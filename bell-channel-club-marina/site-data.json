@@ -1,0 +1,20 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bell-channel-club-marina",
+  "name": "Bell Channel Club & Marina",
+  "niche": "marina",
+  "contact": {"phone": "+1-242-373-2673", "whatsapp": null, "email": null, "address": "Bell Channel, P.O. Box F-44053, Freeport", "settlement": "Freeport", "island": "Grand Bahama"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Private owners' marina", "kind": "slip", "summary": "Private marina for owners, offered when available.", "price": null, "source": "https://sarlesrealty.com/?p=261634"},
+    {"name": "Condominiums and townhouses", "kind": "room", "summary": "Gated complex on the canal and the beach overlooking the inlet into Port Lucaya; heated pool, tennis, owners' library, storage garages, RO water.", "price": null, "source": "https://www.bettermcrbahamas.com/sales/detail/585-l-587-62229/bell-channel-club-bell-channel-bay-bell-channel-gb"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": [
+    "https://marinas.com/view/marina/eyc5ld_Bell_Channel_Club_and_Marina_Freeport_GB_Bahamas",
+    "https://www.thebahamasinvestor.com/?p=7170",
+    "https://sarlesrealty.com/?p=261634",
+    "https://www.bettermcrbahamas.com/sales/detail/585-l-587-62229/bell-channel-club-bell-channel-bay-bell-channel-gb"
+  ]
+}
