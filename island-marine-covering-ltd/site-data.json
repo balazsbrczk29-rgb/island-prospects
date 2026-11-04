@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "island-marine-covering-ltd",
+  "name": "Island Marine Covering Ltd (IMC)",
+  "niche": "industrial-b2b",
+  "contact": {"phone": "+1-242-377-0335", "whatsapp": null, "email": null, "address": "4B Sabal Close, Airport Industrial Park", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Awnings", "kind": "product", "summary": "Fabric awnings.", "price": null, "source": "https://coverupbahamas.com/"},
+    {"name": "Weather curtains", "kind": "product", "summary": "Weather curtains.", "price": null, "source": "https://coverupbahamas.com/"},
+    {"name": "Roll-away hurricane shutters", "kind": "product", "summary": "Hurricane shutters (roll-away).", "price": null, "source": "https://coverupbahamas.com/"},
+    {"name": "Marine canvas", "kind": "service", "summary": "Marine canvas work.", "price": null, "source": "https://coverupbahamas.com/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://www.bahamasindex.com/company/1517/Island_Marine_Covering_Ltd_IMC","https://coverupbahamas.com/"]
+}
