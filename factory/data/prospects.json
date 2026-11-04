@@ -90,24 +90,6 @@
   "batch": "01"
  },
  {
-  "id": 37,
-  "slug": "grand-bahama-island-promotion-board",
-  "name": "Grand Bahama Island Promotion Board",
-  "size": "Medium",
-  "sector": "Tourism marketing",
-  "niche": "tours-experiences",
-  "location": "Freeport, Grand Bahama",
-  "current_site": "grandbahamavacations.com",
-  "listed_site_text": "grandbahamavacations.com",
-  "site_check_2026_11_04": "LOADED",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Destination marketer",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "02"
- },
- {
   "id": 43,
   "slug": "jones-construction-company-ltd",
   "name": "Jones Construction Company Ltd.",
@@ -122,24 +104,6 @@
   "sheet_evidence": "Candidate: Directory listing",
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/businesses/search/12/company",
-  "tier": "A",
-  "batch": "02"
- },
- {
-  "id": 48,
-  "slug": "unexso",
-  "name": "UNEXSO (Underwater Explorers Society)",
-  "size": "Medium",
-  "sector": "Dive attraction",
-  "niche": "tours-experiences",
-  "location": "Lucaya, Grand Bahama",
-  "current_site": "unexso.com",
-  "listed_site_text": "unexso.com",
-  "site_check_2026_11_04": "FETCH-BLOCKED (robots)",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Plain-http site in association listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "A",
   "batch": "02"
  },
@@ -195,7 +159,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bolddata.nl/en/directory/business-directory-bahamas",
   "tier": "A",
-  "batch": "03"
+  "batch": "02"
  },
  {
   "id": 18,
@@ -213,25 +177,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bolddata.nl/en/directory/business-directory-bahamas",
   "tier": "A",
-  "batch": "03"
- },
- {
-  "id": 51,
-  "slug": "abaco-boat-rental",
-  "name": "Abaco Boat Rental",
-  "size": "Small",
-  "sector": "Boat rentals",
-  "niche": "tours-experiences",
-  "location": "Abaco",
-  "current_site": "abacoboatrental.com",
-  "listed_site_text": "abacoboatrental.com",
-  "site_check_2026_11_04": "LOADED",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Very small online footprint",
-  "sheet_pitch_angle": null,
-  "source_link": "https://coresignal.com/discover/rental-and-leasing/bahamas/",
-  "tier": "A",
-  "batch": "03"
+  "batch": "02"
  },
  {
   "id": 52,
@@ -285,7 +231,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bahamasindex.com/location/Nassau",
   "tier": "A",
-  "batch": "04"
+  "batch": "03"
  },
  {
   "id": 56,
@@ -303,25 +249,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/businesses/search/10/company",
   "tier": "A",
-  "batch": "04"
- },
- {
-  "id": 57,
-  "slug": "bahamas-rum-cake-factory",
-  "name": "Bahamas Rum Cake Factory",
-  "size": "Small",
-  "sector": "Food manufacturing",
-  "niche": "food-events",
-  "location": "McPherson St, Nassau",
-  "current_site": "bacardirumcake.com",
-  "listed_site_text": "bacardirumcake.com",
-  "site_check_2026_11_04": "FETCH-BLOCKED (robots)",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Plain-http site in association listing; e-commerce opportunity",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "04"
+  "batch": "03"
  },
  {
   "id": 58,
@@ -339,7 +267,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.thebahamaschamber.com/businesscontacts",
   "tier": "A",
-  "batch": "04"
+  "batch": "03"
  },
  {
   "id": 59,
@@ -360,78 +288,6 @@
   "batch": "04"
  },
  {
-  "id": 60,
-  "slug": "bluff-house-beach-resort-marina",
-  "name": "Bluff House Beach Resort & Marina",
-  "size": "Small",
-  "sector": "Hotel & marina",
-  "niche": "hospitality-stay",
-  "location": "Green Turtle Cay, Abaco",
-  "current_site": "bluffhouse.com",
-  "listed_site_text": "bluffhouse.com",
-  "site_check_2026_11_04": "LOADED: built by Faro Enterprise",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Small resort",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.sportfishingmag.com/?p=46285",
-  "tier": "A",
-  "batch": "05"
- },
- {
-  "id": 61,
-  "slug": "cable-beach-manor",
-  "name": "Cable Beach Manor",
-  "size": "Small",
-  "sector": "Hotel",
-  "niche": "hospitality-stay",
-  "location": "Cable Beach, Nassau",
-  "current_site": "cablebeachmanorbahamas.chroma.site",
-  "listed_site_text": "cablebeachmanorbahamas.chroma.site",
-  "site_check_2026_11_04": "LOADED: free chroma.site subdomain, no phone/email on page",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Site runs on a free builder subdomain, not its own domain",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "05"
- },
- {
-  "id": 62,
-  "slug": "cape-santa-maria-beach-resort",
-  "name": "Cape Santa Maria Beach Resort",
-  "size": "Small",
-  "sector": "Hotel",
-  "niche": "hospitality-stay",
-  "location": "Long Island",
-  "current_site": "capesantamaria.com",
-  "listed_site_text": "capesantamaria.com",
-  "site_check_2026_11_04": "LOADED: no contact info visible",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Plain-http site in association listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "05"
- },
- {
-  "id": 63,
-  "slug": "cheryl-s-bahamas-taxi-and-tours",
-  "name": "Cheryl's Bahamas Taxi and Tours",
-  "size": "Small",
-  "sector": "Transport & tours",
-  "niche": "tours-experiences",
-  "location": "Nassau",
-  "current_site": "cherylbahamastaxiandtours.com",
-  "listed_site_text": "cherylbahamastaxiandtours.com",
-  "site_check_2026_11_04": "LOADED: dated footer (2022)",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Owner-operated tour business",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "05"
- },
- {
   "id": 64,
   "slug": "colonial-realty-ltd",
   "name": "Colonial Realty Ltd.",
@@ -447,25 +303,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bahamasindex.com/location/Nassau",
   "tier": "A",
-  "batch": "05"
- },
- {
-  "id": 65,
-  "slug": "conch-inn-marina",
-  "name": "Conch Inn & Marina",
-  "size": "Small",
-  "sector": "Hotel & marina",
-  "niche": "hospitality-stay",
-  "location": "Marsh Harbour, Abaco",
-  "current_site": "conchinn.com",
-  "listed_site_text": "conchinn.com",
-  "site_check_2026_11_04": "LOADED",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Small marina hotel",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.noonsite.com/business/conch-inn-marina/",
-  "tier": "A",
-  "batch": "06"
+  "batch": "04"
  },
  {
   "id": 66,
@@ -483,7 +321,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.thebahamaschamber.com/businesscontacts",
   "tier": "A",
-  "batch": "06"
+  "batch": "04"
  },
  {
   "id": 68,
@@ -501,7 +339,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/businesses/search/17/bahamas",
   "tier": "A",
-  "batch": "06"
+  "batch": "04"
  },
  {
   "id": 69,
@@ -519,43 +357,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.noonsite.com/business/donnys-boat-rentals-and-marina/",
   "tier": "A",
-  "batch": "06"
- },
- {
-  "id": 70,
-  "slug": "fernandez-bay-village",
-  "name": "Fernandez Bay Village",
-  "size": "Small",
-  "sector": "Hotel",
-  "niche": "hospitality-stay",
-  "location": "New Bight, Cat Island",
-  "current_site": "fernandezbayvillage.com",
-  "listed_site_text": "fernandezbayvillage.com",
-  "site_check_2026_11_04": "LOADED",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Family-run resort, recently listed for sale; plain-http site in listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.caribjournal.com/?p=79540",
-  "tier": "A",
-  "batch": "06"
- },
- {
-  "id": 71,
-  "slug": "firefly-sunset-resort",
-  "name": "Firefly Sunset Resort",
-  "size": "Small",
-  "sector": "Hotel",
-  "niche": "hospitality-stay",
-  "location": "Elbow Cay, Abaco",
-  "current_site": "fireflysunsetresort.com",
-  "listed_site_text": "fireflysunsetresort.com",
-  "site_check_2026_11_04": "LOADED: no phone shown",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Small resort",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.sportfishingmag.com/?p=46285",
-  "tier": "A",
-  "batch": "07"
+  "batch": "04"
  },
  {
   "id": 72,
@@ -573,7 +375,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.caribjournal.com/?p=79540",
   "tier": "A",
-  "batch": "07"
+  "batch": "05"
  },
  {
   "id": 74,
@@ -591,25 +393,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/businesses/search/10/company",
   "tier": "A",
-  "batch": "07"
- },
- {
-  "id": 75,
-  "slug": "hideaways-at-palm-bay",
-  "name": "Hideaways at Palm Bay",
-  "size": "Small",
-  "sector": "Hotel",
-  "niche": "hospitality-stay",
-  "location": "George Town, Exuma",
-  "current_site": "hideawayspalmbay.com",
-  "listed_site_text": "hideawayspalmbay.com",
-  "site_check_2026_11_04": "LOADED: no booking path, no rates, no contact",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Small resort",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "07"
+  "batch": "05"
  },
  {
   "id": 76,
@@ -627,7 +411,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.sportfishingmag.com/?p=46285",
   "tier": "A",
-  "batch": "07"
+  "batch": "05"
  },
  {
   "id": 78,
@@ -645,7 +429,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "A",
-  "batch": "08"
+  "batch": "05"
  },
  {
   "id": 79,
@@ -663,7 +447,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bahamasindex.com/location/Nassau",
   "tier": "A",
-  "batch": "08"
+  "batch": "05"
  },
  {
   "id": 80,
@@ -681,61 +465,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.sportfishingmag.com/?p=46285",
   "tier": "A",
-  "batch": "08"
- },
- {
-  "id": 81,
-  "slug": "lighthouse-marina",
-  "name": "Lighthouse Marina",
-  "size": "Small",
-  "sector": "Marina",
-  "niche": "marina",
-  "location": "Hope Town, Abaco",
-  "current_site": "htlighthousemarina.com",
-  "listed_site_text": "htlighthousemarina.com",
-  "site_check_2026_11_04": "LOADED: (c) 2023, gmail contact",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Small family marina",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.sportfishingmag.com/?p=46285",
-  "tier": "A",
-  "batch": "08"
- },
- {
-  "id": 82,
-  "slug": "majestic-tours",
-  "name": "Majestic Tours",
-  "size": "Small",
-  "sector": "Tours & dinner cruise",
-  "niche": "hospitality-stay",
-  "location": "Cumberland St, Nassau",
-  "current_site": "majestictoursbahamas.com",
-  "listed_site_text": "majestictoursbahamas.com",
-  "site_check_2026_11_04": "LOADED: (c) 2012-2021, no phone/email on homepage",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Association listing links to a different, older domain (majesticholidays.com)",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "08"
- },
- {
-  "id": 83,
-  "slug": "man-o-war-marina",
-  "name": "Man-O-War Marina",
-  "size": "Small",
-  "sector": "Marina",
-  "niche": "marina",
-  "location": "Man-O-War Cay, Abaco",
-  "current_site": "manowarmarina.com",
-  "listed_site_text": "manowarmarina.com",
-  "site_check_2026_11_04": "LOADED: reads like a boating guide, not a marina sales site",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Small family marina",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.sportfishingmag.com/?p=46285",
-  "tier": "A",
-  "batch": "09"
+  "batch": "06"
  },
  {
   "id": 84,
@@ -753,7 +483,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/businesses/search/12/service",
   "tier": "A",
-  "batch": "09"
+  "batch": "06"
  },
  {
   "id": 85,
@@ -771,7 +501,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/listing/view/94964/nassau-glass-co-ltd",
   "tier": "A",
-  "batch": "09"
+  "batch": "06"
  },
  {
   "id": 86,
@@ -789,43 +519,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/listing/view/94976/nassau-paper-company-ltd",
   "tier": "A",
-  "batch": "09"
- },
- {
-  "id": 87,
-  "slug": "ocean-west-boutique-hotel",
-  "name": "Ocean West Boutique Hotel",
-  "size": "Small",
-  "sector": "Hotel",
-  "niche": "hospitality-stay",
-  "location": "West Bay St, Nassau",
-  "current_site": "oceanwestbahamas.com",
-  "listed_site_text": "oceanwestbahamas.com",
-  "site_check_2026_11_04": "LOADED: dated keyword-stuffed title, no contact shown",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Plain-http site in association listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "09"
- },
- {
-  "id": 88,
-  "slug": "orange-creek-inn",
-  "name": "Orange Creek Inn",
-  "size": "Small",
-  "sector": "Inn",
-  "niche": "hospitality-stay",
-  "location": "Arthur's Town, Cat Island",
-  "current_site": "orangecreekinn.com",
-  "listed_site_text": "orangecreekinn.com",
-  "site_check_2026_11_04": "LOADED",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Small family-island inn",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "10"
+  "batch": "06"
  },
  {
   "id": 89,
@@ -843,7 +537,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.travelocity.com/Destinations-In-Cat-Island-Shopping-Hotel.0-0-d11778-tShoppingHotel.Hotel-Filter-Destinations",
   "tier": "A",
-  "batch": "10"
+  "batch": "06"
  },
  {
   "id": 90,
@@ -861,7 +555,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/businesses/search/12/service",
   "tier": "A",
-  "batch": "10"
+  "batch": "07"
  },
  {
   "id": 91,
@@ -879,43 +573,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.sportfishingmag.com/?p=46285",
   "tier": "A",
-  "batch": "10"
- },
- {
-  "id": 92,
-  "slug": "romora-bay-resort-marina",
-  "name": "Romora Bay Resort & Marina",
-  "size": "Small",
-  "sector": "Hotel & marina",
-  "niche": "hospitality-stay",
-  "location": "Harbour Island",
-  "current_site": "romorabay.com",
-  "listed_site_text": "romorabay.com",
-  "site_check_2026_11_04": "LOADED: no contact info visible",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Plain-http site in association listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "10"
- },
- {
-  "id": 93,
-  "slug": "runaway-hill-club",
-  "name": "Runaway Hill Club",
-  "size": "Small",
-  "sector": "Hotel",
-  "niche": "hospitality-stay",
-  "location": "Harbour Island",
-  "current_site": "runawayhill.com",
-  "listed_site_text": "runawayhill.com",
-  "site_check_2026_11_04": "LOADED: no contact info visible",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Boutique inn",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "11"
+  "batch": "07"
  },
  {
   "id": 94,
@@ -933,25 +591,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.travelocity.com/Destinations-In-Cat-Island-Hotels-With-Restaurants.0-0-d11778-tHotelswithRestaurants.Hotel-Filter-Destinations",
   "tier": "A",
-  "batch": "11"
- },
- {
-  "id": 95,
-  "slug": "schooner-bay-marina",
-  "name": "Schooner Bay Marina",
-  "size": "Small",
-  "sector": "Marina",
-  "niche": "marina",
-  "location": "Schooner Bay, Abaco",
-  "current_site": "schoonerbaybahamas.com",
-  "listed_site_text": "schoonerbaybahamas.com",
-  "site_check_2026_11_04": "LOADED: (c) 2020",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Small marina",
-  "sheet_pitch_angle": null,
-  "source_link": "https://move.noonsite.com/?p=56330",
-  "tier": "A",
-  "batch": "11"
+  "batch": "07"
  },
  {
   "id": 96,
@@ -969,7 +609,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.sportfishingmag.com/?p=46285",
   "tier": "A",
-  "batch": "11"
+  "batch": "07"
  },
  {
   "id": 97,
@@ -987,43 +627,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bahamasindex.com/location/Nassau",
   "tier": "A",
-  "batch": "11"
- },
- {
-  "id": 98,
-  "slug": "stella-maris-resort-club",
-  "name": "Stella Maris Resort Club",
-  "size": "Small",
-  "sector": "Hotel & marina",
-  "niche": "hospitality-stay",
-  "location": "Stella Maris, Long Island",
-  "current_site": "stellamarisresort.com",
-  "listed_site_text": "stellamarisresort.com",
-  "site_check_2026_11_04": "LOADED",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Family-run since the 1960s and listed for sale; plain-http site in listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.nestseekers.com/4659180/stella-maris-resort",
-  "tier": "A",
-  "batch": "12"
- },
- {
-  "id": 99,
-  "slug": "swain-s-cay-lodge",
-  "name": "Swain's Cay Lodge",
-  "size": "Small",
-  "sector": "Hotel / fishing lodge",
-  "niche": "hospitality-stay",
-  "location": "Mangrove Cay, Andros",
-  "current_site": "swainscaylodge.com",
-  "listed_site_text": "swainscaylodge.com",
-  "site_check_2026_11_04": "LOADED",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Family-island lodge; plain-http site in association listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "12"
+  "batch": "07"
  },
  {
   "id": 100,
@@ -1041,43 +645,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/businesses/search/3/bahamas",
   "tier": "A",
-  "batch": "12"
- },
- {
-  "id": 6,
-  "slug": "bahamas-hotel-tourism-association",
-  "name": "Bahamas Hotel & Tourism Association (BHTA)",
-  "size": "Medium",
-  "sector": "Tourism association",
-  "niche": "tours-experiences",
-  "location": "Nassau, New Providence",
-  "current_site": "bhahotels.com",
-  "listed_site_text": "bhahotels.com",
-  "site_check_2026_11_04": "LOADED",
-  "sheet_status": "Verified outdated",
-  "sheet_evidence": "Sidebar still loads 2009 image assets over plain http; 'Member Benefits' and training pages date from 2009–2011; member directory has stale entries (e.g. a listing that is 'inactive or no longer available', members with no website).",
-  "sheet_pitch_angle": "Refresh member directory and benefits pages; members are themselves good referral leads.",
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "12"
- },
- {
-  "id": 25,
-  "slug": "ardastra-gardens-zoo-conservation-centre",
-  "name": "Ardastra Gardens Zoo & Conservation Centre",
-  "size": "Medium",
-  "sector": "Attraction",
-  "niche": "tours-experiences",
-  "location": "Chippingham Rd, Nassau",
-  "current_site": "ardastra.com",
-  "listed_site_text": "ardastra.com",
-  "site_check_2026_11_04": "LOADED",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Plain-http site in association listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "12"
+  "batch": "08"
  },
  {
   "id": 26,
@@ -1095,7 +663,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/businesses/search/10/bahamas",
   "tier": "A",
-  "batch": "13"
+  "batch": "08"
  },
  {
   "id": 27,
@@ -1112,6 +680,510 @@
   "sheet_evidence": "Candidate: Directory listing",
   "sheet_pitch_angle": null,
   "source_link": "https://bahamas.yabsta.com/businesses/search/10/bahamas",
+  "tier": "A",
+  "batch": "08"
+ },
+ {
+  "id": 31,
+  "slug": "bahamas-securities-ltd",
+  "name": "Bahamas Securities Ltd",
+  "size": "Medium",
+  "sector": "Financial services",
+  "niche": "professional-services",
+  "location": "Nassau",
+  "current_site": null,
+  "listed_site_text": "(search)",
+  "site_check_2026_11_04": "NO OWN SITE LISTED: (search)",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Directory listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://bahamas.yabsta.com/businesses/search/3/bahamas",
+  "tier": "A",
+  "batch": "08"
+ },
+ {
+  "id": 44,
+  "slug": "kelly-s-home-centre",
+  "name": "Kelly's Home Centre",
+  "size": "Medium",
+  "sector": "Home & hardware retail",
+  "niche": "trade-retail",
+  "location": "Nassau",
+  "current_site": null,
+  "listed_site_text": "(search)",
+  "site_check_2026_11_04": "NO OWN SITE LISTED: (search)",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Large local retailer; e-commerce opportunity",
+  "sheet_pitch_angle": null,
+  "source_link": "https://bolddata.nl/en/directory/business-directory-bahamas",
+  "tier": "A",
+  "batch": "08"
+ },
+ {
+  "id": 45,
+  "slug": "mckinney-bancroft-hughes",
+  "name": "McKinney, Bancroft & Hughes",
+  "size": "Medium",
+  "sector": "Law firm",
+  "niche": "professional-services",
+  "location": "Mareva House, Nassau",
+  "current_site": null,
+  "listed_site_text": "(search)",
+  "site_check_2026_11_04": "NO OWN SITE LISTED: (search)",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Established law firm",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.lexmundi.com/CountryGuides/PDF/Guide_Bahamas.pdf",
+  "tier": "A",
+  "batch": "08"
+ },
+ {
+  "id": 49,
+  "slug": "water-technologies-bahamas-limited",
+  "name": "Water Technologies Bahamas Limited",
+  "size": "Medium",
+  "sector": "Water treatment",
+  "niche": "industrial-b2b",
+  "location": "Nassau",
+  "current_site": null,
+  "listed_site_text": "(search)",
+  "site_check_2026_11_04": "NO OWN SITE LISTED: (search)",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Directory listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://bahamas.yabsta.com/businesses/search/19/bahamas",
+  "tier": "A",
+  "batch": "08"
+ },
+ {
+  "id": 37,
+  "slug": "grand-bahama-island-promotion-board",
+  "name": "Grand Bahama Island Promotion Board",
+  "size": "Medium",
+  "sector": "Tourism marketing",
+  "niche": "tours-experiences",
+  "location": "Freeport, Grand Bahama",
+  "current_site": "grandbahamavacations.com",
+  "listed_site_text": "grandbahamavacations.com",
+  "site_check_2026_11_04": "LOADED",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Destination marketer",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "09"
+ },
+ {
+  "id": 48,
+  "slug": "unexso",
+  "name": "UNEXSO (Underwater Explorers Society)",
+  "size": "Medium",
+  "sector": "Dive attraction",
+  "niche": "tours-experiences",
+  "location": "Lucaya, Grand Bahama",
+  "current_site": "unexso.com",
+  "listed_site_text": "unexso.com",
+  "site_check_2026_11_04": "FETCH-BLOCKED (robots)",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Plain-http site in association listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "09"
+ },
+ {
+  "id": 51,
+  "slug": "abaco-boat-rental",
+  "name": "Abaco Boat Rental",
+  "size": "Small",
+  "sector": "Boat rentals",
+  "niche": "tours-experiences",
+  "location": "Abaco",
+  "current_site": "abacoboatrental.com",
+  "listed_site_text": "abacoboatrental.com",
+  "site_check_2026_11_04": "LOADED",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Very small online footprint",
+  "sheet_pitch_angle": null,
+  "source_link": "https://coresignal.com/discover/rental-and-leasing/bahamas/",
+  "tier": "A",
+  "batch": "09"
+ },
+ {
+  "id": 57,
+  "slug": "bahamas-rum-cake-factory",
+  "name": "Bahamas Rum Cake Factory",
+  "size": "Small",
+  "sector": "Food manufacturing",
+  "niche": "food-events",
+  "location": "McPherson St, Nassau",
+  "current_site": "bacardirumcake.com",
+  "listed_site_text": "bacardirumcake.com",
+  "site_check_2026_11_04": "FETCH-BLOCKED (robots)",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Plain-http site in association listing; e-commerce opportunity",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "09"
+ },
+ {
+  "id": 60,
+  "slug": "bluff-house-beach-resort-marina",
+  "name": "Bluff House Beach Resort & Marina",
+  "size": "Small",
+  "sector": "Hotel & marina",
+  "niche": "hospitality-stay",
+  "location": "Green Turtle Cay, Abaco",
+  "current_site": "bluffhouse.com",
+  "listed_site_text": "bluffhouse.com",
+  "site_check_2026_11_04": "LOADED: built by Faro Enterprise",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Small resort",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.sportfishingmag.com/?p=46285",
+  "tier": "A",
+  "batch": "09"
+ },
+ {
+  "id": 61,
+  "slug": "cable-beach-manor",
+  "name": "Cable Beach Manor",
+  "size": "Small",
+  "sector": "Hotel",
+  "niche": "hospitality-stay",
+  "location": "Cable Beach, Nassau",
+  "current_site": "cablebeachmanorbahamas.chroma.site",
+  "listed_site_text": "cablebeachmanorbahamas.chroma.site",
+  "site_check_2026_11_04": "LOADED: free chroma.site subdomain, no phone/email on page",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Site runs on a free builder subdomain, not its own domain",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "10"
+ },
+ {
+  "id": 62,
+  "slug": "cape-santa-maria-beach-resort",
+  "name": "Cape Santa Maria Beach Resort",
+  "size": "Small",
+  "sector": "Hotel",
+  "niche": "hospitality-stay",
+  "location": "Long Island",
+  "current_site": "capesantamaria.com",
+  "listed_site_text": "capesantamaria.com",
+  "site_check_2026_11_04": "LOADED: no contact info visible",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Plain-http site in association listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "10"
+ },
+ {
+  "id": 63,
+  "slug": "cheryl-s-bahamas-taxi-and-tours",
+  "name": "Cheryl's Bahamas Taxi and Tours",
+  "size": "Small",
+  "sector": "Transport & tours",
+  "niche": "tours-experiences",
+  "location": "Nassau",
+  "current_site": "cherylbahamastaxiandtours.com",
+  "listed_site_text": "cherylbahamastaxiandtours.com",
+  "site_check_2026_11_04": "LOADED: dated footer (2022)",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Owner-operated tour business",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "10"
+ },
+ {
+  "id": 65,
+  "slug": "conch-inn-marina",
+  "name": "Conch Inn & Marina",
+  "size": "Small",
+  "sector": "Hotel & marina",
+  "niche": "hospitality-stay",
+  "location": "Marsh Harbour, Abaco",
+  "current_site": "conchinn.com",
+  "listed_site_text": "conchinn.com",
+  "site_check_2026_11_04": "LOADED",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Small marina hotel",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.noonsite.com/business/conch-inn-marina/",
+  "tier": "A",
+  "batch": "10"
+ },
+ {
+  "id": 70,
+  "slug": "fernandez-bay-village",
+  "name": "Fernandez Bay Village",
+  "size": "Small",
+  "sector": "Hotel",
+  "niche": "hospitality-stay",
+  "location": "New Bight, Cat Island",
+  "current_site": "fernandezbayvillage.com",
+  "listed_site_text": "fernandezbayvillage.com",
+  "site_check_2026_11_04": "LOADED",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Family-run resort, recently listed for sale; plain-http site in listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.caribjournal.com/?p=79540",
+  "tier": "A",
+  "batch": "10"
+ },
+ {
+  "id": 71,
+  "slug": "firefly-sunset-resort",
+  "name": "Firefly Sunset Resort",
+  "size": "Small",
+  "sector": "Hotel",
+  "niche": "hospitality-stay",
+  "location": "Elbow Cay, Abaco",
+  "current_site": "fireflysunsetresort.com",
+  "listed_site_text": "fireflysunsetresort.com",
+  "site_check_2026_11_04": "LOADED: no phone shown",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Small resort",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.sportfishingmag.com/?p=46285",
+  "tier": "A",
+  "batch": "11"
+ },
+ {
+  "id": 75,
+  "slug": "hideaways-at-palm-bay",
+  "name": "Hideaways at Palm Bay",
+  "size": "Small",
+  "sector": "Hotel",
+  "niche": "hospitality-stay",
+  "location": "George Town, Exuma",
+  "current_site": "hideawayspalmbay.com",
+  "listed_site_text": "hideawayspalmbay.com",
+  "site_check_2026_11_04": "LOADED: no booking path, no rates, no contact",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Small resort",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "11"
+ },
+ {
+  "id": 81,
+  "slug": "lighthouse-marina",
+  "name": "Lighthouse Marina",
+  "size": "Small",
+  "sector": "Marina",
+  "niche": "marina",
+  "location": "Hope Town, Abaco",
+  "current_site": "htlighthousemarina.com",
+  "listed_site_text": "htlighthousemarina.com",
+  "site_check_2026_11_04": "LOADED: (c) 2023, gmail contact",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Small family marina",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.sportfishingmag.com/?p=46285",
+  "tier": "A",
+  "batch": "11"
+ },
+ {
+  "id": 82,
+  "slug": "majestic-tours",
+  "name": "Majestic Tours",
+  "size": "Small",
+  "sector": "Tours & dinner cruise",
+  "niche": "hospitality-stay",
+  "location": "Cumberland St, Nassau",
+  "current_site": "majestictoursbahamas.com",
+  "listed_site_text": "majestictoursbahamas.com",
+  "site_check_2026_11_04": "LOADED: (c) 2012-2021, no phone/email on homepage",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Association listing links to a different, older domain (majesticholidays.com)",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "11"
+ },
+ {
+  "id": 83,
+  "slug": "man-o-war-marina",
+  "name": "Man-O-War Marina",
+  "size": "Small",
+  "sector": "Marina",
+  "niche": "marina",
+  "location": "Man-O-War Cay, Abaco",
+  "current_site": "manowarmarina.com",
+  "listed_site_text": "manowarmarina.com",
+  "site_check_2026_11_04": "LOADED: reads like a boating guide, not a marina sales site",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Small family marina",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.sportfishingmag.com/?p=46285",
+  "tier": "A",
+  "batch": "11"
+ },
+ {
+  "id": 87,
+  "slug": "ocean-west-boutique-hotel",
+  "name": "Ocean West Boutique Hotel",
+  "size": "Small",
+  "sector": "Hotel",
+  "niche": "hospitality-stay",
+  "location": "West Bay St, Nassau",
+  "current_site": "oceanwestbahamas.com",
+  "listed_site_text": "oceanwestbahamas.com",
+  "site_check_2026_11_04": "LOADED: dated keyword-stuffed title, no contact shown",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Plain-http site in association listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "12"
+ },
+ {
+  "id": 88,
+  "slug": "orange-creek-inn",
+  "name": "Orange Creek Inn",
+  "size": "Small",
+  "sector": "Inn",
+  "niche": "hospitality-stay",
+  "location": "Arthur's Town, Cat Island",
+  "current_site": "orangecreekinn.com",
+  "listed_site_text": "orangecreekinn.com",
+  "site_check_2026_11_04": "LOADED",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Small family-island inn",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "12"
+ },
+ {
+  "id": 92,
+  "slug": "romora-bay-resort-marina",
+  "name": "Romora Bay Resort & Marina",
+  "size": "Small",
+  "sector": "Hotel & marina",
+  "niche": "hospitality-stay",
+  "location": "Harbour Island",
+  "current_site": "romorabay.com",
+  "listed_site_text": "romorabay.com",
+  "site_check_2026_11_04": "LOADED: no contact info visible",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Plain-http site in association listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "12"
+ },
+ {
+  "id": 93,
+  "slug": "runaway-hill-club",
+  "name": "Runaway Hill Club",
+  "size": "Small",
+  "sector": "Hotel",
+  "niche": "hospitality-stay",
+  "location": "Harbour Island",
+  "current_site": "runawayhill.com",
+  "listed_site_text": "runawayhill.com",
+  "site_check_2026_11_04": "LOADED: no contact info visible",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Boutique inn",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "12"
+ },
+ {
+  "id": 95,
+  "slug": "schooner-bay-marina",
+  "name": "Schooner Bay Marina",
+  "size": "Small",
+  "sector": "Marina",
+  "niche": "marina",
+  "location": "Schooner Bay, Abaco",
+  "current_site": "schoonerbaybahamas.com",
+  "listed_site_text": "schoonerbaybahamas.com",
+  "site_check_2026_11_04": "LOADED: (c) 2020",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Small marina",
+  "sheet_pitch_angle": null,
+  "source_link": "https://move.noonsite.com/?p=56330",
+  "tier": "A",
+  "batch": "12"
+ },
+ {
+  "id": 98,
+  "slug": "stella-maris-resort-club",
+  "name": "Stella Maris Resort Club",
+  "size": "Small",
+  "sector": "Hotel & marina",
+  "niche": "hospitality-stay",
+  "location": "Stella Maris, Long Island",
+  "current_site": "stellamarisresort.com",
+  "listed_site_text": "stellamarisresort.com",
+  "site_check_2026_11_04": "LOADED",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Family-run since the 1960s and listed for sale; plain-http site in listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.nestseekers.com/4659180/stella-maris-resort",
+  "tier": "A",
+  "batch": "13"
+ },
+ {
+  "id": 99,
+  "slug": "swain-s-cay-lodge",
+  "name": "Swain's Cay Lodge",
+  "size": "Small",
+  "sector": "Hotel / fishing lodge",
+  "niche": "hospitality-stay",
+  "location": "Mangrove Cay, Andros",
+  "current_site": "swainscaylodge.com",
+  "listed_site_text": "swainscaylodge.com",
+  "site_check_2026_11_04": "LOADED",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Family-island lodge; plain-http site in association listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "13"
+ },
+ {
+  "id": 6,
+  "slug": "bahamas-hotel-tourism-association",
+  "name": "Bahamas Hotel & Tourism Association (BHTA)",
+  "size": "Medium",
+  "sector": "Tourism association",
+  "niche": "tours-experiences",
+  "location": "Nassau, New Providence",
+  "current_site": "bhahotels.com",
+  "listed_site_text": "bhahotels.com",
+  "site_check_2026_11_04": "LOADED",
+  "sheet_status": "Verified outdated",
+  "sheet_evidence": "Sidebar still loads 2009 image assets over plain http; 'Member Benefits' and training pages date from 2009–2011; member directory has stale entries (e.g. a listing that is 'inactive or no longer available', members with no website).",
+  "sheet_pitch_angle": "Refresh member directory and benefits pages; members are themselves good referral leads.",
+  "source_link": "https://www.bhahotels.com/members-directory/",
+  "tier": "A",
+  "batch": "13"
+ },
+ {
+  "id": 25,
+  "slug": "ardastra-gardens-zoo-conservation-centre",
+  "name": "Ardastra Gardens Zoo & Conservation Centre",
+  "size": "Medium",
+  "sector": "Attraction",
+  "niche": "tours-experiences",
+  "location": "Chippingham Rd, Nassau",
+  "current_site": "ardastra.com",
+  "listed_site_text": "ardastra.com",
+  "site_check_2026_11_04": "LOADED",
+  "sheet_status": "Not yet checked",
+  "sheet_evidence": "Candidate: Plain-http site in association listing",
+  "sheet_pitch_angle": null,
+  "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "A",
   "batch": "13"
  },
@@ -1130,24 +1202,6 @@
   "sheet_evidence": "Candidate: Hotel listings embed third-party widgets; check age",
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
-  "tier": "A",
-  "batch": "13"
- },
- {
-  "id": 31,
-  "slug": "bahamas-securities-ltd",
-  "name": "Bahamas Securities Ltd",
-  "size": "Medium",
-  "sector": "Financial services",
-  "niche": "professional-services",
-  "location": "Nassau",
-  "current_site": null,
-  "listed_site_text": "(search)",
-  "site_check_2026_11_04": "NO OWN SITE LISTED: (search)",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Directory listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://bahamas.yabsta.com/businesses/search/3/bahamas",
   "tier": "A",
   "batch": "13"
  },
@@ -1185,43 +1239,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "A",
-  "batch": "14"
- },
- {
-  "id": 44,
-  "slug": "kelly-s-home-centre",
-  "name": "Kelly's Home Centre",
-  "size": "Medium",
-  "sector": "Home & hardware retail",
-  "niche": "trade-retail",
-  "location": "Nassau",
-  "current_site": null,
-  "listed_site_text": "(search)",
-  "site_check_2026_11_04": "NO OWN SITE LISTED: (search)",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Large local retailer; e-commerce opportunity",
-  "sheet_pitch_angle": null,
-  "source_link": "https://bolddata.nl/en/directory/business-directory-bahamas",
-  "tier": "A",
-  "batch": "14"
- },
- {
-  "id": 45,
-  "slug": "mckinney-bancroft-hughes",
-  "name": "McKinney, Bancroft & Hughes",
-  "size": "Medium",
-  "sector": "Law firm",
-  "niche": "professional-services",
-  "location": "Mareva House, Nassau",
-  "current_site": null,
-  "listed_site_text": "(search)",
-  "site_check_2026_11_04": "NO OWN SITE LISTED: (search)",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Established law firm",
-  "sheet_pitch_angle": null,
-  "source_link": "https://www.lexmundi.com/CountryGuides/PDF/Guide_Bahamas.pdf",
-  "tier": "A",
-  "batch": "14"
+  "batch": "13"
  },
  {
   "id": 47,
@@ -1239,25 +1257,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "A",
-  "batch": "14"
- },
- {
-  "id": 49,
-  "slug": "water-technologies-bahamas-limited",
-  "name": "Water Technologies Bahamas Limited",
-  "size": "Medium",
-  "sector": "Water treatment",
-  "niche": "industrial-b2b",
-  "location": "Nassau",
-  "current_site": null,
-  "listed_site_text": "(search)",
-  "site_check_2026_11_04": "NO OWN SITE LISTED: (search)",
-  "sheet_status": "Not yet checked",
-  "sheet_evidence": "Candidate: Directory listing",
-  "sheet_pitch_angle": null,
-  "source_link": "https://bahamas.yabsta.com/businesses/search/19/bahamas",
-  "tier": "A",
-  "batch": "14"
+  "batch": "13"
  },
  {
   "id": 40,
@@ -1275,7 +1275,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "B",
-  "batch": "15"
+  "batch": "14"
  },
  {
   "id": 73,
@@ -1293,7 +1293,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "B",
-  "batch": "15"
+  "batch": "14"
  },
  {
   "id": 4,
@@ -1311,7 +1311,7 @@
   "sheet_pitch_angle": "Working searchable member directory plus member portal.",
   "source_link": "https://bahamasbarassociation.com/member-services/members-directory/bar-member/629",
   "tier": "B",
-  "batch": "15"
+  "batch": "14"
  },
  {
   "id": 5,
@@ -1329,7 +1329,7 @@
   "sheet_pitch_angle": "Online membership sign-up and searchable member directory; members are referral leads.",
   "source_link": "https://www.thebahamaschamber.com/bccecmembership",
   "tier": "B",
-  "batch": "15"
+  "batch": "14"
  },
  {
   "id": 7,
@@ -1347,7 +1347,7 @@
   "sheet_pitch_angle": "Listings-driven business: faster property search, fresh content, lead capture.",
   "source_link": "https://www.coldwellbankerbahamas.com/realty-news-updates/take-initiative-nassau-132.html",
   "tier": "B",
-  "batch": "15"
+  "batch": "14"
  },
  {
   "id": 8,
@@ -1365,7 +1365,7 @@
   "sheet_pitch_angle": "Magazine whose audience is international investors: a modern, mobile editorial site and digital edition.",
   "source_link": "https://thebahamasinvestor.com/2011/new-nassau-container-port-set-to-be-operational-by-december/",
   "tier": "B",
-  "batch": "15"
+  "batch": "14"
  },
  {
   "id": 24,
@@ -1383,7 +1383,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.thebahamaschamber.com/businesscontacts",
   "tier": "B",
-  "batch": "16"
+  "batch": "15"
  },
  {
   "id": 30,
@@ -1401,7 +1401,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.thebahamaschamber.com/businesscontacts",
   "tier": "B",
-  "batch": "16"
+  "batch": "15"
  },
  {
   "id": 35,
@@ -1419,7 +1419,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "B",
-  "batch": "16"
+  "batch": "15"
  },
  {
   "id": 36,
@@ -1437,7 +1437,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "B",
-  "batch": "16"
+  "batch": "15"
  },
  {
   "id": 38,
@@ -1455,7 +1455,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "B",
-  "batch": "16"
+  "batch": "15"
  },
  {
   "id": 42,
@@ -1473,7 +1473,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://jonesbahamas.com/make-over-for-city-center/",
   "tier": "B",
-  "batch": "16"
+  "batch": "15"
  },
  {
   "id": 2,
@@ -1491,7 +1491,7 @@
   "sheet_pitch_angle": "BISX-listed company with public shareholders: an investor-grade, mobile site with live notices and tariffs.",
   "source_link": "https://www.nassaucontainerport.com/history.cfm",
   "tier": "B",
-  "batch": "17"
+  "batch": "15"
  },
  {
   "id": 10,
@@ -1509,7 +1509,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.thebahamaschamber.com/businesscontacts",
   "tier": "B",
-  "batch": "17"
+  "batch": "15"
  },
  {
   "id": 11,
@@ -1527,7 +1527,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.thebahamaschamber.com/businesscontacts",
   "tier": "B",
-  "batch": "17"
+  "batch": "15"
  },
  {
   "id": 41,
@@ -1545,7 +1545,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "C",
-  "batch": "18"
+  "batch": "16"
  },
  {
   "id": 9,
@@ -1563,7 +1563,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.thebahamasinvestor.com/?p=7170",
   "tier": "C",
-  "batch": "18"
+  "batch": "16"
  },
  {
   "id": 15,
@@ -1581,7 +1581,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://en.wikipedia.org/wiki/Freeport_Container_Port",
   "tier": "C",
-  "batch": "18"
+  "batch": "16"
  },
  {
   "id": 16,
@@ -1599,7 +1599,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://en.wikipedia.org/wiki/Freeport,_Bahamas",
   "tier": "C",
-  "batch": "18"
+  "batch": "16"
  },
  {
   "id": 20,
@@ -1617,7 +1617,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bolddata.nl/en/directory/business-directory-bahamas",
   "tier": "C",
-  "batch": "18"
+  "batch": "16"
  },
  {
   "id": 21,
@@ -1635,7 +1635,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://poidata.io/report/hospital/bahamas",
   "tier": "C",
-  "batch": "18"
+  "batch": "16"
  },
  {
   "id": 67,
@@ -1653,7 +1653,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "C",
-  "batch": "18"
+  "batch": "16"
  },
  {
   "id": 46,
@@ -1671,7 +1671,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bolddata.nl/en/directory/business-directory-bahamas",
   "tier": "C",
-  "batch": "18"
+  "batch": "16"
  },
  {
   "id": 1,
@@ -1689,7 +1689,7 @@
   "sheet_pitch_angle": "Government tender, not a cold pitch: watch for RFPs on digital services.",
   "source_link": "https://www.bahamas.gov.bs/wps/wcm/connect/MOF_Content/internet/Bahamas+Investment+Authority/Government/Guide+for+Investors/Freeport+Grand+Bahama",
   "tier": "C",
-  "batch": "19"
+  "batch": "17"
  },
  {
   "id": 3,
@@ -1707,7 +1707,7 @@
   "sheet_pitch_angle": "Largest audience on the list: responsive rebuild, faster ad-friendly article pages, modern sharing.",
   "source_link": "https://www.tribune242.com/news/2020/jan/23/downtown-chief-pledges-areas-transformation",
   "tier": "C",
-  "batch": "19"
+  "batch": "17"
  },
  {
   "id": 12,
@@ -1725,7 +1725,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "C",
-  "batch": "19"
+  "batch": "17"
  },
  {
   "id": 13,
@@ -1743,7 +1743,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://poidata.io/report/hospital/bahamas",
   "tier": "C",
-  "batch": "19"
+  "batch": "17"
  },
  {
   "id": 19,
@@ -1761,7 +1761,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bolddata.nl/en/directory/business-directory-bahamas",
   "tier": "C",
-  "batch": "19"
+  "batch": "17"
  },
  {
   "id": 22,
@@ -1779,7 +1779,7 @@
   "sheet_pitch_angle": null,
   "source_link": "https://www.bhahotels.com/members-directory/",
   "tier": "C",
-  "batch": "19"
+  "batch": "17"
  },
  {
   "id": 23,
@@ -1797,6 +1797,6 @@
   "sheet_pitch_angle": null,
   "source_link": "https://bolddata.nl/en/directory/business-directory-bahamas",
   "tier": "C",
-  "batch": "19"
+  "batch": "17"
  }
 ]

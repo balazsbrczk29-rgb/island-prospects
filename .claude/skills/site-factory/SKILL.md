@@ -24,17 +24,38 @@ Also load the vendored skills **once per session** at step 4: `frontend-design` 
 
 ---
 
-## Step 1. Research (max ~10 tool calls; Tier C max 5)
-Goal: a fact sheet you could defend in front of the owner.
+## Step 1. Research and analysis (max ~12 tool calls; Tier C max 5)
+Goal: understand the company as well as its owner would expect a serious agency to, then write a fact sheet you could defend in front of them. Pick the track that matches `site_check_2026_11_04`.
 
-1. If `current_site` exists and `site_check_2026_11_04` says LOADED: WebFetch the homepage with a prompt asking for: business description in their words, every service/room/product with details, address, phone, WhatsApp, email, hours, social links, awards they claim, year founded, the absolute URLs of their main photos and logo (img src), and visible problems (dated copyright, broken links, no mobile layout, no booking path, missing contact). Then fetch at most 2-3 inner pages that carry real content (rooms, services, about, contact).
-2. If DOMAIN LOST / NO OWN SITE / FETCH-BLOCKED / AGE GATE: WebSearch `"<name>" Bahamas` and `"<name>" <island> phone`. Use the business's own Facebook/Instagram page, the source link in the record, directory listings (Yabsta, BHA members directory, Bahamas Index, noonsite, chamber) **for facts only**. Note that facts from directories must be double-sourced or written conservatively.
-3. Write `factory/briefs/<slug>.md` with these sections:
+### Track A: the business HAS a working site (LOADED / REDIRECTS)
+Extract and analyze the existing site; it is the raw material we repackage.
+1. WebFetch the homepage with a prompt asking for: business description in their own words, every service/room/product/tour with its details, address, phone, WhatsApp, email, hours, social links, awards or press they claim, year founded, owners/history, the absolute URLs of their main photos and logo (img src), and the navigation menu (list every page).
+2. Fetch the 2-4 inner pages that carry the most real content (rooms, services, about, rates, contact, FAQ). Capture their facts, wording and photos.
+3. Build a **content inventory** in the brief: every page, what it contains, what is worth keeping, what is outdated or missing.
+4. **Audit** like a consultant (this becomes the pitch): mobile layout, outdated years/copyright, broken or missing booking/contact path, missing address/island (Google can't place them), weak or duplicate page titles, no clear call to action, slow/heavy signals, dead social links, missing trust signals they actually have but hide.
+5. Note their **brand assets**: logo colors, typefaces, photography style, tone of voice. Keep what is genuinely theirs; fix the rest.
+
+### Track B: the business has NO working site (NO OWN SITE / Facebook only / DOMAIN LOST / FETCH-BLOCKED / AGE GATE)
+These are the priority prospects. With no site to copy, you must understand the company from its name, record and public footprint, then design what its site *should* be.
+1. **Read the record closely**: name, sector, size, location, `sheet_evidence`, `sheet_pitch_angle`, `source_link`. Decode the name (e.g. "Island Marine Covering" = marine canvas, boat covers, upholstery; "Thermoset Roofing" = thermoset/membrane roofing systems; "Hot Mix" = asphalt paving).
+2. **Find every public trace** (3-6 searches/fetches): WebSearch `"<name>" Bahamas`, `"<name>" <settlement or island>`, `"<name>" facebook`; fetch their Facebook/Instagram page or directory listing (Yabsta, Bahamas Index, BHA members directory, Chamber directory, noonsite, Google-indexed listings) for phone, address, hours, services, photos, years in business, owner names they publish themselves. For DOMAIN LOST: also search for their old site content in search snippets.
+3. **Analyze the business model**: what they most likely sell, to whom (locals, contractors, government, cruise visitors, yacht owners, foreign buyers), how customers find them today (word of mouth, Facebook, drive-by), and what a customer needs to see before calling.
+4. **Scan 2 comparable businesses** (one in the Bahamas, one strong example in Florida or the Caribbean) with WebSearch to learn what customers in this category expect: typical services list, quote/booking flow, trust signals. Use this only to shape structure, never copy their text or claims.
+5. **Separate verified from assumed** in the brief:
+   - *Verified facts* (with source URL): only these may be stated as facts on the site.
+   - *Category-standard offer* (inferred from the confirmed category and name): may appear on the site only phrased as the service category (e.g. "Roof repairs and replacement" for a confirmed roofing contractor), never with numbers, brands, certifications, years, prices or guarantees. List every such line under **Assumptions to confirm with the owner** in the brief and in status `notes`.
+   - If you cannot confirm even the business category or that it still operates, set status `"skipped"` with the reason.
+6. Turn the analysis into a **positioning statement**: "For <audience> in <place> who need <job>, <business> is the <category> that <one true differentiator or, if none is known, the clearest promise we can honestly make>."
+
+### Both tracks: write `factory/briefs/<slug>.md` with these sections:
    - **Facts** (each line ends with its source URL)
    - **Photos** (verbatim URLs from the business's own pages only, with a note on what each shows)
    - **Current site audit**: 3-6 concrete problems, written for the owner in plain words (this becomes the pitch)
    - **Audience**: who buys, from where (US/Canada visitors, Nassau locals, boaters arriving by sea, B2B procurement, members), on which device
    - **Primary conversion** (one): e.g. WhatsApp enquiry for a room, slip reservation request, quote request, call, membership application
+   - **Content inventory** (Track A) or **Business analysis + comparables** (Track B)
+   - **Positioning statement**
+   - **Assumptions to confirm with the owner** (Track B mainly; every inferred line on the site)
    - **Unknowns** you designed around
    If research finds the business has closed or the record is wrong, write that in the brief, set status `"skipped"` with the reason, publish, and move on. Do not build a site for a closed business.
 
@@ -107,6 +128,8 @@ Write `factory/status/<slug>.json`:
   "pitch_line": "One sentence Balazs can say at the door.",
   "sources": ["https://..."],
   "qa": {"blockers": 0, "warnings": 2},
+  "track": "A or B",
+  "assumptions": ["every inferred line on the site that the owner must confirm"],
   "notes": "anything Balazs must know: unverified facts, missing photos, ask owner for X",
   "built_at": "ISO timestamp"
 }
