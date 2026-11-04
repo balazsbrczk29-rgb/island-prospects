@@ -1,0 +1,21 @@
+{
+  "slug": "bahamas-business-solutions-limited", "id": 28, "name": "Bahamas Business Solutions Limited", "batch": "01", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "solutions.html"],
+  "primary_cta": "Request an equipment quote",
+  "brand_truth": "The Bahamas' Xerox company since 1966, with a Freeport office since 1968: sixty years of keeping island offices printing.",
+  "design": {"display_font": "Newsreader 500/600", "body_font": "Public Sans 400/500/600", "palette": ["#f2f4f7","#121a26","#8a6a1f","#d9e1ec","#4c5566","#d0d6df","#ffffff"], "hero_pattern": "framed-image", "signature": "Hero headline printed on a sheet that feeds out of a printer slot on load, with a scan line passing over it"},
+  "current_site_findings": [
+    "bbsl.com homepage carries a noindex, nofollow tag (tells Google not to list it).",
+    "Leftover 'has been added to the cart' message on the homepage.",
+    "No street address for Freeport (or Nassau) on the homepage.",
+    "A menu item links to '#'.",
+    "Vendor logos have empty alt text.",
+    "The 1966 Xerox (Bahamas) heritage and 1968 Freeport office are not on the homepage."
+  ],
+  "pitch_line": "Your website is telling Google not to list you; this version puts sixty years of BBSL, and both offices, in front of every office manager searching for a copier.",
+  "sources": ["https://www.bbsl.com","https://xerox.com/en-bs/office/dealer-locator","https://theorg.com/org/bahamas-business-solutions-ltd-bbsl","https://bahamasb2b.com/news/2002/09/merger-to-give-bahamas-copier-extra-capital-base"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "notes": "Record said 'no own site' but BBSL runs bbsl.com (WordPress, uploads dated 2026). Headquartered in Nassau (90 Collins Avenue); the Freeport office has a phone but no published street address. VERIFY the noindex finding in a browser (view source) before pitching; it came from a WebFetch snapshot. History (1966 Xerox (Bahamas) Ltd, 1968 Freeport, 1987 buyout) comes from an unverified TheOrg profile; 2002 merger confirmed by bahamasb2b/Tribune. '3,000+ customers' and leadership names (TheOrg) deliberately left off. Two emails exist: sales@bbsl.com (Xerox locator, used for form) and info@bbsl.com (own site, footer). Medium-size company with an existing site: pitch is a rebuild, budget likely higher end.",
+  "built_at": "2026-11-04T23:56:29Z"
+}

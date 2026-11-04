@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bahamas-business-solutions-limited",
+  "name": "Bahamas Business Solutions Limited",
+  "niche": "professional-services",
+  "contact": {"phone": "+1-242-688-8100", "whatsapp": null, "email": "sales@bbsl.com", "address": "Freeport office (street address not published); HQ 90 Collins Avenue, P.O. Box N-4950, Nassau", "settlement": "Freeport", "island": "Grand Bahama"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Copiers and printers", "kind": "product", "summary": "Xerox desktop printers and MFPs incl. tabloid, HP; toner and supplies.", "price": null, "source": "https://xerox.com/en-bs/office/dealer-locator"},
+    {"name": "Production printing", "kind": "product", "summary": "Xerox entry-level and advanced production printers; Riso.", "price": null, "source": "https://xerox.com/en-bs/office/dealer-locator"},
+    {"name": "NCR Atleos", "kind": "product", "summary": "NCR Atleos equipment lines.", "price": null, "source": "https://www.bbsl.com"},
+    {"name": "Computers", "kind": "product", "summary": "Lenovo and HP.", "price": null, "source": "https://www.bbsl.com"},
+    {"name": "Service and copy service", "kind": "service", "summary": "Xerox Authorized Service Provider; copy service.", "price": null, "source": "https://www.bbsl.com"}
+  ],
+  "platform": {"candidate": true, "orderable": false, "categories": ["toner","printer supplies","office equipment"]},
+  "sources": ["https://www.bbsl.com","https://xerox.com/en-bs/office/dealer-locator","https://theorg.com/org/bahamas-business-solutions-ltd-bbsl","https://bahamasb2b.com/news/2002/09/merger-to-give-bahamas-copier-extra-capital-base"]
+}
