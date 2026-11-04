@@ -13,6 +13,9 @@ const status = s => fs.existsSync(stFile(s)) ? JSON.parse(fs.readFileSync(stFile
 const mode = process.argv[2] || '';
 if (mode === 'claim') {
   const slug = process.argv[3]; const r = all.find(x => x.slug === slug); if (!r) { console.error('unknown slug'); process.exit(1); }
+  try { execSync('git pull -q --rebase --autostash origin main', { cwd: root, stdio: 'inherit' }); } catch {}
+  const cur = status(slug);
+  if (cur && !(cur.state === 'building' && Date.now() - new Date(cur.claimed_at).getTime() > 2.5 * 3600 * 1000)) { console.log(`SKIP ${slug}: already ${cur.state} by another session. Move to the next business.`); process.exit(3); }
   fs.writeFileSync(stFile(slug), JSON.stringify({ slug, id: r.id, name: r.name, batch: r.batch, tier: r.tier, state: 'building', claimed_at: new Date().toISOString() }, null, 1));
   execSync(`git add factory/status/${slug}.json && git commit -q -m "claim: ${slug}" && (git pull -q --rebase --autostash origin main && git push -q origin HEAD:main)`, { cwd: root, stdio: 'inherit', shell: '/bin/bash' });
   console.log('CLAIMED', slug); process.exit(0);

@@ -5,7 +5,7 @@ Each site is a sales asset: Balazs shows it to the owner to win a $500-$1,000+ r
 GitHub Pages serves the repo root, so `/<slug>/index.html` becomes `https://<owner>.github.io/<repo>/<slug>/`.
 
 ## Your job in a session
-You are given a BATCH number (for example `07`). Build every prospect in `prospects.json` whose `batch` matches, one after another, fully finishing and pushing each before starting the next.
+You are given a BATCH number (for example `07`). Build every prospect in `prospects.json` whose `batch` matches, one after another, fully finishing and pushing each before starting the next. **Immediately before starting each business, run `node factory/tools/batch.mjs claim <slug>`. If it prints SKIP, another session has it: move on to the next one.** In resume mode (`batch.mjs pending N`) the same claim rule applies.
 **Always load the `site-factory` skill first** (`.claude/skills/site-factory/SKILL.md`) and follow its pipeline exactly. It tells you when to load `frontend-design` and `ui-ux-pro-max`.
 
 ## Priority and saving
