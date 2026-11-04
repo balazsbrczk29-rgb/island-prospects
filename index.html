@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Concept Previews Dashboard</title>
+<style>
+:root{--paper:#f6f4ee;--ink:#1f1e1b;--muted:#6d695f;--line:#e0dcd1;--accent:#1f5f5b;--card:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#171714;--ink:#eeebe3;--muted:#a19d92;--line:#33322d;--accent:#7cc4bc;--card:#201f1c}}
+:root[data-theme="dark"]{--paper:#171714;--ink:#eeebe3;--muted:#a19d92;--line:#33322d;--accent:#7cc4bc;--card:#201f1c}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 ui-sans-serif,-apple-system,"Segoe UI",sans-serif}
+header{padding:28px 16px 8px;max-width:1200px;margin:auto}h1{font-size:22px;margin:0 0 4px}p.sub{color:var(--muted);margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:8px;max-width:1200px;margin:16px auto;padding:0 16px}
+.bar input,.bar select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.bar input{flex:1;min-width:180px}.stats{max-width:1200px;margin:0 auto 8px;padding:0 16px;color:var(--muted);font-size:13px}
+main{max-width:1200px;margin:auto;padding:0 16px 48px;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:6px}
+.c h2{font-size:15px;margin:0}.m{color:var(--muted);font-size:12.5px}.p{font-size:13.5px}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-right:4px}
+.tag.built{border-color:var(--accent);color:var(--accent)}.tag.skipped{color:#a3612a;border-color:#a3612a}
+.links{display:flex;gap:12px;margin-top:auto;padding-top:6px;font-size:13.5px}a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header><h1>Concept previews</h1><p class="sub">Internal sales dashboard. Each card links to a concept site and its "what we would change" notes.</p></header>
+<div class="bar">
+  <input id="q" placeholder="Search name, island, sector" aria-label="Search">
+  <select id="st" aria-label="State"><option value="">All states</option><option>built</option><option>pending</option><option>skipped</option></select>
+  <select id="ni" aria-label="Niche"><option value="">All niches</option></select>
+</div>
+<div class="stats" id="stats">Loading…</div>
+<main id="grid"></main>
+<script>
+(async function(){
+  const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const P=await (await fetch('factory/data/prospects.json')).json();
+  await Promise.all(P.map(async p=>{try{const r=await fetch('factory/status/'+p.slug+'.json',{cache:'no-store'});p.s=r.ok?await r.json():null}catch(e){p.s=null}}));
+  const ni=document.getElementById('ni');[...new Set(P.map(p=>p.niche))].sort().forEach(n=>ni.add(new Option(n,n)));
+  function render(){
+    const q=document.getElementById('q').value.toLowerCase(),st=document.getElementById('st').value,n=ni.value;
+    const rows=P.filter(p=>{const s=p.s?p.s.state:'pending';return(!st||s===st)&&(!n||p.niche===n)&&(!q||(p.name+' '+p.location+' '+p.sector).toLowerCase().includes(q))})
+      .sort((a,b)=>(a.s?0:1)-(b.s?0:1)||a.batch.localeCompare(b.batch));
+    const built=P.filter(p=>p.s&&p.s.state==='built').length;
+    document.getElementById('stats').textContent=built+' of '+P.length+' built · '+rows.length+' shown';
+    document.getElementById('grid').innerHTML=rows.map(p=>{const s=p.s,state=s?s.state:'pending';
+      return '<article class="c"><h2>'+esc(p.name)+'</h2><div class="m">'+esc(p.sector)+' · '+esc(p.location)+'</div>'+
+      '<div><span class="tag '+state+'">'+state+'</span><span class="tag">tier '+p.tier+'</span><span class="tag">batch '+p.batch+'</span></div>'+
+      (s&&s.pitch_line?'<div class="p">'+esc(s.pitch_line)+'</div>':'<div class="m">'+esc(p.site_check_2026_11_04||'')+'</div>')+
+      (s&&s.state==='skipped'?'<div class="m">'+esc(s.notes)+'</div>':'')+
+      '<div class="links">'+(state==='built'?'<a href="'+p.slug+'/">Open site</a><a href="'+p.slug+'/?notes=1">Open with notes</a>':'')+
+      (p.current_site?'<a href="https://'+esc(p.current_site)+'" rel="noopener" target="_blank">Current site</a>':'')+'</div></article>'}).join('');
+  }
+  ['q','st','ni'].forEach(id=>document.getElementById(id).addEventListener('input',render));render();
+})();
+</script>
+</body>
+</html>
