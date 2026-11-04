@@ -1,6 +1,6 @@
 /* Shared concept ribbon + notes panel. Neutral on purpose so it never fights the site design. */
 .concept-ribbon{position:relative;z-index:9000;display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:center;padding:.5rem 1rem;background:#1d1d1b;color:#f4f2ec;font:500 12.5px/1.4 ui-sans-serif,-apple-system,"Segoe UI",sans-serif;letter-spacing:.01em;text-align:center}
-.concept-ribbon__btn{appearance:none;border:1px solid rgba(244,242,236,.45);background:transparent;color:inherit;font:inherit;padding:.3rem .7rem;border-radius:999px;cursor:pointer}
+.concept-ribbon__btn{appearance:none;border:1px solid rgba(244,242,236,.45);background:transparent;color:inherit;font:inherit;padding:.3rem .8rem;min-height:40px;border-radius:999px;cursor:pointer}
 .concept-ribbon__btn:hover,.concept-ribbon__btn:focus-visible{background:#f4f2ec;color:#1d1d1b;outline:none}
 .concept-notes{position:fixed;inset:0;z-index:9500;display:none;align-items:flex-end;justify-content:center;background:rgba(20,20,18,.45);padding:1rem}
 .concept-notes.is-open{display:flex}
