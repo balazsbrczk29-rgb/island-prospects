@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bvg-design-services",
+  "name": "BVG Design Services",
+  "niche": "professional-services",
+  "contact": {"phone": "+1-242-602-0658", "whatsapp": null, "email": "info@bvgdesign.com", "address": "P.O. Box F-43652, Freeport", "settlement": "Freeport", "island": "Grand Bahama"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Websites", "kind": "service", "summary": "Simple to multi-page themed sites with contact areas; discounts over 10 pages.", "price": null, "source": "https://bvgdesign.com/"},
+    {"name": "Hosting", "kind": "service", "summary": "Hosting plans with a control panel.", "price": null, "source": "https://bvgdesign.com/"},
+    {"name": "SEO and promotion", "kind": "service", "summary": "Search engine optimisation and site promotion.", "price": null, "source": "https://bvgdesign.com/"},
+    {"name": "Advanced web development", "kind": "service", "summary": "JavaScript, dynamic HTML and animation.", "price": null, "source": "https://bvgdesign.com/"},
+    {"name": "Advertising", "kind": "service", "summary": "Printed materials, layout advertising, video ads, CD/DVD production and etching.", "price": null, "source": "https://bvgdesign.com/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://bvgdesign.com/"]
+}
