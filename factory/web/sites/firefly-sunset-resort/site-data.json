@@ -1,0 +1,82 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "firefly-sunset-resort",
+ "name": "Firefly Sunset Resort",
+ "niche": "hospitality-stay",
+ "contact": {
+  "phone": "+1-242-366-0145",
+  "whatsapp": null,
+  "email": "info@fireflysunsetresort.com",
+  "address": "Centre Line Road, Elbow Cay",
+  "settlement": "Hope Town",
+  "island": "Abaco"
+ },
+ "hours": {
+  "restaurant": {
+   "breakfast": "08:00-11:00",
+   "lunch": "11:30-16:00",
+   "dinner": "17:30-21:00",
+   "days": "daily"
+  }
+ },
+ "socials": [
+  "https://instagram.com/fireflysunsetresort",
+  "https://facebook.com/fireflysunsetresort.com",
+  "https://www.tiktok.com/@fireflysunsetresort"
+ ],
+ "offer": [
+  {
+   "name": "Mint To Be",
+   "kind": "room",
+   "summary": "2B/2B, plunge pool",
+   "price": "$1,125/night in season; $1,000 off season; +10% VAT",
+   "source": "https://www.fireflysunsetresort.com/rooms"
+  },
+  {
+   "name": "Java Rum Plantation",
+   "kind": "room",
+   "summary": "3B/2B",
+   "price": "$1,500/night in season; $1,350 off season; +10% VAT",
+   "source": "https://www.fireflysunsetresort.com/rooms"
+  },
+  {
+   "name": "Firefly / Dragonfly / Butterfly",
+   "kind": "room",
+   "summary": "2B/2B each",
+   "price": "$800/night in season; $665 off season; +10% VAT",
+   "source": "https://www.fireflysunsetresort.com/rooms"
+  },
+  {
+   "name": "Whole resort",
+   "kind": "room",
+   "summary": "all five villas",
+   "price": "$49,258/week incl. VAT; $21,731 3-day min",
+   "source": "https://www.fireflysunsetresort.com/rooms"
+  },
+  {
+   "name": "Firefly Bar & Grill",
+   "kind": "product",
+   "summary": "breakfast, lunch, dinner daily; to-go orders",
+   "price": null,
+   "source": "https://www.fireflysunsetresort.com/empty-page"
+  }
+ ],
+ "platform": {
+  "candidate": true,
+  "orderable": true,
+  "categories": [
+   "resort",
+   "restaurant",
+   "to-go"
+  ]
+ },
+ "sources": [
+  "https://www.fireflysunsetresort.com",
+  "https://www.fireflysunsetresort.com/rooms",
+  "https://www.fireflysunsetresort.com/faqs",
+  "https://www.fireflysunsetresort.com/our-services",
+  "https://www.fireflysunsetresort.com/empty-page",
+  "https://www.fireflysunsetresort.com/gallery",
+  "https://firefly-sunset-resort.tablein.com/"
+ ]
+}

@@ -1,9 +1,31 @@
 {
- "slug": "firefly-sunset-resort",
- "id": 71,
- "name": "Firefly Sunset Resort",
- "batch": "11",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T03:51:03.281Z"
+ "slug": "firefly-sunset-resort", "id": 71, "name": "Firefly Sunset Resort", "batch": "11", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "villas.html", "restaurant.html"],
+ "primary_cta": "Request a villa",
+ "brand_truth": "Five villas on the Sea of Abaco named for things that glow and fly, rebuilt after Dorian, where the day is measured by the sunset from your deck.",
+ "buyer": "US families, couples and boaters staying a week in Hope Town; honeymooners; groups booking the whole resort; plus Elbow Cay diners for the Bar & Grill.",
+ "design": {"display_font": "Italiana 400", "body_font": "Plus Jakarta Sans 400/500/600", "palette": ["#fbf5ec", "#23302e", "#1f5c58", "#f2d57a", "#2b3a38", "#f3e8d8", "#e7dccb"], "hero_pattern": "split-bleed-right-sunset-clock", "signature": "Live tonight's-sunset clock for Hope Town (solar calculation); villa rate calculator on published season/weekly rates with 3-night minimum and 10% VAT; menu explorer with 'from the sea' filter; CSS firefly glow in the dusk section"},
+ "current_site_findings": [
+  "Every page title shows the literal text '<title>' in Google and browser tabs",
+  "Homepage slider shows 'Slide title' and 'Button' placeholders over Pexels stock photos",
+  "No phone number anywhere on the site",
+  "Villa rates and the email-to-book rule buried at the bottom of the villas page",
+  "Mint To Be described two different ways (honeymoon suite vs 2B/2B villa)",
+  "Menu page URL is /empty-page"
+ ],
+ "pitch_line": "Google shows your resort as '<title> Firefly Sunset Resort' and your homepage slider still says 'Slide title'; this concept fixes that and lets guests price a villa with VAT and request it in one tap.",
+ "sources": ["https://www.fireflysunsetresort.com", "https://www.fireflysunsetresort.com/rooms", "https://www.fireflysunsetresort.com/faqs", "https://www.fireflysunsetresort.com/our-services", "https://www.fireflysunsetresort.com/empty-page", "https://www.fireflysunsetresort.com/gallery", "https://firefly-sunset-resort.tablein.com/"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "A",
+ "assumptions": [
+  "Phone +1 (242) 366-0145 from their Tablein reservations page (site shows no phone)",
+  "Address 'Centre Line Rd, Elbow Cay' from Tablein",
+  "Plunge-pool photo (homepage villas tile) shown on Mint To Be",
+  "Gallery photos used with generic alt; individual villas have no photo assigned because their site does not label which is which",
+  "Weekly rate applied per full 7 nights, remaining nights at daily rate",
+  "Seasonal closure: Instagram bio mentions 'closing August 24 & reopening'; confirm current status"
+ ],
+ "notes": "Photos hotlinked from their Duda CDN (own photographer, Firefly+Sunset+Resort-NNN); Pexels stock on their homepage excluded. Sunset time computed client-side for Hope Town (26.54N, 76.96W), shown in America/Nassau time. Ask owner for labelled photos of each villa. Guest testimonials on their site not reused. Scorecard: hero 4, type 4, layout 4, context 4, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T03:57:58Z"
 }
