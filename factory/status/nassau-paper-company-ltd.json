@@ -1,9 +1,22 @@
 {
- "slug": "nassau-paper-company-ltd",
- "id": 86,
- "name": "Nassau Paper Company Ltd",
- "batch": "06",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:35:15.953Z"
+  "slug": "nassau-paper-company-ltd", "id": 86, "name": "Nassau Paper Company Ltd", "batch": "06", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "departments.html"],
+  "primary_cta": "Request a supply quote",
+  "brand_truth": "One counter on Carib Road for everything a Nassau business uses up: disposables, janitorial, paper and print.",
+  "design": {"display_font": "Sora 600", "body_font": "Rubik 400/500", "palette": ["#f5f3ee", "#17191c", "#2f6fde", "#a87a45", "#5b5f66", "#dcd7cc", "#ebe7de"], "hero_pattern": "product-still-life-split", "signature": "R3F counter still life of their departments with clickable department tags; quote builder with case steppers"},
+  "current_site_findings": [
+    "The online store has 100+ pages of products but no one-line statement of what, where and when for a first-time visitor.",
+    "Hours and the Carib Road address are mainly in directory listings.",
+    "Printing (Napco Printing Service) lives on a separate Facebook page.",
+    "Page titles carry no search words such as 'janitorial supplies Nassau'.",
+    "The site refused our preview tools ('Forbidden') on every attempt: worth checking link previews and visitor access."
+  ],
+  "pitch_line": "You have hundreds of products online, but a new restaurant owner can't tell in five seconds that you're the one counter for cups, cleaning supplies, paper and print; this concept says it on the first screen and turns a shopping list into a quote request.",
+  "sources": ["https://nassaupaperco.com/", "https://www.facebook.com/Nassaupaper/", "https://www.facebook.com/napcoprintingservice/", "https://www.bahamaslocal.com/showlisting/1209/Nassau_Paper_Company_Ltd.html"],
+  "qa": {"blockers": 0, "warnings": 1},
+  "track": "A",
+  "assumptions": ["Quote-builder example items are category-standard (plates and bowls, takeaway containers, toilet tissue, cleaning chemicals; print items business cards, flyers, letterhead, forms, menus, signage)", "Department one-line descriptions", "Delivery only offered as 'Ask about delivery'"],
+  "notes": "nassaupaperco.com returned 403 to Firecrawl twice and Facebook is unsupported, so facts come from search snippets of their own pages, Facebook snippets and BahamasLocal. No photos: 3D still life uses generic forms, no brand marks. platform.candidate true (supply merchant already selling online). Remaining QA warning: small 3D tags on mobile. interact.mjs is very slow on this page (WebGL in software rendering).",
+  "built_at": "2026-11-05T01:51:54Z"
 }

@@ -1,0 +1,101 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "nassau-paper-company-ltd",
+  "name": "Nassau Paper Company Ltd.",
+  "niche": "trade-retail",
+  "contact": {
+    "phone": "+1-242-393-3556",
+    "whatsapp": null,
+    "email": "info@nassaupaperco.com",
+    "address": "#34 Carib Road, P.O. Box N-4139",
+    "settlement": "Nassau",
+    "island": "New Providence"
+  },
+  "hours": "Mon-Fri 08:00-17:00",
+  "socials": [
+    "https://www.facebook.com/Nassaupaper/",
+    "https://www.facebook.com/napcoprintingservice/"
+  ],
+  "offer": [
+    {
+      "name": "Disposables",
+      "kind": "product",
+      "summary": "Disposables",
+      "price": null,
+      "source": "https://nassaupaperco.com/"
+    },
+    {
+      "name": "Cleaning & Janitorial Supplies",
+      "kind": "product",
+      "summary": "Cleaning & Janitorial Supplies",
+      "price": null,
+      "source": "https://nassaupaperco.com/"
+    },
+    {
+      "name": "Copy Paper & Supplies",
+      "kind": "product",
+      "summary": "Copy Paper & Supplies",
+      "price": null,
+      "source": "https://nassaupaperco.com/"
+    },
+    {
+      "name": "Paper, Envelopes, Chart Paper",
+      "kind": "product",
+      "summary": "Paper, Envelopes, Chart Paper",
+      "price": null,
+      "source": "https://nassaupaperco.com/"
+    },
+    {
+      "name": "Eco-Friendly Products",
+      "kind": "product",
+      "summary": "Eco-Friendly Products",
+      "price": null,
+      "source": "https://nassaupaperco.com/"
+    },
+    {
+      "name": "Warehouse & Shipping Supplies",
+      "kind": "product",
+      "summary": "Warehouse & Shipping Supplies",
+      "price": null,
+      "source": "https://nassaupaperco.com/"
+    },
+    {
+      "name": "Gift Wrap, Bows & Accessories",
+      "kind": "product",
+      "summary": "Gift Wrap, Bows & Accessories",
+      "price": null,
+      "source": "https://nassaupaperco.com/"
+    },
+    {
+      "name": "Candy & Gum",
+      "kind": "product",
+      "summary": "Candy & Gum",
+      "price": null,
+      "source": "https://nassaupaperco.com/"
+    },
+    {
+      "name": "Commercial printing",
+      "kind": "service",
+      "summary": "Napco Printing Service",
+      "price": null,
+      "source": "https://www.facebook.com/napcoprintingservice/"
+    }
+  ],
+  "platform": {
+    "candidate": true,
+    "orderable": true,
+    "categories": [
+      "disposables",
+      "janitorial",
+      "office-paper",
+      "shipping-supplies",
+      "printing"
+    ]
+  },
+  "sources": [
+    "https://nassaupaperco.com/",
+    "https://www.facebook.com/Nassaupaper/",
+    "https://www.bahamaslocal.com/showlisting/1209/Nassau_Paper_Company_Ltd.html",
+    "https://www.facebook.com/napcoprintingservice/"
+  ]
+}
