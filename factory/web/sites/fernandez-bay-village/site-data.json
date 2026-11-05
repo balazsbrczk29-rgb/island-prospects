@@ -1,0 +1,140 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "fernandez-bay-village",
+ "name": "Fernandez Bay Village",
+ "niche": "hospitality-stay",
+ "contact": {
+  "phone": "+1-954-302-7422",
+  "phone_alt": "+1-954-518-4500",
+  "whatsapp": "+1-242-808-5711",
+  "email": "reservations@fernandezbayvillage.com",
+  "address": "Fernandez Bay",
+  "settlement": "New Bight",
+  "island": "Cat Island"
+ },
+ "hours": null,
+ "socials": [
+  "https://www.facebook.com/fernandezbayvillage/",
+  "https://www.instagram.com/fernandezbayvillageresort/"
+ ],
+ "booking_engine": "https://fernandezbayvillage.client.innroad.com/",
+ "offer": [
+  {
+   "name": "Shane's Shack",
+   "kind": "room",
+   "summary": "cottage",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "Royal Palm",
+   "kind": "room",
+   "summary": "cottage",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "Coconut Palm",
+   "kind": "room",
+   "summary": "cottage",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "Traveler's Palm",
+   "kind": "room",
+   "summary": "cottage",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "Tamarind Suite",
+   "kind": "room",
+   "summary": "cottage",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "Seabreeze Cottage",
+   "kind": "room",
+   "summary": "cottage",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "Reefs Room",
+   "kind": "room",
+   "summary": "cottage",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "Caretaker's Cottage",
+   "kind": "room",
+   "summary": "cottage",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "The Manor House",
+   "kind": "room",
+   "summary": "villa, four bedrooms",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "The Beach House",
+   "kind": "room",
+   "summary": "villa, two bedrooms",
+   "price": null,
+   "source": "https://www.fernandezbayvillage.com/cottages"
+  },
+  {
+   "name": "Hot breakfast",
+   "kind": "product",
+   "summary": "per person",
+   "price": "$20",
+   "source": "https://www.fernandezbayvillage.com/dining"
+  },
+  {
+   "name": "Continental breakfast",
+   "kind": "product",
+   "summary": "per person",
+   "price": "$10",
+   "source": "https://www.fernandezbayvillage.com/dining"
+  },
+  {
+   "name": "Lunch",
+   "kind": "product",
+   "summary": "per person",
+   "price": "$8-$18",
+   "source": "https://www.fernandezbayvillage.com/dining"
+  },
+  {
+   "name": "Dinner with beach bonfire",
+   "kind": "product",
+   "summary": "per person per night",
+   "price": "$48",
+   "source": "https://www.fernandezbayvillage.com/dining"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": [
+   "resort",
+   "restaurant"
+  ]
+ },
+ "sources": [
+  "https://www.fernandezbayvillage.com",
+  "https://www.fernandezbayvillage.com/cottages",
+  "https://www.fernandezbayvillage.com/villas",
+  "https://www.fernandezbayvillage.com/gettinghere",
+  "https://www.fernandezbayvillage.com/dining",
+  "https://www.fernandezbayvillage.com/activities",
+  "https://www.fernandezbayvillage.com/clubhouse",
+  "https://www.fernandezbayvillage.com/contact",
+  "https://www.caribjournal.com/2019/01/20/three-bahamas-resorts-for-sale-all-on-cat-island/"
+ ]
+}

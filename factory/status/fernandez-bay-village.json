@@ -1,9 +1,30 @@
 {
- "slug": "fernandez-bay-village",
- "id": 70,
- "name": "Fernandez Bay Village",
- "batch": "10",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T03:43:38.506Z"
+ "slug": "fernandez-bay-village", "id": 70, "name": "Fernandez Bay Village", "batch": "10", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "stay.html", "getting-here.html"],
+ "primary_cta": "Check availability",
+ "brand_truth": "A family-run village of cottages in the hollow of Fernandez Bay, Cat Island, where every room looks at the beach and the day ends at a bonfire on the sand.",
+ "buyer": "US couples and families, groups renting the Manor House or Beach House, and private pilots flying into New Bight five minutes away.",
+ "design": {"display_font": "Petrona 300/400 + italic", "body_font": "Instrument Sans 400/500/600", "palette": ["#f7f3ec", "#1e2b24", "#3d5a3f", "#a9dcd6", "#e7d6b8", "#efe7da", "#e2d8c8"], "hero_pattern": "framed-image-passe-partout", "signature": "'Who's coming?' party planner lighting up fitting cottages, adjoining pairs and villas; meal counter on published dining prices; sticky 'one day in the bay' scrollytelling with a sun arc drawn by scroll; Getting Here route chooser (FXE, Nassau, own plane)"},
+ "current_site_findings": [
+  "Two different front-desk numbers: contact page (954) 302-7422, footer (954) 518-4500",
+  "No meta descriptions; default Squarespace favicon",
+  "Homepage video fails to load; newsletter block shows a setup error",
+  "Cat Island / New Bight not in the first screen",
+  "No way to see adjoining cottages or total meals without emailing",
+  "Generic 'Click Here' / 'Learn More' buttons"
+ ],
+ "pitch_line": "Your site has beautiful photos but two different phone numbers and no mention of Cat Island on the first screen; this concept puts the island, the five-minute airport transfer and a 'who's coming' cottage planner up front.",
+ "sources": ["https://www.fernandezbayvillage.com", "https://www.fernandezbayvillage.com/cottages", "https://www.fernandezbayvillage.com/villas", "https://www.fernandezbayvillage.com/gettinghere", "https://www.fernandezbayvillage.com/dining", "https://www.fernandezbayvillage.com/activities", "https://www.fernandezbayvillage.com/clubhouse", "https://www.fernandezbayvillage.com/contact", "https://www.caribjournal.com/2019/01/20/three-bahamas-resorts-for-sale-all-on-cat-island/"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "A",
+ "assumptions": [
+  "Front desk number shown is (954) 302-7422 from the contact page; footer lists (954) 518-4500",
+  "WhatsApp 1 (242) 808-5711 used for the enquiry form",
+  "Cottage photos matched by order on their cottages page",
+  "Caretaker's Cottage bed size not published, not shown",
+  "Business still family run after the 2019 sale listing"
+ ],
+ "notes": "Photos hotlinked from their Squarespace CDN with ?format=1500w/2500w size parameter. Guest testimonials on their homepage were deliberately not reused. Interact reports 3 'dead' inputs on index: meal checkboxes Playwright cannot 'fill'; they work. Weddings page not scraped (budget). Design reference: aman.com Amanyara. Scorecard: hero 4, type 4, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 5, consistency 4.",
+ "built_at": "2026-11-05T03:50:57Z"
 }
