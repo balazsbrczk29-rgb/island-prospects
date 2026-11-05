@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "jones-construction-company-ltd",
+  "name": "Jones Construction Company Ltd.",
+  "niche": "industrial-b2b",
+  "contact": {"phone": "+1-242-327-7486", "whatsapp": null, "email": null, "address": "Airport Industrial Park, P.O. Box N-3409, Nassau", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Building construction", "kind": "service", "summary": "Building contractor in New Providence (category inferred, confirm scope with owner).", "price": null, "source": "https://www.bahamasb2b.com/news/2004/02/sand-shortage-hurting-construction-industry"},
+    {"name": "Construction consulting", "kind": "service", "summary": "Listed under construction consultants.", "price": null, "source": "https://bahamas.yabsta.com/listing/view/94213/jones-construction-company-ltd"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": [
+    "https://bahamas.yabsta.com/listing/view/94213/jones-construction-company-ltd",
+    "https://www.bahamasb2b.com/news/2004/02/sand-shortage-hurting-construction-industry"
+  ]
+}

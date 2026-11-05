@@ -1,9 +1,22 @@
 {
- "slug": "jones-construction-company-ltd",
- "id": 43,
- "name": "Jones Construction Company Ltd.",
- "batch": "02",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:12:00.139Z"
+  "slug": "jones-construction-company-ltd", "id": 43, "name": "Jones Construction Company Ltd.", "batch": "02", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "capabilities.html"],
+  "primary_cta": "Discuss a project",
+  "brand_truth": "A Nassau building contractor, built from the block up, working out of Airport Industrial Park.",
+  "design": {"display_font": "Archivo 560-650 (wdth 118)", "body_font": "Public Sans 400/500/600", "palette": ["#efede8", "#1c1f22", "#2c4a9a", "#d8c39a", "#e4e1d9", "#5a5f63", "#d2cdc3"], "hero_pattern": "cinematic-3d-build", "signature": "R3F block building assembling course by course with tower crane; sticky section-drawing scrollytelling"},
+  "current_site_findings": [
+    "No website: the only result is a directory listing with a stock picture, a phone number and the words construction consultants.",
+    "Search results mix the company up with a US contractor, an Abaco builder and a roofing firm.",
+    "Nothing online says what you build or how to start a project.",
+    "No email or project form for developers and procurement officers abroad.",
+    "Google has no business details to place you in Airport Industrial Park."
+  ],
+  "pitch_line": "Right now a developer who Googles Jones Construction finds a US firm and a directory stub; this site shows them, in one screen, that you build in block and steel in Nassau and lets them brief you in one call.",
+  "sources": ["https://bahamas.yabsta.com/listing/view/94213/jones-construction-company-ltd", "https://www.bahamasb2b.com/news/2004/02/sand-shortage-hurting-construction-industry", "https://www.tribune242.com/news/2014/apr/30/builder-who-failed-awarded-contract/"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "B",
+  "assumptions": ["Service lines: new homes and commercial buildings, additions and renovations, storm damage repairs, site supervision, sequencing of trades, project review, advice on stalled work", "Four-stage build process copy is category standard", "Still operating at Airport Industrial Park on 242-327-7486"],
+  "notes": "No photos, email, hours or projects found; hero and drawings are illustrations. MD named as Mervin Jones in 2004 press (not used on site). Be aware: Tribune 2014 article criticised the company over a 2009 NIB building contract; not referenced on the site. Proposed domain jonesconstructionbahamas.com (unverified availability). Fonts and the 3D scene render only online (sandbox QA used fallbacks).",
+  "built_at": "2026-11-05T01:26:06Z"
 }
