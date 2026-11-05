@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "schooner-bay-marina",
+  "name": "Schooner Bay Marina",
+  "niche": "marina",
+  "contact": {"phone": "+1-242-366-2044", "phone_main": "+1-242-699-3470", "whatsapp": null, "email": "harbourmaster@schoonerbaybahamas.com", "vhf": "16 / 77", "address": "Schooner Bay", "settlement": "Schooner Bay", "island": "Great Abaco"},
+  "hours": "Daily 7:30 am to 4:30 pm",
+  "socials": ["https://www.facebook.com/schoonerbay"],
+  "offer": [
+    {"name": "Transient dockage", "kind": "slip", "summary": "Daily, weekly and monthly; vessels to 80 ft, 8 ft at MLW; 30 and 50 amp.", "price": "USD 3.00 per ft per day, variable by length of stay (published)", "source": "https://schoonerbaybahamas.com/community/the-marina/"},
+    {"name": "Fuel", "kind": "service", "summary": "Diesel and gas at market rates; call ahead.", "price": null, "source": "https://schoonerbaybahamas.com/community/the-marina/"},
+    {"name": "Resident boat storage", "kind": "service", "summary": "Covered, secured storage for residents.", "price": null, "source": "https://schoonerbaybahamas.com/community/the-marina/"},
+    {"name": "Discovery Stay", "kind": "tour", "summary": "Hosted 3-night, 4-day stay for prospective home buyers.", "price": null, "source": "https://schoonerbaybahamas.com"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://schoonerbaybahamas.com/community/the-marina/", "https://schoonerbaybahamas.com/abaco-bahamas/", "https://schoonerbaybahamas.com/contact/", "https://schoonerbaybahamas.com"]
+}

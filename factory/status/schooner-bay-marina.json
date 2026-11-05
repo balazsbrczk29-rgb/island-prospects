@@ -1,9 +1,24 @@
 {
- "slug": "schooner-bay-marina",
- "id": 95,
- "name": "Schooner Bay Marina",
- "batch": "12",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T05:43:27.845Z"
+  "slug": "schooner-bay-marina", "id": 95, "name": "Schooner Bay Marina", "batch": "12", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "marina.html", "village.html"],
+  "primary_cta": "Request a slip",
+  "brand_truth": "A working harbour on Great Abaco's south-east shore, the closest marina to Hole in the Wall, with a village around the water.",
+  "buyer": "Sportfish and cruising-yacht owners and captains (US Southeast, HNW) running the Abaco Cays to Nassau or heading to Hole in the Wall; second-home buyers arriving by boat.",
+  "design": {"display_font": "Ibarra Real Nova 400/600 + italic", "body_font": "Geist 400/500", "palette": ["#eef1ef", "#0f2530", "#1d4e6e", "#a8792f", "#cfe3e0", "#e2e8e5", "#cfd5d3"], "hero_pattern": "type-sandwich panorama (Schooner / real harbour panorama / Bay.) with published position caption", "signature": "'Will she fit?' checker: LOA/draft/nights sliders against the published 80 ft / 8 ft MLW, plan-view hull drawing and depth gauge, dockage estimate at $3.00/ft/day feeding the slip request; By sea / By air arrival switch on marina page"},
+  "current_site_findings": [
+    "Homepage leads with a 2020 'We are open' banner and real estate; nothing for boaters.",
+    "Site contradicts itself: 80 ft (Marina page) vs 70 ft (Abaco page).",
+    "Two different phone numbers (366-2044 Harbour Master vs 699-3470 contact page) with no explanation.",
+    "Specs buried in paragraphs and a 2017 PDF.",
+    "No online slip or fuel request.",
+    "Hole in the Wall, the main draw, is one sentence on a secondary page."
+  ],
+  "pitch_line": "Boaters decide on a phone at the helm: this puts your 80-foot, 8-foot limits, fuel and VHF 16 in the first screen and lets them request a slip in one tap.",
+  "sources": ["https://schoonerbaybahamas.com", "https://schoonerbaybahamas.com/community/the-marina/", "https://schoonerbaybahamas.com/abaco-bahamas/", "https://schoonerbaybahamas.com/contact/", "https://www.waterwayguide.com/marina/schooner-bay"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["80 ft max used (marina page, updated 2026) over 70 ft (Abaco page)", "Golf cart rentals and help with local transport still offered (Abaco page 2023 / marina page)", "Blackfly Lodge still part of the village (contact page)"],
+  "notes": "Waterway Guide lists 40 slips (5 transient) and a slightly different position; not shown on site. JSON-LD geo from the marina's own published position (N 26 09.529, W 077 10.633). Port of entry status not stated anywhere, so not claimed. Restaurant not confirmed by own site, omitted. Interact tool flags range sliders as 'dead' (it cannot fill range inputs); they work. Scorecard: 1:5 2:5 3:4 4:4 5:4 6:4 7:5 8:4 9:4 10:4 11:5.",
+  "built_at": "2026-11-05T00:00:00Z"
 }
