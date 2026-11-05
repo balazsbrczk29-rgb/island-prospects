@@ -1,9 +1,62 @@
 {
  "slug": "sea-spray-resort-marina",
- "id": 96,
- "name": "Sea Spray Resort & Marina",
- "batch": "07",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:41:00.640Z"
+ "name": "Sea Spray Resort & Marina",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "marina.html",
+  "residences.html"
+ ],
+ "primary_cta": "Request a slip",
+ "brand_truth": "An Albury boat-building name, rebuilt after Dorian by four friends who boat, in the sheltered White Sound of Elbow Cay.",
+ "buyer": "US East Coast boat owners and captains crossing to the Abacos; villa guests; second-home buyers in the $3-6M bracket.",
+ "design": {
+  "display_font": "Newsreader 300/400 (+italic)",
+  "body_font": "Inter Tight 400/500",
+  "palette": [
+   "#f3f4f1",
+   "#0f2230",
+   "#1d5b7f",
+   "#a9d3cc",
+   "#e6ebe8",
+   "#536470",
+   "#d3dbd8",
+   "#d9c7a6"
+  ],
+  "hero_pattern": "panorama-band-type-above-spec-strip",
+  "signature": "Slip-fit checker: LOA and draft sliders against the sourced 130 ft / 7 ft limits, boat silhouette on a dock scale and a depth gauge"
+ },
+ "current_site_findings": [
+  "'Book a Slip' redirects to a 404 page",
+  "Stay and Contact pages carry the template title and share image ('Ocealis - Webflow Ecommerce website template')",
+  "No slip count, LOA, draft or VHF on the homepage",
+  "Event buttons read 'Button Button'; events repeat three times",
+  "Contact page has no phone, VHF or address",
+  "Homepage sells homes before telling boaters where the marina is"
+ ],
+ "pitch_line": "Your 'Book a Slip' button goes to a 404 and your pages still carry the template's name; this concept puts 68 slips, 130 ft and 7 ft at low tide in the first screen and lets a captain check his boat before he calls.",
+ "sources": [
+  "https://seasprayresort.com/",
+  "https://seasprayresort.com/stay/1",
+  "https://seasprayresort.com/contact/1",
+  "https://www.allatsea.net/sea-spray-resort-marina-rebirth-of-a-bahamian-icon-in-elbow-cay/",
+  "https://marinas.com/view/marina/g9c5rg_Seaspray_Resort_and_Villas_Ltd_Elbow_Cay_AB_Bahamas",
+  "https://www.facebook.com/SeaSprayResortAbaco/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Slip specs (68 slips, 20-130 ft, 7 ft at low tide) from All At Sea Dec 2023 and TripAdvisor listing text: confirm current",
+  "Gas availability from Facebook page snippet",
+  "Slip rates not published: 'Rates on request'",
+  "Event descriptions 'Bring the crew' / 'For the brave' are microcopy, not facts"
+ ],
+ "notes": "Record said no own site; seasprayresort.com is live (Webflow template, 2026) so this is a fix-and-sharpen pitch, not a rescue. Phone +1 242 577 4696 and VHF 16 from their footer and marinas.com; no email published, so slip request ends in a read-out summary + Call + VHF. Photos hotlinked from their Webflow CDN. interact.mjs flags the two range sliders as 'dead' because it types into inputs; they work by drag/keyboard. Home page has accordion only; slip checker, enquiry tabs and residence selector are on inner pages. Scorecard: hero 4, type 5, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 5, consistency 4.",
+ "built_at": "2026-11-05T01:46:35.527236+00:00",
+ "id": 96,
+ "batch": "07"
 }

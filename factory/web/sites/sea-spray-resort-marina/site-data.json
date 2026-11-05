@@ -1,0 +1,19 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "sea-spray-resort-marina",
+  "name": "Sea Spray Resort & Marina",
+  "niche": "marina",
+  "contact": {"phone": "+1-242-577-4696", "vhf": "16", "whatsapp": null, "email": null, "address": "White Sound, Elbow Cay", "settlement": "Elbow Cay", "island": "Abaco"},
+  "hours": null,
+  "socials": ["https://www.facebook.com/SeaSprayResortAbaco/", "https://www.instagram.com/seasprayabaco/"],
+  "offer": [
+    {"name": "Marina slips", "kind": "slip", "summary": "68 slips for boats 20 to 130 ft LOA, drafts up to 7 ft at low tide; electricity, water, ice, restrooms.", "price": null, "source": "https://www.allatsea.net/sea-spray-resort-marina-rebirth-of-a-bahamian-icon-in-elbow-cay/"},
+    {"name": "Villa stays", "kind": "room", "summary": "Rental stays booked online.", "price": null, "source": "https://seasprayresortandvillas.guestybookings.com/en"},
+    {"name": "Marina bar and restaurant", "kind": "service", "summary": "Bar and dining over White Sound; online ordering.", "price": null, "source": "https://seasprayresortandvillas.revelup.online/store/1"},
+    {"name": "Oceanfront home", "kind": "product", "summary": "6 bed, 6.5 bath, 3,879 sq ft, private pool.", "price": "from $5,999,500", "source": "https://seasprayresort.com/stay/1"},
+    {"name": "Marina View Cottage, Plan A", "kind": "product", "summary": "3 bed, 3.5 bath, 2,264 sq ft.", "price": "from $3,050,000", "source": "https://seasprayresort.com/stay/1"},
+    {"name": "Marina View Cottage, Plan B", "kind": "product", "summary": "3 bed (4-bed option), 3.5 bath, 2,492 sq ft.", "price": "from $3,300,000", "source": "https://seasprayresort.com/stay/1"}
+  ],
+  "platform": {"candidate": true, "orderable": false, "categories": ["restaurant", "bar"]},
+  "sources": ["https://seasprayresort.com/", "https://seasprayresort.com/stay/1", "https://www.allatsea.net/sea-spray-resort-marina-rebirth-of-a-bahamian-icon-in-elbow-cay/", "https://marinas.com/view/marina/g9c5rg_Seaspray_Resort_and_Villas_Ltd_Elbow_Cay_AB_Bahamas", "https://www.facebook.com/SeaSprayResortAbaco/"]
+}
