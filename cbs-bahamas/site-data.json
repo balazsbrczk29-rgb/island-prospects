@@ -3,17 +3,15 @@
   "slug": "cbs-bahamas",
   "name": "CBS Bahamas (Commonwealth Building Supplies Ltd)",
   "niche": "trade-retail",
-  "contact": {"phone": "+1-242-677-2100", "whatsapp": null, "email": null, "address": "Southwest Plaza, Carmichael Road, P.O. Box SS-6268", "settlement": "Nassau", "island": "New Providence"},
-  "hours": null,
-  "socials": ["https://www.facebook.com/buildbeautiful/","https://www.instagram.com/cbsbahamas","https://www.youtube.com/user/CBSBahamas","https://twitter.com/CBSBahamas"],
+  "contact": {"phone": "+1-242-677-2100", "whatsapp": null, "email": "cbs@cbsbahamas.com", "email_online_orders": "online@cbsbahamas.com", "address": "SouthWest Plaza, Carmichael Road", "settlement": "Nassau", "island": "New Providence"},
+  "hours": {"mon_sat": "08:00-20:00", "sun": "09:00-17:00", "note": "to confirm, listings differ"},
+  "socials": ["https://www.facebook.com/buildbeautiful/"],
   "offer": [
-    {"name": "Windows & Doors", "kind": "product", "summary": "Impact windows and doors, hurricane shutters, locks (PGT, JELD-WEN, Kawneer, Huttig).", "price": null, "source": "https://www.bahamaslocal.com/showlisting/17519/CBS_Bahamas.html"},
-    {"name": "Plumbing & Bath", "kind": "product", "summary": "Kohler and Sterling fixtures, Kohler showroom, water heaters.", "price": null, "source": "https://www.tribune242.com/news/2014/oct/16/cbs-bahamas-expands-with-brand-showroom"},
-    {"name": "Paint & Flooring", "kind": "product", "summary": "Valspar paint, Mohawk and Choice Flooring.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/17519/CBS_Bahamas.html"},
-    {"name": "Tools & Electrical", "kind": "product", "summary": "Milwaukee tools, electrical supplies.", "price": null, "source": "https://www.lbmjournal.com/industry-news/news/15784639/commonwealth-building-supplies-ltd-announces-key-leadership-promotions"},
-    {"name": "Home & Garden", "kind": "product", "summary": "Housewares, cleaning supplies, lawn and garden.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/17519/CBS_Bahamas.html"},
-    {"name": "CBS PROstore", "kind": "service", "summary": "Bulk building materials for contractors and industry professionals.", "price": null, "source": "https://www.lbmjournal.com/industry-news/news/15784639/commonwealth-building-supplies-ltd-announces-key-leadership-promotions"}
+    {"name": "Free mailboat delivery", "kind": "service", "summary": "Orders dropped at the Family Island mailboat of your choice (Potter's Cay or Arawak Cay) at no charge; the boat charges its own freight fee at collection.", "price": null, "source": "https://www.cbsbahamas.com/news/family-island-customers-the-ultimate-guide-to-shipping-on-the-mailboat"},
+    {"name": "Island-wide delivery, in-store pick-up, smart-locker pickup", "kind": "service", "summary": "Delivery and pickup options for online orders.", "price": null, "source": "https://www.cbsbahamas.com/"},
+    {"name": "Price match guarantee", "kind": "service", "summary": "Stated on the CBS homepage.", "price": null, "source": "https://www.cbsbahamas.com/"},
+    {"name": "Special order", "kind": "service", "summary": "Items not stocked in store can be special ordered.", "price": null, "source": "https://www.cbsbahamas.com/shop-special-order"}
   ],
-  "platform": {"candidate": true, "orderable": false, "categories": ["building supplies","hardware","windows & doors","plumbing","paint","flooring","tools","electrical","housewares","lawn & garden"]},
-  "sources": ["https://www.lbmjournal.com/industry-news/news/15784639/commonwealth-building-supplies-ltd-announces-key-leadership-promotions","https://www.tribune242.com/news/2014/oct/16/cbs-bahamas-expands-with-brand-showroom","https://www.bhahotels.com/members-directory/commonwealth-building-supplies-ltd/","https://www.bahamaslocal.com/showlisting/17519/CBS_Bahamas.html","https://www.cbsbahamas.com/contact-us--6"]
+  "platform": {"candidate": true, "orderable": true, "categories": ["Doors & Windows", "Roofing", "Ceilings", "Flooring", "Bath & Faucets", "Kitchen & Kitchenware", "Lighting & Ceiling Fans", "Lawn & Garden", "Patio & Outdoor Living", "Cleaning & Maintenance", "Blinds & Window Treatments", "Marine & Automotive", "Decor & Furniture", "Bulk Supply"], "existing_store": "https://www.cbsbahamas.com/"},
+  "sources": ["https://www.cbsbahamas.com/", "https://www.cbsbahamas.com/news/family-island-customers-the-ultimate-guide-to-shipping-on-the-mailboat", "https://www.lbmjournal.com/industry-news/news/15784639/commonwealth-building-supplies-ltd-announces-key-leadership-promotions", "https://www.bahamaslocal.com/showlisting/17519/CBS_Bahamas.html", "https://www.facebook.com/buildbeautiful/"]
 }

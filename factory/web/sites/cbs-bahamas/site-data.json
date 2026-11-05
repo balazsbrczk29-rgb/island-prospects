@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "cbs-bahamas",
+  "name": "CBS Bahamas (Commonwealth Building Supplies Ltd)",
+  "niche": "trade-retail",
+  "contact": {"phone": "+1-242-677-2100", "whatsapp": null, "email": "cbs@cbsbahamas.com", "email_online_orders": "online@cbsbahamas.com", "address": "SouthWest Plaza, Carmichael Road", "settlement": "Nassau", "island": "New Providence"},
+  "hours": {"mon_sat": "08:00-20:00", "sun": "09:00-17:00", "note": "to confirm, listings differ"},
+  "socials": ["https://www.facebook.com/buildbeautiful/"],
+  "offer": [
+    {"name": "Free mailboat delivery", "kind": "service", "summary": "Orders dropped at the Family Island mailboat of your choice (Potter's Cay or Arawak Cay) at no charge; the boat charges its own freight fee at collection.", "price": null, "source": "https://www.cbsbahamas.com/news/family-island-customers-the-ultimate-guide-to-shipping-on-the-mailboat"},
+    {"name": "Island-wide delivery, in-store pick-up, smart-locker pickup", "kind": "service", "summary": "Delivery and pickup options for online orders.", "price": null, "source": "https://www.cbsbahamas.com/"},
+    {"name": "Price match guarantee", "kind": "service", "summary": "Stated on the CBS homepage.", "price": null, "source": "https://www.cbsbahamas.com/"},
+    {"name": "Special order", "kind": "service", "summary": "Items not stocked in store can be special ordered.", "price": null, "source": "https://www.cbsbahamas.com/shop-special-order"}
+  ],
+  "platform": {"candidate": true, "orderable": true, "categories": ["Doors & Windows", "Roofing", "Ceilings", "Flooring", "Bath & Faucets", "Kitchen & Kitchenware", "Lighting & Ceiling Fans", "Lawn & Garden", "Patio & Outdoor Living", "Cleaning & Maintenance", "Blinds & Window Treatments", "Marine & Automotive", "Decor & Furniture", "Bulk Supply"], "existing_store": "https://www.cbsbahamas.com/"},
+  "sources": ["https://www.cbsbahamas.com/", "https://www.cbsbahamas.com/news/family-island-customers-the-ultimate-guide-to-shipping-on-the-mailboat", "https://www.lbmjournal.com/industry-news/news/15784639/commonwealth-building-supplies-ltd-announces-key-leadership-promotions", "https://www.bahamaslocal.com/showlisting/17519/CBS_Bahamas.html", "https://www.facebook.com/buildbeautiful/"]
+}

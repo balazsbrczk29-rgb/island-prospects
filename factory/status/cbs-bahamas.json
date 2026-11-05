@@ -1,9 +1,24 @@
 {
- "slug": "cbs-bahamas",
- "id": 34,
- "name": "CBS Bahamas (Commonwealth Building Supplies)",
- "batch": "01",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T00:56:26.658Z"
+ "slug": "cbs-bahamas", "id": 34, "name": "CBS Bahamas (Commonwealth Building Supplies)", "batch": "01", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "departments.html"],
+ "primary_cta": "Shop CBS online",
+ "brand_truth": "A Bahamian-owned store on Carmichael Road that has built Nassau since 1973 and now sends every order to the mailboat for free.",
+ "buyer": "Nassau homeowners and renovators, contractors buying in quantity, and Family Island homeowners ordering by phone for mailboat delivery.",
+ "design": {"display_font": "Bricolage Grotesque 700", "body_font": "Figtree 400/500/600", "palette": ["#eeefe9", "#17201d", "#245a41", "#e2b23a", "#d4e4df", "#56605b", "#cfd3c8"], "hero_pattern": "typographic-monument", "signature": "Shop the house: interactive line-drawn Bahamian house elevation with 10 hotspots mapped to CBS departments; mailboat planner chart with route draw and personalised 5-step guide; louvred shutters opening on the hours card"},
+ "current_site_findings": [
+  "The homepage opens on a seasonal product feed; the 1973 Bahamian-owned story is not on it.",
+  "Free mailboat delivery, the strongest Family Island promise, lives in a 2024 blog post.",
+  "Pinch-zoom is disabled on phones (user-scalable=no).",
+  "Directories show a second main number (242-325-2505) and an old wixsite contact page with different hours.",
+  "Store email vs online-orders email is never explained in one place."
+ ],
+ "pitch_line": "Your online store works, but your best promise, free mailboat drop-off to every island, is buried in a blog post; this front door puts it, your hours and your 1973 story on the first screen and hands buyers straight into your shop.",
+ "sources": ["https://www.cbsbahamas.com/", "https://www.cbsbahamas.com/news/family-island-customers-the-ultimate-guide-to-shipping-on-the-mailboat", "https://www.lbmjournal.com/industry-news/news/15784639/commonwealth-building-supplies-ltd-announces-key-leadership-promotions", "https://www.bahamaslocal.com/showlisting/17519/CBS_Bahamas.html", "https://www.facebook.com/buildbeautiful/", "https://www.bhahotels.com/members-directory/commonwealth-building-supplies-ltd/"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "A",
+ "scorecard": {"first_screen": 4, "typography": 5, "editorial_layout": 4, "context_visuals": 4, "motion": 4, "depth": 4, "detailing": 4, "mobile": 4, "next_to_references": 4, "owner_proud": 4, "whole_page": 4},
+ "assumptions": ["Hours Mon-Sat 8-8, Sun 9-5 (other listings differ)", "cbs@cbsbahamas.com is the right inbox for stock and bulk questions", "Department summaries are short category descriptions built from the store's own category names and products seen online"],
+ "notes": "Record said DOMAIN LOST; re-checked 2026-11-05: cbsbahamas.com (with and without www) serves CBS's own live Evolution X e-commerce store. Built as a Track A brand front door that links into their existing shop, not a store replacement. Pitch is weaker than a no-website prospect; consider repricing as a landing/brand layer. No store photography used (banners have baked-in text); ask owner for store, warehouse and team photos. Map and island chart are illustrations. No WhatsApp found.",
+ "built_at": "2026-11-05T01:05:45Z"
 }
