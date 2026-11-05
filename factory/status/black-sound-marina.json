@@ -4,6 +4,15 @@
  "name": "Black Sound Marina",
  "batch": "04",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:23:52.011Z"
+ "state": "skipped",
+ "pages": [],
+ "notes": "Skipped: BahamasLocal lists it as permanently closed, destroyed in Hurricane Dorian; old domain dead; only 2004-era specs; its phone appears under another marina in 2018. Facebook page could not be read. Re-queue if Balazs confirms it reopened.",
+ "sources": [
+  "https://www.bahamaslocal.com/showlisting/16826/Black_Sound_Marina.html",
+  "https://www.noonsite.com/business/black-sound-marina/",
+  "https://www.sportfishingmag.com/abacos-destination-guide/",
+  "https://www.facebook.com/blacksoundmarina/",
+  "https://www.abacobahamas.com/blog/posts/2025/10/23/abaco-marinas/"
+ ],
+ "built_at": "2026-11-05T01:25:11.897126+00:00"
 }
