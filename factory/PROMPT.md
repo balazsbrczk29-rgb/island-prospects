@@ -29,6 +29,7 @@ Every site must be **portfolio-level work that a client would pay at least $1,00
 4. Load these vendored skills once, before your first design:
    - `taste-skill` (design-taste-frontend): the quality bar (figma.com / x.ai level) and its house rules; read the references it points to for the page you build (`layout-v4.md`, `sections.md`, `motion.md`, `backgrounds.md`, `copy.md`).
    - `emil-design-eng` and `choreograph` (polish, hero entrances, staggered reveals), `animate` when building a new interaction, `animation-performance` if anything stutters.
+   - `web-artifacts-builder` (same React + Tailwind + shadcn stack: apply its design guidelines, but build with our build-site.mjs).
    - `frontend-design`; query `ui-ux-pro-max` for palettes and type pairings instead of reading it whole.
 5. Study the reference site source `factory/web/sites/bell-channel-club-marina/` (`index.html`, `src/site.tsx`, `src/home.tsx`, `src/Scene.tsx`, `src/styles.css`). It is the **minimum** level of craft and the file structure to copy. Never copy its design: every site must look nothing like it.
 
@@ -109,6 +110,9 @@ Mandatory on every page:
 - one `<h1>`, semantic landmarks, skip link, alt text, labelled fields, focus styles, tap targets 44 px+, mobile first (390 px, then 768, then 1280+).
 
 SEO (production-ready, written in full): title 45 to 62 chars "{primary phrase} | {Business}, {Island}", meta description 120 to 158 chars, canonical to their real or proposed domain, Open Graph, JSON-LD `@graph` with the right LocalBusiness subtype (Hotel, Resort, Marina, TouristAttraction, RoofingContractor, LegalService, InsuranceAgency, etc.), WebSite and FAQPage (3 to 5 real Q&As); identical NAP everywhere; settlements and islands spelled exactly; never `aggregateRating` or `review`. Conversion: enquiry form that opens WhatsApp or email prefilled (only with a sourced number/email), otherwise a large call block; Google Maps embed by address.
+
+## 8b. Whole page, key information, booking
+The hero sets the art direction for the entire page: same palette (derived from the hero visual), type, container, labels and motion in every section, never a plainer template look further down. Directly under the hero, a contrasting key-information band with the 3 to 5 facts buyers need first (phone or booking channel, location, core offer, hours), large and tappable. Wherever the business takes bookings or enquiries, a booking section with shadcn Tabs for its real enquiry types, labelled fields (dates, guests, boat length, service) and a summary that becomes the WhatsApp/email message, or is read out on the call when only a phone is known. Number sections editorially (01, 02...). Click-test with `node factory/tools/interact.mjs <slug>`.
 
 ## 9. QA and the uniqueness check
 

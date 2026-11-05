@@ -63,6 +63,14 @@ Never: stock, icons-as-illustration, emoji, cartoon or toy-like visuals for prem
 ## 5. Copy tone for premium
 Short, confident, specific, sensory. Headlines of 2-6 words. Sentence case, no exclamation marks. Captions read like a magazine ("Bell Channel, late afternoon"). Let one strong line breathe instead of three weak ones.
 
+## 5b. Whole-page consistency, key information, booking (learned from the approved reference)
+- **The hero sets the art direction for the whole page.** Derive the page palette from the hero visual (the reference took its navy, dusk sand and warm paper from the golden-hour scene) and keep the same type system, container width (1440 px, 40 px gutters), label style and motion language in every section. No section may drop back to a plainer, template look.
+- **Key-information band directly under the hero**: the 3 to 5 facts a buyer needs first (phone or booking channel, location, the core offer, hours or season if sourced), large and tappable, in a contrasting band. Crucial information must never be buried in body text.
+- **Booking or enquiry section wherever the business takes bookings or enquiries** (rooms, slips, tours, rentals, events, quotes, consultations): shadcn `Tabs` for the enquiry types the business really has, labelled fields (dates, guests, boat length, service), and a summary that becomes the message. With a sourced WhatsApp number or email, the button opens WhatsApp or email prefilled; with phone only, show the summary to read out and a large Call button; with a real booking engine URL, link it. The primary CTA in the header, hero and mobile action bar all lead here.
+- **Editorial indexing**: number the sections (01, 02...) with tracked micro-labels, like the reference.
+- **Rhythm**: hero (immersive), key-info band (dense, contrasting), signature interaction (immersive), story (quiet), offer (dense), booking (functional), FAQ, contact. Adapt the order to the niche, keep the alternation.
+- Test interactions with `node factory/tools/interact.mjs <slug>` (clicks tabs, accordions, buttons, fills inputs, reports JS errors and dead controls). Fix any JS error.
+
 ## 6. Showcase scorecard (score 1-5 each in the brief; publish only when every line is 4+)
 1. First screen stops the scroll: a full-viewport, art-directed visual or typographic moment.
 2. Typography has dramatic scale contrast and a refined pairing.
@@ -74,4 +82,5 @@ Short, confident, specific, sensory. Headlines of 2-6 words. Sentence case, no e
 8. Mobile is designed, not squeezed: portrait crops, thumb-reachable CTA, no cramped text.
 9. It would not look out of place next to the two reference sites studied.
 10. The owner would be proud to show it.
+11. The whole page keeps the hero's quality and palette; key information is visible in the first two screens; booking/enquiry is one tap away everywhere.
 If any line scores below 4, fix it before publishing (this replaces the "two worst issues" rule).

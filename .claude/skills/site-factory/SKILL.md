@@ -27,6 +27,7 @@ Read these references when the step says so (do not preload all of them):
 Load these vendored skills **once per session**, at step 4, before your first design:
 - `taste-skill` (design-taste-frontend): the quality bar (figma.com / x.ai level), its house rules and `references/layout-v4.md`, `sections.md`, `motion.md`, `backgrounds.md`, `copy.md`. Read SKILL.md plus the references it points to for the page you are building. Its rules win over the generic advice in `design-system.md` where they conflict, except our hard rules in CLAUDE.md (truth, concept ribbon, noindex, banned anti-patterns).
 - `emil-design-eng` (UI polish and animation judgement) and `choreograph` (staggered hero entrances, list reveals).
+- `web-artifacts-builder`: same stack as ours (React, Tailwind, shadcn); apply its design guidelines and shadcn patterns, but build and publish with `factory/tools/build-site.mjs`, not its bundler.
 - `frontend-design` for aesthetic direction; query `ui-ux-pro-max` for palettes/pairings rather than reading it whole.
 - **Open the reference site source** `factory/web/sites/bell-channel-club-marina/src/` (home.tsx, site.tsx, Water.tsx, styles.css) to see the expected level of craft and the file structure.
 
@@ -106,7 +107,7 @@ src/Scene.tsx              # optional R3F scene, always lazy-loaded with React.l
 src/styles.css             # @import "tailwindcss" source(none); @source lines; @theme tokens (palette, fonts)
 site-data.json  favicon.svg
 ```
-Build: `node factory/tools/build-site.mjs <slug>` (installs deps on first run, builds to `/<slug>/`, prerenders HTML). Fix any build error before QA.
+Build: `node factory/tools/build-site.mjs <slug>`, then `node factory/tools/interact.mjs <slug>` (and for each inner page) to click-test every tab, accordion, button and input (installs deps on first run, builds to `/<slug>/`, prerenders HTML). Fix any build error before QA.
 Requirements:
 - Include every shared snippet from `components.md`: concept ribbon, noindex meta, concept-notes panel, enquiry form wiring, site-data.json.
 - Semantic HTML: one `<h1>` per page, logical h2/h3, `<header> <nav> <main> <footer>`, skip link, `alt` on every image, labelled form fields, focus styles.

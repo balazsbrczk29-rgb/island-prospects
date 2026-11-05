@@ -3,20 +3,21 @@
 /* list ONLY the vendored components this site imports, so the CSS stays small */
 @source "../../../src/components/ui/accordion.tsx";
 @source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/ui/tabs.tsx";
 @source "../../../src/components/magicui/border-beam.tsx";
 @source "../../../src/components/reactbits/TextAnimations/BlurText/BlurText.tsx";
 @source "../../../../node_modules/@react-three/drei/core/Html.js";
 
 @theme {
-  --color-paper: #eef2ee;
-  --color-paper-2: #e3ebe7;
-  --color-ink: #14303a;
-  --color-muted: #4d6066;
-  --color-teal: #1f7a78;
-  --color-teal-deep: #155c5b;
-  --color-sand: #c9b88f;
-  --color-sea: #d6e6e3;
-  --color-line: #c8d3cf;
+  --color-paper: #f5f0e8;
+  --color-paper-2: #ece4d7;
+  --color-ink: #0b2a35;
+  --color-muted: #55656b;
+  --color-teal: #1d6b70;
+  --color-teal-deep: #0f4a50;
+  --color-sand: #c9a77a;
+  --color-sea: #dfe8e5;
+  --color-line: #ddd3c3;
   --font-display: "DM Serif Display", Georgia, serif;
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);

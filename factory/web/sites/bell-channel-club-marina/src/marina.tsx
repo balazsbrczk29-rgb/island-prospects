@@ -13,7 +13,7 @@ const SPECS: [string, string][] = [
 
 function MarinaHero() {
   return (
-    <section className="mx-auto max-w-[1240px] px-5 pt-16 pb-10 md:px-8 md:pt-24" aria-labelledby="marina-title">
+    <section className="mx-auto max-w-[1440px] px-5 pt-16 pb-10 md:px-10 md:pt-24" aria-labelledby="marina-title">
       <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }} className="text-[13px] tracking-[0.2em] text-teal uppercase">The marina</motion.p>
       <motion.h1 id="marina-title" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 1, ease }} className="mt-5 max-w-4xl font-display text-[clamp(2.6rem,6vw,5rem)] leading-[1]">A private marina on the inlet into Port Lucaya.</motion.h1>
       <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 1, ease }} className="mt-7 max-w-2xl text-lg leading-relaxed text-muted">The docks at Bell Channel Club are for owners, offered when space is available. Everything we could not confirm from public sources is marked below, so you know exactly what to ask.</motion.p>
@@ -23,7 +23,7 @@ function MarinaHero() {
 
 function Specs() {
   return (
-    <section className="mx-auto max-w-[1240px] px-5 pb-24 md:px-8 md:pb-32" aria-label="Dock details">
+    <section className="mx-auto max-w-[1440px] px-5 pb-24 md:px-10 md:pb-32" aria-label="Dock details">
       <Reveal>
         <dl className="divide-y divide-line border-y border-line">
           {SPECS.map(([k, v]) => (

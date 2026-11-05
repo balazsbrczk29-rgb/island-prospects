@@ -32,7 +32,7 @@ function Header({ current }: { current: string }) {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-5 py-3 md:px-8">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-3 md:px-10">
         <a href="index.html" className="group leading-none">
           <span className="font-display text-[1.35rem] text-ink">Bell Channel Club</span>
           <span className="mt-1 block text-[11px] tracking-[0.18em] text-muted uppercase">&amp; Marina · Freeport</span>
@@ -66,7 +66,7 @@ function Header({ current }: { current: string }) {
 function Footer() {
   return (
     <footer className="border-t border-line bg-paper-2 pb-28 md:pb-0">
-      <div className="mx-auto grid max-w-[1240px] gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
+      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-10">
         <div>
           <p className="font-display text-2xl">Bell Channel Club &amp; Marina</p>
           <p className="mt-3 max-w-sm text-muted">Bell Channel, Freeport, Grand Bahama. P.O. Box F-44053.</p>
@@ -81,7 +81,7 @@ function Footer() {
           {NAV.map(n => <a key={n.href} href={n.href} className="mt-2 block hover:text-teal">{n.label}</a>)}
         </div>
       </div>
-      <p className="mx-auto max-w-[1240px] px-5 pb-8 text-xs text-muted md:px-8">Concept by ESTATIQ AI Solutions. Details from public listings, to be confirmed with the club.</p>
+      <p className="mx-auto max-w-[1440px] px-5 pb-8 text-xs text-muted md:px-10">Concept by ESTATIQ AI Solutions. Details from public listings, to be confirmed with the club.</p>
     </footer>
   )
 }

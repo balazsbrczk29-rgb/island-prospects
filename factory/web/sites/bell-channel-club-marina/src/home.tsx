@@ -1,8 +1,9 @@
-import { lazy, Suspense } from "react"
+import { lazy, Suspense, useState } from "react"
 import { motion } from "motion/react"
 import { ArrowUpRight, Phone } from "lucide-react"
 import BlurText from "@/components/reactbits/TextAnimations/BlurText/BlurText"
 import { BorderBeam } from "@/components/magicui/border-beam"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Page, mount, Reveal, ease, PHONE, TEL } from "./site"
 
@@ -84,13 +85,22 @@ function Explore() {
 }
 
 function Facts() {
+  const items = [
+    ["Club office", PHONE, TEL],
+    ["Where", "Bell Channel, Freeport, Grand Bahama", "#find-us"],
+    ["Marina", "Private docks for owners, when space allows", "marina.html"],
+    ["The club", "Gated condominiums and townhouses", "#living"],
+  ]
   return (
-    <section id="club" className="border-y border-line bg-paper-2" aria-label="The club at a glance">
-      <ul className="mx-auto grid max-w-[1240px] md:grid-cols-4">
-        {FACTS.map(([t, d], i) => (
-          <motion.li key={t} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.8, ease }} className="border-line px-5 py-8 md:border-l md:px-8 md:first:border-l-0">
-            <p className="font-display text-2xl">{t}</p>
-            <p className="mt-2 text-[15px] text-muted">{d}</p>
+    <section id="club" className="bg-ink text-paper" aria-label="Key information">
+      <ul className="mx-auto grid max-w-[1440px] md:grid-cols-[1.25fr_1fr_1fr_1fr]">
+        {items.map(([k, v, href], i) => (
+          <motion.li key={k} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.8, ease }} className="border-paper/15 md:border-l md:first:border-l-0">
+            <a href={href} className="group block px-5 py-7 transition hover:bg-white/5 md:px-8 md:py-9">
+              <span className="text-[11px] tracking-[0.22em] text-sand uppercase">{k}</span>
+              <span className={`mt-2 block font-display leading-tight ${i === 0 ? "text-[clamp(1.9rem,2.6vw,2.6rem)]" : "text-xl md:text-2xl"}`}>{v}</span>
+              <span className="mt-3 block h-px w-0 bg-sand transition-all duration-500 group-hover:w-12" aria-hidden />
+            </a>
           </motion.li>
         ))}
       </ul>
@@ -98,23 +108,71 @@ function Facts() {
   )
 }
 
+const ENQUIRY = {
+  dock: { label: "Dock availability", intro: "For owners and their guests asking about a slip at the club's private marina.", fields: [["Boat name", "text"], ["Length overall (ft)", "number"], ["Arrival", "date"], ["Departure", "date"]] },
+  owners: { label: "Owners and guests", intro: "For owners, their guests and visitors to the club.", fields: [["Your name", "text"], ["Unit, if you are an owner", "text"], ["Date of visit", "date"]] },
+  buying: { label: "Buying or renting", intro: "For buyers and renters researching a home at Bell Channel Club.", fields: [["Your name", "text"], ["Buy or rent", "text"], ["When", "text"]] },
+} as const
+
+function Plan() {
+  const [tab, setTab] = useState<keyof typeof ENQUIRY>("dock")
+  const [vals, setVals] = useState<Record<string, string>>({})
+  const conf = ENQUIRY[tab]
+  const summary = conf.fields.map(([f]) => vals[`${tab}:${f}`] ? `${f}: ${vals[`${tab}:${f}`]}` : null).filter(Boolean).join(" · ")
+  return (
+    <section id="plan" className="bg-paper-2" aria-labelledby="plan-title">
+      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:grid-cols-12 md:px-10 md:py-32">
+        <Reveal className="md:col-span-4">
+          <p className="text-[11px] tracking-[0.22em] text-teal uppercase">04 · Plan your call</p>
+          <h2 id="plan-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.02em]">Have the details ready.</h2>
+          <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-muted">The club takes enquiries by phone. Choose what you are calling about, fill in the details, and we will put them in one line to read out.</p>
+        </Reveal>
+        <Reveal delay={0.1} className="md:col-span-7 md:col-start-6">
+          <Tabs value={tab} onValueChange={v => setTab(v as keyof typeof ENQUIRY)}>
+            <TabsList className="h-auto w-full flex-wrap justify-start gap-1 rounded-full bg-paper p-1">
+              {Object.entries(ENQUIRY).map(([k, c]) => <TabsTrigger key={k} value={k} className="min-h-11 rounded-full px-5 data-[state=active]:bg-ink data-[state=active]:text-paper">{c.label}</TabsTrigger>)}
+            </TabsList>
+            {Object.entries(ENQUIRY).map(([k, c]) => (
+              <TabsContent key={k} value={k} className="mt-8">
+                <p className="text-[15px] text-muted">{c.intro}</p>
+                <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                  {c.fields.map(([f, type]) => (
+                    <label key={f} className="block">
+                      <span className="text-[11px] tracking-[0.18em] text-muted uppercase">{f}</span>
+                      <input type={type} value={vals[`${k}:${f}`] ?? ""} onChange={e => setVals(v => ({ ...v, [`${k}:${f}`]: e.target.value }))} className="mt-2 block min-h-12 w-full border-b border-ink/25 bg-transparent font-display text-xl outline-none transition focus:border-teal" />
+                    </label>
+                  ))}
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
+          <div className="mt-10 flex flex-col gap-4 rounded-3xl bg-ink p-6 text-paper md:flex-row md:items-center md:justify-between md:p-8">
+            <p className="text-[15px] text-paper/80">{summary ? <>Read out: <span className="text-paper">{summary}</span></> : "Your details will appear here."}</p>
+            <a href={TEL} className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-paper px-6 text-ink transition hover:-translate-y-px"><Phone className="size-4" aria-hidden /> Call {PHONE}</a>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
 function Setting() {
   return (
-    <section className="mx-auto grid max-w-[1240px] gap-12 px-5 py-24 md:grid-cols-2 md:px-8 md:py-36" aria-labelledby="setting-title">
+    <section className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:grid-cols-2 md:px-10 md:py-36" aria-labelledby="setting-title">
       <Reveal>
-        <p className="text-[13px] tracking-[0.2em] text-teal uppercase">The setting</p>
+        <p className="text-[11px] tracking-[0.22em] text-teal uppercase">02 · The setting</p>
         <h2 id="setting-title" className="mt-4 font-display text-[clamp(2.2rem,4vw,3.4rem)] leading-[1.04]">Water on both sides of the gate.</h2>
         <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">The club stands where the Bell Channel inlet meets the open water. On one side, a canal. On the other, a beach the homeowners' association keeps. Units look out over the inlet into Port Lucaya Marketplace.</p>
       </Reveal>
       <Reveal delay={0.1}>
         <svg viewBox="0 0 520 420" className="w-full" role="img" aria-label="Illustration of the club between the canal and the beach, beside the Bell Channel inlet. Not for navigation.">
-          <rect width="520" height="420" rx="24" fill="#e3ebe7" />
-          <rect x="0" y="300" width="520" height="120" fill="#d6e6e3" />
+          <rect width="520" height="420" rx="24" fill="#ece4d7" />
+          <rect x="0" y="300" width="520" height="120" fill="#dfe8e5" />
           <path d="M0 300 C120 290 200 310 300 298 S460 292 520 300" fill="none" stroke="#14303a" strokeWidth="1.5" />
-          <rect x="0" y="190" width="250" height="34" fill="#d6e6e3" />
-          <rect x="262" y="0" width="54" height="300" fill="#d6e6e3" />
+          <rect x="0" y="190" width="250" height="34" fill="#dfe8e5" />
+          <rect x="262" y="0" width="54" height="300" fill="#dfe8e5" />
           <motion.path d="M289 420 L289 40" stroke="#1f7a78" strokeWidth="2" strokeDasharray="6 7" fill="none" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 2.2, ease }} />
-          <ellipse cx="289" cy="48" rx="110" ry="36" fill="#d6e6e3" />
+          <ellipse cx="289" cy="48" rx="110" ry="36" fill="#dfe8e5" />
           <text x="289" y="46" textAnchor="middle" fontFamily="DM Serif Display" fontSize="20" fill="#14303a">Port Lucaya</text>
           <text x="289" y="66" textAnchor="middle" fontFamily="IBM Plex Sans" fontSize="11" fill="#4d6066">Marketplace</text>
           <motion.g initial={{ scale: 0.6, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.8, duration: 0.9, ease }} style={{ transformOrigin: "200px 262px" }}>
@@ -135,9 +193,9 @@ function Setting() {
 function Living() {
   return (
     <section id="living" className="bg-ink text-paper" aria-labelledby="living-title">
-      <div className="mx-auto max-w-[1240px] px-5 py-24 md:px-8 md:py-32">
+      <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-8 md:py-32">
         <Reveal>
-          <p className="text-[13px] tracking-[0.2em] text-sand uppercase">Living here</p>
+          <p className="text-[11px] tracking-[0.22em] text-sand uppercase">03 · Living here</p>
           <h2 id="living-title" className="mt-4 max-w-2xl font-display text-[clamp(2.2rem,4vw,3.4rem)] leading-[1.04]">Small, private, and everything inside the gate.</h2>
         </Reveal>
         <ol className="mt-14 divide-y divide-paper/15 border-y border-paper/15">
@@ -156,9 +214,9 @@ function Living() {
 
 function Questions() {
   return (
-    <section className="mx-auto grid max-w-[1240px] gap-12 px-5 py-24 md:grid-cols-[1fr_1.4fr] md:px-8 md:py-32" aria-labelledby="faq-title">
+    <section className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:grid-cols-[1fr_1.4fr] md:px-8 md:py-32" aria-labelledby="faq-title">
       <Reveal>
-        <p className="text-[13px] tracking-[0.2em] text-teal uppercase">Questions</p>
+        <p className="text-[11px] tracking-[0.22em] text-teal uppercase">05 · Questions</p>
         <h2 id="faq-title" className="mt-4 font-display text-[clamp(2.2rem,4vw,3.4rem)] leading-[1.04]">What people ask the office.</h2>
       </Reveal>
       <Reveal delay={0.1}>
@@ -178,9 +236,9 @@ function Questions() {
 function FindUs() {
   return (
     <section id="find-us" className="border-t border-line bg-paper-2" aria-labelledby="find-title">
-      <div className="mx-auto grid max-w-[1240px] gap-10 px-5 py-24 md:grid-cols-2 md:px-8 md:py-28">
+      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-24 md:grid-cols-2 md:px-10 md:py-28">
         <Reveal>
-          <p className="text-[13px] tracking-[0.2em] text-teal uppercase">Find us</p>
+          <p className="text-[11px] tracking-[0.22em] text-teal uppercase">06 · Find us</p>
           <h2 id="find-title" className="mt-4 font-display text-[clamp(2.2rem,4vw,3.4rem)] leading-[1.04]">One call reaches the club.</h2>
           <p className="mt-5 max-w-md text-lg text-muted">Owners, guests, buyers and boaters: the club office is the place to start.</p>
           <a href={TEL} className="mt-9 block rounded-3xl bg-ink p-7 text-paper transition hover:-translate-y-0.5 hover:bg-teal-deep">
@@ -197,4 +255,4 @@ function FindUs() {
   )
 }
 
-mount(<Page current="The club"><Hero /><Facts /><Explore /><Setting /><Living /><Questions /><FindUs /></Page>)
+mount(<Page current="The club"><Hero /><Facts /><Explore /><Setting /><Living /><Plan /><Questions /><FindUs /></Page>)
