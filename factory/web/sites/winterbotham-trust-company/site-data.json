@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "winterbotham-trust-company",
+  "name": "The Winterbotham Trust Company Limited (Winterbotham Group)",
+  "niche": "professional-services",
+  "contact": {"phone": "+1-242-356-5454", "fax": "+1-242-356-9432", "whatsapp": null, "email": null, "address": "Winterbotham Place, Marlborough & Queen Streets, P.O. Box N-3026", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": ["https://www.facebook.com/WinterbothamGroup/", "https://bs.linkedin.com/company/winterbotham-group"],
+  "offer": [
+    {"name": "Trust", "kind": "service", "summary": "Trustee and trust administration, Private Trust Companies, corporate trust (escrow agent, loan trustee, dissolution trusts).", "price": null, "source": "https://www.winterbotham.com/services.html"},
+    {"name": "Funds", "kind": "service", "summary": "Advisory, licensing, incorporation, accounting, NAV, RTA, compliance, administration, reporting, investor relations, domiciliary.", "price": null, "source": "https://www.winterbotham.com/services.html"},
+    {"name": "Corporate", "kind": "service", "summary": "Company formation, administration, accounting, IT, compliance, governance, reporting, physical presence.", "price": null, "source": "https://www.winterbotham.com/services.html"},
+    {"name": "Bank, brokerage and global custody", "kind": "service", "summary": "Multi-currency accounts, wires, FX, fiduciary placements; execution from the Nassau trading desk; custody for funds, institutions and private clients.", "price": null, "source": "https://www.winterbotham.com/services.html"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://www.winterbotham.com/", "https://www.winterbotham.com/services.html", "https://www.winterbotham.com/history.html", "https://www.winterbotham.com/contact-us.html", "https://bfsb-bahamas.com/providers/name/the-winterbotham-trust-company-limited/"]
+}

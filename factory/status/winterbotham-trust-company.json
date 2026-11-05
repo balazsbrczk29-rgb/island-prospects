@@ -1,9 +1,25 @@
 {
- "slug": "winterbotham-trust-company",
- "id": 50,
- "name": "Winterbotham Trust Company",
- "batch": "02",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:12:19.289Z"
+ "slug": "winterbotham-trust-company", "id": 50, "name": "Winterbotham Trust Company", "batch": "02", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "services.html"],
+ "primary_cta": "Arrange a consultation",
+ "brand_truth": "A family name with two centuries of public service behind it, now a Nassau bank and trust house built on one idea: trust is built over time.",
+ "buyer": "International families, entrepreneurs, fund managers and financial institutions, and their advisers doing due diligence on desktop.",
+ "design": {"display_font": "Cormorant Garamond 500", "body_font": "Hanken Grotesk 400/500", "palette": ["#f2f1ed", "#1b1d22", "#7a5e2f", "#c2a46e", "#e5e2da", "#5a5d63", "#d3d0c8"], "hero_pattern": "spec-led", "signature": "Live local-time strip for six offices feeding an office detail panel with ticking clock; 'I am...' service finder; heritage hairline timeline"},
+ "current_site_findings": [
+  "Homepage opens with a tariff-revision notice before saying who Winterbotham is.",
+  "Footer still reads (c) 2023.",
+  "All six homepage service icons share the alt text 'Trust'.",
+  "The History portrait file of Rev. William Winterbotham is labelled 'Geoffrey Hooper' in its alt text.",
+  "No meta description; generic title without Nassau or The Bahamas.",
+  "No email on the contact page; only a reCAPTCHA form."
+ ],
+ "pitch_line": "Your clients in Montevideo and Hong Kong judge you in ten seconds on your website, and right now it opens with a tariff notice and a 2023 footer; this concept opens with your regulator, your Nassau desk and the time in all six of your offices.",
+ "sources": ["https://www.winterbotham.com/", "https://www.winterbotham.com/services.html", "https://www.winterbotham.com/history.html", "https://www.winterbotham.com/contact-us.html", "https://www.winterbotham.com/group-entities.html", "https://bfsb-bahamas.com/providers/name/the-winterbotham-trust-company-limited/"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "A",
+ "scorecard": {"first_screen": 4, "typography": 5, "editorial_layout": 5, "context_visuals": 4, "motion": 4, "depth": 4, "detailing": 5, "mobile": 4, "next_to_references": 4, "owner_proud": 4, "whole_page": 4},
+ "assumptions": ["Record lists Nassau / Freeport; no Freeport office found, concept shows Nassau head office only", "Audience mapping in the 'I am...' finder (which services apply to whom) is our editorial grouping of their published services"],
+ "notes": "Has a working site (record said no own site). Large regulated group; pitch is a front-door redesign, likely needs a decision-maker contact rather than a walk-in. Their site photos are generic lifestyle images and were not used. No email sourced; consultation is phone-led. Office clocks show local time only (no opening hours claimed).",
+ "built_at": "2026-11-05T01:17:05Z"
 }
