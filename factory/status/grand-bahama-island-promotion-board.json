@@ -1,9 +1,55 @@
 {
  "slug": "grand-bahama-island-promotion-board",
- "id": 37,
- "name": "Grand Bahama Island Promotion Board",
- "batch": "09",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:55:50.545Z"
+ "name": "Grand Bahama Island Promotion Board",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "getting-here.html"
+ ],
+ "primary_cta": "Plan your trip",
+ "brand_truth": "The Bahamas island closest to Florida, with caves at one end and stingrays at the other.",
+ "buyer": "Florida and US South-East travellers (weekenders, families, divers), cruise and ferry passengers, planning on a phone.",
+ "design": {
+  "display_font": "Playfair Display 500 (+italic)",
+  "body_font": "Outfit 400/500/600",
+  "palette": [
+   "#f1f2ee",
+   "#0f2233",
+   "#1b5fa8",
+   "#f2b8c6",
+   "#e8d6ad",
+   "#2e5b45",
+   "#d5dad6"
+  ],
+  "hero_pattern": "map-led-crossing-florida-to-island",
+  "signature": "Crossing map (Florida coast, ferry/cruise/flight routes to Freeport, 55-mile bracket) plus an island map of the five favourites feeding a west-to-east day planner"
+ },
+ "current_site_findings": [
+  "Homepage still links to COVID-19 entry requirements",
+  "Book Now panel lists Anchorage-to-Honolulu airports but only two resorts; sign-up shows 'Operation timed out'",
+  "Empty 'Learn more about' link and 'Grand Bahama Island Open' tile text",
+  "Core pages last edited 2022; flip-books open on another site",
+  "55 miles from Florida buried in body copy"
+ ],
+ "pitch_line": "Your best line, 55 miles from Florida, is hidden under a COVID notice; this concept turns it into the map a Floridian sees first, then lets them build a day on the island.",
+ "sources": [
+  "https://www.grandbahamavacations.com/",
+  "https://www.grandbahamavacations.com/getting-here/",
+  "https://www.grandbahamavacations.com/things-to-do/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Map pin positions approximate (illustration)",
+  "Crossing map routes are schematic",
+  "No phone or email found on scraped pages: CTAs go to their own planning, deals and guide pages"
+ ],
+ "notes": "Freeport-based destination marketer: strong local relationship prospect for Balazs. Record niche is tours; built as a destination planner (TouristInformationCenter + TouristDestination schema). Photos hotlinked from grandbahamavacations.com/assets. Getting-here inner page only (things-to-do covered on home and linked to their listings) to stay in budget. interact.mjs flags the nights slider as 'dead' (range input). Org email consent names it 'Grand Bahama Island Tourism Board' at Fidelity Financial Center, Freeport. Scorecard: hero 5, type 4, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T02:01:08.108161+00:00",
+ "id": 37,
+ "batch": "09"
 }

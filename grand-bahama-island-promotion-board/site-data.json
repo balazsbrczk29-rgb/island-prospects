@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "grand-bahama-island-promotion-board",
+  "name": "Grand Bahama Island Promotion Board",
+  "niche": "tours-experiences",
+  "contact": {"phone": null, "whatsapp": null, "email": null, "address": "Fidelity Financial Center, Freeport", "settlement": "Freeport", "island": "Grand Bahama"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Lucayan National Park", "kind": "tour", "summary": "Lucayan Caverns, over six miles of caves and charted tunnels; Gold Rock Beach.", "price": null, "source": "https://www.grandbahamavacations.com/things-to-do/"},
+    {"name": "UNEXSO", "kind": "tour", "summary": "Dolphin sanctuary at Sanctuary Bay; swim with dolphins in a natural lagoon.", "price": null, "source": "https://www.grandbahamavacations.com/things-to-do/"},
+    {"name": "Garden of the Groves", "kind": "tour", "summary": "Gardens, waterfalls, chapel replica, labyrinth, Garden Cafe.", "price": null, "source": "https://www.grandbahamavacations.com/things-to-do/"},
+    {"name": "West End Ecology Tours", "kind": "tour", "summary": "Stingray, Coral Reef and Reef Fishing experiences.", "price": null, "source": "https://www.grandbahamavacations.com/things-to-do/"},
+    {"name": "Smith's Point Fish Fry", "kind": "tour", "summary": "Traditional Bahamian cookout.", "price": null, "source": "https://www.grandbahamavacations.com/things-to-do/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://www.grandbahamavacations.com/", "https://www.grandbahamavacations.com/getting-here/", "https://www.grandbahamavacations.com/things-to-do/"]
+}

@@ -1,0 +1,33 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/accordion.tsx";
+@source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/ui/tabs.tsx";
+
+@theme {
+  --color-paper: #f1f2ee;
+  --color-paper-2: #e6ebe7;
+  --color-ink: #0f2233;
+  --color-muted: #52606b;
+  --color-gulf: #1b5fa8;
+  --color-gulf-deep: #134781;
+  --color-flamingo: #f2b8c6;
+  --color-sand: #e8d6ad;
+  --color-pine: #2e5b45;
+  --color-line: #d5dad6;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+}
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-flamingo); }
+.label { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 500; }
+.ulink { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s cubic-bezier(.16,1,.3,1); }
+.ulink:hover, .ulink:focus-visible { background-size: 100% 1px; }
+:focus-visible { outline: 2px solid var(--color-gulf); outline-offset: 3px; }
+@keyframes dash { to { stroke-dashoffset: -40; } }
+.route { animation: dash 3s linear infinite; }
+@media (max-width: 767px) { body { padding-bottom: calc(56px + env(safe-area-inset-bottom)); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
