@@ -1,0 +1,72 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "bvg-design-services",
+ "name": "BVG Design Services",
+ "niche": "professional-services",
+ "contact": {
+  "phone": "+1-242-602-0658",
+  "whatsapp": null,
+  "email": "info@bvgdesign.com",
+  "address": "Smith's Point, P.O. Box F-43652",
+  "settlement": "Freeport",
+  "island": "Grand Bahama"
+ },
+ "hours": null,
+ "socials": [],
+ "offer": [
+  {
+   "name": "Website design",
+   "kind": "service",
+   "summary": "Simple to complex multi-page sites",
+   "price": null,
+   "source": "https://www.bvgdesign.com/"
+  },
+  {
+   "name": "Search engine optimization",
+   "kind": "service",
+   "summary": "Optimization for major search engines",
+   "price": null,
+   "source": "https://www.bvgdesign.com/"
+  },
+  {
+   "name": "Website promotion",
+   "kind": "service",
+   "summary": "Search promotion with free initial key-phrase look",
+   "price": null,
+   "source": "https://www.bvgdesign.com/"
+  },
+  {
+   "name": "Hosting and domains",
+   "kind": "service",
+   "summary": "Hosting with simple control panels, domain registration",
+   "price": null,
+   "source": "https://www.bvgdesign.com/"
+  },
+  {
+   "name": "Redesign and takeover",
+   "kind": "service",
+   "summary": "Hourly or full takeover and upkeep",
+   "price": null,
+   "source": "https://www.bvgdesign.com/"
+  },
+  {
+   "name": "Advertising agency",
+   "kind": "service",
+   "summary": "Print, video and disc production",
+   "price": null,
+   "source": "https://www.bvgdesign.com/"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://www.bvgdesign.com/",
+  "https://www.bvgdesign.com/faqs.html",
+  "https://www.bvgdesign.com/promo.html",
+  "http://www.bahamasvacationguide.com/",
+  "https://bahamas.yabsta.com/listing/view/92035/bvg-design-services"
+ ]
+}
