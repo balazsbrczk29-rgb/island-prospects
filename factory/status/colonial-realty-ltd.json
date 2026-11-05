@@ -4,6 +4,15 @@
  "name": "Colonial Realty Ltd.",
  "batch": "04",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:25:17.031Z"
+ "state": "skipped",
+ "claimed_at": "2026-11-05T01:25:17.031Z",
+ "pages": [],
+ "track": "A",
+ "notes": "Skipped: crbahamas.com is a brand-new (Oct 2026) modern site with search, map, multilingual, WhatsApp; a rebuild pitch is weak. Recommend a directory/NAP clean-up + local SEO pitch instead (old Marathon Road address in directories vs Sapphire House, Soldier Road on site; BREA listing with hotmail and other phone).",
+ "sources": [
+  "https://crbahamas.com/",
+  "https://www.bahamaslocal.com/showlisting/15115/Colonial_Realty_Ltd.html",
+  "https://www.breabahamas.com/realtor.php?cmd=view&id=1452"
+ ],
+ "built_at": "2026-11-05T01:25:45.737516+00:00"
 }
