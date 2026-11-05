@@ -1,9 +1,16 @@
 {
  "slug": "sammy-t-s-beach-resort",
- "id": 94,
- "name": "Sammy T's Beach Resort",
- "batch": "07",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:40:35.604Z"
+ "name": "Sammy T's Beach Resort",
+ "state": "skipped",
+ "track": "B",
+ "notes": "Skipped: closed. The Tribune (22 May 2025) reports the resort has been closed for over a decade and its site is being redeveloped as Curly's Beach Resort (owner Vince McDonald; 7 villas, restaurant, beach club). New lead for Balazs: Curly's Beach Resort, Bennett's Harbour, Cat Island.",
+ "sources": [
+  "http://m.tribune242.com/news/2025/may/22/34m-resort-to-help-revive-cat-island/",
+  "https://www.tripadvisor.com/Hotel_Review-g147427-d310982-Reviews-Sammy_T_s_Beach_Resort-Cat_Island_Out_Islands_Bahamas.html"
+ ],
+ "pitch_line": null,
+ "built_at": "2026-11-05T01:40:57.878722+00:00",
+ "id": 94,
+ "batch": "07"
 }
