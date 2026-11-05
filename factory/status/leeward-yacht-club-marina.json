@@ -1,9 +1,4 @@
-{
- "slug": "leeward-yacht-club-marina",
- "id": 80,
- "name": "Leeward Yacht Club & Marina",
- "batch": "06",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:33:37.865Z"
-}
+{"slug":"leeward-yacht-club-marina","id":80,"name":"Leeward Yacht Club & Marina","batch":"06","tier":"A","state":"skipped","track":"A",
+"notes":"Skipped: acquired by Beach Weekend (US operator) and now sold as 'Beach Weekend Bahamas' on beachweekend.com/bahamas (2026 site, Dockwa slip booking, (242) 831-1157). Record (Hotmail contact, no site) is out of date; not a viable pitch.",
+"sources":["https://beachweekend.com/bahamas/","https://discoverbahamas.com/directory/leeward-yacht-club-guide-marina-dockage-boating-green-turtle-cay-travel-article-1770.aspx","https://www.facebook.com/p/Leeward-Yacht-Club-61573495260183/"],
+"pitch_line":null,"built_at":"2026-11-05T01:34:04Z"}
