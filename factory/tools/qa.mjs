@@ -97,9 +97,10 @@ for (const page of pages) {
 }
 await browser.close(); server.close();
 // size budget
-const own = fs.readdirSync(path.join(root, slug)).filter(f => /\.(css|js)$/.test(f)).reduce((a, f) => a + fs.statSync(path.join(root, slug, f)).size, 0);
-if (own > 60000) warnings.push(`own CSS+JS is ${Math.round(own / 1024)} KB (budget 60 KB)`);
-for (const req of ['site-data.json', 'favicon.svg', 'styles.css']) if (!fs.existsSync(path.join(root, slug, req))) blockers.push(`missing ${req}`);
+const adir = path.join(root, slug, 'assets'); const own = fs.existsSync(adir) ? fs.readdirSync(adir).filter(f => /\.(css|js)$/.test(f) && !/^(Water|Scene|three|Three)/.test(f)).reduce((a, f) => a + fs.statSync(path.join(adir, f)).size, 0) : 0;
+if (own > 650000) warnings.push(`initial JS+CSS is ${Math.round(own / 1024)} KB (budget 650 KB; lazy-load three.js scenes)`);
+if (!fs.existsSync(path.join(root, 'factory/web/sites', slug))) blockers.push('site source missing in factory/web/sites/<slug>/ (build with factory/tools/build-site.mjs)');
+for (const req of ['site-data.json', 'favicon.svg']) if (!fs.existsSync(path.join(root, slug, req))) blockers.push(`missing ${req}`);
 if (prospect.tier === 'C' && pages.length > 1) warnings.push('Tier C should be a single page');
 // copy main screenshots to simple names
 for (const n of ['mobile', 'desktop']) { const s = path.join(outDir, `index-${n}.png`); if (fs.existsSync(s)) fs.copyFileSync(s, path.join(outDir, `${n}.png`)); }

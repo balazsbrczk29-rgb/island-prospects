@@ -20,7 +20,15 @@ Read these references when the step says so (do not preload all of them):
 - `references/seo-local.md`         titles, meta, headings, JSON-LD, Bahamas local keyword patterns
 - `references/components.md`        the mandatory shared snippets (concept ribbon, concept notes, enquiry form, site-data.json)
 
-Also load the vendored skills **once per session** at step 4: `frontend-design` (aesthetic direction) and, when you need a palette or pairing idea, query `ui-ux-pro-max` rather than reading it whole.
+- `references/components-catalog.md` every vendored component (shadcn, Magic UI, React Bits) and which fit each niche
+
+Load these vendored skills **once per session**, at step 4, before your first design:
+- `taste-skill` (design-taste-frontend): the quality bar (figma.com / x.ai level), its house rules and `references/layout-v4.md`, `sections.md`, `motion.md`, `backgrounds.md`, `copy.md`. Read SKILL.md plus the references it points to for the page you are building. Its rules win over the generic advice in `design-system.md` where they conflict, except our hard rules in CLAUDE.md (truth, concept ribbon, noindex, banned anti-patterns).
+- `emil-design-eng` (UI polish and animation judgement) and `choreograph` (staggered hero entrances, list reveals).
+- `frontend-design` for aesthetic direction; query `ui-ux-pro-max` for palettes/pairings rather than reading it whole.
+- **Open the reference site source** `factory/web/sites/bell-channel-club-marina/src/` (home.tsx, site.tsx, Water.tsx, styles.css) to see the expected level of craft and the file structure.
+
+Design inspiration: the Dribbble collection Balazs chose (dribbble.com/search/ai-library) cannot be scraped here (images only). Its direction, which you must hit: editorial large-type heroes, generous whitespace, soft tonal gradients inside the brand palette (never purple/blue AI gradients), glassy panels over live visuals, bento-style feature layouts only when content is genuinely varied, refined micro-interactions on every interactive element, and one immersive visual (3D scene or animated background) per site.
 
 ---
 
@@ -74,8 +82,9 @@ Run `node factory/tools/used.mjs` first. Then specify, in the brief, with zero a
 - Display + body fonts (exact Google Fonts families and weights). **No pairing may already appear 2+ times in used.mjs output. No display face may repeat within your batch.**
 - Palette: 5-7 hex values with roles (`--ink`, `--paper`, `--accent`, `--accent-2`, `--muted`, `--line`), derived from the brand's real colors if visible, otherwise from the physical place and materials (limestone, sea-grape leaf, conch pink, mangrove tannin, hull blue, weathered teak, rust-free stainless). Check text contrast is at least 4.5:1.
 - Layout system: grid, max widths, the hero composition (must differ from the last 3 entries in used.mjs).
-- **One signature moment**: a single memorable interaction tied to the brand truth (a tide-line that draws as you scroll, a room selector that slides like a shutter, a depth gauge for a dive shop, a chart-style map of slips). One is enough; make it excellent.
-- Motion: 2-4 named animations with durations and easing (see design-system.md). Respect `prefers-reduced-motion`.
+- **One signature visual** tied to the brand truth: either a React Three Fiber scene (water, light on limestone, a turning 3D object that represents the trade, an island chart in 3D) or one React Bits animated background (Silk, SoftAurora, Grainient, Waves, Topography, GridScan...) tinted to the palette. Plus one signature interaction (a line that draws as you scroll, a room selector, a depth gauge). The reference site uses a shader sea with channel-marker buoys; do something different.
+- Components: name the exact vendored components you will use (catalog), 2-4 motion components max plus shadcn primitives.
+- Motion: entrance choreography for the hero (stagger, blur-in), scroll reveals (`whileInView`, once), hover micro-interactions on every button/link/row (lift 1-2px, underline draw, arrow nudge), scroll progress or similar quiet detail. Ease `[0.16, 1, 0.3, 1]`, 0.6-1.2s. Respect `prefers-reduced-motion`.
 
 ## Step 5. Copy
 Write all copy before coding. Rules:
@@ -85,25 +94,27 @@ Write all copy before coding. Rules:
 - Microcopy near CTAs removes risk: "Replies on WhatsApp, usually same day" only if true or neutral; otherwise "We reply by email".
 - Unknown prices: "Rates on request". Unknown hours: omit the hours block, do not guess.
 
-## Step 6. Build
-Folder `/<slug>/`:
+## Step 6. Build (React + Tailwind + shadcn + Motion + three.js)
+Source folder `factory/web/sites/<slug>/` (copy the structure of the reference site, never its design):
 ```
-index.html            # required
-<inner>.html          # per sitemap
-styles.css            # one stylesheet for the site
-main.js               # progressive enhancement only
-site-data.json        # structured business data (components.md)
-favicon.svg           # simple monogram in the site palette
+index.html  <inner>.html   # one HTML shell per page: full SEO head + JSON-LD, concept ribbon, <div id="root"></div>, concept-notes JSON, ../assets/concept.js, <script type="module" src="./src/<page>.tsx">
+src/site.tsx               # shared layout: header (shadcn Sheet on mobile), footer, mobile action bar, Lenis, mount(), Reveal
+src/<page>.tsx             # one entry per page
+src/Scene.tsx              # optional R3F scene, always lazy-loaded with React.lazy + Suspense
+src/styles.css             # @import "tailwindcss" source(none); @source lines; @theme tokens (palette, fonts)
+site-data.json  favicon.svg
 ```
+Build: `node factory/tools/build-site.mjs <slug>` (installs deps on first run, builds to `/<slug>/`, prerenders HTML). Fix any build error before QA.
 Requirements:
 - Include every shared snippet from `components.md`: concept ribbon, noindex meta, concept-notes panel, enquiry form wiring, site-data.json.
 - Semantic HTML: one `<h1>` per page, logical h2/h3, `<header> <nav> <main> <footer>`, skip link, `alt` on every image, labelled form fields, focus styles.
 - Mobile first. Design at 390px, then 768, then 1280+. Sticky mobile action bar with the primary CTA (call / WhatsApp / enquire). Tap targets at least 44px.
-- Performance: no image wider than its slot (`width`/`height` attributes, `loading="lazy"` below the fold, `fetchpriority="high"` on the hero image). Total own CSS+JS under 60 KB.
-- Animations: `../assets/vendor/gsap.min.js`, `../assets/vendor/ScrollTrigger.min.js`, `../assets/vendor/lenis.min.js` only when used. Add `document.documentElement.classList.add('js-anim')` at the top of main.js; scope every hidden-initial-state style under `.js-anim`.
+- Performance: images with `width`/`height`, `loading="lazy"` below the fold, `fetchpriority="high"` on the hero image. three.js scenes lazy-loaded. Initial JS+CSS under 650 KB (QA checks). Tailwind `@source` only the components you import.
+- Never use `next/*`, `"use client"` is harmless but unnecessary. No server code. Pages are linked with relative hrefs (`marina.html`, `index.html#contact`).
 - Maps: `<iframe loading="lazy" src="https://www.google.com/maps?q=<url-encoded address or name+island>&output=embed">` with a title attribute.
 - Full SEO head and JSON-LD per `seo-local.md`.
 - Footer: real NAP (name, address, phone), social links found, "Concept by <agency_name>" from `factory/config.json`.
+- Quality bar: if your desktop screenshot would not stand next to the reference site, it is not done.
 
 ## Step 7. QA (one run, at most two fix passes)
 ```
