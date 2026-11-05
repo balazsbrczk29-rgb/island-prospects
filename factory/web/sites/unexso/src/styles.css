@@ -1,0 +1,28 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/accordion.tsx";
+@source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/magicui/marquee.tsx";
+
+@theme {
+  --color-foam: #f4f7f5;
+  --color-foam-2: #e3eeec;
+  --color-ink: #0b2530;
+  --color-deep: #0b3b4a;
+  --color-abyss: #072530;
+  --color-lagoon: #007c8f;
+  --color-lagoon-soft: #bfe3e3;
+  --color-sun: #ffd23f;
+  --color-muted: #4f6a72;
+  --color-line: #d3e1e0;
+  --font-display: "Syne", ui-sans-serif, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+html { background: var(--color-foam); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-sun); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-sun); outline-offset: 3px; }
+@media (max-width: 767px) { body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

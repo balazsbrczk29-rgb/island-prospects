@@ -4,6 +4,53 @@
  "name": "UNEXSO (Underwater Explorers Society)",
  "batch": "09",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:57:35.241Z"
+ "state": "built",
+ "claimed_at": "2026-11-05T01:57:35.241Z",
+ "pages": [
+  "index.html",
+  "experiences.html"
+ ],
+ "primary_cta": "Book an experience",
+ "brand_truth": "The dive society that brought the world underwater at Grand Bahama in 1965, now caring for dolphins in a 9-acre lagoon at Sanctuary Bay.",
+ "buyer": "Cruise passengers and resort guests on Grand Bahama deciding on a phone; families; returning divers.",
+ "design": {
+  "display_font": "Syne 700/800",
+  "body_font": "DM Sans 400/500/600",
+  "palette": [
+   "#f4f7f5",
+   "#0b2530",
+   "#007c8f",
+   "#ffd23f",
+   "#0b3b4a",
+   "#bfe3e3",
+   "#4f6a72"
+  ],
+  "hero_pattern": "split-stacked-photos-with-badge",
+  "signature": "Dive-gauge history scrollytelling (1965 to today) with archive photos; experience picker with live Peek booking links and published prices"
+ },
+ "current_site_findings": [
+  "unexso.com has an SSL certificate error.",
+  "Sanctuary Bay pages (UNEXSO's current home) are noindex.",
+  "History buried at the bottom of a page.",
+  "Diving 'returning soon' with no way to register interest.",
+  "Stock (Pexels) header images."
+ ],
+ "pitch_line": "Anyone who types unexso.com today gets a security warning, and the Sanctuary Bay pages are hidden from Google; this concept puts your dolphins, prices and Peek booking on one fast page and turns your 1965 legend into a reason to book.",
+ "sources": [
+  "https://www.sanctuarybaybahamas.com/unexso",
+  "https://www.sanctuarybaybahamas.com/planyourvisit",
+  "https://www.bahamas.com/plan-your-trip/things-to-do/unexso",
+  "https://www.instagram.com/unexsograndbahama/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Age suitability only where published",
+  "Single inner page (experiences)"
+ ],
+ "notes": "Freeport prospect, high value: SSL failure + noindex. Pitch to Sanctuary Bay management (UNEXSO is part of Sanctuary Bay). Prices exc. VAT as published. Did not use skipTlsVerification on unexso.com.",
+ "built_at": "2026-11-05T02:02:50.148559+00:00"
 }

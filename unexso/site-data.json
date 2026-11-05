@@ -1,0 +1,76 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "unexso",
+ "name": "UNEXSO (Underwater Explorers Society)",
+ "niche": "tours-experiences",
+ "contact": {
+  "phone": "+1-242-373-1244",
+  "phone_intl": "+1-800-992-3483",
+  "whatsapp": null,
+  "email": "info@unexso.com",
+  "address": "Sanctuary Bay, Sterling Circle",
+  "settlement": "Freeport",
+  "island": "Grand Bahama"
+ },
+ "hours": "Mo-Fr 09:00-17:00",
+ "socials": [
+  "https://www.instagram.com/unexsograndbahama/"
+ ],
+ "offer": [
+  {
+   "name": "Dolphin Encounter",
+   "kind": "tour",
+   "summary": "",
+   "price": "$85 adults / $50 children exc. VAT",
+   "source": "https://www.sanctuarybaybahamas.com/planyourvisit"
+  },
+  {
+   "name": "Dolphin Swim",
+   "kind": "tour",
+   "summary": "",
+   "price": "$179 exc. VAT",
+   "source": "https://www.sanctuarybaybahamas.com/planyourvisit"
+  },
+  {
+   "name": "Assistant Marine Mammal Specialist",
+   "kind": "tour",
+   "summary": "",
+   "price": "$389 exc. VAT",
+   "source": "https://www.sanctuarybaybahamas.com/planyourvisit"
+  },
+  {
+   "name": "Snorkel Sea Safari",
+   "kind": "tour",
+   "summary": "",
+   "price": "$50 adults / $40 children exc. VAT",
+   "source": "https://www.sanctuarybaybahamas.com/planyourvisit"
+  },
+  {
+   "name": "Glass Bottom Boat Adventure",
+   "kind": "tour",
+   "summary": "",
+   "price": "$65 adults / $55 children exc. VAT",
+   "source": "https://www.sanctuarybaybahamas.com/planyourvisit"
+  },
+  {
+   "name": "Eco-Snorkel at Sanctuary Bay",
+   "kind": "tour",
+   "summary": "",
+   "price": "$159 exc. VAT",
+   "source": "https://www.sanctuarybaybahamas.com/planyourvisit"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": true,
+  "categories": [
+   "tours"
+  ]
+ },
+ "sources": [
+  "https://www.sanctuarybaybahamas.com/unexso",
+  "https://www.sanctuarybaybahamas.com/planyourvisit",
+  "https://www.bahamas.com/plan-your-trip/things-to-do/unexso",
+  "https://www.instagram.com/unexsograndbahama/"
+ ]
+}
