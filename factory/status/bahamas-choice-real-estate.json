@@ -4,6 +4,58 @@
  "name": "Bahamas Choice Real Estate",
  "batch": "03",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:21:30.030Z"
+ "state": "built",
+ "pages": [
+  "index.html",
+  "buying.html"
+ ],
+ "primary_cta": "Send your brief",
+ "brand_truth": "A small Nassau family brokerage that guides people to and from property on any island, end to end, since 2013.",
+ "buyer": "Overseas buyers and investors (US, Canada, UK, diaspora) researching for months, and Bahamian families selling family property, often from abroad.",
+ "design": {
+  "display_font": "Gilda Display 400",
+  "body_font": "Albert Sans 400/500/600",
+  "palette": [
+   "#f3f2ee",
+   "#17212b",
+   "#44663f",
+   "#e6c3b4",
+   "#e7e5de",
+   "#59636d",
+   "#d6d3ca",
+   "#1d3330"
+  ],
+  "hero_pattern": "framed-image-passe-partout",
+  "signature": "Interactive SVG archipelago chart of the 16 island groups they serve; tap an island to see the areas they feature and pre-fill the brief"
+ },
+ "current_site_findings": [
+  "About, Meet the Team and Contact pages carry a conflicting noindex tag",
+  "Every Featured Areas settlement link points to '#'",
+  "Contact page shows no address, phone or map",
+  "About page title claims '#1 Real Estate Agents in the Bahamas' without support",
+  "Team emails on bahamaschoice.com, site and BREA on bahamaschoicerealestate.com",
+  "No guided path for overseas buyers or families selling from abroad"
+ ],
+ "pitch_line": "Your own clients say you sold their mother's house from abroad in four months; this site makes that the front door, with your islands on a chart and a brief that lands in your inbox.",
+ "sources": [
+  "https://bahamaschoicerealestate.com/",
+  "https://bahamaschoicerealestate.com/about/",
+  "https://bahamaschoicerealestate.com/meet-the-team/",
+  "https://bahamaschoicerealestate.com/contact/",
+  "https://www.breabahamas.com/realtor.php?cmd=view&id=96",
+  "https://www.findyello.com/new-providence/bahamas-choice-real-estate-ltd/profile/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Buying steps 3-6 wording (negotiate offer, attorney handles legal side) is category-standard paraphrase",
+  "Sherry Morris and Erica Pinder job titles not published: shown as 'Bahamas Choice team'",
+  "Settlement and development lists taken from their own nav; development locations not mapped",
+  "Official links: bahamas.gov.bs, inlandrevenue.finance.gov.bs, breabahamas.com"
+ ],
+ "notes": "Record said no own site, but bahamaschoicerealestate.com is live (AgentImage WordPress, updated 2026), so pitch as a sharper, faster, lead-focused rebuild, not a rescue. Testimonials quoted verbatim from their own homepage, no stars. Photos hotlinked from their site. Hours unknown (omitted). Island outlines are approximate illustration labelled 'not to scale'. Scorecard: hero 4, type 4, layout 4, context 5, motion 4, depth 4, detailing 5, mobile 4, refs 4, pride 5, consistency 4.",
+ "built_at": "2026-11-05T01:31:44.498339Z"
 }

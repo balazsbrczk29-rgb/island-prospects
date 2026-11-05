@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bahamas-choice-real-estate",
+  "name": "Bahamas Choice Real Estate",
+  "niche": "real-estate",
+  "contact": {"phone": "+1-242-677-3868", "whatsapp": null, "email": "sales@bahamaschoicerealestate.com", "address": "Yamacraw Hill Road, Nassau", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": ["https://www.facebook.com/BahamaChoiceRealEstate", "https://www.instagram.com/bahamaschoice.realestate/", "https://www.linkedin.com/company/bahamas-choice-real-estate/", "https://www.youtube.com/@bahamaschoicerealestate157"],
+  "offer": [
+    {"name": "Buying", "kind": "service", "summary": "Guidance for first-time, local and international buyers, from listings to viewings, closing and beyond.", "price": null, "source": "https://bahamaschoicerealestate.com/about/"},
+    {"name": "Selling", "kind": "service", "summary": "Sale of homes, land and family property, including for owners living abroad.", "price": null, "source": "https://bahamaschoicerealestate.com/"},
+    {"name": "Rentals and leasing", "kind": "service", "summary": "Residential and commercial rental and leasing.", "price": null, "source": "https://www.facebook.com/BahamaChoiceRealEstate/"},
+    {"name": "Commercial and investment property", "kind": "service", "summary": "Commercial real estate and investment property for Bahamian and international investors.", "price": null, "source": "https://bahamaschoicerealestate.com/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://bahamaschoicerealestate.com/", "https://bahamaschoicerealestate.com/about/", "https://bahamaschoicerealestate.com/meet-the-team/", "https://www.breabahamas.com/realtor.php?cmd=view&id=96", "https://www.findyello.com/new-providence/bahamas-choice-real-estate-ltd/profile/"]
+}
