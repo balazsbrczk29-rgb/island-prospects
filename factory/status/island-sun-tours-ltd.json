@@ -4,6 +4,15 @@
  "name": "Island Sun Tours Ltd.",
  "batch": "05",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:32:05.773Z"
+ "state": "skipped",
+ "track": "B",
+ "notes": "Skipped: Island Sun Tours appears to be a trading name of Majestic Tours Ltd / Majestic Holidays (same phone 242-322-2606, fax 326-5785 and Hillside Manor, Cumberland Street address; bahamas.com listing links to majesticholidays.com). Majestic already has its own websites, and nothing independent (tours, photos, socials) exists under the Island Sun Tours name. Possible Track A pitch to the Majestic group instead; confirm locally whether Island Sun Tours still trades.",
+ "sources": [
+  "https://www.bhahotels.com/members-directory/island-sun-tours-ltd/",
+  "https://www.bahamas.com/vendor/island-sun-tours",
+  "https://www.bahamaslocal.com/showlisting/914/Island_Sun_Tours.html",
+  "https://www.majestictoursbahamas.com/contact.php"
+ ],
+ "pitch_line": null,
+ "built_at": "2026-11-05T01:32:50.846455+00:00"
 }
