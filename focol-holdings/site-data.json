@@ -1,0 +1,71 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "focol-holdings",
+ "name": "FOCOL Holdings Limited",
+ "niche": "industrial-b2b",
+ "contact": {
+  "phone": "+1-242-702-3000",
+  "whatsapp": null,
+  "email": "info@focol.com",
+  "address": "Clifton Pier",
+  "settlement": "Nassau",
+  "island": "New Providence"
+ },
+ "hours": null,
+ "socials": [],
+ "offer": [
+  {
+   "name": "Fuel distribution",
+   "kind": "service",
+   "summary": "Gasoline, diesel, marine and aviation fuel (Sun Oil)",
+   "price": null,
+   "source": "https://www.focol.com/"
+  },
+  {
+   "name": "Freeport fuel supply",
+   "kind": "service",
+   "summary": "Freeport Oil Company, since 1967",
+   "price": null,
+   "source": "https://www.focol.com/"
+  },
+  {
+   "name": "LNG",
+   "kind": "service",
+   "summary": "New Providence Gas regas terminal, Clifton Pier",
+   "price": null,
+   "source": "https://www.focol.com/"
+  },
+  {
+   "name": "Power and utilities",
+   "kind": "service",
+   "summary": "Bahamas Utilities Company",
+   "price": null,
+   "source": "https://www.focol.com/"
+  },
+  {
+   "name": "Solar",
+   "kind": "service",
+   "summary": "Bahamas Solar & Renewables",
+   "price": null,
+   "source": "https://www.focol.com/"
+  },
+  {
+   "name": "Service stations",
+   "kind": "service",
+   "summary": "Convenience Retailing Limited, Grand Sun Investments",
+   "price": null,
+   "source": "https://www.focol.com/"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://www.focol.com/",
+  "https://www.focol.com/contact/",
+  "https://www.focol.com/who-we-are/",
+  "https://www.focol.com/a-new-energy-milestone-for-the-bahamas/"
+ ]
+}

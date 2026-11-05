@@ -4,6 +4,52 @@
  "name": "Focol Holdings",
  "batch": "02",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:12:33.908Z"
+ "state": "built",
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "Find the right company",
+ "brand_truth": "One Bahamian group runs every link of the country's energy chain, from tanker to service station.",
+ "buyer": "Commercial fuel buyers, utility and government partners, BISX investors, job seekers and media.",
+ "design": {
+  "display_font": "Schibsted Grotesk 500-700",
+  "body_font": "Public Sans 400/500",
+  "palette": [
+   "#f2f4f3",
+   "#0c1b2a",
+   "#1c7fb0",
+   "#8fd3f4",
+   "#e6eae9",
+   "#4f5d68",
+   "#d3dad9"
+  ],
+  "hero_pattern": "typographic-monument-over-technical-elevation",
+  "signature": "Self-drawing technical elevation of the energy chain, reused as a sticky scrollytelling diagram"
+ },
+ "current_site_findings": [
+  "Slider 'Read More' buttons link to '#'",
+  "Stock Depositphotos image in the hero",
+  "Unfinished headings ('Who We Are?', empty 'Our Vision')",
+  "Contact page has a conflicting noindex robots tag and 'Grand Bahamas' typo",
+  "No routing: seven companies, no clue which to call",
+  "BISX tile shows a raw '0\u2014' change"
+ ],
+ "pitch_line": "You run the whole energy chain of The Bahamas; this page shows it in one drawing and gets every customer to the right FOCOL company in one tap.",
+ "sources": [
+  "https://www.focol.com/",
+  "https://www.focol.com/contact/",
+  "https://www.focol.com/who-we-are/",
+  "https://www.focol.com/a-new-energy-milestone-for-the-bahamas/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Per-company phone routing as published",
+  "Leadership list current as of focol.com"
+ ],
+ "notes": "Record said no website; focol.com exists and was rebuilt in 2026, so this is a weaker prospect: pitch as a sharper corporate concept, not a rescue. Large enterprise, so one-page concept. Head office is Clifton Pier, Nassau (record says Freeport; Freeport Oil is the Freeport arm). Photos hotlinked from focol.com. Shell named only as their distributor relationship; no Shell logo used. Scorecard: hero 5, type 4, layout 4, context 5, motion 4, depth 4, detailing 5, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T01:17:33.482827+00:00"
 }
