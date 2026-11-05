@@ -1,0 +1,82 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "bahamas-hot-mix-co",
+ "name": "BHM Co. Ltd. (Bahamas Hot Mix)",
+ "niche": "industrial-b2b",
+ "contact": {
+  "phone": "+1-242-601-6350",
+  "whatsapp": null,
+  "email": "info@bhmgroup.com",
+  "address": "Airport Industrial Park, P.O. Box CB-10990",
+  "settlement": "Nassau",
+  "island": "New Providence"
+ },
+ "hours": null,
+ "socials": [
+  "https://twitter.com/BHMBahamas"
+ ],
+ "offer": [
+  {
+   "name": "Road construction",
+   "kind": "service",
+   "summary": "Road construction",
+   "price": null,
+   "source": "https://bhmgroup.com/"
+  },
+  {
+   "name": "Airports and runways",
+   "kind": "service",
+   "summary": "Airports and runways",
+   "price": null,
+   "source": "https://bhmgroup.com/"
+  },
+  {
+   "name": "Hot mix asphalt supply",
+   "kind": "service",
+   "summary": "Hot mix asphalt supply",
+   "price": null,
+   "source": "https://bhmgroup.com/"
+  },
+  {
+   "name": "Ready mix concrete",
+   "kind": "service",
+   "summary": "Ready mix concrete",
+   "price": null,
+   "source": "https://bhmgroup.com/"
+  },
+  {
+   "name": "Ports, coastal and marine",
+   "kind": "service",
+   "summary": "Ports, coastal and marine",
+   "price": null,
+   "source": "https://bhmgroup.com/"
+  },
+  {
+   "name": "Reverse osmosis and water",
+   "kind": "service",
+   "summary": "Reverse osmosis and water",
+   "price": null,
+   "source": "https://bhmgroup.com/"
+  },
+  {
+   "name": "Site development, utilities, drilling",
+   "kind": "service",
+   "summary": "Site development, utilities, drilling",
+   "price": null,
+   "source": "https://bhmgroup.com/"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://bhmgroup.com/",
+  "https://bhmgroup.com/contact/",
+  "https://bhmgroup.com/expertise/airports-and-runways/",
+  "https://bhmgroup.com/expertise/hot-mix-asphalt-supply/",
+  "https://bhmgroup.com/expertise/road-construction/",
+  "https://www.bahamasindex.com/companies/Asphalt_Paving"
+ ]
+}

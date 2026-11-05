@@ -1,0 +1,27 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/ui/tabs.tsx";
+
+@theme {
+  --color-paper: #f1f0ec;
+  --color-paper-2: #e4e2db;
+  --color-ink: #1a1c1e;
+  --color-asphalt: #232629;
+  --color-muted: #5a5e63;
+  --color-amber: #f0c300;
+  --color-amber-deep: #8a6d00;
+  --color-line: #d6d3ca;
+  --font-display: "Archivo", ui-sans-serif, sans-serif;
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-amber); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-amber-deep); outline-offset: 3px; }
+.grid > * { min-width: 0; }
+@media (max-width: 1023px) { body { padding-bottom: 64px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

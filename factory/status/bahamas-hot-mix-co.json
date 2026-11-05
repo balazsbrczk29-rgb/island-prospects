@@ -4,6 +4,56 @@
  "name": "Bahamas Hot Mix Co",
  "batch": "03",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:22:26.063Z"
+ "state": "built",
+ "pages": [
+  "index.html",
+  "capabilities.html"
+ ],
+ "primary_cta": "Request a quote",
+ "brand_truth": "BHM makes the asphalt and concrete and builds with them, on any island.",
+ "buyer": "Government, airport and developer procurement, engineering consultants, plus homeowners for small paving.",
+ "design": {
+  "display_font": "Archivo (wdth 115) 700",
+  "body_font": "Work Sans 400/500 + IBM Plex Mono",
+  "palette": [
+   "#f1f0ec",
+   "#1a1c1e",
+   "#f0c300",
+   "#232629",
+   "#e4e2db",
+   "#5a5e63",
+   "#d6d3ca"
+  ],
+  "hero_pattern": "cinematic-full-bleed-photo-with-slab",
+  "signature": "Scroll-assembled pavement cross-section; project chart of the islands"
+ },
+ "current_site_findings": [
+  "'Bahamas Hot Mix' never appears on the homepage",
+  "Slider controls link to '#'",
+  "No phone or email on the homepage",
+  "Service icons without links",
+  "Proof scattered across inner pages",
+  "Unsourced '#1 concrete provider' claim"
+ ],
+ "pitch_line": "Your runways run from LPIA to Hog Cay and your plant can be up in six days, but your homepage hides it behind a slider; this concept puts it all in the first two screens with a quote builder.",
+ "sources": [
+  "https://bhmgroup.com/",
+  "https://bhmgroup.com/contact/",
+  "https://bhmgroup.com/expertise/airports-and-runways/",
+  "https://bhmgroup.com/expertise/hot-mix-asphalt-supply/",
+  "https://bhmgroup.com/expertise/road-construction/",
+  "https://www.bahamasindex.com/companies/Asphalt_Paving"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "info@bhmgroup.com is the enquiry email",
+  "Pavement section is a typical illustration",
+  "Ready mix supply area"
+ ],
+ "notes": "Record said no website and 'Bay St'; they trade as BHM at bhmgroup.com, head office Airport Industrial Park. Two client quotes reproduced verbatim from bhmgroup.com with attribution (no ratings). Photos hotlinked from bhmgroup.com. Scorecard: hero 4, type 5, layout 4, context 5, motion 4, depth 4, detailing 5, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T01:27:05.538670+00:00"
 }
