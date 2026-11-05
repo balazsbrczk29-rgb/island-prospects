@@ -1,9 +1,22 @@
 {
- "slug": "bahamas-rum-cake-factory",
- "id": 57,
- "name": "Bahamas Rum Cake Factory",
- "batch": "09",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:58:47.009Z"
+  "slug": "bahamas-rum-cake-factory", "id": 57, "name": "Bahamas Rum Cake Factory", "batch": "09", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "flavours.html"],
+  "primary_cta": "Order a rum cake",
+  "brand_truth": "One recipe, one downtown Nassau shop since 2000, now the Official Rum Cake of The Bahamas.",
+  "design": {"display_font": "Gloock 400", "body_font": "Mulish 400/600", "palette": ["#faf3e6", "#2a1a12", "#8f6214", "#f1d3cf", "#e2b862", "#e6d6b8", "#f2e6cf"], "hero_pattern": "product-closeup-ring", "signature": "Their Original bundt on a conch disc with rotating ring text; six pack planner; hover-preview flavour menu"},
+  "current_site_findings": [
+    "Older listings, including the hotel association directory, still point to bacardirumcake.com, which could not be opened.",
+    "Shop address, hours and phone are hard to find on your own site; Yelp and the directories disagree.",
+    "The founding story and the 2014 'Official Rum Cake' recognition sit on an inner page.",
+    "The homepage is a long, repeated product grid on mobile.",
+    "Several product images are named after stock photos."
+  ],
+  "pitch_line": "Cruise visitors decide on the walk from the port; this concept tells them in one screen that you are the Official Rum Cake of The Bahamas, where the shop is, and lets them plan a six pack before they arrive.",
+  "sources": ["https://thebahamasrumcakefactory.com/", "https://thebahamasrumcakefactory.com/pages/about", "https://www.tripadvisor.com/Attraction_Review-g147416-d11094462-Reviews-The_Bahamas_Rum_Cake_Factory-Nassau_New_Providence_Island_Bahamas.html", "https://m.yelp.com/biz/bahamas-rum-cake-factory-nassau"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Street shown as East Bay Street (Yelp); record says McPherson St", "Phone (242) 328-3750 and opening times (7:30 Mon-Sat, 8:00 Sun) from Yelp", "'Coming soon' delivery hook is the agency platform placeholder, inactive"],
+  "notes": "Listed site bacardirumcake.com is outdated; the business runs a modern Shopify store at thebahamasrumcakefactory.com, so the pitch is brand and story, not e-commerce. Reviews and star ratings on their store deliberately not reproduced. Product images hotlinked from their Shopify CDN; AdobeStock-named files avoided. Banana and Key lime have no own photo, shown typographically.",
+  "built_at": "2026-11-05T02:03:12Z"
 }

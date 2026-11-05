@@ -1,0 +1,130 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bahamas-rum-cake-factory",
+  "name": "Bahamas Rum Cake Factory",
+  "niche": "food-events",
+  "contact": {
+    "phone": "+1-242-328-3750",
+    "whatsapp": null,
+    "email": null,
+    "address": "East Bay Street (record: McPherson St)",
+    "settlement": "Nassau",
+    "island": "New Providence"
+  },
+  "hours": "Opens 7:30 Mon-Sat, 8:00 Sun (closing unknown)",
+  "socials": [],
+  "offer": [
+    {
+      "name": "Original rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Original with pecans rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Pineapple rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Pina colada rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Coconut rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Banana rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Chocolate rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Caramel Caribbean rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Key lime rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Amaretto rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Irish cream rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Kentucky bourbon rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Strawberry rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    },
+    {
+      "name": "Pumpkin spice rum cake",
+      "kind": "product",
+      "summary": "4 oz and 20 oz",
+      "price": null,
+      "source": "https://thebahamasrumcakefactory.com/"
+    }
+  ],
+  "platform": {
+    "candidate": true,
+    "orderable": true,
+    "categories": [
+      "rum-cake",
+      "gifts",
+      "bakery"
+    ]
+  },
+  "sources": [
+    "https://thebahamasrumcakefactory.com/",
+    "https://www.tripadvisor.com/Attraction_Review-g147416-d11094462-Reviews-The_Bahamas_Rum_Cake_Factory-Nassau_New_Providence_Island_Bahamas.html",
+    "https://m.yelp.com/biz/bahamas-rum-cake-factory-nassau"
+  ]
+}
