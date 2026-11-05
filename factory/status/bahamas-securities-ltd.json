@@ -1,9 +1,55 @@
 {
  "slug": "bahamas-securities-ltd",
- "id": 31,
- "name": "Bahamas Securities Ltd",
- "batch": "08",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:51:54.220Z"
+ "name": "Bahamas Securities (1987) Limited",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "regulation.html"
+ ],
+ "primary_cta": "Arrange a consultation",
+ "brand_truth": "A registered Nassau investment adviser, advising from Charlotte Street since 1987.",
+ "buyer": "Bahamian professionals, business owners, families and small companies with savings to invest; comparing bank brokerages and other advisers; wary of unlicensed advice.",
+ "design": {
+  "display_font": "Crimson Pro 300/400 (+italic)",
+  "body_font": "Karla 400/500",
+  "palette": [
+   "#f4f3ef",
+   "#161a18",
+   "#234a3a",
+   "#dfe6df",
+   "#eae9e3",
+   "#59605c",
+   "#d9d8d0"
+  ],
+  "hero_pattern": "register-card-split",
+  "signature": "Interactive public-register record (field highlight + explanation + link to the SCB PDF) and a five-step 'verify an adviser' checklist"
+ },
+ "current_site_findings": [
+  "No website; only old directory listings",
+  "Directory emails look mistyped or belong to another firm",
+  "SCB registration buried in a government PDF",
+  "No plain explanation of the service or how to start"
+ ],
+ "pitch_line": "You have been registered with the Securities Commission and advising since 1987, but online you are a phone number in a directory; this site makes your registration the reason to call.",
+ "sources": [
+  "https://scb.gov.bs/wp-content/uploads/2026/10/SIA-Firms-as-at-30-September-2026-1.pdf",
+  "https://www.scb.gov.bs/wp-content/uploads/2025/11/SIA-Firms-as-at-31-October-2025-1.pdf",
+  "https://www.findyello.com/bahamas/bahamas-securities-ltd/profile/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "B",
+ "assumptions": [
+  "Plain-language explanation of capital market instruments (shares, bonds, funds) is a category description",
+  "Client types (individuals, families, companies) inferred",
+  "'Fees are discussed at your consultation' is neutral wording",
+  "Proposed domain bahamassecurities.com (availability unverified)"
+ ],
+ "notes": "Record name 'Bahamas Securities Ltd'; registered legal name is Bahamas Securities (1987) Limited (SCB register 30 Sep 2026, advising only). Register names George C. Culmer and Myles J. Culmer (roles not stated in the extract; names not shown on site). Directory emails (mculmer@bdcbahams.com, info@bdobahamas.com) look unreliable, not used; Gresham House is also BDO Bahamas' address, so ask whether the firm shares premises. No 3D by design (professional services). Scorecard: hero 4, type 5, layout 4, context 4, motion 4, depth 4, detailing 5, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T01:55:39.483970+00:00",
+ "id": 31,
+ "batch": "08"
 }

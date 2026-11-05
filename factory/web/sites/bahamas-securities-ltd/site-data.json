@@ -1,0 +1,12 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bahamas-securities-ltd",
+  "name": "Bahamas Securities (1987) Limited",
+  "niche": "professional-services",
+  "contact": {"phone": "+1-242-325-6591", "whatsapp": null, "email": null, "address": "Gresham House, Charlotte Street South, P.O. Box N-10144, Nassau", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": [],
+  "offer": [{"name": "Advising on capital market instruments", "kind": "service", "summary": "Investment advice from a firm registered with the Securities Commission of The Bahamas.", "price": null, "source": "https://scb.gov.bs/wp-content/uploads/2026/10/SIA-Firms-as-at-30-September-2026-1.pdf"}],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://scb.gov.bs/wp-content/uploads/2026/10/SIA-Firms-as-at-30-September-2026-1.pdf", "https://www.findyello.com/bahamas/bahamas-securities-ltd/profile/"]
+}
