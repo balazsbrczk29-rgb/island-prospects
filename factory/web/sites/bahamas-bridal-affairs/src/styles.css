@@ -1,0 +1,32 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/accordion.tsx";
+@source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/ui/tabs.tsx";
+
+@theme {
+  --color-paper: #f6f6f3;
+  --color-blush: #f1e3dc;
+  --color-glass: #d8e8e5;
+  --color-ink: #22201f;
+  --color-sea: #2f6f70;
+  --color-champagne: #b89a62;
+  --color-muted: #5d5a57;
+  --color-line: #e1ddd6;
+  --font-display: "Bodoni Moda", Didot, "Times New Roman", serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+}
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); font-weight: 400; -webkit-font-smoothing: antialiased; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-glass); color: var(--color-ink); }
+:focus-visible { outline: 1.5px solid var(--color-sea); outline-offset: 3px; }
+.card-paper {
+  background-color: #fffefb;
+  background-image: radial-gradient(rgb(34 32 31 / .035) 1px, transparent 1px);
+  background-size: 4px 4px;
+  box-shadow: 0 1px 0 rgb(34 32 31 / .06), 0 30px 60px -30px rgb(47 111 112 / .35), 0 18px 30px -24px rgb(34 32 31 / .25);
+}
+.deboss { color: #2b2827; text-shadow: 0 1px 0 rgb(255 255 255 / .9), 0 -0.5px 0 rgb(0 0 0 / .08); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

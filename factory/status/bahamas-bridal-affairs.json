@@ -1,9 +1,24 @@
 {
- "slug": "bahamas-bridal-affairs",
- "id": 54,
- "name": "Bahamas Bridal Affairs",
- "batch": "03",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:18:04.592Z"
+ "slug": "bahamas-bridal-affairs", "id": 54, "name": "Bahamas Bridal Affairs", "batch": "03", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "weddings.html"],
+ "primary_cta": "Check your wedding date",
+ "brand_truth": "Twenty-six years of making Paradise Island weddings stress-free, with the owner herself at your side.",
+ "buyer": "US and Canadian couples (28-45, comfortable income) planning 9-18 months ahead on a phone, often with parents paying.",
+ "design": {"display_font": "Bodoni Moda 500", "body_font": "Jost 300/400", "palette": ["#f6f6f3", "#22201f", "#2f6f70", "#f1e3dc", "#d8e8e5", "#b89a62", "#5d5a57"], "hero_pattern": "framed-object", "signature": "Live letterpress invitation card filled by the visitor (names, date, guests, setting) feeding a call summary; help-with chips; published-weddings filter with real credits"},
+ "current_site_findings": [
+  "bahamasbridalaffairs.com no longer exists; directories still link to it.",
+  "The One&Only Ocean Club / Atlantis record is only in a directory blurb.",
+  "Weddingbells and Style Me Pretty features are not linked from anything they control.",
+  "The Florida number for US couples is buried in a listing.",
+  "No way to send date, guests and setting before calling."
+ ],
+ "pitch_line": "Couples who find you in the directories click a website that no longer exists; this concept puts your Ocean Club and Atlantis record and your magazine features in front of them, and lets them write their names and date on an invitation before they call you.",
+ "sources": ["https://www.bahamaslocal.com/showlisting/16239/Bahamas_Bridal_Affairs.html", "https://www.bahamasindex.com/company/10600/Bahamas_Bridal_Affairs", "https://weddingbells.ca/real-weddings/a-glamorous-destination-wedding-in-the-bahamas/", "https://www.stylemepretty.com/2013/06/14/nassau-bahamas-wedding-from-karen-hill-photography/", "https://www.booksamillion.com/p/How-Be-Fabulous/Bernadette-L-Burrows/9781629521237", "https://bs.linkedin.com/in/beburrows"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "B",
+ "scorecard": {"first_screen": 5, "typography": 5, "editorial_layout": 4, "context_visuals": 4, "motion": 4, "depth": 4, "detailing": 4, "mobile": 4, "next_to_references": 4, "owner_proud": 5, "whole_page": 4},
+ "assumptions": ["Phone numbers 242-326-4029 and 1-954-892-6969 are current (directory data)", "Help categories (ceremony, reception, flowers, cake, music, hair and makeup, stationery, photography) inferred from published vendor credits", "Style Me Pretty credit text taken from search excerpts (coordination by Bernadette Burrows)", "'26 years' figure is from an undated listing and may now be higher"],
+ "notes": "Domain bahamasbridalaffairs.com does not resolve (DNS failure 2026-11-05). No email, WhatsApp or own photos found; press photos belong to photographers and were not used. Strong pitch: dead domain still listed. Ask owner for a gallery and her email. Proposed domain: keep bahamasbridalaffairs.com if re-registrable (unverified).",
+ "built_at": "2026-11-05T01:22:35Z"
 }

@@ -1,0 +1,12 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bahamas-bridal-affairs",
+  "name": "Bahamas Bridal Affairs",
+  "niche": "food-events",
+  "contact": {"phone": "+1-242-326-4029", "phone_us": "+1-954-892-6969", "whatsapp": null, "email": null, "address": "Fire Trail Road West, P.O. Box CB-13320", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": ["https://bs.linkedin.com/in/beburrows"],
+  "offer": [{"name": "Destination wedding planning", "kind": "service", "summary": "Personalised planning with flexible packages; preferred planner with One&Only Ocean Club / Atlantis for many years.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/16239/Bahamas_Bridal_Affairs.html"}],
+  "platform": {"candidate": true, "orderable": false, "categories": ["Wedding planning", "Events"]},
+  "sources": ["https://www.bahamaslocal.com/showlisting/16239/Bahamas_Bridal_Affairs.html", "https://www.bahamasindex.com/company/10600/Bahamas_Bridal_Affairs", "https://weddingbells.ca/real-weddings/a-glamorous-destination-wedding-in-the-bahamas/", "https://www.stylemepretty.com/2013/06/14/nassau-bahamas-wedding-from-karen-hill-photography/"]
+}
