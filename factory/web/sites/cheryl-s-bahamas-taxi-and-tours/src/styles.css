@@ -1,0 +1,29 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/accordion.tsx";
+@source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/ui/tabs.tsx";
+
+@theme {
+  --color-paper: #f4f4f0;
+  --color-paper-2: #e9eae4;
+  --color-ink: #141a2b;
+  --color-muted: #545b69;
+  --color-navy: #1b2b52;
+  --color-navy-deep: #121e3b;
+  --color-yellow: #f5c84c;
+  --color-line: #d9dbd6;
+  --font-display: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+}
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-yellow); }
+.label { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; }
+.ulink { background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size .45s cubic-bezier(.16,1,.3,1); }
+.ulink:hover, .ulink:focus-visible { background-size: 100% 2px; }
+:focus-visible { outline: 3px solid var(--color-yellow); outline-offset: 2px; }
+@media (max-width: 767px) { body { padding-bottom: calc(56px + env(safe-area-inset-bottom)); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

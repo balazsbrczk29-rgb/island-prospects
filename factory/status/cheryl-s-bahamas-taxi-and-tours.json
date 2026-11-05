@@ -1,9 +1,53 @@
 {
  "slug": "cheryl-s-bahamas-taxi-and-tours",
- "id": 63,
- "name": "Cheryl's Bahamas Taxi and Tours",
- "batch": "10",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T02:17:42.977Z"
+ "name": "Cheryl's Bahamas Taxi and Tours",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "tours.html"
+ ],
+ "primary_cta": "Book my airport pickup",
+ "brand_truth": "Cheryl's driver is the one in navy and yellow holding your name at Nassau arrivals, for over 25 years.",
+ "buyer": "US resort guests and cruise passengers, families and Spanish-speaking visitors booking transfers and private tours on phones.",
+ "design": {
+  "display_font": "Familjen Grotesk 500-700",
+  "body_font": "Atkinson Hyperlegible 400/700",
+  "palette": [
+   "#f4f4f0",
+   "#141a2b",
+   "#1b2b52",
+   "#f5c84c",
+   "#e9eae4",
+   "#545b69",
+   "#d9dbd6"
+  ],
+  "hero_pattern": "arrivals-name-card-split",
+  "signature": "Live arrivals name card the visitor types into (their real meet-and-greet), plus a tour planner from their real stops that emails the plan; filterable tour catalogue"
+ },
+ "current_site_findings": [
+  "Covid-19 banner still at the top",
+  "Footer 2022; duplicated 'Conch Demonstration' heading",
+  "Five phone numbers and a live.com email",
+  "Unproven '#1' claims",
+  "Old viewport zooms out on phones; tours are one long list"
+ ],
+ "pitch_line": "Your best promise is a driver holding the guest's name at arrivals; this concept lets them see their own name on your sign before they land, then book the pickup in one go.",
+ "sources": [
+  "https://www.cherylbahamastaxiandtours.com/",
+  "https://www.cherylbahamastaxiandtours.com/bahamas-tours.html"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Tour descriptions condensed from their own tour page; historical claims about the Cloisters and Bat Cave left out",
+  "Brand colours taken from their navy and yellow uniform"
+ ],
+ "notes": "Live but dated site (2022 footer, Covid banner). Contacts from their own site: office 242-423-4982 / 242-393-9899, out of hours 242-525-5729, email cherylfoxferguson@live.com (suggest a branded domain email at launch). No WhatsApp found, so planners email or call. Photos hotlinked from their /Resources/. interact.mjs dead input is the number field. Scorecard: hero 5, type 4, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 5, consistency 4.",
+ "built_at": "2026-11-05T02:21:40.683886+00:00",
+ "id": 63,
+ "batch": "10"
 }

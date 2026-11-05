@@ -1,0 +1,16 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "cheryl-s-bahamas-taxi-and-tours",
+  "name": "Cheryl's Bahamas Taxi and Tours",
+  "niche": "tours-experiences",
+  "contact": {"phone": "+1-242-423-4982", "phone_2": "+1-242-393-9899", "phone_after_hours": "+1-242-525-5729", "whatsapp": null, "email": "cherylfoxferguson@live.com", "address": "Nassau", "settlement": "Nassau", "island": "New Providence"},
+  "hours": {"office": "09:00-18:00 daily", "out_of_hours": "+1-242-423-4982 or +1-242-525-5729"},
+  "socials": ["https://www.tripadvisor.com/Attraction_Review-g147416-d3746669-Reviews-Cheryl_s_Bahamas_Taxi_and_Private_Tours-Nassau_New_Providence_Island_Bahamas.html"],
+  "offer": [
+    {"name": "Airport transfer", "kind": "service", "summary": "Meet at Nassau arrivals with a name card; air-conditioned vehicles; car and booster seats free.", "price": null, "source": "https://www.cherylbahamastaxiandtours.com/"},
+    {"name": "Sightseeing and shopping tour", "kind": "tour", "summary": "About 3 hours, designed around your interests.", "price": null, "source": "https://www.cherylbahamastaxiandtours.com/bahamas-tours.html"},
+    {"name": "Full day out with picnic lunch", "kind": "tour", "summary": "Minimum 8 hours; picnic for 6 or more.", "price": null, "source": "https://www.cherylbahamastaxiandtours.com/bahamas-tours.html"}
+  ],
+  "platform": {"candidate": false, "orderable": true, "categories": ["taxi", "tours"]},
+  "sources": ["https://www.cherylbahamastaxiandtours.com/", "https://www.cherylbahamastaxiandtours.com/bahamas-tours.html"]
+}
