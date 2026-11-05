@@ -1,9 +1,24 @@
 {
- "slug": "runaway-hill-club",
- "id": 93,
- "name": "Runaway Hill Club",
- "batch": "12",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T05:32:45.590Z"
+  "slug": "runaway-hill-club", "id": 93, "name": "Runaway Hill Inn (listed as Runaway Hill Club)", "batch": "12", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "rooms.html", "island.html"],
+  "primary_cta": "Ask about a room",
+  "brand_truth": "A 1946 English manor on Harbour Island's high ground above Pink Sands Beach, where every room carries a name.",
+  "buyer": "US East Coast couples and small family groups (HHI $250k+) planning 2-6 months ahead on a phone; Infinity House for multi-family groups; destination wedding couples.",
+  "design": {"display_font": "Castoro 400 + italic", "body_font": "Be Vietnam Pro 300/400/500", "palette": ["#f8efe9", "#1f2838", "#2b5175", "#a9d0c5", "#e6bcae", "#f1e2d9", "#e4d2c8"], "hero_pattern": "framed-image passe-partout with name in a paper notch and glass room-key card", "signature": "Sticky scroll descent from the Main House to pool, staircase and Pink Sands Beach (SVG section with walking marker + real photos), a filterable room register, and a stay estimator that writes the enquiry email"},
+  "current_site_findings": [
+    "Homepage shows no phone, address or email.",
+    "Rates pop-up has a typo: Room 7 shows $500 and $550.00 with tax, not the 30% used everywhere else.",
+    "Activities page uses a stock photo captioned Barbuda, Antigua & Barbuda.",
+    "Name split online (Inn vs Club) and acreage conflicts (10 vs 11 acres).",
+    "No room comparison: twelve separate pages to choose a room.",
+    "No getting-here guidance (North Eleuthera airport, taxi, water taxi)."
+  ],
+  "pitch_line": "Your guests choose rooms by name, so we built the site around that: every room, its bed and its rate in one register, and an enquiry that writes itself to your reservations inbox.",
+  "sources": ["https://runawayhill.com", "https://runawayhill.com/accommodations/", "https://runawayhill.com/contact/", "https://runawayhill.com/activities-2/", "https://runawayhill.com/rooms/jacqueline-jean/", "https://elitetraveler.com/travel/travel-news/runaway-hill-inn-caribbean"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Published rates are per night (implied by the daily/weekly Infinity House line)", "Room amenities listed on the Jacqueline Jean page apply across rooms", "Lyon Holland (room 11) is the Owner's Cottage"],
+  "notes": "Business trades as Runaway Hill Inn; prospect list says Club, kept as alternateName in JSON-LD. Room 7 after-tax figure on their site is inconsistent; the estimator uses base x 1.3. Guest quote is from their own homepage (Caroline C.), attributed. Photos hotlinked from runawayhill.com; their stock 'Barbuda' image deliberately not used. Acreage omitted because sources disagree (10, 11, 9.365). Elite Traveler is the source for 175 ft beachfront, ~30 ft elevation, pool steps down from the house, ELH + water taxi. Scorecard: 1:4 2:5 3:4 4:5 5:4 6:4 7:4 8:4 9:4 10:5 11:5.",
+  "built_at": "2026-11-05T00:00:00Z"
 }

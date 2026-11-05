@@ -1,0 +1,19 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "runaway-hill-club",
+  "name": "Runaway Hill Inn",
+  "niche": "hospitality-stay",
+  "contact": {"phone": "+1-242-333-2150", "phone_us": "+1-843-278-1724", "whatsapp": null, "email": "Reservations@runawayhill.com", "address": "Love Lane and Colebrooke Streets, PO Box 27031", "settlement": "Harbour Island", "island": "Harbour Island, Eleuthera"},
+  "hours": null,
+  "socials": [],
+  "booking_engine": "https://direct-book.com/properties/RunawayHillInnDirect",
+  "offer": [
+    {"name": "Main House rooms 1 to 5", "kind": "room", "summary": "Five rooms in the 1946 manor house, king or queen.", "price": "USD 580 to 690 per night before 30% tax and gratuity (published)", "source": "https://runawayhill.com/accommodations/"},
+    {"name": "Courtyard rooms 6 to 8", "kind": "room", "summary": "Three rooms that can connect.", "price": "USD 495 to 555 (published)", "source": "https://runawayhill.com/accommodations/"},
+    {"name": "Villas 9 and 10, Lyon Holland 11", "kind": "room", "summary": "Villa rooms; Lyon with kitchen, living room and bay-view deck.", "price": "USD 690 to 1,425 (published)", "source": "https://runawayhill.com/accommodations/"},
+    {"name": "Infinity House", "kind": "room", "summary": "Five-bedroom oceanfront house with deck.", "price": "USD 21,750 weekly, 3,107.14 daily before taxes (published)", "source": "https://runawayhill.com/accommodations/"},
+    {"name": "Special events", "kind": "service", "summary": "Weddings and events with the inn's events team.", "price": null, "source": "https://runawayhill.com/special-events/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://runawayhill.com", "https://runawayhill.com/accommodations/", "https://runawayhill.com/contact/", "https://elitetraveler.com/travel/travel-news/runaway-hill-inn-caribbean"]
+}
