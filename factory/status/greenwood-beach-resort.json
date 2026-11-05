@@ -1,9 +1,22 @@
 {
- "slug": "greenwood-beach-resort",
- "id": 72,
- "name": "Greenwood Beach Resort",
- "batch": "05",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:29:15.249Z"
+  "slug": "greenwood-beach-resort", "id": 72, "name": "Greenwood Beach Resort", "batch": "05", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "rooms.html", "getting-here.html"],
+  "primary_cta": "Check dates and book",
+  "brand_truth": "Pauline and Antoine's small beachfront resort at the south end of Cat Island, where the diving and kitesurfing start at the beach.",
+  "design": {"display_font": "Young Serif 400", "body_font": "Albert Sans 400/500/600", "palette": ["#f7f1ea", "#1d2a2c", "#3f6a4d", "#e1a999", "#1f4a57", "#efe4d8", "#e6d5c3"], "hero_pattern": "split-screen-editorial-bleed", "signature": "Interactive journey map FXE/Nassau to New Bight to Port Howe"},
+  "current_site_findings": [
+    "Both rooms share the same one-line description.",
+    "View room, Explore rooms, Discover activities, Lunch and Dinner buttons all lead back to the same page.",
+    "No phone number or email on the homepage.",
+    "Port Howe and the south of Cat Island are never named, so Google cannot place you.",
+    "The excellent flight, taxi and car guide is hidden on a separate page."
+  ],
+  "pitch_line": "Your travel guide is the best thing on your site and nobody sees it; this concept puts the journey, the rooms and the booking button in front of every guest in the first two screens.",
+  "sources": ["https://greenwoodbeachresort.com/", "https://greenwoodbeachresort.com/how-to-get-here/", "https://direct-book.com/properties/greenwoodbeachresort/contact", "https://www.facebook.com/GreenwoodinCat242/", "https://www.epicdiving.com/greenwood-beach-resort/"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Private bathroom in both rooms (from a 2019 dive-operator page)", "Room audiences: King for couples and solo travellers, Family for families and small groups", "Lunch and dinner menus available on request"],
+  "notes": "Prospect record said no site, but greenwoodbeachresort.com is live (rebuilt 2026); treated as Track A redesign. Photos hotlinked from their own site, crops not visible in sandbox: check online. Resort is reportedly listed for sale (HG Christie), so the owner may value a stronger site for the sale too. Phone numbers: two published; WhatsApp not confirmed, so enquiries go by email. Reference sites not scraped to save budget.",
+  "built_at": "2026-11-05T01:36:23Z"
 }

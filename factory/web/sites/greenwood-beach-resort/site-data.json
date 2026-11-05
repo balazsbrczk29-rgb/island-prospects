@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "greenwood-beach-resort",
+  "name": "Greenwood Beach Resort",
+  "niche": "hospitality-stay",
+  "contact": {"phone": "+1-242-808-1846", "phone_2": "+1-242-342-3053", "whatsapp": null, "email": "info@greenwoodbeachresort.com", "address": "1 Ocean Drive, Port Howe", "settlement": "Port Howe", "island": "Cat Island"},
+  "hours": null,
+  "socials": ["https://www.instagram.com/greenwood.beach.resort/", "https://www.facebook.com/GreenwoodinCat242/"],
+  "booking_engine": "https://direct-book.com/properties/greenwoodbeachresort",
+  "offer": [
+    {"name": "Executive King Room", "kind": "room", "summary": "Beachfront resort room.", "price": null, "source": "https://greenwoodbeachresort.com/"},
+    {"name": "Executive Family Room", "kind": "room", "summary": "Beachfront resort room for families.", "price": null, "source": "https://greenwoodbeachresort.com/"},
+    {"name": "Diving and kitesurfing", "kind": "tour", "summary": "Supervised by professionals, including dives with sharks.", "price": null, "source": "https://greenwoodbeachresort.com/"},
+    {"name": "Restaurant", "kind": "product", "summary": "Breakfast, lunch and dinner on the beachfront terrace.", "price": null, "source": "https://greenwoodbeachresort.com/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://greenwoodbeachresort.com/", "https://greenwoodbeachresort.com/how-to-get-here/", "https://direct-book.com/properties/greenwoodbeachresort/contact", "https://www.epicdiving.com/greenwood-beach-resort/"]
+}
