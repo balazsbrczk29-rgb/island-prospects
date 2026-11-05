@@ -4,6 +4,53 @@
  "name": "Digitech Bahamas",
  "batch": "04",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:27:12.796Z"
+ "state": "built",
+ "pages": [
+  "index.html",
+  "services.html"
+ ],
+ "primary_cta": "Get a quote",
+ "brand_truth": "Local hands-on IT that keeps the till and the network running.",
+ "buyer": "Owners and managers of Nassau restaurants, bars, shops and small offices.",
+ "design": {
+  "display_font": "Sora 500-700",
+  "body_font": "Manrope 400-600",
+  "palette": [
+   "#f4f6f8",
+   "#0e1726",
+   "#0a8f6a",
+   "#066b4f",
+   "#e9edf2",
+   "#566173",
+   "#d5dbe3"
+  ],
+  "hero_pattern": "split-live-diagram",
+  "signature": "Network planner that redraws a VLAN/firewall/backup diagram and feeds the quote email"
+ },
+ "current_site_findings": [
+  "Counters read '0+ Happy Clients'",
+  "Every CTA links to '#'",
+  "Theme stock photos instead of real work",
+  "Address and phone conflict across directories",
+  "Letter-split animated headings",
+  "Typo 'gound'"
+ ],
+ "pitch_line": "Your homepage tells visitors you have 0+ happy clients; this one lets a restaurant owner draw the network you would build for them and send it to you as a quote.",
+ "sources": [
+  "https://digitechbahamas.com/",
+  "https://digitechbahamas.com/downloads/DTBEmployeeApplication_distributed.pdf",
+  "https://caribfind.tel/listing/digitech-bahamas.html"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Client names (Hana, Naughty Johnny's, Blu Sail, Beauty Shack, Little Caesars) as read from homepage logos",
+  "East Avenue, Centreville is the current address",
+  "Network diagram is illustrative"
+ ],
+ "notes": "Record said no website and Soldier Rd; site exists and lists Centreville. No sourced hours or prices. Scorecard: hero 4, type 4, layout 4, context 4, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T01:30:47.706891+00:00"
 }

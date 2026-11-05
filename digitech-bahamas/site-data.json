@@ -1,0 +1,64 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "digitech-bahamas",
+ "name": "Digitech Bahamas Ltd.",
+ "niche": "professional-services",
+ "contact": {
+  "phone": "+1-242-676-2033",
+  "phone2": "+1-242-676-3022",
+  "whatsapp": null,
+  "email": "sales@digitechbahamas.com",
+  "address": "#33 East Avenue, Centreville",
+  "settlement": "Nassau",
+  "island": "New Providence"
+ },
+ "hours": null,
+ "socials": [],
+ "offer": [
+  {
+   "name": "IT consultancy",
+   "kind": "service",
+   "summary": "IT consultancy",
+   "price": null,
+   "source": "https://digitechbahamas.com/"
+  },
+  {
+   "name": "Razor POS systems",
+   "kind": "service",
+   "summary": "Razor POS systems",
+   "price": null,
+   "source": "https://digitechbahamas.com/"
+  },
+  {
+   "name": "IT managed services",
+   "kind": "service",
+   "summary": "IT managed services",
+   "price": null,
+   "source": "https://digitechbahamas.com/"
+  },
+  {
+   "name": "Cloud backup",
+   "kind": "service",
+   "summary": "Cloud backup",
+   "price": null,
+   "source": "https://digitechbahamas.com/"
+  },
+  {
+   "name": "Network design",
+   "kind": "service",
+   "summary": "Network design",
+   "price": null,
+   "source": "https://digitechbahamas.com/"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://digitechbahamas.com/",
+  "https://digitechbahamas.com/downloads/DTBEmployeeApplication_distributed.pdf",
+  "https://caribfind.tel/listing/digitech-bahamas.html"
+ ]
+}
