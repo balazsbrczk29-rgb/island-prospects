@@ -1,0 +1,56 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/accordion.tsx";
+@source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/ui/tabs.tsx";
+
+@theme {
+  --color-paper: #f6f1ea;
+  --color-paper-2: #efe5d8;
+  --color-ink: #142430;
+  --color-muted: #56636d;
+  --color-harbour: #0f5e6e;
+  --color-conch: #ecc1b0;
+  --color-conch-deep: #d99a84;
+  --color-line: #ded2c2;
+  --font-display: "Hedvig Letters Serif", Georgia, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; font-size: 17px; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-conch); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-harbour); outline-offset: 3px; }
+
+.label { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 500; }
+.ulink { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .35s cubic-bezier(.16,1,.3,1); padding-bottom: 2px; }
+.ulink:hover, .ulink.is-current { background-size: 100% 1px; }
+
+.btn { display: inline-flex; align-items: center; gap: .5rem; min-height: 48px; padding: 0 1.4rem; border-radius: 999px; font-size: 15px; font-weight: 500; transition: transform .2s cubic-bezier(.16,1,.3,1), background-color .2s, color .2s, border-color .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn svg { transition: transform .25s cubic-bezier(.16,1,.3,1); }
+.btn:hover svg { transform: translate(2px, -1px); }
+.btn-primary { background: var(--color-ink); color: var(--color-paper); }
+.btn-primary:hover { background: var(--color-harbour); }
+.btn-quiet { border: 1px solid color-mix(in srgb, var(--color-ink) 25%, transparent); color: var(--color-ink); }
+.btn-quiet:hover { border-color: var(--color-ink); }
+.btn-light { background: var(--color-conch); color: var(--color-ink); }
+.btn-light:hover { background: var(--color-paper); }
+
+.glass { background: color-mix(in srgb, var(--color-paper) 82%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid color-mix(in srgb, white 50%, transparent); }
+
+.range { -webkit-appearance: none; appearance: none; height: 2px; background: color-mix(in srgb, var(--color-ink) 22%, transparent); border-radius: 2px; }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--color-ink); border: 4px solid var(--color-conch); cursor: grab; transition: transform .2s; }
+.range::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--color-ink); border: 4px solid var(--color-conch); }
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
+
+.marquee__track { animation: marquee 55s linear infinite; }
+.marquee:hover .marquee__track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

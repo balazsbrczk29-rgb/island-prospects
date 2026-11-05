@@ -1,0 +1,116 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "conch-inn-marina",
+ "name": "The Conch Inn & Marina",
+ "niche": "hospitality-stay",
+ "contact": {
+  "phone": "+1-242-367-4000",
+  "phone_alt": "+1-242-577-7000",
+  "whatsapp": null,
+  "email": "info@conchinn.com",
+  "vhf": "16",
+  "address": "700 Bay Street",
+  "settlement": "Marsh Harbour",
+  "island": "Abaco"
+ },
+ "hours": {
+  "office": "Mon-Sun 08:00-17:30"
+ },
+ "socials": [],
+ "offer": [
+  {
+   "name": "Garden View Double Queen",
+   "kind": "room",
+   "summary": "Two queen beds, balcony",
+   "price": null,
+   "source": "https://www.conchinn.com/rooms"
+  },
+  {
+   "name": "Garden View Single King",
+   "kind": "room",
+   "summary": "King bed, balcony",
+   "price": null,
+   "source": "https://www.conchinn.com/rooms"
+  },
+  {
+   "name": "Marina View King Suite",
+   "kind": "room",
+   "summary": "King, sleeper sofa, balcony",
+   "price": null,
+   "source": "https://www.conchinn.com/rooms"
+  },
+  {
+   "name": "Marina View King & Queen Suite",
+   "kind": "room",
+   "summary": "King and queen, balcony",
+   "price": null,
+   "source": "https://www.conchinn.com/rooms"
+  },
+  {
+   "name": "Harbour View Two Bed Two Bath Apartment",
+   "kind": "room",
+   "summary": "King, queen, sleeper sofa, full kitchen, patio",
+   "price": null,
+   "source": "https://www.conchinn.com/rooms"
+  },
+  {
+   "name": "Presidential Suite",
+   "kind": "room",
+   "summary": "Marina view, two kings, full kitchen, balcony",
+   "price": null,
+   "source": "https://www.conchinn.com/rooms"
+  },
+  {
+   "name": "Transient slip, 1 night",
+   "kind": "slip",
+   "summary": "73 slips",
+   "price": "$3.75/ft",
+   "source": "https://www.conchinn.com/marina"
+  },
+  {
+   "name": "Transient slip, 2+ nights",
+   "kind": "slip",
+   "summary": "daily rate",
+   "price": "$3.25/ft",
+   "source": "https://www.conchinn.com/marina"
+  },
+  {
+   "name": "Slip, 30+ nights",
+   "kind": "slip",
+   "summary": "monthly rate",
+   "price": "$2.25/ft",
+   "source": "https://www.conchinn.com/marina"
+  },
+  {
+   "name": "Short-term dockage up to 3 hours",
+   "kind": "slip",
+   "summary": "pick-up, drop-off, provisioning",
+   "price": "$1.00/ft",
+   "source": "https://www.conchinn.com/marina"
+  },
+  {
+   "name": "Mooring ball",
+   "kind": "slip",
+   "summary": "first come first served, +VAT",
+   "price": "$30/night or $500/month",
+   "source": "https://www.conchinn.com/marina"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": [
+   "hotel",
+   "marina"
+  ]
+ },
+ "sources": [
+  "https://www.conchinn.com",
+  "https://www.conchinn.com/rooms",
+  "https://www.conchinn.com/marina",
+  "https://www.conchinn.com/contact-us",
+  "https://www.conchinn.com/marina-rules",
+  "https://www.noonsite.com/business/conch-inn-marina/",
+  "https://www.bahamasmarinas.com/post/resort-renovation-complete-at-conch-inn-abaco"
+ ]
+}

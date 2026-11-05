@@ -1,9 +1,30 @@
 {
- "slug": "conch-inn-marina",
- "id": 65,
- "name": "Conch Inn & Marina",
- "batch": "10",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T03:31:39.137Z"
+ "slug": "conch-inn-marina", "id": 65, "name": "Conch Inn & Marina", "batch": "10", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "marina.html", "rooms.html"],
+ "primary_cta": "Request a slip",
+ "brand_truth": "Since 1972 the Conch Inn has been Marsh Harbour's front door from the water: the dock you tie up to and walk into town from, rebuilt after Dorian.",
+ "buyer": "Cruising sailors, charter catamaran crews and US East Coast boat owners crossing to Abaco; plus guests flying into Marsh Harbour who want a balcony over the marina.",
+ "design": {"display_font": "Hedvig Letters Serif 400", "body_font": "DM Sans 400/500/600", "palette": ["#f6f1ea", "#142430", "#0f5e6e", "#ecc1b0", "#efe5d8", "#56636d", "#ded2c2"], "hero_pattern": "wordmark-monument-over-panorama", "signature": "Dockage calculator on their published per-foot rates (LOA, beam check vs 30 ft catamaran limit, nights tier) that pre-fills the slip request; room selector + comparison table; tabbed slip/mooring/room email enquiry; walk-to-town route line drawn on scroll"},
+ "current_site_findings": [
+  "Phone number differs by page (367-4000, 577-7000; directories list 807-6501)",
+  "No slip or room request form: boaters must hand-write an email with boat type, LOA, beam, draft, dates",
+  "Homepage meta robots nofollow, noimageindex, nosnippet: Google shows no description or photos",
+  "Room pages: no rates or date enquiry, several photos are tiny blurred thumbnails",
+  "Key facts (1972, 73 slips, 30 ft beam, 3 mi to airport) only on third-party sites",
+  "Wix stock images used where their own docks should be"
+ ],
+ "pitch_line": "Your marina page makes a boater write the email by hand; this concept shows your rates as a calculator and sends the office exactly the slip request it asks for, in one tap.",
+ "sources": ["https://www.conchinn.com", "https://www.conchinn.com/rooms", "https://www.conchinn.com/marina", "https://www.conchinn.com/contact-us", "https://www.conchinn.com/marina-rules", "https://www.conchinn.com/dock-map", "https://www.noonsite.com/business/conch-inn-marina/", "https://www.bahamasmarinas.com/post/resort-renovation-complete-at-conch-inn-abaco"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "A",
+ "assumptions": [
+  "$2.25/ft for 30+ nights read as per foot per night (their page says 'Monthly 30+ nights $2.25/ft'); calculator uses that",
+  "Dockage VAT not stated (mooring says +VAT); calculator says taxes may apply",
+  "Gabrielle Manni photo 061 shown for Garden View Single King",
+  "Three dock-map page photos assumed to show the marina",
+  "Street number 700 from directories; their site says Bay Street only"
+ ],
+ "notes": "Photos hotlinked from their Wix media (21c3e0_ uploads only; Wix stock excluded). Marina View King & Queen Suite and Harbour View Apartment have no usable photo (only blurred thumbnails), shown as contents panels: ask owner for photos. Max LOA/draft and fuel dock hours not published, not shown. interact.mjs reports 3 'dead' inputs per page: these are range sliders Playwright cannot fill; they work. Scorecard: hero 4, type 5, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 4, consistency 4. Design references: aman.com (Amanyara); yachtclubdemonaco.com DNS failed.",
+ "built_at": "2026-11-05T03:43:30Z"
 }
