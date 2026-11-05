@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "abaco-boat-rental",
+  "name": "Abaco Boat Rental",
+  "niche": "tours-experiences",
+  "contact": {"phone": null, "whatsapp": "12428245755", "email": "abacoboatrental@gmail.com", "address": "Man-O-War Cay", "settlement": "Man-O-War Cay", "island": "Abaco"},
+  "hours": {"daily": "09:00-17:00", "season": "November 1 to August 15"},
+  "socials": [],
+  "offer": [
+    {"name": "24 ft Key West center console rental", "kind": "service", "summary": "Seats 8, 250 hp, Garmin GPS, cooler, safety gear; 24-hour rental period.", "price": "$475/day (1 day), $450/day (2), $330/day (3-6), $303/day (7+), VAT exclusive", "source": "https://www.abacoboatrental.com/our-fleet-rates"},
+    {"name": "Delivery", "kind": "service", "summary": "Free at Man-O-War; $100 per direction Elbow Cay, Hope Town, Guana Cay, Scotland Cay, Marsh Harbour; $300 per direction Treasure Cay, Little Harbour.", "price": null, "source": "https://www.abacoboatrental.com/our-fleet-rates"},
+    {"name": "A Night Out", "kind": "service", "summary": "Captain to dinner and back, Man-O-War clients.", "price": "$50/hr", "source": "https://www.abacoboatrental.com/our-fleet-rates"},
+    {"name": "Get Acquainted", "kind": "service", "summary": "Captain shows you the area.", "price": "$100/hr", "source": "https://www.abacoboatrental.com/our-fleet-rates"},
+    {"name": "Snorkel set", "kind": "product", "summary": "Subject to availability.", "price": "from $5/day", "source": "https://www.abacoboatrental.com/our-fleet-rates"}
+  ],
+  "platform": {"candidate": false, "orderable": true, "categories": ["boat rental"]},
+  "sources": ["https://www.abacoboatrental.com/", "https://www.abacoboatrental.com/our-fleet-rates"]
+}

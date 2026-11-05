@@ -1,9 +1,53 @@
 {
  "slug": "abaco-boat-rental",
- "id": 51,
- "name": "Abaco Boat Rental",
- "batch": "09",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T02:01:16.394Z"
+ "name": "Abaco Boat Rental",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "rates.html"
+ ],
+ "primary_cta": "Check availability & book",
+ "brand_truth": "One boat, done right: identical 24 ft Key Wests from Man-O-War Cay, delivered to your cay.",
+ "buyer": "Families and friends staying a week on Elbow Cay, Hope Town, Guana Cay or Marsh Harbour (mostly US), booking on a phone.",
+ "design": {
+  "display_font": "Unbounded 500",
+  "body_font": "Manrope 400/600/700",
+  "palette": [
+   "#f3f6f4",
+   "#0b2a33",
+   "#0f6f7a",
+   "#7fd6d3",
+   "#efe3c8",
+   "#e5eeeb",
+   "#d3dfdc"
+  ],
+  "hero_pattern": "split-photo-spec-sheet",
+  "signature": "Sea of Abaco delivery chart coloured by fee, wired to a trip cost builder (days, delivery, add-ons) that sends a WhatsApp plan or opens the live booking page"
+ },
+ "current_site_findings": [
+  "Homepage hero shows 'Unable to load video'",
+  "Empty homepage meta description; title is only the name",
+  "Homepage never says Man-O-War Cay; rates and delivery fees hidden on inner page",
+  "Rates page hero is an Unsplash stock photo",
+  "WhatsApp only in the footer"
+ ],
+ "pitch_line": "Your rates and delivery fees are clear but hidden a click away; this concept lets a family tap their cay, see the full price and send it to you on WhatsApp in thirty seconds.",
+ "sources": [
+  "https://www.abacoboatrental.com/",
+  "https://www.abacoboatrental.com/our-fleet-rates"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Chart positions approximate (illustration)",
+  "Cost estimate uses published rates, VAT excluded; snorkel sets priced at the 'from $5/day' floor"
+ ],
+ "notes": "Live Squarespace + Booqable site (2026), so pitch as conversion upgrade, not rescue. All prices, delivery fees, add-ons, hours and WhatsApp from their rates page. Guest quotes verbatim from their homepage (unnamed, labelled as from the current site). interact.mjs flags disabled '-' steppers at 0 and the range slider as dead; both work. Scorecard: hero 4, type 4, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 5, consistency 4.",
+ "built_at": "2026-11-05T02:06:57.030276+00:00",
+ "id": 51,
+ "batch": "09"
 }
