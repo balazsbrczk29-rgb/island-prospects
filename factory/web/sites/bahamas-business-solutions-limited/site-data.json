@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bahamas-business-solutions-limited",
+  "name": "Bahamas Business Solutions Limited (BBSL)",
+  "niche": "professional-services",
+  "contact": {"phone": "+1-242-688-8100", "phone_nassau": "+1-242-605-6000", "whatsapp": null, "email": "info@bbsl.com", "address": "Queens Highway, Freeport", "address_nassau": "Collins Avenue & 7th Terrace, P.O. Box N-4950, Nassau", "settlement": "Freeport", "island": "Grand Bahama"},
+  "hours": {"service_helpdesk": "Mo-Fr 08:30-17:00"},
+  "socials": ["https://bs.linkedin.com/company/bahamas-business-solutions-ltd."],
+  "offer": [
+    {"name": "Xerox office and production printing", "kind": "product", "summary": "Exclusive local Xerox distributor: multifunction devices, printers, production devices, scanners, local warranty.", "price": null, "source": "https://www.bbsl.com/sales/"},
+    {"name": "NCR ATMs, payments and point of sale", "kind": "product", "summary": "Authorized NCR dealer and service centre.", "price": null, "source": "https://www.bbsl.com/sales/"},
+    {"name": "Service plans", "kind": "service", "summary": "Time and materials, full-service maintenance (parts and labour), managed print (everything except paper).", "price": null, "source": "https://www.bbsl.com/service/"},
+    {"name": "Document Centre / Copy Service", "kind": "service", "summary": "Digital printing, architectural and engineering, wide format, banners, scanning, binding, booklets, design; remote submission.", "price": null, "source": "https://www.bbsl.com/copy-service/"}
+  ],
+  "platform": {"candidate": true, "orderable": false, "categories": ["printing", "office-supplies"]},
+  "sources": ["https://www.bbsl.com/", "https://www.bbsl.com/about/", "https://www.bbsl.com/sales/", "https://www.bbsl.com/service/", "https://www.bbsl.com/copy-service/", "https://theorg.com/org/bahamas-business-solutions-ltd-bbsl", "https://bahamas.yabsta.com/listing/view/91564/bahamas-business-solutions-limited", "https://bs.linkedin.com/company/bahamas-business-solutions-ltd."]
+}

@@ -1,0 +1,43 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/accordion.tsx";
+@source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/ui/tabs.tsx";
+@source "../../../src/components/magicui/marquee.tsx";
+
+@theme {
+  --color-paper: #f2f0ea;
+  --color-paper-2: #e7e3d8;
+  --color-sheet: #fbfaf6;
+  --color-ink: #121417;
+  --color-graphite: #23272c;
+  --color-muted: #5b5f63;
+  --color-line: #d3cec2;
+  --color-cyan: #0a6d8c;
+  --color-cyan-deep: #07506a;
+  --color-toner: #e3b505;
+  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-toner); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 3px; }
+
+/* print-production detailing: crop marks and registration targets */
+.crop { position: absolute; width: 28px; height: 28px; pointer-events: none; }
+.crop::before, .crop::after { content: ""; position: absolute; background: var(--color-ink); opacity: .55; }
+.crop::before { width: 100%; height: 1px; top: 50%; }
+.crop::after { height: 100%; width: 1px; left: 50%; }
+.paper-tex { position: relative; }
+.paper-tex::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.07 0 0 0 0 0.08 0 0 0 0 0.09 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (max-width: 767px) { body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

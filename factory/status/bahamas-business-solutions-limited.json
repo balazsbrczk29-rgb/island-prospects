@@ -4,6 +4,59 @@
  "name": "Bahamas Business Solutions Limited",
  "batch": "01",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:06:50.767Z"
+ "state": "built",
+ "pages": [
+  "index.html",
+  "document-centre.html"
+ ],
+ "primary_cta": "Request a quote",
+ "brand_truth": "The Bahamas' Xerox company since 1966: sixty years in the document business, with its own engineers on two islands.",
+ "buyer": "Office managers, procurement and IT leads at government, banks, utilities, healthcare and hotels in Grand Bahama and New Providence; plus walk-in print customers.",
+ "design": {
+  "display_font": "Instrument Serif 400",
+  "body_font": "Geist 400/500/600",
+  "palette": [
+   "#f2f0ea",
+   "#121417",
+   "#0a6d8c",
+   "#e3b505",
+   "#23272c",
+   "#5b5f63",
+   "#d3cec2"
+  ],
+  "hero_pattern": "print-proof-craft-closeup",
+  "signature": "R3F fanned stack of six documents BBSL produces (proof, plan, NCR receipt, Neopost letter, wide-format poster, OnBase record) with hover/tap hotspots; product-line index; service-plan coverage chooser; tabbed quote router to sales/service/copy inboxes; office switcher; Document Centre job-ticket builder"
+ },
+ "current_site_findings": [
+  "Every page of bbsl.com carries a noindex, nofollow tag, so Google is told not to list the site.",
+  "The homepage is a slogan and five vendor logos: no explanation of what you sell or service, or where.",
+  "No street address for the Freeport or Nassau office on the pages reviewed.",
+  "Service plans are buried in one paragraph and cannot be compared.",
+  "A leftover shop message, 'has been added to the cart', shows on every page."
+ ],
+ "pitch_line": "Your website has been telling Google not to list you, so when a Freeport office searches for a Xerox dealer they never find the company that has been the Xerox dealer since 1966; this version fixes that and puts your two office numbers, service plans and quote form on the first screens.",
+ "sources": [
+  "https://www.bbsl.com/",
+  "https://www.bbsl.com/about/",
+  "https://www.bbsl.com/sales/",
+  "https://www.bbsl.com/service/",
+  "https://www.bbsl.com/copy-service/",
+  "https://theorg.com/org/bahamas-business-solutions-ltd-bbsl",
+  "https://bahamas.yabsta.com/listing/view/91564/bahamas-business-solutions-limited",
+  "https://bs.linkedin.com/company/bahamas-business-solutions-ltd."
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Freeport address shown as Queens Highway, Freeport (from LinkedIn snippet only)",
+  "Time & materials shown as 'billed per visit' (paraphrase)",
+  "Full-service plan consumables shown as 'Ask us'",
+  "One-line descriptions under Document Centre services are category descriptions",
+  "Riso shown only as 'also on our vendor list'"
+ ],
+ "notes": "Record said no own site, but bbsl.com is live (WordPress/WooCommerce) and carries noindex,nofollow: treated as Track A, the noindex is the lead pitch. No usable photos (vendor logos only); visuals are procedural 3D paper and print-production typography. Ask owner for showroom, Document Centre and engineer photos, Freeport hours, TCI address. Interact: index 0 errors/0 dead, document-centre 0 errors/0 dead. Rebuilt on the React stack, replacing an earlier static build of this slug.",
+ "built_at": "2026-11-05T01:23:42.648830Z"
 }
