@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "swain-s-cay-lodge",
+  "name": "Swain's Cay Lodge",
+  "niche": "hospitality-stay",
+  "contact": {"phone": "+1-242-422-5018", "phone_2": "+1-242-369-0296", "whatsapp": null, "email": "fish@swainscaylodge.com", "address": "Mangrove Cay Settlement", "settlement": "Mangrove Cay", "island": "Andros"},
+  "hours": null,
+  "socials": ["https://www.facebook.com/swainscaylodge/", "https://twitter.com/SwainsCayLodge"],
+  "offer": [
+    {"name": "Guided fishing day trip", "kind": "tour", "summary": "Full day, 1 or 2 anglers per boat, lunch and transport; lodging not included.", "price": "USD 975 per boat (2026-2027 season)", "source": "https://www.swainscaylodge.com/activities/bahamas-fishing/"},
+    {"name": "Fly fishing packages", "kind": "tour", "summary": "Guide and boat, accommodation, all meals, airport and dock transfers.", "price": "Per person, see fishing guide", "source": "https://www.swainscaylodge.com/activities/bahamas-fishing/"},
+    {"name": "Duplex Apartment", "kind": "room", "summary": "3 double bedrooms, kitchenette, dining area, terrace.", "price": null, "source": "https://www.swainscaylodge.com"},
+    {"name": "Ocean View Room, Ocean View Suite, Beach Front Suite", "kind": "room", "summary": "En-suite, air conditioning, patio, Wi-Fi.", "price": null, "source": "https://www.swainscaylodge.com"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://www.swainscaylodge.com", "https://www.swainscaylodge.com/activities/bahamas-fishing/", "https://www.swainscaylodge.com/about-us/"]
+}

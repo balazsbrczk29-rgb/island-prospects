@@ -1,9 +1,24 @@
 {
- "slug": "swain-s-cay-lodge",
- "id": 99,
- "name": "Swain's Cay Lodge",
- "batch": "13",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T05:57:16.766Z"
+  "slug": "swain-s-cay-lodge", "id": 99, "name": "Swain's Cay Lodge", "batch": "13", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "fishing.html", "lodge.html"],
+  "primary_cta": "Plan my fishing week",
+  "brand_truth": "An Orvis-endorsed bonefishing lodge on Mangrove Cay, between the Middle and South Bights of Andros, with a wadeable flat off its own beach.",
+  "buyer": "Serious fly anglers (US, 40-70), repeat groups of friends, father-son trips and couples with a non-angling partner, comparing Andros lodges.",
+  "design": {"display_font": "Alegreya 500 + italic", "body_font": "Alegreya Sans 400/500", "palette": ["#eef0e8", "#1c2a24", "#7a5530", "#5fa39a", "#1f4d55", "#e2e6da", "#d3d8cb"], "hero_pattern": "sunrise-disc monument: huge serif name with the real lodge photo in a rising circle over a drawn horizon line", "signature": "'Where you'll fish' illustrated chart (home flat, Middle Bight, South Bight, Andros Barrier Reef, 6,000 ft drop) with method and species per water; trip planner counting boats and recommended gratuities composing the enquiry email; room switcher on lodge page"},
+  "current_site_findings": [
+    "About page images load from 'localhost/swainscaytest' and are broken for visitors.",
+    "Fishing guide button opens the 2024-2025 PDF while the page lists 2026-2027 rates.",
+    "Generic homepage headline without bonefishing, Andros or Mangrove Cay.",
+    "Eight repeated special-offer blocks bury rooms, fishing and contact.",
+    "Orvis endorsement and the home flat are barely visible.",
+    "Package math (boats, guides, gratuities) left to a PDF."
+  ],
+  "pitch_line": "Your About page is showing broken images from a test server; this concept leads with what anglers actually book on: your waters, your guides, and the full cost of a week.",
+  "sources": ["https://www.swainscaylodge.com", "https://www.swainscaylodge.com/activities/bahamas-fishing/", "https://www.swainscaylodge.com/about-us/"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Chart is illustrative: relative placement of lodge, home flat, bights and reef not verified", "Orvis endorsement current (logo in their header)", "Non-angler rate unit not stated", "Guest quotes and staff names on their site come from third-party reviews; not used on the concept"],
+  "notes": "Current site was rebuilt in Sept 2026 by Hotel Traffic Builders, so the pitch is improvement, not rescue: lead with the broken localhost images and stale PDF. Index booking uses a custom planner rather than shadcn Tabs (single enquiry type: fishing week); room booking links to their engine. Scorecard: 1:4 2:5 3:4 4:5 5:4 6:4 7:5 8:4 9:4 10:5 11:4.",
+  "built_at": "2026-11-05T00:00:00Z"
 }
