@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bahamas-bus-truck-co-ltd",
+  "name": "Bahamas Bus & Truck Co. Ltd.",
+  "niche": "trade-retail",
+  "contact": {"phone": "+1-242-322-1722", "whatsapp": null, "email": "info@bahamasbus.com", "address": "#44 Montrose Avenue, Palmdale, Nassau", "settlement": "Nassau", "island": "New Providence"},
+  "hours": {"sales": "Mon-Fri 8-5, Sat 9-1", "service": "Mon-Fri 8-5", "parts": "Mon-Fri 8-5, Sat 8-12"},
+  "socials": ["https://www.facebook.com/bahamabus/", "https://www.instagram.com/bahamas_bus_and_truck/"],
+  "offer": [
+    {"name": "New vehicles", "kind": "product", "summary": "GWM (Haval, Tank, Ora, Poer), Mitsubishi, RAM, FUSO, CMC and more", "price": null, "source": "https://bahamasbus.com/brand-new-vehicles"},
+    {"name": "Used vehicles", "kind": "product", "summary": "Used inventory with listed prices", "price": null, "source": "https://bahamasbus.com/"},
+    {"name": "Service department", "kind": "service", "summary": "Maintenance, warranty, servicing by appointment", "price": null, "source": "https://bahamasbus.com/departments"},
+    {"name": "Parts", "kind": "product", "summary": "Genuine parts and special orders", "price": null, "source": "https://bahamasbus.com/departments"}
+  ],
+  "platform": {"candidate": true, "orderable": false, "categories": ["vehicles", "auto parts", "service"]},
+  "sources": ["https://bahamasbus.com/", "https://bahamasbus.com/departments", "https://bahamasbus.com/about", "https://bahamasbus.com/brand-new-vehicles", "https://www.facebook.com/bahamabus/"]
+}

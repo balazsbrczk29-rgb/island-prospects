@@ -1,9 +1,23 @@
 {
- "slug": "bahamas-bus-truck-co-ltd",
- "id": 27,
- "name": "Bahamas Bus & Truck Co Ltd",
- "batch": "08",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:49:06.457Z"
+  "slug": "bahamas-bus-truck-co-ltd", "id": 27, "name": "Bahamas Bus & Truck Co Ltd", "batch": "08", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "inventory.html"],
+  "primary_cta": "Call the showroom",
+  "brand_truth": "The Montrose Avenue dealership that has kept Nassau moving since 1944, from family SUVs to taxi vans and flat beds.",
+  "design": {"display_font": "Unbounded 400-600", "body_font": "Hanken Grotesk 400/500/600", "palette": ["#f4f4f1", "#111418", "#55652a", "#c3d38a", "#23272c", "#e9eae4", "#d9dad2"], "hero_pattern": "vehicle-parade-typographic", "signature": "Lineup filtered by use with side-profile renders on a road line"},
+  "current_site_findings": [
+    "Facebook and Instagram icons link to the Facebook and Instagram homepages, not your pages.",
+    "The header phone link dials a malformed number.",
+    "Homepage says 8:30 opening, Departments page says 8am.",
+    "RAM 1500 still says in stock this summer 26.",
+    "Your 1944 heritage is one line on the About page.",
+    "No way to request service or a test drive with model, VIN and day."
+  ],
+  "pitch_line": "You have been moving Nassau since 1944, but your site's call button dials a wrong number; this version lets a contractor find the right truck by job and send the service desk his VIN in one tap.",
+  "sources": ["https://bahamasbus.com/", "https://bahamasbus.com/departments", "https://bahamasbus.com/about", "https://bahamasbus.com/brand-new-vehicles", "https://www.facebook.com/bahamabus/", "https://panjiva.com/Bahamas-Bus-Truck-Co-Ltd/44225211"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Grouping of models into family, work, moving people and electric", "Hours taken from the Departments page (8am), not the homepage (8:30)"],
+  "notes": "Record said no own site, but bahamasbus.com is live; Track A redesign. Extra phone numbers 806-2465, 806-8023, 809-4492 found on site but roles unknown, not used. JCB, Chrysler, Dodge, Jeep listed as brands but no new models shown for them. Vehicle images hotlinked from their site (not visible in sandbox).",
+  "built_at": "2026-11-05T01:53:56Z"
 }
