@@ -1,0 +1,22 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "pigeon-cay-beach-club",
+  "name": "Pigeon Cay Beach Club",
+  "niche": "hospitality-stay",
+  "contact": {"phone": "+1-242-354-5084", "whatsapp": null, "email": "pcbclub@gmail.com", "address": "Roker's, three miles south of Bennett's Harbour", "settlement": "Roker's", "island": "Cat Island"},
+  "hours": null,
+  "socials": ["https://www.facebook.com/pages/Pigeon-Cay-Beach-Club/429723473777383"],
+  "booking_engine": "https://direct-book.com/properties/pigeoncaydirect",
+  "offer": [
+    {"name": "Sea Studio", "kind": "room", "summary": "1-2 persons, queen bed, kitchenette", "price": "$225/night", "source": "https://pigeoncaybahamas.com/"},
+    {"name": "Garden View", "kind": "room", "summary": "1-2 persons, queen bed", "price": "$215/night", "source": "https://pigeoncaybahamas.com/"},
+    {"name": "Hibiscus", "kind": "room", "summary": "1-2 persons, queen bed", "price": "$215/night", "source": "https://pigeoncaybahamas.com/"},
+    {"name": "Little House", "kind": "room", "summary": "1-2 persons, queen bed", "price": "$250/night", "source": "https://pigeoncaybahamas.com/"},
+    {"name": "Winston Cottage", "kind": "room", "summary": "1-2 persons, queen bed", "price": "$250/night", "source": "https://pigeoncaybahamas.com/"},
+    {"name": "Oleander", "kind": "room", "summary": "1-4 persons, queen bed and two twins", "price": "$315/night", "source": "https://pigeoncaybahamas.com/"},
+    {"name": "Casuarina", "kind": "room", "summary": "1-4 persons, queen bed in each bedroom", "price": "$325/night", "source": "https://pigeoncaybahamas.com/"},
+    {"name": "Big House", "kind": "room", "summary": "1-6 persons, king, queen and two twin beds", "price": "$425/night", "source": "https://pigeoncaybahamas.com/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://pigeoncaybahamas.com/", "https://www.facebook.com/p/Pigeon-Cay-Beach-Club-100063724083264/"]
+}

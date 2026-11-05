@@ -1,9 +1,22 @@
 {
- "slug": "pigeon-cay-beach-club",
- "id": 89,
- "name": "Pigeon Cay Beach Club",
- "batch": "06",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:36:37.521Z"
+  "slug": "pigeon-cay-beach-club", "id": 89, "name": "Pigeon Cay Beach Club", "batch": "06", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "cottages.html", "weddings.html"],
+  "primary_cta": "Check dates and book",
+  "brand_truth": "Eight handmade cottages on a private, quiet north Cat Island beach where the honor bar and the kayaks are yours.",
+  "design": {"display_font": "Fraunces 340 SOFT italic", "body_font": "Manrope 400/500/600", "palette": ["#fbf9f4", "#1b2b33", "#8f6226", "#9fd3cf", "#12333d", "#f1ece2", "#e4dccd"], "hero_pattern": "typographic-filmstrip", "signature": "Stay estimator from published rates, taxes, meals and taxi"},
+  "current_site_findings": [
+    "All eight cottages, rates and galleries are on one very long page; on a phone the price you want is far down.",
+    "The homepage repeats the same guest reviews several times, many with no text.",
+    "No deposit and payment on departure, your best reassurance, is hidden at the bottom.",
+    "Meal prices, taxes and the taxi fare are in pop-ups, so nobody sees what a week costs.",
+    "The Special Packages section is a wall of terms that buries the offer."
+  ],
+  "pitch_line": "Guests want to know what a week at Pigeon Cay really costs; this site tells them in ten seconds, with your own rates, and puts no deposit next to every booking button.",
+  "sources": ["https://pigeoncaybahamas.com/", "https://www.facebook.com/p/Pigeon-Cay-Beach-Club-100063724083264/"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Estimator applies VAT and resort levy to lodging only and 15% gratuity to meals", "Dinner limited to four per week (Wed-Sat)", "Photo choices for the 'Days here' section are illustrative picks from their galleries"],
+  "notes": "Record said no own site, but pigeoncaybahamas.com is live (refreshed 2026); built as Track A redesign. Rates as published on their site in Nov 2026: confirm current. Hosts named in a guest review (Ned and Leslie) not used. Photos hotlinked from their site; crops not visible in sandbox. interact.mjs on index timed out (likely Playwright waiting on the continuously drifting filmstrip links); cottages and weddings pages passed with 0 errors. Same island as Greenwood Beach Resort (also in this repo): designs deliberately unrelated.",
+  "built_at": "2026-11-05T01:44:40Z"
 }
