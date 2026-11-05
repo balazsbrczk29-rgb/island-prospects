@@ -4,6 +4,55 @@
  "name": "McKinney, Bancroft & Hughes",
  "batch": "08",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:53:49.957Z"
+ "state": "built",
+ "claimed_at": "2026-11-05T01:53:49.957Z",
+ "pages": [
+  "index.html",
+  "practice-groups.html"
+ ],
+ "primary_cta": "Arrange a consultation",
+ "brand_truth": "Counsel in The Bahamas since 1945, growing like the rings of a tree through mentorship.",
+ "buyer": "International institutions, HNW families, developers and Bahamian businesses needing standing, discretion and cross-border reach.",
+ "design": {
+  "display_font": "Spectral 300/400 italic",
+  "body_font": "Hanken Grotesk 400/500",
+  "palette": [
+   "#f5f2ea",
+   "#14161b",
+   "#1d3b33",
+   "#9a7d3e",
+   "#ebe6da",
+   "#5c5f63",
+   "#d9d3c5"
+  ],
+  "hero_pattern": "typographic-light-serif-with-ring-drawing",
+  "signature": "Rings of longevity history explorer (their own brand mark); situation-to-practice finder; consultation notes + call"
+ },
+ "current_site_findings": [
+  "Contact page has noindex, nofollow.",
+  "No addresses/phones in text on Contact page.",
+  "Images and footer icons load from a staging server (cedsto3.dreamhosters.com).",
+  "'Seventy year history' outdated (est. 1945).",
+  "Dead Privacy Policy link, \u00a9 2025, 'Corporae Law' typo.",
+  "Slogan-led homepage."
+ ],
+ "pitch_line": "Your contact page is hidden from Google and your footer icons load from a developer's test server; this concept presents the firm the way Chambers describes it, an institution since 1945, and puts your address and number on every page.",
+ "sources": [
+  "https://www.mckinney.com.bs/",
+  "https://www.mckinney.com.bs/about-us/",
+  "https://www.mckinney.com.bs/contact-us/",
+  "https://www.lexmundi.com/firms/mckinney-bancroft-hughes/nassau/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Practice group plain-language descriptors",
+  "Situation-to-practice mapping",
+  "Lyford Cay and Freeport addresses shown by area only"
+ ],
+ "notes": "No public email found; conversion by phone. One client comment quoted as published on the firm's own About page. Attorney photos deliberately not used.",
+ "built_at": "2026-11-05T01:57:28.254838+00:00"
 }

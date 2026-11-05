@@ -1,0 +1,41 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "mckinney-bancroft-hughes",
+ "name": "McKinney, Bancroft & Hughes",
+ "niche": "professional-services",
+ "contact": {
+  "phone": "+1-242-502-9750",
+  "whatsapp": null,
+  "email": null,
+  "address": "Mareva House, 4 George Street, P.O. Box N-3937",
+  "settlement": "Nassau",
+  "island": "New Providence"
+ },
+ "hours": null,
+ "socials": [
+  "https://bs.linkedin.com/company/mckinney-bancroft-hughes",
+  "https://www.facebook.com/mckinneybancroftandhughes/",
+  "https://www.instagram.com/mckinneybancrofthughes/"
+ ],
+ "offer": [
+  {
+   "name": "Legal services (12 practice groups)",
+   "kind": "service",
+   "summary": "General practice of law",
+   "price": null,
+   "source": "https://www.mckinney.com.bs/"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://www.mckinney.com.bs/",
+  "https://www.mckinney.com.bs/about-us/",
+  "https://www.mckinney.com.bs/contact-us/",
+  "https://www.lexmundi.com/firms/mckinney-bancroft-hughes/nassau/",
+  "https://www.iflr.com/iflr1000/firms/mckinney-bancroft-hughes-bahamas"
+ ]
+}
