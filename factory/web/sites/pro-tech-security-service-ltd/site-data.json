@@ -1,0 +1,37 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "pro-tech-security-service-ltd",
+ "name": "Pro Tech Security Service Ltd",
+ "niche": "industrial-b2b",
+ "contact": {
+  "phone": "+1-242-325-3335",
+  "phone_us": "+1-954-237-1017",
+  "whatsapp": null,
+  "email": null,
+  "address": "#10 Jem's Plaza, Pitt Road, P.O. Box CB-13083",
+  "settlement": "Nassau",
+  "island": "New Providence"
+ },
+ "hours": "Listed as 24 hours (Yabsta)",
+ "socials": [],
+ "offer": [
+  {
+   "name": "Security and alarm systems",
+   "kind": "service",
+   "summary": "Security service; burglar alarm systems (directory categories).",
+   "price": null,
+   "source": "https://www.bahamasindex.com/company/424/Pro_Tech_Security_Services_Ltd"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://bahamas.yabsta.com/listing/view/95510/pro-tech-security-service-limited",
+  "https://www.bahamasindex.com/company/424/Pro_Tech_Security_Services_Ltd",
+  "https://www.bahamasindex.com/company/429/Pro_Tech_Security_Service_Limited",
+  "https://www.findyello.com/bahamas/pro-tech-security-and-alarms-services/profile/2-farrington/"
+ ]
+}

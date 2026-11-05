@@ -4,6 +4,55 @@
  "name": "Pro Tech Security Service Ltd",
  "batch": "07",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:37:12.855Z"
+ "state": "built",
+ "claimed_at": "2026-11-05T01:37:12.855Z",
+ "pages": [
+  "index.html",
+  "security-plan.html"
+ ],
+ "primary_cta": "Call (242) 325-3335",
+ "brand_truth": "A local security and alarm service on Pitt Road, reachable by one number.",
+ "buyer": "Nassau homeowners and small business owners after a nearby break-in; property managers.",
+ "design": {
+  "display_font": "Sora 600",
+  "body_font": "Public Sans 400/600",
+  "palette": [
+   "#f2f3ef",
+   "#0f1a24",
+   "#13805a",
+   "#3fd49a",
+   "#3d4b52",
+   "#56626a",
+   "#cfd5cf"
+  ],
+  "hero_pattern": "dark-blueprint-split-radar",
+  "signature": "Interactive alarm plan: property type switch, tap entry points to add sensor coverage cones, read-out summary + call"
+ },
+ "current_site_findings": [
+  "No website.",
+  "Directories disagree on name and address (Pitt Road vs Farrington Rd & Gregory St).",
+  "Listings have no description, services or hours (Bahamas Index locked).",
+  "Phone is the only contact channel."
+ ],
+ "pitch_line": "When someone in Nassau searches for an alarm company tonight they can't find you; this site lets them mark the doors and windows they want covered and call you with the list.",
+ "sources": [
+  "https://bahamas.yabsta.com/listing/view/95510/pro-tech-security-service-limited",
+  "https://www.bahamasindex.com/company/424/Pro_Tech_Security_Services_Ltd",
+  "https://www.bahamasindex.com/company/429/Pro_Tech_Security_Service_Limited",
+  "https://www.findyello.com/bahamas/pro-tech-security-and-alarms-services/profile/2-farrington/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "B",
+ "assumptions": [
+  "'What we protect' categories and descriptions",
+  "Hours 'Listed as 24 hours' (Yabsta)",
+  "Address Jem's Plaza, Pitt Road (alt: #2 Farrington Rd & Gregory St)",
+  "Proposed domain protechsecuritybahamas.com",
+  "Planner entry points are generic"
+ ],
+ "notes": "Thin public footprint: confirm the business still trades, current address, whether they also provide guards, alarm monitoring, CCTV, and an email/WhatsApp to add. No photos.",
+ "built_at": "2026-11-05T01:41:02.505212+00:00"
 }
