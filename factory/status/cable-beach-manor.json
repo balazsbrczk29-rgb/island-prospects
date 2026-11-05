@@ -1,9 +1,16 @@
 {
  "slug": "cable-beach-manor",
- "id": 61,
- "name": "Cable Beach Manor",
- "batch": "10",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T02:12:50.612Z"
+ "name": "Cable Beach Manor",
+ "state": "skipped",
+ "track": "B",
+ "notes": "Skipped: the Cable Beach Manor apartment complex was demolished in May 2021 (Facebook group post and video). The listed chroma.site subdomain no longer resolves; a lookalike chroma.work page appears to be a leftover template, not an operating business.",
+ "sources": [
+  "https://www.facebook.com/groups/1118839844851237/posts/27092971143678085/",
+  "https://www.facebook.com/FreelancerMediaGroup/videos/cable-beach-manor-apartment-demolished-beach-access-limited/962754121209488/"
+ ],
+ "pitch_line": null,
+ "built_at": "2026-11-05T02:13:10.775803+00:00",
+ "id": 61,
+ "batch": "10"
 }
