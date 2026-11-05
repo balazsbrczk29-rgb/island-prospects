@@ -1,9 +1,28 @@
 {
- "slug": "lighthouse-marina",
- "id": 81,
- "name": "Lighthouse Marina",
- "batch": "11",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T04:05:07.131Z"
+ "slug": "lighthouse-marina", "id": 81, "name": "Lighthouse Marina", "batch": "11", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "boatyard.html"],
+ "primary_cta": "Request a slip or service",
+ "brand_truth": "Since 1980, the fuel dock and boatyard at the foot of the Elbow Reef Lighthouse, the one stop every Elbow Cay boat makes.",
+ "buyer": "Hope Town boaters (owners and renters of 20-40 ft centre consoles, cruisers to 60 ft) needing fuel, a slip, a mechanic or seasonal dry storage; Elbow Cay second-home owners.",
+ "design": {"display_font": "Space Grotesk 500/600", "body_font": "Inter Tight 400/500", "palette": ["#f6f3ee", "#13202b", "#1e4f7a", "#e9dcc3", "#ebe4d8", "#ddd4c6", "#56616b"], "hero_pattern": "spec-led-with-lighthouse-illustration", "signature": "SVG Elbow Reef Lighthouse with sweeping beam; 'Will your boat fit?' check against 60 ft LOA / 6 ft draft; haul-out and storage estimator on Nov 2024 boatyard rates with VAT; tabbed slip/yard/mechanic enquiry"},
+ "current_site_findings": [
+  "Footer (c) 2023, Gmail contact, default Wix favicon and 'Home | LighthouseMarina' title",
+  "No slip/dockage rates; the Dockage button goes to boatyard rates",
+  "DIY yard rate $50/day on rates page, $40/day on facilities page",
+  "Liquor store 'reopening soon' vs listed in menu",
+  "Blurred homepage thumbnails; key facts not in Google snippet"
+ ],
+ "pitch_line": "You run the only marine fuel on Elbow Cay at the foot of the lighthouse, but Google shows 'Home | LighthouseMarina'; this concept puts your 60-ft, 6-ft-draft slips, fuel and boatyard prices in the first screen and lets boaters price a haul-out themselves.",
+ "sources": ["https://www.htlighthousemarina.com/", "https://www.htlighthousemarina.com/rates", "https://www.htlighthousemarina.com/facilities-services", "https://www.htlighthousemarina.com/rental-cottages"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "A",
+ "assumptions": [
+  "DIY rate shown as $50/day (rates page, effective Nov 2024)",
+  "Liquor (cold beer, wines, spirits, cigars) listed as in store per homepage header; confirm reopening",
+  "Lighthouse drawn red and white (Elbow Reef Lighthouse's real livery); the marina's own site only says 'historic'",
+  "Rental cottages shown as under long-term rental (their page)"
+ ],
+ "notes": "Slip rates are not published; site asks boaters to contact the office. Interact 'dead inputs' are range sliders/checkbox Playwright can't fill; they work. Lighthouse red used only inside the illustration, not as a UI accent. Scorecard: hero 4, type 4, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T04:10:15Z"
 }

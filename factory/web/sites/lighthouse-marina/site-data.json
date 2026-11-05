@@ -1,0 +1,86 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "lighthouse-marina",
+ "name": "Lighthouse Marina",
+ "niche": "marina",
+ "contact": {
+  "phone": "+1-242-366-0154",
+  "phone_alt": [
+   "+1-242-577-0283",
+   "+1-305-735-8550"
+  ],
+  "vhf": "16",
+  "whatsapp": null,
+  "email": "lighthousemarinaht@gmail.com",
+  "address": "Hope Town Harbour, Elbow Cay",
+  "settlement": "Hope Town",
+  "island": "Abaco"
+ },
+ "hours": {
+  "boatyard": "Mon-Fri 08:00-16:00",
+  "laundry": "Daily 08:00-18:00"
+ },
+ "socials": [
+  "https://www.facebook.com/Lighthouse-Marina-260128454011114"
+ ],
+ "offer": [
+  {
+   "name": "Slip",
+   "kind": "slip",
+   "summary": "6 protected slips, to 60 ft LOA, 6 ft draft at low water",
+   "price": null,
+   "source": "https://www.htlighthousemarina.com/"
+  },
+  {
+   "name": "Haul single hull",
+   "kind": "service",
+   "summary": "",
+   "price": "$5.50/ft",
+   "source": "https://www.htlighthousemarina.com/rates"
+  },
+  {
+   "name": "Haul twin hull",
+   "kind": "service",
+   "summary": "",
+   "price": "$7.00/ft",
+   "source": "https://www.htlighthousemarina.com/rates"
+  },
+  {
+   "name": "Dry storage",
+   "kind": "service",
+   "summary": "single hull to 25 ft $200/mo; 25-30 ft $8.50/ft/mo; over 30 ft and twin $9.00/ft/mo",
+   "price": null,
+   "source": "https://www.htlighthousemarina.com/rates"
+  },
+  {
+   "name": "Mechanic",
+   "kind": "service",
+   "summary": "",
+   "price": "$110/hr",
+   "source": "https://www.htlighthousemarina.com/rates"
+  },
+  {
+   "name": "Fuel, ice, bait, tackle",
+   "kind": "product",
+   "summary": "ship's store",
+   "price": null,
+   "source": "https://www.htlighthousemarina.com/facilities-services"
+  }
+ ],
+ "platform": {
+  "candidate": true,
+  "orderable": false,
+  "categories": [
+   "marina",
+   "fuel",
+   "bait-tackle",
+   "liquor"
+  ]
+ },
+ "sources": [
+  "https://www.htlighthousemarina.com/",
+  "https://www.htlighthousemarina.com/rates",
+  "https://www.htlighthousemarina.com/facilities-services",
+  "https://www.htlighthousemarina.com/rental-cottages"
+ ]
+}
