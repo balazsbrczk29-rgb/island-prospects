@@ -1,9 +1,25 @@
 {
- "slug": "island-marine-covering-ltd",
- "id": 77,
- "name": "Island Marine Covering Ltd (IMC)",
- "batch": "01",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:05:55.252Z"
+ "slug": "island-marine-covering-ltd", "id": 77, "name": "Island Marine Covering Ltd (IMC)", "batch": "01", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "services.html"],
+ "primary_cta": "Call for a measure",
+ "brand_truth": "One sewing machine, one roll of canvas, and a family upholstery trade that once dressed Nassau's grand hotels: now shade and shelter, made in Nassau.",
+ "buyer": "Nassau homeowners with verandahs and pool decks, restaurant and hotel managers, yacht and boat owners and their captains, property managers before hurricane season.",
+ "design": {"display_font": "Fraunces 600", "body_font": "Work Sans 400/500", "palette": ["#f3f5f4", "#13243a", "#1f5f99", "#c9a46a", "#dfe8ee", "#4f5d6b", "#d5dce0"], "hero_pattern": "split-screen-editorial", "signature": "Live SVG awning designer (type, valance, stripe) that writes the call summary; land/sea toggle swapping product lists and their own project photos; stitched-line detailing"},
+ "current_site_findings": [
+  "Homepage shows a 'Login with Bluehost' box and a maths puzzle to visitors.",
+  "'View Our Products' opens a WordPress sample page.",
+  "Leftover template text: 'Leave heading fields empty to hide the heading.'",
+  "No phone, email or street address on the homepage.",
+  "imcawnings.com forwards to Cover Up with no mention of IMC; directories still show 2012 data.",
+  "The family story (Nixon's Upholstery, The British Colonial, 1992) is hidden under About."
+ ],
+ "pitch_line": "Your work dressed Nassau's grand hotels, but your website greets customers with a Bluehost login box and a sample page; this concept shows your awnings and boat canvas first and puts your number under every thumb.",
+ "sources": ["https://coverupbahamas.com/", "https://coverupbahamas.com/about-us/", "https://www.bahamasindex.com/category/Marine_services/2/city:Nassau", "https://www.noonsite.com/business/island-marine-covering/", "https://www.facebook.com/p/Cover-Up-100064084779650/"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "A",
+ "scorecard": {"first_screen": 4, "typography": 4, "editorial_layout": 4, "context_visuals": 5, "motion": 4, "depth": 4, "detailing": 4, "mobile": 4, "next_to_references": 4, "owner_proud": 5, "whole_page": 4},
+ "assumptions": ["Phone (242) 377-0335 is current (2012 listing; a 2006 listing shows 393-2939)", "Cover Up is the current trading name of Island Marine Covering Ltd (Facebook says IMC was born there; imcawnings.com forwards to Cover Up)", "The 'one sewing machine' Facebook quote is Ricky Nixon's own words", "Short product descriptions (e.g. 'Shade when you want it, rolled away when you don't') are category phrasing, not claims"],
+ "notes": "Photos hotlinked from their own site: gallery images originally under imcawnings.com/wp-content/uploads/2011/05/ now served at the same path on www.coverupbahamas.com (redirect verified, image/jpeg 200). Contents verified by image analysis for Old-Fortbay-11, Covers and the 2022 workshop photo; Boat-Upholstery and Ferry-Seats judged by file name. Photos are 2011-era and low resolution: ask the owner for recent project photography. No email or WhatsApp found, so enquiry is call-only. Hours unknown, omitted.",
+ "built_at": "2026-11-05T01:12:12Z"
 }

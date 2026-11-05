@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "island-marine-covering-ltd",
+  "name": "Island Marine Covering Ltd (IMC), trading as Cover Up",
+  "niche": "industrial-b2b",
+  "contact": {"phone": "+1-242-377-0335", "whatsapp": null, "email": null, "address": "4B Sabal Close, Airport Industrial Park", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": ["https://www.facebook.com/p/Cover-Up-100064084779650/"],
+  "offer": [
+    {"name": "Awnings and retractable awnings", "kind": "service", "summary": "Professional grade, customised and made in The Bahamas.", "price": null, "source": "https://coverupbahamas.com/about-us/"},
+    {"name": "Weather screens", "kind": "service", "summary": "Customised weather screens.", "price": null, "source": "https://coverupbahamas.com/about-us/"},
+    {"name": "Hurricane shutters", "kind": "service", "summary": "Customised hurricane shutters.", "price": null, "source": "https://coverupbahamas.com/about-us/"},
+    {"name": "Marine canvas: Bimini tops, isinglass enclosures", "kind": "service", "summary": "From a 10 ft inflatable to a mega yacht.", "price": null, "source": "https://coverupbahamas.com/about-us/"},
+    {"name": "Boat upholstery", "kind": "service", "summary": "Upholstery for boats.", "price": null, "source": "https://coverupbahamas.com/about-us/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://coverupbahamas.com/", "https://coverupbahamas.com/about-us/", "https://www.bahamasindex.com/company/1517/Island_Marine_Covering_Ltd_IMC", "https://www.noonsite.com/business/island-marine-covering/", "https://www.facebook.com/p/Cover-Up-100064084779650/"]
+}
