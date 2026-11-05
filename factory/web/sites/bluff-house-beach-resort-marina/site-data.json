@@ -1,0 +1,16 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bluff-house-beach-resort-marina",
+  "name": "Bluff House Beach Resort & Marina",
+  "niche": "hospitality-stay",
+  "contact": {"phone": "+1-954-284-7341", "phone_local": "+1-242-824-9550", "whatsapp": "12428249550", "email": "frontdesk@bluffhouse.com", "address": "White Sound, Green Turtle Cay", "settlement": "Green Turtle Cay", "island": "Abaco"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Hotel suites", "kind": "room", "summary": "Eight air-conditioned suites with balconies over the Sea of Abaco.", "price": null, "source": "https://www.bluffhouse.com/"},
+    {"name": "Private cottages and villas", "kind": "room", "summary": "1-4 bedrooms: Summerset, La Conchita, Turtle Bluff Villa, Pineapple House Villa, Sweet Guava Villa, Blue Bay Cottage, Dove Cottage, Coral Haven, Sunset Cottage 4.", "price": null, "source": "https://www.bluffhouse.com/"},
+    {"name": "Marina slips", "kind": "slip", "summary": "40 slips, 7 ft MLW channel, 50/100 amp, water, Wi-Fi, showers, laundry.", "price": "Last published 2025: $2.00-$3.50/ft/day + 10% VAT, 30 ft minimum", "source": "https://www.bluffhouse.com/marina-rates"}
+  ],
+  "platform": {"candidate": true, "orderable": false, "categories": ["restaurant", "bar", "gift shop"]},
+  "sources": ["https://www.bluffhouse.com/", "https://www.bluffhouse.com/marina-rates", "https://www.bluffhouse.com/a-little-history"]
+}

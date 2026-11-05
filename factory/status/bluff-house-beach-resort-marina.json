@@ -1,9 +1,55 @@
 {
  "slug": "bluff-house-beach-resort-marina",
- "id": 60,
- "name": "Bluff House Beach Resort & Marina",
- "batch": "09",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T02:07:09.032Z"
+ "name": "Bluff House Beach Resort & Marina",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "marina.html",
+  "history.html"
+ ],
+ "primary_cta": "Ask about a room",
+ "brand_truth": "The Out Islands' first resort, still a home for boaters on a bluff above White Sound.",
+ "buyer": "US boaters crossing to the Abacos, returning families, cottage owners and wedding couples, planning on phones.",
+ "design": {
+  "display_font": "Libre Caslon Display 400",
+  "body_font": "Rethink Sans 400/500",
+  "palette": [
+   "#f4f3ee",
+   "#14283a",
+   "#24507a",
+   "#ecc4b4",
+   "#e9cf7a",
+   "#ebe8df",
+   "#dcd8cc"
+  ],
+  "hero_pattern": "stacked-collage-hilltop",
+  "signature": "Stay chooser (8 suites vs named cottages), slip estimator from last-published seasonal rates, enquiry tabs to the front desk, history timeline 1950s-2025"
+ },
+ "current_site_findings": [
+  "Marina rates headed '2022' with seasons that ended in 2025",
+  "Marina page description shows a different phone (242-365-4200)",
+  "Empty testimonials carousel on homepage",
+  "First-resort story and VIP Marinas chapter buried",
+  "Many image alts 'undefined'"
+ ],
+ "pitch_line": "You have the best story in the Abacos, the Out Islands' first resort, but your marina rates still say 2022; this concept leads with the story and gives boaters current-looking specs and a Dockwa button.",
+ "sources": [
+  "https://www.bluffhouse.com/",
+  "https://www.bluffhouse.com/marina-rates",
+  "https://www.bluffhouse.com/a-little-history"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Slip estimate uses last published 2025 season rates; owners must confirm 2026-27 rates",
+  "Season groupings simplified from their table"
+ ],
+ "notes": "Live Wix site; new owners VIP Marinas Group (Dec 2025) are a strong pitch target (Austin and Jenny Cameron, Felecia and Dan Ongley). Photos hotlinked from static.wixstatic.com originals. Phone, email, Dockwa link from their site. Awards mentioned only as published on their own history page. interact.mjs flags range sliders as dead (work by drag/keyboard). Scorecard: hero 4, type 5, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 5, consistency 4.",
+ "built_at": "2026-11-05T02:12:47.554151+00:00",
+ "id": 60,
+ "batch": "09"
 }
