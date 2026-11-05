@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "maximum-security-patrol-services-ltd",
+  "name": "Maximum Security & Patrol Services Ltd.",
+  "niche": "industrial-b2b",
+  "contact": {"phone": "+1-242-394-5425", "phone_2": "+1-242-393-7206", "fax": "+1-242-394-5428", "whatsapp": null, "email": null, "address": "Carib House, #15 Carib Road, P.O. Box N-9425, Nassau", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Trained security officers", "kind": "service", "summary": "Officers for diverse and special applications.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/13385/Maximum_Security_and_Patrol_Services_Ltd.html"},
+    {"name": "Mobile patrols", "kind": "service", "summary": "Patrol services (from the company name; to confirm).", "price": null, "source": "https://www.bahamaslocal.com/showlisting/13385/Maximum_Security_and_Patrol_Services_Ltd.html"},
+    {"name": "Alarm monitoring", "kind": "service", "summary": "Alarm monitoring.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/13385/Maximum_Security_and_Patrol_Services_Ltd.html"},
+    {"name": "Investigations", "kind": "service", "summary": "Investigations.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/13385/Maximum_Security_and_Patrol_Services_Ltd.html"},
+    {"name": "Security consultancy", "kind": "service", "summary": "Consultancy and customised services.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/13385/Maximum_Security_and_Patrol_Services_Ltd.html"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://www.bahamaslocal.com/showlisting/13385/Maximum_Security_and_Patrol_Services_Ltd.html", "https://www.bahamasindex.com/company/9631/Maximum_Security_Patrol_Services_Ltd", "https://bahamas.yabsta.com/listing/view/94705/maximum-security-patrol-services-ltd", "https://urcabahamas.bs/wp-content/uploads/2024/05/Public-Register-of-Individual-and-Registered-Class-Licensees-8-May-2024.pdf"]
+}

@@ -1,9 +1,59 @@
 {
  "slug": "maximum-security-patrol-services-ltd",
  "id": 84,
- "name": "Maximum Security & Patrol Services Ltd",
+ "name": "Maximum Security & Patrol Services Ltd.",
  "batch": "06",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:33:53.909Z"
+ "state": "built",
+ "pages": [
+  "index.html",
+  "services.html"
+ ],
+ "primary_cta": "Request a security proposal",
+ "brand_truth": "A Nassau firm that has put trained officers on posts since 1993, with one Carib Road office behind every service.",
+ "buyer": "Facilities, operations and procurement managers at banks, retailers, offices and government in Nassau, plus property managers and private clients.",
+ "design": {
+  "display_font": "Red Hat Display 600/700",
+  "body_font": "Red Hat Text 400/500",
+  "palette": [
+   "#eef0ef",
+   "#121a21",
+   "#56652a",
+   "#b4bec5",
+   "#e2e5e3",
+   "#55606a",
+   "#cdd3d2",
+   "#172129"
+  ],
+  "hero_pattern": "plan-led-technical-site-drawing",
+  "signature": "Technical site plan (posts, patrol route with moving patrol, alarm sensors to monitoring, incident, survey) that highlights the chosen service layer"
+ },
+ "current_site_findings": [
+  "maximumsecurityservice.com (in their listings) no longer resolves",
+  "Only phone and fax on directories; no email or proposal path",
+  "Company story only on a third-party directory",
+  "Services not explained for procurement managers",
+  "No Google-readable page for 'security company Nassau'"
+ ],
+ "pitch_line": "Your old website address is dead; here is the site that tells Nassau's facility managers you have put trained officers on posts since 1993, and gets them to call you with their needs already written down.",
+ "sources": [
+  "https://www.bahamaslocal.com/showlisting/13385/Maximum_Security_and_Patrol_Services_Ltd.html",
+  "https://www.bahamasindex.com/company/9631/Maximum_Security_Patrol_Services_Ltd",
+  "https://bahamas.yabsta.com/listing/view/94705/maximum-security-patrol-services-ltd",
+  "https://urcabahamas.bs/wp-content/uploads/2024/05/Public-Register-of-Individual-and-Registered-Class-Licensees-8-May-2024.pdf"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "B",
+ "assumptions": [
+  "'Patrols' as a service line (from company name and job titles)",
+  "Example settings for officers (gates, lobbies, banking halls, stores, events) and sector examples are category-standard",
+  "'Have these answers ready' questions on services.html are generic intake questions",
+  "Service area shown as New Providence",
+  "Proposed domain maximumsecuritybahamas.com (availability unverified)"
+ ],
+ "notes": "Track B, domain lost (maximumsecurityservice.com fails DNS). Still trading per URCA register May 2024 and directory updates 2022. No email published, so proposal builder produces a read-out summary plus two Call buttons. No photos found: art-directed with a technical plan illustration. Avoided repeating the company's 'largest provider' self-claim; the quote used is labelled as the company's own description. Ask owner for email, hours, licences, photos of officers and vehicles. Scorecard: hero 4, type 4, layout 4, context 4, motion 4, depth 4, detailing 5, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T01:40:03.428138+00:00"
 }
