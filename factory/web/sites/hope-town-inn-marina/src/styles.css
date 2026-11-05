@@ -1,0 +1,27 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/accordion.tsx";
+@source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/ui/tabs.tsx";
+
+@theme {
+  --color-paper: #f6f3ec;
+  --color-paper-2: #ece6d9;
+  --color-ink: #0f2a33;
+  --color-muted: #586a70;
+  --color-line: #ddd5c6;
+  --color-sea: #1d5f8a;
+  --color-sea-deep: #134767;
+  --color-shallows: #cfe5e3;
+  --color-sand: #d9c3a0;
+  --font-display: "Cormorant", Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-shallows); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-sea); outline-offset: 3px; }
+@media (max-width: 767px) { body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

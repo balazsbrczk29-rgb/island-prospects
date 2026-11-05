@@ -1,0 +1,67 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "hope-town-inn-marina",
+ "name": "Hope Town Inn & Marina",
+ "niche": "hospitality-stay",
+ "contact": {
+  "phone": "+1-850-588-4855",
+  "phone_bs": "+1-242-803-4401",
+  "phone_bs_main_out_of_service": "+1-242-366-0003",
+  "whatsapp": null,
+  "email": "office@hopetownmarina.com",
+  "address": "Hope Town Harbour (west side)",
+  "settlement": "Hope Town",
+  "island": "Elbow Cay, Abaco"
+ },
+ "hours": null,
+ "socials": [
+  "https://www.facebook.com/hopetowninnandmarina",
+  "https://www.instagram.com/hopetowninnandmarina"
+ ],
+ "offer": [
+  {
+   "name": "King Suite",
+   "kind": "room",
+   "summary": "3 guests, 450 ft2",
+   "price": null,
+   "source": "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-hotel-rooms"
+  },
+  {
+   "name": "King Bed Hotel Room",
+   "kind": "room",
+   "summary": "2 guests, 350 ft2",
+   "price": null,
+   "source": "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-hotel-rooms"
+  },
+  {
+   "name": "Double Occupancy Hotel Room",
+   "kind": "room",
+   "summary": "4 guests, 270 ft2",
+   "price": null,
+   "source": "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-hotel-rooms"
+  },
+  {
+   "name": "Marina slips",
+   "kind": "slip",
+   "summary": "50 surge-free slips to 125 ft, moorings to 45 ft, 30/50/100A, RO water",
+   "price": null,
+   "source": "https://www.hopetownmarina.com/marina-abacos-bahamas"
+  }
+ ],
+ "booking": {
+  "rooms": "https://reservations.verticalbooking.com/premium/index.html?id_albergo=29742&dc=8525&lingua_int=usa&id_stile=22585",
+  "slips": "https://dockwa.com/explore/destination/d9cl55-hope-town-inn-marina?form=transient"
+ },
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://www.hopetownmarina.com/",
+  "https://www.hopetownmarina.com/marina-abacos-bahamas",
+  "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-hotel-rooms",
+  "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-villas",
+  "https://www.hopetownmarina.com/the-abacos-bahamas/getting-here"
+ ]
+}

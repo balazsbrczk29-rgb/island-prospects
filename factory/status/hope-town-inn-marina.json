@@ -4,6 +4,57 @@
  "name": "Hope Town Inn & Marina",
  "batch": "05",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:31:21.591Z"
+ "state": "built",
+ "claimed_at": "2026-11-05T01:31:21.591Z",
+ "pages": [
+  "index.html",
+  "stay.html",
+  "marina.html"
+ ],
+ "primary_cta": "Check room rates",
+ "brand_truth": "The harbourside estate beside the Elbow Reef Lighthouse, where boats and guests arrive at the same dock.",
+ "buyer": "US East Coast couples/families planning Abaco trips on phones; yacht and sportfish owners/captains crossing from Florida.",
+ "design": {
+  "display_font": "Cormorant 500/italic",
+  "body_font": "Manrope 400/500/600",
+  "palette": [
+   "#f6f3ec",
+   "#0f2a33",
+   "#1d5f8a",
+   "#cfe5e3",
+   "#d9c3a0",
+   "#586a70",
+   "#ddd5c6"
+  ],
+  "hero_pattern": "cinematic-full-bleed-photo-with-overlapping-title-card",
+  "signature": "Real photography with mask reveals; stay finder by party size over the 9 real rooms/villas; slip checker vs published 125 ft / 45 ft limits; flight + ferry route planner"
+ },
+ "current_site_findings": [
+  "Main number 242.366.0003 flagged out of service but still first in header/footer.",
+  "30+ menu links across four dropdowns.",
+  "No way to filter the 9 rooms and villas by party size.",
+  "Homepage says 120 ft, marina page 125 ft.",
+  "2021/2022 Covid badges still in footer.",
+  "Generic copy hides the lighthouse, 15 acres and Bridget's rum list."
+ ],
+ "pitch_line": "Your own site still sends guests to a phone line it says is out of service; this version puts the lighthouse, the right room for their party and a working Book-a-slip button on the first screen.",
+ "sources": [
+  "https://www.hopetownmarina.com/",
+  "https://www.hopetownmarina.com/marina-abacos-bahamas",
+  "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-hotel-rooms",
+  "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-villas",
+  "https://www.hopetownmarina.com/the-abacos-bahamas/getting-here"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "125 ft (marina page) used over 120 ft (homepage)",
+  "Leads with US +1 850 588 4855 / BS 242 803 4401 since 366-0003 is flagged out of service",
+  "'3 rooms, 6 villas' = room types"
+ ],
+ "notes": "Record said no own site, but hopetownmarina.com is live (Wix). Strong Track A prospect: real photos hotlinked from their site (thumbnails are 395px; ask for originals). Booking engine and Dockwa links kept. QA screenshots show grey boxes for external images (expected in sandbox).",
+ "built_at": "2026-11-05T01:37:03.431134+00:00"
 }
