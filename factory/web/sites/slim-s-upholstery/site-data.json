@@ -1,0 +1,73 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "slim-s-upholstery",
+ "name": "Slim Upholstery",
+ "niche": "trade-retail",
+ "contact": {
+  "phone": "+1-242-814-5451",
+  "phone_alt": "+1-242-341-2149",
+  "whatsapp": "+1-242-814-5451",
+  "email": null,
+  "address": "#21 Claridge Road",
+  "settlement": "Nassau",
+  "island": "New Providence"
+ },
+ "hours": "Mo-Sa 09:00-17:30",
+ "socials": [
+  "https://www.facebook.com/SlimUpholstery/",
+  "https://www.instagram.com/slimupholstery/",
+  "https://www.tiktok.com/@slimupholstery"
+ ],
+ "offer": [
+  {
+   "name": "Home upholstery",
+   "kind": "service",
+   "summary": "Upholstery",
+   "price": null,
+   "source": "https://www.bahamasindex.com/company/10461/Slims_Upholstery"
+  },
+  {
+   "name": "Auto upholstery",
+   "kind": "service",
+   "summary": "Upholstery",
+   "price": null,
+   "source": "https://www.bahamasindex.com/company/10461/Slims_Upholstery"
+  },
+  {
+   "name": "Marine upholstery",
+   "kind": "service",
+   "summary": "Upholstery",
+   "price": null,
+   "source": "https://www.bahamasindex.com/company/10461/Slims_Upholstery"
+  },
+  {
+   "name": "Aircraft upholstery",
+   "kind": "service",
+   "summary": "Upholstery",
+   "price": null,
+   "source": "https://www.bahamasindex.com/company/10461/Slims_Upholstery"
+  },
+  {
+   "name": "Church upholstery",
+   "kind": "service",
+   "summary": "Upholstery",
+   "price": null,
+   "source": "https://www.bahamasindex.com/company/10461/Slims_Upholstery"
+  }
+ ],
+ "platform": {
+  "candidate": true,
+  "orderable": false,
+  "categories": [
+   "home-services",
+   "upholstery"
+  ]
+ },
+ "sources": [
+  "https://www.bahamasindex.com/company/10461/Slims_Upholstery",
+  "https://www.facebook.com/SlimUpholstery/",
+  "https://www.instagram.com/slimupholstery/",
+  "https://www.tiktok.com/@slimupholstery",
+  "https://www.facebook.com/SlimUpholstery/photos/1414895807315706/"
+ ]
+}

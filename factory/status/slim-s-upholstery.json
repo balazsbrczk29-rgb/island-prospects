@@ -4,6 +4,54 @@
  "name": "Slim's Upholstery",
  "batch": "07",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:41:08.759Z"
+ "state": "built",
+ "claimed_at": "2026-11-05T01:41:08.759Z",
+ "pages": [
+  "index.html",
+  "what-we-upholster.html"
+ ],
+ "primary_cta": "WhatsApp a free quote",
+ "brand_truth": "From worn to wow, one stitch at a time: home, auto, marine, aircraft and church upholstery from Claridge Road.",
+ "buyer": "Nassau homeowners with worn sofas/dining chairs, boat and car owners, church committees.",
+ "design": {
+  "display_font": "Young Serif 400",
+  "body_font": "Work Sans 400/500",
+  "palette": [
+   "#f4efe6",
+   "#2a2420",
+   "#23395b",
+   "#c99a2e",
+   "#ebe3d5",
+   "#6b625a",
+   "#ddd2c1"
+  ],
+  "hero_pattern": "craft-close-up-swatch-book",
+  "signature": "Fabric studio: pick piece (sofa, dining chair, boat cushions, car seat, church pew), colour and weave; SVG recolours and stitches; sends WhatsApp quote"
+ },
+ "current_site_findings": [
+  "No website.",
+  "Phone numbers split between 341-2149 (directories) and 814-5451 (socials).",
+  "Old BahamasLocal URL says 'may have closed down'.",
+  "Portfolio only in Instagram/TikTok posts."
+ ],
+ "pitch_line": "Your Instagram shows beautiful work, but Google can't send anyone to it; this site lets a customer try colours on their sofa and WhatsApp you for a free quote in one minute.",
+ "sources": [
+  "https://www.bahamasindex.com/company/10461/Slims_Upholstery",
+  "https://www.facebook.com/SlimUpholstery/",
+  "https://www.instagram.com/slimupholstery/",
+  "https://www.tiktok.com/@slimupholstery"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "B",
+ "assumptions": [
+  "Per-area piece descriptions are category-standard",
+  "'No charge for quoting' from 'FREE quote'",
+  "Swatches are colour ideas only",
+  "Proposed domain slimupholstery.com"
+ ],
+ "notes": "Ask Slim for 6-10 before/after photos from Instagram to drop into a before/after slider at launch. Confirm which number to lead with (814-5451 used, WhatsApp-enabled per FB post).",
+ "built_at": "2026-11-05T01:45:00.716819+00:00"
 }
