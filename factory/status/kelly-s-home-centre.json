@@ -1,9 +1,22 @@
 {
- "slug": "kelly-s-home-centre",
- "id": 44,
- "name": "Kelly's Home Centre",
- "batch": "08",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:52:12.654Z"
+  "slug": "kelly-s-home-centre", "id": 44, "name": "Kelly's Home Centre", "batch": "08", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "departments.html"],
+  "primary_cta": "Shop Kelly's online",
+  "brand_truth": "Since 1927, everything for the Bahamian home under one roof at Marathon, delivered to every island.",
+  "design": {"display_font": "Young Serif 400", "body_font": "Nunito Sans 400/600", "palette": ["#f7f3ea", "#1c1b22", "#b0306a", "#2e5a52", "#cfe3dc", "#e0d7c6", "#efe8da"], "hero_pattern": "department-wall-split", "signature": "Drifting wall of their real department photos; mail boat instruction builder; life-moments selector"},
+  "current_site_findings": [
+    "Homepage leads with seasonal banners; 'since 1927' and 'Nassau's largest department store' are only on the About page.",
+    "Store hours are published as a 2025 image that Google and screen readers cannot read.",
+    "The Family Island mail boat instructions are three images with no text.",
+    "An April 2025 flyer is still loaded on every page.",
+    "Gift registry, Contractor Cards and in-store pick up are scattered across links and outside sites."
+  ],
+  "pitch_line": "Your Family Island customers are your most loyal and your mail boat instructions are just three pictures; this concept turns them into a two-minute form and puts 'since 1927' back on the front door.",
+  "sources": ["https://www.kellysbahamas.com/", "https://www.kellysbahamas.com/about-us", "https://www.kellysbahamas.com/delivery-information", "https://www.kellysbahamas.com/faq/mailboat-delivery"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Store hours omitted (only published as an image)", "Contractor Cards mentioned by name only", "Island list in the mail boat helper taken from their newsletter form"],
+  "notes": "Record said no site, but kellysbahamas.com is a working e-commerce site (BuilderWire): pitch is a front-end and UX repositioning, not a new store. Trading name is Kelly's House & Home. Category photos hotlinked from their own site (grey in sandbox QA). interact.mjs times out on hovering the continuously drifting hero tiles (Playwright waits for stable elements); not a site error.",
+  "built_at": "2026-11-05T01:58:29Z"
 }

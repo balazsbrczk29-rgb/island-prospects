@@ -1,0 +1,60 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "kelly-s-home-centre",
+  "name": "Kelly's House & Home",
+  "niche": "trade-retail",
+  "contact": {
+    "phone": "+1-242-393-4002",
+    "whatsapp": null,
+    "email": "mail@kellysbahamas.com",
+    "address": "The Mall at Marathon, Robinson Road, P.O. Box N-865",
+    "settlement": "Nassau",
+    "island": "New Providence"
+  },
+  "hours": null,
+  "socials": [
+    "https://www.facebook.com/kellyshouseandhome/"
+  ],
+  "offer": [
+    {
+      "name": "Department retail",
+      "kind": "product",
+      "summary": "Housewares, hardware, paint, garden, toys and more",
+      "price": null,
+      "source": "https://www.kellysbahamas.com/about-us"
+    },
+    {
+      "name": "Mail boat delivery",
+      "kind": "service",
+      "summary": "Delivery to Potters Cay Dock, $25 + VAT",
+      "price": "$25 + VAT",
+      "source": "https://www.kellysbahamas.com/delivery-information"
+    },
+    {
+      "name": "Gift registry",
+      "kind": "service",
+      "summary": "Weddings, showers, birthdays, anniversaries",
+      "price": null,
+      "source": "https://www.kellysbahamas.com/about-us"
+    }
+  ],
+  "platform": {
+    "candidate": true,
+    "orderable": true,
+    "categories": [
+      "housewares",
+      "hardware",
+      "paint",
+      "lawn-garden",
+      "toys",
+      "baby",
+      "office"
+    ]
+  },
+  "sources": [
+    "https://www.kellysbahamas.com/",
+    "https://www.kellysbahamas.com/about-us",
+    "https://www.kellysbahamas.com/delivery-information",
+    "https://www.kellysbahamas.com/faq/mailboat-delivery"
+  ]
+}
