@@ -1,9 +1,17 @@
 {
  "slug": "rainbow-rentals",
- "id": 91,
- "name": "Rainbow Rentals",
- "batch": "07",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:40:09.609Z"
+ "name": "Rainbow Rentals",
+ "state": "skipped",
+ "track": "B",
+ "notes": "Skipped: cannot confirm it reopened after Hurricane Dorian (2019). Locals on Reddit (2024) and an Abaco Facebook group ask whether it still exists; no phone, website or social page found; TripAdvisor activity is a decade old. Re-queue only if confirmed operating at the Union Jack dock, Marsh Harbour.",
+ "sources": [
+  "https://www.bahamaslocal.com/showlisting/10545/Rainbow_Boat_Rentals.html",
+  "https://www.reddit.com/r/bahamas/comments/1gjmspe/single_day_boat_rental_in_marsh_harbor_or_elbow/",
+  "https://www.facebook.com/groups/1460101050748569/posts/5954061428019153/"
+ ],
+ "pitch_line": null,
+ "built_at": "2026-11-05T01:40:32.813211+00:00",
+ "id": 91,
+ "batch": "07"
 }
