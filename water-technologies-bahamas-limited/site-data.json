@@ -1,0 +1,14 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "water-technologies-bahamas-limited",
+  "name": "Water Technologies Bahamas Limited",
+  "niche": "industrial-b2b",
+  "contact": {"phone": "+1-242-326-1202", "fax": "+1-242-325-4202", "whatsapp": null, "email": null, "address": "Fairwind Street, Hawkins Hill, P.O. Box N-3723, Nassau", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Air2Water atmospheric water generators", "kind": "product", "summary": "Machines that extract drinking water from the air, purified by UV; stand-up and countertop units for homes and offices.", "price": null, "source": "https://www.bahamasindex.com/company/10535/Water_Technologies_Bahamas_Ltd"}
+  ],
+  "platform": {"candidate": true, "orderable": false, "categories": ["water machines", "water coolers"]},
+  "sources": ["https://www.bahamasindex.com/company/10535/Water_Technologies_Bahamas_Ltd", "https://bahamas.yabsta.com/search/all/1/Water%20Services/10"]
+}

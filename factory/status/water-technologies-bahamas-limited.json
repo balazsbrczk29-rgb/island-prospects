@@ -1,9 +1,22 @@
 {
- "slug": "water-technologies-bahamas-limited",
- "id": 49,
- "name": "Water Technologies Bahamas Limited",
- "batch": "08",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:54:04.269Z"
+  "slug": "water-technologies-bahamas-limited", "id": 49, "name": "Water Technologies Bahamas Limited", "batch": "08", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "machines.html"],
+  "primary_cta": "Ask for a demonstration",
+  "brand_truth": "Drinking water made from Nassau's own humid air, purified with UV light, in your home or office.",
+  "design": {"display_font": "Sora 300-600", "body_font": "Source Sans 3 400/500/600", "palette": ["#eef3f4", "#0d2230", "#135d7a", "#bfe6ef", "#e1eaec", "#536772", "#cfdde1"], "hero_pattern": "product-illustration-closeup", "signature": "Air-to-water five-stage flow diagram with animated flow line"},
+  "current_site_findings": [
+    "air2waterbahamas.com no longer exists; old listings send people to an error.",
+    "Your listings disagree on your street number (46 or 47 Fairwind Street).",
+    "The only description online is the US manufacturer's boilerplate.",
+    "Nothing shows the machines or explains how water from air works.",
+    "The only way to enquire is a phone number."
+  ],
+  "pitch_line": "Your website address is dead, and 'water from air' is a product people need to see working; this site shows it step by step and books the demonstration.",
+  "sources": ["https://www.bahamasindex.com/company/10535/Water_Technologies_Bahamas_Ltd", "https://bahamas.yabsta.com/search/all/1/Water%20Services/10"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "B",
+  "assumptions": ["Still trading and still selling Air2Water machines", "Mobile and larger machines offered (from listing keywords Triton mobile, industrial water machine)", "Process stage wording for cooling and filtering is a generic description"],
+  "notes": "Operating status not confirmed beyond directory listings (BahamasIndex listing from 2012, Yabsta sponsored). Domain air2waterbahamas.com does not resolve: pitch a new domain (proposed watertechnologiesbahamas.com, unverified). Street number conflict: 46 (Yabsta) vs 47 (BahamasIndex); site shows street only. No photos or email found.",
+  "built_at": "2026-11-05T01:58:02Z"
 }
