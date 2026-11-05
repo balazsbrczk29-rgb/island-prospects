@@ -1,9 +1,4 @@
-{
- "slug": "island-electrical-construction-co",
- "id": 18,
- "name": "Island Electrical Construction Co.",
- "batch": "02",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:17:12.152Z"
-}
+{"slug":"island-electrical-construction-co","id":18,"name":"Island Electrical Construction Co.","batch":"02","tier":"A","state":"skipped","track":"B",
+"notes":"Skipped: cannot confirm the company still operates. Registry listings only (D&B, zavia status unknown), last street address Logwood Rd from a 1976 yearbook, no phone/email/web/social found, not on BPL 2025-2026 three-phase contractor list. Worth a local check in Freeport; if active, rebuild with real contact details.",
+"sources":["https://www.dnb.com/business-directory/company-information.construction.bs.gr_bahama.html","https://zavia.ai/companies/island-electrical-construction-company-limited-bs-1249802550/","https://archive.org/stream/westindiescaribb1976unse/westindiescaribb1976unse_djvu.txt"],
+"pitch_line":null,"built_at":"2026-11-05T01:17:57Z"}
