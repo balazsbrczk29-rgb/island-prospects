@@ -8,6 +8,9 @@ GitHub Pages serves the repo root, so `/<slug>/index.html` becomes `https://<own
 You are given a BATCH number (for example `07`). Build every prospect in `prospects.json` whose `batch` matches, one after another, fully finishing and pushing each before starting the next. **Immediately before starting each business, run `node factory/tools/batch.mjs claim <slug>`. If it prints SKIP, another session has it: move on to the next one.** In resume mode (`batch.mjs pending N`) the same claim rule applies.
 **Always load the `site-factory` skill first** (`.claude/skills/site-factory/SKILL.md`) and follow its pipeline exactly. It tells you when to load `frontend-design` and `ui-ux-pro-max`.
 
+## The bar
+Every site is portfolio work a client would pay $1,000+ for: built for that business's real buyer (a marina sells to yacht owners, so it must feel quietly luxurious), with visuals that depict the business's actual setting and trade (never random effects), at least two real interactions, and a design unlike any other site in this repo. Read `.claude/skills/site-factory/references/portfolio-standard.md` for every business.
+
 ## Priority and saving
 Batches are ordered by priority: businesses with no working website first, then outdated sites, then the rest, then large enterprises. Every finished business is pushed immediately, so if credits run out, everything completed so far is already live and saved.
 

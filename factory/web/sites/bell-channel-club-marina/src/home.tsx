@@ -6,7 +6,7 @@ import { BorderBeam } from "@/components/magicui/border-beam"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Page, mount, Reveal, ease, PHONE, TEL } from "./site"
 
-const Water = lazy(() => import("./Water"))
+const Scene = lazy(() => import("./Scene"))
 
 const FACTS = [
   ["Gated", "A quiet, gated community on the Bell Channel inlet."],
@@ -50,12 +50,12 @@ function Hero() {
             </a>
           </motion.div>
         </div>
-        <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 1.4, ease }} className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-sea md:aspect-[5/6]">
-          <Suspense fallback={<div className="size-full bg-gradient-to-b from-sea to-[#bcd8d3]" />}><Water /></Suspense>
-          <div className="pointer-events-none absolute inset-x-5 bottom-5 flex items-end justify-between rounded-2xl bg-paper/90 px-5 py-4 backdrop-blur">
+        <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 1.4, ease }} className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-sea md:aspect-[1/1]">
+          <Suspense fallback={<div className="size-full bg-gradient-to-b from-sea to-[#bcd8d3]" />}><Scene /></Suspense>
+          <div className="pointer-events-none absolute inset-x-4 top-4 flex items-start justify-between rounded-2xl bg-paper/85 px-4 py-3 backdrop-blur">
             <div>
-              <p className="text-[11px] tracking-[0.18em] text-muted uppercase">The inlet</p>
-              <p className="font-display text-xl">Bell Channel, into Port Lucaya</p>
+              <p className="text-[11px] tracking-[0.18em] text-muted uppercase">Bell Channel, Freeport</p>
+              <p className="font-display text-lg">Explore the club: tap a label</p>
             </div>
             <span className="text-xs text-muted">26.51° N · 78.64° W</span>
           </div>

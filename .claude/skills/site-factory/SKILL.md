@@ -20,6 +20,7 @@ Read these references when the step says so (do not preload all of them):
 - `references/seo-local.md`         titles, meta, headings, JSON-LD, Bahamas local keyword patterns
 - `references/components.md`        the mandatory shared snippets (concept ribbon, concept notes, enquiry form, site-data.json)
 
+- `references/portfolio-standard.md` the $1,000+ bar: buyer portrait, context-true visuals, interactivity, uniqueness check (read for EVERY business)
 - `references/components-catalog.md` every vendored component (shadcn, Magic UI, React Bits) and which fit each niche
 
 Load these vendored skills **once per session**, at step 4, before your first design:
@@ -74,8 +75,8 @@ Decide and add to the brief:
 - The user journey in 3 lines: arrive (from Google / Instagram / a dock-side QR code) → reassure → act.
 - Local SEO target: one primary query and 3-5 secondary queries (patterns in `seo-local.md`).
 
-## Step 3. Brand story
-Find the one true thing that makes this business itself: the cay it sits on, the founding family, the 1940s mansion, the reef at the doorstep, 40 years of roofing after hurricanes. Write a single-sentence **brand truth** and a 5-word **feel** (e.g. "unhurried, salt-bleached, family, nautical, honest"). Everything visual follows from these.
+## Step 3. Brand story (read `references/portfolio-standard.md` first, every business)
+Find the one true thing that makes this business itself: the cay it sits on, the founding family, the 1940s mansion, the reef at the doorstep, 40 years of roofing after hurricanes. Write the **buyer portrait** (portfolio-standard section 1), then a single-sentence **brand truth** and a 5-word **feel** (e.g. "unhurried, salt-bleached, family, nautical, honest"). Everything visual follows from these.
 
 ## Step 4. Design direction (load `frontend-design` once; read `design-system.md`)
 Run `node factory/tools/used.mjs` first. Then specify, in the brief, with zero ambiguity:
