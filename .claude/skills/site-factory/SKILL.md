@@ -20,6 +20,7 @@ Read these references when the step says so (do not preload all of them):
 - `references/seo-local.md`         titles, meta, headings, JSON-LD, Bahamas local keyword patterns
 - `references/components.md`        the mandatory shared snippets (concept ribbon, concept notes, enquiry form, site-data.json)
 
+- `references/showcase-art-direction.md` WHAT SHOWCASE LEVEL MEANS: reference sites per niche to study, design vocabulary, hero recipes, motion system, imagery hierarchy, and the scorecard that gates publishing (read for EVERY business)
 - `references/portfolio-standard.md` the $1,000+ bar: buyer portrait, context-true visuals, interactivity, uniqueness check (read for EVERY business)
 - `references/components-catalog.md` every vendored component (shadcn, Magic UI, React Bits) and which fit each niche
 
@@ -78,7 +79,7 @@ Decide and add to the brief:
 ## Step 3. Brand story (read `references/portfolio-standard.md` first, every business)
 Find the one true thing that makes this business itself: the cay it sits on, the founding family, the 1940s mansion, the reef at the doorstep, 40 years of roofing after hurricanes. Write the **buyer portrait** (portfolio-standard section 1), then a single-sentence **brand truth** and a 5-word **feel** (e.g. "unhurried, salt-bleached, family, nautical, honest"). Everything visual follows from these.
 
-## Step 4. Design direction (load `frontend-design` once; read `design-system.md`)
+## Step 4. Design direction (first study 2 reference sites from showcase-art-direction.md; write the spec in its vocabulary) (load `frontend-design` once; read `design-system.md`)
 Run `node factory/tools/used.mjs` first. Then specify, in the brief, with zero ambiguity:
 - Display + body fonts (exact Google Fonts families and weights). **No pairing may already appear 2+ times in used.mjs output. No display face may repeat within your batch.**
 - Palette: 5-7 hex values with roles (`--ink`, `--paper`, `--accent`, `--accent-2`, `--muted`, `--line`), derived from the brand's real colors if visible, otherwise from the physical place and materials (limestone, sea-grape leaf, conch pink, mangrove tannin, hull blue, weathered teak, rust-free stainless). Check text contrast is at least 4.5:1.
@@ -123,7 +124,7 @@ node factory/tools/qa.mjs <slug>
 ```
 It serves the repo locally, blocks outside network (outside images show as grey "external image" boxes, Google Fonts fall back; both are expected in the sandbox), screenshots mobile 390 and desktop 1440 into `factory/qa/<slug>/`, and prints blockers and warnings. Then:
 1. Fix every **BLOCKER**.
-2. Read `factory/qa/<slug>/mobile.png` and `desktop.png` with the Read tool. Judge as a design director: hierarchy, spacing rhythm, alignment, does the hero say who/where/what in 3 seconds, is the CTA obvious on mobile, does anything look templated. Fix the two worst issues.
+2. Read `factory/qa/<slug>/mobile.png` and `desktop.png` with the Read tool. Judge as a design director: hierarchy, spacing rhythm, alignment, does the hero say who/where/what in 3 seconds, is the CTA obvious on mobile, does anything look templated. Score the showcase scorecard (showcase-art-direction.md section 6); fix every line below 4.
 3. Re-run QA once. Stop after the second fix pass even if warnings remain; list them in status notes.
 
 ## Step 8. Status and publish

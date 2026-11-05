@@ -5,6 +5,7 @@
 @source "../../../src/components/ui/sheet.tsx";
 @source "../../../src/components/magicui/border-beam.tsx";
 @source "../../../src/components/reactbits/TextAnimations/BlurText/BlurText.tsx";
+@source "../../../../node_modules/@react-three/drei/core/Html.js";
 
 @theme {
   --color-paper: #eef2ee;

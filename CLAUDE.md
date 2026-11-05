@@ -9,7 +9,7 @@ You are given a BATCH number (for example `07`). Build every prospect in `prospe
 **Always load the `site-factory` skill first** (`.claude/skills/site-factory/SKILL.md`) and follow its pipeline exactly. It tells you when to load `frontend-design` and `ui-ux-pro-max`.
 
 ## The bar
-Every site is portfolio work a client would pay $1,000+ for: built for that business's real buyer (a marina sells to yacht owners, so it must feel quietly luxurious), with visuals that depict the business's actual setting and trade (never random effects), at least two real interactions, and a design unlike any other site in this repo. Read `.claude/skills/site-factory/references/portfolio-standard.md` for every business.
+Every site is portfolio work a client would pay $1,000+ for: built for that business's real buyer (a marina sells to yacht owners, so it must feel quietly luxurious), with visuals that depict the business's actual setting and trade (never random effects), at least two real interactions, and a design unlike any other site in this repo. Read `.claude/skills/site-factory/references/portfolio-standard.md` AND `references/showcase-art-direction.md` for every business: study two award-level reference sites for the niche first, use the vocabulary there (full-bleed hero, type scale contrast, editorial grid, section rhythm, mask reveals, scrollytelling, cinematic 3D), and only publish when every line of the showcase scorecard scores 4/5 or higher.
 
 ## Priority and saving
 Batches are ordered by priority: businesses with no working website first, then outdated sites, then the rest, then large enterprises. Every finished business is pushed immediately, so if credits run out, everything completed so far is already live and saved.

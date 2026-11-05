@@ -97,7 +97,11 @@ for (const page of pages) {
 }
 await browser.close(); server.close();
 // size budget
-const adir = path.join(root, slug, 'assets'); const own = fs.existsSync(adir) ? fs.readdirSync(adir).filter(f => /\.(css|js)$/.test(f) && !/^(Water|Scene|three|Three)/.test(f)).reduce((a, f) => a + fs.statSync(path.join(adir, f)).size, 0) : 0;
+const adir = path.join(root, slug, 'assets');
+// initial payload = assets referenced directly by index.html (script src, link href, modulepreload); lazy chunks (3D scenes) excluded
+const ihtml = fs.readFileSync(path.join(root, slug, 'index.html'), 'utf8');
+const refs = [...ihtml.matchAll(/(?:src|href)="\.?\/?assets\/([^"]+\.(?:js|css))"/g)].map(m => m[1]);
+const own = refs.filter(f => fs.existsSync(path.join(adir, f))).reduce((a, f) => a + fs.statSync(path.join(adir, f)).size, 0);
 if (own > 650000) warnings.push(`initial JS+CSS is ${Math.round(own / 1024)} KB (budget 650 KB; lazy-load three.js scenes)`);
 if (!fs.existsSync(path.join(root, 'factory/web/sites', slug))) blockers.push('site source missing in factory/web/sites/<slug>/ (build with factory/tools/build-site.mjs)');
 for (const req of ['site-data.json', 'favicon.svg']) if (!fs.existsSync(path.join(root, slug, req))) blockers.push(`missing ${req}`);

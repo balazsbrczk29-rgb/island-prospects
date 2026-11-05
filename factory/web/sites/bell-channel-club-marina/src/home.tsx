@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Page, mount, Reveal, ease, PHONE, TEL } from "./site"
 
 const Scene = lazy(() => import("./Scene"))
+const Cinematic = lazy(() => import("./Cinematic"))
 
 const FACTS = [
   ["Gated", "A quiet, gated community on the Bell Channel inlet."],
@@ -30,37 +31,53 @@ const FAQ = [
 
 function Hero() {
   return (
-    <section className="grain relative isolate overflow-hidden" aria-labelledby="hero-title">
-      <div className="mx-auto grid min-h-[calc(100svh-120px)] max-w-[1240px] items-center gap-10 px-5 py-14 md:grid-cols-[1.05fr_1fr] md:px-8 md:py-20">
-        <div>
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }} className="text-[13px] tracking-[0.2em] text-teal uppercase">Bell Channel · Freeport · Grand Bahama</motion.p>
-          <h1 id="hero-title" className="mt-6 font-display text-[clamp(2.8rem,5.6vw,5rem)] leading-[0.98] tracking-[-0.01em] text-ink">
-            <BlurText text="Between the canal" animateBy="words" delay={90} direction="bottom" trigger="load" className="block" />
-            <BlurText text="and the beach." animateBy="words" delay={90} direction="bottom" trigger="load" className="block italic text-teal" />
+    <section className="relative isolate h-[calc(100svh-96px)] min-h-[640px] overflow-hidden bg-[#2a4a55]" aria-labelledby="hero-title">
+      <div className="absolute inset-0 -z-10">
+        <Suspense fallback={<div className="size-full bg-gradient-to-b from-[#6f8fa0] via-[#e2b48c] to-[#173f49]" />}><Cinematic /></Suspense>
+      </div>
+      <div className="mx-auto flex h-full max-w-[1440px] flex-col justify-between px-5 pt-10 pb-8 md:px-10 md:pt-14 md:pb-10">
+        <div className="flex items-start justify-between text-[11px] tracking-[0.22em] text-white/85 uppercase">
+          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }}>Bell Channel · Freeport · Grand Bahama</motion.span>
+          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: 0.2 }} className="hidden md:block">26.51° N · 78.64° W</motion.span>
+        </div>
+        <div className="grid items-end gap-8 md:grid-cols-[1fr_360px]">
+          <h1 id="hero-title" className="font-display text-[clamp(3.2rem,8.6vw,9rem)] leading-[0.88] tracking-[-0.025em] text-white [text-shadow:0_2px_40px_rgba(20,48,58,.35)]">
+            {["Between the canal", "and the beach."].map((line, i) => (
+              <span key={line} className="block overflow-hidden pb-[0.06em]">
+                <motion.span className={`block ${i === 1 ? "italic text-[#f3dcc0]" : ""}`} initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.25 + i * 0.12, duration: 1.2, ease: [0.77, 0, 0.175, 1] }}>{line}</motion.span>
+              </span>
+            ))}
           </h1>
-          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.9, ease }} className="mt-7 max-w-[34rem] text-lg leading-relaxed text-muted">
-            Bell Channel Club &amp; Marina is a gated club of condominiums and townhouses on the inlet that opens into Port Lucaya, with a private marina for owners.
-          </motion.p>
-          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65, duration: 0.9, ease }} className="mt-9 flex flex-wrap gap-3">
-            <a href={TEL} className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 text-paper transition hover:-translate-y-px hover:bg-teal-deep active:translate-y-0">
-              <Phone className="size-4" aria-hidden /> Call the club office
-            </a>
-            <a href="marina.html" className="group inline-flex min-h-12 items-center gap-2 rounded-full border border-ink/25 px-6 text-ink transition hover:border-ink">
-              About the marina <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
-            </a>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 1, ease }} className="relative rounded-2xl border border-white/25 bg-white/12 p-6 text-white backdrop-blur-xl">
+            <p className="text-[15px] leading-relaxed text-white/90">A gated club of condominiums and townhouses on the inlet into Port Lucaya, with a private marina for owners.</p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              <a href={TEL} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-5 text-[15px] text-ink transition hover:-translate-y-px active:translate-y-0"><Phone className="size-4" aria-hidden /> Call the club office</a>
+              <a href="marina.html" className="group inline-flex min-h-11 items-center gap-1.5 rounded-full border border-white/40 px-5 text-[15px] text-white transition hover:border-white">The marina <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden /></a>
+            </div>
+            <BorderBeam size={120} duration={10} colorFrom="#f3dcc0" colorTo="#ffffff" borderWidth={1} />
           </motion.div>
         </div>
-        <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 1.4, ease }} className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-sea md:aspect-[1/1]">
-          <Suspense fallback={<div className="size-full bg-gradient-to-b from-sea to-[#bcd8d3]" />}><Scene /></Suspense>
-          <div className="pointer-events-none absolute inset-x-4 top-4 flex items-start justify-between rounded-2xl bg-paper/85 px-4 py-3 backdrop-blur">
-            <div>
-              <p className="text-[11px] tracking-[0.18em] text-muted uppercase">Bell Channel, Freeport</p>
-              <p className="font-display text-lg">Explore the club: tap a label</p>
-            </div>
-            <span className="text-xs text-muted">26.51° N · 78.64° W</span>
+      </div>
+      <p className="absolute bottom-3 left-1/2 -translate-x-1/2 text-[10px] tracking-[0.2em] text-white/60 uppercase">Illustration · Bell Channel at golden hour</p>
+    </section>
+  )
+}
+
+function Explore() {
+  return (
+    <section className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36" aria-labelledby="explore-title">
+      <div className="grid gap-10 md:grid-cols-12">
+        <Reveal className="md:col-span-4">
+          <p className="text-[11px] tracking-[0.22em] text-teal uppercase">01 · Explore</p>
+          <h2 id="explore-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4rem)] leading-[0.98] tracking-[-0.02em]">The whole club, from above.</h2>
+          <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-muted">Move across the model and tap a label: the beach the association keeps, the townhouses, the owners' docks on the canal, and the channel into Port Lucaya.</p>
+          <p className="mt-8 text-[11px] tracking-[0.18em] text-muted uppercase">Illustration, not to scale</p>
+        </Reveal>
+        <Reveal delay={0.1} className="md:col-span-8">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] bg-sea md:aspect-[16/10]">
+            <Suspense fallback={<div className="size-full bg-sea" />}><Scene /></Suspense>
           </div>
-          <BorderBeam size={180} duration={9} colorFrom="#1f7a78" colorTo="#c9b88f" borderWidth={1.5} />
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   )
@@ -180,4 +197,4 @@ function FindUs() {
   )
 }
 
-mount(<Page current="The club"><Hero /><Facts /><Setting /><Living /><Questions /><FindUs /></Page>)
+mount(<Page current="The club"><Hero /><Facts /><Explore /><Setting /><Living /><Questions /><FindUs /></Page>)

@@ -23,6 +23,7 @@ Every site must be **portfolio-level work that a client would pay at least $1,00
 1. `bash factory/tools/setup.sh` (installs the React toolchain in `factory/web/`, lists the skills).
 2. Read `CLAUDE.md` in full. Its hard rules override everything else.
 3. Read `.claude/skills/site-factory/SKILL.md` (the 8-step pipeline) and its references when the steps say so:
+   - `references/showcase-art-direction.md` (read for EVERY business): the reference sites to study per niche (Feadship, Aman, Belmond, Sotheby's, Pictet, Arup, Aesop...), the professional design vocabulary, hero recipes, motion system and the 10-point showcase scorecard that gates publishing.
    - `references/portfolio-standard.md` (read for EVERY business): buyer portrait, context-true visuals, interactivity, uniqueness check.
    - `references/niche-playbooks.md`, `references/design-system.md`, `references/seo-local.md`, `references/components.md`, `references/components-catalog.md`.
 4. Load these vendored skills once, before your first design:
@@ -72,7 +73,10 @@ Write a **buyer portrait** first: who pays, income band, where they live, what t
 
 Decide: sitemap (stay/marina/tours: home + 2 inner pages; others: home + 1; Tier C: one page), one primary CTA with a specific label ("Request a slip", "Ask about the Garden Suite", "Request a roofing quote"; never "Submit", "Learn more", "Book a Table"), the 3-step user journey, one primary and 3 to 5 secondary local search queries.
 
-## 6. Design (portfolio level, unique, context-true)
+## 6. Design (showcase level, unique, context-true)
+
+First `firecrawl_scrape` two award-level reference sites for the niche (list in showcase-art-direction.md) and note their hero composition, type system, section rhythm and best interaction. Write the design spec using the vocabulary: full-bleed hero, art-directed crop, type scale contrast (display 7-12 vw against 11-13 px tracked labels), editorial asymmetric grid, section rhythm and tonal shifts, negative space, hairline detailing, mask reveals, line-split headlines, sticky scrollytelling, parallax depth, glass panels, cinematic 3D (procedural sky, reflective ocean, golden hour, silhouettes) instead of toy-like low-poly. Score the 10-line showcase scorecard and fix anything under 4/5 before publishing.
+
 
 - **Brand truth** in one sentence and a 5-word feel, from the research.
 - **Type**: an exact Google Fonts pairing. Run `node factory/tools/used.mjs` first: no pairing may appear more than twice in the repo, no display face twice in a session. Banned display faces: Inter, Roboto, Arial, system, Poppins, Montserrat, Oswald, Bebas, condensed uppercase.
