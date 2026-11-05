@@ -1,0 +1,60 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "orange-creek-inn",
+ "name": "Orange Creek Inn",
+ "niche": "hospitality-stay",
+ "contact": {
+  "phone": "+1-242-354-4110",
+  "whatsapp": null,
+  "email": "info@orangecreekinn.com",
+  "address": "Orange Creek, north of Arthur's Town",
+  "settlement": "Orange Creek",
+  "island": "Cat Island",
+  "booking": "https://www.bahamago.com/hotels/22-Orange-Creek-Inn?ref=oipb"
+ },
+ "hours": null,
+ "socials": [
+  "https://www.facebook.com/Orange-Creek-Inn-698462783509770/"
+ ],
+ "offer": [
+  {
+   "name": "Studio",
+   "kind": "room",
+   "summary": "Spacious studio with stove-top kitchenette, AC, TV and internet; beach across the road; store on site.",
+   "price": null,
+   "source": "https://www.orangecreekinn.com/"
+  },
+  {
+   "name": "Car rental",
+   "kind": "service",
+   "summary": "Average $80/day, can meet you at the airport.",
+   "price": "$80/day avg",
+   "source": "https://www.orangecreekinn.com/"
+  },
+  {
+   "name": "Bicycle rental",
+   "kind": "service",
+   "summary": "$10/day.",
+   "price": "$10/day",
+   "source": "https://www.orangecreekinn.com/"
+  },
+  {
+   "name": "On-site convenience store",
+   "kind": "product",
+   "summary": "Groceries and essentials.",
+   "price": null,
+   "source": "https://www.orangecreekinn.com/"
+  }
+ ],
+ "platform": {
+  "candidate": true,
+  "orderable": false,
+  "categories": [
+   "grocery",
+   "lodging"
+  ]
+ },
+ "sources": [
+  "https://www.orangecreekinn.com/"
+ ]
+}

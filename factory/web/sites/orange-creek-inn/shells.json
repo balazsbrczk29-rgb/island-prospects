@@ -1,0 +1,142 @@
+{
+ "name": "Orange Creek Inn",
+ "domain": "https://www.orangecreekinn.com/",
+ "ogImage": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/welcome-img.jpg",
+ "theme": "#f7f4ee",
+ "fonts": "https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600&family=Karla:wght@400;500&display=swap",
+ "pages": [
+  {
+   "file": "index.html",
+   "entry": "home",
+   "path": "",
+   "faq": true,
+   "title": "Cat Island Hotel near Arthur's Town | Orange Creek Inn",
+   "desc": "Orange Creek Inn, Cat Island: studios with kitchenettes across the road from a white-sand beach, a store on site, car rental and airport pickup, 3.5 miles away."
+  },
+  {
+   "file": "stay.html",
+   "entry": "stay",
+   "path": "studios",
+   "title": "Studios, Amenities & Specials | Orange Creek Inn, Cat Island",
+   "desc": "Studios with kitchenettes at Orange Creek Inn, Cat Island, plus a finder for the published specials: fee credits, air credits and free flights from Nassau."
+  },
+  {
+   "file": "island.html",
+   "entry": "island",
+   "path": "getting-here",
+   "title": "How to Get to Cat Island | Orange Creek Inn, Bahamas",
+   "desc": "Plan your trip to Orange Creek Inn: flights from Nassau and Fort Lauderdale, Arthur's Town Airport 3.5 miles away, car and bicycle rental, and things to do."
+  }
+ ],
+ "graph": [
+  {
+   "@type": [
+    "Hotel",
+    "LodgingBusiness"
+   ],
+   "@id": "https://www.orangecreekinn.com/#business",
+   "name": "Orange Creek Inn",
+   "url": "https://www.orangecreekinn.com/",
+   "telephone": "+1-242-354-4110",
+   "email": "info@orangecreekinn.com",
+   "image": [
+    "https://www.orangecreekinn.com/wp-content/uploads/2019/08/welcome-img.jpg"
+   ],
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Orange Creek",
+    "addressRegion": "Cat Island",
+    "addressCountry": "BS"
+   },
+   "sameAs": [
+    "https://www.facebook.com/Orange-Creek-Inn-698462783509770/"
+   ],
+   "paymentAccepted": "Visa, Mastercard, Cash",
+   "amenityFeature": [
+    {
+     "@type": "LocationFeatureSpecification",
+     "name": "Kitchenette",
+     "value": true
+    },
+    {
+     "@type": "LocationFeatureSpecification",
+     "name": "Air conditioning",
+     "value": true
+    },
+    {
+     "@type": "LocationFeatureSpecification",
+     "name": "Internet access",
+     "value": true
+    },
+    {
+     "@type": "LocationFeatureSpecification",
+     "name": "Laundry",
+     "value": true
+    },
+    {
+     "@type": "LocationFeatureSpecification",
+     "name": "Convenience store",
+     "value": true
+    },
+    {
+     "@type": "LocationFeatureSpecification",
+     "name": "Car rental",
+     "value": true
+    },
+    {
+     "@type": "LocationFeatureSpecification",
+     "name": "Airport pickup",
+     "value": true
+    }
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://www.orangecreekinn.com/#website",
+   "url": "https://www.orangecreekinn.com/",
+   "name": "Orange Creek Inn"
+  }
+ ],
+ "faq": [
+  [
+   "Where is Orange Creek Inn?",
+   "In Orange Creek, immediately north of Arthur's Town on Cat Island, The Bahamas, directly across the road from a white-sand beach."
+  ],
+  [
+   "How do I get to Orange Creek Inn?",
+   "Fly to Nassau and take a Western Air flight to Cat Island, or fly Makers Air from Fort Lauderdale Executive. Arthur's Town Airport is about 3.5 miles away; the inn offers airport pickup, and a taxi is about $15."
+  ],
+  [
+   "Do I need a car?",
+   "It is recommended for exploring. Car rental averages $80 a day and can be waiting at the airport; bicycles are $10 a day."
+  ],
+  [
+   "Is it good for bonefishing?",
+   "Yes. The inn is near bonefishing flats on Cat Island and is popular with anglers."
+  ],
+  [
+   "How do I pay?",
+   "Visa and Mastercard, or cash on arrival."
+  ]
+ ],
+ "notes": {
+  "business": "Orange Creek Inn",
+  "current_site": "orangecreekinn.com",
+  "findings": [
+   "Everything sits on one long page with #!/ links, so Google sees one page and nobody can share a link to your rooms or FAQ.",
+   "The headline reads \"Welcome to Orange Creek Inn\" and never says the thing that sells you: the beach across the road at the top of Cat Island.",
+   "Eight specials run in a slideshow of fine print; a guest cannot tell which one fits their trip.",
+   "Your flight times and costs, the most useful thing on the site, are buried near the end of 25 FAQs.",
+   "Book Now sends guests to another site without telling them why."
+  ],
+  "improvements": [
+   "A first screen that says where you are and what you offer in one line, with Check dates and your phone.",
+   "A three-tap trip planner: where you fly from, which day, then the last 3.5 miles and island transport costs.",
+   "A specials finder: nights and home country in, matching offers out.",
+   "Separate pages for studios, specials and getting here, so each can rank on Google.",
+   "Clear wording that online booking opens the Out Islands booking page."
+  ],
+  "agency": "ESTATIQ AI Solutions",
+  "contact": "balazs@estatiq.co"
+ }
+}
