@@ -1,0 +1,16 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "cape-santa-maria-beach-resort",
+  "name": "Cape Santa Maria Beach Resort",
+  "niche": "hospitality-stay",
+  "contact": {"phone": "+1-800-926-9704", "phone_local": "+1-242-338-5273", "whatsapp": null, "email": "resort@capesantamaria.com", "address": "PO Box L.I. 30-117, Seymour's", "settlement": "Seymour's", "island": "Long Island"},
+  "hours": null,
+  "socials": ["https://www.facebook.com/capesantamaria", "https://www.instagram.com/capesantamaria/", "https://www.youtube.com/user/CapeSantaMaria1"],
+  "offer": [
+    {"name": "Beachfront Villa", "kind": "room", "summary": "Two bedrooms, 1,800 sq ft, 1 king + 2 queens, full kitchen.", "price": null, "source": "https://www.capesantamaria.com/long-island-bahamas-resort"},
+    {"name": "Beachfront Bungalow", "kind": "room", "summary": "One bedroom, 400 sq ft, 1 king, private veranda.", "price": null, "source": "https://www.capesantamaria.com/long-island-bahamas-resort"},
+    {"name": "Two-Bedroom Beachfront Bungalow", "kind": "room", "summary": "580 sq ft, 1 king or 2 queens + 2 twins.", "price": null, "source": "https://www.capesantamaria.com/long-island-bahamas-resort"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://www.capesantamaria.com/", "https://www.capesantamaria.com/long-island-bahamas-resort", "https://www.capesantamaria.com/travel-to-long-island-bahamas"]
+}

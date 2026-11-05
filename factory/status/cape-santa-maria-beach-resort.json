@@ -1,9 +1,54 @@
 {
  "slug": "cape-santa-maria-beach-resort",
- "id": 62,
- "name": "Cape Santa Maria Beach Resort",
- "batch": "10",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T02:13:13.423Z"
+ "name": "Cape Santa Maria Beach Resort",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "getting-here.html"
+ ],
+ "primary_cta": "Check availability",
+ "brand_truth": "Beachfront bungalows at the far north of Long Island, where the route (and the runway) is part of the adventure.",
+ "buyer": "US and Canadian couples, families and private pilots seeking a remote beach; planning months ahead.",
+ "design": {
+  "display_font": "Marcellus 400",
+  "body_font": "Raleway 400/500/600",
+  "palette": [
+   "#f5f5f1",
+   "#1a2a33",
+   "#1f6e8c",
+   "#efe2c6",
+   "#f3c9b5",
+   "#ebeae3",
+   "#dad9d1"
+  ],
+  "hero_pattern": "full-bleed-photo-text-below",
+  "signature": "Gateway route finder (Florida, Nassau, Exuma, own plane, seaplane) with stepped route and the right booking link; room selector"
+ },
+ "current_site_findings": [
+  "Getting Here page has noindex,nofollow",
+  "Homepage shows placeholder 'Subheadline'",
+  "FareHarbor widget shows 'did not load properly'",
+  "Conflicting taxi times (20/15/13 min), airport codes LLI/LGI, broken 'SML, min to resort'",
+  "Machine-written image alt text"
+ ],
+ "pitch_line": "Your Getting Here page, the one every guest needs, is hidden from Google and contradicts itself; this concept turns it into a route finder from Florida, Nassau or the pilot's seat.",
+ "sources": [
+  "https://www.capesantamaria.com/",
+  "https://www.capesantamaria.com/long-island-bahamas-resort",
+  "https://www.capesantamaria.com/travel-to-long-island-bahamas"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Activity tiles from their gallery captions",
+  "Taxi time omitted because their site gives three different figures"
+ ],
+ "notes": "Strong existing Tambourine site; pitch is fixes plus a sharper route-led concept, not a rescue. Record said no contact info visible; footer does show +1 800-926-9704, local 242-338-5273, resort@capesantamaria.com. Photos hotlinked from their Tambourine CDN. Current offer ($500 air credit, booking window ends Nov 9 2026) deliberately not shown as it expires within days. Scorecard: hero 4, type 4, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T02:17:40.084127+00:00",
+ "id": 62,
+ "batch": "10"
 }
