@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "armoured-express-ltd",
+  "name": "Armoured Express (Bahamas) Ltd.",
+  "niche": "industrial-b2b",
+  "contact": {"phone": "+1-242-323-4430", "phone_2": "+1-242-328-6841", "whatsapp": null, "email": null, "address": "Stapledon Gardens, P.O. Box N-4499, Nassau", "settlement": "Nassau", "island": "New Providence"},
+  "hours": {"mon-fri": "09:00-17:00", "sat": "closed", "sun": "closed"},
+  "socials": ["https://m.facebook.com/pages/Armoured-Express-Bahamas-Limited/165799423610124"],
+  "offer": [
+    {"name": "Cash in transit", "kind": "service", "summary": "Surveillance-enabled cash-in-transit with armoured vehicles, armed uniformed guards and locked transit bags.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/1393/Armoured_Express_Bahamas_Ltd.html"},
+    {"name": "ATM services", "kind": "service", "summary": "ATM replenishment and first-line maintenance.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/1393/Armoured_Express_Bahamas_Ltd.html"},
+    {"name": "Family Island air courier", "kind": "service", "summary": "Air courier solutions for the Family Islands.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/1393/Armoured_Express_Bahamas_Ltd.html"},
+    {"name": "Static guards (Security Services (Bah.) Ltd.)", "kind": "service", "summary": "Static guard services from the sister company.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/1393/Armoured_Express_Bahamas_Ltd.html"},
+    {"name": "Aviation security (Security Services (Bah.) Ltd.)", "kind": "service", "summary": "Aviation security from the sister company.", "price": null, "source": "https://www.bahamaslocal.com/showlisting/1393/Armoured_Express_Bahamas_Ltd.html"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://www.bahamaslocal.com/showlisting/1393/Armoured_Express_Bahamas_Ltd.html", "https://bahamas.yabsta.com/listing/view/91415/armoured-express-bahamas-limited", "https://www.bahamasindex.com/company/673/Armoured_Express_Bahamas_Ltd"]
+}

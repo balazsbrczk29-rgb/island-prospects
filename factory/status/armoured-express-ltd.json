@@ -1,9 +1,58 @@
 {
  "slug": "armoured-express-ltd",
- "id": 26,
- "name": "Armoured Express (Bahamas) Ltd",
- "batch": "08",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:46:46.757Z"
+ "name": "Armoured Express (Bahamas) Ltd.",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "services.html"
+ ],
+ "primary_cta": "Request a service proposal",
+ "brand_truth": "Since 1961, the people Bahamian businesses hand their cash to: 100% Bahamian-owned, first with ATM services.",
+ "buyer": "Treasury, operations and risk managers at banks, credit unions, retailers, fuel stations and government revenue points in Nassau and Grand Bahama; their insurers.",
+ "design": {
+  "display_font": "Libre Franklin 800",
+  "body_font": "Libre Franklin 400/500/600",
+  "palette": [
+   "#f0f0ec",
+   "#14161b",
+   "#7d6230",
+   "#c8a96a",
+   "#e4e3dc",
+   "#5a5d63",
+   "#d6d4cc",
+   "#232c35"
+  ],
+  "hero_pattern": "typographic-monument-with-line-drawn-truck-arrival",
+  "signature": "Chain-of-custody stepper with a transit tag that stamps 'Signed' at each hand-off"
+ },
+ "current_site_findings": [
+  "No website; best description is a paid directory listing",
+  "No email published",
+  "Facebook page empty",
+  "Invisible for 'cash in transit Bahamas' / 'ATM replenishment Nassau'",
+  "Sister company Security Services (Bah.) Ltd. has no shared home online"
+ ],
+ "pitch_line": "You put armoured trucks on Bahamian roads in 1961 and were first with ATM services, yet a bank searching for cash in transit finds nothing from you; this site shows your chain of custody and insurance in one screen.",
+ "sources": [
+  "https://www.bahamaslocal.com/showlisting/1393/Armoured_Express_Bahamas_Ltd.html",
+  "https://bahamas.yabsta.com/listing/view/91415/armoured-express-bahamas-limited",
+  "https://www.bahamasindex.com/company/673/Armoured_Express_Bahamas_Ltd",
+  "https://m.facebook.com/pages/Armoured-Express-Bahamas-Limited/165799423610124"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "B",
+ "assumptions": [
+  "Chain-of-custody step wording (collected, sealed, in transit, delivered, dispensed) illustrates their sourced services; 'delivered where you direct' is inferred",
+  "Business-type options in the planner are category examples",
+  "'Have these answers ready' intake questions are generic",
+  "Proposed domain armouredexpressbahamas.com (availability unverified)"
+ ],
+ "notes": "Track B (no website). All facts from the company's own featured BahamasLocal listing (company-written). Directory-hosted images not used (rule 7): truck is an SVG line drawing (their listing shows a Hino L-series). Kept clearly distinct from the earlier Maximum Security concept (different palette, type, hero, signature). Ask owner for email, Grand Bahama office details, photos of crews and vehicles. Scorecard: hero 4, type 4, layout 4, context 4, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T01:51:48.167456+00:00",
+ "id": 26,
+ "batch": "08"
 }
