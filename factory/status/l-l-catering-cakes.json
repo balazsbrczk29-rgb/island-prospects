@@ -4,6 +4,14 @@
  "name": "L & L Catering & Cakes",
  "batch": "05",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:32:53.811Z"
+ "state": "skipped",
+ "track": "B",
+ "notes": "Skipped: cannot confirm it still operates. Only traces are a Bahamas Index listing last updated 2014 (reviews 2013, est. 2011, manager Lateisha Wallace, mobile 242-552-8861, Harold Road) and a dead Weebly site (404). No current social page found. Worth one phone call: if active it is a strong lost-website prospect (catering + wedding cakes, delivery-platform candidate).",
+ "sources": [
+  "https://www.bahamasindex.com/company/15900/L_L_Catering_Cakes",
+  "https://llcateringcakes.weebly.com/",
+  "https://www.ilsd.us/the-bahamas/nassau/catering/l-l-catering-cakes"
+ ],
+ "pitch_line": null,
+ "built_at": "2026-11-05T01:33:38.461858+00:00"
 }
