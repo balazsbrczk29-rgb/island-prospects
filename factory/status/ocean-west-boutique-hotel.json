@@ -1,9 +1,22 @@
 {
- "slug": "ocean-west-boutique-hotel",
- "id": 87,
- "name": "Ocean West Boutique Hotel",
- "batch": "12",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T04:49:58.095Z"
+  "slug": "ocean-west-boutique-hotel", "id": 87, "name": "Ocean West Boutique Hotel", "batch": "12", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "rooms.html", "stay.html"],
+  "primary_cta": "Check dates",
+  "brand_truth": "Ten gem-named rooms on a ridge 70 ft up, between Lake Killarney and the Atlantic, five minutes from the airport.",
+  "design": {"display_font": "Prata 400", "body_font": "Hanken Grotesk 400/500/600", "palette": ["#f5f1ea", "#1d2126", "#45705f", "#2c4d41", "#2b5d78", "#ecc9b4", "#ddd4c5"], "hero_pattern": "section-elevation-split (ridge drawing with clickable gem windows)", "signature": "Elevation drawing of the hotel on its 70 ft ridge between lake and ocean; each of the 10 windows is a clickable gem room that opens its real photo and details"},
+  "current_site_findings": [
+    "Same keyword-stuffed title on every page.",
+    "Headings are images inside tables, unreadable to Google and phones.",
+    "No address or phone on the homepage.",
+    "Ten gem rooms shown as tiny thumbnails with no comparison.",
+    "The 70 ft ridge between lake and ocean is a single sentence."
+  ],
+  "pitch_line": "You have ten rooms named after gems on a ridge between a lake and the ocean; this concept lets a guest tap the Diamond Room's window and book it, instead of squinting at thumbnails in a 2010 table layout.",
+  "sources": ["https://oceanwestbahamas.com/", "https://oceanwestbahamas.com/about-us.html", "https://oceanwestbahamas.com/accommodations.html", "https://oceanwestbahamas.com/amenities.html", "https://oceanwestbahamas.com/contactus.html", "https://oceanwestbahamas.com/getting-here.html"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Rates 15-00 still current", "Sapodilla restaurant still operating", "Room photos current", "Ridge drawing positions rooms by floor only; exact window layout is illustrative"],
+  "notes": "No street number published; address shown as West Bay St, Nassau with the hotel's own map pin (25.069827,-77.443689). Booking CTA links to their real innRoad engine. Tripadvisor/HotelsCombined badges they display were not used (avoid rating claims). Gem colour swatches are decorative. Scorecard: 1:4 2:4 3:4 4:5 5:4 6:4 7:5 8:4 9:4 10:5 11:5.",
+  "built_at": "2026-11-05T04:56:23Z"
 }

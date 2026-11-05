@@ -1,0 +1,106 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "ocean-west-boutique-hotel",
+ "name": "Ocean West Boutique Hotel",
+ "niche": "hospitality-stay",
+ "contact": {
+  "phone": "+1-242-698-6744",
+  "whatsapp": null,
+  "email": "info@oceanwestbahamas.com",
+  "address": "West Bay St, western New Providence",
+  "settlement": "Nassau",
+  "island": "New Providence",
+  "booking": "https://oceanwestbahamas.client.innroad.com/"
+ },
+ "hours": {
+  "front_desk": "24 hours",
+  "check_in": "15:00",
+  "check_out": "11:00"
+ },
+ "socials": [],
+ "offer": [
+  {
+   "name": "Diamond Room",
+   "kind": "room",
+   "summary": "1 King; Ocean view, private balcony, 3rd floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  },
+  {
+   "name": "Sapphire Room",
+   "kind": "room",
+   "summary": "1 King; Lake and partial ocean view, 2nd floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  },
+  {
+   "name": "Ruby Room",
+   "kind": "room",
+   "summary": "1 Queen; Lake and partial ocean view, 3rd floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  },
+  {
+   "name": "Topaz Room",
+   "kind": "room",
+   "summary": "2 Single; Ocean and pool view, private balcony, 2nd floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  },
+  {
+   "name": "Emerald Room",
+   "kind": "room",
+   "summary": "1 Queen; Ocean and pool view, private balcony, 2nd floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  },
+  {
+   "name": "Tanzanite Room",
+   "kind": "room",
+   "summary": "1 King; Garden view, 1st floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  },
+  {
+   "name": "Onyx Room",
+   "kind": "room",
+   "summary": "1 Queen; Ocean and pool view, 1st floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  },
+  {
+   "name": "Ivory Room",
+   "kind": "room",
+   "summary": "1 Double; Ocean and pool view, 1st floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  },
+  {
+   "name": "Pearl Room",
+   "kind": "room",
+   "summary": "2 Single; Ocean and pool view, 1st floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  },
+  {
+   "name": "Coral Room",
+   "kind": "room",
+   "summary": "1 Double; Ocean and pool view, 1st floor",
+   "price": "$215-$600 per night range (hotel-wide)",
+   "source": "https://oceanwestbahamas.com/accommodations.html"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://oceanwestbahamas.com/",
+  "https://oceanwestbahamas.com/about-us.html",
+  "https://oceanwestbahamas.com/accommodations.html",
+  "https://oceanwestbahamas.com/amenities.html",
+  "https://oceanwestbahamas.com/contactus.html",
+  "https://oceanwestbahamas.com/getting-here.html"
+ ]
+}
