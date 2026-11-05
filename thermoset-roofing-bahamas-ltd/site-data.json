@@ -1,0 +1,91 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "thermoset-roofing-bahamas-ltd",
+ "name": "Thermoset Roofing Bahamas Ltd.",
+ "niche": "industrial-b2b",
+ "contact": {
+  "phone": "+1-242-328-7017",
+  "whatsapp": null,
+  "email": "croix.culmer@thermosetroofing242.com",
+  "address": "7 Portago Road, Oakesfield, P.O. Box SP-63997",
+  "settlement": "Nassau",
+  "island": "New Providence"
+ },
+ "hours": null,
+ "socials": [
+  "https://www.facebook.com/thermosetroofing242",
+  "https://www.instagram.com/thermosetroofing242",
+  "https://www.tiktok.com/@thermosetroofing242"
+ ],
+ "offer": [
+  {
+   "name": "Single-ply TPO/PVC roofing",
+   "kind": "service",
+   "summary": "",
+   "price": null,
+   "source": "https://www.thermosetroofing242.com/services"
+  },
+  {
+   "name": "Modified bitumen",
+   "kind": "service",
+   "summary": "",
+   "price": null,
+   "source": "https://www.thermosetroofing242.com/services"
+  },
+  {
+   "name": "Standing seam & metal roofing",
+   "kind": "service",
+   "summary": "",
+   "price": null,
+   "source": "https://www.thermosetroofing242.com/services"
+  },
+  {
+   "name": "Shingle roofing",
+   "kind": "service",
+   "summary": "",
+   "price": null,
+   "source": "https://www.thermosetroofing242.com/services"
+  },
+  {
+   "name": "Waterproofing",
+   "kind": "service",
+   "summary": "",
+   "price": null,
+   "source": "https://www.thermosetroofing242.com/services"
+  },
+  {
+   "name": "R.A.D.A.R. maintenance program",
+   "kind": "service",
+   "summary": "",
+   "price": null,
+   "source": "https://www.thermosetroofing242.com/services"
+  },
+  {
+   "name": "Custom fabrication",
+   "kind": "service",
+   "summary": "",
+   "price": null,
+   "source": "https://www.thermosetroofing242.com/services"
+  },
+  {
+   "name": "General construction",
+   "kind": "service",
+   "summary": "",
+   "price": null,
+   "source": "https://www.thermosetroofing242.com/services"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://www.thermosetroofing242.com/",
+  "https://www.thermosetroofing242.com/services",
+  "https://www.thermosetroofing242.com/radar-program",
+  "https://www.thermosetroofing242.com/portfolio",
+  "https://www.thermosetbahamas.com/about-us/",
+  "https://bahamas.yabsta.com/listing/view/96488/thermoset-roofing-bahamas-ltd"
+ ]
+}

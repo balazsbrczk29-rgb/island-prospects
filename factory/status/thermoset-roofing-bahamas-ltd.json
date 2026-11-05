@@ -4,6 +4,57 @@
  "name": "Thermoset Roofing Bahamas Ltd",
  "batch": "08",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:45:06.926Z"
+ "state": "built",
+ "claimed_at": "2026-11-05T01:45:06.926Z",
+ "pages": [
+  "index.html",
+  "services.html"
+ ],
+ "primary_cta": "Request a free estimate",
+ "brand_truth": "The roof over the brands you know: a Bahamian family contractor certified on world-class roofing systems since 2002.",
+ "buyer": "Property/facility managers, resort engineering, church committees, contractors and homeowners in New Providence.",
+ "design": {
+  "display_font": "Archivo 800",
+  "body_font": "Karla 400/600",
+  "palette": [
+   "#efeeea",
+   "#121314",
+   "#1f5e8c",
+   "#c8d64b",
+   "#164566",
+   "#5a5d60",
+   "#cfcdc5"
+  ],
+  "hero_pattern": "split-editorial-photo-bleed-right",
+  "signature": "R3F exploded single-ply roof assembly that builds on scroll (sticky scrollytelling); filterable client index; 3-tab free estimate builder"
+ },
+ "current_site_findings": [
+  "Two websites; old thermosetbahamas.com says 'based in South Florida'.",
+  "Header TikTok link misspelled.",
+  "Cart icon and 'Welcome to the pinnacle' on a non-shop site.",
+  "Client list buried under stock-style resort photos.",
+  "WhatsApp promised but no number shown.",
+  "Tax ID printed in the public footer."
+ ],
+ "pitch_line": "You've roofed Baha Mar, Atlantis and the airport, yet your old website still says you're from South Florida; this concept leads with your client list and lets a facility manager watch your roof system assemble before asking for a free estimate.",
+ "sources": [
+  "https://www.thermosetroofing242.com/",
+  "https://www.thermosetroofing242.com/services",
+  "https://www.thermosetroofing242.com/radar-program",
+  "https://www.thermosetroofing242.com/portfolio",
+  "https://www.thermosetbahamas.com/about-us/",
+  "https://www.facebook.com/thermosetroofing242/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Deck/insulation/cover board descriptions generic",
+  "Estimates emailed to GM Croix Culmer",
+  "'Since 2002' (07/03/02 ambiguous)"
+ ],
+ "notes": "Record location (Paradise Beach Rd) is outdated; site says 7 Portago Road, Oakesfield. Did not reuse RADAR testimonials. Ask for WhatsApp number and high-res project photos. QA shows external photos as grey boxes (expected).",
+ "built_at": "2026-11-05T01:53:43.193416+00:00"
 }
