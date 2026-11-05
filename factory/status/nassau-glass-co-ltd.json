@@ -1,9 +1,24 @@
 {
- "slug": "nassau-glass-co-ltd",
- "id": 85,
- "name": "Nassau Glass Co Ltd",
- "batch": "06",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:34:08.471Z"
+ "slug": "nassau-glass-co-ltd", "id": 85, "name": "Nassau Glass Co Ltd", "batch": "06", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "services.html"],
+ "primary_cta": "Request a glass quote",
+ "brand_truth": "The Bahamas' first glass fabricator, on the same hill on Mackey Street since 1959.",
+ "buyer": "Nassau homeowners renovating bathrooms and kitchens, landlords and property managers, designers and contractors; walk-in customers for fans, bulbs and framing.",
+ "design": {"display_font": "Libre Caslon Display 400", "body_font": "Karla 400/500/700", "palette": ["#f1f3f2", "#141a1c", "#2f4f5f", "#cfe5dd", "#e8b04a", "#586266", "#d6dcda"], "hero_pattern": "product-close-up-3d", "signature": "Real-time 3D float-glass slab (transmission, chromatic aberration) refracting warm and cool light bars and a hanging bulb; glass measure helper that draws the pane to proportion and writes the call summary; department filter"},
+ "current_site_findings": [
+  "'SASTIFIED CLIENTS' misspelled in large letters on the homepage.",
+  "Many photos are stock images (one filename still says Unsplash).",
+  "No homepage meta description; title is just 'Nassau Glass Company'.",
+  "Services carousel repeats the same six departments twice.",
+  "A 'business for sale' notice sits beside the phone numbers on every page."
+ ],
+ "pitch_line": "Nassau's first glass company deserves better than stock photos and a misspelled 'SASTIFIED CLIENTS'; this concept shows glass and light the way you sell them and helps customers measure before they call, which also strengthens the business for its next owner.",
+ "sources": ["https://www.nassauglass.com/", "https://www.nassauglass.com/about/", "https://www.nassauglass.com/contact/", "https://www.facebook.com/NassauGlass/"],
+ "qa": {"blockers": 0, "warnings": 0, "note": "3D scene is heavy under software GL in the sandbox; rendering pauses when off-screen and under reduced motion"},
+ "track": "A",
+ "scorecard": {"first_screen": 5, "typography": 4, "editorial_layout": 4, "context_visuals": 4, "motion": 4, "depth": 5, "detailing": 4, "mobile": 4, "next_to_references": 4, "owner_proud": 4, "whole_page": 4},
+ "assumptions": ["Department one-line descriptions are paraphrased from their department names and homepage blurbs", "Measure helper asks only item, size, quantity and location (no glass types or edge finishes listed on their site)"],
+ "notes": "Record said no site; nassauglass.com is live (WordPress). The business is advertised for sale on its own site (contact Andrew Rogers): pitch the owner on sale value, or approach the buyer once known. Their photos were stock, so none used. No email found; enquiry is phone-led (two numbers + international).",
+ "built_at": "2026-11-05T01:49:58Z"
 }

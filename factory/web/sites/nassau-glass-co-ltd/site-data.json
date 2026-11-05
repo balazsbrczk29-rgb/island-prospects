@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "nassau-glass-co-ltd",
+  "name": "Nassau Glass Co Ltd",
+  "niche": "trade-retail",
+  "contact": {"phone": "+1-242-603-5521", "phone_2": "+1-242-393-8165", "phone_intl": "+1-313-556-1322", "fax": "+1-242-603-5531", "whatsapp": null, "email": null, "address": "#46 Mackey Street (top of the hill)", "settlement": "Nassau", "island": "New Providence"},
+  "hours": {"mon_fri": "09:00-16:30", "sat": "09:00-13:00"},
+  "socials": ["https://www.facebook.com/NassauGlass/"],
+  "offer": [
+    {"name": "Custom glass and mirrors", "kind": "service", "summary": "Residential and commercial glass, cut and installed.", "price": null, "source": "https://www.nassauglass.com/"},
+    {"name": "Shower enclosures", "kind": "product", "summary": "Manufactured by Nassau Glass.", "price": null, "source": "https://www.nassauglass.com/"},
+    {"name": "Hunter ceiling fans", "kind": "product", "summary": "Authorized dealer.", "price": null, "source": "https://www.nassauglass.com/"},
+    {"name": "Lightbulbs, lamps and shades", "kind": "product", "summary": "Lightbulb Center; lamps and replacement shades.", "price": null, "source": "https://www.nassauglass.com/"},
+    {"name": "Framing, art gallery, home decor, architectural metals, service department", "kind": "service", "summary": "Other departments.", "price": null, "source": "https://www.nassauglass.com/"}
+  ],
+  "platform": {"candidate": true, "orderable": false, "categories": ["Glass & mirrors", "Shower enclosures", "Ceiling fans", "Lightbulbs", "Lamps & shades", "Framing", "Art", "Home decor"]},
+  "sources": ["https://www.nassauglass.com/", "https://www.nassauglass.com/about/", "https://www.nassauglass.com/contact/", "https://www.facebook.com/NassauGlass/"]
+}
