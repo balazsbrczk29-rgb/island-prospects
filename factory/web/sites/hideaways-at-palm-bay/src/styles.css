@@ -1,0 +1,45 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/accordion.tsx";
+@source "../../../src/components/ui/sheet.tsx";
+
+@theme {
+  --color-paper: #f4f8f7;
+  --color-paper-2: #e8f0ef;
+  --color-ink: #0e2a33;
+  --color-muted: #4f6770;
+  --color-brand: #17a3dc;
+  --color-deep: #0c6788;
+  --color-sand: #f1e4c9;
+  --color-line: #d6e4e4;
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+}
+
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; font-size: 17px; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-brand); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-deep); outline-offset: 3px; }
+em { font-style: italic; }
+
+.label { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; }
+.ulink { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .35s cubic-bezier(.16,1,.3,1); padding-bottom: 2px; }
+.ulink:hover, .ulink.is-current { background-size: 100% 1px; }
+
+.btn { display: inline-flex; align-items: center; gap: .5rem; min-height: 48px; padding: 0 1.4rem; border-radius: 999px; font-size: 15px; font-weight: 600; transition: transform .2s cubic-bezier(.16,1,.3,1), background-color .2s, color .2s, border-color .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn svg { transition: transform .25s cubic-bezier(.16,1,.3,1); }
+.btn:hover svg { transform: translate(2px, -1px); }
+.btn-primary { background: var(--color-deep); color: #fff; }
+.btn-primary:hover { background: var(--color-ink); }
+.btn-quiet { border: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+.btn-quiet:hover { border-color: currentColor; }
+
+.range { -webkit-appearance: none; appearance: none; height: 2px; background: rgba(255,255,255,.3); border-radius: 2px; }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--color-brand); border: 4px solid var(--color-ink); cursor: grab; }
+.range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--color-brand); border: 4px solid var(--color-ink); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

@@ -1,0 +1,106 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "hideaways-at-palm-bay",
+ "name": "Hideaways at Palm Bay",
+ "niche": "hospitality-stay",
+ "contact": {
+  "phone": "+1-242-336-2787",
+  "whatsapp": null,
+  "email": "info@hideawayspalmbay.com",
+  "address": "Jolly Hall Bay at Queen's Highway",
+  "settlement": "George Town",
+  "island": "Exuma"
+ },
+ "hours": {
+  "splash": {
+   "breakfast": "08:00-10:00",
+   "lunch": "11:00-17:00",
+   "dinner": "18:00-21:00"
+  }
+ },
+ "socials": [
+  "https://www.facebook.com/HideawaysPalmBay/",
+  "https://www.instagram.com/hideawayspalmbay/",
+  "https://www.pinterest.co.uk/hideawaysatpalm/"
+ ],
+ "booking_engine": "https://hotels.cloudbeds.com/reservation/QVagP2",
+ "offer": [
+  {
+   "name": "One Bedroom Ocean View Cottage",
+   "kind": "room",
+   "summary": "",
+   "price": null,
+   "source": "https://hideawayspalmbay.com/"
+  },
+  {
+   "name": "One Bedroom Garden View Studio Cottage",
+   "kind": "room",
+   "summary": "",
+   "price": null,
+   "source": "https://hideawayspalmbay.com/"
+  },
+  {
+   "name": "Two Bedroom Garden View Cottage",
+   "kind": "room",
+   "summary": "",
+   "price": null,
+   "source": "https://hideawayspalmbay.com/"
+  },
+  {
+   "name": "One Bedroom Partial Ocean View Villa",
+   "kind": "room",
+   "summary": "",
+   "price": null,
+   "source": "https://hideawayspalmbay.com/"
+  },
+  {
+   "name": "Two Bedroom Ocean View Villa",
+   "kind": "room",
+   "summary": "",
+   "price": null,
+   "source": "https://hideawayspalmbay.com/"
+  },
+  {
+   "name": "Island Time Studio (Hillside)",
+   "kind": "room",
+   "summary": "",
+   "price": null,
+   "source": "https://hideawayspalmbay.com/"
+  },
+  {
+   "name": "Island Time One Bedroom Villa (Hillside)",
+   "kind": "room",
+   "summary": "",
+   "price": null,
+   "source": "https://hideawayspalmbay.com/"
+  },
+  {
+   "name": "Island Time Two Bedroom Villa (Hillside)",
+   "kind": "room",
+   "summary": "",
+   "price": null,
+   "source": "https://hideawayspalmbay.com/"
+  },
+  {
+   "name": "Splash! Bar & Grill",
+   "kind": "product",
+   "summary": "breakfast, lunch, dinner, take-out",
+   "price": null,
+   "source": "https://hideawayspalmbay.com/splash-beach-bar/"
+  }
+ ],
+ "platform": {
+  "candidate": true,
+  "orderable": false,
+  "categories": [
+   "resort",
+   "restaurant"
+  ]
+ },
+ "sources": [
+  "https://hideawayspalmbay.com/",
+  "https://hideawayspalmbay.com/accommodations/",
+  "https://hideawayspalmbay.com/contact-us/",
+  "https://hideawayspalmbay.com/splash-beach-bar/"
+ ]
+}

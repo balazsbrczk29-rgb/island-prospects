@@ -1,9 +1,29 @@
 {
- "slug": "hideaways-at-palm-bay",
- "id": 75,
- "name": "Hideaways at Palm Bay",
- "batch": "11",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T03:58:04.309Z"
+ "slug": "hideaways-at-palm-bay", "id": 75, "name": "Hideaways at Palm Bay", "batch": "11", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "stay.html", "exuma.html"],
+ "primary_cta": "Check availability",
+ "brand_truth": "Cottages on the sand and villas on the hill over Elizabeth Harbour, where the water toys are free and Splash is the island's living room.",
+ "buyer": "Value-minded US/Canadian couples and families, Bahamian residents on fly-free offers, private pilots and Europeans planning George Town, Exuma on a phone.",
+ "design": {"display_font": "Instrument Serif 400 + italic", "body_font": "Figtree 400/500/600", "palette": ["#f4f8f7", "#0e2a33", "#17a3dc", "#0c6788", "#f1e4c9", "#e8f0ef", "#d6e4e4"], "hero_pattern": "postcard-collage-overlap", "signature": "Specials finder (residence + nights, auto-hides expired offers by book-by date, copy promo code); room finder (ocean side / hillside, bedrooms) with comparison table; nearby distances bars that draw in"},
+ "current_site_findings": [
+  "COVID-19 banner still on every page",
+  "Expired offers (2025) published next to current ones",
+  "Homepage repeats every room twice and activities three times",
+  "No side-by-side room comparison",
+  "Three different names for the resort; homepage title says 'GeorgeTown'",
+  "Splash menus are 2022 PDFs"
+ ],
+ "pitch_line": "Your site still leads with a COVID banner and lists expired 2025 offers next to live ones; this concept shows each guest only the deal that applies to them today, and compares all eight rooms in one table.",
+ "sources": ["https://hideawayspalmbay.com/", "https://hideawayspalmbay.com/accommodations/", "https://hideawayspalmbay.com/contact-us/", "https://hideawayspalmbay.com/splash-beach-bar/"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "A",
+ "assumptions": [
+  "Room photos matched by filename (img1 of each set)",
+  "Gallery photos (2020) used with generic alt",
+  "Specials copied verbatim from their site on 2026-11-05; they disappear from the finder after their book-by date",
+  "Splash presented as their on-site bar and grill (their wording), with its own reservation numbers"
+ ],
+ "notes": "Prospect record said 'no booking path, no rates, no contact': incorrect. The site has Cloudbeds booking, phone +1 242-336-2787 and info@ email; it has no public rates. Pitch is clarity, not rescue. 8 distinct room types (homepage shows them twice). Interact 'dead input' on index is the range slider (works). Tripadvisor Travelers' Choice 2026 badge exists on their site but not reused (award claims kept off concept). Scorecard: hero 4, type 4, layout 4, context 4, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 4, consistency 4.",
+ "built_at": "2026-11-05T04:04:59Z"
 }
