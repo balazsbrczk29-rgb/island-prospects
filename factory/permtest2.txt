@@ -1,0 +1,7 @@
+firecrawl_scrape | https://www.graycliff.com | ok | title "Graycliff Hotel & Restaurant - Nassau, Bahamas with 5-star fine dining" | 2026-11-05T00:20:56Z
+firecrawl_scrape | https://www.coralsands.com | ok | title "Coral Sands Inn & Cottages | Conde Nast Traveler Gold List 2026 | Harbour Island, Bahamas" | 2026-11-05T00:20:56Z
+firecrawl_scrape | https://www.stuartcove.com | ok (metadata only, markdown body near-empty) | title "Stuart Cove's | Nassau Bahamas Aqua Adventures - ..." | 2026-11-05T00:20:56Z
+firecrawl_scrape | https://www.abacoboatrental.com | ok | title "Abaco Boat Rental" | 2026-11-05T00:20:56Z
+WebSearch | "Bluff House Green Turtle Cay" | ok | 18 results incl. bluffhouse.com | 2026-11-05T00:20:57Z
+firecrawl_search | "Thermoset Roofing Bahamas" | ok | 5 web results incl. thermosetroofing242.com | 2026-11-05T00:20:57Z
+add_repo | balazsbrczk29-rgb/island-prospects | failed (tool not found via ToolSearch; repo already cloned and in scope, used as-is) | 2026-11-05T00:20:55Z
