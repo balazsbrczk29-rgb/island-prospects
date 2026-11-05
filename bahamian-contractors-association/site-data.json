@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "bahamian-contractors-association",
+  "name": "Bahamian Contractors' Association (BCA)",
+  "niche": "institution",
+  "contact": {"phone": "+1-242-356-8850", "whatsapp": null, "email": "admin@bahamiancontractors.org", "address": "#27 Chesapeake Road, Suite #11", "settlement": "Nassau", "island": "New Providence"},
+  "hours": {"mon_wed": "09:00-15:00", "thu": "09:00-12:00"},
+  "socials": ["https://www.facebook.com/bahamiancontractors/", "https://www.instagram.com/bahamiancontractors/"],
+  "offer": [
+    {"name": "Associate Membership", "kind": "service", "summary": "Suppliers, manufacturers, consultants, project managers, professionals.", "price": "$250/year", "source": "https://www.bahamiancontractors.org/"},
+    {"name": "General Membership", "kind": "service", "summary": "General, specialty and subcontractors.", "price": "$300/year", "source": "https://www.bahamiancontractors.org/"},
+    {"name": "Prime Membership", "kind": "service", "summary": "Contractors with annual revenue of $5 million or more.", "price": "$1,000/year", "source": "https://www.bahamiancontractors.org/"},
+    {"name": "Developer / Corporate Membership", "kind": "service", "summary": "Developers with annual turnover of $10 million or more.", "price": "$5,000/year", "source": "https://www.bahamiancontractors.org/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://www.bahamiancontractors.org/", "https://www.bahamiancontractors.org/events/skyfall-2026", "https://businessviewcaribbean.com/brochures/may-2026/bca/", "https://znsbahamas.com/newly-elected-bahamas-contractors-association-bca-executive-board/"]
+}

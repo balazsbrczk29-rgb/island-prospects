@@ -1,9 +1,24 @@
 {
- "slug": "bahamian-contractors-association",
- "id": 58,
- "name": "Bahamian Contractors Association",
- "batch": "03",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:22:42.323Z"
+ "slug": "bahamian-contractors-association", "id": 58, "name": "Bahamian Contractors Association", "batch": "03", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "membership.html"],
+ "primary_cta": "Find your membership",
+ "brand_truth": "The construction industry's own voice since 1959, building the Bahamian horizon.",
+ "buyer": "Bahamian contractors, subcontractors, suppliers and developers on phones; officials and foreign developers checking who represents the industry.",
+ "design": {"display_font": "Archivo 800", "body_font": "Archivo 400/500", "palette": ["#eeeeea", "#121417", "#00778b", "#00abc9", "#f2b705", "#565a60", "#e1e1db"], "hero_pattern": "horizon-line-drawing", "signature": "Nassau skyline under construction assembling on load (rising floors, scaffold, crane swing); membership tier finder that emails the application; live event countdown; Contractors Act timeline"},
+ "current_site_findings": [
+  "Hero subtitle misspells 'Assoication', twice.",
+  "The hero block is repeated a second time on the homepage.",
+  "Own site says founded 1959; ZNS says 1958.",
+  "Newest homepage post is from May 2025.",
+  "Membership prices are hidden in an FAQ accordion."
+ ],
+ "pitch_line": "Your homepage spells 'Association' wrong twice and hides your dues in an FAQ; this concept lets a contractor find their tier and email their application in three taps, with the next Mix & Mingle counting down on the first screen.",
+ "sources": ["https://www.bahamiancontractors.org/", "https://www.bahamiancontractors.org/events/skyfall-2026", "https://www.bahamiancontractors.org/blog/introducing-the-latest-bca-newsletter-volume-3-october-2025/", "https://businessviewcaribbean.com/brochures/may-2026/bca/", "https://znsbahamas.com/newly-elected-bahamas-contractors-association-bca-executive-board/"],
+ "qa": {"blockers": 0, "warnings": 0},
+ "track": "A",
+ "scorecard": {"first_screen": 4, "typography": 4, "editorial_layout": 4, "context_visuals": 4, "motion": 4, "depth": 4, "detailing": 4, "mobile": 4, "next_to_references": 4, "owner_proud": 4, "whole_page": 4},
+ "assumptions": ["Founding year 1959 (own site) vs 1958 (ZNS)", "Skyfall event is 11 December 2026 (from event URL); start time not stated, countdown in days only", "Revenue band mapping in the tier finder follows the published tier rules; suppliers/consultants default to Associate"],
+ "notes": "Record said Facebook only, but bahamiancontractors.org is live and was built in 2026 by another agency (Starfish Web Ventures): weaker pitch, approach as an upgrade (finder, clarity, typo fixes). No own photos used. President Leonard Sands is sourced but not featured.",
+ "built_at": "2026-11-05T01:27:39Z"
 }
