@@ -1,9 +1,22 @@
 {
- "slug": "harding-lee-company",
- "id": 74,
- "name": "Harding-Lee & Company",
- "batch": "05",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:29:33.775Z"
+  "slug": "harding-lee-company", "id": 74, "name": "Harding-Lee & Company", "batch": "05", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "practice.html"],
+  "primary_cta": "Discuss your matter",
+  "brand_truth": "A senior, boutique Bahamian law practice on two islands, Nassau and Salt Pond, Long Island, since 1996.",
+  "design": {"display_font": "Libre Caslon Display 400", "body_font": "Public Sans 400/500/600", "palette": ["#f4efe6", "#1d1b17", "#8a6a3b", "#1f2b27", "#625a4e", "#d9d0c1", "#ebe4d7"], "hero_pattern": "framed-ledger-with-line-drawing", "signature": "Hairline drawing of New Providence and Long Island joined by a thread, reused as a clickable office switcher; matter-to-attorney selector"},
+  "current_site_findings": [
+    "The homepage opens with 'Welcome To' and one long paragraph; no clear way to reach a specific attorney.",
+    "The associate's surname differs between the About page (Adderley) and the Contact page (Johnson).",
+    "Forty years of practice and the Bank of The Bahamas chairmanship are buried in an inner page.",
+    "Not updated since July 2022; pages titled 'Front page' with ?page_id= URLs.",
+    "No addresses or maps on the homepage; the Long Island office is barely visible."
+  ],
+  "pitch_line": "Clients in Long Island and overseas cannot tell from your site which of you to call or where your Salt Pond office is; this concept routes each matter to the right attorney in two taps.",
+  "sources": ["https://www.hardinglee.com/", "https://www.hardinglee.com/?page_id=1895", "https://www.hardinglee.com/?page_id=1985", "https://www.bankbahamas.com/directors/directors-1/donna-harding-lee", "https://www.bahamaslocal.com/showlisting/3410/Harding_Lee_and_Company.html"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Associate named Nadia Hope Johnson (About page says Adderley)", "One-line practice-area descriptions are restatements of published areas", "Partner's email used as the main enquiry address"],
+  "notes": "Record said no site listed, but hardinglee.com is live (last updated July 2022): treated as Track A, outdated. No hours published, so none shown. Portraits hotlinked from their own site. Islands drawing labelled illustration, not to scale.",
+  "built_at": "2026-11-05T01:35:07Z"
 }

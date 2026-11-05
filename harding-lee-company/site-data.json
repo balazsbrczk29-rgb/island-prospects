@@ -1,0 +1,72 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "harding-lee-company",
+  "name": "Harding-Lee & Company",
+  "niche": "professional-services",
+  "contact": {
+    "phone": "+1-242-326-4065",
+    "whatsapp": null,
+    "email": "dharding-lee@hardinglee.com",
+    "address": "Mecam House, Dowdeswell & Deveaux Streets, P.O. Box N-877",
+    "settlement": "Nassau",
+    "island": "New Providence"
+  },
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {
+      "name": "Commercial law",
+      "kind": "service",
+      "summary": "Commercial law",
+      "price": null,
+      "source": "https://www.hardinglee.com/"
+    },
+    {
+      "name": "Conveyancing",
+      "kind": "service",
+      "summary": "Conveyancing",
+      "price": null,
+      "source": "https://www.hardinglee.com/"
+    },
+    {
+      "name": "Company incorporation",
+      "kind": "service",
+      "summary": "Company incorporation",
+      "price": null,
+      "source": "https://www.hardinglee.com/"
+    },
+    {
+      "name": "International and domestic transactions",
+      "kind": "service",
+      "summary": "International and domestic transactions",
+      "price": null,
+      "source": "https://www.hardinglee.com/"
+    },
+    {
+      "name": "Insurance",
+      "kind": "service",
+      "summary": "Insurance",
+      "price": null,
+      "source": "https://www.hardinglee.com/"
+    },
+    {
+      "name": "Banking",
+      "kind": "service",
+      "summary": "Banking",
+      "price": null,
+      "source": "https://www.hardinglee.com/"
+    }
+  ],
+  "platform": {
+    "candidate": false,
+    "orderable": false,
+    "categories": []
+  },
+  "sources": [
+    "https://www.hardinglee.com/",
+    "https://www.hardinglee.com/?page_id=1895",
+    "https://www.hardinglee.com/?page_id=1985",
+    "https://www.bankbahamas.com/directors/directors-1/donna-harding-lee",
+    "https://www.bahamaslocal.com/showlisting/3410/Harding_Lee_and_Company.html"
+  ]
+}
