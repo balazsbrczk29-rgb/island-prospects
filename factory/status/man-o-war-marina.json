@@ -1,9 +1,22 @@
 {
- "slug": "man-o-war-marina",
- "id": 83,
- "name": "Man-O-War Marina",
- "batch": "11",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T04:43:35.278Z"
+  "slug": "man-o-war-marina", "id": 83, "name": "Man-O-War Marina", "batch": "11", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "marina.html", "island.html"],
+  "primary_cta": "Request a slip",
+  "brand_truth": "The only fuel dock on Abaco's small boatbuilding cay, running a full-service harbour marina since 1976 and rebuilt after Dorian.",
+  "design": {"display_font": "EB Garamond 500 + italic", "body_font": "Public Sans 400/500/600", "palette": ["#f6f3ec", "#20242a", "#8a5a2b", "#2f6f76", "#1d4a50", "#e7dcc8", "#dcd4c5"], "hero_pattern": "video-free-panorama-under-monument-type", "signature": "Will she fit? slip checker: LOA/beam/draft sliders against the published 120/20/7 ft limits with a slip cross-section and low-tide line; plus an Open right now board in Bahamas time"},
+  "current_site_findings": [
+    "manowarmarina.com now shows an unrelated boating article, not the marina.",
+    "The new Wix site's page titles read 'My Site 1'.",
+    "Key specs (120 ft, 20 ft beam, 7 ft at low tide, VHF 16) are buried in a paragraph.",
+    "Rates are a PDF and booking is a bare email link.",
+    "The homepage never says it is the island's only fuel dock."
+  ],
+  "pitch_line": "Captains decide on four numbers before they cross; this concept puts your 120 ft, 20 ft beam, 7 ft at low tide and VHF 16 on the first screen, and fixes the 'My Site 1' title Google shows today.",
+  "sources": ["https://manowarmarina.com", "https://www.manowarmarinavillage.com/", "https://www.manowarmarinavillage.com/services", "https://www.manowarmarinavillage.com/faq", "https://www.manowarmarinavillage.com/mow-life", "https://www.facebook.com/p/Man-O-War-Marina-Village-100090702221315/"],
+  "qa": {"blockers": 0, "warnings": 2},
+  "track": "A",
+  "assumptions": ["Saturday evening Dock N' Dine service (from Facebook)", "Pool still in service", "Rate PDF current", "Canonical set to manowarmarina.com assuming they recover the domain; otherwise use manowarmarinavillage.com"],
+  "notes": "Listed domain manowarmarina.com is lost (shows a generic boating article); the business runs manowarmarinavillage.com on Wix. Dockwa says 28 slips; we use the marina's own 23. interact.mjs flags range sliders as 'dead' (Playwright cannot fill range inputs; they work) and warns inner pages have under 2 interactions (the interactions live on index). Photos hotlinked from wixstatic (marina's own site). No approach waypoints or depths published beyond 7 ft at low tide. Scorecard: 1:4 2:5 3:4 4:5 5:4 6:4 7:5 8:4 9:4 10:5 11:4.",
+  "built_at": "2026-11-05T04:49:54Z"
 }

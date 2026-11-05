@@ -1,0 +1,16 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "man-o-war-marina",
+  "name": "Man-O-War Marina Village",
+  "niche": "marina",
+  "contact": {"phone": "+1-242-554-9500", "whatsapp": null, "email": "mowmv@hotmail.com", "address": "Man-O-War Cay, Abaco", "settlement": "Man-O-War Cay", "island": "Abaco", "vhf": "16"},
+  "hours": {"office": "Mon-Sat 8:00-12:00, 13:00-16:00", "fuel_dockside": "Mon-Sat 8:00-12:00, 13:00-16:00", "fuel_roadside": "Mon-Sat 9:00-12:00, 14:00-16:00", "restaurant_lunch": "Mon-Sat 11:00-15:00"},
+  "socials": ["https://www.instagram.com/manowarmarina/", "https://www.facebook.com/p/Man-O-War-Marina-Village-100090702221315/"],
+  "offer": [
+    {"name": "Dockage", "kind": "slip", "summary": "23 slips, up to 120 ft LOA, 20 ft beam, 7 ft draft at low tide, 30/50 amp, water, assisted docking.", "price": null, "source": "https://www.manowarmarinavillage.com/services"},
+    {"name": "Fuel", "kind": "service", "summary": "Gasoline and diesel, dockside and roadside; only fuel station on the island.", "price": null, "source": "https://www.manowarmarinavillage.com/services"},
+    {"name": "Dock N' Dine", "kind": "service", "summary": "Waterfront restaurant, lunch Mon-Sat.", "price": null, "source": "https://www.manowarmarinavillage.com/services"}
+  ],
+  "platform": {"candidate": true, "orderable": false, "categories": ["restaurant", "fuel", "gift shop"]},
+  "sources": ["https://www.manowarmarinavillage.com/", "https://www.manowarmarinavillage.com/services", "https://www.manowarmarinavillage.com/faq", "https://www.manowarmarinavillage.com/mow-life", "https://manowarmarina.com"]
+}
