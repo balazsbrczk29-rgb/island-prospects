@@ -1,0 +1,61 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "romora-bay-resort-marina",
+ "name": "Romora Bay Resort & Marina",
+ "niche": "hospitality-stay",
+ "contact": {
+  "phone": "+1-833-717-6499",
+  "whatsapp": null,
+  "email": "marina@romorabay.com",
+  "address": "Harbour Island",
+  "settlement": "Dunmore Town area",
+  "island": "Harbour Island, Eleuthera",
+  "booking": "https://s006209.officialbookings.com/"
+ },
+ "hours": {
+  "sip_sip": "11:30-16:00, closed Tuesdays",
+  "seasonal_closure": "Aug 17 - Nov 12"
+ },
+ "socials": [],
+ "offer": [
+  {
+   "name": "King with Waterfront View",
+   "kind": "room",
+   "summary": "Private balcony, water views, king, walk-in shower",
+   "price": null,
+   "source": "https://www.romorabay.com/stay"
+  },
+  {
+   "name": "The Suites",
+   "kind": "room",
+   "summary": "Vaulted ceilings, king + daybed, garden views",
+   "price": null,
+   "source": "https://www.romorabay.com/stay"
+  },
+  {
+   "name": "The House",
+   "kind": "room",
+   "summary": "Standalone villa, full kitchen, multiple bedrooms",
+   "price": null,
+   "source": "https://www.romorabay.com/stay"
+  },
+  {
+   "name": "Marina slips",
+   "kind": "slip",
+   "summary": "40+ slips, yachts to 190 ft, port of entry, 30/50A to 3-phase power, RO water, pumpout",
+   "price": null,
+   "source": "https://www.romorabay.com/marina"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://www.romorabay.com/",
+  "https://www.romorabay.com/marina",
+  "https://www.romorabay.com/stay",
+  "https://www.romorabay.com/dining"
+ ]
+}

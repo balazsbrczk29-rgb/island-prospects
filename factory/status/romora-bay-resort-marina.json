@@ -1,9 +1,22 @@
 {
- "slug": "romora-bay-resort-marina",
- "id": 92,
- "name": "Romora Bay Resort & Marina",
- "batch": "12",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T05:02:22.196Z"
+  "slug": "romora-bay-resort-marina", "id": 92, "name": "Romora Bay Resort & Marina", "batch": "12", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "marina.html", "stay.html"],
+  "primary_cta": "Reserve a stay / Reserve a slip",
+  "brand_truth": "Harbour Island's resort where the yacht and the room share one address: an official port of entry with 17 rooms behind it.",
+  "design": {"display_font": "Bodoni Moda 400/500 + italic", "body_font": "Outfit 300/400/500", "palette": ["#fbf6f1", "#1e2331", "#155e67", "#0e434a", "#ebc3b6", "#f3e6dc", "#e6dbd2"], "hero_pattern": "dual-arrival-switch (By sea / By air) over real drone photo with floating paper panel", "signature": "Arrival switch that swaps hero story, facts, photo and CTA between yacht owners and room guests; captain's fit-and-power checker (LOA vs 190 ft, published power list) with prefilled marina email; room selector with photo strip"},
+  "current_site_findings": [
+    "Marina tel links dial different numbers than printed (786-535-7322 dials 833-717-6499; 242.333.2325 dials 242-333-2500).",
+    "'40-slip' in Google description vs '40+ slips' on page.",
+    "190 ft limit buried in prose; no fit or power check; '408V' looks like a typo.",
+    "Resort phone and location not visible on the homepage outside the booking block.",
+    "Homepage leads with a dated pickleball event."
+  ],
+  "pitch_line": "Your marina page prints one phone number and dials another; this concept fixes that and lets a captain check 190 ft and power in five seconds, while room guests get their own version of the same first screen.",
+  "sources": ["https://www.romorabay.com/", "https://www.romorabay.com/marina", "https://www.romorabay.com/stay", "https://www.romorabay.com/dining"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Pink sand beach 'steps away' (their wording)", "Power list includes '408V 3 phase' as published (probably 480V)", "Pickleball bootcamp is a dated event (Nov 20-21 2026); remove after"],
+  "notes": "Their site is a modern 2026 React build, so this is a precision/conversion pitch, not a rescue. interact.mjs flags range slider and the room photo thumbnails as dead in the sandbox (external images blocked); they work in a browser. No draft/beam/approach published; checker says ask dockmaster. Scorecard: 1:4 2:5 3:4 4:5 5:4 6:5 7:4 8:4 9:4 10:4 11:5.",
+  "built_at": "2026-11-05T05:07:32Z"
 }
