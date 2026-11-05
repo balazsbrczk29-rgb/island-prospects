@@ -1,9 +1,24 @@
 {
- "slug": "stella-maris-resort-club",
- "id": 98,
- "name": "Stella Maris Resort Club",
- "batch": "13",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T05:49:56.899Z"
+  "slug": "stella-maris-resort-club", "id": 98, "name": "Stella Maris Resort Club & Marina", "batch": "13", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "stay.html", "island.html"],
+  "primary_cta": "Plan your stay",
+  "brand_truth": "An old-school Out Island resort club on Long Island's Atlantic shore, between two shorelines, that will fly you in itself.",
+  "buyer": "Repeat Out Island travellers, divers, bonefishers, older couples (US and Europe), families and small groups renting multi-bedroom houses; planning months ahead.",
+  "design": {"display_font": "Sorts Mill Goudy 400 + italic", "body_font": "Mulish 400/600", "palette": ["#f4f6f2", "#13283a", "#13777a", "#1b3a63", "#9fd8d2", "#ece2cf", "#dde2dc"], "hero_pattern": "split-editorial with photo bleeding right (curved corner) and drawn star-of-the-sea mark, two-blue shoreline key band", "signature": "'Who's coming?' house finder (party + wishes) filtering the ten real accommodation types with photos; activity chips that compose the stay enquiry; Stay / Wedding / Fly-in tabs routing to reservations or the resort air service"},
+  "current_site_findings": [
+    "Homepage carries injected spam links (replica Rolex, forex, casino, betting app): hacked-site signal to Google.",
+    "No room comparison or booking path beyond a generic form; phone shown as 3382050/1/27.",
+    "Pages from 2021; gallery captions 'OLYMPUS DIGITAL CAMERA' and '????'.",
+    "Dean's Blue Hole, own air service and bonefishing buried in one paragraph.",
+    "No getting-here page despite flying guests in.",
+    "Marina in the name but never explained."
+  ],
+  "pitch_line": "Your homepage is currently carrying hidden casino and replica-watch links; this rebuild cleans that up and lets guests pick the right house and even book their flight in.",
+  "sources": ["https://stellamarisresort.com", "https://stellamarisresort.com/stella-maris-resort/", "https://stellamarisresort.com/accommodations/", "https://www.stellamarisresort.com/contact-us/", "https://myoutislands.com/bahamas-resorts/resort/stella-maris-resort-club", "https://www.travelweekly.com/Hotels/Stella-Maris-Bahamas/Stella-Maris-Resort-Club-p3774968", "https://en.wikipedia.org/wiki/Stella_Maris_Airport"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Resort trades normally while listed for sale", "Party-size grouping in the finder uses published bedroom counts only", "Gallery photos used for the Dive/Fish/Explore panel are generic resort gallery images (alt text says so)"],
+  "notes": "URGENT pitch hook: spam injection on homepage (replica watches, forex, crocobet, melbet links) seen 2026-11-05 via scrape. Marina not described on own site: no marina specs shown; marina only in the name. 29 rooms from myoutislands listing. Street 'Ocean View Drive' from Travel Weekly. Rates unknown: 'Rates on request'. Scorecard: 1:4 2:5 3:4 4:4 5:4 6:4 7:4 8:5 9:4 10:5 11:5.",
+  "built_at": "2026-11-05T00:00:00Z"
 }

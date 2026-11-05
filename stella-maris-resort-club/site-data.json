@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "stella-maris-resort-club",
+  "name": "Stella Maris Resort Club & Marina",
+  "niche": "hospitality-stay",
+  "contact": {"phone": "+1-242-338-2050", "whatsapp": null, "email": "Reservations@stellamarisresort.com", "flights_email": "Stellamarisresortairservice@gmail.com", "address": "Ocean View Drive, P.O. Box LI 30-105", "settlement": "Stella Maris", "island": "Long Island"},
+  "hours": null,
+  "socials": ["https://www.facebook.com/StellaMarisResort"],
+  "offer": [
+    {"name": "Atlantic ocean view hotel rooms", "kind": "room", "summary": "King or two double beds.", "price": null, "source": "https://stellamarisresort.com/accommodations/"},
+    {"name": "Cottages, apartments and 2-4 bedroom houses", "kind": "room", "summary": "Sand Dollar, Sea La Vie, Gecko House, Carolyn's Favourite, Rainbow Villa, Flamingo House, Dolphin House.", "price": null, "source": "https://stellamarisresort.com/accommodations/"},
+    {"name": "Scuba diving", "kind": "tour", "summary": "Shark Reef, The Wreck, Conception Wall, Dean's Blue Hole with Stella Maris Water Sports.", "price": null, "source": "https://stellamarisresort.com/stella-maris-resort/"},
+    {"name": "Resort air service", "kind": "service", "summary": "Flights from your international Bahamas hub.", "price": null, "source": "https://stellamarisresort.com"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://stellamarisresort.com", "https://stellamarisresort.com/stella-maris-resort/", "https://stellamarisresort.com/accommodations/", "https://www.stellamarisresort.com/contact-us/", "https://myoutislands.com/bahamas-resorts/resort/stella-maris-resort-club"]
+}
