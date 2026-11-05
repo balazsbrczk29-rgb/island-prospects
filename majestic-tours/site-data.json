@@ -1,0 +1,17 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "majestic-tours",
+  "name": "Majestic Tours",
+  "niche": "tours-experiences",
+  "contact": {"phone": "+1-242-677-2600", "whatsapp": null, "email": "transport@majesticholidays.com", "address": "Hillside Manor, Cumberland St, P.O. Box N-1401, Nassau", "settlement": "Nassau", "island": "New Providence"},
+  "hours": null,
+  "socials": [],
+  "offer": [
+    {"name": "Flying Cloud, Evening Dinner", "kind": "tour", "summary": "Sunset dinner sail around Nassau Harbour and Paradise Island, Bahamian BBQ buffet.", "price": "$137.50 adult, $68.75 child under 11 (listed)", "source": "https://www.majestictoursbahamas.com/tours/?id=09"},
+    {"name": "The Fantastic Exuma Day Trip", "kind": "tour", "summary": "Powerboat day to Allan's Cay and Ship Channel Cay, lunch and open bar, hotel transfer included.", "price": "from $328.90 adult, $209.00 child under 12 (listed)", "source": "https://www.majestictoursbahamas.com/tours/?id=35"},
+    {"name": "Airport transfers", "kind": "service", "summary": "Shared bus, private car and accessible van transfers from Lynden Pindling International.", "price": null, "source": "https://majestictoursbahamas.com/transportation/"},
+    {"name": "Excursion catalogue", "kind": "tour", "summary": "37 excursions: Rose Island, Blue Lagoon Island, Exuma Cays, Harbour Island, Stuart Cove's dives, culture and food tours.", "price": null, "source": "https://majestictoursbahamas.com/tours/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://majestictoursbahamas.com/", "https://majestictoursbahamas.com/about/", "https://majestictoursbahamas.com/contact.php", "https://majestictoursbahamas.com/transportation/", "https://majestictoursbahamas.com/tours/"]
+}

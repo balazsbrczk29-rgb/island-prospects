@@ -1,9 +1,22 @@
 {
- "slug": "majestic-tours",
- "id": 82,
- "name": "Majestic Tours",
- "batch": "11",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T04:31:27.155Z"
+  "slug": "majestic-tours", "id": 82, "name": "Majestic Tours", "batch": "11", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "excursions.html", "transfers.html"],
+  "primary_cta": "Plan my excursion",
+  "brand_truth": "A Bahamian family company that has met guests at the airport and taken them across the water since 1959.",
+  "design": {"display_font": "Yeseva One 400", "body_font": "Albert Sans 400/500/600", "palette": ["#f3eee4", "#1b2724", "#2e6a55", "#1f4c3d", "#d9b98a", "#a9d8cf", "#d6cbb9"], "hero_pattern": "map-led-split-route-chart", "signature": "Illustrated route chart from Nassau to Rose Island, Blue Lagoon, Exuma Cays, Harbour Island and the reefs; tap a destination to list Majestic's real trips there"},
+  "current_site_findings": [
+    "The footer still says 2012-2021, and the homepage shows no phone number or email.",
+    "Every tour page sends guests to info@majestictourbahamas.com, which is missing an 's': those emails probably never arrive.",
+    "Two pages list different hotel desks and different extensions.",
+    "37 excursions sit in one alphabetical list with no filters.",
+    "The 1959 founding and five industry awards are hidden on the About page."
+  ],
+  "pitch_line": "You have been Nassau's tour company since 1959, but your site still says 2021 and your tour emails go to a misspelled address; this concept shows every trip on a chart and books it in one tap.",
+  "sources": ["https://majestictoursbahamas.com/", "https://majestictoursbahamas.com/about/", "https://majestictoursbahamas.com/contact.php", "https://majestictoursbahamas.com/transportation/", "https://majestictoursbahamas.com/tours/", "https://www.majestictoursbahamas.com/tours/?id=09", "https://www.majestictoursbahamas.com/tours/?id=35"],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["Which hotel desks are current (two pages disagree)", "Listed prices for Flying Cloud Evening Dinner and Exuma Day Trip are still current", "Enquiries by email to transport@majesticholidays.com are accepted for tours", "Tour category labels (Sea and islands, Sail and evening, etc.) are our grouping"],
+  "notes": "All photos hotlinked from majestictoursbahamas.com; many are 480px, so used in modest frames. Route chart is an illustration, not to scale. Tour rows link to the existing tour pages for details. No WhatsApp found; enquiry opens email. Scorecard: 1:4 2:4 3:4 4:5 5:4 6:4 7:5 8:4 9:4 10:4 11:4. Ask owner for logo files and high-res photography.",
+  "built_at": "2026-11-05T04:43:28Z"
 }

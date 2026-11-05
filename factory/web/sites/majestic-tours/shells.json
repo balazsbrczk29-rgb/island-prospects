@@ -1,0 +1,43 @@
+{
+  "name": "Majestic Tours",
+  "domain": "https://majestictoursbahamas.com/",
+  "ogImage": "https://majestictoursbahamas.com/transportation/images/fleet.jpg",
+  "theme": "#f3eee4",
+  "fonts": "https://fonts.googleapis.com/css2?family=Yeseva+One&family=Albert+Sans:wght@400;500;600&display=swap",
+  "pages": [
+    { "file": "index.html", "entry": "home", "path": "", "faq": true, "title": "Nassau Tours, Excursions & Transfers | Majestic Tours, Nassau", "desc": "Majestic Tours, Nassau's Bahamian tour company since 1959: Rose Island, Blue Lagoon, Exuma day trips, dinner sails and airport transfers. Call (242) 677-2600." },
+    { "file": "excursions.html", "entry": "excursions", "path": "excursions", "title": "Excursions from Nassau & Paradise Island | Majestic Tours", "desc": "Every excursion Majestic Tours books from Nassau: swimming pigs on Rose Island, Blue Lagoon dolphins, Exuma powerboat days, Stuart Cove's dives, culture tours." },
+    { "file": "transfers.html", "entry": "transfers", "path": "transfers", "title": "Nassau Airport Transfers, Shared & Private | Majestic Tours", "desc": "Shared bus, private car and accessible van transfers from Nassau airport with Majestic Tours. Meet and greet after Customs. Book 5 days ahead: (242) 677-2600." }
+  ],
+  "graph": [
+    {"@type":["TravelAgency","TouristInformationCenter"],"@id":"https://majestictoursbahamas.com/#business","name":"Majestic Tours","legalName":"Majestic Tours Limited","url":"https://majestictoursbahamas.com/","telephone":"+1-242-677-2600","faxNumber":"+1-242-326-5785","email":"transport@majesticholidays.com","foundingDate":"1959-06","founder":[{"@type":"Person","name":"William Saunders"},{"@type":"Person","name":"Iris Saunders"}],"slogan":"Service is our Profession","image":["https://majestictoursbahamas.com/transportation/images/fleet.jpg"],"address":{"@type":"PostalAddress","streetAddress":"Hillside Manor, Cumberland St","postOfficeBoxNumber":"N-1401","addressLocality":"Nassau","addressRegion":"New Providence","addressCountry":"BS"},"areaServed":["Nassau","Paradise Island","New Providence"],"knowsLanguage":["en","es","fr","de","it","pt","gsw"],"award":["Award of Distinction, Air Canada (1991)","Transfer Company of the Year, Expedia (2003)","Outstanding Customer Service, Thomas Cook Worldwide (2003-11)","Tour Operator of the Year, Cacique (2005)","Quality Assurance Award, MLT Vacations (2013)"]},
+    {"@type":"WebSite","@id":"https://majestictoursbahamas.com/#website","url":"https://majestictoursbahamas.com/","name":"Majestic Tours"}
+  ],
+  "faq": [
+    ["How do I book a Majestic tour?", "Call the tour line on (242) 677-2600, email transport@majesticholidays.com, or visit the Majestic Tours desk in the lobby of your hotel."],
+    ["Do tours include a hotel pickup?", "It depends on the tour. The Fantastic Exuma Day Trip includes the hotel transfer; the Flying Cloud evening dinner sail does not. Each tour lists it."],
+    ["How far ahead should I book an airport transfer?", "Majestic asks that transportation bookings are finalised at least 5 days in advance, and accessible transport at least 48 hours in advance."],
+    ["Do I clear US Immigration in Nassau?", "Yes. Flights to the United States clear US Immigration and Customs in Nassau, and Majestic's departure pickup times allow for the extra time."],
+    ["Which languages do your representatives speak?", "Besides English: Spanish, French, German, Italian, Portuguese and Swiss German."]
+  ],
+  "notes": {
+    "business": "Majestic Tours",
+    "current_site": "majestictoursbahamas.com",
+    "findings": [
+      "The footer still says 2012-2021, and the homepage shows no phone number or email.",
+      "Every tour page sends guests to info@majestictourbahamas.com, which is missing an \"s\": those emails probably never arrive.",
+      "Two pages list different hotel desks and different extensions, so guests cannot tell which is current.",
+      "37 excursions sit in one alphabetical list, with no way to filter by island, evening or family.",
+      "The 1959 founding by Bill and Iris Saunders and five industry awards are hidden on the About page."
+    ],
+    "improvements": [
+      "A first screen that says who you are, since when, and gives the tour line in one tap.",
+      "An illustrated chart of where each trip goes: tap Rose Island or the Exumas and see every tour there.",
+      "A filterable excursion index by type of day and destination, with each tour's own photograph.",
+      "A clear arrival guide for shared, private and accessible transfers, the way guests actually experience it.",
+      "One enquiry form that writes the email for the guest, plus full local search markup for 'Nassau tours'."
+    ],
+    "agency": "ESTATIQ AI Solutions",
+    "contact": "balazs@estatiq.co"
+  }
+}
