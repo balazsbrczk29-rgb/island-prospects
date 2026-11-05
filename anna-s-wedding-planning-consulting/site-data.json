@@ -1,0 +1,90 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "anna-s-wedding-planning-consulting",
+ "name": "Anna's Wedding Planning",
+ "niche": "food-events",
+ "contact": {
+  "phone": "+1-242-324-2559",
+  "whatsapp": null,
+  "email": null,
+  "address": "P.O. Box N-8611",
+  "settlement": "Nassau",
+  "island": "New Providence",
+  "us_phone": "+1-954-246-3108"
+ },
+ "hours": null,
+ "socials": [
+  "https://www.instagram.com/annasweddingbahamas/",
+  "https://www.facebook.com/AnnasWeddingPlanningService/",
+  "https://www.weddingwire.com/biz/annas-wedding-planning/8cdc9996dc501900.html"
+ ],
+ "offer": [
+  {
+   "name": "Basic package",
+   "kind": "service",
+   "summary": "Wedding package",
+   "price": 950,
+   "source": "https://www.annasweddingbahamas.com/beach-package/"
+  },
+  {
+   "name": "Classic package",
+   "kind": "service",
+   "summary": "Wedding package",
+   "price": 1750,
+   "source": "https://www.annasweddingbahamas.com/beach-package/"
+  },
+  {
+   "name": "Beach package",
+   "kind": "service",
+   "summary": "Wedding package",
+   "price": 2990,
+   "source": "https://www.annasweddingbahamas.com/beach-package/"
+  },
+  {
+   "name": "Romantic package",
+   "kind": "service",
+   "summary": "Wedding package",
+   "price": 3995,
+   "source": "https://www.annasweddingbahamas.com/beach-package/"
+  },
+  {
+   "name": "Cruise package",
+   "kind": "service",
+   "summary": "Wedding package",
+   "price": 3495,
+   "source": "https://www.annasweddingbahamas.com/cruise-package/"
+  },
+  {
+   "name": "Blue Ocean package",
+   "kind": "service",
+   "summary": "Wedding package",
+   "price": 7645,
+   "source": "https://www.annasweddingbahamas.com/cruise-package/"
+  },
+  {
+   "name": "Tropical package",
+   "kind": "service",
+   "summary": "Wedding package",
+   "price": 13895,
+   "source": "https://www.annasweddingbahamas.com/cruise-package/"
+  }
+ ],
+ "platform": {
+  "candidate": true,
+  "orderable": false,
+  "categories": [
+   "weddings",
+   "events"
+  ]
+ },
+ "sources": [
+  "https://www.annasweddingbahamas.com/",
+  "https://www.annasweddingbahamas.com/about/",
+  "https://www.annasweddingbahamas.com/beach-package/",
+  "https://www.annasweddingbahamas.com/cruise-package/",
+  "https://www.annasweddingbahamas.com/requirements/",
+  "https://www.annasweddingbahamas.com/services-2/",
+  "https://www.weddingwire.com/biz/annas-wedding-planning/8cdc9996dc501900.html",
+  "https://www.instagram.com/annasweddingbahamas/"
+ ]
+}

@@ -4,6 +4,59 @@
  "name": "Anna's Wedding Planning & Consulting",
  "batch": "03",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:17:39.698Z"
+ "state": "built",
+ "pages": [
+  "index.html",
+  "packages.html"
+ ],
+ "primary_cta": "Check your wedding date",
+ "brand_truth": "One experienced planner in Nassau with published prices and the licence paperwork handled.",
+ "buyer": "US, Canadian and international couples planning a Nassau beach or cruise-day wedding on a phone.",
+ "design": {
+  "display_font": "Gloock 400",
+  "body_font": "Figtree 400-600",
+  "palette": [
+   "#fbf8f5",
+   "#1f2a2e",
+   "#b44c6e",
+   "#f5e6e1",
+   "#8cc9c2",
+   "#625b58",
+   "#eadfd8"
+  ],
+  "hero_pattern": "split-screen-editorial-arched",
+  "signature": "Package finder with arrival mode and guest slider; licence checklist with progress ring"
+ },
+ "current_site_findings": [
+  "2015 photos over insecure http",
+  "Repetitive homepage slider with no clear next step",
+  "Prices hidden inside package pages",
+  "No email or WhatsApp, only a form",
+  "Cruise purser rule buried on licence page",
+  "20+ years and international couples hidden on About"
+ ],
+ "pitch_line": "Your prices start at USD 950 and your paperwork help is the best reason to pick you; this site shows both in the first screen and lets cruise couples find their package in ten seconds.",
+ "sources": [
+  "https://www.annasweddingbahamas.com/",
+  "https://www.annasweddingbahamas.com/about/",
+  "https://www.annasweddingbahamas.com/beach-package/",
+  "https://www.annasweddingbahamas.com/cruise-package/",
+  "https://www.annasweddingbahamas.com/requirements/",
+  "https://www.annasweddingbahamas.com/services-2/",
+  "https://www.weddingwire.com/biz/annas-wedding-planning/8cdc9996dc501900.html",
+  "https://www.instagram.com/annasweddingbahamas/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Published package prices still current",
+  "Annamae Fox is the owner named Anna",
+  "Both phones current; WhatsApp number unknown",
+  "Licence rules current"
+ ],
+ "notes": "Record said no website; annasweddingbahamas.com exists, outdated. No email published, so enquiry is a read-out summary plus call buttons. WeddingWire rating exists but not shown (no ratings rule). Hero headline overlaps the photo edge by design. Scorecard: hero 4, type 5, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 5, consistency 4.",
+ "built_at": "2026-11-05T01:22:19.426597+00:00"
 }
