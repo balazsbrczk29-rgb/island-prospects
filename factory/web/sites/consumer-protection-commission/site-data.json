@@ -1,0 +1,40 @@
+{
+ "schema": "island-previews/site-data@1",
+ "slug": "consumer-protection-commission",
+ "name": "Consumer Protection Commission",
+ "niche": "institution",
+ "contact": {
+  "phone": "+1-242-604-9020",
+  "whatsapp": "+1-242-357-7898",
+  "email": "complaints@bahamas.gov.bs",
+  "email_general": "info@cpcbahamas.gov.bs",
+  "address": "Tonique Williams-Darling Highway (west of Sunburst Paint), Nassau",
+  "settlement": "Nassau",
+  "island": "New Providence"
+ },
+ "hours": null,
+ "socials": [
+  "https://www.facebook.com/cpc242/",
+  "https://www.instagram.com/consumerprotectioncommission/"
+ ],
+ "offer": [
+  {
+   "name": "Consumer complaints",
+   "kind": "service",
+   "summary": "Receives and investigates consumer complaints against providers under the Consumer Protection Act 2023.",
+   "price": null,
+   "source": "https://www.facebook.com/cpc242/"
+  }
+ ],
+ "platform": {
+  "candidate": false,
+  "orderable": false,
+  "categories": []
+ },
+ "sources": [
+  "https://www.facebook.com/cpc242/",
+  "https://www.instagram.com/consumerprotectioncommission/",
+  "https://www.bahamaslocal.com/showlisting/20675/Consumer_Protection_Commission.html",
+  "https://www.tribune242.com/news/2023/sep/05/creative-minds-competition-students-design-logo-co/"
+ ]
+}

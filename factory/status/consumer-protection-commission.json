@@ -4,6 +4,55 @@
  "name": "Consumer Protection Commission",
  "batch": "04",
  "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:25:51.213Z"
+ "state": "built",
+ "claimed_at": "2026-11-05T01:25:51.213Z",
+ "pages": [
+  "index.html",
+  "file-a-complaint.html"
+ ],
+ "primary_cta": "File a complaint",
+ "brand_truth": "The public's referee when a business will not put things right: it logs, reviews, reaches out to the business and keeps you updated.",
+ "buyer": "Bahamian consumers let down by a shop, repair or service, mostly on phones; site buyer is CPC leadership / Ministry comms.",
+ "design": {
+  "display_font": "Fraunces 600",
+  "body_font": "Atkinson Hyperlegible 400/700",
+  "palette": [
+   "#f7f6f1",
+   "#14181b",
+   "#00707a",
+   "#ffc72c",
+   "#d9ecea",
+   "#50585c",
+   "#d8d4c8"
+  ],
+  "hero_pattern": "task-first-split-with-object",
+  "signature": "Receipt stamped with the CPC's real 4-stage process (sticky scrollytelling) + 4-step complaint builder sending to WhatsApp/email"
+ },
+ "current_site_findings": [
+  "No website of its own; only a Facebook page.",
+  "Directories show old numbers (393-7795/6/7) instead of 604-9020 / WhatsApp 357-7898.",
+  "Email domain cpcbahamas.gov.bs has no website behind it.",
+  "Complaint guidance scattered across Facebook posts.",
+  "No structured way to send a complete complaint with proof."
+ ],
+ "pitch_line": "People who want to complain about a business can't find you online beyond Facebook; this site turns your own advice into a four-step complaint that lands on your WhatsApp complete, with proof attached.",
+ "sources": [
+  "https://www.facebook.com/cpc242/",
+  "https://www.instagram.com/consumerprotectioncommission/",
+  "https://www.bahamaslocal.com/showlisting/20675/Consumer_Protection_Commission.html",
+  "https://urcabahamas.bs/consumer/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "B",
+ "assumptions": [
+  "Hours omitted (unknown)",
+  "'Bank record of the payment' from a truncated post",
+  "Builder complaint categories and 'what you want' line are generic",
+  "Proposed domain cpcbahamas.gov.bs"
+ ],
+ "notes": "Government agency: pitch to the Executive Director / Ministry. No photos used. Concept footer states it is not an official Government website. Confirm whether a separate Consumer Affairs Department still handles some complaints (consumeraffairs.gov.bs exists).",
+ "built_at": "2026-11-05T01:31:12.333690+00:00"
 }
