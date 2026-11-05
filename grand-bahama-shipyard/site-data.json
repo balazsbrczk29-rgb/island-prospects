@@ -1,0 +1,71 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "grand-bahama-shipyard",
+  "name": "Grand Bahama Shipyard",
+  "niche": "industrial-b2b",
+  "contact": {
+    "phone": "+1-242-350-4000",
+    "whatsapp": null,
+    "email": "enquiries@gbshipyard.com",
+    "address": "The Fishing Hole Road, P.O. Box F-42623",
+    "settlement": "Freeport",
+    "island": "Grand Bahama"
+  },
+  "hours": "Office Monday to Friday 08:00-18:00; site lists Monday to Sunday 24 hours",
+  "socials": [],
+  "offer": [
+    {
+      "name": "Drydocking",
+      "kind": "service",
+      "summary": "East End floating dock, approx. 357 m, lifts vessels up to 93,500 tons",
+      "price": null,
+      "source": "https://grandbahamashipyard.com/services/"
+    },
+    {
+      "name": "Afloat repairs",
+      "kind": "service",
+      "summary": "1 km deep-water berth, 14 m depth",
+      "price": null,
+      "source": "https://grandbahamashipyard.com/services/"
+    },
+    {
+      "name": "Steel and aluminium fabrication",
+      "kind": "service",
+      "summary": "35,000 ft2 workshop",
+      "price": null,
+      "source": "https://grandbahamashipyard.com/services/"
+    },
+    {
+      "name": "Hull treatment",
+      "kind": "service",
+      "summary": "HP/UHP blasting and coating",
+      "price": null,
+      "source": "https://grandbahamashipyard.com/services/"
+    },
+    {
+      "name": "Pipe work",
+      "kind": "service",
+      "summary": "LRQA certified pipe welders",
+      "price": null,
+      "source": "https://grandbahamashipyard.com/services/"
+    },
+    {
+      "name": "UTM hull gauging",
+      "kind": "service",
+      "summary": "Class approved by ABS, BV, DNV-GL, LR",
+      "price": null,
+      "source": "https://grandbahamashipyard.com/services/"
+    }
+  ],
+  "platform": {
+    "candidate": false,
+    "orderable": false,
+    "categories": []
+  },
+  "sources": [
+    "https://grandbahamashipyard.com/",
+    "https://grandbahamashipyard.com/services/",
+    "https://grandbahamashipyard.com/facilities/",
+    "https://grandbahamashipyard.com/about/"
+  ]
+}

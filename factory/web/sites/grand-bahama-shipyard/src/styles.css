@@ -1,0 +1,31 @@
+@import "tailwindcss" source(none);
+@source "./";
+@source "../../../src/components/ui/accordion.tsx";
+@source "../../../src/components/ui/sheet.tsx";
+@source "../../../src/components/ui/tabs.tsx";
+
+@theme {
+  --color-paper: #ecebe6;
+  --color-paper-2: #e1dfd8;
+  --color-ink: #101418;
+  --color-steel: #535d66;
+  --color-line: #cbc8be;
+  --color-lime: #d6e04b;
+  --color-harbour: #173f4d;
+  --font-display: "Archivo", "Helvetica Neue", sans-serif;
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html { background: var(--color-paper); color: var(--color-ink); }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; font-size: 16px; }
+.font-display { font-weight: 640; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+::selection { background: var(--color-lime); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px; }
+.bg-ink :focus-visible, .bg-harbour :focus-visible { outline-color: var(--color-lime); }
+.range { -webkit-appearance: none; appearance: none; height: 2px; background: var(--color-ink); }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; background: var(--color-lime); border: 2px solid var(--color-ink); cursor: grab; }
+.range::-moz-range-thumb { width: 24px; height: 24px; background: var(--color-lime); border: 2px solid var(--color-ink); border-radius: 0; cursor: grab; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

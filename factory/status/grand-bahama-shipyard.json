@@ -1,9 +1,26 @@
 {
- "slug": "grand-bahama-shipyard",
- "id": 17,
- "name": "Grand Bahama Shipyard",
- "batch": "02",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:16:33.040Z"
+  "slug": "grand-bahama-shipyard", "id": 17, "name": "Grand Bahama Shipyard", "batch": "02", "tier": "A",
+  "state": "built",
+  "pages": ["index.html", "capabilities.html"],
+  "primary_cta": "Request a docking slot",
+  "brand_truth": "The Caribbean's largest ship repair yard, owned by three cruise groups, lifting ships again with a 357 m floating dock 93 nm from Miami.",
+  "design": {"display_font": "Archivo 640 expanded (wdth 112-122)", "body_font": "Archivo 400 + JetBrains Mono 400/500", "palette": ["#ecebe6", "#101418", "#d6e04b", "#173f4d", "#535d66", "#cbc8be", "#e1dfd8"], "hero_pattern": "cinematic-3d-scrollytelling", "signature": "R3F East End floating dock de-ballasting and lifting a cruise ship as you scroll, plus a vessel fit check against published dock and berth figures"},
+  "current_site_findings": [
+    "Facilities page (last updated 2020) still describes the pre-2019 docks; the new 357 m East End dock is only in news posts.",
+    "Safety record (1.45 million LTI-free hours), the 2026 British Safety Council Merit and the cruise-group ownership are missing from the homepage.",
+    "No structured docking enquiry: just two email addresses, one personal.",
+    "Page titles ('Main Home', 'Services') contain no ship repair, drydock, Freeport or Caribbean keywords.",
+    "Dead '#' links on the Services page and a duplicated testimonial carousel."
+  ],
+  "pitch_line": "Your new 357 m dock is the biggest thing to happen to the yard since 2019, yet your website still describes the old docks: this concept puts the new dock, your safety record and a docking-slot request on the first screen.",
+  "sources": [
+    "https://grandbahamashipyard.com/", "https://grandbahamashipyard.com/services/", "https://grandbahamashipyard.com/facilities/", "https://grandbahamashipyard.com/about/",
+    "https://grandbahamashipyard.com/grand-bahama-shipyard-marks-major-milestone-with-first-successful-docking-at-new-east-end-dock/",
+    "https://grandbahamashipyard.com/grand-bahama-shipyard-surpasses-1-45-million-hours-without-a-lost-time-injury-and-earns-international-safety-recognition/"
+  ],
+  "qa": {"blockers": 0, "warnings": 0},
+  "track": "A",
+  "assumptions": ["+1 (242) 350-4000 presented as the 24-hour yard line and the Mon-Fri 08:00-18:00 hours as office hours (their header lists both without saying which is which)", "East End dock figures given as approximate, from the Feb 2026 release", "Client feedback quotes reused from their own homepage, permission to confirm"],
+  "notes": "Record listed no site, but research found grandbahamashipyard.com (Track A). Large enterprise, so pitch is a modernization/repositioning. Pre-2019 dock specs on their Facilities page deliberately excluded. Photos hotlinked from their own site (blocked in sandbox QA). 3D scene labelled as illustration. Fit check is clearly marked as a first look only.",
+  "built_at": "2026-11-05T01:29:16Z"
 }
