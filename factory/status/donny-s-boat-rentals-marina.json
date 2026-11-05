@@ -1,9 +1,25 @@
 {
- "slug": "donny-s-boat-rentals-marina",
- "id": 69,
- "name": "Donny's Boat Rentals & Marina",
- "batch": "04",
- "tier": "A",
- "state": "building",
- "claimed_at": "2026-11-05T01:27:46.765Z"
+ "slug": "donny-s-boat-rentals-marina", "id": 69, "name": "Donny's Boat Rentals & Marina", "batch": "04", "tier": "A",
+ "state": "built",
+ "pages": ["index.html", "fleet.html", "marina.html"],
+ "primary_cta": "Reserve a boat",
+ "brand_truth": "The family dock at the end of Black Sound, where Donny lives on site.",
+ "buyer": "Visitors staying on Green Turtle Cay (US families and couples deciding on a phone) and East Coast cruisers crossing to the Abacos.",
+ "design": {"display_font": "Young Serif 400", "body_font": "Nunito Sans 400/600/700", "palette": ["#f5f4ef", "#0f2a33", "#256a5a", "#8fd0c6", "#e9dcc0", "#f4c430", "#5b6466"], "hero_pattern": "cinematic-full-bleed-photo-glass-panel", "signature": "Boat chooser with rental calculator (published day/week rates, 3-day minimum) composing a WhatsApp booking; slip checker against the published 50 ft LOA / 7 ft draft limits with the Black Sound tide note"},
+ "current_site_findings": [
+  "Most homepage photos have the description 'undefined'.",
+  "Dockage and Activities 'View More' buttons reload the homepage.",
+  "Cruiser facts (50 ft LOA, 7 ft draft, VHF 16, Black Sound tide note) are only on noonsite / Waterway Guide.",
+  "WhatsApp and US numbers appear only on other sites.",
+  "Typos show through ('There is many things to do', 'doony doch from air').",
+  "No way to price a rental or check whether a boat fits."
+ ],
+ "pitch_line": "Cruisers find your 50-foot, 7-foot-draft dock on noonsite, not on your own site; this concept puts your aerial photo, WhatsApp and dock limits on one screen and lets renters price a week with a boat and send the booking to Taylor in one tap.",
+ "sources": ["https://www.donnysboatrentalsgtc.com/", "https://www.donnysboatrentalsgtc.com/our-fleet", "https://www.noonsite.com/business/donnys-boat-rentals-and-marina/", "https://www.waterwayguide.com/marina/donnys-boat-rentals-and-marina", "https://www.waterwayguide.com/reviews/1-4433/donnys-boat-rentals-and-marina", "https://www.facebook.com/p/Donnys-Boat-Rentals-and-Marina-100057220039045/"],
+ "qa": {"blockers": 0, "warnings": 0, "interact_note": "2 'dead' inputs are range sliders the click-tester cannot fill; they work"},
+ "track": "A",
+ "scorecard": {"first_screen": 5, "typography": 4, "editorial_layout": 4, "context_visuals": 5, "motion": 4, "depth": 4, "detailing": 4, "mobile": 4, "next_to_references": 4, "owner_proud": 5, "whole_page": 4},
+ "assumptions": ["Photo URLs are the original-size files of the Wix images seen on their site (size parameters removed)", "Rental estimate = weekly rate per full week plus day rate for extra days, capped at the weekly rate (our arithmetic on published rates)", "WhatsApp to Taylor (242 815 9323, from noonsite) is the right booking channel", "Coordinates converted from Waterway Guide (N 26 45.460, W 077 19.301)"],
+ "notes": "Record said Facebook only; they have a basic Wix site. Strong pitch: excellent facts scattered across third-party sites. Boat photo assignments follow page order on their fleet page. Map embed uses the Waterway Guide position.",
+ "built_at": "2026-11-05T01:33:30Z"
 }

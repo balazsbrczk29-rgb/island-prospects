@@ -1,0 +1,18 @@
+{
+  "schema": "island-previews/site-data@1",
+  "slug": "donny-s-boat-rentals-marina",
+  "name": "Donny's Boat Rentals & Marina",
+  "niche": "marina",
+  "contact": {"phone": "+1-242-823-8733", "phone_us": "+1-407-610-7000", "whatsapp": "12428159323", "email": "donnysboatrentals@gmail.com", "vhf": "16 (working 10)", "address": "End of Black Sound", "settlement": "Green Turtle Cay", "island": "Abaco"},
+  "hours": {"daily": "08:00-20:00"},
+  "socials": ["https://www.facebook.com/p/Donnys-Boat-Rentals-and-Marina-100057220039045/"],
+  "offer": [
+    {"name": "23ft Angler, 200 hp", "kind": "boat", "summary": "5-6 adults; VHF, chart-plotter, stereo, ladder. Experience required.", "price": "$185/day, $1,200/7 days, 3-day minimum", "source": "https://www.donnysboatrentalsgtc.com/our-fleet"},
+    {"name": "20ft Century, 150 hp", "kind": "boat", "summary": "5-6 adults; VHF, trim tabs, chart-plotter, stereo, anchor, cooler. Experience required.", "price": "$170/day, $1,075/7 days, 3-day minimum", "source": "https://www.donnysboatrentalsgtc.com/our-fleet"},
+    {"name": "19' Boston Whaler, 115 hp", "kind": "boat", "summary": "4 adults; VHF, chart-plotter, ladder, anchor, cooler.", "price": "$140/day, $880/7 days, 3-day minimum", "source": "https://www.donnysboatrentalsgtc.com/our-fleet"},
+    {"name": "17' Boston Whaler, 60-90 hp", "kind": "boat", "summary": "2-3 adults; VHF, ladder, anchor, cooler.", "price": "$125/day, $805/7 days, 3-day minimum", "source": "https://www.donnysboatrentalsgtc.com/our-fleet"},
+    {"name": "Dockage and moorings", "kind": "slip", "summary": "Fixed-price dockage up to 50 ft LOA and 7 ft draft; moorings with swing room.", "price": null, "source": "https://www.noonsite.com/business/donnys-boat-rentals-and-marina/"}
+  ],
+  "platform": {"candidate": false, "orderable": false, "categories": []},
+  "sources": ["https://www.donnysboatrentalsgtc.com/", "https://www.donnysboatrentalsgtc.com/our-fleet", "https://www.noonsite.com/business/donnys-boat-rentals-and-marina/", "https://www.waterwayguide.com/marina/donnys-boat-rentals-and-marina"]
+}
