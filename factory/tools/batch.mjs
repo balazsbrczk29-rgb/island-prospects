@@ -18,7 +18,7 @@ if (mode === 'claim') {
   try { execSync('git pull -q --rebase --autostash origin main', { cwd: root, stdio: 'inherit' }); } catch {}
   const cur = status(slug);
   if (cur && !needsWork(cur) && !(cur.state === 'building' && Date.now() - new Date(cur.claimed_at).getTime() > 2.5 * 3600 * 1000)) { console.log(`SKIP ${slug}: already ${cur.state} by another session. Move to the next business.`); process.exit(3); }
-  fs.writeFileSync(stFile(slug), JSON.stringify({ slug, id: r.id, name: r.name, batch: r.batch, tier: r.tier, state: 'building', generation: GEN, rebuild_of: cur && cur.state === 'built' ? 1 : undefined, claimed_at: new Date().toISOString() }, null, 1));
+  fs.writeFileSync(stFile(slug), JSON.stringify({ slug, id: r.id, name: r.name, batch: r.batch, tier: r.tier, state: 'building', generation: GEN, history: cur && cur.history, rebuild_of: cur && cur.state === 'built' ? 1 : undefined, claimed_at: new Date().toISOString() }, null, 1));
   execSync(`git add factory/status/${slug}.json && git commit -q -m "claim: ${slug}" && (git pull -q --rebase --autostash origin main && git push -q origin HEAD:main)`, { cwd: root, stdio: 'inherit', shell: '/bin/bash' });
   console.log('CLAIMED', slug); process.exit(0);
 }
@@ -26,7 +26,7 @@ let rows;
 if (mode === 'pending') {
   const n = parseInt(process.argv[3] || '5', 10);
   const stale = ms => Date.now() - new Date(ms).getTime() > 2.5 * 3600 * 1000;   // a "building" claim older than 2.5h = crashed session
-  rows = all.filter(r => { const s = status(r.slug); return needsWork(s) || (s.state === 'building' && stale(s.claimed_at)); }).slice(0, n); // prospects.json is already in priority order
+  rows = all.filter(r => { const s = status(r.slug); return needsWork(s) || (s.state === 'building' && stale(s.claimed_at)); }).sort((a, b) => (status(b.slug)?.reroll ? 1 : 0) - (status(a.slug)?.reroll ? 1 : 0)).slice(0, n); // rerolls first, then prospects.json priority order
   console.log(`PENDING (top ${n} by priority). For EACH: run "node factory/tools/batch.mjs claim <slug>" immediately before you start it, then build and publish it.`);
 } else {
   const b = mode.padStart(2, '0');
