@@ -29,9 +29,11 @@ Load these vendored skills **once per session**, at step 4, before your first de
 - `emil-design-eng` (UI polish and animation judgement) and `choreograph` (staggered hero entrances, list reveals).
 - `web-artifacts-builder`: same stack as ours (React, Tailwind, shadcn); apply its design guidelines and shadcn patterns, but build and publish with `factory/tools/build-site.mjs`, not its bundler.
 - `frontend-design` for aesthetic direction; query `ui-ux-pro-max` for palettes/pairings rather than reading it whole.
-- **Open the reference site source** `factory/web/sites/bell-channel-club-marina/src/` (home.tsx, site.tsx, Water.tsx, styles.css) to see the expected level of craft and the file structure.
+- **Never open another site's source** in this repo (generation 1 copied one reference site and all 55 pages came out the same).
+- `art-director` (load for EVERY business at step 4): the dealt direction, imagery procedures, distinctness gate and critic. It overrides `design-system.md`, `showcase-art-direction.md` sections 3 and 5b, and taste-skill layout defaults.
+- `img2threejs` (procedural 3D of a real object from a photo), `playwright-cli` (browser QA), `awesome-design-skills` (component details for your archetype's style seeds).
 
-Design inspiration: the Dribbble collection Balazs chose (dribbble.com/search/ai-library) cannot be scraped here (images only). Its direction, which you must hit: editorial large-type heroes, generous whitespace, soft tonal gradients inside the brand palette (never purple/blue AI gradients), glassy panels over live visuals, bento-style feature layouts only when content is genuinely varied, refined micro-interactions on every interactive element, and one immersive visual (3D scene or animated background) per site.
+Design inspiration (secondary to the dealt direction): the Dribbble collection Balazs chose (dribbble.com/search/ai-library) cannot be scraped here (images only). Its direction, which you must hit: editorial large-type heroes, generous whitespace, soft tonal gradients inside the brand palette (never purple/blue AI gradients), glassy panels over live visuals, bento-style feature layouts only when content is genuinely varied, refined micro-interactions on every interactive element, and one immersive visual (3D scene or animated background) per site.
 
 ---
 
@@ -80,14 +82,15 @@ Decide and add to the brief:
 ## Step 3. Brand story (read `references/portfolio-standard.md` first, every business)
 Find the one true thing that makes this business itself: the cay it sits on, the founding family, the 1940s mansion, the reef at the doorstep, 40 years of roofing after hurricanes. Write the **buyer portrait** (portfolio-standard section 1), then a single-sentence **brand truth** and a 5-word **feel** (e.g. "unhurried, salt-bleached, family, nautical, honest"). Everything visual follows from these.
 
-## Step 4. Design direction (first study 2 reference sites from showcase-art-direction.md; write the spec in its vocabulary) (load `frontend-design` once; read `design-system.md`)
-Run `node factory/tools/used.mjs` first. Then specify, in the brief, with zero ambiguity:
-- Display + body fonts (exact Google Fonts families and weights). **No pairing may already appear 2+ times in used.mjs output. No display face may repeat within your batch.**
-- Palette: 5-7 hex values with roles (`--ink`, `--paper`, `--accent`, `--accent-2`, `--muted`, `--line`), derived from the brand's real colors if visible, otherwise from the physical place and materials (limestone, sea-grape leaf, conch pink, mangrove tannin, hull blue, weathered teak, rust-free stainless). Check text contrast is at least 4.5:1.
-- Layout system: grid, max widths, the hero composition (must differ from the last 3 entries in used.mjs).
-- **One signature visual** tied to the brand truth: either a React Three Fiber scene (water, light on limestone, a turning 3D object that represents the trade, an island chart in 3D) or one React Bits animated background (Silk, SoftAurora, Grainient, Waves, Topography, GridScan...) tinted to the palette. Plus one signature interaction (a line that draws as you scroll, a room selector, a depth gauge). The reference site uses a shader sea with channel-marker buoys; do something different.
-- Components: name the exact vendored components you will use (catalog), 2-4 motion components max plus shadcn primitives.
-- Motion: entrance choreography for the hero (stagger, blur-in), scroll reveals (`whileInView`, once), hover micro-interactions on every button/link/row (lift 1-2px, underline draw, arrow nudge), scroll progress or similar quiet detail. Ease `[0.16, 1, 0.3, 1]`, 0.6-1.2s. Respect `prefers-reduced-motion`.
+## Step 4. Design direction (load `art-director`; it replaces the old free choice of fonts, palette and hero)
+```
+node factory/tools/direction.mjs <slug>     # your archetype, palette lane, type system, navigation, motion
+```
+1. Read the dealt entries in `art-director/references/archetypes.md`, `palettes.md`, `type-systems.md`. One re-deal is allowed (`--redeal --prefer <A..>`) only if the archetype cannot carry the content; write why in the brief.
+2. `firecrawl_scrape` two sites from the archetype's "Study" list (formats markdown + screenshot) and note how they solve the archetype's hero, navigation and section grammar.
+3. Write the design spec in the brief exactly as art-director section 2 asks: archetype mapped to this business's real content, palette pulled from real photos within the lane (5-7 hex with roles, body contrast 4.5:1), type system with exact families and sizes, signature moment, imagery plan for every slot, two interactions that manipulate the real subject, three generation-1 habits you will not use.
+4. Source the imagery now (art-director `imagery.md`): own photos, Commons photos of the place, a Lovable asset project for the trade (one project, at most two rounds), img2threejs only for an object study.
+5. Components: shadcn primitives restyled for the archetype; Magic UI or React Bits only if the archetype calls for that effect. Motion: implement the dealt signature with `animate` / `choreograph` / `emil-design-eng` craft; respect `prefers-reduced-motion`.
 
 ## Step 5. Copy
 Write all copy before coding. Rules:
@@ -98,10 +101,10 @@ Write all copy before coding. Rules:
 - Unknown prices: "Rates on request". Unknown hours: omit the hours block, do not guess.
 
 ## Step 6. Build (React + Tailwind + shadcn + Motion + three.js)
-Source folder `factory/web/sites/<slug>/` (copy the structure of the reference site, never its design):
+Source folder `factory/web/sites/<slug>/`. For a generation-1 rebuild run `rm -rf factory/web/sites/<slug>/src` first and write everything new:
 ```
 index.html  <inner>.html   # one HTML shell per page: full SEO head + JSON-LD, concept ribbon, <div id="root"></div>, concept-notes JSON, ../assets/concept.js, <script type="module" src="./src/<page>.tsx">
-src/site.tsx               # shared layout: header (shadcn Sheet on mobile), footer, mobile action bar, Lenis, mount(), Reveal
+src/layout.tsx             # shared layout implementing YOUR dealt navigation pattern, footer, mount(); no shared Reveal wrapper
 src/<page>.tsx             # one entry per page
 src/Scene.tsx              # optional R3F scene, always lazy-loaded with React.lazy + Suspense
 src/styles.css             # @import "tailwindcss" source(none); @source lines; @theme tokens (palette, fonts)
@@ -111,13 +114,13 @@ Build: `node factory/tools/build-site.mjs <slug>`, then `node factory/tools/inte
 Requirements:
 - Include every shared snippet from `components.md`: concept ribbon, noindex meta, concept-notes panel, enquiry form wiring, site-data.json.
 - Semantic HTML: one `<h1>` per page, logical h2/h3, `<header> <nav> <main> <footer>`, skip link, `alt` on every image, labelled form fields, focus styles.
-- Mobile first. Design at 390px, then 768, then 1280+. Sticky mobile action bar with the primary CTA (call / WhatsApp / enquire). Tap targets at least 44px.
+- Mobile first. Design at 390px, then 768, then 1280+. The primary action is thumb-reachable on mobile in the form the archetype gives it (tear-off strip, dock, legend sheet, toolbar). Tap targets at least 44px.
 - Performance: images with `width`/`height`, `loading="lazy"` below the fold, `fetchpriority="high"` on the hero image. three.js scenes lazy-loaded. Initial JS+CSS under 650 KB (QA checks). Tailwind `@source` only the components you import.
 - Never use `next/*`, `"use client"` is harmless but unnecessary. No server code. Pages are linked with relative hrefs (`marina.html`, `index.html#contact`).
 - Maps: `<iframe loading="lazy" src="https://www.google.com/maps?q=<url-encoded address or name+island>&output=embed">` with a title attribute.
 - Full SEO head and JSON-LD per `seo-local.md`.
 - Footer: real NAP (name, address, phone), social links found, "Concept by <agency_name>" from `factory/config.json`.
-- Quality bar: if your desktop screenshot would not stand next to the reference site, it is not done.
+- Quality bar: if your desktop screenshot would not stand next to the two award-level sites you studied, it is not done.
 
 ## Step 7. QA (one run, at most two fix passes)
 ```
@@ -126,13 +129,18 @@ node factory/tools/qa.mjs <slug>
 It serves the repo locally, blocks outside network (outside images show as grey "external image" boxes, Google Fonts fall back; both are expected in the sandbox), screenshots mobile 390 and desktop 1440 into `factory/qa/<slug>/`, and prints blockers and warnings. Then:
 1. Fix every **BLOCKER**.
 2. Read `factory/qa/<slug>/mobile.png` and `desktop.png` with the Read tool. Judge as a design director: hierarchy, spacing rhythm, alignment, does the hero say who/where/what in 3 seconds, is the CTA obvious on mobile, does anything look templated. Score the showcase scorecard (showcase-art-direction.md section 6); fix every line below 4.
-3. Re-run QA once. Stop after the second fix pass even if warnings remain; list them in status notes.
+3. `node factory/tools/distinct.mjs <slug>`: fix every blocker (too close to a named site, a generation-1 clone, a ground colour outside your lane).
+4. Fresh-eyes critic subagent (art-director section 6) with your screenshots, `factory/qa/_contact.png` and your Lovable gallery screenshot. Apply its three changes if any score is below 4.
+5. Re-run QA and distinct once. Stop after the second fix pass even if warnings remain; list them in status notes.
 
 ## Step 8. Status and publish
 Write `factory/status/<slug>.json`:
 ```json
 {
-  "slug": "...", "id": 0, "name": "...", "batch": "..", "tier": "A",
+  "slug": "...", "id": 0, "name": "...", "batch": "..", "tier": "A", "generation": 2,
+  "direction": {"archetype": "A06", "lane": "P14", "type": "T07", "nav": "N4", "motion": "M4"},
+  "images": [{"src": "https://...", "source": "own | commons | generated", "credit": "Artist, CC BY-SA 4.0"}],
+  "critic": {"composition": 4, "photography": 4, "typography": 4, "colour": 4, "awwwards": 4, "closest": "slug"},
   "state": "built",                       // or "skipped"
   "pages": ["index.html", "rooms.html"],
   "primary_cta": "Check slip availability",

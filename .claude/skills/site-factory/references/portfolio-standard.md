@@ -1,5 +1,7 @@
 # The portfolio standard ($1,000+ per site)
 
+> **Generation 2 override.** Layout, palette, type, navigation, motion and imagery now come from the dealt direction in `.claude/skills/art-director/` (archetypes, palettes, type-systems, imagery). Where this file disagrees with the art-director skill, the art-director skill wins. Any mention of "the reference site" means the award-level sites you study, never another site in this repo.
+
 Read this before step 3 for every business. It overrides any instinct toward safe, generic choices.
 
 ## 1. Know the client and the buyer before designing anything

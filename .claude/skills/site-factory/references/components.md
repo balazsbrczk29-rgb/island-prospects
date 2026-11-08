@@ -1,5 +1,7 @@
 # Mandatory shared components
 
+> **Generation 2 override.** Layout, palette, type, navigation, motion and imagery now come from the dealt direction in `.claude/skills/art-director/` (archetypes, palettes, type-systems, imagery). Where this file disagrees with the art-director skill, the art-director skill wins. Any mention of "the reference site" means the award-level sites you study, never another site in this repo.
+
 Shared files live in `/assets/` (repo root). Reference them relatively from a site folder: `../assets/...`. Do not copy or edit them per site.
 
 ## 1. Concept ribbon (first element inside `<body>`, every page)
@@ -65,12 +67,5 @@ Style the form yourself in `styles.css` to match the site.
 ```
 This is how every site becomes a future node on the agency's delivery/booking platform. `platform.candidate` is true for food, retail, catering, bakeries, rum cake, hardware, paper and similar merchants.
 
-## 5. Mobile action bar
-```html
-<nav class="action-bar" aria-label="Quick actions">
-  <a href="tel:+1242..."><span>Call</span></a>
-  <a href="https://wa.me/1242...">WhatsApp</a>   <!-- only if sourced -->
-  <a href="#enquire" class="is-primary">{short CTA}</a>
-</nav>
-```
-Visible under 768px only, `position: fixed; bottom: 0;` with `padding-bottom: env(safe-area-inset-bottom)`. Add bottom padding to `<body>` on mobile so the footer is not covered.
+## 5. Mobile primary action
+The primary action (call, WhatsApp if sourced, or the enquiry) must be thumb-reachable on phones, in the form your archetype gives it: a magazine tear-off strip, a floating dock, a legend bottom sheet, a toolbar button, a reply-card tab, a single "Enquire" word. Design it; never paste the generation-1 two-cell bar with `aria-label="Quick actions"` (distinct.mjs blocks it). Use `padding-bottom: env(safe-area-inset-bottom)` for anything fixed to the bottom and leave room so the footer is not covered.

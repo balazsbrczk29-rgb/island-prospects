@@ -1,5 +1,7 @@
 # Component catalog (vendored, import from `@/components/...`)
 
+> **Generation 2 override.** Layout, palette, type, navigation, motion and imagery now come from the dealt direction in `.claude/skills/art-director/` (archetypes, palettes, type-systems, imagery). Where this file disagrees with the art-director skill, the art-director skill wins. Any mention of "the reference site" means the award-level sites you study, never another site in this repo.
+
 Pick deliberately: 1 signature visual (three.js scene OR one React Bits background), 2-4 motion components, shadcn primitives for UI. More is worse. Every effect must serve the brand truth; taste-skill rules on when shaders/scenes are appropriate still apply (tech pages get more, hospitality and professional services get quiet motion).
 
 ## shadcn/ui (`@/components/ui/<name>`)

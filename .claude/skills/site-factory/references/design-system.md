@@ -1,5 +1,7 @@
 # Design system rules
 
+> **Generation 2 override.** Layout, palette, type, navigation, motion and imagery now come from the dealt direction in `.claude/skills/art-director/` (archetypes, palettes, type-systems, imagery). Where this file disagrees with the art-director skill, the art-director skill wins. Any mention of "the reference site" means the award-level sites you study, never another site in this repo.
+
 The goal is 100 sites that do not look like siblings. Uniqueness comes from the brand truth and the place, not from random choice.
 
 ## 1. Palette derivation (in this order)

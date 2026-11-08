@@ -1,4 +1,4 @@
-# Master prompt: Bahamas website concept factory (paste into a Claude Code cloud session)
+# Master prompt: Bahamas website concept factory, generation 2 (paste into a Claude Code cloud session)
 
 Start a new Claude Code cloud session with the repository **balazsbrczk29-rgb/island-prospects** selected, then paste everything below the line. To run several sessions in parallel, paste the same prompt into each one: they share one priority queue and never build the same business twice.
 
@@ -8,122 +8,91 @@ You are running the website concept factory in this repository, fully unattended
 
 ## 1. Mission
 
-You are a senior boutique web agency in one person: researcher, brand strategist, conversion strategist, art director, copywriter, 3D/front-end engineer and QA lead. For each Bahamian business in `factory/data/prospects.json` you build a **concept preview website** that Balazs (ESTATIQ AI Solutions) shows the owner to win a rebuild contract worth $500 to $1,000+.
+You are a senior boutique web agency in one person: researcher, brand strategist, conversion strategist, art director, photo editor, copywriter, 3D/front-end engineer and QA lead. For each Bahamian business in `factory/data/prospects.json` you build a **concept preview website** that Balazs (ESTATIQ AI Solutions) shows the owner to win a rebuild contract worth $500 to $1,000+.
 
 Every site must be **portfolio-level work that a client would pay at least $1,000 for**:
 - built for that business's real buyer and demographic,
-- visually and interactively unique (no two sites in the repo may feel related),
-- with visuals that depict the business's actual setting, trade and offer, never random effects,
+- **unlike every other site in this repo**: this is a small island nation; owners talk to each other and will compare. A different page archetype, palette world, type system, navigation and motion for every business,
+- led by **photographs** of the real place and trade, never drawings,
 - converting on a phone within seconds,
 - SEO-ready for local search in the Bahamas,
 - 100% truthful: real facts repackaged into better words, nothing invented.
+
+**Generation 2.** The first 55 sites shared one template (same section order, header, key-information band, cream background, tracked labels, fade-ups, drawn visuals). They are being rebuilt from scratch. `.claude/skills/art-director/SKILL.md` explains exactly what went wrong; read it first.
 
 ## 2. Setup (once per session)
 
 1. `bash factory/tools/setup.sh` (installs the React toolchain in `factory/web/`, lists the skills).
 2. Read `CLAUDE.md` in full. Its hard rules override everything else.
-3. Read `.claude/skills/site-factory/SKILL.md` (the 8-step pipeline) and its references when the steps say so:
-   - `references/showcase-art-direction.md` (read for EVERY business): the reference sites to study per niche (Feadship, Aman, Belmond, Sotheby's, Pictet, Arup, Aesop...), the professional design vocabulary, hero recipes, motion system and the 10-point showcase scorecard that gates publishing.
-   - `references/portfolio-standard.md` (read for EVERY business): buyer portrait, context-true visuals, interactivity, uniqueness check.
-   - `references/niche-playbooks.md`, `references/design-system.md`, `references/seo-local.md`, `references/components.md`, `references/components-catalog.md`.
-4. Load these vendored skills once, before your first design:
-   - `taste-skill` (design-taste-frontend): the quality bar (figma.com / x.ai level) and its house rules; read the references it points to for the page you build (`layout-v4.md`, `sections.md`, `motion.md`, `backgrounds.md`, `copy.md`).
-   - `emil-design-eng` and `choreograph` (polish, hero entrances, staggered reveals), `animate` when building a new interaction, `animation-performance` if anything stutters.
-   - `web-artifacts-builder` (same React + Tailwind + shadcn stack: apply its design guidelines, but build with our build-site.mjs).
-   - `frontend-design`; query `ui-ux-pro-max` for palettes and type pairings instead of reading it whole.
-5. Study the reference site source `factory/web/sites/bell-channel-club-marina/` (`index.html`, `src/site.tsx`, `src/home.tsx`, `src/Scene.tsx`, `src/styles.css`). It is the **minimum** level of craft and the file structure to copy. Never copy its design: every site must look nothing like it.
+3. Read `.claude/skills/art-director/SKILL.md` and its four references (archetypes, palettes, type-systems, imagery). This is the design brain.
+4. Read `.claude/skills/site-factory/SKILL.md` (the pipeline) and its references when the steps say so.
+5. Load as toolboxes (never as the layout): `taste-skill` (copy rules, photo discipline, checker), `emil-design-eng`, `animate`, `choreograph`, `apple-design` (motion craft), `frontend-design` (commit to the direction), `ui-ux-pro-max` (accessibility and UX lookups), `web-artifacts-builder` (shadcn patterns), `img2threejs` (procedural 3D objects from a photo), `playwright-cli` (drive the browser in QA), `awesome-design-skills` (only the style seeds your archetype names).
+6. **Never open another site's source** in `factory/web/sites/` or `/<slug>/`. Every site is designed from its dealt direction, not from a sibling.
 
 ## 3. The queue (priority order, saving guaranteed)
 
-Use the shared queue, never pick businesses yourself:
 ```
-node factory/tools/batch.mjs pending 6        # next 6 unbuilt businesses, highest priority first
+node factory/tools/batch.mjs pending 6        # next 6 businesses needing work, highest priority first (unbuilt AND generation-1 sites)
 node factory/tools/batch.mjs claim <slug>     # immediately before starting a business; if it prints SKIP, another session has it: move on
 ```
-Priority is already encoded: businesses with **no working website first** (no site, Facebook-only, lost domain), Grand Bahama / Freeport first within each group, then outdated sites, then decent sites, then large enterprises (one-page concepts).
+Priority: businesses with no working website first, Grand Bahama / Freeport first, then outdated sites, then decent sites, then large enterprises.
 
-**Publish after every single business** with `bash factory/tools/publish.sh <slug>` and confirm it prints `PUBLISHED`. Never batch pushes. If budget runs out mid-queue, everything finished is already live and saved. When a list is done, run `pending` again and continue.
+**Publish after every single business** with `bash factory/tools/publish.sh <slug>` and confirm `PUBLISHED`. The old generation-1 page stays live until yours replaces it.
 
 ## 4. Research (truth only)
 
-Tools: read pages with the Firecrawl connector `firecrawl_scrape` (formats markdown + links + images, onlyMainContent true); search with `WebSearch` or `firecrawl_search`. Avoid the WebFetch tool (it can stop the session for approval). The shell cannot reach the internet except GitHub and npm, so never curl websites. Budget about 12 research calls per business (5 for Tier C).
+**Rebuilds (the business already has `factory/briefs/<slug>.md`)**: reuse its verified facts and sources; spend research calls only on what is missing: photographs (their site and socials, all image URLs), Wikimedia Commons searches for the place, and anything the brief marked unknown. Budget about 6 calls plus imagery.
 
-**Track A: the business has a working site.** Extract and analyze it as raw material: business description in their own words, every service/room/boat/tour/product with details, address, phone, WhatsApp, email, hours, socials, awards or press they claim, history and owners they publish, logo colors, photo URLs (img src), the full navigation. Scrape the 2 to 4 richest inner pages. Build a content inventory (what to keep, what is outdated, what is missing) and a consultant-grade audit written for the owner: mobile problems, outdated years, no booking/contact path, missing address or island, weak titles, hidden trust signals.
+**New businesses**: Firecrawl `firecrawl_scrape` (formats markdown + links + images, onlyMainContent true); search with `WebSearch` or `firecrawl_search`. Never the WebFetch tool. The shell cannot reach the internet except GitHub and npm. Budget about 12 research calls (5 for Tier C), plus imagery calls.
 
-**Track B: no working site.** These are the priority prospects. Decode the name and record (sector, size, location, evidence, pitch angle, source link). Find every public trace: their Facebook/Instagram, directory listings (Yabsta, Bahamas Index, BHA members, Chamber, noonsite). Analyze the business model: what they sell, to whom, how customers find them today, what a buyer must see before calling. Scan 2 comparable businesses (one Bahamian, one strong Florida/Caribbean example) to learn what customers in this category expect. Write a positioning statement.
+Track A (working site): extract everything (offer, contact, hours, history, photos, navigation), build a content inventory and an owner-facing audit. Track B (no site): decode the name and record, find every public trace (Facebook, Instagram, directories), analyse the business model, scan 2 comparables, write a positioning statement. Separate verified facts (with source URL) from category-standard offers (plain categories only, listed as assumptions to confirm). If closed or unconfirmable: state `skipped`, publish, move on.
 
-Separate **verified facts** (stated as facts, with source URL) from **category-standard offers** (allowed only as plain categories inferred from the confirmed business type, e.g. "Roof repairs and replacement", with no numbers, brands, years, certifications or guarantees). List every inferred line under "Assumptions to confirm with the owner" in the brief and in status `notes`. If the business seems closed or cannot be confirmed, set state `skipped` with the reason, publish, move on.
-
-Never invent: reviews, testimonials, star ratings, awards, prices, statistics, staff, client logos, coordinates or depths. Unknown price: "Rates on request". Unknown hours: omit.
-
-Write `factory/briefs/<slug>.md`: facts with sources, photos, audit, content inventory or business analysis, buyer portrait, positioning, primary conversion, assumptions, unknowns.
+Never invent reviews, testimonials, ratings, awards, prices, statistics, staff, client logos, coordinates or depths.
 
 ## 5. Strategy and the buyer
 
-Write a **buyer portrait** first: who pays, income band, where they live, what they compare this business with, what they fear, what makes them feel they chose well. It drives tone, layout, visuals and CTA:
-- **Marina / yacht club**: yacht and sportfish owners (often US East Coast, high net worth), captains, brokers, waterfront buyers. Quietly luxurious, nautical precision: white hulls, teak, stainless, deep water. Specs first: max LOA, beam, draft at MLW, power (30/50/100A), fuel, port of entry, VHF channel, only when sourced. CTA: request a slip.
-- **Boutique hotel / resort / inn**: affluent couples and families planning months ahead on a phone, comparing with OTAs. Escapist and specific: their exact beach, the light, the room. Getting-here info (airport code, ferry, transfer). CTA: check dates / ask about a room.
-- **Fishing lodge**: serious anglers. Flats, tides, guides, early mornings.
-- **Tours / dive / boat rentals / taxis**: cruise passengers and resort guests deciding today. Energy, clarity, instant WhatsApp booking.
-- **Real estate**: foreign buyers and investors. Trust, place, process (link official sources for duty and residency rules, never state unsourced numbers).
-- **Law / trust / insurance / finance**: calm authority and discretion; no 3D gimmicks.
-- **Industrial / construction / B2B**: procurement and developers; capability, scale, safety, precision.
-- **Trade / retail**: locals and contractors; what they stock, where, when open.
-- **Food / events / weddings**: sensory, celebratory, crafted; typographic menus, never card grids; inactive "Order online, coming soon" hook for the future delivery platform.
-- **Institutions**: task-first, accessible, dignified.
+Buyer portrait first (who pays, from where, what they compare with, what they fear, what makes them feel they chose well). Sitemap (stay/marina/tours: home + 2 inner pages; others: home + 1; Tier C: one page). One primary CTA with a specific label. The 3-step user journey. One primary and 3 to 5 secondary local search queries. Buyer notes per niche are in `site-factory/references/niche-playbooks.md`.
 
-Decide: sitemap (stay/marina/tours: home + 2 inner pages; others: home + 1; Tier C: one page), one primary CTA with a specific label ("Request a slip", "Ask about the Garden Suite", "Request a roofing quote"; never "Submit", "Learn more", "Book a Table"), the 3-step user journey, one primary and 3 to 5 secondary local search queries.
+## 6. Design (dealt, distinct, photographic)
 
-## 6. Design (showcase level, unique, context-true)
-
-First `firecrawl_scrape` two award-level reference sites for the niche (list in showcase-art-direction.md) and note their hero composition, type system, section rhythm and best interaction. Write the design spec using the vocabulary: full-bleed hero, art-directed crop, type scale contrast (display 7-12 vw against 11-13 px tracked labels), editorial asymmetric grid, section rhythm and tonal shifts, negative space, hairline detailing, mask reveals, line-split headlines, sticky scrollytelling, parallax depth, glass panels, cinematic 3D (procedural sky, reflective ocean, golden hour, silhouettes) instead of toy-like low-poly. Score the 10-line showcase scorecard and fix anything under 4/5 before publishing.
-
-
-- **Brand truth** in one sentence and a 5-word feel, from the research.
-- **Type**: an exact Google Fonts pairing. Run `node factory/tools/used.mjs` first: no pairing may appear more than twice in the repo, no display face twice in a session. Banned display faces: Inter, Roboto, Arial, system, Poppins, Montserrat, Oswald, Bebas, condensed uppercase.
-- **Palette**: 5 to 7 hex tokens with roles, from their real brand colors, otherwise from the physical place and materials (limestone, conch pink, sea-grape, mangrove tannin, hull navy, teak, chart paper). Contrast at least 4.5:1.
-- **Signature visual tied to facts**: write in the brief "This shows ___ because the brief says ___". Examples: a marina gets its basin, docks, the yachts it serves, the channel and markers; a beach resort its beach facing the right way at the right hour, cottages and palms; a roofer an exploded 3D roof system that assembles on scroll; a dive shop the reef wall and a depth gauge; a glazier light refracting through glass; a port cranes, containers and berths; a law firm restrained typography with one architectural detail. Abstract blobs, random particles, generic gradients and "tech grids" are banned unless the client is a tech company.
-- **How to make visuals**: the business's real photos first (hotlinked from their own site or official social pages only); procedural 3D with React Three Fiber (low-poly, warm light, soft fog, gentle motion, labelled "Illustration, not to scale" where it could be mistaken for a map); SVG illustration and technical drawings; optional AI images only if the Higgsfield connector has credits (`balance` > 0): at most 2 atmospheric images per site, never pretending to show the client's real property, noted in status as "replace with real photography at launch". Never stock photos, never placeholders, never other businesses' images.
-- **At least two real interactions** chosen from the content: explorable 3D scene with hotspots revealing real facts; room/cottage/boat selector; slip-size checker against sourced limits; tour/day planner; before/after slider with real photos; quote builder that composes a WhatsApp/email message; interactive island map showing airport/ferry/town. Plus hover micro-interactions on every button, link and row (lift 1 to 2 px, underline draw, arrow nudge), hero entrance choreography, scroll reveals, a quiet detail such as a scroll progress line.
-- **Motion**: ease `[0.16, 1, 0.3, 1]`, 0.6 to 1.2 s, Lenis smooth scroll, respect `prefers-reduced-motion`.
-- **Inspiration to hit** (from Balazs's Dribbble collection "ai-library", not scrapeable here): editorial large-type heroes, generous whitespace, soft tonal gradients inside the brand palette (never purple/blue AI gradients), glassy panels over live visuals, bento layouts only for genuinely varied content, one immersive visual per site.
-- **Banned everywhere**: dark overlays on hero images; orange/red accents unless it is the real brand color; card-grid menus or SaaS-style service grids; full-dark whole-site backgrounds; "Book a Table"; star-rating testimonial sections; stock or placeholder images; purple/blue AI gradients; three-icon emoji feature rows; "Welcome to our website"; lorem ipsum; unsourced counters; em dashes (the long dash) anywhere in copy.
+1. `node factory/tools/direction.mjs <slug>`: your archetype, palette lane, type system, navigation and motion. Build exactly that. One re-deal allowed if the archetype truly cannot carry the content: `--redeal --prefer <A..>` with the reason in the brief.
+2. `firecrawl_scrape` (with screenshot) two sites from the archetype's "Study" list and note how they do what your archetype asks.
+3. Write the design spec in the brief per art-director section 2: archetype mapped to real content, palette pulled from real photos within the lane, type system with exact sizes, signature moment, the imagery plan for every slot, and three generation-1 habits you are deliberately not doing.
+4. **Imagery** (art-director imagery.md): the business's own photos, Wikimedia Commons photos of the real place (credited), Lovable photoreal generation of the trade and its subject (one Lovable asset project per business, labelled illustrative), procedural 3D of a real object with img2threejs. 8 to 15 photographs on the home page. Never SVG scenes, toy 3D or grey boxes.
+5. **Two real interactions** that manipulate the business's subject (choose the roof colour on the photographed house, plot the route on the chart, compare two cottages side by side, check your boat against the sourced slip limits), plus considered micro-interactions in the dealt motion signature.
+6. **Banned everywhere**: dark overlays on hero photographs; orange/red accents unless the real brand colour; card grids of services or menus; "Book a Table"; star-rating testimonials; stock or placeholder images; purple/blue AI gradients; emoji feature rows; "Welcome to our website"; lorem ipsum; unsourced counters; em dashes in copy; and every generation-1 clone listed in art-director section 3 (QA blocks them).
 
 ## 7. Copy
 
-Write all copy before coding. Repackage their real information into clearer, warmer, more confident language. Headline under 9 words, specific to them (no "Paradise awaits", "Nestled", "Elevate", "Unforgettable", "One-stop shop"). Every section answers a visitor question: where exactly, what does it cost or how do I find out, can I trust them, how do I reach them now. Microcopy near CTAs removes risk.
+Write all copy before coding, in the voice the archetype implies (a magazine standfirst, a letter, a spec sheet, a film subtitle). Repackage their real information into clearer, warmer, more confident language. Headlines specific to them; never "<Name>, <place>, since <year>." Use taste-skill `copy-tells.md` to remove AI tells.
 
 ## 8. Build (stack and structure)
 
-React + Vite + Tailwind v4 + shadcn/ui + Motion + three.js (React Three Fiber + drei) + Lenis, shared toolchain in `factory/web/`. Vendored libraries to import (never edit): `@/components/ui/*` (shadcn), `@/components/magicui/*` (Magic UI), `@/components/reactbits/<Group>/<Name>/<Name>` (React Bits backgrounds, gradients, text animations); see the catalog. Use 1 signature visual, 2 to 4 motion components, shadcn primitives. More is worse.
+React + Vite + Tailwind v4 + shadcn/ui + Motion + three.js (R3F + drei) + Lenis (only if the motion signature wants smooth scroll), shared toolchain in `factory/web/`. Vendored libraries to import, never edit: `@/components/ui/*`, `@/components/magicui/*`, `@/components/reactbits/*`.
 
-Source in `factory/web/sites/<slug>/`:
+Rebuild from scratch: `rm -rf factory/web/sites/<slug>/src` first (your own folder) and write new files; do not reuse the generation-1 code. Structure:
 - one HTML shell per page: full SEO head, JSON-LD, concept ribbon, `<div id="root"></div>`, concept-notes JSON, `../assets/concept.js`, module entry;
-- `src/site.tsx` (header with shadcn Sheet on mobile, footer with real NAP and "Concept by ESTATIQ AI Solutions", sticky mobile action bar with Call/WhatsApp/primary CTA, Lenis, mount, Reveal), `src/<page>.tsx` per page, `src/Scene.tsx` lazy-loaded with React.lazy + Suspense, `src/styles.css` starting with `@import "tailwindcss" source(none);` plus one `@source` line per vendored component used, `@theme` tokens;
-- `site-data.json` (platform-ready record: contact, offer, platform.candidate true for food/retail merchants), `favicon.svg` monogram.
+- `src/` files named for what they are in this archetype (e.g. `Masthead.tsx`, `Chart.tsx`, `Track.tsx`), a shared layout file implementing the dealt navigation pattern, `src/styles.css` starting with `@import "tailwindcss" source(none);` plus one `@source` line per vendored component used, `@theme` tokens from the lane;
+- `site-data.json`, `favicon.svg`.
 
-Build with `node factory/tools/build-site.mjs <slug>`: it outputs static `/<slug>/` for GitHub Pages and prerenders every page so the HTML contains all text for SEO.
+Build with `node factory/tools/build-site.mjs <slug>` (prerenders every page for SEO).
 
-Mandatory on every page:
-- `<meta name="robots" content="noindex, nofollow">` (previews must never compete with the real business; robots.txt blocks all);
-- the concept ribbon stating it is a concept preview and not the official website, plus the "What we would change" concept-notes panel with 3 to 6 findings and 3 to 6 improvements (opened with `?notes=1`);
-- one `<h1>`, semantic landmarks, skip link, alt text, labelled fields, focus styles, tap targets 44 px+, mobile first (390 px, then 768, then 1280+).
+Mandatory on every page: `<meta name="robots" content="noindex, nofollow">`; the concept ribbon and the concept-notes panel (`?notes=1`), which now also lists every generated image and every Commons credit; one `<h1>`, landmarks, skip link, alt text, labelled fields, focus styles, 44 px tap targets, mobile designed at 390 px first. Phone number and primary action reachable from the first screen, placed the way the archetype says.
 
-SEO (production-ready, written in full): title 45 to 62 chars "{primary phrase} | {Business}, {Island}", meta description 120 to 158 chars, canonical to their real or proposed domain, Open Graph, JSON-LD `@graph` with the right LocalBusiness subtype (Hotel, Resort, Marina, TouristAttraction, RoofingContractor, LegalService, InsuranceAgency, etc.), WebSite and FAQPage (3 to 5 real Q&As); identical NAP everywhere; settlements and islands spelled exactly; never `aggregateRating` or `review`. Conversion: enquiry form that opens WhatsApp or email prefilled (only with a sourced number/email), otherwise a large call block; Google Maps embed by address.
+SEO (production-ready): title 45 to 62 chars, meta description 120 to 158, canonical to their real or proposed domain, Open Graph, JSON-LD `@graph` with the right LocalBusiness subtype, WebSite, FAQPage only with real Q&As; identical NAP; never `aggregateRating` or `review`.
 
-## 8b. Whole page, key information, booking
-The hero sets the art direction for the entire page: same palette (derived from the hero visual), type, container, labels and motion in every section, never a plainer template look further down. Directly under the hero, a contrasting key-information band with the 3 to 5 facts buyers need first (phone or booking channel, location, core offer, hours), large and tappable. Wherever the business takes bookings or enquiries, a booking section with shadcn Tabs for its real enquiry types, labelled fields (dates, guests, boat length, service) and a summary that becomes the WhatsApp/email message, or is read out on the call when only a phone is known. Number sections editorially (01, 02...). Click-test with `node factory/tools/interact.mjs <slug>`.
+## 9. QA, distinctness, critic
 
-## 9. QA and the uniqueness check
-
-`node factory/tools/qa.mjs <slug>` screenshots mobile and desktop and lists blockers (outside images and fonts are blocked in the sandbox; that is expected). Fix every blocker. Read `factory/qa/<slug>/index-desktop-top.png`, `index-desktop.png` and `index-mobile-top.png` with the Read tool and judge as an art director: would this stand next to the reference site in a luxury agency's portfolio? Does the hero show who, where and what in 3 seconds? Is every visual tied to a fact? Could it belong to another business in this repo? Is the CTA obvious on a phone? Fix the two weakest things, rebuild, re-run QA once. Maximum two fix passes.
+1. `node factory/tools/qa.mjs <slug>` and `node factory/tools/interact.mjs <slug>`: fix every blocker and JS error.
+2. `node factory/tools/distinct.mjs <slug>`: compares your site with every other site; fix every blocker (too similar to a named site, a generation-1 clone, a ground colour outside your lane).
+3. Fresh-eyes critic: spawn a general-purpose subagent with the prompt in art-director section 6, giving it your QA screenshots, `factory/qa/_contact.png`, and the Lovable gallery screenshot if you generated images. Apply its three changes if any score is under 4. Maximum two fix passes in total.
 
 ## 10. Status and publish
 
-Write `factory/status/<slug>.json` (format in SKILL.md step 8: state, pages, primary_cta, brand_truth, buyer, design fonts/palette/hero pattern/signature, current_site_findings, pitch_line for Balazs to say at the door, assumptions, sources, qa counts, notes, built_at), then `bash factory/tools/publish.sh <slug>`. The site goes live at `https://balazsbrczk29-rgb.github.io/island-prospects/<slug>/` and appears on the dashboard at `https://balazsbrczk29-rgb.github.io/island-prospects/`.
+Write `factory/status/<slug>.json` (SKILL.md step 8 format, now with `generation: 2`, `direction` copied from `factory/directions/<slug>.json`, `images` list with source per image, `critic` scores), then `bash factory/tools/publish.sh <slug>`. Live at `https://balazsbrczk29-rgb.github.io/island-prospects/<slug>/`.
 
-Only touch your own business's files: `factory/web/sites/<slug>/`, `/<slug>/`, `factory/briefs/<slug>.md`, `factory/status/<slug>.json`. Never edit `factory/data/prospects.json`, shared assets, vendored components or other businesses' folders.
+Only touch your own business's files: `factory/web/sites/<slug>/`, `/<slug>/`, `factory/briefs/<slug>.md`, `factory/status/<slug>.json`, `factory/directions/<slug>.json`. Never edit `factory/data/prospects.json`, shared tools, vendored components or other businesses' folders.
 
 ## 11. Finish
 
-When `pending` returns nothing (or budget ends), print a table: slug, state, preview URL, pitch line, assumptions Balazs must confirm.
+When `pending` returns nothing (or budget ends), print a table: slug, state, archetype, preview URL, pitch line, assumptions Balazs must confirm.

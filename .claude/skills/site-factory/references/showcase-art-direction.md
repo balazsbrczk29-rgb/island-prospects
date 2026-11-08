@@ -1,6 +1,6 @@
 # Showcase art direction (Awwwards / FWA / Site of the Day level)
 
-This file defines what "showcase level" means in concrete, buildable terms. It overrides softer guidance elsewhere. Every site must pass the scorecard at the end before it is published.
+This file defines what "showcase level" means in concrete, buildable terms. The art-director skill (dealt direction, imagery, distinctness) overrides it where they differ. Every site must pass the scorecard at the end before it is published.
 
 ## 0. Study the masters first (2 tool calls per business)
 Before designing, `firecrawl_scrape` TWO award-level reference sites from the list for your niche (formats: markdown + links + images, plus `screenshot` if available). Write in the brief, for each: hero composition, type system, section rhythm, the one interaction that impressed you. Then design something that would sit comfortably next to them. Never copy their text, images or brand.
@@ -39,19 +39,11 @@ Before designing, `firecrawl_scrape` TWO award-level reference sites from the li
 - **Cinematic 3D**: when there are no photos, build a realistic scene, not a toy: drei `<Sky>` (procedural sun/sky, golden hour: sun elevation 2-6 degrees), a reflective ocean shader with fresnel and specular highlights, fog matching the sky colour, ACES filmic tone mapping, soft shadows, a slow camera dolly. Silhouettes and scale (a yacht against the sunset) read as luxury; bright low-poly colours read as a game. Low-poly is only acceptable for maps and diagrams.
 - **Page loader / intro**: a 0.8-1.5 s branded intro (monogram drawing in, then the hero revealing) only for hospitality and marina sites.
 
-## 2. Imagery hierarchy (the biggest quality lever)
-1. The business's real photography (their own site or official socials), art-directed: large, full-bleed, cropped, never small thumbnails.
-2. AI imagery (if the Higgsfield connector has credits): photoreal, editorial, golden hour, shot-on-film look, prompt like a photographer ("35mm, f/2.8, low sun, Bahamian turquoise shallows, white hull, teak deck, editorial travel photography, no people, no text"). Never claim it shows their property; label in status notes.
-3. Cinematic 3D (section 1).
-4. Typographic art direction (giant type, texture, colour fields) for professional and industrial niches.
-Never: stock, icons-as-illustration, emoji, cartoon or toy-like visuals for premium clients.
+## 2. Imagery
+See `.claude/skills/art-director/references/imagery.md`: own photos, Wikimedia Commons photos of the real place, Lovable photoreal generation of the trade, img2threejs objects. 8 to 15 photographs per home page. Never drawn scenes or toy 3D.
 
-## 3. Hero recipes (pick one that fits the brand truth; never repeat the last 3 used in the repo)
-- **Cinematic full-bleed**: 100svh visual, headline set huge in the lower-left over a natural dark area of the image (sky at dusk, deep water), micro-label above, a glass info card bottom-right, scroll cue. (Marinas, resorts.)
-- **Typographic monument**: one or two words at 15-20 vw spanning the screen, a small inset image or 3D object breaking into the letters. (Law, trust, construction, institutions.)
-- **Split-screen editorial**: 7/5 asymmetric split, image bleeding off the right edge, headline overlapping the image boundary. (Real estate, boutique inns.)
-- **Scrollytelling intro**: pinned 3D or image sequence; the first scroll moves the camera through the place while three short lines of copy appear. (Marinas, tours, dive.)
-- **Product/craft close-up**: macro visual of the trade (glass refraction, roof membrane layers, rum cake crumb) with a clean spec column. (Trades, food, manufacturing.)
+## 3. Hero
+The hero comes from your dealt archetype (`art-director/references/archetypes.md`). The vocabulary in section 1 is a toolbox for executing it, not a list to apply everywhere.
 
 ## 4. Motion system (choreography, not decoration)
 - Load sequence: label (0 s) → headline lines (0.15 s, stagger 0.08) → body (0.5 s) → CTA (0.65 s) → visual mask reveal (0.2-1.4 s).
@@ -61,15 +53,14 @@ Never: stock, icons-as-illustration, emoji, cartoon or toy-like visuals for prem
 - Respect prefers-reduced-motion (disable transforms, keep opacity fades).
 
 ## 5. Copy tone for premium
-Short, confident, specific, sensory. Headlines of 2-6 words. Sentence case, no exclamation marks. Captions read like a magazine ("Bell Channel, late afternoon"). Let one strong line breathe instead of three weak ones.
+Short, confident, specific, sensory. Headlines of 2-6 words. Sentence case, no exclamation marks. Captions read like a magazine ("Hope Town harbour, late afternoon"). Let one strong line breathe instead of three weak ones.
 
-## 5b. Whole-page consistency, key information, booking (learned from the approved reference)
-- **The hero sets the art direction for the whole page.** Derive the page palette from the hero visual (the reference took its navy, dusk sand and warm paper from the golden-hour scene) and keep the same type system, container width (1440 px, 40 px gutters), label style and motion language in every section. No section may drop back to a plainer, template look.
-- **Key-information band directly under the hero**: the 3 to 5 facts a buyer needs first (phone or booking channel, location, the core offer, hours or season if sourced), large and tappable, in a contrasting band. Crucial information must never be buried in body text.
-- **Booking or enquiry section wherever the business takes bookings or enquiries** (rooms, slips, tours, rentals, events, quotes, consultations): shadcn `Tabs` for the enquiry types the business really has, labelled fields (dates, guests, boat length, service), and a summary that becomes the message. With a sourced WhatsApp number or email, the button opens WhatsApp or email prefilled; with phone only, show the summary to read out and a large Call button; with a real booking engine URL, link it. The primary CTA in the header, hero and mobile action bar all lead here.
-- **Editorial indexing**: number the sections (01, 02...) with tracked micro-labels, like the reference.
-- **Rhythm**: hero (immersive), key-info band (dense, contrasting), signature interaction (immersive), story (quiet), offer (dense), booking (functional), FAQ, contact. Adapt the order to the niche, keep the alternation.
-- Test interactions with `node factory/tools/interact.mjs <slug>` (clicks tabs, accordions, buttons, fills inputs, reports JS errors and dead controls). Fix any JS error.
+## 5b. Whole page and conversion
+- **The dealt direction holds for the whole page.** Same lane, type system, navigation and motion in every section; no section drops back to a plainer template look.
+- **Crucial information is visible from the first screen**, placed the way the archetype says (facts box, legend panel, toolbar, calling card, ticket stub, letterhead). Never a generic "Key information" strip.
+- **Enquiry or booking wherever the business takes them**, designed in the archetype's language (a reply card, a work order, a chart plot, a ticket), with labelled fields and a summary that becomes the WhatsApp or email message (sourced number or email only), or a large call action when only a phone is known.
+- Numbering and tracked micro-labels only when the type system allows them.
+- Test interactions with `node factory/tools/interact.mjs <slug>` and fix any JS error.
 
 ## 6. Showcase scorecard (score 1-5 each in the brief; publish only when every line is 4+)
 1. First screen stops the scroll: a full-viewport, art-directed visual or typographic moment.
@@ -82,5 +73,7 @@ Short, confident, specific, sensory. Headlines of 2-6 words. Sentence case, no e
 8. Mobile is designed, not squeezed: portrait crops, thumb-reachable CTA, no cramped text.
 9. It would not look out of place next to the two reference sites studied.
 10. The owner would be proud to show it.
-11. The whole page keeps the hero's quality and palette; key information is visible in the first two screens; booking/enquiry is one tap away everywhere.
+11. The whole page keeps the dealt direction; crucial information is visible from the first screen; booking/enquiry is one tap away everywhere.
+12. Distinct: `distinct.mjs` passes and the fresh-eyes critic names no site in this repo as a close match.
+13. Photographic: the page is led by photographs of the real place and trade; nothing looks drawn.
 If any line scores below 4, fix it before publishing (this replaces the "two worst issues" rule).
