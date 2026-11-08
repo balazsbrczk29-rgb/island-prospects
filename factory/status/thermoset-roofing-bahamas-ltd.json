@@ -56,5 +56,16 @@
   "'Since 2002' (07/03/02 ambiguous)"
  ],
  "notes": "Record location (Paradise Beach Rd) is outdated; site says 7 Portago Road, Oakesfield. Did not reuse RADAR testimonials. Ask for WhatsApp number and high-res project photos. QA shows external photos as grey boxes (expected).",
- "built_at": "2026-11-05T01:53:43.193416+00:00"
+ "built_at": "2026-11-05T01:53:43.193416+00:00",
+ "history": [
+  {
+   "generation": 1,
+   "direction": null,
+   "critic": null,
+   "built_at": "2026-11-05T01:53:43.193416+00:00"
+  }
+ ],
+ "generation": 1,
+ "reroll": true,
+ "reroll_at": "2026-11-08T14:51:54.565Z"
 }
