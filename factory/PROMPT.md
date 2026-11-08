@@ -41,6 +41,8 @@ Priority: businesses with no working website first, Grand Bahama / Freeport firs
 
 ## 4. Research (truth only)
 
+**First read your row in `factory/data/site-audit.json`** (method in `factory/AUDIT.md`). If `audit` is null, do the audit for your business first. Its `concept_type` and `must_keep` decide what you build: a business with a real webshop gets a webshop concept (catalogue, product pages, cart, checkout preview), a booking site gets the booking flow, a listings site gets search and property pages. Never build a brochure for a business whose real site is a shop.
+
 **Rebuilds (the business already has `factory/briefs/<slug>.md`)**: reuse its verified facts and sources; spend research calls only on what is missing: photographs (their site and socials, all image URLs), Wikimedia Commons searches for the place, and anything the brief marked unknown. Budget about 6 calls plus imagery.
 
 **New businesses**: Firecrawl `firecrawl_scrape` (formats markdown + links + images, onlyMainContent true); search with `WebSearch` or `firecrawl_search`. Never the WebFetch tool. The shell cannot reach the internet except GitHub and npm. Budget about 12 research calls (5 for Tier C), plus imagery calls.
