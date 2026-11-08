@@ -19,7 +19,10 @@ if (mode === 'claim') {
   const cur = status(slug);
   if (cur && !needsWork(cur) && !(cur.state === 'building' && Date.now() - new Date(cur.claimed_at).getTime() > 2.5 * 3600 * 1000)) { console.log(`SKIP ${slug}: already ${cur.state} by another session. Move to the next business.`); process.exit(3); }
   fs.writeFileSync(stFile(slug), JSON.stringify({ slug, id: r.id, name: r.name, batch: r.batch, tier: r.tier, state: 'building', generation: GEN, history: cur && cur.history, rebuild_of: cur && cur.state === 'built' ? 1 : undefined, claimed_at: new Date().toISOString() }, null, 1));
-  execSync(`git add factory/status/${slug}.json && git commit -q -m "claim: ${slug}" && (git pull -q --rebase --autostash origin main && git push -q origin HEAD:main)`, { cwd: root, stdio: 'inherit', shell: '/bin/bash' });
+  execSync(`git add factory/status/${slug}.json && git commit -q -m "claim: ${slug}"`, { cwd: root, stdio: 'inherit', shell: '/bin/bash' });
+  let ok = false;   // parallel sessions push at the same moment: retry instead of crashing
+  for (let i = 0; i < 6 && !ok; i++) { try { execSync('git pull -q --rebase --autostash origin main && git push -q origin HEAD:main', { cwd: root, stdio: 'inherit', shell: '/bin/bash', timeout: 60000 }); ok = true; } catch { execSync('sleep ' + (3 + i * 4)); } }
+  if (!ok) { console.log('CLAIM PUSH FAILED after retries; continue anyway and publish.sh will retry.'); }
   console.log('CLAIMED', slug); process.exit(0);
 }
 let rows;
