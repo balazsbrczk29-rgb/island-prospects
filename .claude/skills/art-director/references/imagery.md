@@ -22,7 +22,7 @@ firecrawl_scrape  url = https://commons.wikimedia.org/w/api.php?action=query&gen
 
 ## 3. Lovable photoreal generation (the trade and its subject)
 One Lovable project per business, used only as an image studio, about 1 Lovable credit per 4 images.
-1. `mcp__Lovable__create_project` with `workspace_id` "daQesEM9Br73deJHgggx", `wait` true, and this message (fill the list):
+1. `mcp__Lovable__create_project` with `workspace_id` "daQesEM9Br73deJHgggx", `wait` false (keep working while it renders; poll with `get_message` later), and this message (fill the list):
    "This project is only an image asset studio, not a website. Generate these photorealistic images with your image generation tool and save them in public/assets/ as JPG, at least 1600px wide. Then make the home route a page that shows all images as a grid of equal thumbnails, 3 columns, all visible in one 1440x900 screen, with file names under them. No other UI. Style for all: <photographic style line>. No text, no logos, no watermarks, no recognisable faces, not CGI-looking.
    1. <name>.jpg (<ratio>): <precise scene>
    2. ..."

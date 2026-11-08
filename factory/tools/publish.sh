@@ -8,7 +8,7 @@ cd "$(git rev-parse --show-toplevel)"
 git config user.name >/dev/null || git config user.name "Site Factory"
 git config user.email >/dev/null || git config user.email "factory@users.noreply.github.com"
 [ -f "factory/status/$slug.json" ] || { echo "ERROR: write factory/status/$slug.json first"; exit 1; }
-for p in "$slug" "factory/web/sites/$slug" "factory/status/$slug.json" "factory/briefs/$slug.md"; do [ -e "$p" ] && git add -- "$p"; done
+for p in "$slug" "factory/web/sites/$slug" "factory/status/$slug.json" "factory/briefs/$slug.md" "factory/directions/$slug.json" "factory/fingerprints/$slug.json" "factory/fingerprints/$slug.jpg"; do [ -e "$p" ] && git add -- "$p"; done
 state=$(node -e "console.log(require('./factory/status/$slug.json').state)")
 git commit -q -m "site: $slug ($state)" || echo "nothing new to commit"
 branch=$(git rev-parse --abbrev-ref HEAD)

@@ -87,7 +87,7 @@ Find the one true thing that makes this business itself: the cay it sits on, the
 node factory/tools/direction.mjs <slug>     # your archetype, palette lane, type system, navigation, motion
 ```
 1. Read the dealt entries in `art-director/references/archetypes.md`, `palettes.md`, `type-systems.md`. One re-deal is allowed (`--redeal --prefer <A..>`) only if the archetype cannot carry the content; write why in the brief.
-2. `firecrawl_scrape` two sites from the archetype's "Study" list (formats markdown + screenshot) and note how they solve the archetype's hero, navigation and section grammar.
+2. `firecrawl_scrape` one site (two for a brand-new business) from the archetype's "Study" list (formats markdown + screenshot) and note how they solve the archetype's hero, navigation and section grammar.
 3. Write the design spec in the brief exactly as art-director section 2 asks: archetype mapped to this business's real content, palette pulled from real photos within the lane (5-7 hex with roles, body contrast 4.5:1), type system with exact families and sizes, signature moment, imagery plan for every slot, two interactions that manipulate the real subject, three generation-1 habits you will not use.
 4. Source the imagery now (art-director `imagery.md`): own photos, Commons photos of the place, a Lovable asset project for the trade (one project, at most two rounds), img2threejs only for an object study.
 5. Components: shadcn primitives restyled for the archetype; Magic UI or React Bits only if the archetype calls for that effect. Motion: implement the dealt signature with `animate` / `choreograph` / `emil-design-eng` craft; respect `prefers-reduced-motion`.

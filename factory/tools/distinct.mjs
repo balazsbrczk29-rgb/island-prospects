@@ -16,6 +16,9 @@ const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../.
 const slug = process.argv[2];
 if (!slug || !fs.existsSync(path.join(root, slug, 'index.html'))) { console.error('Usage: distinct.mjs <slug> (built site)'); process.exit(2); }
 const fpDir = path.join(root, 'factory/qa/_fp'); fs.mkdirSync(fpDir, { recursive: true });
+const fpStore = path.join(root, 'factory/fingerprints'); fs.mkdirSync(fpStore, { recursive: true });   // committed cache: one json + hero jpg per site
+import crypto from 'node:crypto';
+const pageHash = s => crypto.createHash('sha1').update(fs.readFileSync(path.join(root, s, 'index.html'))).digest('hex');
 const blockers = [], warnings = [];
 
 // 1. source clone patterns
@@ -75,8 +78,9 @@ for f in sys.argv[1:]:
     for x in range(16): bits+='1' if px[y*17+x]>px[y*17+x+1] else '0'
   out.append(bits)
 print(json.dumps(out))`, ...files]).toString());
-  const fp = { slug: s, style, hashes, at: new Date().toISOString() };
-  fs.writeFileSync(path.join(fpDir, s + '.json'), JSON.stringify(fp));
+  const fp = { slug: s, style, hashes, page: pageHash(s), at: new Date().toISOString() };
+  fs.writeFileSync(path.join(fpStore, s + '.json'), JSON.stringify(fp));
+  try { execFileSync('python3', ['-c', "import sys\nfrom PIL import Image\nImage.open(sys.argv[1]).convert('RGB').resize((480,300)).save(sys.argv[2],quality=70)", files[0], path.join(fpStore, s + '.jpg')]); } catch {}
   return fp;
 }
 const ham = (a, b) => { let d = 0; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) d++; return d; };
@@ -87,9 +91,9 @@ const me = await fingerprint(slug);
 const others = fs.readdirSync(path.join(root, 'factory/status')).filter(f => f.endsWith('.json')).map(f => { try { return JSON.parse(fs.readFileSync(path.join(root, 'factory/status', f), 'utf8')); } catch { return {}; } }).filter(s => s.state === 'built' && s.slug !== slug && fs.existsSync(path.join(root, s.slug, 'index.html')));
 const fps = [];
 for (const o of others) {
-  const c = path.join(fpDir, o.slug + '.json');
-  const built = fs.statSync(path.join(root, o.slug, 'index.html')).mtimeMs;
-  fps.push(fs.existsSync(c) && fs.statSync(c).mtimeMs > built ? JSON.parse(fs.readFileSync(c, 'utf8')) : await fingerprint(o.slug));
+  const c = path.join(fpStore, o.slug + '.json');
+  let cached = null; try { cached = JSON.parse(fs.readFileSync(c, 'utf8')); } catch {}
+  fps.push(cached && cached.page === pageHash(o.slug) ? cached : await fingerprint(o.slug));
 }
 await browser.close(); server.close();
 
@@ -116,14 +120,14 @@ if (!['P01', 'P10', 'P12'].includes(dirn.lane) && mx > 232 && mx - mn < 16) bloc
 
 // contact sheet for the critic
 try {
-  const pick = near.slice(0, 12).map(n => path.join(fpDir, n.slug + '-0.png')).filter(f => fs.existsSync(f));
+  const pick = near.slice(0, 12).map(n => path.join(fpStore, n.slug + '.jpg')).filter(f => fs.existsSync(f));
   execFileSync('python3', ['-c', `
 import sys
 from PIL import Image,ImageDraw
 fs=sys.argv[2:];W,H=480,300;c=4;r=(len(fs)+c-1)//c or 1
 s=Image.new('RGB',(c*W,r*(H+20)),'white');d=ImageDraw.Draw(s)
 for i,f in enumerate(fs):
-  x=(i%c)*W;y=(i//c)*(H+20);s.paste(Image.open(f).convert('RGB').resize((W,H)),(x,y+20));d.text((x+4,y+4),f.split('/')[-1][:-6],fill='black')
+  x=(i%c)*W;y=(i//c)*(H+20);s.paste(Image.open(f).convert('RGB').resize((W,H)),(x,y+20));d.text((x+4,y+4),f.split('/')[-1][:-4],fill='black')
 s.save(sys.argv[1])`, path.join(root, 'factory/qa/_contact.png'), ...pick]);
 } catch {}
 

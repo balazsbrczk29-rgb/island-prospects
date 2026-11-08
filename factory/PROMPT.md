@@ -26,7 +26,7 @@ Every site must be **portfolio-level work that a client would pay at least $1,00
 2. Read `CLAUDE.md` in full. Its hard rules override everything else.
 3. Read `.claude/skills/art-director/SKILL.md` and its four references (archetypes, palettes, type-systems, imagery). This is the design brain.
 4. Read `.claude/skills/site-factory/SKILL.md` (the pipeline) and its references when the steps say so.
-5. Load as toolboxes (never as the layout): `taste-skill` (copy rules, photo discipline, checker), `emil-design-eng`, `animate`, `choreograph`, `apple-design` (motion craft), `frontend-design` (commit to the direction), `ui-ux-pro-max` (accessibility and UX lookups), `web-artifacts-builder` (shadcn patterns), `img2threejs` (procedural 3D objects from a photo), `playwright-cli` (drive the browser in QA), `awesome-design-skills` (only the style seeds your archetype names).
+5. Speed rule: read only what you need, once per session. Required: CLAUDE.md, art-director SKILL.md + the dealt sections of its references, site-factory SKILL.md, `taste-skill/references/copy-tells.md`. Open the rest only when a step needs it: `emil-design-eng` / `animate` / `choreograph` when building the motion signature, `img2threejs` only for an A06 object model, `awesome-design-skills/<seed>/SKILL.md` for component details, `ui-ux-pro-max` only to look something up. Never read whole skill folders.
 6. **Never open another site's source** in `factory/web/sites/` or `/<slug>/`. Every site is designed from its dealt direction, not from a sibling.
 
 ## 3. The queue (priority order, saving guaranteed)
@@ -56,9 +56,9 @@ Buyer portrait first (who pays, from where, what they compare with, what they fe
 ## 6. Design (dealt, distinct, photographic)
 
 1. `node factory/tools/direction.mjs <slug>`: your archetype, palette lane, type system, navigation and motion. Build exactly that. One re-deal allowed if the archetype truly cannot carry the content: `--redeal --prefer <A..>` with the reason in the brief.
-2. `firecrawl_scrape` (with screenshot) two sites from the archetype's "Study" list and note how they do what your archetype asks.
+2. `firecrawl_scrape` (formats screenshot + markdown) ONE site from the archetype's "Study" list (two only for a brand-new business) and note how it does what your archetype asks.
 3. Write the design spec in the brief per art-director section 2: archetype mapped to real content, palette pulled from real photos within the lane, type system with exact sizes, signature moment, the imagery plan for every slot, and three generation-1 habits you are deliberately not doing.
-4. **Imagery** (art-director imagery.md): the business's own photos, Wikimedia Commons photos of the real place (credited), Lovable photoreal generation of the trade and its subject (one Lovable asset project per business, labelled illustrative), procedural 3D of a real object with img2threejs. 8 to 15 photographs on the home page. Never SVG scenes, toy 3D or grey boxes.
+4. **Imagery** (art-director imagery.md). Start the Lovable asset project FIRST with `wait: false`, then research, write copy and code while it renders; check it with `get_message` / `get_project` before you place the images. the business's own photos, Wikimedia Commons photos of the real place (credited), Lovable photoreal generation of the trade and its subject (one Lovable asset project per business, labelled illustrative), procedural 3D of a real object with img2threejs. 8 to 15 photographs on the home page. Never SVG scenes, toy 3D or grey boxes.
 5. **Two real interactions** that manipulate the business's subject (choose the roof colour on the photographed house, plot the route on the chart, compare two cottages side by side, check your boat against the sourced slip limits), plus considered micro-interactions in the dealt motion signature.
 6. **Banned everywhere**: dark overlays on hero photographs; orange/red accents unless the real brand colour; card grids of services or menus; "Book a Table"; star-rating testimonials; stock or placeholder images; purple/blue AI gradients; emoji feature rows; "Welcome to our website"; lorem ipsum; unsourced counters; em dashes in copy; and every generation-1 clone listed in art-director section 3 (QA blocks them).
 
@@ -96,3 +96,6 @@ Only touch your own business's files: `factory/web/sites/<slug>/`, `/<slug>/`, `
 ## 11. Finish
 
 When `pending` returns nothing (or budget ends), print a table: slug, state, archetype, preview URL, pitch line, assumptions Balazs must confirm.
+
+## Speed
+A site should take about 35 minutes. Parallel work: start Lovable early with wait false; write copy while photos are found. `distinct.mjs` uses the committed cache in `factory/fingerprints/` and only renders your own site. Do not re-read files you have already read. Do not scrape more than the budget.
