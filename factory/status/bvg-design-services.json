@@ -4,59 +4,8 @@
  "name": "BVG Design Services",
  "batch": "01",
  "tier": "A",
- "state": "built",
- "pages": [
-  "index.html",
-  "services.html"
- ],
- "primary_cta": "Start a website request",
- "brand_truth": "They were getting Bahamian businesses found online before most of the Bahamas was online, starting with their own Bahamas Vacation Guide in 1996.",
- "buyer": "Owners of small and mid Bahamian businesses and tourism operators on Grand Bahama, Nassau and Abaco, budget-conscious, wanting a local firm that answers the phone.",
- "design": {
-  "display_font": "Bricolage Grotesque 500-700",
-  "body_font": "Instrument Sans 400-600",
-  "palette": [
-   "#f6f5f1",
-   "#101515",
-   "#007f88",
-   "#f2c230",
-   "#bfe6e4",
-   "#5a6161",
-   "#d9d8d0"
-  ],
-  "hero_pattern": "typographic-monument-with-live-browser",
-  "signature": "Live browser that types a Bahamian search and assembles a site in the Bahamian flag colours; 1996-vs-today drag compare of the Bahamas Vacation Guide; office chart of the islands"
- },
- "current_site_findings": [
-  "Own site says 'Last Updated on 30 May, 2014'",
-  "Advertising agency page link is a 404",
-  "No mobile layout, bold text and GIF buttons",
-  "Two phone numbers and two emails in public",
-  "2014 prices still published",
-  "30-year track record buried in a joke paragraph"
- ],
- "pitch_line": "You put the Bahamas online in 1996, but your own site stopped in 2014: here is what BVG looks like when it practices what it sells.",
- "sources": [
-  "https://www.bvgdesign.com/",
-  "https://www.bvgdesign.com/faqs.html",
-  "https://www.bvgdesign.com/promo.html",
-  "http://www.bahamasvacationguide.com/",
-  "https://bahamas.yabsta.com/listing/view/92035/bvg-design-services",
-  "https://www.odp.org/Regional/Caribbean/Bahamas/Business_and_Economy/Advertising_and_Marketing/"
- ],
- "qa": {
-  "blockers": 0,
-  "warnings": 1
- },
- "track": "A",
- "assumptions": [
-  "Nassau and Abaco offices still active (from 2014 site)",
-  "Phone (242) 602-0658 current, not 373-2268 (Yabsta)",
-  "Street location Smith's Point, Freeport (Yabsta)",
-  "Advertising services (print, video, disc production) still offered",
-  "Simple pages within 24 hours still holds",
-  "Payment methods unchanged"
- ],
- "notes": "Record said no own site; research found bvgdesign.com (last updated 2014), so Track A. Prospect is itself a web design firm: pitch as a modernisation/partnership, not a beginner sale. 2014 prices deliberately not shown. Hero browser shows a clearly labelled example build ('Your business, Lucaya'), not a client. Logo hotlinked from bvgdesign.com inside the 1996 recreation. Scorecard: hero 4, type 5, layout 4, context 4, motion 4, depth 4, detailing 4, mobile 4, refs 4, pride 4, consistency 4. Remaining warning: some small tap targets (inline links) on mobile. Services page has no interactive widgets; home has 4.",
- "built_at": "2026-11-05T01:12:12.268138Z"
+ "state": "building",
+ "generation": 2,
+ "rebuild_of": 1,
+ "claimed_at": "2026-11-08T14:57:47.469Z"
 }
