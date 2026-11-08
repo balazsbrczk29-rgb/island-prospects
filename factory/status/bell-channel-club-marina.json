@@ -5,7 +5,7 @@
  "batch": "01",
  "tier": "A",
  "state": "built",
- "generation": 2,
+ "generation": 1,
  "rebuild_of": 1,
  "direction": {
   "archetype": "A01",
@@ -161,5 +161,36 @@
   "The office handles sale and rental enquiries (assumed; the club may refer to realtors)."
  ],
  "notes": "Generation 2 rebuild (reroll by manual fire). No own photos exist (domain lost). Commons photos show Port Lucaya Marina, Lucaya Beach, Grand Bahama from the air and from orbit, credited in captions and footer. Eight illustrative images from Lovable project d9c9b932 (ip-assets-bell-channel-club-marina.lovable.app): dockline, canal at dusk, channel light, pool at night, tennis at dawn, reading room, brass deck, empty beach; one regeneration round removed hills (Grand Bahama is flat). These are NOT the club's property and must be replaced with the club's own photos. No sourced quote, so no pull quote. FAQPage schema removed (no sourced Q&A). Critic remaining notes: mobile nav hides 'Colophon' by design (reachable via Contents); the interlude sentence uses an italic second line (allowed in T09). Unknowns still: slip count, LOA, depths, power, fuel, rates, hours, email, management.",
- "built_at": "2026-11-08T15:03:41Z"
+ "built_at": "2026-11-08T15:03:41Z",
+ "history": [
+  {
+   "generation": 2,
+   "direction": {
+    "archetype": "A01",
+    "lane": "P05",
+    "type": "T09",
+    "nav": "N1",
+    "motion": "M1"
+   },
+   "critic": {
+    "composition": 4,
+    "photography": 4,
+    "typography": 4,
+    "colour": 4,
+    "awwwards": 3,
+    "closest": "schooner-bay-marina",
+    "first_pass": {
+     "composition": 3,
+     "photography": 4,
+     "typography": 3,
+     "colour": 4,
+     "awwwards": 2,
+     "closest": "sea-spray-resort-marina"
+    }
+   },
+   "built_at": "2026-11-08T15:03:41Z"
+  }
+ ],
+ "reroll": true,
+ "reroll_at": "2026-11-08T15:24:05.298Z"
 }
