@@ -1,13 +1,13 @@
 {
  "slug": "nassau-glass-co-ltd",
  "niche": "trade-retail",
- "archetype": "A11",
- "archetype_name": "Horizontal journey",
- "lane": "P03",
- "lane_name": "Conch pink",
- "type": "T07",
- "type_name": "Slab poster",
- "nav": "N9",
- "motion": "M2",
- "dealt_at": "2026-11-08T14:03:26.370Z"
+ "archetype": "A02",
+ "archetype_name": "Catalogue index",
+ "lane": "P11",
+ "lane_name": "Straw market",
+ "type": "T11",
+ "type_name": "Neo-grotesk display",
+ "nav": "N2",
+ "motion": "M10",
+ "dealt_at": "2026-11-08T15:22:55.711Z"
 }

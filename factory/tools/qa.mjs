@@ -39,7 +39,8 @@ for (const page of pages) {
     await pg.route('**/*', route => {
       const u = route.request().url();
       if (u.startsWith(base)) return route.continue();
-      if (route.request().resourceType() === 'image') return route.fulfill({ status: 200, contentType: 'image/svg+xml', body: placeholder('external image (blocked in sandbox)') });
+      const t = route.request().resourceType();
+      if (['image', 'font', 'stylesheet', 'media'].includes(t)) return route.fetch({ timeout: 12000 }).then(r => route.fulfill({ response: r })).catch(() => t === 'image' ? (globalThis.__blocked = (globalThis.__blocked || 0) + 1, route.fulfill({ status: 200, contentType: 'image/svg+xml', body: placeholder('external image (blocked in sandbox)') })) : route.abort());
       return route.abort();
     });
     await pg.goto(`${base}/${slug}/${page}`, { waitUntil: 'load', timeout: 30000 }).catch(e => blockers.push(`${page}: failed to load (${e.message})`));
@@ -110,6 +111,7 @@ if (prospect.tier === 'C' && pages.length > 1) warnings.push('Tier C should be a
 for (const n of ['mobile', 'desktop']) { const s = path.join(outDir, `index-${n}.png`); if (fs.existsSync(s)) fs.copyFileSync(s, path.join(outDir, `${n}.png`)); }
 const result = { slug, pages, blockers, warnings, info, screenshots: shots };
 fs.writeFileSync(path.join(outDir, 'qa.json'), JSON.stringify(result, null, 1));
+if (globalThis.__blocked) console.log(`BLIND: ${globalThis.__blocked} outside images could not be loaded in this sandbox, so the screenshots show grey boxes instead of photos. You cannot judge the design from them; note this in status and keep layouts photo-agnostic.`);
 console.log(`QA ${slug}: ${blockers.length} BLOCKERS, ${warnings.length} warnings`);
 blockers.forEach(b => console.log('  BLOCKER  ' + b));
 warnings.forEach(w => console.log('  warning  ' + w));

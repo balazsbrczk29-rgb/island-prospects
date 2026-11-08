@@ -59,6 +59,44 @@ const TYPE = {
   T12: { name: 'Hand and type', fits: [F, H, T, S] },
 };
 const TYPE_CAP = 9;
+// Fit first: ranked choices per niche (best first). Variety only matters between businesses an owner would compare (same niche).
+const PREF = {
+  [M]: { a: ['A14', 'A03', 'A08', 'A05', 'A01', 'A11'], l: ['P13', 'P02', 'P01', 'P12', 'P05'], t: ['T01', 'T09', 'T02', 'T10', 'T04'] },
+  [H]: { a: ['A03', 'A01', 'A08', 'A11', 'A14', 'A13', 'A07', 'A05'], l: ['P02', 'P03', 'P01', 'P07', 'P12', 'P04', 'P08', 'P11'], t: ['T01', 'T02', 'T08', 'T10', 'T09', 'T12'] },
+  [T]: { a: ['A05', 'A11', 'A03', 'A09', 'A13'], l: ['P02', 'P14', 'P06', 'P04', 'P05'], t: ['T06', 'T08', 'T11', 'T04', 'T12'] },
+  [R]: { a: ['A08', 'A14', 'A03', 'A05', 'A01'], l: ['P01', 'P12', 'P10', 'P13', 'P07'], t: ['T02', 'T09', 'T10', 'T01', 'T03'] },
+  [P]: { a: ['A04', 'A12', 'A01', 'A14', 'A08', 'A07', 'A10'], l: ['P10', 'P01', 'P08', 'P12', 'P13'], t: ['T03', 'T10', 'T02', 'T04', 'T11'] },
+  [I]: { a: ['A06', 'A10', 'A04', 'A02', 'A12'], l: ['P09', 'P10', 'P07', 'P12', 'P14', 'P01'], t: ['T03', 'T04', 'T11', 'T06', 'T07'] },
+  [S]: { a: ['A02', 'A06', 'A09', 'A13', 'A11'], l: ['P08', 'P11', 'P09', 'P06', 'P03', 'P01'], t: ['T11', 'T08', 'T07', 'T03', 'T06'] },
+  [F]: { a: ['A09', 'A07', 'A13', 'A01', 'A02'], l: ['P03', 'P06', 'P11', 'P08', 'P02'], t: ['T05', 'T09', 'T07', 'T08', 'T12', 'T01'] },
+  [G]: { a: ['A12', 'A04', 'A05', 'A01', 'A10'], l: ['P12', 'P10', 'P07', 'P02', 'P08', 'P14'], t: ['T03', 'T02', 'T10', 'T11', 'T08'] },
+};
+const DARK_CAP = { P04: 4, P05: 3, P13: 4, P14: 4 };
+function options(rec, ds, n = 3) {
+  const others = Object.values(ds).filter(d => d.slug !== rec.slug);
+  const same = others.filter(d => d.niche === rec.niche);
+  const pf = PREF[rec.niche];
+  const out = [];
+  pf.a.forEach((a, ia) => pf.l.forEach((l, il) => pf.t.forEach((t, it) => {
+    if (DARK_CAP[l] && others.filter(d => d.lane === l).length >= DARK_CAP[l]) return;
+    if (others.filter(d => d.type === t).length >= TYPE_CAP + 3) return;
+    let score = ia * 3 + il * 2 + it * 2;                                     // fit (lower is better)
+    score += same.filter(d => d.archetype === a).length * 6;                 // a competitor already has this page type
+    score += same.filter(d => d.lane === l).length * 4;
+    score += same.filter(d => d.archetype === a && d.lane === l).length * 40; // near-twin of a competitor
+    score += others.filter(d => d.archetype === a && d.lane === l && d.type === t).length * 60;
+    score += hash(rec.slug + a + l + t) * 0.5;
+    out.push({ archetype: a, lane: l, type: t, score: Math.round(score * 10) / 10 });
+  })));
+  out.sort((x, y) => x.score - y.score);
+  const picked = [];
+  for (const o of out) { if (!picked.some(p => p.archetype === o.archetype)) picked.push(o); if (picked.length >= n) break; }
+  return picked;
+}
+const make = (rec, o, others) => {
+  const least = (arr, key) => arr.map(v => [v, others.filter(d => d[key] === v).length + hash(rec.slug + v)]).sort((x, y) => x[1] - y[1])[0][0];
+  return { slug: rec.slug, niche: rec.niche, archetype: o.archetype, archetype_name: ARCH[o.archetype].name, lane: o.lane, lane_name: LANE[o.lane].name, type: o.type, type_name: TYPE[o.type].name, nav: least(ARCH[o.archetype].nav, 'nav'), motion: least(ARCH[o.archetype].motion, 'motion'), dealt_at: new Date().toISOString() };
+};
 
 const hash = s => { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0) / 4294967296; };
 const load = () => Object.fromEntries(fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => [f.slice(0, -5), JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))]));
@@ -91,9 +129,10 @@ Read .claude/skills/art-director/references/archetypes.md (${d.archetype}, ${d.n
 };
 
 const a = process.argv.slice(2);
+const desc = o => `${o.archetype} ${ARCH[o.archetype].name} + ${o.lane} ${LANE[o.lane].name} + ${o.type} ${TYPE[o.type].name}`;
 if (a[0] === '--deal-all') {
-  const ds = load();
-  for (const r of all) if (!ds[r.slug]) { ds[r.slug] = deal(r, ds); save(ds[r.slug]); }
+  const ds = load(); const fresh = a.includes('--fresh');
+  for (const r of all) if (fresh || !ds[r.slug]) { delete ds[r.slug]; const others = Object.values(ds); ds[r.slug] = make(r, options(r, ds, 1)[0], others); save(ds[r.slug]); }
   console.log('dealt', Object.keys(ds).length);
 } else if (a[0] === '--sheet') {
   const ds = load();
@@ -102,5 +141,17 @@ if (a[0] === '--deal-all') {
 } else if (a[0]) {
   const r = all.find(x => x.slug === a[0]); if (!r) { console.error('unknown slug'); process.exit(1); }
   const ds = load();
-  if (!ds[r.slug] || a.includes('--redeal')) { const pi = a.indexOf('--prefer'); const d = deal(r, ds, a.includes('--redeal') ? 'redeal' + Date.now() : '', pi > 0 ? a[pi + 1] : null); save(d); show(d); } else show(ds[r.slug]);
-} else { console.error('usage: direction.mjs <slug> [--redeal] | --deal-all | --sheet'); process.exit(1); }
+  if (a.includes('--options')) {
+    console.log(`Three best-fitting directions for ${r.slug} (${r.niche}), not taken by a competitor:`);
+    options(r, ds, 3).forEach((o, i) => console.log(`  ${i + 1}. ${desc(o)}   fit ${o.score}`));
+    console.log('Choose the one that best expresses THIS business\'s brand truth (or another fitting combination), then:\n  node factory/tools/direction.mjs ' + r.slug + ' --set <A..> <P..> <T..>');
+  } else if (a.includes('--set')) {
+    const [A, L, Ty] = a.slice(a.indexOf('--set') + 1);
+    if (!ARCH[A] || !LANE[L] || !TYPE[Ty]) { console.error('unknown code'); process.exit(1); }
+    const others = Object.values(ds).filter(d => d.slug !== r.slug);
+    const twin = others.find(d => d.niche === r.niche && d.archetype === A && d.lane === L);
+    if (twin) { console.error(`REFUSED: ${twin.slug} (a competitor) already has ${A} + ${L}. Pick another.`); process.exit(1); }
+    const d = make(r, { archetype: A, lane: L, type: Ty }, others); d.chosen = true; save(d); show(d);
+  } else if (!ds[r.slug] || a.includes('--redeal')) { const others = Object.values(ds).filter(d => d.slug !== r.slug); const d = make(r, options(r, ds, 1)[0], others); save(d); show(d); }
+  else show(ds[r.slug]);
+} else { console.error('usage: direction.mjs <slug> [--options | --set A P T | --redeal] | --deal-all [--fresh] | --sheet'); process.exit(1); }

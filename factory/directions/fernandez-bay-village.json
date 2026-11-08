@@ -5,9 +5,9 @@
  "archetype_name": "Horizontal journey",
  "lane": "P07",
  "lane_name": "Abaco pine",
- "type": "T10",
- "type_name": "Old-style book",
+ "type": "T08",
+ "type_name": "Warm humanist",
  "nav": "N9",
  "motion": "M2",
- "dealt_at": "2026-11-08T14:03:26.374Z"
+ "dealt_at": "2026-11-08T15:22:55.728Z"
 }

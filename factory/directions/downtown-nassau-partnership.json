@@ -5,9 +5,9 @@
  "archetype_name": "Service desk",
  "lane": "P12",
  "lane_name": "Inagua salt",
- "type": "T08",
- "type_name": "Warm humanist",
+ "type": "T02",
+ "type_name": "Text-led editorial",
  "nav": "N10",
  "motion": "M10",
- "dealt_at": "2026-11-08T14:03:26.380Z"
+ "dealt_at": "2026-11-08T15:22:55.749Z"
 }

@@ -15,8 +15,8 @@ firecrawl_scrape  url = https://commons.wikimedia.org/w/api.php?action=query&gen
                   formats = ["rawHtml"]
 ```
 - Search the specific place: "Hope Town harbour", "Elbow Cay lighthouse", "Bay Street Nassau", "Port Lucaya", "Fernandez Bay Cat Island", "Andros mangroves", "Exuma cays aerial". Add the island name.
-- Keep files with width >= 2000, licence CC0, CC BY, CC BY-SA or Public domain, and a description that says what you need. Skip maps, logos, paintings, old scans, photos with readable other-business signage as the subject, and photos centred on identifiable people.
-- Use `thumburl` (2000px) for `src`. Credit each one: a small caption "Photo: <Artist>, <Licence>" on the image, or a "Photography credits" line in the footer listing them. Strip HTML from Artist.
+- Keep only excellent files: width >= 3000, taken 2010 or later (DateTimeOriginal), licence CC0, CC BY, CC BY-SA or Public domain, a description that says what you need, and a subject that will look like editorial photography (good light, sharp, level horizon). Add `incategory:Quality_images` to the search first; drop it only if nothing comes back. Better no Commons photo than a mediocre one. Skip maps, logos, paintings, old scans, photos with readable other-business signage as the subject, and photos centred on identifiable people.
+- Use `thumburl` (2000px) for `src`. Credit them in ONE small footer line ("Photography: <Artist> (CC BY-SA 4.0), ...") and in the concept notes. No credit captions on the images, no credit lists in sections. Strip HTML from Artist.
 - These show the place, never the business's own rooms or boats. Caption them as the place ("Hope Town harbour, Elbow Cay").
 - Record every Commons file (URL, artist, licence) in status `images`.
 

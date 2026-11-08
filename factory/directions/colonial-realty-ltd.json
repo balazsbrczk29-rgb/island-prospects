@@ -1,13 +1,13 @@
 {
  "slug": "colonial-realty-ltd",
  "niche": "real-estate",
- "archetype": "A03",
- "archetype_name": "Cinematic chapters",
+ "archetype": "A08",
+ "archetype_name": "Fixed split",
  "lane": "P12",
  "lane_name": "Inagua salt",
- "type": "T09",
- "type_name": "Didone fashion",
- "nav": "N3",
- "motion": "M1",
- "dealt_at": "2026-11-08T14:03:26.368Z"
+ "type": "T02",
+ "type_name": "Text-led editorial",
+ "nav": "N7",
+ "motion": "M3",
+ "dealt_at": "2026-11-08T15:22:55.703Z"
 }

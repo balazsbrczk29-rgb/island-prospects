@@ -3,11 +3,11 @@
  "niche": "industrial-b2b",
  "archetype": "A02",
  "archetype_name": "Catalogue index",
- "lane": "P01",
- "lane_name": "Limestone",
- "type": "T11",
- "type_name": "Neo-grotesk display",
+ "lane": "P12",
+ "lane_name": "Inagua salt",
+ "type": "T04",
+ "type_name": "Technical mono",
  "nav": "N2",
  "motion": "M8",
- "dealt_at": "2026-11-08T14:03:26.381Z"
+ "dealt_at": "2026-11-08T15:22:55.753Z"
 }

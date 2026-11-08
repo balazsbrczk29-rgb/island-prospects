@@ -1,13 +1,13 @@
 {
  "slug": "winterbotham-trust-company",
  "niche": "professional-services",
- "archetype": "A07",
- "archetype_name": "Letter and stationery",
- "lane": "P13",
- "lane_name": "Hull and brass",
- "type": "T01",
- "type_name": "Monumental serif",
- "nav": "N8",
- "motion": "M6",
- "dealt_at": "2026-11-08T14:03:26.365Z"
+ "archetype": "A01",
+ "archetype_name": "Magazine feature",
+ "lane": "P01",
+ "lane_name": "Limestone",
+ "type": "T10",
+ "type_name": "Old-style book",
+ "nav": "N1",
+ "motion": "M7",
+ "dealt_at": "2026-11-08T15:22:55.698Z"
 }

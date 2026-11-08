@@ -1,13 +1,13 @@
 {
  "slug": "leeward-yacht-club-marina",
  "niche": "marina",
- "archetype": "A08",
- "archetype_name": "Fixed split",
- "lane": "P14",
- "lane_name": "Blue hole",
- "type": "T04",
- "type_name": "Technical mono",
- "nav": "N7",
+ "archetype": "A14",
+ "archetype_name": "Quiet luxury",
+ "lane": "P01",
+ "lane_name": "Limestone",
+ "type": "T01",
+ "type_name": "Monumental serif",
+ "nav": "N3",
  "motion": "M1",
- "dealt_at": "2026-11-08T14:03:26.370Z"
+ "dealt_at": "2026-11-08T15:22:55.710Z"
 }

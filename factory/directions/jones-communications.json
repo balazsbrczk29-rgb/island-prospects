@@ -3,11 +3,11 @@
  "niche": "institution",
  "archetype": "A04",
  "archetype_name": "Swiss information grid",
- "lane": "P01",
- "lane_name": "Limestone",
+ "lane": "P10",
+ "lane_name": "Ink and paper",
  "type": "T02",
  "type_name": "Text-led editorial",
- "nav": "N1",
+ "nav": "N5",
  "motion": "M9",
- "dealt_at": "2026-11-08T14:03:26.380Z"
+ "dealt_at": "2026-11-08T15:22:55.751Z"
 }

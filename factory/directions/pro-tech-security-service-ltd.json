@@ -5,9 +5,9 @@
  "archetype_name": "Service desk",
  "lane": "P07",
  "lane_name": "Abaco pine",
- "type": "T06",
- "type_name": "Wide grotesk",
+ "type": "T04",
+ "type_name": "Technical mono",
  "nav": "N10",
- "motion": "M7",
- "dealt_at": "2026-11-08T14:03:26.371Z"
+ "motion": "M10",
+ "dealt_at": "2026-11-08T15:22:55.713Z"
 }

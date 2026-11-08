@@ -5,9 +5,9 @@
  "archetype_name": "Object study",
  "lane": "P10",
  "lane_name": "Ink and paper",
- "type": "T07",
- "type_name": "Slab poster",
- "nav": "N5",
+ "type": "T04",
+ "type_name": "Technical mono",
+ "nav": "N4",
  "motion": "M4",
- "dealt_at": "2026-11-08T14:03:26.372Z"
+ "dealt_at": "2026-11-08T15:22:55.718Z"
 }

@@ -1,13 +1,13 @@
 {
  "slug": "access-accelerator-sbdc",
  "niche": "institution",
- "archetype": "A01",
- "archetype_name": "Magazine feature",
- "lane": "P04",
- "lane_name": "Mangrove",
- "type": "T11",
- "type_name": "Neo-grotesk display",
- "nav": "N1",
- "motion": "M7",
- "dealt_at": "2026-11-08T14:03:26.379Z"
+ "archetype": "A12",
+ "archetype_name": "Service desk",
+ "lane": "P02",
+ "lane_name": "Shallow flats",
+ "type": "T10",
+ "type_name": "Old-style book",
+ "nav": "N10",
+ "motion": "M10",
+ "dealt_at": "2026-11-08T15:22:55.747Z"
 }

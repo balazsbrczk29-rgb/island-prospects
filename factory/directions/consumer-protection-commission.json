@@ -1,13 +1,13 @@
 {
  "slug": "consumer-protection-commission",
  "niche": "institution",
- "archetype": "A10",
- "archetype_name": "Spec sheet",
- "lane": "P08",
- "lane_name": "Bay Street pastel",
- "type": "T08",
- "type_name": "Warm humanist",
- "nav": "N5",
- "motion": "M8",
- "dealt_at": "2026-11-08T14:03:26.368Z"
+ "archetype": "A05",
+ "archetype_name": "Chart and map",
+ "lane": "P02",
+ "lane_name": "Shallow flats",
+ "type": "T02",
+ "type_name": "Text-led editorial",
+ "nav": "N6",
+ "motion": "M5",
+ "dealt_at": "2026-11-08T15:22:55.704Z"
 }

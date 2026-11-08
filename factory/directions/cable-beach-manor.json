@@ -1,13 +1,13 @@
 {
  "slug": "cable-beach-manor",
  "niche": "hospitality-stay",
- "archetype": "A13",
- "archetype_name": "Scrapbook history",
+ "archetype": "A01",
+ "archetype_name": "Magazine feature",
  "lane": "P01",
  "lane_name": "Limestone",
- "type": "T05",
- "type_name": "Script and sans",
- "nav": "N8",
- "motion": "M6",
- "dealt_at": "2026-11-08T14:03:26.373Z"
+ "type": "T02",
+ "type_name": "Text-led editorial",
+ "nav": "N1",
+ "motion": "M3",
+ "dealt_at": "2026-11-08T15:22:55.725Z"
 }

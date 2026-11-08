@@ -1,13 +1,13 @@
 {
  "slug": "rainbow-rentals",
  "niche": "tours-experiences",
- "archetype": "A09",
- "archetype_name": "Colour poster",
- "lane": "P05",
- "lane_name": "Night harbour",
- "type": "T08",
- "type_name": "Warm humanist",
- "nav": "N4",
+ "archetype": "A13",
+ "archetype_name": "Scrapbook history",
+ "lane": "P06",
+ "lane_name": "Junkanoo",
+ "type": "T06",
+ "type_name": "Wide grotesk",
+ "nav": "N8",
  "motion": "M6",
- "dealt_at": "2026-11-08T14:03:26.371Z"
+ "dealt_at": "2026-11-08T15:22:55.714Z"
 }

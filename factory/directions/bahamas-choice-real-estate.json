@@ -3,11 +3,11 @@
  "niche": "real-estate",
  "archetype": "A08",
  "archetype_name": "Fixed split",
- "lane": "P04",
- "lane_name": "Mangrove",
- "type": "T01",
- "type_name": "Monumental serif",
+ "lane": "P01",
+ "lane_name": "Limestone",
+ "type": "T02",
+ "type_name": "Text-led editorial",
  "nav": "N7",
  "motion": "M3",
- "dealt_at": "2026-11-08T14:03:26.367Z"
+ "dealt_at": "2026-11-08T15:22:55.701Z"
 }

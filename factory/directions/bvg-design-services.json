@@ -1,13 +1,13 @@
 {
  "slug": "bvg-design-services",
  "niche": "professional-services",
- "archetype": "A10",
- "archetype_name": "Spec sheet",
- "lane": "P13",
- "lane_name": "Hull and brass",
- "type": "T01",
- "type_name": "Monumental serif",
- "nav": "N5",
- "motion": "M8",
- "dealt_at": "2026-11-08T14:58:33.374Z"
+ "archetype": "A04",
+ "archetype_name": "Swiss information grid",
+ "lane": "P01",
+ "lane_name": "Limestone",
+ "type": "T03",
+ "type_name": "Swiss grotesk",
+ "nav": "N1",
+ "motion": "M7",
+ "dealt_at": "2026-11-08T15:22:55.694Z"
 }

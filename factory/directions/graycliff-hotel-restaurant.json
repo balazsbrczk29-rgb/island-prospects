@@ -1,13 +1,13 @@
 {
  "slug": "graycliff-hotel-restaurant",
  "niche": "hospitality-stay",
- "archetype": "A07",
- "archetype_name": "Letter and stationery",
+ "archetype": "A14",
+ "archetype_name": "Quiet luxury",
  "lane": "P11",
  "lane_name": "Straw market",
- "type": "T09",
- "type_name": "Didone fashion",
- "nav": "N8",
- "motion": "M3",
- "dealt_at": "2026-11-08T14:03:26.376Z"
+ "type": "T10",
+ "type_name": "Old-style book",
+ "nav": "N3",
+ "motion": "M7",
+ "dealt_at": "2026-11-08T15:22:55.743Z"
 }

@@ -5,9 +5,9 @@
  "archetype_name": "Swiss information grid",
  "lane": "P09",
  "lane_name": "Shipyard steel",
- "type": "T07",
- "type_name": "Slab poster",
+ "type": "T11",
+ "type_name": "Neo-grotesk display",
  "nav": "N1",
  "motion": "M9",
- "dealt_at": "2026-11-08T14:03:26.383Z"
+ "dealt_at": "2026-11-08T15:22:55.760Z"
 }

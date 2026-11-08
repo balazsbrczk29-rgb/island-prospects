@@ -48,7 +48,7 @@ const tint = u => { let h = 0; for (const c of u) h = (h * 31 + c.charCodeAt(0))
 async function fingerprint(s) {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const pg = await ctx.newPage();
-  await pg.route('**/*', route => { const u = route.request().url(); if (u.startsWith(base)) return route.continue(); if (route.request().resourceType() === 'image') return route.fulfill({ status: 200, contentType: 'image/svg+xml', body: `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><rect width="100%" height="100%" fill="${tint(u)}"/></svg>` }); return route.abort(); });
+  await pg.route('**/*', route => { const u = route.request().url(); if (u.startsWith(base)) return route.continue(); const t = route.request().resourceType(); const ph = () => route.fulfill({ status: 200, contentType: 'image/svg+xml', body: `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><rect width="100%" height="100%" fill="${tint(u)}"/></svg>` }); if (['image', 'font', 'stylesheet', 'media'].includes(t)) return route.fetch({ timeout: 12000 }).then(r => route.fulfill({ response: r })).catch(() => t === 'image' ? ph() : route.abort()); return route.abort(); });
   await pg.goto(`${base}/${s}/`, { waitUntil: 'load', timeout: 30000 }).catch(() => {});
   await pg.waitForTimeout(1800);
   const style = await pg.evaluate(() => {

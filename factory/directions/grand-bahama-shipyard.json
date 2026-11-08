@@ -3,11 +3,11 @@
  "niche": "industrial-b2b",
  "archetype": "A06",
  "archetype_name": "Object study",
- "lane": "P11",
- "lane_name": "Straw market",
- "type": "T06",
- "type_name": "Wide grotesk",
+ "lane": "P09",
+ "lane_name": "Shipyard steel",
+ "type": "T04",
+ "type_name": "Technical mono",
  "nav": "N4",
- "motion": "M9",
- "dealt_at": "2026-11-08T14:03:26.365Z"
+ "motion": "M4",
+ "dealt_at": "2026-11-08T15:22:55.699Z"
 }

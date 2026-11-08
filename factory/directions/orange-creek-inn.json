@@ -3,11 +3,11 @@
  "niche": "hospitality-stay",
  "archetype": "A03",
  "archetype_name": "Cinematic chapters",
- "lane": "P11",
- "lane_name": "Straw market",
- "type": "T05",
- "type_name": "Script and sans",
+ "lane": "P12",
+ "lane_name": "Inagua salt",
+ "type": "T08",
+ "type_name": "Warm humanist",
  "nav": "N3",
- "motion": "M1",
- "dealt_at": "2026-11-08T14:03:26.375Z"
+ "motion": "M7",
+ "dealt_at": "2026-11-08T15:22:55.735Z"
 }

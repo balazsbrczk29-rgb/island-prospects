@@ -82,15 +82,8 @@ Decide and add to the brief:
 ## Step 3. Brand story (read `references/portfolio-standard.md` first, every business)
 Find the one true thing that makes this business itself: the cay it sits on, the founding family, the 1940s mansion, the reef at the doorstep, 40 years of roofing after hurricanes. Write the **buyer portrait** (portfolio-standard section 1), then a single-sentence **brand truth** and a 5-word **feel** (e.g. "unhurried, salt-bleached, family, nautical, honest"). Everything visual follows from these.
 
-## Step 4. Design direction (load `art-director`; it replaces the old free choice of fonts, palette and hero)
-```
-node factory/tools/direction.mjs <slug>     # your archetype, palette lane, type system, navigation, motion
-```
-1. Read the dealt entries in `art-director/references/archetypes.md`, `palettes.md`, `type-systems.md`. One re-deal is allowed (`--redeal --prefer <A..>`) only if the archetype cannot carry the content; write why in the brief.
-2. `firecrawl_scrape` one site (two for a brand-new business) from the archetype's "Study" list (formats markdown + screenshot) and note how they solve the archetype's hero, navigation and section grammar.
-3. Write the design spec in the brief exactly as art-director section 2 asks: archetype mapped to this business's real content, palette pulled from real photos within the lane (5-7 hex with roles, body contrast 4.5:1), type system with exact families and sizes, signature moment, imagery plan for every slot, two interactions that manipulate the real subject, three generation-1 habits you will not use.
-4. Source the imagery now (art-director `imagery.md`): own photos, Commons photos of the place, a Lovable asset project for the trade (one project, at most two rounds), img2threejs only for an object study.
-5. Components: shadcn primitives restyled for the archetype; Magic UI or React Bits only if the archetype calls for that effect. Motion: implement the dealt signature with `animate` / `choreograph` / `emil-design-eng` craft; respect `prefers-reduced-motion`.
+## Step 4. Design direction (load `art-director` and follow its sections 1-4)
+Brand truth first, then `node factory/tools/direction.mjs <slug> --options` and `--set` the direction that best expresses this business. Study one site from the archetype's list. Write the short spec. Source the imagery (start the Lovable asset project early with `wait: false`). Components: shadcn primitives restyled for the archetype; Magic UI or React Bits only when the direction calls for that effect.
 
 ## Step 5. Copy
 Write all copy before coding. Rules:
@@ -126,7 +119,7 @@ Requirements:
 ```
 node factory/tools/qa.mjs <slug>
 ```
-It serves the repo locally, blocks outside network (outside images show as grey "external image" boxes, Google Fonts fall back; both are expected in the sandbox), screenshots mobile 390 and desktop 1440 into `factory/qa/<slug>/`, and prints blockers and warnings. Then:
+It serves the repo locally and loads outside photos and fonts when the network allows (if it prints BLIND, they were blocked and the screenshots show grey boxes), screenshots mobile 390 and desktop 1440 into `factory/qa/<slug>/`, and prints blockers and warnings. Then:
 1. Fix every **BLOCKER**.
 2. Read `factory/qa/<slug>/mobile.png` and `desktop.png` with the Read tool. Judge as a design director: hierarchy, spacing rhythm, alignment, does the hero say who/where/what in 3 seconds, is the CTA obvious on mobile, does anything look templated. Score the showcase scorecard (showcase-art-direction.md section 6); fix every line below 4.
 3. `node factory/tools/distinct.mjs <slug>`: fix every blocker (too close to a named site, a generation-1 clone, a ground colour outside your lane).

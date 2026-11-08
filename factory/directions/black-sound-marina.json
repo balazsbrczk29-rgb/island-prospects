@@ -1,13 +1,13 @@
 {
  "slug": "black-sound-marina",
  "niche": "marina",
- "archetype": "A11",
- "archetype_name": "Horizontal journey",
+ "archetype": "A03",
+ "archetype_name": "Cinematic chapters",
  "lane": "P02",
  "lane_name": "Shallow flats",
- "type": "T02",
- "type_name": "Text-led editorial",
- "nav": "N9",
- "motion": "M2",
- "dealt_at": "2026-11-08T14:03:26.368Z"
+ "type": "T01",
+ "type_name": "Monumental serif",
+ "nav": "N3",
+ "motion": "M1",
+ "dealt_at": "2026-11-08T15:22:55.703Z"
 }

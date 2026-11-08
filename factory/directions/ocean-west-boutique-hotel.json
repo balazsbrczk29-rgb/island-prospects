@@ -5,9 +5,9 @@
  "archetype_name": "Scrapbook history",
  "lane": "P04",
  "lane_name": "Mangrove",
- "type": "T10",
- "type_name": "Old-style book",
+ "type": "T02",
+ "type_name": "Text-led editorial",
  "nav": "N8",
  "motion": "M6",
- "dealt_at": "2026-11-08T14:03:26.374Z"
+ "dealt_at": "2026-11-08T15:22:55.734Z"
 }

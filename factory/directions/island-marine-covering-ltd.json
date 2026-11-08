@@ -1,13 +1,13 @@
 {
  "slug": "island-marine-covering-ltd",
  "niche": "industrial-b2b",
- "archetype": "A04",
- "archetype_name": "Swiss information grid",
- "lane": "P07",
- "lane_name": "Abaco pine",
+ "archetype": "A02",
+ "archetype_name": "Catalogue index",
+ "lane": "P09",
+ "lane_name": "Shipyard steel",
  "type": "T03",
  "type_name": "Swiss grotesk",
- "nav": "N5",
- "motion": "M7",
- "dealt_at": "2026-11-08T14:03:26.363Z"
+ "nav": "N2",
+ "motion": "M8",
+ "dealt_at": "2026-11-08T15:22:55.695Z"
 }

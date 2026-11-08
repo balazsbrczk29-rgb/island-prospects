@@ -3,11 +3,11 @@
  "niche": "industrial-b2b",
  "archetype": "A12",
  "archetype_name": "Service desk",
- "lane": "P11",
- "lane_name": "Straw market",
- "type": "T07",
- "type_name": "Slab poster",
+ "lane": "P09",
+ "lane_name": "Shipyard steel",
+ "type": "T04",
+ "type_name": "Technical mono",
  "nav": "N10",
  "motion": "M10",
- "dealt_at": "2026-11-08T14:03:26.382Z"
+ "dealt_at": "2026-11-08T15:22:55.754Z"
 }

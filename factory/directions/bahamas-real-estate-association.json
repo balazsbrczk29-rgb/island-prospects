@@ -3,11 +3,11 @@
  "niche": "institution",
  "archetype": "A10",
  "archetype_name": "Spec sheet",
- "lane": "P06",
- "lane_name": "Junkanoo",
- "type": "T04",
- "type_name": "Technical mono",
+ "lane": "P12",
+ "lane_name": "Inagua salt",
+ "type": "T10",
+ "type_name": "Old-style book",
  "nav": "N5",
- "motion": "M8",
- "dealt_at": "2026-11-08T14:03:26.379Z"
+ "motion": "M9",
+ "dealt_at": "2026-11-08T15:22:55.748Z"
 }

@@ -3,11 +3,11 @@
  "niche": "hospitality-stay",
  "archetype": "A14",
  "archetype_name": "Quiet luxury",
- "lane": "P04",
- "lane_name": "Mangrove",
- "type": "T09",
- "type_name": "Didone fashion",
+ "lane": "P12",
+ "lane_name": "Inagua salt",
+ "type": "T08",
+ "type_name": "Warm humanist",
  "nav": "N3",
  "motion": "M7",
- "dealt_at": "2026-11-08T14:03:26.373Z"
+ "dealt_at": "2026-11-08T15:22:55.727Z"
 }
