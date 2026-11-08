@@ -4,8 +4,162 @@
  "name": "Bell Channel Club & Marina",
  "batch": "01",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-08T14:38:22.522Z"
+ "direction": {
+  "archetype": "A01",
+  "lane": "P05",
+  "type": "T09",
+  "nav": "N1",
+  "motion": "M1"
+ },
+ "images": [
+  {
+   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Port_Lucaya_Marina_-_panoramio.jpg/3840px-Port_Lucaya_Marina_-_panoramio.jpg",
+   "source": "commons",
+   "credit": "Photo: qwesy qwesy, CC BY 3.0, via Wikimedia Commons"
+  },
+  {
+   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Port_Lucaya_Marina_-_panoramio_%281%29.jpg/3840px-Port_Lucaya_Marina_-_panoramio_%281%29.jpg",
+   "source": "commons",
+   "credit": "Photo: qwesy qwesy, CC BY 3.0, via Wikimedia Commons"
+  },
+  {
+   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Port_Lucaya_Marina_%5E_Marketplace_-_panoramio.jpg/3840px-Port_Lucaya_Marina_%5E_Marketplace_-_panoramio.jpg",
+   "source": "commons",
+   "credit": "Photo: qwesy qwesy, CC BY 3.0, via Wikimedia Commons"
+  },
+  {
+   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/LucayaBeach.JPG/3840px-LucayaBeach.JPG",
+   "source": "commons",
+   "credit": "Photo: Pietro, CC BY-SA 3.0, via Wikimedia Commons"
+  },
+  {
+   "src": "https://upload.wikimedia.org/wikipedia/commons/d/de/Port_Lucaya_Beach_-_panoramio.jpg",
+   "source": "commons",
+   "credit": "Photo: Pietro Valocchi, CC BY 3.0, via Wikimedia Commons"
+  },
+  {
+   "src": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Stone_steps_1%2C_Lucaya_Beach%2C_Freeport%2C_Bahamas.jpg",
+   "source": "commons",
+   "credit": "Photo: Beyond My Ken, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Grand_Bahama_Island_%28Little_Bahama_Bank%29_1.jpg/3840px-Grand_Bahama_Island_%28Little_Bahama_Bank%29_1.jpg",
+   "source": "commons",
+   "credit": "Photo: James St. John, CC BY-SA 4.0, via Wikimedia Commons"
+  },
+  {
+   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/EFS_highres_STS091_STS091-731-32.JPG/3840px-EFS_highres_STS091_STS091-731-32.JPG",
+   "source": "commons",
+   "credit": "Photo: NASA, public domain, via Wikimedia Commons"
+  },
+  {
+   "src": "https://ip-assets-bell-channel-club-marina.lovable.app/assets/dockline-bluehour.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography (Lovable), replace with your own"
+  },
+  {
+   "src": "https://ip-assets-bell-channel-club-marina.lovable.app/assets/canal-dusk.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography (Lovable), replace with your own"
+  },
+  {
+   "src": "https://ip-assets-bell-channel-club-marina.lovable.app/assets/inlet-lights.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography (Lovable), replace with your own"
+  },
+  {
+   "src": "https://ip-assets-bell-channel-club-marina.lovable.app/assets/pool-night.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography (Lovable), replace with your own"
+  },
+  {
+   "src": "https://ip-assets-bell-channel-club-marina.lovable.app/assets/tennis-dawn.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography (Lovable), replace with your own"
+  },
+  {
+   "src": "https://ip-assets-bell-channel-club-marina.lovable.app/assets/library-chair.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography (Lovable), replace with your own"
+  },
+  {
+   "src": "https://ip-assets-bell-channel-club-marina.lovable.app/assets/beach-morning.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography (Lovable), replace with your own"
+  },
+  {
+   "src": "https://ip-assets-bell-channel-club-marina.lovable.app/assets/brass-deck.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography (Lovable), replace with your own"
+  }
+ ],
+ "critic": {
+  "composition": 4,
+  "photography": 4,
+  "typography": 4,
+  "colour": 4,
+  "awwwards": 3,
+  "closest": "schooner-bay-marina",
+  "first_pass": {
+   "composition": 3,
+   "photography": 4,
+   "typography": 3,
+   "colour": 4,
+   "awwwards": 2,
+   "closest": "sea-spray-resort-marina"
+  }
+ },
+ "pages": [
+  "index.html",
+  "marina.html",
+  "club.html"
+ ],
+ "primary_cta": "Call the club office",
+ "brand_truth": "A quiet gated club between the canal and the beach, looking across the inlet into Port Lucaya, with a dock kept for its owners.",
+ "design": {
+  "display_font": "Libre Bodoni",
+  "body_font": "Jost 300/400",
+  "palette": [
+   "#0E1B2B",
+   "#142638",
+   "#E9E4D8",
+   "#D8B46A",
+   "#5FA3B5",
+   "#ECE6D9",
+   "#152233"
+  ],
+  "hero_pattern": "magazine masthead row, full-bleed photograph, cover-scale roman headline and standfirst below",
+  "signature": "A day at the club: pinned full-screen photographs crossfade with scroll from the tennis courts at first light to the channel marker at night; plus a drag between the canal side and the beach side."
+ },
+ "current_site_findings": [
+  "bellchannelclub.com now serves a gambling site, so owners, buyers and boaters searching for the club land there.",
+  "The only live listing (marinas.com) is unclaimed, with no description, dock details or photos.",
+  "Nothing online says the marina is for owners first, so visiting boaters call blind.",
+  "Pool, tennis and private dock appear only in scattered realtor listings.",
+  "Only a phone and fax from an old directory; no email or modern contact path."
+ ],
+ "pitch_line": "Your old web address now sells gambling; this gives Bell Channel Club its own name back, told like a magazine feature, with the office number on every screen.",
+ "sources": [
+  "https://marinas.com/view/marina/eyc5ld_Bell_Channel_Club_and_Marina_Freeport_GB_Bahamas",
+  "https://www.thebahamasinvestor.com/?p=7170",
+  "https://sarlesrealty.com/?p=261634",
+  "https://www.bettermcrbahamas.com/sales/detail/585-l-587-62229/bell-channel-club-bell-channel-bay-bell-channel-gb",
+  "https://commons.wikimedia.org/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "B",
+ "assumptions": [
+  "Arrival advice per visitor type on the marina page (owners call ahead, guests arrive through their host, visiting boats call with LOA/beam/draft/dates) is a category-standard procedure, not confirmed by the club.",
+  "The canal/beach sides of individual units and whether a garage comes with a unit are suggested questions, not facts.",
+  "The proposed domain bellchannelclubbahamas.com is a placeholder canonical.",
+  "The office handles sale and rental enquiries (assumed; the club may refer to realtors)."
+ ],
+ "notes": "Generation 2 rebuild (reroll by manual fire). No own photos exist (domain lost). Commons photos show Port Lucaya Marina, Lucaya Beach, Grand Bahama from the air and from orbit, credited in captions and footer. Eight illustrative images from Lovable project d9c9b932 (ip-assets-bell-channel-club-marina.lovable.app): dockline, canal at dusk, channel light, pool at night, tennis at dawn, reading room, brass deck, empty beach; one regeneration round removed hills (Grand Bahama is flat). These are NOT the club's property and must be replaced with the club's own photos. No sourced quote, so no pull quote. FAQPage schema removed (no sourced Q&A). Critic remaining notes: mobile nav hides 'Colophon' by design (reachable via Contents); the interlude sentence uses an italic second line (allowed in T09). Unknowns still: slip count, LOA, depths, power, fuel, rates, hours, email, management.",
+ "built_at": "2026-11-08T15:03:41Z"
 }

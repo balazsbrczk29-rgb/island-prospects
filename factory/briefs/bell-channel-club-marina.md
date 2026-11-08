@@ -43,3 +43,13 @@ Feel: between-waters, quiet, private, sun-faded, nautical.
 Fonts: DM Serif Display 400 + IBM Plex Sans 400/500. Palette: --paper #eef2ee, --ink #14303a, --accent #1f7a78, --accent-2 #c9b88f, --muted #4d6066, --line #c8d3cf, --sea #d6e6e3.
 Hero: map-led — a stylized chart (not for navigation) of the inlet with canal on one side, beach on the other, club marked between. Signature: the channel line draws in as the page loads and the "between two waters" labels appear; on scroll the chart's latitude grid shifts softly.
 Motion: line-draw (1.6s ease-out-quart), rise-in on hero text, parallax-soft on chart grid. Reduced motion: static.
+
+## Generation 2 design spec (2026-11-08)
+- Direction: A01 Magazine feature, P05 Night harbour, T09 Didone fashion, N1 masthead row, M1 scroll-scrubbed crossfade.
+- Studied: kinfolk.com (issue masthead, spreads, title + one-line standfirst under portrait images), monocle.com (department kicker, long declarative headline, standfirst, read meta). cerealmag.com did not resolve.
+- Archetype mapping: masthead row (Contents overlay button, wordmark, dateline + office phone); full-bleed Commons photo of Port Lucaya Marina; cover-scale roman headline and standfirst below it; paper article with running header, italic sub-deck, hanging drop cap in 2 columns and "The particulars" facts panel with the call block; one-sentence interlude; photo strip with vertical captions; colophon with phone, fax, P.O. box, map and credits. Mobile: tear-off call strip.
+- Palette: ground #0E1B2B, raised #142638, ink #E9E4D8, muted #B9B4A8, brass #D8B46A, harbour #5FA3B5, paper #ECE6D9 / paper ink #152233 (the light section).
+- Type: Libre Bodoni 400 + italic (display, 56-196px cover, 34-72px section), Jost 300/400 (body 17-18px), labels in spaced all-small-caps.
+- Signature: "A day at the club", pinned photographs crossfading with scroll from courts at first light to the channel marker at night (text does not animate).
+- Interactions: (1) canal side / beach side drag comparison; (2) "Who is asking?" on the marina page gives the honest answer for owners, guests, visiting boats, buyers; (3) amenity index swaps the photograph on the club page.
+- Not doing: Key-information band, sticky blurred pill header, fade-up reveals / SVG chart drawings.
