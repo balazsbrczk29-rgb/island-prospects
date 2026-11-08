@@ -116,7 +116,9 @@ for (const n of near.slice(0, 5)) {
 if (me.style.header.includes('sticky|true')) warnings.push('sticky blurred header: generation-1 look; the dealt nav pattern should replace it');
 // ground vs lane
 const [r, g, b] = rgb(me.style.bg); const mx = Math.max(r, g, b), mn = Math.min(r, g, b);
-if (!['P01', 'P10', 'P12'].includes(dirn.lane) && mx > 232 && mx - mn < 16) blockers.push(`page ground ${me.style.bg} is near-white but the dealt lane is ${dirn.lane || '?'} ${dirn.lane_name || ''}; use the lane's ground`);
+const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+if (lum > 0.3 && lum < 0.82 && !['P04', 'P05', 'P13', 'P14'].includes(dirn.lane)) blockers.push(`page background ${me.style.bg} is a mid tone over the whole page; use a light tint of the lane and keep the field colour for one or two sections`);
+if (Math.abs(r - 245) < 5 && Math.abs(g - 240) < 6 && Math.abs(b - 232) < 7) warnings.push('page background is the generation-1 cream (#f5f0e8); tint it towards your lane');
 
 // contact sheet for the critic
 try {

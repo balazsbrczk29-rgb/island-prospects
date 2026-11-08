@@ -13,7 +13,8 @@ sites in its category. Rules below exist only because earlier rounds failed; tas
 - **Generation 1 (55 sites): one template.** Workers copied one reference site's code: same sticky header, "Key information" band, section order, cream background, tracked labels, fade-ups, drawn SVG and toy 3D scenes.
 - **Generation 2, first try: a lottery and paperwork.** Directions were dealt by least-used, not by fit (a marina palette on a web designer, handwriting on a builders' merchant). Pages looked like forms and ledgers (section codes, form numbers, credit lists) because builders optimised for rules.
 - **Everyone was blind.** The sandbox blocked outside photos and fonts, so builder and critic judged grey boxes in a fallback serif. References were read as text, never seen.
-- **Wrong kind of site.** Businesses with real webshops, listings or booking engines got brochure concepts, a downgrade.
+- **Wrong kind of site.** Businesses with real webshops, listings or booking engines got brochure concepts, a downgrade (CBS has a full online store; it got a one-page front door).
+- **Fixes applied blindly.** Critic changes were applied without re-scoring, so 2/5 pages were published as done.
 - **Hard-coded sameness.** A full-width black concept bar opened every site (now a small floating tag). Shared defaults (shadcn styling, effect components, one motion wrapper) leaked into every page.
 
 ## 1. Understand (before any design)
@@ -76,6 +77,10 @@ there one clear typographic idea and enough space? Iterate up to three times. On
 - shadcn and Radix are for behaviour and accessibility only: restyle completely; no default rounded-bordered SaaS look. Magic UI and React Bits effects only when the direction needs that effect; never decorative beams, sparkles or gradients.
 - No generation-1 clones (distinct.mjs blocks them): "Key information" band, sticky blurred header with pill button, shared fade-up-blur `Reveal`, 1440 px + 40 px container, tracked uppercase eyebrow above every heading (unless the type system uses them), "<Name>, <place>, since <year>" headlines, last-line-italic headline trick.
 - Dark grounds only for genuinely nocturnal or deep-water businesses, and half the page stays light.
+- The page ground is light (a tinted off-white from the lane). The lane's signature colour is a FIELD for one or two full-width sections, never the whole page: a whole site in mid grey, aqua or yellow looks dull or cheap (CBS was entirely galvanised grey).
+- No gimmicks: no tape, stickers, rotated labels, handwritten notes or "pinned" photos, unless the business is genuinely handmade (a bakery, a wedding planner) and then once. CBS covered a builders' merchant in yellow tape and handwriting; it read as a joke.
+- Layout integrity: a side navigation column is full height and sticky or it does not exist; no column, gutter or band may sit empty for more than one screen; content fills the width the grid promises. CBS's dark index column ended after one screen and left a grey void down the rest of the page.
+- One clear hero idea: a large photograph or a large statement, not a mosaic of six captioned boxes.
 - Phone, place and the primary action are reachable from the first screen, placed elegantly.
 - Two real interactions that use the business's subject (pick a cottage and see its photos and rates, filter the catalogue, check your boat against the slip limits). For shops: product filtering and a cart drawer; for bookings: the date and room or tour flow.
 - Motion is quiet and purposeful: one entrance idea for the hero, gentle scroll moments, crisp hover states; honour prefers-reduced-motion.
@@ -83,4 +88,4 @@ there one clear typographic idea and enough space? Iterate up to three times. On
 ## 7. Verify with real eyes
 1. `qa.mjs` (if it prints BLIND, say so in notes), `interact.mjs`, `distinct.mjs` (fix every blocker).
 2. Fresh-eyes critic: spawn a general-purpose subagent with this prompt and the paths: "You are the creative director of an award-winning studio. Look at <index-desktop.png>, <index-mobile.png>, the reference screenshots <ref1-desktop.png>, <ref2-desktop.png>, and factory/qa/_contact.png (other sites in this repo). 1) Does this look like premium hand-made work for this specific business, or like AI output, a template or paperwork? Be specific and harsh. 2) Score 1-5: photography, typography, composition and space, colour, fit to the business and its real web setup, distinct from the contact sheet, would sit next to the references. 3) The three changes that would most raise it."
-3. Every score must be 4 or more. Apply the changes and re-run once or twice. Record the final scores in status `critic`.
+3. Every score must be 4 or more. Apply the changes, rebuild, and ask the critic to re-score the NEW screenshots: never record first-pass scores as final or mark changes "not re-scored" (CBS and BVG published with scores of 2 and 3 because fixes were applied blindly). If after two fix passes any score is still below 4, set status `state` to "needs-review" with the reason instead of "built" and still publish, so Balazs sees it is not ready.

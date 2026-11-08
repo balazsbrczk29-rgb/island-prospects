@@ -111,6 +111,30 @@ if (prospect.tier === 'C' && pages.length > 1) warnings.push('Tier C should be a
 for (const n of ['mobile', 'desktop']) { const s = path.join(outDir, `index-${n}.png`); if (fs.existsSync(s)) fs.copyFileSync(s, path.join(outDir, `${n}.png`)); }
 const result = { slug, pages, blockers, warnings, info, screenshots: shots };
 fs.writeFileSync(path.join(outDir, 'qa.json'), JSON.stringify(result, null, 1));
+// dead space: a vertical strip (e.g. an empty side column) or long empty bands in the desktop home page
+try {
+  const { execFileSync } = await import('node:child_process');
+  const f = path.join(outDir, 'index-desktop.png');
+  if (fs.existsSync(f)) {
+    const res = JSON.parse(execFileSync('python3', ['-c', `
+import sys,json
+from PIL import Image,ImageStat
+im=Image.open(sys.argv[1]).convert('L'); W,H=im.size; out={'strips':[],'bands':0}
+def flat(box): return ImageStat.Stat(im.crop(box)).stddev[0] < 2.5
+if H>1800:
+  for x0 in range(0,W,240):
+    blocks=[flat((x0,y,min(x0+240,W),y+120)) for y in range(900,H-120,120)]
+    if blocks and sum(blocks)/len(blocks)>0.8: out['strips'].append(x0)
+  rows=[flat((0,y,W,y+150)) for y in range(0,H-150,150)]
+  run=best=0
+  for r in rows: run=run+1 if r else 0; best=max(best,run)
+  out['bands']=best*150
+print(json.dumps(out))`, f]).toString());
+    const centre = res.strips.filter(x => x > 0 && x < 1200);
+    if (res.strips.length && res.strips.length < 6) blockers.push(`dead space: a ${res.strips.length * 240}px wide vertical strip at x=${res.strips.join(',')} is empty for most of the page (a side column that ends, or an unused gutter)${centre.length ? '' : ''}`);
+    if (res.bands > 1100) warnings.push(`dead space: ${res.bands}px of empty page in one stretch`);
+  }
+} catch {}
 if (globalThis.__blocked) console.log(`BLIND: ${globalThis.__blocked} outside images could not be loaded in this sandbox, so the screenshots show grey boxes instead of photos. You cannot judge the design from them; note this in status and keep layouts photo-agnostic.`);
 console.log(`QA ${slug}: ${blockers.length} BLOCKERS, ${warnings.length} warnings`);
 blockers.forEach(b => console.log('  BLOCKER  ' + b));

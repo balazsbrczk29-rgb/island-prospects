@@ -25,7 +25,7 @@ const ARCH = {
   A10: { name: 'Spec sheet', fits: [I, G, P], nav: ['N5'], motion: ['M9', 'M8'] },
   A11: { name: 'Horizontal journey', fits: [H, T, S, M], nav: ['N9'], motion: ['M2'] },
   A12: { name: 'Service desk', fits: [G, I, P], nav: ['N10'], motion: ['M7', 'M10'] },
-  A13: { name: 'Scrapbook history', fits: [F, H, S, M], nav: ['N8', 'N4'], motion: ['M6'] },
+  A13: { name: 'Scrapbook history', fits: [F, H], nav: ['N8', 'N4'], motion: ['M6'] },
   A14: { name: 'Quiet luxury', fits: [M, H, R, P], nav: ['N3'], motion: ['M7', 'M1'] },
 };
 const LANE = {
@@ -56,18 +56,18 @@ const TYPE = {
   T09: { name: 'Didone fashion', fits: [F, H, R, M] },
   T10: { name: 'Old-style book', fits: [P, H, G, R] },
   T11: { name: 'Neo-grotesk display', fits: [I, S, T, P, G, R] },
-  T12: { name: 'Hand and type', fits: [F, H, T, S] },
+  T12: { name: 'Hand and type', fits: [F] },
 };
 const TYPE_CAP = 9;
 // Fit first: ranked choices per niche (best first). Variety only matters between businesses an owner would compare (same niche).
 const PREF = {
   [M]: { a: ['A14', 'A03', 'A08', 'A05', 'A01', 'A11'], l: ['P13', 'P02', 'P01', 'P12', 'P05'], t: ['T01', 'T09', 'T02', 'T10', 'T04'] },
-  [H]: { a: ['A03', 'A01', 'A08', 'A11', 'A14', 'A13', 'A07', 'A05'], l: ['P02', 'P03', 'P01', 'P07', 'P12', 'P04', 'P08', 'P11'], t: ['T01', 'T02', 'T08', 'T10', 'T09', 'T12'] },
-  [T]: { a: ['A05', 'A11', 'A03', 'A09', 'A13'], l: ['P02', 'P14', 'P06', 'P04', 'P05'], t: ['T06', 'T08', 'T11', 'T04', 'T12'] },
+  [H]: { a: ['A03', 'A01', 'A08', 'A11', 'A14', 'A13', 'A07', 'A05'], l: ['P02', 'P03', 'P01', 'P07', 'P12', 'P04', 'P08', 'P11'], t: ['T01', 'T02', 'T08', 'T10', 'T09'] },
+  [T]: { a: ['A05', 'A11', 'A03', 'A09'], l: ['P02', 'P14', 'P06', 'P04', 'P05'], t: ['T06', 'T08', 'T11', 'T04'] },
   [R]: { a: ['A08', 'A14', 'A03', 'A05', 'A01'], l: ['P01', 'P12', 'P10', 'P13', 'P07'], t: ['T02', 'T09', 'T10', 'T01', 'T03'] },
   [P]: { a: ['A04', 'A12', 'A01', 'A14', 'A08', 'A07', 'A10'], l: ['P10', 'P01', 'P08', 'P12', 'P13'], t: ['T03', 'T10', 'T02', 'T04', 'T11'] },
   [I]: { a: ['A06', 'A10', 'A04', 'A02', 'A12'], l: ['P09', 'P10', 'P07', 'P12', 'P14', 'P01'], t: ['T03', 'T04', 'T11', 'T06', 'T07'] },
-  [S]: { a: ['A02', 'A06', 'A09', 'A13', 'A11'], l: ['P08', 'P11', 'P09', 'P06', 'P03', 'P01'], t: ['T11', 'T08', 'T07', 'T03', 'T06'] },
+  [S]: { a: ['A02', 'A06', 'A09', 'A11'], l: ['P08', 'P11', 'P09', 'P06', 'P03', 'P01'], t: ['T11', 'T08', 'T07', 'T03', 'T06'] },
   [F]: { a: ['A09', 'A07', 'A13', 'A01', 'A02'], l: ['P03', 'P06', 'P11', 'P08', 'P02'], t: ['T05', 'T09', 'T07', 'T08', 'T12', 'T01'] },
   [G]: { a: ['A12', 'A04', 'A05', 'A01', 'A10'], l: ['P12', 'P10', 'P07', 'P02', 'P08', 'P14'], t: ['T03', 'T02', 'T10', 'T11', 'T08'] },
 };

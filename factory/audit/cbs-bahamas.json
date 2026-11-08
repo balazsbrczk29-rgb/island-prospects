@@ -6,5 +6,29 @@
  "url": "cbsbahamas.com",
  "url_source": "prospects",
  "old_check": "DOMAIN LOST: cbsbahamas.com now serves affiliate spam",
- "audit": null
+ "audit": {
+  "site_kind": "webshop",
+  "cart": true,
+  "online_payments": true,
+  "booking_engine": "",
+  "products_or_listings": 1000,
+  "pages": 0,
+  "platform": "Evolution X (EVO dealer e-commerce, us.evocdn.io)",
+  "latest_year": 2026,
+  "modernity": 3,
+  "concept_type": "webshop: department catalogue, product listing with filters, product page, cart drawer, delivery to Family Islands by mailboat, PROstore contractor accounts",
+  "must_keep": [
+   "online shop with real departments and products",
+   "Family Island mailboat delivery",
+   "PROstore contractor and bulk pricing",
+   "store locations and hours"
+  ],
+  "weaknesses": [
+   "old check wrongly said the domain was lost",
+   "pinch-zoom disabled on phones",
+   "store engine template look"
+  ],
+  "priority": "C",
+  "note": "Real e-commerce store (Evolution X). Gen-2 concept was a one-page front door that links to it: a downgrade. Rebuild only as a full shop concept, after A and B businesses."
+ }
 }

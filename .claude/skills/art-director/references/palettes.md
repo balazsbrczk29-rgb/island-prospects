@@ -1,9 +1,10 @@
 # Palette lanes (Bahamian sources)
 
 A lane is a colour world taken from a real Bahamian place or material. The hex values are starting
-points: refine them from the business's own photos, logo or the exact place. "Ground" is the main
-page background: it defines the site's first impression, so lanes deliberately differ in ground.
-Only lane P01 has a near-white ground. Generation 1 used near-white on 52 of 52 sites; that is over.
+points: refine them from the business's own photos, logo or the exact place. In the table, "Ground" is the
+lane's signature FIELD colour: use it for one or two full-width sections (a hero band, a feature, the footer).
+The page itself sits on a light tint of the lane (for example the field colour mixed 8-12% into off-white), never
+the same cream on every site, never the field colour over the whole page (CBS was grey from top to bottom).
 
 | Lane | Source | Ground | Ink | Accents | Fits |
 |---|---|---|---|---|---|
@@ -23,8 +24,8 @@ Only lane P01 has a near-white ground. Generation 1 used near-white on 52 of 52 
 | P14 Blue hole | the deep blue of Dean's and Andros blue holes | #0B4F6C (deep blue ground) | #F3F7F6 | #9ED8DB, #F2D16B | dive, tours, water tech |
 
 Rules
-- Ground must match the lane: QA reads the computed body background and blocks a site whose lane is not P01, P10 or P12 but whose ground is near-white (lightness > 90 and chroma < 6).
-- Use the ground for whole sections; tonal shifts happen between the lane's own colours, not back to white.
+- Page background: a light tint of the lane (distinct.mjs blocks a mid-tone whole-page background). The field colour carries one or two full-width sections.
+- Tonal shifts happen between the lane's own colours.
 - Orange and red stay banned as accents unless they are the business's real brand colour. Coral pink and salmon are allowed.
 - No purple-to-blue gradients. Gradients only between two colours of the same lane.
 - A dark-ground lane (P04, P05, P13, P14) may be the whole site's ground; it must still have one light section (a photograph-led or paper section) for rhythm.

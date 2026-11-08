@@ -35,6 +35,6 @@ The pipeline was then consolidated (Nov 8 evening). The art-director skill's "Wh
 2. **Reference taste.** Ask Balazs for 3-5 sites he loves per niche. Save the links in `factory/references.md` and use them as ref1/ref2 in look.mjs.
 3. **Pilot with Balazs watching: Bell Channel** (flagged reroll), then BVG. Hero options first, his pick, then the full page. Write down what made it work.
 4. **Only after he approves:** scale. Use update_trigger on trig_01NAXZryxHm6E5CQXcGA7DN3 (Reroll sites) or a new worker task with run_once_at a few minutes ahead. fire_trigger and create_trigger were blocked by the safety check in the long session.
-5. Thermoset and CBS were built on the rejected rules: reroll them.
+5. Thermoset was built on the rejected rules: reroll it. CBS is a real webshop (audit priority C): rebuild it only as a full shop concept, after the A and B businesses. Its failure analysis is in the art-director "What went wrong" and taste rules.
 
 Lovable image studio: workspace daQesEM9Br73deJHgggx, about 1 credit per 4 images. Images are published at ip-assets-<slug>.lovable.app and hotlinked.
