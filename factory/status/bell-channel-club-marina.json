@@ -1,20 +1,11 @@
 {
-  "slug": "bell-channel-club-marina", "id": 32, "name": "Bell Channel Club & Marina", "batch": "01", "tier": "A",
-  "state": "built",
-  "pages": ["index.html", "marina.html", "club.html"],
-  "primary_cta": "Call the club office",
-  "brand_truth": "A quiet gated club that sits between the canal and the beach, right where the inlet opens into Port Lucaya.",
-  "design": {"display_font": "DM Serif Display 400", "body_font": "IBM Plex Sans 400/500", "palette": ["#eef2ee","#14303a","#1f7a78","#c9b88f","#4d6066","#c8d3cf","#d6e6e3"], "hero_pattern": "map-led", "signature": "Illustrated chart of the inlet: club marked between canal and beach, channel line draws in from the sea, grid drifts on scroll"},
-  "current_site_findings": [
-    "bellchannelclub.com now shows a gambling site: owners, buyers and boaters searching for the club land there.",
-    "The only live listing (marinas.com) is unclaimed, with no description, dock details or own photos.",
-    "Nothing online says the marina is for owners, so visiting boaters call blind.",
-    "Amenities (heated pool, tennis, private docks) are only described in scattered realtor listings.",
-    "Only an old phone and fax are online; no email or modern contact path."
-  ],
-  "pitch_line": "Your old web address now sends people to a gambling site; this puts Bell Channel Club back on Google with one tap to call the office.",
-  "sources": ["https://marinas.com/view/marina/eyc5ld_Bell_Channel_Club_and_Marina_Freeport_GB_Bahamas","https://www.thebahamasinvestor.com/?p=7170","https://sarlesrealty.com/?p=261634","https://www.bettermcrbahamas.com/sales/detail/585-l-587-62229/bell-channel-club-bell-channel-bay-bell-channel-gb"],
-  "qa": {"blockers": 0, "warnings": 3},
-  "notes": "Facts are thin: phone/fax from old directories (marinas.com + Bahamas Investor), amenities from two realtor listings. No email, WhatsApp, photos, slip count, depths or VHF found, so no enquiry form (call block instead) and dock spec rows read 'Ask the office'. Coordinates are the marinas.com pin (approx). Canonical uses proposed domain bellchannelclubbahamas.com (unverified availability); club may prefer to recover bellchannelclub.com. Ask owner for photos of docks, pool, beach and an office email. QA warnings: one sub-40px tap target per page on mobile (concept ribbon button, shared component).",
-  "built_at": "2026-11-04T23:36:48Z"
+ "slug": "bell-channel-club-marina",
+ "id": 32,
+ "name": "Bell Channel Club & Marina",
+ "batch": "01",
+ "tier": "A",
+ "state": "building",
+ "generation": 2,
+ "rebuild_of": 1,
+ "claimed_at": "2026-11-08T14:38:22.522Z"
 }
