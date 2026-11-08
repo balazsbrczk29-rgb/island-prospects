@@ -4,8 +4,167 @@
  "name": "CBS Bahamas (Commonwealth Building Supplies)",
  "batch": "01",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-08T14:38:32.943Z"
+ "claimed_at": "2026-11-08T14:38:32.943Z",
+ "direction": {
+  "archetype": "A02",
+  "lane": "P09",
+  "type": "T12",
+  "nav": "N2",
+  "motion": "M10"
+ },
+ "images": [
+  {
+   "src": "https://us.evocdn.io/dealer/1324/content/media/Content_Pages/Project_Sales/Roofing/OneStopShopPhotos_roofing-2-c.jpg",
+   "source": "own",
+   "credit": "CBS Bahamas"
+  },
+  {
+   "src": "https://us.evocdn.io/dealer/1324/content/media/Content_Pages/Project_Sales/Roofing/OneStopShopPhotos_Roofing-1.jpg",
+   "source": "own",
+   "credit": "CBS Bahamas"
+  },
+  {
+   "src": "https://us.evocdn.io/dealer/1324/content/media/Content_Pages/Project_Sales/Roofing/OneStopShopPhotos_roofing-3-c.jpg",
+   "source": "own",
+   "credit": "CBS Bahamas"
+  },
+  {
+   "src": "https://us.evocdn.io/dealer/1324/content/media/Content_Pages/Project_Sales/Roofing/OneStopShopPhotos_CBS-PROstore-c.jpg",
+   "source": "own",
+   "credit": "CBS Bahamas"
+  },
+  {
+   "src": "https://us.evocdn.io/dealer/1324/content/media/Content_Pages/Branches/prostore-prostore_exterior_3.jpg",
+   "source": "own",
+   "credit": "CBS Bahamas"
+  },
+  {
+   "src": "https://us.evocdn.io/dealer/1324/content/media/Content_Pages/Company_Overview/CarlTreco25th.JPG",
+   "source": "own",
+   "credit": "CBS Bahamas"
+  },
+  {
+   "src": "https://us.evocdn.io/dealer/1324/content/media/Content_Pages/Company_Overview/CommonwealthBuilding_Vintage.JPG",
+   "source": "own",
+   "credit": "CBS Bahamas"
+  },
+  {
+   "src": "10 product cut-outs from cbsbahamas.com catalog (JELD-WEN, SCOUT by PGT, Precision, ProSource, PVC, GRACE, Boise Cascade)",
+   "source": "own",
+   "credit": "CBS Bahamas"
+  },
+  {
+   "src": "https://commons.wikimedia.org/wiki/File:Bahamas_1989_(394)_New_Providence_Potter%27s_Cay,_Nassau_(24107306483).jpg",
+   "source": "commons",
+   "credit": "Rüdiger Stehn, CC BY-SA 2.0"
+  },
+  {
+   "src": "https://commons.wikimedia.org/wiki/File:Bahamas_1989_(601)_New_Providence_Potter%27s_Cay,_Nassau_(25011570973).jpg",
+   "source": "commons",
+   "credit": "Rüdiger Stehn, CC BY-SA 2.0"
+  },
+  {
+   "src": "https://ip-assets-cbs-bahamas.lovable.app/assets/roof-sheathing.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project c14ce97d, replace with own"
+  },
+  {
+   "src": "https://ip-assets-cbs-bahamas.lovable.app/assets/sliding-window.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project c14ce97d, replace with own"
+  },
+  {
+   "src": "https://ip-assets-cbs-bahamas.lovable.app/assets/paint-roller.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project c14ce97d, replace with own"
+  },
+  {
+   "src": "https://ip-assets-cbs-bahamas.lovable.app/assets/garden-planting.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project c14ce97d, replace with own"
+  },
+  {
+   "src": "https://ip-assets-cbs-bahamas.lovable.app/assets/floor-tile.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project c14ce97d, replace with own"
+  },
+  {
+   "src": "https://ip-assets-cbs-bahamas.lovable.app/assets/ceiling-fan.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project c14ce97d, replace with own"
+  },
+  {
+   "src": "https://ip-assets-cbs-bahamas.lovable.app/assets/lumber-load.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project c14ce97d, replace with own"
+  },
+  {
+   "src": "https://ip-assets-cbs-bahamas.lovable.app/assets/hurricane-shutter.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project c14ce97d, replace with own"
+  }
+ ],
+ "critic": {
+  "composition": 3,
+  "photography": 3,
+  "typography": 3,
+  "colour": 2,
+  "awwwards": 2,
+  "closest": "conch-inn-marina / man-o-war-marina",
+  "pass": "first-pass scores; all three changes applied in one fix pass (headline moved onto a plate inside a full-height photo wall, Caveat notes enlarged on yellow tape and archive rebuilt around one large photo, ground deepened to galvanised #AEB5BA with a dark yard index column and plywood counter section); not re-scored"
+ },
+ "pages": [
+  "index.html",
+  "departments.html"
+ ],
+ "primary_cta": "Shop CBS online",
+ "brand_truth": "Carl G Treco's 1973 supply house on Carmichael Road, now a 30,000 sq ft Home Center plus a PROstore, that sends Family Island orders to the mailboat for free.",
+ "design": {
+  "display_font": "Literata 500 (opsz)",
+  "body_font": "Literata 400 + Caveat 700 notes",
+  "palette": [
+   "#aeb5ba",
+   "#22282e",
+   "#9aa3ab",
+   "#d9c7a3",
+   "#111417",
+   "#213b52",
+   "#f2c230"
+  ],
+  "hero_pattern": "catalogue index driving a full-height photo wall",
+  "signature": "Running down the dark index column reshuffles the photo wall with view transitions, handwritten tape notes on the photographs"
+ },
+ "current_site_findings": [
+  "The homepage opens on a seasonal product feed; the 1973 story, Home Center and PROstore are invisible.",
+  "Free mailboat delivery is explained only in a blog post.",
+  "Pinch-zoom is disabled on phones.",
+  "Directories show a second number and an old wixsite page with different hours.",
+  "Three inboxes (store, online, PROstore) are never explained side by side."
+ ],
+ "pitch_line": "Your online store already works; this gives it a front door that tells Nassau and every Family Island who CBS is and how their order reaches the mailboat.",
+ "sources": [
+  "https://www.cbsbahamas.com/",
+  "https://www.cbsbahamas.com/about",
+  "https://www.cbsbahamas.com/cbs-prostore",
+  "https://www.cbsbahamas.com/roofing",
+  "https://www.cbsbahamas.com/windows-and-doors--2",
+  "https://www.cbsbahamas.com/news/family-island-customers-the-ultimate-guide-to-shipping-on-the-mailboat",
+  "https://www.bahamaslocal.com/showlisting/17519/CBS_Bahamas.html"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Home Center hours Mon-Sat 8-8, Sun 9-5 (listings differ)",
+  "Which inbox answers which question (cbs@ store, online@ orders, prostore@ bulk)",
+  "Mailboat planner island list is a convenience list; CBS confirms boat and dock per island",
+  "No same-day mailboat; free drop-off at Potter's Cay or Arawak Cay (from the 2024 guide, reconfirm)"
+ ],
+ "notes": "Generation 2 rebuild. Session took the top pending sites because no site was flagged reroll (bell-channel-club-marina was already claimed by another session). Lovable returned no gallery screenshot, so the 8 generated images were not visually reviewed: check them at https://ip-assets-cbs-bahamas.lovable.app before showing the owner. Study sites: muji.com failed to load (Firecrawl proxy error); hay.com screenshot was returned only as a remote URL that cannot be viewed in the sandbox, so reference study relied on known patterns. interact.mjs reports 3 'dead' inputs: these are radio buttons it tries to fill as text (false positive). Archive photos of Carl Treco, John Treco and Brent Burrows are CBS's own from their About page. Ask owner for Home Center interior and aisle photographs to replace generated trade images.",
+ "built_at": "2026-11-08T14:57:38Z"
 }
