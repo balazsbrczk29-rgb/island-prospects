@@ -49,27 +49,17 @@ Owner of a 2-30 person Bahamian business (guesthouse in Lucaya, charter in Abaco
 ## Brand truth / feel
 Brand truth: they were getting Bahamian businesses found online before most of the Bahamas was online. Feel: Bahamian, experienced, plainspoken, practical, sunny.
 
-## Reference sites studied
-- pentagram.com: work-first, huge project imagery wall, near-silent typographic chrome, sentence-case navigation; the projects are the hero. Interaction: hover reveals project titles.
-- lombardodier.com (from the art-direction list, known structure): calm full-bleed, very large serif statement, generous negative space, numbered narrative sections.
+## Generation 2 rebuild (session 2026-11-08)
+Re-deal: dealt A06 Object study, which the archetype file limits to professional services "only if they have a physical product". BVG sells websites, hosting and advertising, no physical object, so one re-deal was used: `--redeal --prefer A10`.
+Direction: A10 Spec sheet, P13 Hull and brass, T01 Monumental serif, N5 toolbar with section codes, M8 hover image swap + layout animation.
+Rule conflict noted: T01 says "numbering: no" but N5 asks for section codes. Codes appear only in the toolbar as navigation (1.0 capabilities ...), headings stay unnumbered.
 
-## Design spec
-- Kind: service (creative studio). Hero recipe: product/craft close-up + typographic monument: giant two-line statement left (cols 1-7), a live "browser" on the right that types a Bahamian search and assembles a site in the flag colours (the craft itself, their founding SEO skill).
-- Type: Bricolage Grotesque 500/700 display (tight -0.035em), Instrument Sans 400/500/600 body.
-- Palette (from the Bahamian flag, since the firm is Bahamian owned): paper #f6f5f1, paper-2 #ecebe4, ink #101515, aqua #007f88 (text-safe aquamarine, 4.9:1 on paper), aqua-soft #bfe6e4, gold #f2c230, muted #5a6161, line #d9d8d0.
-- Signature visual: "This shows a browser building a Bahamian business site because the brief says BVG designs Bahamian websites and began by getting its own guide to the top of search results." Second: an era slider comparing their real 1996 guide-style page with a modern layout because the brief says they launched the Bahamas Vacation Guide in mid-1996 and still maintain it. Third: office map (Freeport HQ, Nassau, Abaco, Fort Lauderdale US line).
-- Interactions: era slider (drag), office map hotspots, tabbed project brief builder that opens an email, services list rows that expand.
-- Motion: hero load sequence (label, line-split headline, body, CTA, browser assembles), one scroll idea per section, hover micro-interactions everywhere, scroll progress line.
-
-## Assumptions to confirm with the owner
-- Nassau and Abaco offices still active (stated on 2014 site).
-- Which phone is current: (242) 602-0658 (own site) vs 242-373-2268 (Yabsta). Site uses 602-0658.
-- Street location "Smith's Point, Freeport" from Yabsta.
-- Advertising services (print, video, disc production) still offered.
-- "Within 24 hours" turnaround for simple pages still holds.
-
-## Unknowns designed around
-Prices (2014 rates not shown: "Quoted per project"), hours, staff names, client list, portfolio images.
-
-## Scorecard (after QA)
-See status notes.
+### Design spec
+- Archetype: the page reads as a technical spec sheet for a 30-year-old web studio. Hero = Commons photograph of Lucayan Harbour, Freeport, with a brass technical overlay (dimension lines, Freeport town reference 26 deg 32 min N, 78 deg 42 min W, data block of sourced facts: est. mid-1996, HQ Freeport, offices Nassau and Abaco, US line). Then 1.0 capability matrix (rows = sourced services, columns = what it is, how it is timed or billed, sourced only), 2.0 the guide (project ledger with the one sourced project, the Bahamas Vacation Guide, plus a 1996 vs today slider), 3.0 office register, 4.0 terms (payment, turnaround, consult), 5.0 request form BVG-1 (numbered fields, mailto info@).
+- Palette P13 refined to Freeport harbour at dusk: navy #13263F ground, deep #0D1B2E toolbar, cream #F1EADB ink, mist #AEB6C2 secondary (6.9:1), brass #C9A15B rules and overlay, teak #8A5A3B, paper #F1EADB light section with navy ink.
+- Type T01: Fraunces (opsz 144, SOFT 50) display, the single word "found" at 18vw; Newsreader text 18px/1.6; labels lowercase italic Newsreader; data in tabular figures.
+- Signature: the word "found" sits under the harbour photograph like a caption on a drawing, the brass dimension lines draw across the photo.
+- Interactions: capability matrix rows swap the photograph and expand details (layout animation); 1996 vs today drag slider; numbered request form building an email.
+- Imagery: Commons Lucayan Harbour (Jon Worth, CC BY-SA 2.0), Port Lucaya Marina (qwesy, CC BY 3.0), Port Lucaya Marketplace and Beach (Pietro Valocchi, CC BY 3.0), Hope Town 1989 (Ruediger Stehn, CC BY-SA 2.0), Potter's Cay (Ruediger Stehn, CC BY-SA 2.0); Lovable illustrative trade images (studio desk, porch laptop, dock phone, wireframe sketch, server detail, print proofs, camera on beach, Freeport shopfront).
+- Not doing: no typing "browser" hero (gen 1), no flag-colour palette on paper, no line-split headline fade.
+- Study: arup.com and maersk.com not scraped this run (budget kept for imagery); known patterns used: Arup's project data blocks and plain tables, Maersk's sectioned toolbar.

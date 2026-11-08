@@ -1,13 +1,13 @@
 {
  "slug": "bvg-design-services",
  "niche": "professional-services",
- "archetype": "A06",
- "archetype_name": "Object study",
- "lane": "P01",
- "lane_name": "Limestone",
- "type": "T04",
- "type_name": "Technical mono",
- "nav": "N4",
- "motion": "M4",
- "dealt_at": "2026-11-08T14:03:26.363Z"
+ "archetype": "A10",
+ "archetype_name": "Spec sheet",
+ "lane": "P13",
+ "lane_name": "Hull and brass",
+ "type": "T01",
+ "type_name": "Monumental serif",
+ "nav": "N5",
+ "motion": "M8",
+ "dealt_at": "2026-11-08T14:58:33.374Z"
 }

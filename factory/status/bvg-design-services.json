@@ -4,8 +4,142 @@
  "name": "BVG Design Services",
  "batch": "01",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-08T14:58:12.956Z"
+ "claimed_at": "2026-11-08T14:58:12.956Z",
+ "track": "A",
+ "direction": {
+  "archetype": "A10",
+  "lane": "P13",
+  "type": "T01",
+  "nav": "N5",
+  "motion": "M8",
+  "redeal": "A06 Object study re-dealt: BVG has no physical product"
+ },
+ "images": [
+  {
+   "src": "https://commons.wikimedia.org/wiki/File:Lucayan_Harbor_JonWorth.jpg",
+   "source": "commons",
+   "credit": "Jon Worth, CC BY-SA 2.0"
+  },
+  {
+   "src": "https://commons.wikimedia.org/wiki/File:Port_Lucaya_Marina_-_panoramio.jpg",
+   "source": "commons",
+   "credit": "qwesy qwesy, CC BY 3.0"
+  },
+  {
+   "src": "https://commons.wikimedia.org/wiki/File:Port_Lucaya_Marketplace_-_panoramio.jpg",
+   "source": "commons",
+   "credit": "Pietro Valocchi, CC BY 3.0"
+  },
+  {
+   "src": "https://commons.wikimedia.org/wiki/File:Port_Lucaya_Beach_-_panoramio.jpg",
+   "source": "commons",
+   "credit": "Pietro Valocchi, CC BY 3.0"
+  },
+  {
+   "src": "https://commons.wikimedia.org/wiki/File:Bahamas_1989_(445)_Abaco_Hope_Town,_Elbow_Cay_(24251314643).jpg",
+   "source": "commons",
+   "credit": "Rüdiger Stehn, CC BY-SA 2.0"
+  },
+  {
+   "src": "https://commons.wikimedia.org/wiki/File:Bahamas_1989_(601)_New_Providence_Potter%27s_Cay,_Nassau_(25011570973).jpg",
+   "source": "commons",
+   "credit": "Rüdiger Stehn, CC BY-SA 2.0"
+  },
+  {
+   "src": "https://ip-assets-bvg-design-services.lovable.app/assets/studio-desk.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project d03b708e, replace with own"
+  },
+  {
+   "src": "https://ip-assets-bvg-design-services.lovable.app/assets/porch-laptop.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project d03b708e, replace with own"
+  },
+  {
+   "src": "https://ip-assets-bvg-design-services.lovable.app/assets/dock-phone.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project d03b708e, replace with own"
+  },
+  {
+   "src": "https://ip-assets-bvg-design-services.lovable.app/assets/wireframe-sketch.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project d03b708e, replace with own"
+  },
+  {
+   "src": "https://ip-assets-bvg-design-services.lovable.app/assets/server-detail.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project d03b708e, replace with own"
+  },
+  {
+   "src": "https://ip-assets-bvg-design-services.lovable.app/assets/print-proofs.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project d03b708e, replace with own"
+  },
+  {
+   "src": "https://ip-assets-bvg-design-services.lovable.app/assets/route-sign.jpg",
+   "source": "generated",
+   "credit": "Illustrative, Lovable project d03b708e, replace with own"
+  }
+ ],
+ "critic": {
+  "composition": 2,
+  "photography": 3,
+  "typography": 3,
+  "colour": 2,
+  "awwwards": 2,
+  "closest": "bahamas-securities-ltd (monumental serif + register panel); colour near cheryl-s-bahamas-taxi-and-tours",
+  "pass": "first-pass scores; all three changes applied in one fix pass (full-bleed harbour hero with 'found' crossing its edge and a measured brass rule, IBM Plex Mono for codes/coordinates/ledger, capability matrix moved onto a full-width cream blueprint ground with photos inside expanded rows); not re-scored"
+ },
+ "pages": [
+  "index.html",
+  "services.html"
+ ],
+ "primary_cta": "Start a website request",
+ "brand_truth": "Two Freeport partners got their own Bahamas Vacation Guide to the top of the search engines in 1996, and have been getting Bahamian businesses found ever since.",
+ "design": {
+  "display_font": "Fraunces 400 (opsz 144, SOFT 50, WONK)",
+  "body_font": "Newsreader + IBM Plex Mono for data",
+  "palette": [
+   "#13263f",
+   "#0d1b2e",
+   "#f1eadb",
+   "#aeb6c2",
+   "#c9a15b",
+   "#8a5a3b"
+  ],
+  "hero_pattern": "spec sheet: full-bleed harbour photo with brass dimension lines, giant 'found' crossing its edge, data block",
+  "signature": "The word 'found' measured like a drawing under Lucayan Harbour; capability matrix rows expand with their photo"
+ },
+ "current_site_findings": [
+  "Footer says Last Updated on 30 May, 2014.",
+  "Advertising agency page link is dead (404).",
+  "Bold text, GIF buttons, no mobile layout.",
+  "Two public phone numbers and two emails.",
+  "The 1996 Bahamas Vacation Guide story is buried."
+ ],
+ "pitch_line": "You were getting Bahamian businesses found before most of them were online; your own site should show that on the first screen.",
+ "sources": [
+  "https://www.bvgdesign.com/",
+  "https://www.bvgdesign.com/faqs.html",
+  "https://www.bvgdesign.com/promo.html",
+  "http://www.bahamasvacationguide.com/",
+  "https://bahamas.yabsta.com/listing/view/92035/bvg-design-services"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "assumptions": [
+  "Nassau and Abaco offices still active (2014 site)",
+  "Current phone (242) 602-0658 vs 242-373-2268 on Yabsta",
+  "Street location Smith's Point (Yabsta)",
+  "Advertising department (print, DVD/CD, video) still offered",
+  "Simple pages within 24 hours still holds",
+  "No portfolio of client sites was confirmed; ledger lists only BVG's own two sites"
+ ],
+ "notes": "Generation 2. Re-dealt once from A06 Object study (requires a physical product) to A10 Spec sheet. Rule conflict: T01 says no numbering but N5 toolbar uses section codes; codes appear in the toolbar and small section labels only, headings are unnumbered. Study sites (arup.com, maersk.com) not scraped this run to keep budget for imagery. Lovable images were not visually reviewed (no gallery screenshot returned); Lovable flagged print-proofs (hilly background) and dock-phone (pseudo-text on screen): check https://ip-assets-bvg-design-services.lovable.app. camera-beach generated but unused. The 1996 vs today slider is an HTML illustration of web styles, labelled as not a screenshot. interact.mjs 'dead' inputs are visually hidden checkboxes and the range slider (false positives). Fonts fall back in the sandbox; Google Fonts load in production.",
+ "built_at": "2026-11-08T15:07:19Z"
 }
