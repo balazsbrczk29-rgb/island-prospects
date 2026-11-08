@@ -5,7 +5,7 @@
  "batch": "01",
  "tier": "A",
  "state": "built",
- "generation": 2,
+ "generation": 1,
  "rebuild_of": 1,
  "claimed_at": "2026-11-08T14:58:12.956Z",
  "track": "A",
@@ -141,5 +141,30 @@
   "No portfolio of client sites was confirmed; ledger lists only BVG's own two sites"
  ],
  "notes": "Generation 2. Re-dealt once from A06 Object study (requires a physical product) to A10 Spec sheet. Rule conflict: T01 says no numbering but N5 toolbar uses section codes; codes appear in the toolbar and small section labels only, headings are unnumbered. Study sites (arup.com, maersk.com) not scraped this run to keep budget for imagery. Lovable images were not visually reviewed (no gallery screenshot returned); Lovable flagged print-proofs (hilly background) and dock-phone (pseudo-text on screen): check https://ip-assets-bvg-design-services.lovable.app. camera-beach generated but unused. The 1996 vs today slider is an HTML illustration of web styles, labelled as not a screenshot. interact.mjs 'dead' inputs are visually hidden checkboxes and the range slider (false positives). Fonts fall back in the sandbox; Google Fonts load in production.",
- "built_at": "2026-11-08T15:07:19Z"
+ "built_at": "2026-11-08T15:07:19Z",
+ "history": [
+  {
+   "generation": 2,
+   "direction": {
+    "archetype": "A10",
+    "lane": "P13",
+    "type": "T01",
+    "nav": "N5",
+    "motion": "M8",
+    "redeal": "A06 Object study re-dealt: BVG has no physical product"
+   },
+   "critic": {
+    "composition": 2,
+    "photography": 3,
+    "typography": 3,
+    "colour": 2,
+    "awwwards": 2,
+    "closest": "bahamas-securities-ltd (monumental serif + register panel); colour near cheryl-s-bahamas-taxi-and-tours",
+    "pass": "first-pass scores; all three changes applied in one fix pass (full-bleed harbour hero with 'found' crossing its edge and a measured brass rule, IBM Plex Mono for codes/coordinates/ledger, capability matrix moved onto a full-width cream blueprint ground with photos inside expanded rows); not re-scored"
+   },
+   "built_at": "2026-11-08T15:07:19Z"
+  }
+ ],
+ "reroll": true,
+ "reroll_at": "2026-11-08T15:26:04.646Z"
 }
