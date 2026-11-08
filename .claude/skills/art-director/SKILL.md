@@ -42,8 +42,7 @@ node factory/tools/look.mjs <their current site>   current
 node factory/tools/look.mjs <reference site 1>     ref1
 node factory/tools/look.mjs <reference site 2>     ref2
 ```
-Read the PNGs. Pick references from your archetype's "Study" list (`references/archetypes.md`), or any
-award-level site in the niche (Awwwards, siteinspire). Write down concretely what makes them premium:
+Read the PNGs. Take references from `factory/references.md` first (Balazs's own picks and the curated list per niche), then your archetype's "Study" list (`references/archetypes.md`), or any award-level site in the niche (Awwwards, siteinspire). Write down concretely what makes them premium:
 how big the photos are and how they are cropped, the type scale, how much space surrounds things, how few
 elements there are, how the navigation behaves. If `look.mjs` reports the network is blocked, say so in
 status notes and rely on the archetype descriptions.
@@ -57,6 +56,12 @@ Pick the option that best expresses the brand truth and the buyer, or another fi
 references (refused only if a direct competitor has the same archetype and palette). Two lines in the brief
 on why. It must feel inevitable for this business. Read only your entries in `references/archetypes.md`,
 `palettes.md` and `type-systems.md`.
+
+## 3b. Storyboard the page, screen by screen (before any code)
+Write in the brief one line per 1440x900 screen, top to bottom, and one per 390x844 phone screen for the first three:
+what fills the screen (which photograph, cropped how), the one sentence of type on it, and what the visitor can do.
+Six to ten screens for a home page. If two consecutive screens could swap places without loss, one is filler: cut it.
+Builders who skip this produce section soup. This storyboard is what you build and what the critic checks against.
 
 ## 4. Photographs (they decide most of the result)
 Follow `references/imagery.md`. 8-15 photographs on the home page, large and cropped with intent, one
@@ -88,4 +93,6 @@ there one clear typographic idea and enough space? Iterate up to three times. On
 ## 7. Verify with real eyes
 1. `qa.mjs` (if it prints BLIND, say so in notes), `interact.mjs`, `distinct.mjs` (fix every blocker).
 2. Fresh-eyes critic: spawn a general-purpose subagent with this prompt and the paths: "You are the creative director of an award-winning studio. Look at <index-desktop.png>, <index-mobile.png>, the reference screenshots <ref1-desktop.png>, <ref2-desktop.png>, and factory/qa/_contact.png (other sites in this repo). 1) Does this look like premium hand-made work for this specific business, or like AI output, a template or paperwork? Be specific and harsh. 2) Score 1-5: photography, typography, composition and space, colour, fit to the business and its real web setup, distinct from the contact sheet, would sit next to the references. 3) The three changes that would most raise it."
+   Scoring anchors (give the critic these): 5 = could be Awwwards Site of the Day in its category; 4 = belongs in a top studio's portfolio, an owner would pay $1,000+ for it gladly; 3 = competent but template-like or uneven, nobody would remember it; 2 = amateur or obviously AI-made (gimmicks, wrong fonts, weak photos, paperwork); 1 = broken.
+4. `qa.mjs` prints "craft" metrics measured on the real page (first-screen photo coverage, font families, body size, line length, scale contrast, photo count, button styles). Treat every craft warning as a design defect to fix, not a note.
 3. Every score must be 4 or more. Apply the changes, rebuild, and ask the critic to re-score the NEW screenshots: never record first-pass scores as final or mark changes "not re-scored" (CBS and BVG published with scores of 2 and 3 because fixes were applied blindly). If after two fix passes any score is still below 4, set status `state` to "needs-review" with the reason instead of "built" and still publish, so Balazs sees it is not ready.

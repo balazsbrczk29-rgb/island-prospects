@@ -88,6 +88,35 @@ for (const page of pages) {
       for (const l of r.localLinks) { const f = l.split('#')[0]; if (!fs.existsSync(path.join(root, slug, f))) blockers.push(`${page}: link to missing page ${f}`); }
       info.push(`${page}: title="${r.title}" ld=${JSON.stringify(r.ldTypes)} fonts=${JSON.stringify(r.fonts)}`);
     } else if (r.smallTargets) warnings.push(`${tag}: ${r.smallTargets} tap targets under 40px tall`);
+    if (page === 'index.html' && vp.name === 'desktop') {
+      const m = await pg.evaluate(() => {
+        const vw = innerWidth, vh = innerHeight; window.scrollTo(0, 0);
+        const vis = e => { const r = e.getBoundingClientRect(), cs = getComputedStyle(e); return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none'; };
+        let hero = 0;
+        for (const e of document.querySelectorAll('img, picture, video, canvas, [style*="background-image"]')) { if (!vis(e)) continue; const r = e.getBoundingClientRect(); const w = Math.max(0, Math.min(r.right, vw) - Math.max(r.left, 0)), h = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0)); hero = Math.max(hero, w * h / (vw * vh)); }
+        const texts = [...document.querySelectorAll('h1,h2,h3,p,li,a,button,span,label')].filter(e => vis(e) && e.textContent.trim().length > 2 && !e.closest('#concept-ribbon'));
+        const fams = new Set(texts.map(e => getComputedStyle(e).fontFamily.split(',')[0].replace(/["']/g, '').trim().toLowerCase()));
+        const ps = [...document.querySelectorAll('main p')].filter(e => vis(e) && e.textContent.trim().length > 80);
+        const sizes = ps.map(e => parseFloat(getComputedStyle(e).fontSize)).sort((x, y) => x - y);
+        const body = sizes.length ? sizes[Math.floor(sizes.length / 2)] : 16;
+        const measure = Math.max(0, ...ps.map(e => e.getBoundingClientRect().width / (parseFloat(getComputedStyle(e).fontSize) * 0.5)));
+        const h1 = document.querySelector('h1'); const h1s = h1 ? parseFloat(getComputedStyle(h1).fontSize) : 0;
+        const imgs = [...document.querySelectorAll('main img')].filter(e => e.getBoundingClientRect().width >= 200).length;
+        const btnStyles = new Set([...document.querySelectorAll('main a, main button')].filter(e => { const cs = getComputedStyle(e); return vis(e) && parseFloat(cs.paddingLeft) >= 12 && cs.backgroundColor !== 'rgba(0, 0, 0, 0)'; }).map(e => { const cs = getComputedStyle(e); return cs.backgroundColor + cs.borderRadius; }));
+        return { hero: Math.round(hero * 100), fams: [...fams], body, measure: Math.round(measure), ratio: h1s && body ? +(h1s / body).toFixed(1) : 0, imgs, btnStyles: btnStyles.size };
+      });
+      const dir = (() => { try { return JSON.parse(fs.readFileSync(path.join(root, 'factory/directions', slug + '.json'), 'utf8')); } catch { return {}; } })();
+      const typeLed = ['A04', 'A12'].includes(dir.archetype);
+      info.push(`craft: hero media ${m.hero}% of first screen, fonts ${m.fams.length} (${m.fams.join(', ')}), body ${m.body}px, measure ${m.measure}ch, h1/body ${m.ratio}x, home photos ${m.imgs}, button styles ${m.btnStyles}`);
+      if (!typeLed && m.hero < 35) blockers.push(`craft: the first screen's largest photograph covers only ${m.hero}% of it (need 35%+ unless the direction is type-led A04/A12)`);
+      if (m.fams.length > 3) blockers.push(`craft: ${m.fams.length} font families in use (${m.fams.join(', ')}); a premium page uses 2, at most 3 with a mono`);
+      if (m.body < 16 || m.body > 22) warnings.push(`craft: body text ${m.body}px (premium range 17-20px)`);
+      if (m.measure > 90) warnings.push(`craft: paragraphs run ${m.measure} characters wide (keep under 75)`);
+      if (m.ratio && m.ratio < 2.5) warnings.push(`craft: h1 is only ${m.ratio}x the body size; premium pages have real scale contrast (3x+)`);
+      if (prospect.tier !== 'C' && m.imgs < 4) blockers.push(`craft: only ${m.imgs} photographs on the home page (need 8-15; 4 is the floor)`);
+      else if (prospect.tier !== 'C' && m.imgs < 8) warnings.push(`craft: ${m.imgs} photographs on the home page (aim for 8-15)`);
+      if (m.btnStyles > 3) warnings.push(`craft: ${m.btnStyles} different filled button styles; use one primary and one secondary`);
+    }
     const file = path.join(outDir, `${page.replace('.html', '')}-${vp.name}.png`);
     await pg.screenshot({ path: file, fullPage: true, clip: undefined }).catch(() => {});
     // cap very tall screenshots for readability: also save viewport-top shot

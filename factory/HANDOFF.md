@@ -22,7 +22,7 @@ The pipeline was then consolidated (Nov 8 evening). The art-director skill's "Wh
 - `design-system.md`, `showcase-art-direction.md` and `portfolio-standard.md` were deleted: they contradicted the new rules (they asked for low-poly 3D and SVG scenes).
 - `factory/AUDIT.md` + `factory/audit/<slug>.json` (one file per business): what kind of site each business really has, the concept type, what to keep, priority A-D. Only 8 of 77 audited so far.
 - Tools:
-  - `look.mjs` (screenshot any live page; needs network);
+  - `look.mjs` (screenshot any live page; needs network); `factory/references.md` (reference library, add Balazs picks; capture the screenshots into factory/references/ once);
   - `direction.mjs --options / --set` (fit-first; only direct competitors are blocked);
   - `qa.mjs` and `distinct.mjs` (load real photos and fonts when the network allows; QA prints BLIND otherwise);
   - `batch.mjs` (queue: rerolls, then audit priority);
