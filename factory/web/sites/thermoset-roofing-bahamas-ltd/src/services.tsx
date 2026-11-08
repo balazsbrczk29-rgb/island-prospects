@@ -1,74 +1,108 @@
 import { motion } from "motion/react"
-import { ArrowUpRight } from "lucide-react"
-import { Page, mount, Reveal, Label, Photo, ease, reveal, IMG } from "./site"
+import { Page, mount } from "./Frame"
+import { GEN, OWN, PHONE_OFFICE, TEL_OFFICE } from "./data"
 
-const GROUPS: [string, [string, string][]][] = [
-  ["Roofing", [
-    ["TPO & PVC single-ply membrane systems", "High-performance thermoplastic membranes for commercial and residential flat roofs."],
-    ["Modified bitumen & torch-applied systems", "Durable multi-layer assemblies for waterproofing and UV resistance."],
-    ["Standing seam & metal roofing", "Custom fabricated aluminium or steel panels with concealed fasteners and Kynar finishes."],
-    ["Shingle roofing", "Architectural, synthetic and 3-tab shingles for pitched residential and commercial roofs."],
-    ["Roof replacement & re-roofing", "Full tear-off and reinstallation of aged or failing roof systems."],
-  ]],
-  ["Waterproofing & specialty", [
-    ["Terrace & balcony waterproofing", "Liquid-applied membranes beneath tile or concrete toppings."],
-    ["Solar plinth & equipment curb flashing", "TPO-compatible detailing for solar bases, HVAC curbs and mechanical penetrations."],
-    ["Planter box & green roof coordination", "Waterproofing continuity beneath movable or built-in planters."],
-    ["Roof overburden installation", "Gravel ballast, pavers or decorative stone over membrane systems."],
-  ]],
-  ["Maintenance & inspection", [
-    ["Preventative maintenance plans", "Scheduled inspections, cleaning and minor repairs to extend roof life."],
-    ["Leak detection & emergency repairs", "Rapid response to active leaks or storm-related damage."],
-    ["Roof condition assessments", "Detailed reports with photos, core cuts and repair recommendations."],
-  ]],
-  ["Custom fabrication", [
-    ["Perimeter flashing & edge metal", "ANSI/SPRI ES-1 compliant fabrication in Kynar-finished aluminium or galvanized steel."],
-    ["AC curb installation", "Custom fabricated mechanical curbs to support rooftop HVAC units."],
-    ["Gutters & downspouts", "Seamless aluminium or copper systems with debris guards and custom profiles."],
-    ["Skylight & hatch integration", "Flashing and waterproofing around daylighting and access features."],
-  ]],
-  ["General construction", [
-    ["Interior & exterior painting", "From precision detailing to full-scale repainting."],
-    ["Pressure cleaning", "Driveways, roofs, gutters and facades."],
-    ["Gutter & downspout cleaning", "Keeping drainage clear to protect foundation and roofline."],
-    ["Tree cutting & hauling", "Safe trimming, removal and debris hauling."],
-    ["Carpentry", "Framing, decking, custom cabinetry, doors and trim."],
-    ["Masonry", "Block work, poured concrete, stone and brick for walls, driveways, patios and retaining structures."],
-  ]],
+type Group = { id: string; part: string; title: string; photo: string; alt: string; source: "own" | "generated"; items: [string, string][] }
+
+const GROUPS: Group[] = [
+  {
+    id: "roofing", part: "The roof itself", title: "Roofing systems", photo: OWN.membrane, alt: "Thermoset crew installing a membrane on a flat commercial roof", source: "own",
+    items: [
+      ["TPO and PVC single-ply membranes", "High-performance thermoplastic membranes for commercial and residential flat roofs."],
+      ["Modified bitumen and torch-applied systems", "Multi-layer assemblies for waterproofing and UV resistance."],
+      ["Standing seam and metal roofing", "Custom fabricated aluminium or steel panels with concealed fasteners and Kynar finishes."],
+      ["Shingle roofing", "Architectural, synthetic and 3-tab shingles for pitched residential and commercial roofs."],
+      ["Roof replacement and re-roofing", "Full tear-off and reinstallation of aged or failing roof systems."],
+    ],
+  },
+  {
+    id: "waterproofing", part: "Terraces, plinths and planters", title: "Waterproofing and specialty", photo: GEN + "waterproofing.jpg", alt: "A roller spreading grey liquid waterproofing across a concrete deck", source: "generated",
+    items: [
+      ["Terrace and balcony waterproofing", "Liquid-applied membranes beneath tile or concrete toppings."],
+      ["Solar plinth and equipment curb flashing", "TPO-compatible detailing for solar bases, HVAC curbs and mechanical penetrations."],
+      ["Planter box and green roof coordination", "Waterproofing continuity beneath movable or built-in planters."],
+      ["Roof overburden", "Gravel ballast, pavers or decorative stone over membrane systems."],
+    ],
+  },
+  {
+    id: "maintenance", part: "After it is built", title: "Maintenance and inspection", photo: GEN + "inspection.jpg", alt: "A roofer in a hard hat kneeling on a white roof, checking a seam on a tablet", source: "generated",
+    items: [
+      ["Preventative maintenance plans", "Scheduled inspections, cleaning and minor repairs to extend roof life. Part of the R.A.D.A.R. program."],
+      ["Leak detection and emergency repairs", "Rapid response to active leaks or storm damage."],
+      ["Roof condition assessments", "Detailed reports with photographs, core cuts and repair recommendations."],
+    ],
+  },
+  {
+    id: "fabrication", part: "Edges, curbs and openings", title: "Custom fabrication", photo: GEN + "coping.jpg", alt: "A fabricated sheet-metal coping cap on a white parapet wall", source: "generated",
+    items: [
+      ["Perimeter flashing and edge metal", "ANSI/SPRI ES-1 compliant fabrication in Kynar-finished aluminium or galvanised steel."],
+      ["AC curb installation", "Custom fabricated mechanical curbs to carry rooftop HVAC units."],
+      ["Gutters and downspouts", "Aluminium or copper systems with debris guards and custom profiles."],
+      ["Skylight and hatch integration", "Flashing and waterproofing around daylighting and roof access."],
+    ],
+  },
+  {
+    id: "construction", part: "Around the roof", title: "General construction", photo: OWN.general, alt: "Thermoset general construction job photograph", source: "own",
+    items: [
+      ["Interior and exterior painting", "From precision detailing to full repaints."],
+      ["Pressure cleaning", "Driveways, roofs, gutters and facades."],
+      ["Gutter and downspout cleaning", "Installed, maintained and cleaned, so water stays off the foundation and roofline."],
+      ["Tree cutting and hauling", "Trimming, removal and debris hauling."],
+      ["Carpentry", "Framing, decking, custom cabinetry, doors and trim."],
+      ["Masonry", "Block work, poured concrete, decorative stone and brickwork for walls, driveways, patios and retaining structures."],
+    ],
+  },
 ]
 
-mount(
-  <Page current="Services">
-    <section className="mx-auto grid max-w-[1440px] gap-10 px-5 pt-16 pb-16 md:px-10 md:pt-24 lg:grid-cols-12" aria-labelledby="hero-title">
-      <div className="lg:col-span-7">
-        <Label>Services</Label>
-        <h1 id="hero-title" className="mt-6 font-display text-[clamp(2.8rem,6vw,6.4rem)] leading-[0.92] font-extrabold tracking-[-0.045em]">
-          {["From membrane", "to masonry."].map((l, i) => <span key={l} className="block overflow-hidden pb-[0.04em]"><motion.span className={`block ${i ? "text-steel" : ""}`} initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.1 + i * 0.09, duration: 1, ease: reveal }}>{l}</motion.span></span>)}
-        </h1>
-        <p className="mt-6 max-w-xl text-[18px] text-muted">Residential, commercial and industrial properties throughout New Providence and the surrounding islands.</p>
-      </div>
-      <Photo src={IMG.hero2} alt="A roof completed by Thermoset Roofing" priority className="aspect-[4/3] lg:col-span-5" />
-    </section>
-    {GROUPS.map(([g, items], gi) => (
-      <section key={g} className={gi % 2 ? "bg-white" : ""} aria-labelledby={`g${gi}`}>
-        <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-20 md:px-10 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4"><Label n={`0${gi + 1}`}>{g}</Label><h2 id={`g${gi}`} className="mt-4 font-display text-[clamp(2rem,3.4vw,3.2rem)] leading-[1] font-extrabold tracking-[-0.035em]">{g}</h2></Reveal>
-          <ol className="border-t-2 border-ink lg:col-span-8">
-            {items.map(([t, d], i) => (
-              <motion.li key={t} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.6, ease }} className="group grid gap-2 border-b border-line py-5 md:grid-cols-[1fr_1.2fr] md:gap-8">
-                <p className="font-display text-xl font-bold tracking-tight transition group-hover:translate-x-1 group-hover:text-steel">{t}</p>
-                <p className="text-[16px] text-muted">{d}</p>
-              </motion.li>
-            ))}
-          </ol>
+const DOCK = GROUPS.map(g => ({ href: `#${g.id}`, label: g.title.split(" ")[0] }))
+
+function Services() {
+  return (
+    <Page page="services" dock={DOCK}>
+      <section aria-labelledby="svc-title" className="mx-auto max-w-[1360px] px-4 pb-16 pt-14 sm:px-8 md:pt-24">
+        <h1 id="svc-title" className="poster max-w-[13ch] text-[clamp(52px,9vw,150px)]">Every service, part by part.</h1>
+        <div className="mt-8 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+          <p className="max-w-2xl text-[19px] text-ink/85">Homes, commercial buildings and industrial properties across New Providence and the surrounding islands. Licensed, insured and factory certified. All estimates are free.</p>
+          <a href={`tel:${TEL_OFFICE}`} className="slab text-[28px] font-bold text-sun">{PHONE_OFFICE}</a>
         </div>
       </section>
-    ))}
-    <section className="bg-ink text-white" aria-label="Free estimate">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-5 py-20 md:flex-row md:items-center md:justify-between md:px-10">
-        <p className="max-w-2xl font-display text-[clamp(2rem,3.6vw,3.4rem)] leading-[1] font-extrabold tracking-[-0.035em]">All estimates are free.</p>
-        <a href="index.html#estimate" className="inline-flex min-h-13 items-center gap-2 bg-vis px-7 py-3 text-[17px] font-semibold text-ink transition hover:-translate-y-0.5">Request a free estimate <ArrowUpRight className="size-4" aria-hidden /></a>
-      </div>
-    </section>
-  </Page>
-)
+
+      {GROUPS.map((g, gi) => (
+        <section key={g.id} id={g.id} aria-labelledby={`${g.id}-t`} className={`scroll-mt-4 border-t rule ${gi % 2 ? "bg-deep" : ""}`}>
+          <div className="mx-auto grid max-w-[1360px] gap-8 px-4 py-16 sm:px-8 md:grid-cols-12 md:py-24">
+            <div className="md:col-span-5">
+              <div className="md:sticky md:top-8">
+                <p className="label">{g.part}</p>
+                <h2 id={`${g.id}-t`} className="poster mt-2 text-[clamp(40px,5vw,80px)]">{g.title}</h2>
+                <motion.img
+                  src={g.photo} alt={g.alt} data-source={g.source} width={900} height={675} loading="lazy"
+                  initial={{ clipPath: "inset(12% 12% 12% 12% round 16px)" }}
+                  whileInView={{ clipPath: "inset(0% 0% 0% 0% round 16px)" }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
+                  className="mt-8 aspect-[4/3] w-full object-cover"
+                />
+                {g.source === "generated" && <p className="mt-2 text-[14px] text-ink/55">Illustrative photograph.</p>}
+              </div>
+            </div>
+            <dl className="md:col-span-7 md:pt-10">
+              {g.items.map(([t, d]) => (
+                <div key={t} className="group border-b rule py-6">
+                  <dt className="slab text-[26px] font-semibold leading-tight transition-colors group-hover:text-sun sm:text-[32px]">{t}</dt>
+                  <dd className="mt-2 max-w-xl text-ink/85">{d}</dd>
+                </div>
+              ))}
+              <a href="index.html#estimate" className="slab mt-8 inline-flex min-h-11 items-center border-b-2 border-sun text-[19px] font-semibold">Request a free estimate</a>
+            </dl>
+          </div>
+        </section>
+      ))}
+
+      <section aria-label="Scaffold" className="relative">
+        <img src={OWN.scaffold} alt="Thermoset workers on scaffolding at the roof of a house" data-source="own" width={2000} height={1200} loading="lazy" className="h-[60svh] w-full object-cover" />
+      </section>
+    </Page>
+  )
+}
+
+mount(<Services />)

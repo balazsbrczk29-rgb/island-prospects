@@ -35,3 +35,23 @@ Hero: split editorial with their crew photo bleeding right. Signature: "This sho
 
 ## Scorecard
 1:4 2:5 3:4 4:5 5:5 6:4 7:5 8:4 9:4 10:5 11:5
+
+---
+
+# Generation 2 (2026-11-08)
+
+## New research this session
+- Services page re-read in full (https://www.thermosetroofing242.com/services): TPO & PVC single-ply; modified bitumen & torch-applied; standing seam & metal (aluminium or steel, concealed fasteners, Kynar finishes); shingle (architectural, synthetic, 3-tab); roof replacement & re-roofing; terrace & balcony waterproofing (liquid-applied beneath tile or concrete toppings); solar plinth & equipment curb flashing (TPO-compatible); planter box & green roof coordination; roof overburden (gravel ballast, pavers, decorative stone); preventative maintenance plans; leak detection & emergency repairs; roof condition assessments (photos, core cuts, recommendations); perimeter flashing & edge metal (ANSI/SPRI ES-1 compliant, Kynar aluminium or galvanised steel); AC curbs; gutters & downspouts (seamless aluminium or copper); skylight & hatch integration; general construction (painting, pressure cleaning, gutter cleaning, tree cutting & hauling, carpentry, masonry).
+- Own job photos (verbatim, squarespace-cdn): homepage a827c3e8 hero, PHOTO-2025-06-23-13-59-54, IMG_4711 (crew installing membrane on flat commercial roof, their alt text), IMG_8670 (waterproofing tile), IMG_4723 (maintenance tile), IMG_4719 (workers on scaffolding, roof of a house, their alt text), IMG_7262 (general construction tile); services page IMG_4897, IMG_4903, IMG_4904, IMG_4895, IMG_4710, IMG_4894 (1). Content of the untitled ones unseen: captioned neutrally as "Thermoset job photograph".
+- Wikimedia Commons: "Bahamas 1989 (758) New Providence Nassau" by Rüdiger Stehn, CC BY-SA 2.0 (aerial over Nassau rooftops).
+- Study site: teenage.engineering/products/op-1 (object huge on flat field, lower-case short lines beside it, a dense feature wall, specifications block at the end).
+
+## Direction (dealt): A06 Object study, P14 Blue hole, T07 Slab poster, N4 floating bottom dock, M4 object scrub
+- **Archetype mapped**: the object is a Bahamian two-storey commercial block (white render, louvred shutter bands, parapet) built procedurally in three.js with its real roof assembly on top. Hero = the building on the deep-blue field, 70% of the viewport, the name and one line small beside it. Scroll lifts the roof apart layer by layer (deck, vapour retarder, insulation, cover board, membrane, edge metal and AC curb) and a leader line draws to each layer's callout, worded from their services list. Then: a finish selector on the same object, their own job photos as a contact-sheet wall, a specification table of systems and manufacturers, R.A.D.A.R. as a printed maintenance schedule, the client ledger (names only, as sourced), and the estimate as a work order.
+- **Phone and primary action**: printed on the slim top toolbar and on the work order; the floating bottom dock carries the part selector (Systems, Finish, Photos, R.A.D.A.R., Clients) and "Request a free estimate".
+- **Palette** (from P14 and their white membranes): ground #0B4C68, deep #073247, ink #F3F7F6, aqua #9ED8DB, sun #F2D16B (their hi-vis vests and the noon sun), membrane white #F4F6F3 for the paper section with ink #0A2C3C, line rgba(243,247,246,.22). Body on ground 8.3:1.
+- **Type**: Zilla Slab 600/700 display (poster: 72-168px desktop, 52-72 mobile, -0.02em), Figtree 400/500/600 body 18px, labels Zilla Slab 600 16px sentence case in aqua. No numbering, no eyebrows.
+- **Signature**: the roof lifts off the building in layers as you scroll and every layer gets its line and its name.
+- **Interactions**: (1) choose the finish (TPO, PVC, modified bitumen, standing seam metal, liquid-applied terrace) and the 3D roof re-skins with the matching spec row and photo; (2) the work order fills itself as you pick building type, job and island, then opens an email to the GM.
+- **Imagery plan**: hero/stage = procedural 3D; finish selector = generated photo per finish; contact sheet = 13 own job photos; RADAR = generated after-rain + inspection; spec table margin = generated layers + coping; city = Commons aerial of Nassau; services page = own photos + generated seam-weld, mod-bit, waterproofing, standing-seam.
+- **Not doing (generation 1)**: the split editorial hero with crew photo bleeding right on paper ground; the sticky blurred header; the client index as tabs with cards and the FAQ accordion filler.

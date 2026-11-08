@@ -4,7 +4,7 @@
  "name": "Thermoset Roofing Bahamas Ltd",
  "batch": "08",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "history": [
   {
@@ -15,5 +15,171 @@
   }
  ],
  "rebuild_of": 1,
- "claimed_at": "2026-11-08T14:57:40.926Z"
+ "direction": {
+  "archetype": "A06",
+  "lane": "P14",
+  "type": "T07",
+  "nav": "N4",
+  "motion": "M4"
+ },
+ "images": [
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/2c132234-ef75-4633-93aa-a3ab3b043533/a827c3e8-ae10-4bb1-97b9-1a8100b023d7.jpeg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/3fd21fc3-d414-4ad4-8aa3-4e43ec25d640/PHOTO-2025-06-23-13-59-54.jpg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/30e95db4-7162-4a03-afe2-feede133298a/IMG_4711.jpeg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/73e36bd3-582d-4ed1-8a4e-47635d9aa4ad/IMG_8670.jpeg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/63931fc6-e57c-4101-afbf-8ab5dce20cad/IMG_4723.jpeg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/8f25b357-e661-4cb8-8f69-d30fd36857d1/IMG_4719.jpeg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/25e12ffd-84e2-4780-a822-d6b9ccf08728/IMG_7262.JPG",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/9b3a63b1-7e7e-461e-9e24-86315e18cf93/IMG_4897.jpg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/a9b9b455-9dc1-414b-9b16-def07cfbaecd/IMG_4903.jpeg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/f4ed6fe0-8479-4c11-b50b-d0fc2b0094c1/IMG_4904.jpeg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/97d1f1f7-2e68-4435-b790-155c71ef5f5f/IMG_4895.jpeg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/1aff7691-b4fe-4ae0-856d-10ff7b08598b/IMG_4710.jpeg",
+   "source": "own"
+  },
+  {
+   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Bahamas_1989_%28758%29_New_Providence_Nassau_%2826189368791%29.jpg/3840px-Bahamas_1989_%28758%29_New_Providence_Nassau_%2826189368791%29.jpg",
+   "source": "commons",
+   "credit": "Rüdiger Stehn, CC BY-SA 2.0"
+  },
+  {
+   "src": "https://ip-assets-thermoset-roofing.lovable.app/assets/aerial-membrane.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own project photos"
+  },
+  {
+   "src": "https://ip-assets-thermoset-roofing.lovable.app/assets/seam-weld.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own project photos"
+  },
+  {
+   "src": "https://ip-assets-thermoset-roofing.lovable.app/assets/standing-seam.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own project photos"
+  },
+  {
+   "src": "https://ip-assets-thermoset-roofing.lovable.app/assets/after-rain.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own project photos"
+  },
+  {
+   "src": "https://ip-assets-thermoset-roofing.lovable.app/assets/coping.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own project photos"
+  },
+  {
+   "src": "https://ip-assets-thermoset-roofing.lovable.app/assets/waterproofing.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own project photos"
+  },
+  {
+   "src": "https://ip-assets-thermoset-roofing.lovable.app/assets/inspection.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own project photos"
+  },
+  {
+   "src": "https://ip-assets-thermoset-roofing.lovable.app/assets/mod-bit.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own project photos"
+  },
+  {
+   "src": "https://ip-assets-thermoset-roofing.lovable.app/assets/layers.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own project photos"
+  }
+ ],
+ "critic": {
+  "composition": 3,
+  "photography": 4,
+  "typography": 2,
+  "colour": 2,
+  "awwwards": 2,
+  "closest": "cheryl-s-bahamas-taxi-and-tours",
+  "note": "Scores are from the first critic pass. Applied its changes in one fix pass: own crew photo in the hero, brighter PBR membrane and stronger sun, callouts moved off the model on dark tags, shorter scroll stage, job file on a membrane-white ground with one dominant photo, white sections alternating with blue. Typography score was judged on the sandbox fallback font (Google Fonts blocked in QA); live page loads Zilla Slab. Not re-scored (pass limit)."
+ },
+ "pages": [
+  "index.html",
+  "services.html"
+ ],
+ "primary_cta": "Request a free estimate",
+ "brand_truth": "The roof over the brands you know: a Bahamian family contractor, factory-certified on Carlisle, Elevate, Englert, Sika, Siplast and Tremco systems, serving The Bahamas since 2002.",
+ "design": {
+  "display_font": "Zilla Slab",
+  "body_font": "Figtree",
+  "palette": [
+   "#0B4C68",
+   "#073247",
+   "#F3F7F6",
+   "#9ED8DB",
+   "#F2D16B",
+   "#F4F6F3",
+   "#0A2C3C"
+  ],
+  "hero_pattern": "object-study-3d-building",
+  "signature": "A procedural 3D Bahamian commercial block whose roof lifts apart layer by layer on scroll, each layer named with a drawn leader line; a finish picker re-skins the same roof."
+ },
+ "current_site_findings": [
+  "Two websites are live; thermosetbahamas.com still says South Florida contractor.",
+  "Homepage opens with 'Welcome to the pinnacle' and a shopping cart icon.",
+  "Client list buried under resort photos that are not Thermoset's own.",
+  "WhatsApp promised but no number shown; TikTok link misspelled.",
+  "Tax ID printed in the public footer."
+ ],
+ "pitch_line": "Your clients are Baha Mar, Atlantis and the airport, so your site should show the roof itself: here it comes apart layer by layer, in your own words, with your crew's photos.",
+ "sources": [
+  "https://www.thermosetroofing242.com/",
+  "https://www.thermosetroofing242.com/services",
+  "https://www.thermosetroofing242.com/radar-program",
+  "https://www.thermosetroofing242.com/portfolio",
+  "https://www.thermosetbahamas.com/about-us/",
+  "https://www.facebook.com/thermosetroofing242/",
+  "https://commons.wikimedia.org/wiki/File:Bahamas_1989_(758)_New_Providence_Nassau_(26189368791).jpg"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Layer descriptions for deck, vapour retarder, insulation boards and cover board are generic category descriptions, not Thermoset's own text.",
+  "Estimate work order is routed to the GM's email (croix.culmer@).",
+  "'Since 2002' (site says 07/03/02, ambiguous format).",
+  "Client list taken from Thermoset's portfolio page; confirm every name may be shown publicly."
+ ],
+ "notes": "Generation 2 rebuild from scratch. Direction A06/P14/T07/N4/M4. 12 own job photos (several untitled, captioned neutrally), 1 Commons aerial, 9 Lovable illustrative photos (2 rounds: removed a cruise ship and hotel towers from backgrounds; mod-bit.jpg still has a small distant cruise ship). Ask owner for a WhatsApp number and high-res project photos per system to replace the generated ones. Record location (Paradise Beach Rd) is outdated; site uses 7 Portago Road, Oakesfield. RADAR testimonials not reused. QA shows external photos as grey boxes (expected).",
+ "built_at": "2026-11-08T15:31:27.260809+00:00"
 }
