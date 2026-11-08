@@ -27,7 +27,7 @@ One Lovable project per business, used only as an image studio, about 1 Lovable 
    1. <name>.jpg (<ratio>): <precise scene>
    2. ..."
 2. `mcp__Lovable__deploy_project` with name `ip-assets-<slug>` (shorten to 40 chars). Images are then live at `https://ip-assets-<slug>.lovable.app/assets/<name>.jpg`.
-3. `mcp__Lovable__get_project` returns a screenshot of the grid: look at it. Regenerate (`send_message`, same project) any image that looks fake, has text, extra limbs, wrong architecture or a non-Bahamian setting. One regeneration round at most.
+3. Look at the images: `node factory/tools/look.mjs https://ip-assets-<slug>.lovable.app lovable-<slug>` and read the PNG (or the screenshot `mcp__Lovable__get_project` returns). Regenerate (`send_message`, same project) any image that looks fake, has text, extra limbs, wrong architecture or a non-Bahamian setting. One regeneration round at most.
 4. If any Lovable call returns `awaiting_input` or a credit limit, stop using Lovable for this site and continue with sources 1, 2 and 4. Never wait on it.
 
 Writing the scene (this is where quality comes from):

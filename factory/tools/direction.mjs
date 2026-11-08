@@ -90,7 +90,11 @@ function options(rec, ds, n = 3) {
   })));
   out.sort((x, y) => x.score - y.score);
   const picked = [];
-  for (const o of out) { if (!picked.some(p => p.archetype === o.archetype)) picked.push(o); if (picked.length >= n) break; }
+  // three genuinely different options: different page type AND, where it costs little fit, a different palette and type system
+  for (const o of out) { if (picked.length >= n) break; if (picked.some(p => p.archetype === o.archetype)) continue;
+    const clash = picked.some(p => p.lane === o.lane || p.type === o.type);
+    const alt = clash && out.find(x => !picked.some(p => p.archetype === x.archetype || p.lane === x.lane || p.type === x.type) && x.score <= o.score + 12);
+    picked.push(alt || o); }
   return picked;
 }
 const make = (rec, o, others) => {

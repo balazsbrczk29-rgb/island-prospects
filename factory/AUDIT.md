@@ -5,7 +5,7 @@ listings sites or booking engines; a brochure concept for them is a downgrade an
 of the "no site" businesses actually have one. The concept must be the SAME kind of site as their real setup,
 done far better, and SMEs come before webshops and enterprises.
 
-Data file: `factory/data/site-audit.json` (one row per business; `url` found from prospects.json or the brief;
+Data: `factory/audit/<slug>.json`, one file per business (each session writes only its own; `url` found from prospects.json or the brief;
 `audit` is null until done; 8 done on Nov 8).
 
 ## Step 1. Audit each business (about 2 Firecrawl calls each)

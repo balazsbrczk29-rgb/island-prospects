@@ -1,6 +1,6 @@
 # Mandatory shared components
 
-> **Generation 2 override.** Layout, palette, type, navigation, motion and imagery now come from the dealt direction in `.claude/skills/art-director/` (archetypes, palettes, type-systems, imagery). Where this file disagrees with the art-director skill, the art-director skill wins. Any mention of "the reference site" means the award-level sites you study, never another site in this repo.
+> **The art-director skill is the design authority.** This file only covers its own topic. Where it mentions layouts, signature visuals or "the reference site", treat them as examples: visuals are photographs (never drawn scenes or toy 3D), and references are award-level sites you look at with `look.mjs`, never another site in this repo.
 
 Shared files live in `/assets/` (repo root). Reference them relatively from a site folder: `../assets/...`. Do not copy or edit them per site.
 
@@ -9,12 +9,13 @@ Shared files live in `/assets/` (repo root). Reference them relatively from a si
 <link rel="stylesheet" href="../assets/concept.css">   <!-- in <head>, before styles.css -->
 ...
 <body>
+<!-- Place directly after <body>. assets/concept.css renders it as a small floating tag bottom-left, NOT a bar: never restyle it into a banner, never cover it. If your site has a fixed bottom bar, set :root { --concept-offset: <bar height> } so the tag sits above it. -->
 <div id="concept-ribbon" class="concept-ribbon" role="note">
   <span>Concept preview prepared for {Business name}. This is not the official website.</span>
   <button type="button" class="concept-ribbon__btn" data-concept-open>What we would change</button>
 </div>
 ```
-Keep its wording. It is small, neutral and sits above your header (your sticky header should stick below it or the ribbon scrolls away; both fine).
+Keep its wording. Put it directly after `<body>`. The shared CSS turns it into a small floating tag in the bottom-left corner, so your own first screen is what the owner sees first. Never restyle it into a full-width bar. If your site has a fixed bottom bar, set `:root { --concept-offset: <bar height> }` so the tag floats above it.
 
 ## 2. Concept notes (the sales panel, every page, just before `</body>`)
 ```html

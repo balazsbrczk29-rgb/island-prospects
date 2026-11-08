@@ -1,0 +1,17 @@
+{
+ "slug": "digitech-bahamas",
+ "id": 68,
+ "size": "Small",
+ "niche": "professional-services",
+ "url": "digitechbahamas.com",
+ "url_source": "brief",
+ "old_check": "NO OWN SITE LISTED: (search)",
+ "audit": {
+  "site_kind": "brochure (WooCommerce installed)",
+  "platform": "WordPress/WooCommerce",
+  "latest_year": 2023,
+  "modernity": 4,
+  "cart": false,
+  "note": "IT/POS services brochure; WooCommerce present, check for a shop section."
+ }
+}

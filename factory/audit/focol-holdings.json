@@ -1,0 +1,17 @@
+{
+ "slug": "focol-holdings",
+ "id": 14,
+ "size": "Large",
+ "niche": "industrial-b2b",
+ "url": "focol.com",
+ "url_source": "brief",
+ "old_check": "NO OWN SITE LISTED: (search)",
+ "audit": {
+  "site_kind": "portal-enterprise",
+  "platform": "WordPress/Elementor",
+  "latest_year": 2026,
+  "modernity": 4,
+  "cart": false,
+  "note": "Largest energy group, recently rebuilt site (2026). Low priority."
+ }
+}

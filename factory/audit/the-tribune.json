@@ -1,0 +1,10 @@
+{
+ "slug": "the-tribune",
+ "id": 3,
+ "size": "Large",
+ "niche": "institution",
+ "url": "tribune242.com",
+ "url_source": "prospects",
+ "old_check": "LOADED: fixed 1020px layout, not responsive",
+ "audit": null
+}

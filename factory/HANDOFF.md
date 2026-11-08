@@ -1,31 +1,40 @@
-# Handoff (2026-11-08, 16:30 Budapest)
+# Handoff (2026-11-08, evening)
 
-Read this first in a new orchestrator session, then CLAUDE.md and factory/PROMPT.md.
+For a new orchestrator session: read this, then CLAUDE.md, factory/PROMPT.md, the site-factory and
+art-director skills, and factory/AUDIT.md. Everything else is reference.
 
-## Where things stand
-- Generation 1: 55 sites built from one template. Balazs rejected them as generic (same structure, cream ground, tracked labels, drawn visuals).
-- Generation 2, first attempt (CBS Bahamas, BVG Design Services, Bell Channel, Thermoset): rejected as "the worst so far". Causes:
-  1. directions dealt by lottery (least-used), not by fit;
-  2. too many rules, so pages looked like paperwork (form codes, ledgers, credit lists);
-  3. builders and critic could not see real photos or fonts (sandbox blocked outside sites), so they judged grey boxes in a fallback serif;
-  4. mediocre old Wikimedia photos;
-  5. too much dark navy.
-- Fixes pushed in commit "Gen 2 fix: fit-first directions...":
-  - `direction.mjs <slug> --options` / `--set` (the builder chooses by fit; only direct competitors are blocked from the same archetype and lane);
-  - shorter taste-led `.claude/skills/art-director/SKILL.md`;
-  - Commons quality bar (>= 3000 px, 2010 or later, Quality images first);
-  - qa.mjs and distinct.mjs load real photos and fonts when the network allows (QA prints BLIND otherwise).
-- Balazs allowed all network domains for his account at about 16:21; this needs confirming from a new session's QA output.
-- Running now: the "Reroll sites" scheduled task (trig_01NAXZryxHm6E5CQXcGA7DN3) on bell-channel-club-marina and bvg-design-services (both flagged reroll). Thermoset is still finishing on the OLD rules: reroll it once the two pass.
+## History in one paragraph
+Generation 1 built 55 sites from one copied template. They were generic: same structure, cream ground,
+tracked labels, drawn visuals. The first generation-2 attempt was rejected as worse:
+- directions were dealt by lottery;
+- pages looked like paperwork;
+- builder and critic were blind (no photos or fonts in the sandbox);
+- Wikimedia photos were mediocre;
+- dark navy was overused;
+- businesses with real shops, listings or booking engines got brochures.
+The pipeline was then consolidated (Nov 8 evening). The art-director skill's "What went wrong" section is the authority on what never to repeat.
 
-## Next steps
-0. FIRST: finish the site audit (factory/AUDIT.md): 69 of 77 sites with a URL still to classify, plus a quick search for the 23 without one. Classify by real setup (webshop, booking, listings, brochure), set concept_type, must_keep and priority A-D. Spot-check the classifications yourself: automatic extraction called a listings site a webshop. Use parallel subagents if Balazs agrees, to keep this session's context small. Then show Balazs the A list.
-1. When Bell Channel and BVG publish, review them with real images. In a fresh session with network access, firecrawl_scrape the live URL with screenshot, or run qa.mjs.
-2. Get Balazs's verdict. Reroll with `node factory/tools/reroll.mjs <slug> [--keep-direction]`.
-3. To start workers, use update_trigger on trig_01NAXZryxHm6E5CQXcGA7DN3 with run_once_at a few minutes ahead. fire_trigger and create_trigger get blocked by the safety classifier in long sessions.
-4. Only after Balazs approves: the full rebuild of all generation-1 sites plus the 36 unbuilt ones, with 8-10 parallel sessions. Then the Tier S hero sprint (plan: project doc claude/gen2-premium-sites-plan.md).
+## The pipeline now (single sources of truth)
+- `CLAUDE.md`: hard rules.
+- `factory/PROMPT.md`: the run brief.
+- `.claude/skills/site-factory/SKILL.md`: the order of work.
+- `.claude/skills/art-director/SKILL.md`: every design decision. Its references: archetypes, palettes, type-systems, imagery.
+- `design-system.md`, `showcase-art-direction.md` and `portfolio-standard.md` were deleted: they contradicted the new rules (they asked for low-poly 3D and SVG scenes).
+- `factory/AUDIT.md` + `factory/audit/<slug>.json` (one file per business): what kind of site each business really has, the concept type, what to keep, priority A-D. Only 8 of 77 audited so far.
+- Tools:
+  - `look.mjs` (screenshot any live page; needs network);
+  - `direction.mjs --options / --set` (fit-first; only direct competitors are blocked);
+  - `qa.mjs` and `distinct.mjs` (load real photos and fonts when the network allows; QA prints BLIND otherwise);
+  - `batch.mjs` (queue: rerolls, then audit priority);
+  - `reroll.mjs`, `publish.sh`, `build-site.mjs`, `interact.mjs`.
+- Concept label: now a small floating tag (`assets/concept.css`), not a black bar across every site.
 
-## Tools
-- batch.mjs: queue; rerolls first; generation-1 sites count as pending.
-- reroll.mjs, direction.mjs, distinct.mjs (committed cache in factory/fingerprints), qa.mjs, interact.mjs, publish.sh.
-- Lovable image studio: workspace daQesEM9Br73deJHgggx, about 1 credit per 4 images. Images are published at ip-assets-<slug>.lovable.app and hotlinked.
+## Open items, in order
+0. **Network check.** Balazs allowed all domains around 16:21. In the new session, run `node factory/tools/look.mjs https://www.aesop.com test` and read the PNG. If it fails, ask Balazs to check Settings > Capabilities, because nothing good can be judged blind.
+1. **Site audit** for the 69 remaining sites with a URL and the 23 without one (factory/AUDIT.md). Check each classification by looking: automatic extraction called a listings site a webshop. Show Balazs the A list.
+2. **Reference taste.** Ask Balazs for 3-5 sites he loves per niche. Save the links in `factory/references.md` and use them as ref1/ref2 in look.mjs.
+3. **Pilot with Balazs watching: Bell Channel** (flagged reroll), then BVG. Hero options first, his pick, then the full page. Write down what made it work.
+4. **Only after he approves:** scale. Use update_trigger on trig_01NAXZryxHm6E5CQXcGA7DN3 (Reroll sites) or a new worker task with run_once_at a few minutes ahead. fire_trigger and create_trigger were blocked by the safety check in the long session.
+5. Thermoset and CBS were built on the rejected rules: reroll them.
+
+Lovable image studio: workspace daQesEM9Br73deJHgggx, about 1 credit per 4 images. Images are published at ip-assets-<slug>.lovable.app and hotlinked.

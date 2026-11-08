@@ -11,8 +11,8 @@ const cfg = JSON.parse(fs.readFileSync(path.join(root, 'factory/config.json'), '
 const stFile = s => path.join(root, 'factory/status', s + '.json');
 const status = s => fs.existsSync(stFile(s)) ? JSON.parse(fs.readFileSync(stFile(s), 'utf8')) : null;
 const mode = process.argv[2] || '';
-const auditFile = path.join(root, 'factory/data/site-audit.json');
-const audit = fs.existsSync(auditFile) ? Object.fromEntries(JSON.parse(fs.readFileSync(auditFile, 'utf8')).map(r => [r.slug, r.audit])) : {};
+const auditDir = path.join(root, 'factory/audit');   // one file per business, so parallel sessions never collide
+const audit = fs.existsSync(auditDir) ? Object.fromEntries(fs.readdirSync(auditDir).filter(f => f.endsWith('.json')).map(f => { try { const r = JSON.parse(fs.readFileSync(path.join(auditDir, f), 'utf8')); return [r.slug, r.audit]; } catch { return [f, null]; } })) : {};
 const prio = slug => ({ A: 0, B: 1, C: 2, D: 3 })[audit[slug]?.priority] ?? 1.5;   // unaudited sits between B and C
 const GEN = 2;   // generation 2 = rebuilt with the art-director pipeline; generation-1 'built' sites are pending again
 const needsWork = s => !s || (s.state === 'built' && (s.generation || 1) < GEN);

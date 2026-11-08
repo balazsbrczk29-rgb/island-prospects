@@ -1,7 +1,10 @@
-/* Shared concept ribbon + notes panel. Neutral on purpose so it never fights the site design. */
-.concept-ribbon{position:relative;z-index:9000;display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:center;padding:.5rem 1rem;background:#1d1d1b;color:#f4f2ec;font:500 12.5px/1.4 ui-sans-serif,-apple-system,"Segoe UI",sans-serif;letter-spacing:.01em;text-align:center}
-.concept-ribbon__btn{appearance:none;border:1px solid rgba(244,242,236,.45);background:transparent;color:inherit;font:inherit;padding:.3rem .8rem;min-height:40px;border-radius:999px;cursor:pointer}
-.concept-ribbon__btn:hover,.concept-ribbon__btn:focus-visible{background:#f4f2ec;color:#1d1d1b;outline:none}
+/* Shared concept label + notes panel. A small floating tag (bottom-left), never a full-width bar, so every site's own first screen is seen first.
+   A site with its own fixed bottom bar sets --concept-offset on :root (e.g. 72px) to lift the tag above it. */
+.concept-ribbon{position:fixed;left:12px;bottom:calc(12px + var(--concept-offset,0px) + env(safe-area-inset-bottom,0px));z-index:9000;display:flex;align-items:center;gap:.6rem;max-width:min(420px,calc(100vw - 24px));padding:.4rem .45rem .4rem .85rem;background:rgba(24,24,22,.82);color:#f4f2ec;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-radius:999px;font:500 11.5px/1.35 ui-sans-serif,-apple-system,"Segoe UI",sans-serif;letter-spacing:.01em;box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.concept-ribbon__btn{appearance:none;flex:none;border:0;background:#f4f2ec;color:#1d1d1b;font:600 11.5px/1 ui-sans-serif,-apple-system,"Segoe UI",sans-serif;padding:.55rem .8rem;min-height:32px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.concept-ribbon__btn:hover,.concept-ribbon__btn:focus-visible{background:#fff;outline:2px solid #f4f2ec;outline-offset:2px}
+@media (max-width:640px){.concept-ribbon{font-size:10.5px;gap:.4rem;padding:.3rem .3rem .3rem .7rem}.concept-ribbon__btn{padding:.5rem .65rem;font-size:10.5px}}
+@media print{.concept-ribbon{position:static}}
 .concept-notes{position:fixed;inset:0;z-index:9500;display:none;align-items:flex-end;justify-content:center;background:rgba(20,20,18,.45);padding:1rem}
 .concept-notes.is-open{display:flex}
 .concept-notes__panel{width:min(640px,100%);max-height:85vh;overflow:auto;background:#fbfaf6;color:#1d1d1b;border-radius:14px;padding:1.5rem 1.5rem 1.25rem;font:400 15px/1.55 ui-sans-serif,-apple-system,"Segoe UI",sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.25)}

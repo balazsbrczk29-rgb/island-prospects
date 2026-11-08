@@ -1,0 +1,17 @@
+{
+ "slug": "bahamian-contractors-association",
+ "id": 58,
+ "size": "Small",
+ "niche": "institution",
+ "url": "bahamiancontractors.org",
+ "url_source": "brief",
+ "old_check": "NO OWN SITE LISTED: (Facebook only)",
+ "audit": {
+  "site_kind": "association-directory",
+  "platform": "WordPress",
+  "latest_year": 2025,
+  "modernity": 4,
+  "cart": false,
+  "note": "Membership association with directory, events, training."
+ }
+}

@@ -1,6 +1,6 @@
 # Niche playbooks
 
-> **Generation 2 override.** Layout, palette, type, navigation, motion and imagery now come from the dealt direction in `.claude/skills/art-director/` (archetypes, palettes, type-systems, imagery). Where this file disagrees with the art-director skill, the art-director skill wins. Any mention of "the reference site" means the award-level sites you study, never another site in this repo.
+> **The art-director skill is the design authority.** This file only covers its own topic. Where it mentions layouts, signature visuals or "the reference site", treat them as examples: visuals are photographs (never drawn scenes or toy 3D), and references are award-level sites you look at with `look.mjs`, never another site in this repo.
 
 Each record in `prospects.json` has a `niche`. Read only your niche's section. Trust signals listed here are **types to look for in research**, never things to invent.
 

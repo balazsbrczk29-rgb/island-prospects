@@ -1,0 +1,17 @@
+{
+ "slug": "bahamas-choice-real-estate",
+ "id": 55,
+ "size": "Small",
+ "niche": "real-estate",
+ "url": "bahamaschoicerealestate.com",
+ "url_source": "brief",
+ "old_check": "NO OWN SITE LISTED: (search)",
+ "audit": {
+  "site_kind": "listings-site",
+  "platform": "WordPress",
+  "latest_year": 2024,
+  "modernity": 4,
+  "cart": false,
+  "note": "Property listings for sale/rent (~50). Concept must be a listings site with search/filter, not a brochure."
+ }
+}
