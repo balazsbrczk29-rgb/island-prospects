@@ -19,6 +19,7 @@ Read this first in a new orchestrator session, then CLAUDE.md and factory/PROMPT
 - Running now: the "Reroll sites" scheduled task (trig_01NAXZryxHm6E5CQXcGA7DN3) on bell-channel-club-marina and bvg-design-services (both flagged reroll). Thermoset is still finishing on the OLD rules: reroll it once the two pass.
 
 ## Next steps
+0. FIRST: finish the site audit (factory/AUDIT.md): 69 of 77 sites with a URL still to classify, plus a quick search for the 23 without one. Classify by real setup (webshop, booking, listings, brochure), set concept_type, must_keep and priority A-D. Spot-check the classifications yourself: automatic extraction called a listings site a webshop. Use parallel subagents if Balazs agrees, to keep this session's context small. Then show Balazs the A list.
 1. When Bell Channel and BVG publish, review them with real images. In a fresh session with network access, firecrawl_scrape the live URL with screenshot, or run qa.mjs.
 2. Get Balazs's verdict. Reroll with `node factory/tools/reroll.mjs <slug> [--keep-direction]`.
 3. To start workers, use update_trigger on trig_01NAXZryxHm6E5CQXcGA7DN3 with run_once_at a few minutes ahead. fire_trigger and create_trigger get blocked by the safety classifier in long sessions.
