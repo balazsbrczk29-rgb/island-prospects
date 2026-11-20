@@ -53,3 +53,22 @@ Motion: line-draw (1.6s ease-out-quart), rise-in on hero text, parallax-soft on 
 - Signature: "A day at the club", pinned photographs crossfading with scroll from courts at first light to the channel marker at night (text does not animate).
 - Interactions: (1) canal side / beach side drag comparison; (2) "Who is asking?" on the marina page gives the honest answer for owners, guests, visiting boats, buyers; (3) amenity index swaps the photograph on the club page.
 - Not doing: Key-information band, sticky blurred pill header, fade-up reveals / SVG chart drawings.
+
+
+## Pilot rebuild (2026-11-20): the arrival
+Big idea: scrolling carries you across open water off Lucaya at dusk, the sun setting and the shore lights coming on, toward the low line of Grand Bahama and the breakwater lights of Bell Channel, with real waypoints as film subtitles, ending on Port Lucaya Marina inside the cut.
+Direction: A14 Quiet luxury + P02 Shallow flats (ground #eef4f1, field #bfe3dc) + T01 Monumental serif (Fraunces + Newsreader, self-hosted woff2 from @fontsource). Why: a quiet private club for owners; the scene does the talking, type stays sparse.
+New facts this session: VRBO lists 7+ owner rentals at Bell Channel Club (https://www.vrbo.com/vacation-rentals/caribbean/bahamas/grand-bahama/freeport/bell-channel-club); mapcarta places the marina on Jolly Roger Drive (https://mapcarta.com/N4115456554, not used on the page).
+Storyboard (desktop 1440x900):
+1. Arrival 0: dusk ocean, "Bell Channel" at 14.5vw, "Club & Marina, Lucaya, Grand Bahama"; subtitle with the coordinates; office number bottom right.
+2. Arrival 0.2-0.4: island rises, lights come on. "Ahead, the island..."
+3. Arrival 0.43-0.6: breakwater lights, "Bell Channel. The cut from the open sea into Bell Channel Bay."
+4. Arrival 0.63-0.79: "On its shore, between the canal and the beach, the club."
+5. Arrival end: crossfade to Port Lucaya Marina (Commons).
+6. Two waters: one full-bleed image, beach/canal toggle swaps it, headline on the sky.
+7. What the club keeps: 58vw image bleeding left, amenity list swaps the image.
+8. The marina (aqua field): "A private marina, for owners." + Who is asking? (4 honest answers) + call.
+9. Where the inlet opens: blue-hour still of the 3D channel, three subtitles.
+10. Calling card on the channel-light photo.
+Phone: first screen = title + subtitle + "Menu"; call bar appears after the first screen, hides over the card.
+Marina page: 3D channel still hero, captain spec (sourced lines + one "Confirmed when you call" line), slip note composer (read out on the phone), calling card on the night still.

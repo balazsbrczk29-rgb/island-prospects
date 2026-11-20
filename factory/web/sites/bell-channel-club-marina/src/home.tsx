@@ -1,111 +1,194 @@
-import { Layout, Photo, mount, PHONE, TEL, FAX } from './layout';
-import { IMG } from './images';
-import { TwoWaters } from './TwoWaters';
-import { DayScrub } from './DayScrub';
-import { Strip } from './Strip';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { useScroll, useMotionValueEvent, motion, AnimatePresence } from 'motion/react'
+import { Header, CallingCard, Footer, MobileCall, mount, PHONE, TEL, COORD, reduced } from './common'
+import { IMG, type Img } from './images'
 
-function Opening() {
-  return (
-    <>
-      <Photo img={IMG.marinaPano} className="spread" priority captionClass="wrap" />
-      <section className="wrap opener" aria-labelledby="h1">
-        <p className="sc kicker" style={{ margin: 0 }}>Residences and a private marina, Freeport</p>
-        <h1 id="h1" className="h1 h1--cover">A quiet club between two waters</h1>
-        <div className="opener__deck">
-        <p className="stand">Bell Channel Club &amp; Marina is a gated community of condominiums and townhouses in Lucaya, with the canal on one side, the beach on the other, and a private dock for its owners. From the units you look across the inlet into Port Lucaya.</p>
-        <div className="byline sc">
-          <span>Bell Channel, Lucaya, Grand Bahama</span>
-          <span>By telephone: <a href={TEL}>{PHONE}</a></span>
-        </div>
-        </div>
-      </section>
-    </>
-  );
+const Arrival = lazy(() => import('./Arrival'))
+
+const CHAPTERS: { at: [number, number]; text: string }[] = [
+  { at: [0.0, 0.16], text: `${COORD}. Open water off Lucaya, Grand Bahama, as the sun goes down.` },
+  { at: [0.2, 0.4], text: 'Ahead, the island: low and dark, its shore lights coming on.' },
+  { at: [0.43, 0.6], text: 'Bell Channel. The cut from the open sea into Bell Channel Bay.' },
+  { at: [0.63, 0.79], text: 'On its shore, between the canal and the beach, the club.' },
+]
+
+const sm = (a: number, b: number, x: number) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t) }
+
+function useWebGL() {
+  const [ok, setOk] = useState<boolean | null>(null)
+  useEffect(() => { try { const c = document.createElement('canvas'); setOk(!!(c.getContext('webgl2') || c.getContext('webgl'))) } catch { setOk(false) } }, [])
+  return ok
 }
 
-function Article() {
+function ArrivalStage() {
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+  const [p, setP] = useState(0)
+  useMotionValueEvent(scrollYProgress, 'change', v => setP(v))
+  const gl = useWebGL()
+  const still = reduced()
+  const active = CHAPTERS.findIndex(c => p >= c.at[0] && p < c.at[1])
+  const photo = sm(0.8, 0.93, p)
+  const title = 1 - sm(0.06, 0.16, p)
   return (
-    <section className="paper" aria-labelledby="article-h">
-      <div className="wrap article">
-        <p className="runhead sc"><span>Bell Channel Club &amp; Marina</span><span>Lucaya, Grand Bahama</span></p>
-        <div>
-          <h2 id="article-h" className="subdeck">Two kinds of water, one gate, and a dock kept for the people who live here.</h2>
-          <div className="cols">
-            <p>There are two kinds of water at Bell Channel Club. On one side runs the canal, still and sheltered, where owners keep their boats at the club’s private dock. On the other is the beach, which the homeowners’ association looks after. Between them stand the condominiums and townhouses, behind a gate, in a quiet corner of Lucaya.</p>
-            <p>Look out from the units and you see the inlet: the stretch of water that carries boats in from the ocean to Port Lucaya and its Marketplace. Boats come and go below, and the club is a quiet place to watch them from.</p>
-            <p>The club keeps the things that make a second home easy. A heated pool. Tennis courts. A library for owners. A limited number of storage garages. And reverse osmosis water for every unit, which on an island counts for more than it sounds. Pets are welcome.</p>
-            <p>The marina is for owners first. Visiting boats can ask, and the office will tell you whether a slip is free. The same goes for anyone thinking of buying or renting here: the quickest answer is a phone call to the club office.</p>
+    <section id="arrival" ref={ref} className="stage" aria-label="Arriving at Bell Channel from the sea">
+      <div className="stage__pin">
+        <div className="stage__scene" aria-hidden="true">
+          <img className="stage__poster" src="poster-dusk.jpg" alt="" />
+          {gl && <Suspense fallback={null}><Arrival progress={p} still={still} className="stage__canvas" /></Suspense>}
+          <div className="stage__grade" style={{ opacity: sm(0.25, 0.85, p) }} />
+        </div>
+        <figure className="stage__photo" style={{ opacity: photo }} aria-hidden={photo < 0.5}>
+          <img src={IMG.bay.src} alt={IMG.bay.alt} style={{ transform: `scale(${1.08 - 0.08 * photo})` }} decoding="async" data-source="commons" />
+          <figcaption className="sub sub--photo">{IMG.bay.caption}</figcaption>
+        </figure>
+        <Header tone="dark" />
+        <div className="hero" style={{ opacity: title }}>
+          <h1 className="hero__h1"><span className="hero__big">Bell Channel</span><span className="hero__small">Club &amp; Marina, Lucaya, Grand Bahama</span></h1>
+        </div>
+        <div className="stage__subs" aria-live="off">
+          <AnimatePresence mode="wait">
+            {active >= 0 && (
+              <motion.p key={active} className="sub" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}>
+                {CHAPTERS[active].text}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </div>
+        <div className="stage__foot" style={{ opacity: 1 - sm(0.7, 0.8, p) }}>
+          <span className="stage__hint">Scroll to come in from the sea</span>
+          <a className="stage__tel nw" href={TEL}>Club office {PHONE}</a>
+        </div>
+      </div>
+      {/* the chapters, for readers, search engines and anyone without the scene */}
+      <ol className="sr-only">{CHAPTERS.map(c => <li key={c.text}>{c.text}</li>)}</ol>
+    </section>
+  )
+}
+
+function TwoWaters() {
+  const [side, setSide] = useState<'canal' | 'beach'>('beach')
+  const img: Img = side === 'canal' ? IMG.dockline : IMG.beach
+  return (
+    <section className="two" aria-labelledby="two-h">
+      <AnimatePresence initial={false}>
+        <motion.img key={img.src} className="two__img" src={img.src} alt={img.alt} loading="lazy" decoding="async" data-source={img.source}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }} />
+      </AnimatePresence>
+      <div className={`two__over two__over--${side}`}>
+        <h2 id="two-h" className="display">Two waters, one quiet gate.</h2>
+        <p className="lede">A gated community of condominiums and townhouses in Lucaya. One side lies on the canal, the other on the beach, and the homes look out over the inlet into Port Lucaya.</p>
+        <div className="toggle" role="radiogroup" aria-label="Show a side of the club">
+          <button role="radio" aria-checked={side === 'beach'} onClick={() => setSide('beach')}>The beach side</button>
+          <button role="radio" aria-checked={side === 'canal'} onClick={() => setSide('canal')}>The canal side</button>
+        </div>
+      </div>
+      <p className="two__cap">{img.caption}</p>
+    </section>
+  )
+}
+
+const AMENITIES: { t: string; d: string; img?: Img }[] = [
+  { t: 'A heated pool', d: 'Warm water through the cooler months.', img: IMG.pool },
+  { t: 'Tennis courts', d: 'Best played early, before the heat.', img: IMG.tennis },
+  { t: 'The beach', d: 'Kept by the owners’ association.', img: IMG.beach },
+  { t: 'The owners’ marina', d: 'Private, for owners, when a slip is free.' },
+  { t: 'An owners’ library', d: 'A reading room for owners.' },
+  { t: 'Storage garages', d: 'A limited number, for owners.' },
+  { t: 'Reverse osmosis water', d: 'Piped to every home.' },
+  { t: 'A gate, and pets welcome', d: 'A quiet corner of Lucaya.' },
+]
+
+function Club() {
+  const [i, setI] = useState(0)
+  const shown = AMENITIES.slice(0, i + 1).reverse().find(a => a.img)?.img ?? IMG.pool
+  return (
+    <section id="club" className="club" aria-labelledby="club-h">
+      <figure className="club__fig">
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.img key={shown.src} src={shown.src} alt={shown.alt} loading="lazy" decoding="async" data-source={shown.source}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }} />
+        </AnimatePresence>
+        <figcaption className="cap">{shown.caption}</figcaption>
+      </figure>
+      <div className="club__text">
+        <h2 id="club-h" className="display">What the club keeps.</h2>
+        <ul className="amen">
+          {AMENITIES.map((a, k) => (
+            <li key={a.t}>
+              <button className={k === i ? 'is-on' : ''} onMouseEnter={() => setI(k)} onFocus={() => setI(k)} onClick={() => setI(k)} aria-pressed={k === i}>
+                <span className="amen__t">{a.t}</span><span className="amen__d">{a.d}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+const ASK = [
+  { k: 'owner', q: 'I own a home at the club', a: 'The marina is kept for owners. Call the club office to ask which slip is free for your boat and when.' },
+  { k: 'guest', q: 'I am staying with an owner', a: 'Slips go to owners first. Ask your host, then the office, whether one can be arranged for your stay.' },
+  { k: 'visit', q: 'I am bringing a visiting boat', a: 'This is a private marina, so call before you come in. If the club has no space, Port Lucaya Marina is inside the same cut.' },
+  { k: 'buy', q: 'I am buying or renting here', a: 'Listings describe the slips as “if available”: a slip does not come with every home. The office can explain how it works before you commit.' },
+]
+
+function Marina() {
+  const [k, setK] = useState('owner')
+  const cur = ASK.find(a => a.k === k)!
+  return (
+    <section className="mar" aria-labelledby="mar-h">
+      <h2 id="mar-h" className="display display--xl">A private marina,<br />for owners.</h2>
+      <div className="mar__grid">
+        <div className="ask" role="radiogroup" aria-label="Who is asking?">
+          <p className="ask__q">Who is asking?</p>
+          {ASK.map(a => <button key={a.k} role="radio" aria-checked={a.k === k} onClick={() => setK(a.k)}>{a.q}</button>)}
+        </div>
+        <div className="ask__a" aria-live="polite">
+          <AnimatePresence mode="wait">
+            <motion.p key={k} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>{cur.a}</motion.p>
+          </AnimatePresence>
+          <div className="ask__cta">
+            <a className="btn" href={TEL}>Call the club office</a>
+            <a className="link" href="marina.html">Prepare your slip question</a>
           </div>
         </div>
-        <aside className="particulars" aria-labelledby="part-h">
-          <h2 id="part-h">The particulars</h2>
-          <dl>
-            <dt>Where</dt><dd>Bell Channel, Lucaya, Freeport, Grand Bahama</dd>
-            <dt>What</dt><dd>Gated condominiums and townhouses on the canal and the beach</dd>
-            <dt>The marina</dt><dd>Private, for owners. Other boats if a slip is available.</dd>
-            <dt>Fax</dt><dd>{FAX}</dd>
-            <dt>Post</dt><dd>P.O. Box F-44053, Freeport</dd>
-          </dl>
-          <a className="call" href={TEL}><span className="sc">Call the club office</span><b>{PHONE}</b></a>
-        </aside>
       </div>
     </section>
-  );
+  )
 }
 
-function Sentence() {
+function Here() {
   return (
-    <section className="sentence" aria-label="The canal on one side, the beach on the other">
-      <div className="wrap"><p>The canal on one side. <em className="it">The beach on the other.</em></p></div>
-    </section>
-  );
-}
-
-function Essay() {
-  return (
-    <section className="essay" aria-labelledby="essay-h">
-      <div className="wrap">
-        <div className="essay__head">
-          <h2 id="essay-h">Around the inlet</h2>
-          <p style={{ margin: 0, color: '#B9B4A8', maxWidth: '44ch' }}>Lucaya, seen from the water and the air. Photographs of the neighbourhood the club looks out on, until the club’s own album takes their place.</p>
-        </div>
-      </div>
-      <Strip imgs={[IMG.marketplace, IMG.steps, IMG.dockline, IMG.brass, IMG.bank, IMG.marinaPano2]} />
-    </section>
-  );
-}
-
-function InThisIssue() {
-  return (
-    <section className="issue" aria-labelledby="issue-h">
-      <div className="wrap">
-        <h2 id="issue-h" className="sc kicker" style={{ margin: '0 0 28px' }}>Also in these pages</h2>
-        <div className="issue__grid">
-          <a href="marina.html">
-            <img src={IMG.inlet.src} alt={IMG.inlet.alt} data-source="generated" loading="lazy" width={IMG.inlet.w} height={IMG.inlet.h} style={{ aspectRatio: '3 / 2' }} />
-            <h3>The marina: a private dock, kept for owners</h3>
-            <p>What to know before you bring a boat in, whether you own, visit an owner or are passing through.</p>
-          </a>
-          <a href="club.html" className="issue__b">
-            <img src={IMG.pool.src} alt={IMG.pool.alt} data-source="generated" loading="lazy" width={IMG.pool.w} height={IMG.pool.h} style={{ aspectRatio: '4 / 5' }} />
-            <h3>The club: residences and grounds</h3>
-            <p>The pool, the courts, the library and the beach, and how to ask about owning or renting here.</p>
-          </a>
-        </div>
+    <section className="here" aria-labelledby="here-h">
+      <img className="here__img" src="channel-night.jpg" alt="Blue hour at Bell Channel: the low shore of Grand Bahama, lit windows, and the red and green lights on the breakwater heads" loading="lazy" decoding="async" />
+      <h2 id="here-h" className="display here__h">Where the inlet opens.</h2>
+      <div className="here__subs">
+        <p><span>By sea.</span> Come in from the south shore of Grand Bahama through Bell Channel, the cut into Bell Channel Bay. Call the office before you arrive.</p>
+        <p><span>By air.</span> Grand Bahama International Airport, Freeport.</p>
+        <p><span>Across the water.</span> The shops and restaurants of Port Lucaya Marketplace, at the head of the inlet.</p>
       </div>
     </section>
-  );
+  )
 }
 
-mount(
-  <Layout page="index">
-    <Opening />
-    <Article />
-    <Sentence />
-    <TwoWaters />
-    <DayScrub />
-    <Essay />
-    <Photo img={IMG.orbit} className="bleed" />
-    <InThisIssue />
-  </Layout>
-);
+function Home() {
+  return (
+    <>
+      <a className="skip" href="#main">Skip to content</a>
+      <ArrivalStage />
+      <main id="main">
+        <TwoWaters />
+        <Club />
+        <Marina />
+        <Here />
+      </main>
+      <CallingCard />
+      <Footer />
+      <MobileCall />
+    </>
+  )
+}
+
+mount(<Home />)

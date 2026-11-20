@@ -4,7 +4,7 @@
  "name": "Bell Channel Club & Marina",
  "batch": "01",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "history": [
   {
@@ -36,5 +36,90 @@
   }
  ],
  "rebuild_of": 1,
- "claimed_at": "2026-11-20T17:35:00.649Z"
+ "pages": [
+  "index.html",
+  "marina.html"
+ ],
+ "primary_cta": "Call the club office",
+ "brand_truth": "A quiet gated club between the canal and the beach, right where the inlet opens into Port Lucaya.",
+ "buyer": "Owners and their guests, prospective buyers and renters, captains of visiting boats; mostly US/Canada, mostly on phones.",
+ "big_idea": "Scrolling carries you across open water off Lucaya at dusk toward the island and the breakwater lights of Bell Channel, with real waypoints as film subtitles, ending on the bay inside the cut.",
+ "direction": {
+  "archetype": "A14",
+  "lane": "P02",
+  "type": "T01",
+  "nav": "N3",
+  "motion": "M1",
+  "why": "Quiet luxury suits a private owners' club; the real-time scene carries the page so the type can stay sparse."
+ },
+ "concept_type": "brochure: club and private owners' marina, who-is-asking router, slip note + call",
+ "images": [
+  {
+   "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Port_Lucaya_Marina_-_panoramio.jpg/3840px-Port_Lucaya_Marina_-_panoramio.jpg",
+   "source": "commons",
+   "credit": "qwesy qwesy, CC BY 3.0",
+   "url": "https://commons.wikimedia.org/wiki/File:Port_Lucaya_Marina_-_panoramio.jpg"
+  },
+  {
+   "src": "poster-dusk.jpg, channel-dusk.jpg, channel-night.jpg",
+   "source": "generated",
+   "credit": "stills rendered from the site's own 3D scene"
+  },
+  {
+   "src": "https://ip-assets-bell-channel-club-marina.lovable.app/assets/{beach-morning,dockline-bluehour,pool-night,tennis-dawn,inlet-lights}.jpg",
+   "source": "generated",
+   "credit": "Lovable asset studio (Nov 8), illustrative, replace with the club's own"
+  }
+ ],
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 4,
+  "distinct": 5,
+  "references": 4,
+  "first_pass": {
+   "photography": 3,
+   "typography": 4,
+   "composition": 3,
+   "colour": 4,
+   "fit": 4,
+   "distinct": 5,
+   "references": 3
+  },
+  "second_pass": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 3,
+   "colour": 4,
+   "fit": 4,
+   "distinct": 5,
+   "references": 3
+  }
+ },
+ "current_site_findings": [
+  "bellchannelclub.com now serves a gambling site",
+  "only an unclaimed marinas.com listing with no photos or dock details",
+  "nothing says the marina is private and for owners",
+  "amenities known only from scattered realtor listings",
+  "only phone and fax from old directories"
+ ],
+ "pitch_line": "Your old domain sends owners and buyers to a gambling site. This is what Bell Channel Club looks like when someone arrives from the sea.",
+ "assumptions": [
+  "Slip limits, depth, power, fuel and VHF are unknown: shown as 'Confirmed when you call'",
+  "Proposed domain bellchannelclubbahamas.com in canonical/JSON-LD",
+  "Coordinates from the marinas.com map pin",
+  "Generated photographs are illustrative, not the club",
+  "The 3D island silhouette, buildings and breakwater lights are an evocation, not a survey of the real channel"
+ ],
+ "sources": [
+  "https://marinas.com/view/marina/eyc5ld_Bell_Channel_Club_and_Marina_Freeport_GB_Bahamas",
+  "https://www.thebahamasinvestor.com/?p=7170",
+  "https://sarlesrealty.com/?p=261634",
+  "https://www.bettermcrbahamas.com/sales/detail/585-l-587-62229/bell-channel-club-bell-channel-bay-bell-channel-gb",
+  "https://bahamabeachrealty.com/property/bell-channel-club-bell-channel-club-mar/"
+ ],
+ "notes": "Pilot run 2026-11-20. Network: look.mjs blocked (ERR_TUNNEL_CONNECTION_FAILED for feadship.com); Google Fonts, Wikimedia and lovable.app blocked in the sandbox. Fonts were self-hosted from npm @fontsource so they load in QA and production. QA printed BLIND for photos; the critic judged Lovable images from crops of the Lovable get_project gallery screenshot routed into Playwright; the Commons photo was never seen. No reference screenshots (blocked); critic judged from knowledge of feadship/aman/ycm. interact.mjs reports 14 dead buttons: false positive (the Menu dialog trigger has aria-expanded, gets clicked as an accordion and its full-screen overlay covers every later button); all interactions verified with a custom Playwright test. qa dead-space warning is the 640svh pinned scroll stage. Reused the Nov 8 Lovable images (no new Lovable credits). Two critic fix passes, final scores re-scored on new screenshots.",
+ "built_at": "2026-11-20T18:09:50Z"
 }
