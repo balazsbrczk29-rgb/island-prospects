@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import { useScroll, useMotionValueEvent, motion, AnimatePresence } from 'motion/react'
+import { useScroll, useMotionValueEvent, useTransform, motion, AnimatePresence } from 'motion/react'
 import { Header, CallingCard, Footer, MobileCall, mount, PHONE, TEL, COORD, reduced } from './common'
 import { IMG, type Img } from './images'
 
@@ -12,6 +12,7 @@ const CHAPTERS: { at: [number, number]; text: string }[] = [
   { at: [0.63, 0.79], text: 'On its shore, between the canal and the beach, the club.' },
 ]
 
+
 const sm = (a: number, b: number, x: number) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t) }
 
 function useWebGL() {
@@ -22,30 +23,43 @@ function useWebGL() {
 
 function ArrivalStage() {
   const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
-  const [p, setP] = useState(0)
-  useMotionValueEvent(scrollYProgress, 'change', v => setP(v))
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: ['start start', 'end end'] })
+  // only the chapter index and visibility are React state; every fade is a motion value (no re-render per scroll frame)
+  const [active, setActive] = useState(0)
+  const [inView, setInView] = useState(true)
+  useMotionValueEvent(p, 'change', v => {
+    const i = CHAPTERS.findIndex(c => v >= c.at[0] && v < c.at[1])
+    setActive(a => (a === i ? a : i))
+  })
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { rootMargin: '200px 0px' })
+    if (ref.current) io.observe(ref.current)
+    return () => io.disconnect()
+  }, [])
   const gl = useWebGL()
   const still = reduced()
-  const active = CHAPTERS.findIndex(c => p >= c.at[0] && p < c.at[1])
-  const photo = sm(0.8, 0.93, p)
-  const title = 1 - sm(0.06, 0.16, p)
+  // function transforms on purpose: motion's native scroll-timeline acceleration mis-maps these ranges
+  const photo = useTransform(p, v => sm(0.8, 0.93, v))
+  const photoScale = useTransform(p, v => 1.08 - 0.08 * sm(0.8, 0.93, v))
+  const title = useTransform(p, v => 1 - sm(0.06, 0.16, v))
+  const grade = useTransform(p, v => sm(0.25, 0.85, v))
+  const foot = useTransform(p, v => 1 - sm(0.7, 0.8, v))
   return (
     <section id="arrival" ref={ref} className="stage" aria-label="Arriving at Bell Channel from the sea">
       <div className="stage__pin">
         <div className="stage__scene" aria-hidden="true">
           <img className="stage__poster" src="poster-dusk.jpg" alt="" />
-          {gl && <Suspense fallback={null}><Arrival progress={p} still={still} className="stage__canvas" /></Suspense>}
-          <div className="stage__grade" style={{ opacity: sm(0.25, 0.85, p) }} />
+          {gl && <Suspense fallback={null}><Arrival progress={p} still={still} active={inView} className="stage__canvas" /></Suspense>}
+          <motion.div className="stage__grade" style={{ opacity: grade }} />
         </div>
-        <figure className="stage__photo" style={{ opacity: photo }} aria-hidden={photo < 0.5}>
-          <img src={IMG.bay.src} alt={IMG.bay.alt} style={{ transform: `scale(${1.08 - 0.08 * photo})` }} decoding="async" data-source="commons" />
+        <motion.figure className="stage__photo" style={{ opacity: photo }}>
+          <motion.img src={IMG.bay.src} alt={IMG.bay.alt} style={{ scale: photoScale }} decoding="async" loading="lazy" data-source="commons" />
           <figcaption className="sub sub--photo">{IMG.bay.caption}</figcaption>
-        </figure>
+        </motion.figure>
         <Header tone="dark" />
-        <div className="hero" style={{ opacity: title }}>
+        <motion.div className="hero" style={{ opacity: title }}>
           <h1 className="hero__h1"><span className="hero__big">Bell Channel</span><span className="hero__small">Club &amp; Marina, Lucaya, Grand Bahama</span></h1>
-        </div>
+        </motion.div>
         <div className="stage__subs" aria-live="off">
           <AnimatePresence mode="wait">
             {active >= 0 && (
@@ -55,10 +69,10 @@ function ArrivalStage() {
             )}
           </AnimatePresence>
         </div>
-        <div className="stage__foot" style={{ opacity: 1 - sm(0.7, 0.8, p) }}>
+        <motion.div className="stage__foot" style={{ opacity: foot }}>
           <span className="stage__hint">Scroll to come in from the sea</span>
           <a className="stage__tel nw" href={TEL}>Club office {PHONE}</a>
-        </div>
+        </motion.div>
       </div>
       {/* the chapters, for readers, search engines and anyone without the scene */}
       <ol className="sr-only">{CHAPTERS.map(c => <li key={c.text}>{c.text}</li>)}</ol>

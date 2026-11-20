@@ -80,6 +80,15 @@ Build only the header and first screen (desktop and mobile) with real images, ru
 in `factory/qa/<slug>/` next to ref1 and ref2. Ask: would a juror who just saw those stop on this? Is the photograph doing the work? Is
 there one clear typographic idea and enough space? Iterate up to three times. Only then build the rest.
 
+## 6a. The craft checklist (mandatory, every page)
+Read `references/craft-checklist.md` before building and again before the critic. It holds Balazs's polish pass:
+no filler badges or redundant labels, italics and mono only with a reason, one token-based design system, the real
+product shown, the main feature enlarged, grouping by spacing, specific headlines, one emphasised CTA, a sparing
+accent, consistent icons, no embellishment, concentric radii, contrast, balanced wraps with no widows, optical alignment,
+tabular numbers, loading states and useful motion feedback. It also holds the performance rules (no lag on a phone),
+the vocabulary to use in briefs and critiques (kerning, optical centre, Fitts, Hick, Doherty, origin-aware and interruptible
+animation, the Disney principles), the 3D tier policy, and the rules for the vendored React Bits library.
+
 ## 6. Taste rules (the only design rules)
 - The big idea leads (a scene, a living photograph, a film, an object, or pure type); type is confident and sparse; space is generous; one idea per section; remove anything that exists only to look designed.
 - Sections come from `concept_type` and the buyer's questions, in an order that suits this business, not a standard rhythm.
@@ -94,10 +103,13 @@ there one clear typographic idea and enough space? Iterate up to three times. On
 - Phone, place and the primary action are reachable from the first screen, placed elegantly.
 - Two real interactions that use the business's subject (pick a cottage and see its photos and rates, filter the catalogue, check your boat against the slip limits). For shops: product filtering and a cart drawer; for bookings: the date and room or tour flow.
 - Motion is quiet and purposeful: one entrance idea for the hero, gentle scroll moments, crisp hover states; honour prefers-reduced-motion.
+- Smooth on a phone or it doesn't ship: motion values instead of state per scroll frame, offscreen scenes paused, adaptive pixel ratio, transform and opacity only (`craft-checklist.md` B).
+- 3D is the premium tier, not the default: use it only when it explains the product (contractors, industrial, water systems), when the arrival is the product (marinas, sea-access resorts), or when the business is pitched premium. Otherwise wow with photography, type, PhotoDepth, film and layout (`craft-checklist.md` D).
 
 ## 7. Verify with real eyes
 1. `qa.mjs` (if it prints BLIND, say so in notes), `interact.mjs`, `distinct.mjs` (fix every blocker).
 2. Fresh-eyes critic: spawn a general-purpose subagent with this prompt and the paths: "You are the creative director of an award-winning studio. Look at <index-desktop.png>, <index-mobile.png>, the reference screenshots <ref1-desktop.png>, <ref2-desktop.png>, and factory/qa/_contact.png (other sites in this repo). 1) Does this look like premium hand-made work for this specific business, or like AI output, a template or paperwork? Be specific and harsh. 2) Score 1-5: photography, typography, composition and space, colour, fit to the business and its real web setup, distinct from the contact sheet, would sit next to the references. 3) The three changes that would most raise it."
+   Also give the critic `references/craft-checklist.md` sections A and C and ask it to list every checklist violation it sees.
    Scoring anchors (give the critic these): 5 = could be Awwwards Site of the Day in its category; 4 = belongs in a top studio's portfolio, an owner would pay $1,000+ for it gladly; 3 = competent but template-like or uneven, nobody would remember it; 2 = amateur or obviously AI-made (gimmicks, wrong fonts, weak photos, paperwork); 1 = broken.
    If the reference or current-site screenshots could not be captured (network blocked), give the critic the reference names and ask it to judge from its knowledge of those sites, and say so in status notes.
 3. `qa.mjs` prints "craft" metrics measured on the real page (first-screen photo coverage, font families, body size, line length, scale contrast, photo count, button styles). Treat every craft warning as a design defect to fix, not a note.

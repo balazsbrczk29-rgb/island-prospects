@@ -12,9 +12,12 @@ like this."* Then the next thirty seconds must prove we understand their busines
 site does: their real offer, their real customers, how people actually contact or buy from them.
 
 So every site has two jobs, in this order:
-1. **The wow**: one big idea, about this business's real world, executed beautifully. Often immersive: a 3D
-   scene, a photograph that comes alive, film that moves with the scroll, an object you can turn. Sometimes it
-   is pure typography and space, if that is what the business deserves (a law firm, a trust company).
+1. **The wow**: one big idea, about this business's real world, executed beautifully. In the standard tier that means
+   extraordinary photography and type, a photograph that comes alive (PhotoDepth), film that moves with the scroll,
+   a layout nobody on the island has seen. **Real-time 3D is the premium tier**: use it where it explains the product
+   (contractors, industrial, water systems, an object to turn), where the arrival is the product (marinas, sea-access
+   resorts), or for premium pitches. If every site is 3D, 3D stops being a wow. Every site, in either tier, must make
+   the owner's jaw drop. Pure typography and space is right for some businesses (a law firm, a trust company).
 2. **The proof**: the same kind of site the business really needs (shop, booking, listings, enquiry), with their
    real facts, made clearer and easier than anything they have now.
 
@@ -80,6 +83,10 @@ gallery of living places.
 - **Film**: their own reels; Higgsfield image-to-video from the best still if credits exist; otherwise a slow
   scroll-driven zoom on a still is better than nothing.
 - **Depth**: PhotoDepth's built-in landscape guess works for horizons; a real depth map is better when you can get one.
+
+More pilot lessons:
+- **Scroll-linked fades:** use function transforms (`useTransform(p, v => ...)`), never React state per frame. Motion's native scroll-timeline path mis-mapped the range form `useTransform(p, [a, b], [1, 0])` (`art-director/references/craft-checklist.md` B).
+- **Pause offscreen 3D** (`frameloop={inView ? 'always' : 'never'}`) and step dpr down with drei `<PerformanceMonitor>`; phones get dpr 1 to 1.25 and no MSAA.
 
 ## Craft principles (why, not rules)
 - **One idea, done perfectly, beats five effects.** Everything around the big idea is calm: generous space, two

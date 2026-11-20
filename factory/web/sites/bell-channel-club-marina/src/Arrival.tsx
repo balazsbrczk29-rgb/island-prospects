@@ -2,7 +2,9 @@
 // and the cut of Bell Channel. Built from the site-playbooks Ocean recipe (custom ocean shader + physical Sky),
 // art-directed: the sun sinks below the horizon as you scroll, the island rises out of the haze, shore lights come on,
 // and a pair of channel lights marks the cut. Progress 0..1 comes from the ScrollStage.
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import type { MotionValue } from 'motion/react'
+import { PerformanceMonitor } from '@react-three/drei'
 import { Canvas, extend, useFrame, useThree, type ThreeElement } from '@react-three/fiber'
 import * as THREE from 'three'
 import { Sky } from 'three/examples/jsm/objects/Sky.js'
@@ -101,7 +103,8 @@ varying vec3 vCol; varying float vA;
 void main(){ vec2 c = gl_PointCoord - 0.5; float d = length(c); float a = exp(-d * d * 40.0) + 0.35 * exp(-d * d * 9.0);
   gl_FragColor = vec4(vCol * a * vA * 1.6, a * vA); }`
 
-export type ArrivalProps = { progress: number; still?: boolean }
+// progress is read inside the render loop, never through React state: scrolling causes zero React re-renders
+export type ArrivalProps = { progress: MotionValue<number>; still?: boolean }
 
 const lerp = THREE.MathUtils.lerp
 const fract = (x: number) => x - Math.floor(x)
@@ -159,7 +162,7 @@ function Scene({ progress, still }: ArrivalProps) {
     u.turbidity.value = 3.2; u.rayleigh.value = 2.0; u.mieCoefficient.value = 0.004; u.mieDirectionalG.value = 0.86
   }, [gl])
 
-  const smooth = useRef(progress)
+  const smooth = useRef(progress.get())
   const sun = useMemo(() => new THREE.Vector3(), [])
   const cH = useMemo(() => [new THREE.Color('#eec39c'), new THREE.Color('#8b8fa8'), new THREE.Color('#3b4a66')], [])
   const cZ = useMemo(() => [new THREE.Color('#6f8db0'), new THREE.Color('#3a5276'), new THREE.Color('#1a2840')], [])
@@ -167,7 +170,7 @@ function Scene({ progress, still }: ArrivalProps) {
 
   useFrame((state, dt) => {
     const t = state.clock.elapsedTime
-    smooth.current = lerp(smooth.current, progress, Math.min(1, dt * 3))
+    smooth.current = lerp(smooth.current, progress.get(), Math.min(1, dt * 3))
     const p = smooth.current
     const e = ease(p)
     // the sun sets as you come in: golden hour -> sunset -> blue hour
@@ -217,10 +220,15 @@ function Scene({ progress, still }: ArrivalProps) {
   )
 }
 
-export default function Arrival({ progress, still, className }: ArrivalProps & { className?: string }) {
+export default function Arrival({ progress, still, active = true, className }: ArrivalProps & { active?: boolean; className?: string }) {
+  // phones and small screens: lower pixel ratio, no MSAA; PerformanceMonitor drops further if frames are missed
+  const small = typeof matchMedia !== 'undefined' && matchMedia('(max-width: 860px), (pointer: coarse)').matches
+  const [dpr, setDpr] = useState(small ? 1.25 : 1.5)
   return (
-    <Canvas className={className} dpr={[1, 1.5]} camera={{ fov: 40, near: 0.5, far: 20000, position: [0, 2.4, 40] }}
-      gl={{ antialias: true, powerPreference: 'high-performance' }} frameloop={still ? 'demand' : 'always'}>
+    <Canvas className={className} dpr={dpr} camera={{ fov: 40, near: 0.5, far: 20000, position: [0, 2.4, 40] }}
+      gl={{ antialias: !small, powerPreference: 'high-performance', alpha: false, stencil: false }}
+      frameloop={still ? 'demand' : active ? 'always' : 'never'}>
+      <PerformanceMonitor onDecline={() => setDpr(d => Math.max(0.85, d - 0.25))} flipflops={3} onFallback={() => setDpr(0.85)} />
       <Scene progress={progress} still={still} />
     </Canvas>
   )

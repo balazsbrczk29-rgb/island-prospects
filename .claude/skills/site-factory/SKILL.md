@@ -55,6 +55,7 @@ skip link, alt text, labelled fields, focus styles, 44 px tap targets, mobile de
 SEO per `seo-local.md`; never `aggregateRating` or `review`.
 
 ## 7. Verify (art-director section 7)
+Craft checklist pass first (`art-director/references/craft-checklist.md` A and B). Phone smoothness: no React re-render per scroll frame, offscreen canvases paused, no layout shift.
 `qa.mjs`, `interact.mjs`, `distinct.mjs`, the critic subagent; every critic score 4+; at most two fix passes.
 
 ## 8. Status and publish

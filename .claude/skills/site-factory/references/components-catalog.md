@@ -41,3 +41,7 @@ AccordionGallery AnimatedList BorderGlow BounceCards BubbleMenu CardNav CardSwap
 
 ## Tailwind CSS size rule
 Each site's `styles.css` starts with `@import "tailwindcss" source(none);` then `@source "./";` and one `@source` line per vendored component file it imports (see the reference site). Never `@source` the whole components folder (226 KB of CSS).
+
+## React Bits full library (`@/components/react-bits/<Category>/<Name>/<Name>`, vendored Nov 20)
+Categories: Animations, Backgrounds, Components, Micro, TextAnimations (TypeScript + Tailwind variants). List one folder with `ls` when you need it.
+Rules: `art-director/references/craft-checklist.md` section E. Use components only, set every prop from your tokens, and use at most one effect per page, only when it serves the big idea. Check imports for extra packages first (gsap, ogl, matter-js, @hugeicons, vgpu).
