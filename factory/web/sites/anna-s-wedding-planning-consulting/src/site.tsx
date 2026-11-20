@@ -44,7 +44,7 @@ function useSection(setSection: (s: string) => void) {
 
 const PLAN = [
   { id: "licence", label: "Marriage licence" },
-  { id: "anna", label: "About Anna" },
+  { id: "gallery", label: "Her weddings" },
   { id: "date", label: "Request a date" },
 ]
 
@@ -55,9 +55,17 @@ function isOn(id: string, section: string, mode: string, heroKind: string) {
   return id === section
 }
 
+export const ON_HOME = ["beach", "cruise", "licence", "gallery", "date"]
+export const hrefFor = (id: string, home: boolean) => {
+  if (!ON_HOME.includes(id)) return `packages.html#${id}`
+  const anchor = id === "beach" || id === "cruise" ? "weddings" : id
+  return home ? `#${anchor}` : (["licence", "gallery", "date"].includes(id) ? `index.html#${anchor}` : `packages.html#${id}`)
+}
+
 function IndexColumn({ home }: { home: boolean }) {
-  const { heroKind, setHeroKind, mode, section, go } = useIndex()
-  const href = (id: string) => home ? `#${id === "beach" || id === "cruise" ? "weddings" : id}` : (["licence", "anna", "date"].includes(id) ? `index.html#${id}` : `packages.html#${id}`)
+  const { heroKind, mode, section, go } = useIndex()
+  const href = (id: string) => hrefFor(id, home)
+  const hidden = home && section === "hero"
   const Item = ({ id, children, big }: { id: string; children: ReactNode; big?: boolean }) => {
     const on = isOn(id, section, mode, heroKind)
     return (
@@ -66,22 +74,21 @@ function IndexColumn({ home }: { home: boolean }) {
         <a
           href={href(id)}
           aria-current={on ? "true" : undefined}
-          onMouseEnter={() => home && section === "hero" && KINDS.some(k => k.id === id) && setHeroKind(id as KindId)}
-          onClick={e => { if (home) { e.preventDefault(); go(id) } }}
+          onClick={e => { if (home && ON_HOME.includes(id)) { e.preventDefault(); go(id) } }}
           className={`grid min-h-11 grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4 py-1.5 transition-colors duration-300 ${on ? "text-channel" : "text-ink hover:text-channel"} ${big ? "" : "text-sm"}`}
         >{children}</a>
       </li>
     )
   }
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-[var(--index-w)] flex-col border-r border-line bg-ground px-9 pt-8 pb-8 lg:flex" aria-label="Anna's index">
+    <aside className={`fixed inset-y-0 left-0 z-30 hidden w-[var(--index-w)] flex-col border-r border-line bg-ground px-9 pt-8 pb-8 transition-[transform,opacity] duration-500 ease-[cubic-bezier(.22,1,.36,1)] lg:flex ${hidden ? "pointer-events-none -translate-x-full opacity-0" : "translate-x-0 opacity-100"}`} aria-label="Anna's index" aria-hidden={hidden || undefined}>
       <a href="index.html" className="block leading-none" aria-label="Anna's Wedding Planning, home">
         <span className="display block text-[2.6rem] tracking-[-0.04em]">Anna's</span>
         <span className="mt-2 block text-xs text-muted">Wedding Planning &amp; Consulting, Nassau</span>
       </a>
       <nav aria-label="Weddings and planning" className="mt-[clamp(28px,7vh,72px)]">
         <p className="display text-sm italic text-muted">The weddings</p>
-        <ul className="mt-2" onMouseLeave={() => home && setHeroKind("beach")}>
+        <ul className="mt-2">
           {KINDS.map(k => (
             <Item key={k.id} id={k.id} big>
               <span className="display truncate text-[1.45rem] leading-tight tracking-[-0.02em]">{k.short}</span>
@@ -107,7 +114,7 @@ function MobileBar({ home }: { home: boolean }) {
   const { section, mode, go } = useIndex()
   const links = [
     { id: "beach", label: "Beach" }, { id: "cruise", label: "Cruise day" }, { id: "cultural", label: "Cultural" }, { id: "deluxe", label: "Deluxe" },
-    { id: "renewal", label: "Renewals" }, { id: "licence", label: "Licence" }, { id: "anna", label: "Anna" }, { id: "date", label: "Your date" },
+    { id: "renewal", label: "Renewals" }, { id: "licence", label: "Licence" }, { id: "gallery", label: "Her weddings" }, { id: "date", label: "Your date" },
   ]
   const nav = useRef<HTMLDivElement>(null)
   useEffect(() => { // keep the lit chip in view (discrete change only)
@@ -128,9 +135,9 @@ function MobileBar({ home }: { home: boolean }) {
           {links.map(l => {
             const on = home && isOn(l.id, section, mode, "")
             return (
-              <a key={l.id} href={home ? `#${l.id === "beach" || l.id === "cruise" ? "weddings" : l.id}` : (["licence", "anna", "date"].includes(l.id) ? `index.html#${l.id}` : `packages.html#${l.id}`)}
+              <a key={l.id} href={hrefFor(l.id, home)}
                 aria-current={on ? "true" : undefined}
-                onClick={e => { if (home) { e.preventDefault(); go(l.id) } }}
+                onClick={e => { if (home && ON_HOME.includes(l.id)) { e.preventDefault(); go(l.id) } }}
                 className={`relative flex min-h-11 shrink-0 items-center text-sm transition-colors ${on ? "text-channel" : "text-ink"}`}>
                 {l.label}
                 {on && <motion.span layoutId="chip" className="absolute inset-x-0 bottom-0 h-0.5 bg-channel" transition={{ duration: 0.35, ease }} />}
@@ -156,6 +163,7 @@ function DateButton() {
     addEventListener("scroll", onScroll, { passive: true })
     return () => removeEventListener("scroll", onScroll)
   }, [])
+  useEffect(() => { document.documentElement.style.setProperty("--concept-offset", show && innerWidth < 1024 ? "64px" : "0px") }, [show])
   return (
     <AnimatePresence>
       {show && (
@@ -194,7 +202,7 @@ function Footer() {
   )
 }
 
-export function Page({ home = false, children }: { home?: boolean; children: ReactNode }) {
+export function Page({ home = false, hero, children }: { home?: boolean; hero?: ReactNode; children: ReactNode }) {
   useLenis()
   const [heroKind, setHeroKind] = useState<KindId>("beach")
   const [mode, setMode] = useState<"beach" | "cruise">("beach")
@@ -210,7 +218,7 @@ export function Page({ home = false, children }: { home?: boolean; children: Rea
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:p-3 focus:text-ground">Skip to content</a>
       <IndexColumn home={home} />
       <MobileBar home={home} />
-      <main id="main" className="with-index">{children}</main>
+      <main id="main">{hero}<div className="with-index">{children}</div></main>
       <Footer />
       <DateButton />
     </IndexCtx.Provider>
@@ -218,7 +226,14 @@ export function Page({ home = false, children }: { home?: boolean; children: Rea
 }
 
 export function mount(node: ReactNode) {
+  document.documentElement.classList.add("js")
+  const mark = (img: HTMLImageElement) => img.classList.add("is-loaded")
+  document.addEventListener("load", e => { if (e.target instanceof HTMLImageElement) mark(e.target) }, true)
+  document.addEventListener("error", e => { if (e.target instanceof HTMLImageElement) mark(e.target) }, true)
   createRoot(document.getElementById("root")!).render(node)
+  const sweep = () => document.querySelectorAll<HTMLImageElement>(".img-slot img").forEach(i => { if (i.complete) mark(i) })
+  new MutationObserver(sweep).observe(document.getElementById("root")!, { childList: true, subtree: true })
+  setTimeout(sweep, 50)
 }
 
 export { usd }

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Phone, ArrowRight } from "lucide-react"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Page, mount, ease, wipe } from "./site"
 import { KINDS, PACKAGES, usd, PHONE, TEL, type KindId } from "./data"
 
@@ -27,9 +28,9 @@ function Detailed({ kind }: { kind: "beach" | "cruise" }) {
   return (
     <section id={kind} data-index={kind} aria-labelledby={`h-${kind}`} className="scroll-mt-12 border-t border-line">
       <div className="wrap grid gap-x-[clamp(32px,4vw,72px)] gap-y-12 py-[clamp(80px,10vw,144px)] lg:grid-cols-[minmax(0,60fr)_minmax(0,40fr)]">
-        <div className="lg:sticky lg:top-10 lg:self-start">
+        <div>
           <AnimatePresence mode="wait" initial={false}>
-            <motion.div key={p.id} className="img-slot aspect-[4/3] overflow-hidden lg:aspect-[5/6]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease }}>
+            <motion.div key={p.id} className="img-slot aspect-[4/3] overflow-hidden lg:aspect-[4/5]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease }}>
               <img src={p.img} alt={`${p.name} package, a wedding planned by Anna's in Nassau`} referrerPolicy="no-referrer" width={1000} height={1200} loading="lazy" />
             </motion.div>
           </AnimatePresence>
@@ -83,6 +84,31 @@ function PriceOnly({ kind, flip }: { kind: KindId; flip?: boolean }) {
   )
 }
 
+const FAQ = [
+  ["Can we marry on a cruise ship day in Nassau?", "Yes. Anna's cruise packages are built for it. The licence needs a letter from the ship's purser confirming the ship has been in Bahamian waters for 24 hours."],
+  ["How long must we be in The Bahamas before applying for the licence?", "Both of you must be in The Bahamas, and have been for 24 hours, before the date you apply."],
+  ["What does a package cost?", "Published packages start at USD 950 for the Basic beach package, and vow renewals at USD 875. Cruise packages start at USD 3,495 for 25 guests. Every package can be adjusted to your guest count and wishes."],
+  ["What is the marriage licence fee?", "The licence fee is $100. Anna prepares your documents and schedules the Registrar's appointment."],
+]
+
+function Questions() {
+  return (
+    <section aria-labelledby="faq-title" className="border-t border-line">
+      <div className="wrap grid gap-x-[clamp(32px,4vw,72px)] gap-y-10 py-[clamp(72px,9vw,128px)] xl:grid-cols-[minmax(0,40fr)_minmax(0,60fr)]">
+        <h2 id="faq-title" className="display text-[clamp(2.2rem,3.2vw,3.2rem)] leading-[1] tracking-[-0.04em]">What couples ask first.</h2>
+        <Accordion type="single" collapsible defaultValue="q0" className="border-t border-line">
+          {FAQ.map(([q, a], i) => (
+            <AccordionItem key={q} value={`q${i}`} className="border-line">
+              <AccordionTrigger className="min-h-16 py-5 text-left font-[family-name:var(--font-display)] text-[1.35rem] font-normal leading-snug tracking-[-0.02em] hover:no-underline">{q}</AccordionTrigger>
+              <AccordionContent className="max-w-[38rem] pb-6 text-base leading-relaxed text-muted">{a}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  )
+}
+
 function Close() {
   return (
     <section aria-label="Next step" className="wrap border-t border-line py-[clamp(72px,9vw,128px)]">
@@ -94,4 +120,4 @@ function Close() {
   )
 }
 
-mount(<Page><Hero /><Detailed kind="beach" /><Detailed kind="cruise" /><PriceOnly kind="cultural" flip /><PriceOnly kind="deluxe" /><PriceOnly kind="renewal" flip /><Close /></Page>)
+mount(<Page><Hero /><Detailed kind="beach" /><Detailed kind="cruise" /><PriceOnly kind="cultural" flip /><PriceOnly kind="deluxe" /><PriceOnly kind="renewal" flip /><Questions /><Close /></Page>)

@@ -48,7 +48,9 @@ html.lenis, html.lenis body { height: auto; }
 .wrap { padding-inline: var(--gutter); }
 @media (min-width: 1024px) { .with-index { margin-left: var(--index-w); } }
 .img-slot { background: var(--color-sand); }
-.img-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.img-slot { background: linear-gradient(135deg, #e9e3d5, #dfe4dc); }
+.img-slot img { width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(0.14) saturate(0.9) contrast(1.04) brightness(1.03); transition: opacity .7s var(--ease-out-soft); }
+html.js .img-slot img:not(.is-loaded) { opacity: 0; }
 .range { appearance: none; -webkit-appearance: none; height: 44px; background: transparent; width: 100%; cursor: pointer; }
 .range::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(to right, var(--color-channel) var(--fill, 0%), var(--color-line) var(--fill, 0%)); }
 .range::-moz-range-track { height: 2px; background: var(--color-line); }
@@ -66,3 +68,4 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media (max-width: 1023px) { .fade-right-m { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 80px), transparent calc(100% - 28px)); mask-image: linear-gradient(to right, #000 calc(100% - 80px), transparent calc(100% - 28px)); } }

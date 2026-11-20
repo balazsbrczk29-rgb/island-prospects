@@ -112,12 +112,12 @@
  ],
  "critic": {
   "photography": 3,
-  "typography": 3,
+  "typography": 4,
   "composition": 3,
-  "colour": 3,
+  "colour": 4,
   "fit": 4,
-  "distinct": 3,
-  "references": 2
+  "distinct": 4,
+  "references": 3
  },
  "critic_first_pass": {
   "photography": 3,
@@ -128,7 +128,7 @@
   "distinct": 3,
   "references": 2
  },
- "critic_kind": "independent critic (via coordinator) scored the first build; fix pass 1 applied, awaiting re-score of the pass1 screenshots in factory/qa/anna-s-wedding-planning-consulting/",
+ "critic_kind": "independent critic scored pass 1 (above); fix pass 2 applied, not yet re-scored. Left at needs-review: Anna's own photos are 2015 web-size files, and the hero portrait is upscaled to about 900 px, so photography may still score 3.",
  "current_site_findings": [
   "Booking form and package pages disagree on three prices (Romantic 3,295 vs 3,995; Blue Ocean 6,645 vs 7,645; Tropical 10,595 vs 13,895).",
   "Cultural, Deluxe and Renewal prices exist only inside booking-form dropdowns.",
@@ -154,8 +154,8 @@
   "https://www.annasweddingbahamas.com/about/",
   "https://www.instagram.com/annasweddingbahamas/"
  ],
- "notes": "Gen-2 rebuild 2026-11-20, kept the gen-1 structure Balazs liked (package finder with arrival mode and guest slider, licence checklist, published prices, date request) and rebuilt everything else: Bodoni Moda + Jost self-hosted (replaces Gloock + Figtree), fixed left index of the five wedding kinds that swaps the hero photo on hover, bigger photography (half-screen hero, 78svh spread), aqua field for licence and footer. BLIND: look.mjs, Wikimedia and outside images blocked; Anna's photos were seen through a Lovable contact-sheet project (ip-assets-anna-wedding, about 1.5 Lovable credits, no generation) and its screenshot crops were routed into Playwright for my own QA screenshots (low-res crops, the real hero is 2560px). No reference screenshots (blocked); references judged from knowledge (aesop.com index, belmond weddings). No subagent tool was available, so the critic step was a self-critique: first pass found repetitive 5/7 two-column rhythm and a CTA ('Check your wedding date') identical to Bahamas Bridal Affairs; fixed (licence restructured full-width with two-column checklist, CTA now 'Request your wedding date'), re-shot and re-scored. State is needs-review because no independent critic scored it. qa.mjs dead-space blocker is a false positive: the index column is position:fixed and full height on every screen, but a full-page screenshot draws it only once at the top. qa tap-target warning is the shared concept ribbon button. interact.mjs 'dead input' is the range slider receiving text input (works with real input). No 3D (standard tier). Fix pass 1 (after independent critic 3/3/3/3/4/3/2): see fix_passes. Full-page screenshots for the critic are stitched from viewport captures (pass1-*-full.png) because a fixed column only renders once at the top of a Playwright full-page capture; the qa.mjs dead-space blocker remains for the same reason.",
- "built_at": "2026-11-20T19:50:47+00:00",
+ "notes": "Gen-2 rebuild 2026-11-20, kept the gen-1 structure Balazs liked (package finder with arrival mode and guest slider, licence checklist, published prices, date request) and rebuilt everything else: Bodoni Moda + Jost self-hosted (replaces Gloock + Figtree), fixed left index of the five wedding kinds that swaps the hero photo on hover, bigger photography (half-screen hero, 78svh spread), aqua field for licence and footer. BLIND: look.mjs, Wikimedia and outside images blocked; Anna's photos were seen through a Lovable contact-sheet project (ip-assets-anna-wedding, about 1.5 Lovable credits, no generation) and its screenshot crops were routed into Playwright for my own QA screenshots (low-res crops, the real hero is 2560px). No reference screenshots (blocked); references judged from knowledge (aesop.com index, belmond weddings). No subagent tool was available, so the critic step was a self-critique: first pass found repetitive 5/7 two-column rhythm and a CTA ('Check your wedding date') identical to Bahamas Bridal Affairs; fixed (licence restructured full-width with two-column checklist, CTA now 'Request your wedding date'), re-shot and re-scored. State is needs-review because no independent critic scored it. qa.mjs dead-space blocker is a false positive: the index column is position:fixed and full height on every screen, but a full-page screenshot draws it only once at the top. qa tap-target warning is the shared concept ribbon button. interact.mjs 'dead input' is the range slider receiving text input (works with real input). No 3D (standard tier). Fix pass 1 (after independent critic 3/3/3/3/4/3/2): see fix_passes. Full-page screenshots for the critic are stitched from viewport captures (pass1-*-full.png) because a fixed column only renders once at the top of a Playwright full-page capture; the qa.mjs dead-space blocker remains for the same reason. Fix pass 2 applied after independent re-score 3/4/3/4/4/4/3; pass2-* screenshots in factory/qa/anna-s-wedding-planning-consulting/ (stitched from viewport captures, photo crops routed in).",
+ "built_at": "2026-11-20T20:30:45+00:00",
  "fix_passes": [
   {
    "pass": 1,
@@ -167,6 +167,17 @@
     "All tracked uppercase eyebrows removed; the mint band now only on the licence section (footer is ground with a hairline).",
     "Mobile first screen: headline, 'Request your wedding date' and 'Call Anna' inside 844 px, photo after; scrolling chip nav has a fade mask and an arrow and its lit chip follows scroll.",
     "Packages page rebuilt to match: 60/40 spreads, editorial inclusion lists, no checkmarks, no card grid."
+   ]
+  },
+  {
+   "pass": 2,
+   "at": "2026-11-20T20:30:45+00:00",
+   "changes": [
+    "Hero is now full-bleed: photo is exactly 62% of the viewport (x 547 to 1440), full height, bleeding right; it leads with the smiling couple at the sea (faces read). The index column slides in after the hero and stays pinned for the rest of the page.",
+    "One warm grade on every photograph (CSS sepia .14, saturate .9, contrast 1.04); crops set per photo on faces, 4:5 for vertical slots; sized tinted placeholders with a fade-in on load (checklist A19).",
+    "Home cut to five screens: hero (about line folded in), package finder, licence, gallery, request. Kind spreads, About and FAQ moved off the home page; FAQ now on packages; cultural, deluxe and renewal index links go to packages.html.",
+    "Packages page: white strips and repeated slivers removed (they came from screenshot crops and sticky photos in stitched captures; photos are no longer sticky).",
+    "Phone: the concept label now sits above the 'Request your date' bar via --concept-offset (64 px). The label's compact state after scrolling is assets/concept.js shared behaviour, not changed here."
    ]
   }
  ]
