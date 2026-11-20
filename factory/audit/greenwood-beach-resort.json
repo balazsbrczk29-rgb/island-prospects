@@ -6,5 +6,20 @@
  "url": "greenwoodbeachresort.com",
  "url_source": "brief",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "direct-book.com/properties/greenwoodbeachresort",
+  "products_or_listings": 2,
+  "pages": 6,
+  "platform": "WordPress 7.0.9 + Elementor 4.4.1, OceanWP theme",
+  "latest_year": 2026,
+  "modernity": 3,
+  "concept_type": "booking: room picker with dates handing off to their direct-book engine, plus whitetip dive package enquiry and getting-here guide",
+  "must_keep": ["direct-book.com booking engine as the primary action", "two room types with guest counts", "oceanic whitetip shark dive package enquiry (email template)", "restaurant hours and WhatsApp dinner booking", "flight, taxi and car rental guide", "WhatsApp +1 242 808 1846 and info@ email"],
+  "weaknesses": ["identical room descriptions and swapped room photos between home and rooms page", "dead buttons (View room, Discover activities, Book your activities, Lunch, Dinner)", "'paradise' and 'private escape' headline, Port Howe never named", "whitetip season buried on a sub-page", "star-graphic review cards including an unnamed 'Guest Review'"],
+  "priority": "B",
+  "note": "New 2026 WordPress site with a real booking engine; decent but generic, weak on rooms, activities and SEO."
+ }
 }

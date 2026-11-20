@@ -1,12 +1,13 @@
 import { useEffect, useState, type ReactNode } from "react"
 import { createRoot } from "react-dom/client"
 import Lenis from "lenis"
-import { motion, useScroll, useSpring } from "motion/react"
-import { ArrowUpRight, Mail, Menu, Phone } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
+import * as Dialog from "@radix-ui/react-dialog"
+import { motion, AnimatePresence, useScroll, useTransform } from "motion/react"
 import "./styles.css"
 
-export const PHONE = "+1 242 808 1846"
+/* ---------- sourced facts (greenwoodbeachresort.com, direct-book.com contact page) ---------- */
+export const WHATSAPP = "+1 242 808 1846"
+export const WA = "https://wa.me/12428081846"
 export const TEL = "tel:+12428081846"
 export const PHONE2 = "+1 242 342 3053"
 export const TEL2 = "tel:+12423423053"
@@ -14,25 +15,66 @@ export const EMAIL = "info@greenwoodbeachresort.com"
 export const BOOK = "https://direct-book.com/properties/greenwoodbeachresort"
 export const IG = "https://www.instagram.com/greenwood.beach.resort/"
 export const FB = "https://www.facebook.com/GreenwoodinCat242/"
-export const IMG = "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/"
-export const ease = [0.16, 1, 0.3, 1] as const
-export const reveal = [0.77, 0, 0.175, 1] as const
+export const MAP = "https://www.google.com/maps/search/?api=1&query=24.1903379,-75.3129993"
+const U = "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/"
+export const IMG = {
+  kiteLesson: { src: U + "Kite-course-wind-window-1024x683.jpg", fallback: U + "Kite-course-wind-window-768x512.jpg", ratio: 1.5, pos: "50% 14%", posM: "16% 50%" },
+  kiteRide: { src: U + "DSCF5316-2-1024x683.jpg", ratio: 1.5, pos: "50% 45%", posM: "62% 50%" },
+  whitetipSurface: { src: U + "Surface-1024x683.jpg", ratio: 1.5 },
+  whitetipDeep: { src: U + "Oceanic-White-tip_CatIsland_BAHAMAS_Pauline-VazBranco3-1024x683.jpg", ratio: 1.5 },
+  whitetipPilots: { src: U + "OWT-May-2023-@GreenwoodBeachResort-1024x576.jpg", ratio: 1.78 },
+  snorkel: { src: U + "Snorkel-trip-1024x672.jpg", ratio: 1.52 },
+  terrace: { src: U + "Greenwood-Beach-Resort-Terasse-Restaurant-768x531.jpg", ratio: 1.45 },
+  crabs: { src: U + "Local-Crabs-1-of-1-e1786812753461-768x550.jpg", ratio: 1.4 },
+  roomFamily: { src: U + "Cat-Island-Greenwood-room-1024x683.jpg", ratio: 1.5 },
+  roomKing: { src: U + "King-size-AC-room-1-of-1-scaled-e1786570117617-1024x623.jpg", ratio: 1.64 },
+  hosts: { src: U + "01-Cat-Island-Pauline-et-Antoine-1024x682.jpg", ratio: 1.5 },
+  poolDive: { src: U + "GOPR7892-768x576.jpg", ratio: 1.33 },
+  reefDivers: { src: U + "The-nursery-Dive-site-768x473.jpg", ratio: 1.62 },
+}
+export type Img = { src: string; fallback?: string; ratio: number; pos?: string; posM?: string }
 
-const NAV_L = [
-  { href: "rooms.html", label: "Rooms" },
-  { href: "index.html#water", label: "Dive and kite" },
-  { href: "index.html#dining", label: "Dining" },
-]
-const NAV_R = [
-  { href: "getting-here.html", label: "Getting here" },
-  { href: "index.html#enquire", label: "Enquire" },
-]
-const NAV = [...NAV_L, ...NAV_R]
+export const ROOMS = [
+  {
+    id: "king", name: "Executive King Room", guests: 2, beds: "One king-size bed", roomTypeId: "367604",
+    line: "For two. A king-size bed under a ceiling fan, with a door and windows opening onto the garden.",
+    img: IMG.roomKing, alt: "Executive King Room at Greenwood: a king bed with a green cover, ceiling fan and garden windows",
+  },
+  {
+    id: "family", name: "Executive Family Room", guests: 3, beds: "One king-size bed and one single", roomTypeId: "367936",
+    line: "For three. A king-size bed and a single, air conditioning, white wicker chairs and louvred windows onto the palms.",
+    img: IMG.roomFamily, alt: "Executive Family Room at Greenwood: a king bed, wicker chairs and windows onto palms",
+  },
+] as const
+
+/** Their own booking engine (direct-book.com), opened with the dates the guest picked. Params as used on their rooms page. */
+export function bookingUrl(o: { roomTypeId?: string; arrive?: string; nights?: number; adults?: number }) {
+  if (!o.arrive) return BOOK
+  const a = new Date(o.arrive + "T12:00:00")
+  const d = new Date(a.getTime() + (o.nights ?? 3) * 864e5)
+  const iso = (x: Date) => x.toISOString().slice(0, 10)
+  const q = new URLSearchParams({ currency: "USD", checkInDate: iso(a), checkOutDate: iso(d), "items[0][adults]": String(o.adults ?? 2), "items[0][children]": "0", "items[0][infants]": "0" })
+  if (o.roomTypeId) { q.set("roomTypeId", o.roomTypeId); q.set("rateId", "749316") }
+  return `${BOOK}?${q.toString()}`
+}
+
+export const ease = [0.22, 1, 0.36, 1] as const
+
+/* ---------- photo with reserved space, tinted placeholder and a fallback size ---------- */
+export function Photo({ img, alt, className = "", eager = false, style }: { img: Img; alt: string; className?: string; eager?: boolean; style?: React.CSSProperties }) {
+  const [src, setSrc] = useState(img.src)
+  return (
+    <div className={`photo ${className}`} style={{ ...style, ...(img.pos ? { ["--pos" as string]: img.pos } : {}), ...(img.posM ? { ["--pos-m" as string]: img.posM } : {}) }}>
+      <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} decoding="async" fetchPriority={eager ? "high" : "auto"}
+        onError={() => { if (img.fallback && src !== img.fallback) setSrc(img.fallback) }} />
+    </div>
+  )
+}
 
 function useLenis() {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const lenis = new Lenis({ duration: 1.2, smoothWheel: true })
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || matchMedia("(pointer: coarse)").matches) return
+    const lenis = new Lenis({ duration: 1.15, smoothWheel: true })
     let id = 0
     const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
     id = requestAnimationFrame(raf)
@@ -40,116 +82,126 @@ function useLenis() {
   }, [])
 }
 
-function NavLink({ href, label, current }: { href: string; label: string; current: string }) {
-  return <a href={href} className={`relative py-2 text-[15px] after:absolute after:bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:bg-grape after:transition-transform after:duration-500 after:ease-[cubic-bezier(.16,1,.3,1)] ${current === label ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100"}`}>{label}</a>
-}
+/* ---------- navigation: one word, "Menu", opening the chapter list (N3) ---------- */
+const MENU = [
+  { href: "index.html#film", label: "A day at Port Howe", img: IMG.kiteRide, alt: "Kitesurfer on the water" },
+  { href: "rooms.html", label: "Rooms", img: IMG.roomKing, alt: "Executive King Room" },
+  { href: "index.html#whitetips", label: "Whitetip season", img: IMG.whitetipDeep, alt: "Oceanic whitetip shark" },
+  { href: "getting-here.html", label: "Getting here", img: IMG.poolDive, alt: "Greenwood's pool and garden" },
+  { href: "#contact", label: "Contact", img: IMG.hosts, alt: "Pauline and Antoine on the beach" },
+]
 
-export function Wordmark() {
+export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <span className="block text-center leading-none">
-      <span className="font-display text-[22px] tracking-[-0.01em] text-ink">Greenwood</span>
-      <span className="mt-1 block text-[10px] tracking-[0.32em] text-muted uppercase">Beach Resort · Cat Island</span>
-    </span>
+    <a href="index.html" className={`flex min-h-11 items-center gap-3 ${className}`} aria-label="Greenwood Beach Resort, home">
+      <span className="display text-[26px] leading-none tracking-[-0.02em]">Greenwood</span>
+      <span className="hidden text-[length:var(--t-xs)] italic text-muted sm:inline">Beach Resort, Cat Island</span>
+    </a>
   )
 }
 
-function Header({ current }: { current: string }) {
+function Header() {
   const [open, setOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-6 px-5 py-3 md:px-10">
-        <nav aria-label="Main left" className="hidden items-center gap-7 lg:flex">{NAV_L.map(n => <NavLink key={n.href} {...n} current={current} />)}</nav>
-        <span className="lg:hidden" />
-        <a href="index.html" aria-label="Greenwood Beach Resort, home"><Wordmark /></a>
-        <div className="flex items-center justify-end gap-7">
-          <nav aria-label="Main right" className="hidden items-center gap-7 lg:flex">{NAV_R.map(n => <NavLink key={n.href} {...n} current={current} />)}</nav>
-          <a href={BOOK} className="btn hidden lg:inline-flex">Check dates</a>
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger className="inline-flex size-11 items-center justify-center rounded-full border border-line lg:hidden" aria-label="Open menu"><Menu className="size-5" /></SheetTrigger>
-            <SheetContent side="right" className="w-full border-l-0 bg-paper sm:max-w-sm">
-              <SheetTitle className="sr-only">Menu</SheetTitle>
-              <nav className="mt-16 flex flex-col px-6" aria-label="Mobile">
-                {NAV.map((n, i) => (
-                  <motion.a key={n.href} href={n.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i, duration: 0.5, ease }} className="border-b border-line py-4 font-display text-3xl">{n.label}</motion.a>
-                ))}
-                <a href={BOOK} className="btn mt-8 justify-center py-4">Check dates and book</a>
-                <a href={TEL} className="mt-3 text-center text-muted">or call {PHONE}</a>
-              </nav>
-            </SheetContent>
-          </Sheet>
+    <header className="fixed inset-x-0 top-0 z-40 bg-ground" style={{ height: "var(--bar)" }}>
+      <div className="flex h-full items-center justify-between px-[var(--gutter)]">
+        <Wordmark />
+        <div className="flex items-center gap-6">
+          <a href={BOOK} className="link hidden text-[length:var(--t-sm)] md:inline">Check dates</a>
+          <Dialog.Root open={open} onOpenChange={setOpen}>
+            <Dialog.Trigger className="group flex min-h-11 items-center gap-3 text-[length:var(--t-sm)]">
+              <span>Menu</span>
+              <span aria-hidden className="flex w-6 flex-col gap-[5px]"><span className="h-px w-full bg-ink transition-transform duration-300 group-hover:translate-x-1" /><span className="h-px w-full bg-ink" /></span>
+            </Dialog.Trigger>
+            <AnimatePresence>
+              {open && (
+                <Dialog.Portal forceMount>
+                  <Dialog.Content forceMount asChild aria-describedby={undefined}>
+                    <motion.div className="fixed inset-0 z-50 overflow-y-auto bg-ground" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease }}>
+                      <Dialog.Title className="sr-only">Menu</Dialog.Title>
+                      <div className="flex items-center justify-between px-[var(--gutter)]" style={{ height: "var(--bar)" }}>
+                        <Wordmark />
+                        <Dialog.Close className="flex min-h-11 items-center gap-3 text-[length:var(--t-sm)]">Close <span aria-hidden className="relative block size-5"><span className="absolute top-1/2 left-0 h-px w-full rotate-45 bg-ink" /><span className="absolute top-1/2 left-0 h-px w-full -rotate-45 bg-ink" /></span></Dialog.Close>
+                      </div>
+                      <nav aria-label="Main" className="px-[var(--gutter)] pt-6 pb-16 md:pt-12">
+                        <ul className="grid gap-1">
+                          {MENU.map((m, i) => (
+                            <motion.li key={m.href} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 + i * 0.045, duration: 0.6, ease }}>
+                              <a href={m.href} onClick={() => setOpen(false)} className="group grid grid-cols-[88px_1fr] items-center gap-5 border-b border-line py-4 md:grid-cols-[160px_1fr] md:gap-10">
+                                <Photo img={m.img} alt="" className="aspect-[3/2] w-full" />
+                                <span className="display text-[clamp(34px,5.4vw,80px)] transition-transform duration-500 ease-[var(--ease-film)] group-hover:translate-x-2">{m.label}</span>
+                              </a>
+                            </motion.li>
+                          ))}
+                        </ul>
+                        <div className="mt-10 flex flex-col gap-4 text-[length:var(--t-sm)] md:flex-row md:items-center md:gap-10">
+                          <a href={BOOK} className="btn self-start">Check dates and book</a>
+                          <a href={WA} className="link num self-start">WhatsApp {WHATSAPP}</a>
+                          <a href={`mailto:${EMAIL}`} className="link self-start">{EMAIL}</a>
+                        </div>
+                      </nav>
+                    </motion.div>
+                  </Dialog.Content>
+                </Dialog.Portal>
+              )}
+            </AnimatePresence>
+          </Dialog.Root>
         </div>
       </div>
-      <motion.div style={{ scaleX: progress }} className="h-[2px] origin-left bg-grape" aria-hidden />
     </header>
+  )
+}
+
+/* ---------- the persistent "Check dates" (A03: small, bottom-right), hidden on the first screen ---------- */
+function FloatingDates() {
+  const { scrollY } = useScroll()
+  const o = useTransform(scrollY, (v) => (typeof window === "undefined" ? 0 : Math.min(1, Math.max(0, (v - window.innerHeight * 0.8) / 200))))
+  const pe = useTransform(o, (v) => (v > 0.5 ? "auto" : "none"))
+  return (
+    <motion.a href={BOOK} style={{ opacity: o, pointerEvents: pe, bottom: "calc(16px + env(safe-area-inset-bottom))" }}
+      className="btn btn-ink fixed right-4 z-30 min-h-12 px-5 shadow-[0_8px_24px_-12px_rgba(27,26,23,.5)] md:right-8">
+      Check dates
+    </motion.a>
   )
 }
 
 function Footer() {
   return (
-    <footer className="bg-paper-2 pb-24 lg:pb-0">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:px-10 md:py-20">
-        <div>
-          <p className="font-display text-[clamp(2.2rem,4vw,3.4rem)] leading-none">Greenwood</p>
-          <p className="mt-4 max-w-sm text-muted">1 Ocean Drive, Port Howe, Cat Island, The Bahamas. Hosted by Pauline and Antoine.</p>
+    <footer id="contact" className="bg-ground px-[var(--gutter)] pt-[var(--s-16)] pb-[calc(var(--s-12)+env(safe-area-inset-bottom))]">
+      <div className="grid gap-12 border-t border-ink pt-10 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <p className="display text-[length:var(--t-2xl)]">Ask about your dates.</p>
+          <p className="mt-5 max-w-sm text-muted">Pauline and Antoine answer by WhatsApp and email. For live availability and rates, use the booking page.</p>
+          <a href={BOOK} className="btn mt-8">Check dates and book</a>
         </div>
-        <div className="text-[15px]">
-          <p className="label text-grape">Reach the resort</p>
-          <a href={TEL} className="mt-3 flex items-center gap-2 hover:text-grape"><Phone className="size-4" aria-hidden />{PHONE}</a>
-          <a href={TEL2} className="mt-2 flex items-center gap-2 hover:text-grape"><Phone className="size-4" aria-hidden />{PHONE2}</a>
-          <a href={`mailto:${EMAIL}`} className="mt-2 flex items-center gap-2 hover:text-grape"><Mail className="size-4" aria-hidden />{EMAIL}</a>
-        </div>
-        <div className="text-[15px]">
-          <p className="label text-grape">Pages</p>
-          {NAV.map(n => <a key={n.href} href={n.href} className="mt-2 block hover:text-grape">{n.label}</a>)}
-          <div className="mt-4 flex gap-4">
-            <a href={IG} className="group inline-flex items-center gap-1 hover:text-grape">Instagram <ArrowUpRight className="size-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden /></a>
-            <a href={FB} className="group inline-flex items-center gap-1 hover:text-grape">Facebook <ArrowUpRight className="size-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden /></a>
-          </div>
+        <address className="grid content-start gap-6 not-italic md:col-span-3 md:col-start-7">
+          <a href={WA} className="num text-[length:var(--t-lg)]"><span className="block text-[length:var(--t-xs)] italic text-muted">WhatsApp</span>{WHATSAPP}</a>
+          <a href={TEL2} className="num text-[length:var(--t-lg)]"><span className="block text-[length:var(--t-xs)] italic text-muted">Telephone</span>{PHONE2}</a>
+          <a href={`mailto:${EMAIL}`} className="text-[length:var(--t-lg)] break-words">{EMAIL}</a>
+        </address>
+        <div className="grid content-start gap-6 md:col-span-3">
+          <a href={MAP} className="text-[length:var(--t-lg)]">1 Ocean Drive<br />Port Howe, Cat Island<br />The Bahamas</a>
+          <p className="flex gap-6 text-[length:var(--t-sm)]"><a href={IG} className="link">Instagram</a><a href={FB} className="link">Facebook</a></p>
         </div>
       </div>
-      <p className="mx-auto max-w-[1440px] border-t border-line px-5 py-6 text-xs text-muted md:px-10">Concept by ESTATIQ AI Solutions. Photographs from greenwoodbeachresort.com. Details to be confirmed with the resort.</p>
+      <p className="mt-16 max-w-3xl text-[length:var(--t-xs)] text-muted">Photographs: Greenwood Beach Resort and Pauline Vaz Branco, from greenwoodbeachresort.com. Concept preview by ESTATIQ AI Solutions; not the official website.</p>
     </footer>
   )
 }
 
-function ActionBar() {
-  return (
-    <nav aria-label="Quick actions" className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1fr_1.4fr] border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
-      <a href={TEL} className="flex min-h-14 items-center justify-center gap-1.5 text-[15px]"><Phone className="size-4" aria-hidden />Call</a>
-      <a href={`mailto:${EMAIL}`} className="flex min-h-14 items-center justify-center gap-1.5 border-l border-line text-[15px]"><Mail className="size-4" aria-hidden />Email</a>
-      <a href={BOOK} className="flex min-h-14 items-center justify-center bg-grape text-[15px] text-paper">Check dates</a>
-    </nav>
-  )
-}
-
-export function Page({ current, children }: { current: string; children: ReactNode }) {
+export function Page({ children }: { children: ReactNode }) {
   useLenis()
-  return (<><a href="#main" className="sr-only focus:not-sr-only">Skip to content</a><Header current={current} /><main id="main">{children}</main><Footer /><ActionBar /></>)
+  return (
+    <>
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-ground focus:p-3">Skip to content</a>
+      <Header />
+      <main id="main">{children}</main>
+      <Footer />
+      <FloatingDates />
+    </>
+  )
 }
 
 export function mount(node: ReactNode) {
-  document.documentElement.classList.add("js-anim")
   createRoot(document.getElementById("root")!).render(node)
-}
-
-export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
-  return (
-    <motion.div className={className} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ duration: 1, delay, ease }}>
-      {children}
-    </motion.div>
-  )
-}
-
-export function Mask({ src, alt, className = "", priority = false, w = 1024, h = 683 }: { src: string; alt: string; className?: string; priority?: boolean; w?: number; h?: number }) {
-  return (
-    <motion.div className={`group relative overflow-hidden bg-sand ${className}`} initial={{ clipPath: "inset(12% 12% 12% 12% round 2px)" }} whileInView={{ clipPath: "inset(0% 0% 0% 0% round 2px)" }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ duration: 1.3, ease: reveal }}>
-      <img src={src} alt={alt} width={w} height={h} loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : "auto"} className="size-full object-cover transition duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.03]" />
-    </motion.div>
-  )
-}
-
-export function Label({ n, children, light = false }: { n?: string; children: ReactNode; light?: boolean }) {
-  return <p className={`label ${light ? "text-conch" : "text-grape"}`}>{n && <span className="mr-3">{n}</span>}{children}</p>
 }
