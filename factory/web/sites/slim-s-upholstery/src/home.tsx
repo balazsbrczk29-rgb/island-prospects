@@ -1,148 +1,314 @@
-import { motion } from "motion/react"
-import { ArrowRight, Clock, MapPin, MessageCircle, Phone } from "lucide-react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Marquee } from "@/components/magicui/marquee"
-import { Page, mount, Reveal, Label, ease, C, waLink } from "./site"
-import { Studio } from "./studio"
+import { useRef, useState } from "react"
+import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue, AnimatePresence } from "motion/react"
+import { ArrowUpRight, MessageCircle, Minus, Phone, Plus } from "lucide-react"
+import { C, Page, Photo, QUOTE_TEXT, ease, img, mount, waLink } from "./site"
 
+/* ---------- 1. Hero: the needle in the cloth ---------- */
 function Hero() {
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
+  const y = useTransform(scrollYProgress, (v) => `${v * 12}%`)
+  const lines = ["From worn to wow,", "one stitch at a time."]
   return (
-    <section className="weave relative overflow-hidden" aria-labelledby="hero-title">
-      <div className="mx-auto grid max-w-[1360px] items-center gap-10 px-5 py-16 md:px-10 md:py-24 lg:min-h-[calc(100svh-120px)] lg:grid-cols-[1.15fr_1fr]">
-        <div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}><Label>Upholstery · #21 Claridge Road, Nassau</Label></motion.div>
-          <h1 id="hero-title" className="mt-7 font-display text-[clamp(3.2rem,7vw,7.4rem)] leading-[0.92] tracking-[-0.025em]">
-            <span className="sr-only">Slim Upholstery, Nassau: </span>
-            {["From worn", "to wow."].map((l, i) => <span key={l} className="block overflow-hidden pb-[0.06em]"><motion.span className={`block ${i ? "text-navy" : ""}`} initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.12 + i * 0.1, duration: 1.05, ease: [0.77, 0, 0.175, 1] }}>{l}</motion.span></span>)}
+    <section ref={ref} className="relative h-[100svh] min-h-[640px] overflow-hidden bg-cream-2" aria-labelledby="hero-title">
+      <motion.div className="absolute inset-0 will-change-transform" style={{ y }}>
+        <motion.picture className="block h-full w-full" initial={{ scale: 1.07 }} animate={{ scale: 1 }} transition={{ duration: 2.2, ease }}>
+          <source media="(max-width: 767px)" srcSet={img("hero-stitch-m")} />
+          <Photo priority src={img("hero-stitch")} alt="A sewing machine needle stitching a piped seam into deep navy upholstery cloth" className="h-full w-full object-[62%_50%] md:object-[70%_40%]" />
+        </motion.picture>
+      </motion.div>
+
+      <div className="relative mx-auto flex h-full max-w-[1320px] flex-col px-5 pb-8 pt-6 md:px-12 md:pb-12 md:pt-9">
+        <div className="flex items-start justify-between gap-6">
+          <p className="display pt-2 text-[1.3rem] md:pt-0 md:text-[1.45rem]">Slim Upholstery</p>
+          <a href={C.tel} className="tnum t-small inline-flex min-h-[44px] items-center font-bold underline decoration-ink/30 underline-offset-[5px] hover:decoration-ink md:min-h-0">{C.phone}</a>
+        </div>
+
+        <div className="mt-[7svh] max-w-[34rem] md:my-auto md:max-w-[38rem] md:pb-[14svh]">
+          <h1 id="hero-title" className="display t-h1">
+            {lines.map((l, i) => (
+              <span key={l} className="block overflow-hidden pb-[0.08em]">
+                <motion.span className="block" initial={{ y: "104%" }} animate={{ y: 0 }} transition={{ delay: 0.25 + i * 0.12, duration: 1.1, ease }}>{l}</motion.span>
+              </span>
+            ))}
           </h1>
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8, ease }} className="mt-7 max-w-[30rem] text-[19px] leading-relaxed text-muted">Home, auto, marine, aircraft and church upholstery, done one stitch at a time in our Claridge Road shop.</motion.p>
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65, duration: 0.8, ease }} className="mt-9 flex flex-wrap gap-3">
-            <a href={waLink("Hi Slim Upholstery, I would like a free quote.")} className="inline-flex min-h-13 items-center gap-2 rounded-full bg-navy px-7 py-3 text-[17px] text-linen transition hover:-translate-y-0.5 hover:bg-navy-deep"><MessageCircle className="size-5" aria-hidden /> WhatsApp a free quote</a>
-            <a href="#studio" className="group inline-flex min-h-13 items-center gap-2 rounded-full border border-ink px-7 py-3 text-[17px] transition hover:-translate-y-0.5 hover:bg-ink hover:text-linen">Try colours <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden /></a>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75, duration: 0.9 }} className="mt-5 max-w-[27rem] text-[1.08rem] leading-relaxed text-ink/85 md:mt-6 md:text-[1.25rem]">
+            Sofas, dining seats, boat cushions, car seats and church pews, re-covered at our workshop on Claridge Road, Nassau.
+          </motion.p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.9 }} className="mt-8 flex flex-wrap items-center gap-3">
+            <a href={waLink(QUOTE_TEXT)} className="btn btn-primary"><MessageCircle className="size-[18px]" strokeWidth={1.9} aria-hidden /> WhatsApp a free quote</a>
+            <a href="#layers" className="btn btn-quiet hidden md:inline-flex">See how a chair is rebuilt</a>
           </motion.div>
         </div>
-        <motion.div initial={{ opacity: 0, rotate: -4, scale: 0.94 }} animate={{ opacity: 1, rotate: -3, scale: 1 }} transition={{ delay: 0.25, duration: 1.2, ease }} className="relative mx-auto aspect-square w-full max-w-[480px]" aria-hidden>
-          {/* a fabric swatch book: three fanned swatches with a stitched seam being sewn */}
-          {[["#d8cbb4", 10], ["#8fb9b0", 4], ["#23395b", -3]].map(([c, r], i) => (
-            <motion.div key={i} initial={{ rotate: 0, y: 30 }} animate={{ rotate: r as number, y: 0 }} transition={{ delay: 0.4 + i * 0.12, duration: 1, ease }} className="absolute inset-[8%] origin-bottom-left rounded-[22px] shadow-[0_30px_60px_-30px_rgba(42,36,32,.5)]" style={{ background: c as string, backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,.07) 0 2px, transparent 2px 7px), repeating-linear-gradient(-45deg, rgba(0,0,0,.06) 0 2px, transparent 2px 7px)" }} />
-          ))}
-          <svg viewBox="0 0 400 400" className="absolute inset-[8%] size-[84%]">
-            <motion.path d="M40 300 C 120 250, 200 330, 360 260" fill="none" stroke="#c99a2e" strokeWidth="4" strokeDasharray="10 9" strokeLinecap="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 1.1, duration: 2.2, ease }} />
-            <motion.g initial={{ x: 40, y: 300 }} animate={{ x: [40, 360], y: [300, 260] }} transition={{ delay: 1.1, duration: 2.2, ease }}>
-              <path d="M0 0 L-40 -60" stroke="#efe8da" strokeWidth="3" strokeLinecap="round" />
-              <circle cx="-40" cy="-60" r="4" fill="none" stroke="#efe8da" strokeWidth="2" />
-            </motion.g>
-            <text x="44" y="70" fill="#efe8da" fontFamily="Young Serif, serif" fontSize="30">Same chairs,</text>
-            <text x="44" y="108" fill="#c99a2e" fontFamily="Young Serif, serif" fontSize="30">new look.</text>
-          </svg>
-        </motion.div>
       </div>
     </section>
   )
 }
 
-function KeyInfo() {
-  const items = [
-    { icon: MessageCircle, k: "Call or WhatsApp", v: C.phone, href: waLink("Hi Slim Upholstery, I would like a free quote.") },
-    { icon: MapPin, k: "The shop", v: "#21 Claridge Road", href: "#visit" },
-    { icon: Clock, k: "Open", v: "Mon to Sat, 9 to 5:30", href: "#visit" },
-    { icon: Phone, k: "Quotes", v: "Free, by appointment", href: C.tel },
+/* ---------- 2. The object study: one chair, five layers ---------- */
+const LAYERS = [
+  { key: "worn-chair", name: "Before", title: "The chair you nearly threw out", body: "Faded cloth, a split seat, foam pushing through. The frame underneath is usually sound. Bring it to Claridge Road before you replace it.", alt: "A mahogany dining chair with a torn, faded floral seat and foam showing through" },
+  { key: "layer-frame", name: "Frame", title: "Back to bare wood", body: "Everything comes off. Old tacks out, joints checked, so nothing new goes onto a weak frame.", alt: "The same chair stripped to its bare hardwood frame" },
+  { key: "layer-webbing", name: "Webbing and springs", title: "A new base under the seat", body: "Webbing woven tight and tacked down, springs tied in, so the seat sits level and firm.", alt: "The same chair with jute webbing and hand-tied springs across the seat" },
+  { key: "layer-foam", name: "Foam", title: "Fresh foam, cut to fit", body: "New foam shaped to the seat and wrapped in batting, so the cloth lies smooth with no hard edges.", alt: "The same chair with a new cream foam seat pad" },
+  { key: "layer-fabric", name: "Cloth", title: "Same chair, new look", body: "The fabric you chose, pulled taut, stapled underneath and finished by hand. One stitch at a time.", alt: "The same chair finished in deep navy cloth with piping and brass nail heads" },
+]
+
+function LayerImage({ i, p, n }: { i: number; p: MotionValue<number>; n: number }) {
+  // each photo fades in over the last stretch before its chapter; the first is always under the others
+  const opacity = useTransform(p, (v) => {
+    if (i === 0) return 1
+    const start = (i - 0.5) / n
+    const end = i / n + 0.02
+    return Math.min(1, Math.max(0, (v - start) / (end - start)))
+  })
+  return (
+    <motion.div className="absolute inset-0" style={{ opacity }}>
+      <Photo src={img(LAYERS[i].key)} alt={LAYERS[i].alt} className="h-full w-full" />
+    </motion.div>
+  )
+}
+
+function Layers() {
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] })
+  const [step, setStep] = useState(0)
+  const n = LAYERS.length
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const s = Math.min(n - 1, Math.max(0, Math.round(v * n - 0.25)))
+    if (s !== step) setStep(s)
+  })
+  const bar = useTransform(scrollYProgress, (v) => `scaleY(${Math.min(1, Math.max(0, v))})`)
+  const L = LAYERS[step]
+  return (
+    <section ref={ref} id="layers" data-stage className="relative h-[460vh] bg-cream" aria-labelledby="layers-title">
+      <div className="sticky top-0 flex h-[100svh] flex-col overflow-hidden md:grid md:grid-cols-[1fr_minmax(0,auto)_1fr] md:items-center md:gap-10 md:px-12">
+        <div className="order-2 px-5 pb-28 pt-5 md:order-1 md:max-w-[24rem] md:justify-self-end md:p-0">
+          <h2 id="layers-title" className="t-small font-bold text-muted">What we do to a chair, layer by layer</h2>
+          <div className="relative mt-3 min-h-[11.5rem] md:mt-6 md:min-h-[17rem]">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div key={L.key} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.38, ease }}>
+                <p className="display t-h3 md:text-[2.6rem]">{L.title}</p>
+                <p className="mt-3 max-w-[24rem] text-ink/80 md:mt-5">{L.body}</p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <div className="relative order-1 mx-auto mt-4 aspect-[4/5] h-[52svh] overflow-hidden rounded-[18px] bg-cream-2 md:mt-0 md:h-[80svh]">
+          {LAYERS.map((_, i) => <LayerImage key={i} i={i} p={scrollYProgress} n={n} />)}
+        </div>
+
+        <div className="order-3 hidden md:block md:max-w-[15rem]">
+          <ol className="relative pl-6" aria-label="Layers">
+            <span className="absolute left-0 top-1 h-[calc(100%-0.5rem)] w-px bg-line" aria-hidden />
+            <motion.span className="absolute left-0 top-1 h-[calc(100%-0.5rem)] w-px origin-top bg-navy" style={{ transform: bar }} aria-hidden />
+            {LAYERS.map((l, i) => (
+              <li key={l.key} className={`py-2.5 transition-colors duration-300 ${i === step ? "text-ink" : "text-ink/45"}`}>
+                <span className="tnum mr-3 t-small">{String(i + 1).padStart(2, "0")}</span>
+                <span className={i === step ? "font-bold" : ""}>{l.name}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="t-cap mt-8 text-muted">Illustrative photographs of the process.</p>
+        </div>
+        <div className="absolute inset-x-5 bottom-[calc(96px+env(safe-area-inset-bottom))] flex gap-1.5 md:hidden" aria-hidden>
+          {LAYERS.map((l, i) => <span key={l.key} className={`h-[3px] flex-1 rounded-full transition-colors duration-300 ${i <= step ? "bg-navy" : "bg-line"}`} />)}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ---------- 3. What we upholster: the list is the selector ---------- */
+const AREAS = [
+  { key: "home", name: "Home", line: "Sofas, dining seats, cushions and the other pieces you live with.", photo: "sofa-living", alt: "A navy reupholstered sofa in a bright room with white louvred shutters" },
+  { key: "marine", name: "Marine", line: "Boat cushions and cockpit seating.", photo: "marine-cushions", alt: "New white boat cushions with navy piping in a sportfishing cockpit over turquoise water" },
+  { key: "auto", name: "Auto", line: "Car seats and interiors, re-covered and restitched.", photo: "auto-seat", alt: "A car seat re-covered in tan leather with cream double stitching" },
+  { key: "aircraft", name: "Aircraft", line: "Aircraft seating and cabin upholstery.", photo: "swatches", alt: "A fanned book of upholstery cloth samples with chalk, shears and a tape measure" },
+  { key: "churches", name: "Churches", line: "Pews and church seating, done as a set.", photo: "church-pew", alt: "Church pews with new deep green seat cushions in a white church with louvred windows" },
+]
+
+function Areas() {
+  const [active, setActive] = useState(0)
+  const A = AREAS[active]
+  return (
+    <section className="bg-cream px-5 py-24 md:px-12 md:py-36" aria-labelledby="areas-title">
+      <div className="mx-auto max-w-[1320px]">
+        <h2 id="areas-title" className="display t-h2 max-w-[44rem]">Home, auto, marine, aircraft and church upholstery.</h2>
+        <p className="t-lead mt-5 max-w-[34rem] text-ink/80">If it has a seat, a cushion or a cover, Slim's can strip it and do it again.</p>
+
+        <div className="mt-14 grid gap-12 md:mt-20 md:grid-cols-[1fr_1.15fr] md:gap-16">
+          <ul className="border-t border-line">
+            {AREAS.map((a, i) => (
+              <li key={a.key} className="border-b border-line">
+                <button
+                  type="button" aria-pressed={active === i}
+                  onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)}
+                  className="group flex w-full items-baseline gap-5 py-5 text-left md:py-7"
+                >
+                  <span className={`display text-[2.2rem] leading-none transition-colors duration-300 md:text-[3.4rem] ${active === i ? "text-ink" : "text-ink/40 group-hover:text-ink/70"}`}>{a.name}</span>
+                  {active === i && <span className="t-small hidden max-w-[16rem] text-muted lg:block">{a.line}</span>}
+                </button>
+                <div className="pb-6 md:hidden">
+                  <p className="t-small text-muted">{a.line}</p>
+                  <div className="mt-4 aspect-[3/2] overflow-hidden rounded-[14px] bg-cream-2">
+                    <Photo src={img(a.photo)} alt={a.alt} className="h-full w-full" />
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="relative hidden aspect-[4/3.4] overflow-hidden rounded-[22px] bg-cream-2 md:sticky md:top-[10vh] md:block">
+            <AnimatePresence initial={false}>
+              <motion.div key={A.key} className="absolute inset-0" initial={{ opacity: 0, scale: 1.03 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.7, ease }}>
+                <Photo src={img(A.photo)} alt={A.alt} className="h-full w-full" />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+        <a href="what-we-upholster.html" className="mt-12 inline-flex min-h-[44px] items-center gap-2 font-bold underline decoration-line decoration-2 underline-offset-[6px] hover:decoration-ink">More on each kind of job <ArrowUpRight className="size-[18px]" strokeWidth={1.9} aria-hidden /></a>
+      </div>
+    </section>
+  )
+}
+
+/* ---------- 4. How it works: straw field ---------- */
+function HowItWorks() {
+  const steps = [
+    ["Send a photo", `WhatsApp a picture of the piece to ${C.phone}. A tape measure in the shot helps.`],
+    ["Get a free quote", "Slim's replies with a price for the job. Quotes cost nothing."],
+    ["Book a time", "Appointments are available. Bring it in, or arrange the pick-up of larger pieces."],
   ]
   return (
-    <section className="bg-navy text-linen" aria-label="Key information">
-      <ul className="mx-auto grid max-w-[1360px] sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((it, i) => (
-          <motion.li key={it.k} initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.7, ease }} className="border-b border-linen/15 sm:border-r lg:border-b-0 lg:last:border-r-0">
-            <a href={it.href} className="group flex items-start gap-4 px-5 py-7 transition hover:bg-navy-deep md:px-8 md:py-8">
-              <it.icon className="mt-1 size-5 shrink-0 text-thread" aria-hidden />
-              <span><span className="block text-[11px] font-medium tracking-[0.2em] text-linen/70 uppercase">{it.k}</span><span className="mt-1 block font-display text-[1.45rem] leading-tight">{it.v}</span><span className="stitch mt-3 block h-[2px] w-0 transition-all duration-500 group-hover:w-14" /></span>
-            </a>
-          </motion.li>
-        ))}
-      </ul>
-    </section>
-  )
-}
-
-function Band() {
-  return (
-    <section className="border-b border-line py-7" aria-label="Specialities">
-      <Marquee className="[--duration:50s] [--gap:2.5rem]" pauseOnHover>
-        {["Sofas", "Dining seats", "Home", "Auto", "Marine", "Aircraft", "Churches"].map(s => <span key={s} className="flex items-center gap-10 font-display text-[clamp(1.8rem,3vw,2.6rem)]">{s}<span className="stitch h-[2px] w-10" aria-hidden /></span>)}
-      </Marquee>
-    </section>
-  )
-}
-
-function StudioSection() {
-  return (
-    <section id="studio" className="scroll-mt-24" aria-labelledby="studio-title">
-      <div className="mx-auto max-w-[1360px] px-5 py-24 md:px-10 md:py-32">
-        <Reveal className="max-w-3xl">
-          <Label n="01">Fabric studio</Label>
-          <h2 id="studio-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1] tracking-[-0.02em]">Picture it before we pull a single staple.</h2>
-          <p className="mt-5 text-[18px] text-muted">Pick the piece, try a colour and a fabric look, then send it to Slim on WhatsApp with photos of what you have now.</p>
-        </Reveal>
-        <Reveal delay={0.1} className="mt-12"><Studio /></Reveal>
+    <section className="bg-straw" aria-labelledby="how-title">
+      <div className="grid md:grid-cols-2">
+        <div className="relative aspect-[4/3] bg-cream-2 md:aspect-auto md:min-h-[86svh]">
+          <Photo src={img("hands-staple")} alt="Hands pulling navy cloth taut over a seat edge and stapling it underneath" className="absolute inset-0 h-full w-full" />
+        </div>
+        <div className="flex flex-col justify-center px-5 py-20 md:px-16 md:py-24">
+          <h2 id="how-title" className="display t-h2 max-w-[30rem]">Send a photo. Get a free quote.</h2>
+          <ol className="mt-12 space-y-9">
+            {steps.map(([t, b], i) => (
+              <li key={t} className="grid grid-cols-[2.6rem_1fr] gap-x-4">
+                <span className="display tnum text-[1.6rem] leading-none text-saddle">{i + 1}</span>
+                <div>
+                  <p className="text-[1.2rem] font-bold">{t}</p>
+                  <p className="mt-1.5 max-w-[26rem] text-ink/80">{b}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   )
 }
 
-const STEPS = [
-  ["Send photos", `WhatsApp ${C.phone} with pictures of the piece and what you have in mind.`],
-  ["Get a free quote", "Slim replies with a price for the job, no charge for quoting."],
-  ["Book an appointment", "Bring it to Claridge Road or arrange a time that suits you."],
-  ["Same piece, new look", "Reupholstered and stitched to finish, ready to collect."],
+/* ---------- 5. Quote builder: writes the WhatsApp message ---------- */
+const PIECES = ["Sofa", "Dining chairs", "Cushions", "Boat seating", "Car seats", "Church pews", "Something else"]
+const CLOTHS = [
+  { name: "Navy weave", c: "#1E3557" }, { name: "Sand linen", c: "#D8C6A2" }, { name: "Olive", c: "#5E6A3E" },
+  { name: "Cream", c: "#F1E9D6" }, { name: "Outdoor canvas", c: "#9FB3B8" }, { name: "Leather or vinyl", c: "#8C5A2B" },
 ]
-function How() {
+
+function QuoteBuilder() {
+  const [piece, setPiece] = useState("Dining chairs")
+  const [qty, setQty] = useState(4)
+  const [cloth, setCloth] = useState<string | null>("Navy weave")
+  const [name, setName] = useState("")
+  const msg = `Hi Slim Upholstery${name.trim() ? `, this is ${name.trim()}` : ""}. I would like a free quote: ${qty} x ${piece.toLowerCase()}${cloth ? `, thinking of ${cloth.toLowerCase()}` : ", fabric still to choose"}. I can send photos now. When is a good time to come by?`
   return (
-    <section className="bg-linen-2" aria-labelledby="how-title">
-      <div className="mx-auto max-w-[1360px] px-5 py-24 md:px-10 md:py-32">
-        <Reveal><Label n="02">How a job goes</Label><h2 id="how-title" className="mt-5 max-w-3xl font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1] tracking-[-0.02em]">Four steps, one stitch at a time.</h2></Reveal>
-        <ol className="relative mt-14 grid gap-10 md:grid-cols-4 md:gap-6">
-          <motion.span className="stitch absolute top-6 left-0 hidden h-[2px] origin-left md:block" style={{ width: "100%" }} initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1.6, ease }} aria-hidden />
-          {STEPS.map(([t, d], i) => (
-            <motion.li key={t} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 + i * 0.12, duration: 0.8, ease }} className="relative">
-              <span className="relative z-10 grid size-12 place-items-center rounded-full bg-ink font-display text-lg text-linen">{i + 1}</span>
-              <p className="mt-5 font-display text-2xl">{t}</p>
-              <p className="mt-2 text-[16px] text-muted">{d}</p>
-            </motion.li>
-          ))}
-        </ol>
+    <section id="quote" className="bg-cream px-5 py-24 md:px-12 md:py-36" aria-labelledby="quote-title">
+      <div className="mx-auto grid max-w-[1320px] gap-14 md:grid-cols-[1.05fr_1fr] md:gap-20">
+        <div>
+          <h2 id="quote-title" className="display t-h2 max-w-[34rem]">Tell Slim's what needs doing.</h2>
+          <p className="t-lead mt-5 max-w-[30rem] text-ink/80">Three choices, and your WhatsApp message is written for you.</p>
+
+          <fieldset className="mt-12">
+            <legend className="font-bold">The piece</legend>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {PIECES.map((p) => (
+                <button key={p} type="button" aria-pressed={piece === p} onClick={() => setPiece(p)}
+                  className={`min-h-[44px] rounded-full px-4 t-small transition-colors duration-200 ${piece === p ? "bg-ink text-cream" : "bg-cream-2 text-ink hover:bg-straw"}`}>{p}</button>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset className="mt-10">
+            <legend className="font-bold">How many</legend>
+            <div className="mt-4 inline-flex items-center rounded-full bg-cream-2 p-1">
+              <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} className="inline-flex size-11 items-center justify-center rounded-full hover:bg-straw" aria-label="One fewer"><Minus className="size-4" strokeWidth={2} aria-hidden /></button>
+              <output className="tnum w-12 text-center text-[1.25rem] font-bold" aria-live="polite">{qty}</output>
+              <button type="button" onClick={() => setQty((q) => Math.min(60, q + 1))} className="inline-flex size-11 items-center justify-center rounded-full hover:bg-straw" aria-label="One more"><Plus className="size-4" strokeWidth={2} aria-hidden /></button>
+            </div>
+          </fieldset>
+
+          <fieldset className="mt-10">
+            <legend className="font-bold">A cloth idea <span className="font-normal text-muted">(you will see real samples at the shop)</span></legend>
+            <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6">
+              {CLOTHS.map((c) => (
+                <button key={c.name} type="button" aria-pressed={cloth === c.name} onClick={() => setCloth(cloth === c.name ? null : c.name)} className="group text-left">
+                  <span className={`block aspect-square rounded-[14px] transition-[box-shadow,transform] duration-200 group-active:scale-95 ${cloth === c.name ? "shadow-[0_0_0_2px_var(--color-cream),0_0_0_4px_var(--color-ink)]" : "shadow-[inset_0_0_0_1px_rgba(43,33,24,.12)]"}`} style={{ background: c.c }} />
+                  <span className="t-cap mt-2 block leading-snug">{c.name}</span>
+                </button>
+              ))}
+            </div>
+          </fieldset>
+        </div>
+
+        <div className="md:sticky md:top-[12vh] md:self-start">
+          <div className="rounded-[26px] bg-cream-2 p-6 md:p-8">
+            <label htmlFor="q-name" className="font-bold">Your name <span className="font-normal text-muted">(optional)</span></label>
+            <input id="q-name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" className="mt-3 block min-h-[48px] w-full rounded-[14px] border border-line bg-cream px-4 outline-none focus:border-ink" />
+            <p className="mt-7 font-bold">Your message</p>
+            <p className="mt-3 rounded-[18px] rounded-bl-[6px] bg-cream p-5 leading-relaxed text-ink/90" aria-live="polite">{msg}</p>
+            <a href={waLink(msg)} className="btn btn-primary mt-7 w-full min-h-[54px] text-[1rem]"><MessageCircle className="size-[19px]" strokeWidth={1.9} aria-hidden /> Send on WhatsApp</a>
+            <p className="t-small mt-4 text-center text-muted">Opens WhatsApp with this message to {C.phone}. Or call <a href={C.tel} className="tnum whitespace-nowrap underline underline-offset-4">{C.phone}</a>.</p>
+          </div>
+        </div>
       </div>
     </section>
   )
 }
 
-const FAQ = [
-  ["What does Slim Upholstery work on?", "Home, auto, marine, aircraft and church upholstery: sofas, dining seats, boat cushions, car seats, pews and more."],
-  ["Is the quote free?", `Yes. Call or WhatsApp ${C.phone} for a free quote. Appointments are available.`],
-  ["Where is the shop and when is it open?", `At ${C.address}. Monday to Saturday, 9:00am to 5:30pm. Closed Sunday.`],
-]
-
+/* ---------- 6. Visit: navy field ---------- */
 function Visit() {
   return (
-    <section id="visit" className="scroll-mt-24" aria-labelledby="visit-title">
-      <div className="mx-auto grid max-w-[1360px] gap-12 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-2">
-        <Reveal>
-          <Label n="03">Visit the shop</Label>
-          <h2 id="visit-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1] tracking-[-0.02em]">#21 Claridge Road.</h2>
-          <dl className="mt-8 border-t border-line">{C.hours.map(([d, h]) => <div key={d} className="flex justify-between border-b border-line py-3.5 text-[17px]"><dt>{d}</dt><dd className="text-muted">{h}</dd></div>)}</dl>
-          <Accordion type="single" collapsible className="mt-10 border-t border-line">
-            {FAQ.map(([q, a], i) => <AccordionItem key={q} value={`q${i}`} className="border-line"><AccordionTrigger className="min-h-14 py-5 text-left font-display text-xl hover:no-underline">{q}</AccordionTrigger><AccordionContent className="pb-5 text-[16px] text-muted">{a}</AccordionContent></AccordionItem>)}
-          </Accordion>
-        </Reveal>
-        <Reveal delay={0.1} className="flex flex-col gap-4">
-          <div className="min-h-[360px] flex-1 overflow-hidden rounded-[28px] border border-line"><iframe title="Map of Slim Upholstery, 21 Claridge Road, Nassau" loading="lazy" className="h-full min-h-[360px] w-full" src="https://www.google.com/maps?q=21+Claridge+Road,+Nassau,+Bahamas&output=embed" /></div>
-          <a href={waLink("Hi Slim Upholstery, I would like a free quote.")} className="flex items-center justify-between gap-4 rounded-[28px] bg-navy p-7 text-linen transition hover:-translate-y-0.5 hover:bg-navy-deep">
-            <span><span className="block text-[11px] font-medium tracking-[0.2em] text-thread uppercase">Call or WhatsApp</span><span className="mt-1 block font-display text-[clamp(2rem,3.6vw,2.8rem)]">{C.phone}</span></span>
-            <MessageCircle className="size-8 text-thread" aria-hidden />
-          </a>
-        </Reveal>
+    <section id="visit" className="bg-navy px-5 py-24 text-cream md:px-12 md:py-32" aria-labelledby="visit-title">
+      <div className="mx-auto grid max-w-[1320px] gap-14 md:grid-cols-[1.3fr_1fr]">
+        <div>
+          <h2 id="visit-title" className="display t-h2">{C.street},<br />Nassau.</h2>
+          <p className="t-lead mt-6 max-w-[30rem] text-cream/80">The workshop is on Claridge Road. Come with photos or with the piece itself; cloth samples are there to touch.</p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a href={C.map} className="btn text-cream shadow-[inset_0_0_0_1.5px_var(--color-cream)] hover:bg-cream hover:text-ink">Directions <ArrowUpRight className="size-[17px]" strokeWidth={1.9} aria-hidden /></a>
+            <a href={C.tel} className="btn tnum text-cream shadow-[inset_0_0_0_1.5px_rgba(247,240,224,.4)] hover:shadow-[inset_0_0_0_1.5px_var(--color-cream)]"><Phone className="size-[17px]" strokeWidth={1.9} aria-hidden /> {C.phone}</a>
+          </div>
+        </div>
+        <dl className="tnum grid grid-cols-[auto_1fr] gap-x-8 gap-y-4 self-end text-cream/90">
+          <dt className="text-cream/60">Monday to Friday</dt><dd>9:00am to 5:30pm</dd>
+          <dt className="text-cream/60">Saturday</dt><dd>Shorter hours, call ahead</dd>
+          <dt className="text-cream/60">Sunday</dt><dd>Closed</dd>
+          <dt className="pt-6 text-cream/60">Call or WhatsApp</dt><dd className="pt-6"><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tel}>{C.phone}</a></dd>
+          <dt className="text-cream/60">Shop line</dt><dd><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tel2}>{C.phone2}</a></dd>
+          <dt className="text-cream/60">Recent work</dt><dd className="flex flex-wrap gap-x-4"><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.ig}>Instagram</a><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tt}>TikTok</a><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.fb}>Facebook</a></dd>
+        </dl>
       </div>
     </section>
   )
 }
 
-mount(<Page current=""><Hero /><KeyInfo /><Band /><StudioSection /><How /><Visit /></Page>)
+function Home() {
+  return (
+    <Page current="home">
+      <Hero />
+      <Layers />
+      <Areas />
+      <HowItWorks />
+      <QuoteBuilder />
+      <Visit />
+    </Page>
+  )
+}
+
+mount(<Home />)

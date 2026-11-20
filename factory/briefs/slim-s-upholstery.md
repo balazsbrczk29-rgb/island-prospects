@@ -27,15 +27,31 @@ Positioning: For Nassau homes, boats, cars and churches with tired seating, Slim
 ## Brand truth / feel
 "From worn to wow, one stitch at a time" (their words). Feel: crafted, warm, patient, proud, local.
 
-## Design
-Reference vocabulary: aesop.com / hay.dk (craft, material, restraint). Fonts Young Serif 400 + Work Sans 400/500. Palette linen #f4efe6, linen-2 #ebe3d5, ink #2a2420, navy #23395b (from their navy sofa set), thread #c99a2e, muted #6b625a, line #ddd2c1.
-Hero: product/craft close-up: fanned fabric swatches with a stitched seam sewing across. Signature: "This shows fabric swatches and a stitch line because their own tagline is 'quality craftsmanship, one stitch at a time'." Interaction: Fabric studio (piece, colour, weave, quantity → WhatsApp quote); stitched 4-step process; FAQ.
+## Design (generation 2 rebuild, 2026-11-20)
+Big idea: take one Nassau dining chair apart on Slim's bench; scrolling rebuilds it, bare frame, webbing and springs, foam, then navy cloth, so the buyer sees what an upholsterer actually does, "one stitch at a time" (their words).
+Tier: standard (photo-sequence object study, not real-time 3D). Why: a procedural 3D chair would read as a toy next to real fabric; the layers are best explained by photographs of the same chair at each stage, scrubbed by scroll. Fabric texture is the whole sell and only photography carries it.
+Direction: A06 Object study + P11 Straw market + T08 Warm humanist (Gloock 400 display, Mulish text). Why: the archetype literally names an upholstered chair explained part by part; straw, jute and sisal are the materials under every seat (webbing, twine), so the lane is the inside of the trade; a warm serif fits a patient family workshop better than a technical grotesk. Nav N4 floating bottom dock, motion M4 object scrub.
+Palette: cream ground #F7F0E0, straw field #E2CFA3, ink #2B2118, teal #1F4F4A (CTA, visit field), saddle brown #8C5A2B (thread details only), muted #6B5B49.
+Photos: illustrative photography generated in Lovable project ip-assets-slim-s-upholstery (labelled "replace with your own"), since Facebook/Instagram/TikTok cannot be read by our tools; BahamasLocal listing images viewed but not used unless clearly theirs.
+References (BLIND, from knowledge): apple.com product pages (one object, perfect light, scroll explains it), aesop.com (material, restraint, warm serif).
+
+### Storyboard (1440x900)
+1. Hero: macro photo of a needle sewing a piped navy seam fills the screen; headline in the calm linen area left: "From worn to wow, one stitch at a time." One line: what they upholster and where. WhatsApp free quote + call. Dock at the bottom.
+2-6. Pinned stage (data-stage): the same chair centred on the cream wall, crossfading worn, frame, webbing and springs, foam, navy cloth as you scroll; left, the chapter title and one sentence on what Slim does at that layer; right, a 5-step rail. 
+7. What we upholster: a large editorial list (Home, Marine, Auto, Aircraft, Churches); hovering or tapping swaps the big photo on the right. Link to the inner page.
+8. Straw field: hands pulling cloth taut, full-bleed half; "Send photos, get a free quote, book a time" in three short lines.
+9. Quote builder: choose the piece, how many, a fabric idea; it writes the WhatsApp message.
+10. Visit: teal field; address, hours, both numbers, directions link, socials.
+Phone 390x844: 1 vertical needle photo with headline at top and the WhatsApp button at thumb height; 2 stage with chair on top and caption below; 3 list as stacked rows each with its photo.
 
 ## Assumptions to confirm
 - Piece descriptions per area (e.g. "headboards", "cabin seating") are category-standard.
 - Step 2 "no charge for quoting" from "FREE quote"; step 3 "arrange a time that suits you" from "Appointments available".
 - Colour/weave swatches are ideas, not stock.
-- Proposed domain slimupholstery.com.
+- Proposed domain slimupholstery.com (listed in directories, currently does not resolve: reclaim it).
+- Saturday hours: BahamasLocal says 10:00am to 3:00pm, Bahamas Index says 9:00am to 5:30pm; site shows 10 to 3 with "call to confirm".
+- Email slimupholstery@yahoo.com appears on FindYello only; not shown on the site until confirmed.
+- Layer descriptions (webbing, springs, foam, batting) are category-standard upholstery steps.
 
 ## Scorecard
 1:4 2:4 3:4 4:4 5:4 6:4 7:4 8:4 9:4 10:5 11:5

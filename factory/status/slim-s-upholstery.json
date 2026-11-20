@@ -4,8 +4,61 @@
  "name": "Slim's Upholstery",
  "batch": "07",
  "tier": "A",
- "state": "building",
+ "state": "needs-review",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-20T19:55:51.887Z"
+ "pages": ["index.html", "what-we-upholster.html"],
+ "primary_cta": "WhatsApp a free quote (242) 814-5451",
+ "brand_truth": "A Claridge Road upholstery workshop whose own line is 'From worn to wow, quality craftsmanship, one stitch at a time', re-covering home, auto, marine, aircraft and church seating.",
+ "buyer": "Nassau homeowners weighing reupholstery against buying new, boat and car owners, church committees; they fear amateur results and want to see the craft and get a free quote on WhatsApp.",
+ "direction": {"archetype": "A06 Object study", "lane": "P11 Straw market (accent swapped to their real brand navy)", "type": "T08 Warm humanist: Gloock 400 + Mulish", "nav": "N4 floating bottom dock", "motion": "M4 object scrub", "why": "The archetype names an upholstered chair explained part by part, which is exactly the big idea; straw, jute and sisal are the materials inside every seat; navy is the colour of Slim's own logo and fabric work."},
+ "tier_visual": "standard",
+ "tier_visual_why": "A photo-sequence object study (the same chair photographed at five stages, crossfaded by scroll) explains the layers better than a procedural 3D chair, which would read as a toy next to real cloth texture.",
+ "concept_type": "brochure: craft story + what we upholster + WhatsApp free-quote builder",
+ "images": [
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/hero-stitch.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/hero-stitch-m.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/worn-chair.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-frame.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-webbing.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-foam.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-fabric.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/hands-staple.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/sofa-living.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/marine-cushions.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/auto-seat.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/swatches.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/church-pew.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
+  {"src": "https://www.bahamaslocal.com/img/users/sz1_QOAmFQ.jpg", "source": "own", "credit": "Slim Upholstery logo, uploaded to their BahamasLocal listing"}
+ ],
+ "critic": {"photography": 4, "typography": 4, "composition": 4, "colour": 4, "fit": 4, "distinct": 4, "references": 4},
+ "critic_note": "Self-scores only (builder cannot spawn subagents); awaiting independent critic.",
+ "current_site_findings": [
+  "slimupholstery.com is listed in directories but does not resolve",
+  "Two phone numbers in circulation (814-5451 and 341-2149); Saturday hours differ between directories",
+  "Old BahamasLocal URL shows 'may have closed down'",
+  "Project photos only in Facebook, Instagram and TikTok posts"
+ ],
+ "pitch_line": "Your work deserves better than a lapsed domain: this site rebuilds one chair layer by layer as people scroll, then writes their WhatsApp quote request to 814-5451 for them.",
+ "assumptions": [
+  "Example pieces under each kind of work (sectionals, headliners, kneelers, cabin panels etc.) are category-standard",
+  "Layer steps (frame check, webbing and springs, foam and batting, cloth) are category-standard upholstery steps",
+  "Saturday shown as 'shorter hours, call ahead' (BahamasLocal 10 to 3 vs Bahamas Index 9 to 5:30)",
+  "Pick-up of larger pieces is offered",
+  "Cloth swatches in the quote builder are ideas, not stock",
+  "Proposed domain slimupholstery.com (reclaim)",
+  "Email slimupholstery@yahoo.com (FindYello only) not shown until confirmed"
+ ],
+ "sources": [
+  "https://www.bahamasindex.com/company/10461/Slims_Upholstery",
+  "https://www.bahamaslocal.com/showlisting/17880/Slim_Upholstery.html",
+  "https://www.facebook.com/SlimUpholstery/",
+  "https://www.facebook.com/SlimUpholstery/photos/1414895807315706/",
+  "https://www.facebook.com/SlimUpholstery/photos/3806645219359959/",
+  "https://www.instagram.com/slimupholstery/",
+  "https://www.tiktok.com/@slimupholstery",
+  "https://www.findyello.com/bahamas/slim-upholstery/profile/"
+ ],
+ "notes": "BLIND: look.mjs, Google Fonts and lovable.app images are blocked in the sandbox; references (apple.com product pages, aesop.com) judged from knowledge. QA screenshots use crops of the Lovable gallery screenshot routed in via Playwright (low-res thumbnails, so photos look softer than live). Fonts self-hosted from @fontsource. Facebook/Instagram/TikTok photos not readable by Firecrawl, so all photography is illustrative (Lovable project ip-assets-slim-s-upholstery, one round, 1.8 credits); only their logo is their own. The five chair stages were generated from one base image so the chair, angle and wall match. qa 0 blockers (remaining warning is the shared concept-tag button height), interact 0 dead/0 errors, distinct: distinct (closest bahamas-rum-cake-factory 68). Awaiting independent critic.",
+ "built_at": "2026-11-20T20:40:00Z"
 }
