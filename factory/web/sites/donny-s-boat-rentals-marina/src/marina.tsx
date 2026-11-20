@@ -14,7 +14,7 @@ function SlipCheck() {
   return (
     <div className="bg-white rounded-[var(--radius-lg)] p-6 md:p-10">
       <h2 className="text-[2rem] md:text-[2.75rem] tracking-[-0.04em]">Will my boat fit?</h2>
-      <div className="mt-6 grid grid-cols-2 gap-4">
+      <div className="mt-6 grid grid-cols-2 gap-4 items-end">
         <div><label htmlFor={a} className="block font-semibold mb-2">Length overall (ft)</label>
           <input id={a} inputMode="decimal" value={loa} onChange={e => setLoa(e.target.value)} placeholder="42" className="w-full h-12 px-4 rounded-[var(--radius-sm)] bg-ground text-[1.25rem] tnum shadow-[inset_0_0_0_1px_var(--color-line)]" /></div>
         <div><label htmlFor={b} className="block font-semibold mb-2">Draft (ft)</label>
@@ -45,9 +45,9 @@ function Marina() {
   return (
     <Page current="marina">
       <section aria-labelledby="m-h1" className="relative">
-        <div className="ph h-[48svh] md:h-[72svh]">
+        <div className="ph h-[44svh] md:h-[min(60vh,560px)]">
           <img src={wix(P.dockAir, 2000)} srcSet={srcSet(P.dockAir, [900, 1600, 2000])} sizes="100vw" fetchPriority="high"
-            alt="Donny's dock from the air: sailboats and trawlers on the moorings and at the dock in Black Sound" className="max-md:scale-[1.5] max-md:origin-[50%_15%]" style={{ objectPosition: '50% 40%' }} />
+            alt="Donny's dock from the air: sailboats and trawlers on the moorings and at the dock in Black Sound" className="max-md:scale-[1.5] max-md:origin-[50%_15%]" style={{ objectPosition: '50% 30%' }} />
         </div>
         <div className="px-5 md:px-[4vw] pt-10 md:pt-14 pb-16 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-[5vw] items-end">
           <h1 id="m-h1" className="text-[3rem] md:text-[clamp(4rem,7vw,7rem)] tracking-[-0.05em] leading-[0.92]">Dockage at the end of Black Sound</h1>
@@ -96,14 +96,18 @@ function Marina() {
               <div><dt className="text-ink/75">Ashore</dt><dd className="m-0 mt-1 font-semibold">New Plymouth, 10 minutes on foot</dd></div>
             </dl>
           </div>
-          {/* the top of Donny's own annotated aerial, cropped above the burned-in labels; the callouts are set in the site's type */}
-          <figure className="relative m-0 min-h-[320px] lg:min-h-[80svh] overflow-hidden bg-flats-deep">
-            <img src={wix(P.soundAir, 1800)} loading="lazy" decoding="async" alt="Black Sound and Green Turtle Cay from the air, with the Sea of Abaco beyond"
-              className="absolute inset-0 size-full object-cover origin-top scale-[1.75]" style={{ objectPosition: '50% 0%' }} />
-            <figcaption className="absolute left-4 right-4 bottom-4 md:left-6 md:right-auto md:bottom-6 bg-ground text-ink rounded-[var(--radius-md)] px-4 py-3 text-[0.9375rem] max-w-[36ch]">
-              <span className="font-semibold">Black Sound from the air.</span> Donny&rsquo;s dock and mooring field are at the far end of the sound.
-            </figcaption>
-          </figure>
+          {/* the top of Donny's own annotated aerial, cropped above its burned-in labels and shown no larger than the source */}
+          <div className="px-5 md:px-[4vw] pb-16 lg:py-24 flex items-center">
+            <figure className="m-0 w-full max-w-[640px]">
+              <div className="relative aspect-[12/5] overflow-hidden rounded-[var(--radius-md)] bg-flats-deep">
+                <img src={wix(P.soundAir, 1280)} loading="lazy" decoding="async" alt="Black Sound and Green Turtle Cay from the air, with the Sea of Abaco beyond"
+                  className="absolute inset-0 size-full object-cover" style={{ objectPosition: '50% 0%' }} />
+              </div>
+              <figcaption className="mt-3 text-[0.9375rem] text-ink/80 max-w-[52ch]">
+                <span className="font-semibold text-ink">Black Sound from the air.</span> Donny&rsquo;s dock and mooring field are at the far end of the sound.
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 

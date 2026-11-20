@@ -101,17 +101,13 @@ function FloatingWhatsApp() {
     quiet.forEach(q => io.observe(q)); update()
     return () => io.disconnect()
   }, [])
-  // while the button shows on a phone, lift the concept tag above its row (--concept-offset, read by assets/concept.css)
-  useEffect(() => {
-    const phone = matchMedia('(max-width: 767px)').matches
-    document.documentElement.style.setProperty('--concept-offset', show && phone ? '68px' : '0px')
-  }, [show])
+  // sits at 88px so it clears the shared concept tag (even expanded) in the bottom-left corner
   return (
     <AnimatePresence>
       {show && (
         <motion.a key="wa" href={WA_DEFAULT} target="_blank" rel="noopener" aria-label="Ask Taylor on WhatsApp"
           initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.6 }} transition={{ duration: 0.25, ease }}
-          style={{ transformOrigin: '100% 100%', bottom: 'calc(14px + env(safe-area-inset-bottom, 0px))' }}
+          style={{ transformOrigin: '100% 100%', bottom: 'calc(88px + env(safe-area-inset-bottom, 0px))' }}
           className="md:hidden fixed right-3.5 z-40 grid place-items-center size-14 rounded-full bg-channel text-white shadow-[0_8px_24px_rgba(13,43,46,.28)]">
           <WhatsAppGlyph size={26} />
         </motion.a>
