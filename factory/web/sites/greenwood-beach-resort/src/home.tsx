@@ -53,8 +53,8 @@ mount(
     <HomeHero />
     <FilmStage />
     <Hosts />
-    <Rooms />
     <Whitetips />
+    <Rooms />
     <EndCredits />
   </Page>,
 )

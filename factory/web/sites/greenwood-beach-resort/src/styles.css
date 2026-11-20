@@ -52,7 +52,7 @@
   --gutter: clamp(16px, 4vw, 56px);
   --d-fast: 180ms; --d-swap: 520ms; --d-film: 1100ms;
 }
-@media (max-width: 767px) { :root { --bar: 56px; --concept-offset: 56px; } }
+@media (max-width: 767px) { :root { --bar: 56px; } }
 
 html { background: var(--color-ground); color: var(--color-ink); }
 body { font-family: var(--font-text); font-size: var(--t-base); line-height: 1.55; font-optical-sizing: auto; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }

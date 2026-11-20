@@ -4,7 +4,7 @@
  "name": "Greenwood Beach Resort",
  "batch": "05",
  "tier": "A",
- "state": "needs-review",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
  "claimed_at": "2026-11-20T19:55:53.812Z",
@@ -85,13 +85,13 @@
  "critic": {
   "photography": 3,
   "typography": 4,
-  "composition": 3,
+  "composition": 4,
   "colour": 4,
-  "fit": 3,
+  "fit": 4,
   "distinct": 4,
   "references": 3
  },
- "critic_note": "Independent critic, first pass (scores above). Fix pass 1 applied 2026-11-20, awaiting independent critic re-score.",
+ "critic_note": "Independent critic re-score after fix pass 1 (above). Fix pass 2 (final) applied; per coordinator instruction state set to built. Photography and references were 3 before pass 2.",
  "current_site_findings": [
   "Identical room descriptions; home and rooms page attach different photos to each room.",
   "Dead buttons: View room, Discover activities, Book your activities, Lunch, Dinner.",
@@ -118,8 +118,8 @@
   "https://direct-book.com/properties/greenwoodbeachresort/contact",
   "https://www.epicdiving.com/greenwood-beach-resort/"
  ],
- "notes": "Generation 2 rebuild, 2026-11-20. awaiting independent critic (fix pass 1 applied). BLIND: sandbox blocks their image host, Google Fonts and look.mjs; photos were viewed through the Lovable gallery project ip-assets-greenwood-beach-resort (2 rounds) and QA screenshots use crops of that gallery routed in with Playwright (so they look softer than the real 1024 px files). References (aman.com, belmond.com) judged from known patterns, not captured. Fonts self-hosted from fontsource. Interactions: room picker + dates composer to direct-book; whitetip package form writing their own email template; route toggle (USA / Nassau) on getting-here; full-screen Menu overlay. qa: 0 blockers (one sub-40px target is the shared concept tag button); interact: the two 'dead' buttons are stepper +/- at their limits (disabled by design); distinct: distinct.",
- "built_at": "2026-11-20T21:16:57.956Z",
+ "notes": "Generation 2 rebuild, 2026-11-20. fix passes 1 and 2 applied. BLIND: sandbox blocks their image host, Google Fonts and look.mjs; photos were viewed through the Lovable gallery project ip-assets-greenwood-beach-resort (2 rounds) and QA screenshots use crops of that gallery routed in with Playwright (so they look softer than the real 1024 px files). References (aman.com, belmond.com) judged from known patterns, not captured. Fonts self-hosted from fontsource. Interactions: room picker + dates composer to direct-book; whitetip package form writing their own email template; route toggle (USA / Nassau) on getting-here; full-screen Menu overlay. qa: 0 blockers (one sub-40px target is the shared concept tag button); interact: the two 'dead' buttons are stepper +/- at their limits (disabled by design); distinct: distinct.",
+ "built_at": "2026-11-20T21:58:02.729Z",
  "fix_pass_1": [
   "Real film: fixed limestone bars (top 12svh with 01 / 05 counter and progress rule, bottom 16svh with word and copy); each photo scales and pans with scroll via function transforms; stage 640svh",
   "Hero merged to one screen: Pauline and Antoine on their beach in the letterbox, Port Howe set large in the lower bar; kite lesson photo moved to the Wind chapter; old title card removed",
@@ -127,5 +127,11 @@
   "Booking strip enlarged into a ticket line: custom date field (showPicker), large steppers, 72px teal button",
   "End credits: full-width two-column roll in three groups (journey, day, house) with tabular times and phones, address on one line",
   "Rooms headline no longer hidden under the header; empty band after the rooms link removed; meal table columns widened and left column sticky"
+ ],
+ "fix_pass_2": [
+  "Hero photo re-cropped (hosts lower in the frame, less sky); Wind chapter now uses the wider open-water kite shot",
+  "End credits rebuilt as a real end roll on the teal ground: sticky frame with faded edges, right-aligned italic labels and left values at full width, generous leading, ending on Then, the beach and the CTA; whitetip section moved before rooms so the two teal fields never touch",
+  "Getting here: the doubled Ask about your dates was a screenshot stitching artifact (last capture clamped to page end); stitching now uses real scroll offsets, page itself has one footer",
+  "Mobile: concept pill only rises while the teal booking bar is visible (discrete state, not per frame); hero keeps 132px bottom padding so nothing sits under the pill"
  ]
 }

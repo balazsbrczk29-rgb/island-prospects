@@ -62,7 +62,7 @@ export function HomeHero() {
 /* ---------- the film: fixed limestone bars, the photo scales and pans with scroll (A03 / M1) ---------- */
 type Chapter = { word: string; img: Img; alt: string; lines: [string, string]; pan: [number, number, number, number] }
 export const CHAPTERS: Chapter[] = [
-  { word: "Wind", img: IMG.kiteLesson, alt: "A kitesurf instructor and student on Greenwood's beach, an orange kite over turquoise water", lines: ["Kite lessons on the beach, in Cat Island's steady wind.", "Diving and kitesurfing here are supervised by professionals."], pan: [-3, 0, 3, -2] },
+  { word: "Wind", img: IMG.kiteRide, alt: "A kitesurfer riding the open water off Cat Island under an orange kite", lines: ["Kitesurfing on Cat Island's steady wind and open turquoise water.", "Diving and kitesurfing here are supervised by professionals."], pan: [-3, 0, 3, -2] },
   { word: "Deep blue", img: IMG.whitetipSurface, alt: "An oceanic whitetip shark just below the surface off Cat Island", lines: ["From March to June, oceanic whitetip sharks visit these waters.", "Guided boat dives, small groups, and respect for the animal."], pan: [4, 2, -2, -2] },
   { word: "The reef", img: IMG.snorkel, alt: "Yellow grunts over a small coral reef in clear water", lines: ["A snorkel over a small reef, then a secluded beach.", "The island's only sea-accessible bat cave is reached by boat."], pan: [0, 3, 0, -3] },
   { word: "Table", img: IMG.terrace, alt: "Greenwood's terrace restaurant with the beach and sea beyond the palms", lines: ["Breakfast eight to ten. Lunch noon to two. Dinner six to eight.", "Dinner is booked a day ahead, on the terrace by the beach."], pan: [-3, -1, 3, 1] },

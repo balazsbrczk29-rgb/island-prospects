@@ -60,24 +60,39 @@ export function EndCredits() {
     ] },
   ]
   return (
-    <section aria-labelledby="credits-title" className="border-t border-line px-[var(--gutter)] py-[var(--s-16)]">
-      <h2 id="credits-title" className="display text-center text-[length:var(--t-2xl)]">The way to Port Howe</h2>
-      <div className="mt-16 grid gap-16">
-        {groups.map((g) => (
-          <div key={g.title}>
-            <h3 className="mb-6 text-center text-[length:var(--t-sm)] italic text-muted">{g.title}</h3>
-            <dl className="grid gap-4 md:gap-3">
-              {g.rows.map(([k, v], i) => (
-                <div key={k + i} className="grid gap-0.5 text-center md:grid-cols-2 md:gap-12 md:text-left">
-                  <dt className="text-[length:var(--t-sm)] text-muted md:text-right md:text-[length:var(--t-base)]">{k}</dt>
-                  <dd className="num text-[length:var(--t-base)] md:text-[length:var(--t-lg)]">{v}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        ))}
+    <section aria-labelledby="credits-title" className="on-glass relative bg-glass text-on-glass">
+      {/* the frame: a sticky viewport whose top and bottom edges fade the roll in and out, like the end of a film */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-10">
+        <div className="sticky top-0 h-[100svh]">
+          <div className="absolute inset-x-0 h-[22svh] bg-gradient-to-b from-glass via-glass/80 to-transparent" style={{ top: "var(--bar)" }} />
+          <div className="absolute inset-x-0 bottom-0 h-[18svh] bg-gradient-to-t from-glass to-transparent" />
+        </div>
       </div>
-      <p className="mt-16 text-center"><a href="getting-here.html" className="link">Flights, taxis and car rentals in full</a></p>
+      <div className="px-[var(--gutter)] pt-[46svh] pb-[30svh]">
+        <h2 id="credits-title" className="display text-center text-[length:var(--t-2xl)]">The way to Port Howe</h2>
+        <div className="mt-24 grid gap-24">
+          {groups.map((g) => (
+            <div key={g.title}>
+              <h3 className="mb-8 text-center text-[length:var(--t-xl)] font-light" style={{ fontFamily: "var(--font-display)" }}>{g.title}</h3>
+              <dl className="grid gap-6 md:gap-4">
+                {g.rows.map(([k, v], i) => (
+                  <div key={k + i} className="grid gap-1 text-center md:grid-cols-2 md:gap-16 md:text-left">
+                    <dt className="text-[length:var(--t-sm)] italic leading-[1.7] opacity-80 md:text-right md:text-[length:var(--t-lg)]">{k}</dt>
+                    <dd className="num text-[length:var(--t-base)] leading-[1.7] md:text-[length:var(--t-lg)]">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+        <div className="mt-32 grid justify-items-center gap-8 text-center">
+          <p className="mono-word !text-[clamp(56px,9vw,140px)]">Then, the beach.</p>
+          <div className="flex flex-col items-center gap-5 sm:flex-row sm:gap-8">
+            <a href="#dates" className="btn btn-line btn-xl">Check dates and book</a>
+            <a href="getting-here.html" className="link">Flights, taxis and car rentals in full</a>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
