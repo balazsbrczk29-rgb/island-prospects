@@ -5,7 +5,8 @@ description: The production pipeline for building one concept preview website pe
 
 # Site factory pipeline
 
-One business at a time, steps 1-8, published before the next. Design authority is
+One business at a time, steps 1-8, published before the next. The creative brief per site type and the tested
+immersive recipes are in `.claude/skills/site-playbooks/`; design judgment and verification are in
 `.claude/skills/art-director/SKILL.md`; this file is only the order of work and the mechanics.
 
 References (read when the step says so): `references/niche-playbooks.md` (per-niche goals and CTAs),
@@ -30,7 +31,9 @@ Buyer portrait and brand truth (art-director section 1). Sitemap from `concept_t
 and product pages; a booking site has its booking flow; others: home plus 1-2 inner pages; Tier C one page).
 One primary CTA with a specific label. Primary and 3-5 secondary local search queries.
 
-## 4. Look, choose, source (art-director sections 2-4)
+## 4. Big idea, look, choose, source
+Read your playbook (`site-playbooks/playbooks/<type>.md`) and write the big idea in one sentence that names this
+business's real subject. Then (art-director sections 2-4):
 `look.mjs` on their current site and two reference sites; `direction.mjs --options` then `--set`; start the
 Lovable asset project; collect own photos and Commons photos.
 

@@ -1,6 +1,6 @@
 # Imagery: exact procedures
 
-Aim for 8-15 real photographs per home page. A page full of photographs of the actual place and trade
+Use as many photographs as the concept needs, and no more: a cinematic resort page may live on a dozen, a law firm on two, a 3D-led page on none. A page full of photographs of the actual place and trade
 beats any drawing or shader. The sandbox cannot load outside images, so QA shows them as grey boxes:
 that is expected. The fresh-eyes critic gets the Lovable gallery screenshot to judge them.
 
@@ -43,7 +43,7 @@ Write the brief for the set like a photo director, not like a caption. Every ima
 - **EXCLUSIONS** (always): "no text, no logos, no signage, no watermarks, no recognisable faces, no people looking at the camera, not CGI, not illustration, no oversaturation, no HDR halos".
 - **Bahamian truth**: islands are flat; casuarina, coconut palm, sea grape and Caribbean pine; concrete-block houses painted white or pastel with hip roofs or flat parapets, louvred shutters; limestone; very clear turquoise shallows over white sand; Out Island docks of grey weathered timber. Never mountains, never European or Floridian high-rise skylines.
 
-Shot list per niche (choose 8-12, at least 3 per site at hero quality, in 16:9 for desktop and a matching 4:5 crop for mobile):
+Shot list per niche (choose only the shots your page plan uses, the hero ones at hero quality, in 16:9 for desktop and a matching 4:5 crop for mobile):
 - **Trades, construction, roofing, glass, pools, upholstery**: the finished result on a real-looking Bahamian building; a cross-section or detail of the work; gloved hands at the critical step; the tool and the material close up; the crew from behind in context; the result after rain or at dusk; the workshop or yard.
 - **Industrial, port, energy, shipyard**: a wide establishing view from the air; machinery at work at human scale; a safety detail; a process close-up; the operation at blue hour.
 - **Retail, home centre, paper, rum cake**: hero still life of the core products on one surface and one backdrop; hands choosing or wrapping; aisle detail with soft depth of field (no brand labels readable); delivery to a dock or mailboat; the product in use at home.

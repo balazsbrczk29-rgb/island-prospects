@@ -1,6 +1,6 @@
 ---
 name: art-director
-description: The single design authority of the site factory. Understand the buyer and the business's real web setup, LOOK at reference sites and the current site, choose a fitting direction, source photographs, perfect the first screen before building the rest, and pass a critic that sees the real page. Load for EVERY business. It replaces design-system.md, showcase-art-direction.md and portfolio-standard.md.
+description: The design judgment of the site factory (works with the site-playbooks skill, which holds the creative brief per site type). Understand the buyer and the business's real web setup, LOOK at reference sites and the current site, choose a fitting direction, source photographs, perfect the first screen before building the rest, and pass a critic that sees the real page. Load for EVERY business. It replaces design-system.md, showcase-art-direction.md and portfolio-standard.md.
 ---
 
 # Art director
@@ -16,6 +16,11 @@ sites in its category. Rules below exist only because earlier rounds failed; tas
 - **Wrong kind of site.** Businesses with real webshops, listings or booking engines got brochure concepts, a downgrade (CBS has a full online store; it got a one-page front door).
 - **Fixes applied blindly.** Critic changes were applied without re-scoring, so 2/5 pages were published as done.
 - **Hard-coded sameness.** A full-width black concept bar opened every site (now a small floating tag). Shared defaults (shadcn styling, effect components, one motion wrapper) leaked into every page.
+
+## 0. Start from the playbook
+Read `.claude/skills/site-playbooks/SKILL.md` and the playbook for your site type first. The playbook gives the
+buyer, the big ideas, the page, imagery and references; this skill gives the judgment to execute it and verify it.
+The big idea comes first; direction, palette and type serve it.
 
 ## 1. Understand (before any design)
 1. Read your row in `factory/audit/<slug>.json`: `site_kind`, `concept_type`, `must_keep`. Your concept is the SAME kind of site, far better: a webshop stays a shop (catalogue, product pages, cart drawer, checkout preview), a booking site keeps its real booking flow, a listings site keeps search and property pages, a brochure becomes a sharp sales site. If the row is not audited, audit it first (`factory/AUDIT.md`).
@@ -47,7 +52,7 @@ how big the photos are and how they are cropped, the type scale, how much space 
 elements there are, how the navigation behaves. If `look.mjs` reports the network is blocked, say so in
 status notes and rely on the archetype descriptions.
 
-## 3. Choose the direction
+## 3. Choose the direction (in service of the big idea)
 ```
 node factory/tools/direction.mjs <slug> --options
 node factory/tools/direction.mjs <slug> --set A.. P.. T..
@@ -63,8 +68,8 @@ what fills the screen (which photograph, cropped how), the one sentence of type 
 Six to ten screens for a home page. If two consecutive screens could swap places without loss, one is filler: cut it.
 Builders who skip this produce section soup. This storyboard is what you build and what the critic checks against.
 
-## 4. Photographs (they decide most of the result)
-Follow `references/imagery.md`. 8-15 photographs on the home page, large and cropped with intent, one
+## 4. Imagery, 3D and film
+The playbook for your site type decides what carries the page: photographs, a 3D scene, film, type, or a mix. There is no quota. When you use photographs, follow `references/imagery.md`: large and cropped with intent, one
 consistent light and grade across the set: the business's own photos, excellent Wikimedia Commons photos of
 the real place, and a Lovable asset project for photoreal images of the trade (start it first, `wait: false`).
 Never SVG scenes, toy 3D, stock or placeholders.
@@ -76,7 +81,7 @@ in `factory/qa/<slug>/` next to ref1 and ref2. Ask: would a juror who just saw t
 there one clear typographic idea and enough space? Iterate up to three times. Only then build the rest.
 
 ## 6. Taste rules (the only design rules)
-- Photographs lead; type is confident and sparse; space is generous; one idea per section; remove anything that exists only to look designed.
+- The big idea leads (a scene, a living photograph, a film, an object, or pure type); type is confident and sparse; space is generous; one idea per section; remove anything that exists only to look designed.
 - Sections come from `concept_type` and the buyer's questions, in an order that suits this business, not a standard rhythm.
 - No paperwork aesthetics: no form numbers, section codes, ledgers or tables unless the business truly publishes tabular data (rates, specs, timetables), no visible credit lists (credits in one small footer line and the concept notes).
 - shadcn and Radix are for behaviour and accessibility only: restyle completely; no default rounded-bordered SaaS look. Magic UI and React Bits effects only when the direction needs that effect; never decorative beams, sparkles or gradients.

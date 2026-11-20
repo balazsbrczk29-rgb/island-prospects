@@ -13,15 +13,17 @@ For Bahamian businesses in `factory/data/prospects.json`, build concept preview 
 (ESTATIQ AI Solutions) shows the owner to win a $500 to $1,000+ rebuild. Each one must be:
 - work a top studio would put in its portfolio, for this business's real buyer;
 - the same kind of site as the business really needs (a shop stays a shop, a booking site keeps booking), far better than what they have;
-- led by photographs of the real place and trade, never drawings;
+- built around ONE big idea about the business's real world, executed so the owner has never seen anything like it
+  (often immersive: a photoreal scene, a living photograph, film, a real object in 3D; sometimes pure typography);
 - unlike any competitor's site in this repo (owners on a small island compare);
 - 100% truthful, converting on a phone, SEO-ready.
 
 ## Read once, in this order (nothing else up front)
 1. `CLAUDE.md`: the hard rules.
 2. `.claude/skills/site-factory/SKILL.md`: the order of work.
-3. `.claude/skills/art-director/SKILL.md`: every design decision. Its references only for your chosen entries.
-4. `factory/AUDIT.md`: what your site-audit row means.
+3. `.claude/skills/site-playbooks/SKILL.md`: what we make and why, the recipes, and which playbook is yours. Then your one playbook.
+4. `.claude/skills/art-director/SKILL.md`: design judgment and verification. Its references only for your chosen entries.
+5. `factory/AUDIT.md`: what your site-audit row means.
 Run `bash factory/tools/setup.sh` once.
 
 ## The queue
@@ -34,10 +36,10 @@ Publish after every business: `bash factory/tools/publish.sh <slug>`, confirm `P
 ## Per business (detail in the two skills)
 1. Claim. Read the site-audit row and the brief. Audit first if the row is empty.
 2. Research only what is missing (rebuild about 6 calls, new about 12) plus imagery.
-3. Buyer portrait and brand truth. Sitemap from `concept_type`.
+3. Buyer portrait and brand truth. Sitemap from `concept_type`. Your playbook, then the big idea in one sentence.
 4. LOOK: `node factory/tools/look.mjs` on their current site and two reference sites; read the screenshots.
 5. Choose the direction: `direction.mjs <slug> --options`, then `--set`.
-6. Photographs: own, excellent Commons, and a Lovable asset project (workspace daQesEM9Br73deJHgggx, start early with wait false; skip Lovable if a tool is missing or it asks for input).
+6. Assets for the idea (the recipes in site-playbooks/recipes; photographs as the idea needs): own, excellent Commons, and a Lovable asset project (workspace daQesEM9Br73deJHgggx, start early with wait false; skip Lovable if a tool is missing or it asks for input).
 7. Copy, then build the first screen and pass the hero gate before building the rest.
 8. qa.mjs (note any BLIND line), interact.mjs, distinct.mjs, critic subagent; every score 4 or more; at most two fix passes.
 9. Status JSON, publish.

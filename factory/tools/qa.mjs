@@ -106,15 +106,11 @@ for (const page of pages) {
         return { hero: Math.round(hero * 100), fams: [...fams], body, measure: Math.round(measure), ratio: h1s && body ? +(h1s / body).toFixed(1) : 0, imgs, btnStyles: btnStyles.size };
       });
       const dir = (() => { try { return JSON.parse(fs.readFileSync(path.join(root, 'factory/directions', slug + '.json'), 'utf8')); } catch { return {}; } })();
-      const typeLed = ['A04', 'A12'].includes(dir.archetype);
-      info.push(`craft: hero media ${m.hero}% of first screen, fonts ${m.fams.length} (${m.fams.join(', ')}), body ${m.body}px, measure ${m.measure}ch, h1/body ${m.ratio}x, home photos ${m.imgs}, button styles ${m.btnStyles}`);
-      if (!typeLed && m.hero < 35) blockers.push(`craft: the first screen's largest photograph covers only ${m.hero}% of it (need 35%+ unless the direction is type-led A04/A12)`);
+            info.push(`craft: hero media ${m.hero}% of first screen, fonts ${m.fams.length} (${m.fams.join(', ')}), body ${m.body}px, measure ${m.measure}ch, h1/body ${m.ratio}x, home photos ${m.imgs}, button styles ${m.btnStyles}`);
       if (m.fams.length > 3) blockers.push(`craft: ${m.fams.length} font families in use (${m.fams.join(', ')}); a premium page uses 2, at most 3 with a mono`);
       if (m.body < 16 || m.body > 22) warnings.push(`craft: body text ${m.body}px (premium range 17-20px)`);
       if (m.measure > 90) warnings.push(`craft: paragraphs run ${m.measure} characters wide (keep under 75)`);
       if (m.ratio && m.ratio < 2.5) warnings.push(`craft: h1 is only ${m.ratio}x the body size; premium pages have real scale contrast (3x+)`);
-      if (prospect.tier !== 'C' && m.imgs < 4) blockers.push(`craft: only ${m.imgs} photographs on the home page (need 8-15; 4 is the floor)`);
-      else if (prospect.tier !== 'C' && m.imgs < 8) warnings.push(`craft: ${m.imgs} photographs on the home page (aim for 8-15)`);
       if (m.btnStyles > 3) warnings.push(`craft: ${m.btnStyles} different filled button styles; use one primary and one secondary`);
     }
     const file = path.join(outDir, `${page.replace('.html', '')}-${vp.name}.png`);

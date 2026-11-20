@@ -15,6 +15,7 @@ tracked labels, drawn visuals. The first generation-2 attempt was rejected as wo
 The pipeline was then consolidated (Nov 8 evening). The art-director skill's "What went wrong" section is the authority on what never to repeat.
 
 ## The pipeline now (single sources of truth)
+- `.claude/skills/site-playbooks/` (Nov 20): the creative brief per site type (11 playbooks: marina, resort, experiences, trades, industrial, shop, food-events, professional, tech-security, real-estate, institutions) and 8 tested immersive recipes (Ocean, ScrollStage, ModelStage, PhotoDepth, ScrollVideo, HorizontalTrack, Enquiry, Shop). Each site is built around ONE big idea from its playbook. There is no photo quota: the idea decides photos vs 3D vs film vs type.
 - `CLAUDE.md`: hard rules.
 - `factory/PROMPT.md`: the run brief.
 - `.claude/skills/site-factory/SKILL.md`: the order of work.
