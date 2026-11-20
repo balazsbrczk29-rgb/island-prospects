@@ -8,6 +8,11 @@ with every other harbour on the route and with Florida marinas they know. They f
 approach, no slip on arrival, a marina that feels run-down. They choose a place that feels calm, competent
 and quietly exclusive, and that answers the captain's questions in seconds.
 
+**Variant: private club and residences.** Some marinas (Bell Channel) are owners' condominium clubs with a private
+dock, not public marinas. Then the buyers are owners, prospective buyers or renters of units, and visiting boaters
+asking whether a slip is ever available. Route them early ("Who is asking?": an owner, a prospective buyer, a
+visiting boat) and sell the place to live, not transient slips.
+
 ## 2. What wins the owner
 "Your harbour finally looks like the place yacht owners talk about, and a captain can check everything they
 need from the cockpit on a phone." Most marina sites here are dated brochures or boating-guide pages.
@@ -15,7 +20,8 @@ need from the cockpit on a phone." Most marina sites here are dated brochures or
 ## 3. Big ideas (pick one, or invent a truer one)
 - **The arrival.** A ScrollStage with the Ocean recipe at dusk or first light: scrolling carries the visitor
   across open water toward the harbour; chapter captions name the real waypoints (the channel, the markers, the
-  island). At the end the scene dissolves into a real photograph of the docks. (Ocean, ScrollStage, PhotoDepth)
+  island). At the end the scene dissolves into a real photograph of the docks. If no real dock photo exists (often), end on an
+  excellent Commons photo of the real bay or inlet, or on a still rendered from the scene. (Ocean, ScrollStage, PhotoDepth)
 - **Will she fit?** A precise, elegant slip checker as the hero: enter length, beam and draft; the page shows
   the marina's sourced limits and answers yes, ask, or no, with a calm visual of the hull against the slip.
   Only with sourced numbers; otherwise "Ask the dockmaster" states clearly what to ask. (Enquiry for the request)

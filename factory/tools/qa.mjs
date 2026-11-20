@@ -52,7 +52,7 @@ for (const page of pages) {
       const q = (s) => [...document.querySelectorAll(s)];
       const text = document.body.innerText || '';
       let ld = [], ldErr = 0; q('script[type="application/ld+json"]').forEach(s => { try { ld.push(JSON.parse(s.textContent)); } catch { ldErr++; } });
-      const hidden = q('main *').filter(el => { const cs = getComputedStyle(el); return el.children.length === 0 && (el.innerText || '').trim().length > 20 && parseFloat(cs.opacity) < 0.05; }).length;
+      const hidden = q('main *').filter(el => { const cs = getComputedStyle(el); return !el.closest('[data-stage]') && el.children.length === 0 && (el.innerText || '').trim().length > 20 && parseFloat(cs.opacity) < 0.05; }).length;
       return {
         overflow: document.documentElement.scrollWidth - window.innerWidth,
         h1: q('h1').length, title: document.title, desc: (document.querySelector('meta[name="description"]') || {}).content || '',
@@ -157,7 +157,8 @@ if H>1800:
 print(json.dumps(out))`, f]).toString());
     const centre = res.strips.filter(x => x > 0 && x < 1200);
     if (res.strips.length && res.strips.length < 6) blockers.push(`dead space: a ${res.strips.length * 240}px wide vertical strip at x=${res.strips.join(',')} is empty for most of the page (a side column that ends, or an unused gutter)${centre.length ? '' : ''}`);
-    if (res.bands > 1100) warnings.push(`dead space: ${res.bands}px of empty page in one stretch`);
+    const stage = fs.readFileSync(path.join(root, slug, 'index.html'), 'utf8').includes('data-stage');   // pinned scroll stages look empty in a full-page screenshot
+    if (res.bands > 1100 && !stage) warnings.push(`dead space: ${res.bands}px of empty page in one stretch`);
   }
 } catch {}
 if (globalThis.__blocked) console.log(`BLIND: ${globalThis.__blocked} outside images could not be loaded in this sandbox, so the screenshots show grey boxes instead of photos. You cannot judge the design from them; note this in status and keep layouts photo-agnostic.`);

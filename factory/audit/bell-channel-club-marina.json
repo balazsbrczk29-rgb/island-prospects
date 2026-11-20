@@ -6,5 +6,28 @@
  "url": "bellchannelclub.com",
  "url_source": "prospects",
  "old_check": "DOMAIN LOST: bellchannelclub.com now serves gambling content",
- "audit": null
+ "audit": {
+  "site_kind": "none",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 0,
+  "platform": "",
+  "latest_year": null,
+  "modernity": 0,
+  "concept_type": "brochure: club and private owners' marina, who-is-asking router, slip note + call",
+  "must_keep": [
+   "office phone and fax",
+   "private-marina-for-owners message",
+   "amenities from listings"
+  ],
+  "weaknesses": [
+   "bellchannelclub.com now serves gambling content",
+   "only an unclaimed marinas.com listing",
+   "no email or modern contact path"
+  ],
+  "priority": "A",
+  "note": "Lost domain; owners, buyers and boaters land on a gambling site."
+ }
 }

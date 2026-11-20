@@ -61,6 +61,11 @@ Recipes are techniques, not layouts; two sites using the same recipe must still 
 | `Enquiry.tsx` | choices to summary to a prefilled WhatsApp or email message | every business that takes bookings, quotes or enquiries |
 | `Shop.tsx` | catalogue with filters, cart drawer, checkout preview handing off to their store | every business that really sells online |
 
+Lessons from the Bell Channel pilot, built into the recipes:
+- **Shader materials**: create them with `new THREE.ShaderMaterial({...})` inside `useMemo` and pass `material={...}` to the mesh. A `uniforms={obj}` prop on `<shaderMaterial>` is copied, so per-frame updates silently do nothing.
+- **Rendered stills**: a still rendered from your own 3D scene (Playwright screenshot of the canvas at a chosen progress, saved as JPG in the site's `public/`) is free, true to the idea, and works as the canvas poster, the no-WebGL fallback, an inner-page hero and the social share image.
+- **Scroll stages**: give the pinned section `data-stage` so QA does not mistake its pinned height for empty space, or its waiting chapter captions for hidden text.
+
 Combining is where the magic is: a ScrollStage holding the Ocean with chapters is a cinematic arrival; a
 ScrollStage holding a ModelStage with callouts is a product film; PhotoDepth inside a HorizontalTrack is a
 gallery of living places.

@@ -30,6 +30,9 @@ The pipeline was then consolidated (Nov 8 evening). The art-director skill's "Wh
   - `reroll.mjs`, `publish.sh`, `build-site.mjs`, `interact.mjs`.
 - Concept label: now a small floating tag (`assets/concept.css`), not a black bar across every site.
 
+## Pilot result (Nov 20)
+Bell Channel was rebuilt with the marina playbook ("the arrival", Ocean recipe). It was the first genuinely premium result; critic scores 4/4/4/4/4/5/4 after real re-scoring. Its 12 feedback points are folded into the playbooks, recipes and tools (project doc claude/pilot-bell-channel-feedback.md). The cloud environment's network was still "Limited": Balazs must set the Claude Code cloud environment's Network access to Full (environment settings), otherwise builders cannot see photos or references.
+
 ## Open items, in order
 0. **Network check.** Balazs allowed all domains around 16:21. In the new session, run `node factory/tools/look.mjs https://www.aesop.com test` and read the PNG. If it fails, ask Balazs to check Settings > Capabilities, because nothing good can be judged blind.
 1. **Site audit** for the 69 remaining sites with a URL and the 23 without one (factory/AUDIT.md). Check each classification by looking: automatic extraction called a listings site a webshop. Show Balazs the A list.
