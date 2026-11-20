@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue, AnimatePresence } from "motion/react"
 import { ArrowUpRight, MessageCircle, Minus, Phone, Plus } from "lucide-react"
-import { C, Page, Photo, QUOTE_TEXT, ease, img, mount, waLink } from "./site"
+import { C, Page, Photo, QUOTE_TEXT, chairSet, ease, img, mount, waLink } from "./site"
 
 /* ---------- 1. Hero: the needle in the cloth ---------- */
 function Hero() {
@@ -47,11 +47,11 @@ function Hero() {
 
 /* ---------- 2. The object study: one chair, five layers ---------- */
 const LAYERS = [
-  { key: "worn-chair", name: "Before", title: "The chair you nearly threw out", body: "Faded cloth, a split seat, foam pushing through. The frame underneath is usually sound. Bring it to Claridge Road before you replace it.", alt: "A mahogany dining chair with a torn, faded floral seat and foam showing through" },
-  { key: "layer-frame", name: "Frame", title: "Back to bare wood", body: "Everything comes off. Old tacks out, joints checked, so nothing new goes onto a weak frame.", alt: "The same chair stripped to its bare hardwood frame" },
-  { key: "layer-webbing", name: "Webbing and springs", title: "A new base under the seat", body: "Webbing woven tight and tacked down, springs tied in, so the seat sits level and firm.", alt: "The same chair with jute webbing and hand-tied springs across the seat" },
-  { key: "layer-foam", name: "Foam", title: "Fresh foam, cut\u00a0to\u00a0fit", body: "New foam shaped to the seat and wrapped in batting, so the cloth lies smooth with no hard edges.", alt: "The same chair with a new cream foam seat pad" },
-  { key: "layer-fabric", name: "Cloth", title: "Same chair, new look", body: "The fabric you chose, pulled taut, stapled underneath and finished by hand. One stitch at a time.", alt: "The same chair finished in deep navy cloth with piping and brass nail heads" },
+  { key: "worn", name: "Before", title: "The chair you nearly threw out", body: "Faded cloth, a split seat, foam pushing through. The frame underneath is usually sound. Bring it to Claridge Road before you replace it.", alt: "A mahogany dining chair with a torn, faded floral seat and foam showing through" },
+  { key: "frame", name: "Frame", title: "Back to bare wood", body: "Everything comes off. Old tacks out, joints checked, so nothing new goes onto a weak frame.", alt: "The same chair stripped to its bare hardwood frame" },
+  { key: "webbing", name: "Webbing and springs", title: "A new base under the seat", body: "Webbing woven tight and tacked down, springs tied in, so the seat sits level and firm.", alt: "The same chair with interlaced jute webbing and five coil springs tied down with twine" },
+  { key: "foam", name: "Foam", title: "Fresh foam, cut\u00a0to\u00a0fit", body: "New foam shaped to the seat and wrapped in batting, so the cloth lies smooth with no hard edges.", alt: "The same chair with a square-cut cream foam block on the seat" },
+  { key: "fabric", name: "Cloth", title: "Same chair, new look", body: "The fabric you chose, pulled taut, stapled underneath and finished by hand. One stitch at a time.", alt: "The same chair finished in deep navy cloth with piping and brass nail heads" },
 ]
 
 // Scroll map: the stage holds on "Before", then each new layer wipes up over the last one (a seam travels with the
@@ -72,7 +72,7 @@ function LayerImage({ i, p, n }: { i: number; p: MotionValue<number>; n: number 
   return (
     <motion.div className="absolute inset-0 overflow-hidden will-change-transform" style={{ transform: i ? mask : undefined }}>
       <motion.div className="absolute inset-0 will-change-transform" style={{ transform: i ? inner : undefined }}>
-        <Photo src={img(LAYERS[i].key)} alt={LAYERS[i].alt} className="h-full w-full" priority={i === 0} />
+        <Photo src={img(`chair-${LAYERS[i].key}-1600`)} srcSet={chairSet(LAYERS[i].key)} sizes="(min-width: 768px) 80svh, 100vw" alt={LAYERS[i].alt} className="h-full w-full object-[50%_62%]" priority={i === 0} />
       </motion.div>
       {i > 0 && <motion.span aria-hidden className="stitch absolute inset-x-0 top-0 text-cream" style={{ opacity: seam }} />}
     </motion.div>

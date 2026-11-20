@@ -20,6 +20,8 @@ export const waLink = (text: string) => `https://wa.me/${C.wa}?text=${encodeURIC
 export const QUOTE_TEXT = "Hi Slim Upholstery, I would like a free quote. I can send photos of the piece."
 // Illustrative photography generated for this concept (Lovable asset project), to be replaced with Slim's own project photos.
 export const img = (n: string) => `https://ip-assets-slim-s-upholstery.lovable.app/assets/${n}.jpg`
+// The chair stages exist at native 3712x4608 plus 1600 and 900 px web copies (2x the displayed size).
+export const chairSet = (stage: string) => `${img(`chair-${stage}-900`)} 900w, ${img(`chair-${stage}-1600`)} 1600w`
 
 function useLenis() {
   useEffect(() => {
@@ -103,11 +105,11 @@ export function Page({ current, children }: { current: string; children: ReactNo
 }
 
 /** A photograph with a reserved, tinted box (no layout shift) that fades in once decoded. */
-export function Photo({ src, alt, className = "", sizes, priority = false, style }: { src: string; alt: string; className?: string; sizes?: string; priority?: boolean; style?: React.CSSProperties }) {
+export function Photo({ src, srcSet, alt, className = "", sizes, priority = false, style }: { src: string; srcSet?: string; alt: string; className?: string; sizes?: string; priority?: boolean; style?: React.CSSProperties }) {
   const [loaded, setLoaded] = useState(false)
   return (
     <img
-      src={src} alt={alt} sizes={sizes} decoding="async" loading={priority ? "eager" : "lazy"}
+      src={src} srcSet={srcSet} alt={alt} sizes={sizes} decoding="async" loading={priority ? "eager" : "lazy"}
       {...(priority ? { fetchPriority: "high" as const } : {})}
       data-source="generated"
       onLoad={() => setLoaded(true)}
