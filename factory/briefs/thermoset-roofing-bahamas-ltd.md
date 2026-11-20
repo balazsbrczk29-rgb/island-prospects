@@ -55,3 +55,13 @@ Hero: split editorial with their crew photo bleeding right. Signature: "This sho
 - **Interactions**: (1) choose the finish (TPO, PVC, modified bitumen, standing seam metal, liquid-applied terrace) and the 3D roof re-skins with the matching spec row and photo; (2) the work order fills itself as you pick building type, job and island, then opens an email to the GM.
 - **Imagery plan**: hero/stage = procedural 3D; finish selector = generated photo per finish; contact sheet = 13 own job photos; RADAR = generated after-rain + inspection; spec table margin = generated layers + coping; city = Commons aerial of Nassau; services page = own photos + generated seam-weld, mod-bit, waterproofing, standing-seam.
 - **Not doing (generation 1)**: the split editorial hero with crew photo bleeding right on paper ground; the sticky blurred header; the client index as tabs with cards and the FAQ accordion filler.
+
+---
+
+# Reroll (2026-11-20), hero-first review with Balazs
+
+- **Playbook**: trades. **Big idea** (anatomy of the work): a white-rendered Nassau commercial block with Bahama shutters stands on a cut block of limestone, and Thermoset's single-ply roof hangs apart above it (deck, vapour retarder, insulation, cover board, membrane, edge metal and AC curbs); scrolling builds it back one layer at a time, each named from their services list.
+- **Direction**: A06 Object study, P01 Limestone (ground #EFEAE0, ink #1B1A17, sea glass #2C6C70 = their logo teal, used on shutters and coping), T03 Swiss grotesk (Hanken Grotesk only, 14/18/28/56/120, weights 400 and 600, self-hosted so QA is not blind). Why: their product is a physical assembly a facility manager never sees; the lane is the white membrane and whitewash in noon glare.
+- **Looked at**: current site (Squarespace, round photo crops, red certification line, "Welcome to the pinnacle"). look.mjs cannot reach reference sites from this sandbox (proxy), current site seen through a Firecrawl screenshot.
+- **First screen**: headline "The roof, layer by layer." top left; the 3D object centre right with six leader-line callouts; one paragraph, "Request a free estimate" and the office number bottom left. Entrance: the roof comes apart from the top down.
+- **Assumption to confirm**: vapour retarder, insulation and cover board are trade names for a typical single-ply build-up, not Thermoset's own text.
