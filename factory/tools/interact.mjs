@@ -15,7 +15,7 @@ await pg.route('**/*', r => r.request().url().startsWith(base) ? r.continue() : 
 await pg.goto(`${base}/${slug}/${page}`, { waitUntil: 'load' }); await pg.waitForTimeout(1200);
 const report = { tabs: 0, accordions: 0, buttons: 0, inputs: 0, dead: [] };
 for (const el of await pg.$$('[role="tab"]')) { await el.scrollIntoViewIfNeeded(); await el.click().catch(() => report.dead.push('tab')); report.tabs++; await pg.waitForTimeout(150); }
-for (const el of await pg.$$('[data-slot="accordion-trigger"], button[aria-expanded]')) { if (!(await el.isVisible())) continue; await el.scrollIntoViewIfNeeded(); await el.click().catch(() => report.dead.push('accordion')); report.accordions++; await pg.waitForTimeout(120); }
+for (const el of await pg.$$('[data-slot="accordion-trigger"], button[aria-expanded]:not([aria-haspopup="dialog"])')) { if (!(await el.isVisible())) continue; if (await pg.$('[role="dialog"][data-state="open"], [aria-modal="true"]:visible')) await pg.keyboard.press('Escape'); await el.scrollIntoViewIfNeeded(); await el.click().catch(() => report.dead.push('accordion')); report.accordions++; await pg.waitForTimeout(120); }
 for (const el of await pg.$$('main input:visible, main textarea:visible')) { const type = await el.getAttribute('type'); await el.fill(type === 'date' ? '2026-12-20' : type === 'number' ? '62' : 'Test').catch(() => report.dead.push('input')); report.inputs++; }
 for (const el of await pg.$$('main button:visible')) { const t = (await el.innerText().catch(() => '')).trim().slice(0, 30); if (/^(call|whatsapp)/i.test(t)) continue; await el.click({ trial: true }).catch(() => report.dead.push('button:' + t)); report.buttons++; }
 for (const el of (await pg.$$('main a[href]')).slice(0, 25)) { await el.hover().catch(() => {}); }

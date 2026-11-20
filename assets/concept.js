@@ -21,3 +21,11 @@
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&wrap.classList.contains('is-open')) close(); });
   if(/[?&]notes=1/.test(location.search)) open();
 })();
+/* On phones the full label sits over the hero for the first moments only, then collapses to a small "Concept
+   preview" pill (still a button that opens the notes). The full wording stays in the DOM for screen readers. */
+(function(){
+  var r=document.getElementById('concept-ribbon'); if(!r||!window.matchMedia) return;
+  var mq=matchMedia('(max-width: 640px)'); var done=false;
+  function compact(){ if(done||!mq.matches) return; done=true; r.classList.add('is-compact'); }
+  setTimeout(compact,4500); addEventListener('scroll',function(){ if(scrollY>120) compact(); },{passive:true});
+})();

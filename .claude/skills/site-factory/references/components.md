@@ -70,3 +70,15 @@ This is how every site becomes a future node on the agency's delivery/booking pl
 
 ## 5. Mobile primary action
 The primary action (call, WhatsApp if sourced, or the enquiry) must be thumb-reachable on phones, in the form your archetype gives it: a magazine tear-off strip, a floating dock, a legend bottom sheet, a toolbar button, a reply-card tab, a single "Enquire" word. Design it; never paste the generation-1 two-cell bar with `aria-label="Quick actions"` (distinct.mjs blocks it). Use `padding-bottom: env(safe-area-inset-bottom)` for anything fixed to the bottom and leave room so the footer is not covered.
+
+
+## 6. Fonts: self-host, never a Google Fonts link
+Google Fonts may be unreachable in the build sandbox, so QA and the critic would judge fallback fonts. The npm
+registry is always reachable: `cd /tmp && npm pack @fontsource-variable/<family>` (or `@fontsource/<family>`),
+untar it, copy the latin `.woff2` files into `factory/web/sites/<slug>/src/fonts/`, and declare them with
+`@font-face` (`font-display: swap`) in `styles.css`. They ship with the site and load everywhere.
+
+## 7. Mobile action bars
+A fixed mobile bar plus the concept tag can cover 130 px of a phone screen. Hide your bar on the first screen
+(the hero carries the phone number) and when the contact section is in view; set `--concept-offset` so the tag
+sits above it when it shows.

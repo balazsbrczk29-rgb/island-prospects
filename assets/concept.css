@@ -16,3 +16,8 @@
 .concept-notes__meta{color:#6b675e;font-size:13px;margin:0}
 .concept-notes__close{float:right;appearance:none;border:0;background:#ebe8df;border-radius:999px;width:32px;height:32px;font-size:18px;line-height:32px;cursor:pointer}
 .concept-notes__foot{margin-top:1.25rem;padding-top:1rem;border-top:1px solid #e3dfd4;font-size:13px;color:#6b675e}
+.concept-ribbon.is-compact{padding:.25rem .25rem .25rem .7rem}
+.concept-ribbon.is-compact>span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.concept-ribbon.is-compact::before{content:"Concept preview";font-size:10.5px}
+.concept-ribbon.is-compact .concept-ribbon__btn{font-size:0;padding:.45rem .6rem}
+.concept-ribbon.is-compact .concept-ribbon__btn::after{content:"Notes";font-size:10.5px}

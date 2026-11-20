@@ -22,11 +22,18 @@ const oceanFrag = /* glsl */ `
 uniform float uTime; uniform vec3 uSun; uniform vec3 uDeep; uniform vec3 uShallow; uniform vec3 uHorizon; uniform vec3 uZenith; uniform vec3 uSunColor;
 varying vec3 vWorld;
 vec2 wave(vec2 p, vec2 d, float f, float s, float a){ float ph = dot(p, d) * f + uTime * s; return d * cos(ph) * a * f; }
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+float vnoise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y); }
 void main(){
   vec2 p = vWorld.xz;
   vec2 g = wave(p, normalize(vec2(1.0, .3)), .08, 1.1, .5) + wave(p, normalize(vec2(-.4, 1.0)), .13, 1.5, .32)
          + wave(p, normalize(vec2(.7, -.6)), .31, 2.3, .14) + wave(p, normalize(vec2(-.9, -.2)), .73, 3.1, .06)
-         + wave(p, normalize(vec2(.2, .9)), 1.9, 4.7, .022);
+         + wave(p, normalize(vec2(.2, .9)), 1.9, 4.7, .022) + wave(p, normalize(vec2(.95, .35)), 1.17, 3.7, .03)
+         + wave(p, normalize(vec2(-.55, .83)), 2.9, 5.9, .012) + wave(p, normalize(vec2(.33, -.94)), 4.3, 7.3, .007);
+  // fine noise breaks up the regular stripes that a sum of sine waves produces
+  vec2 q = p * 0.9 + vec2(uTime * 0.35, uTime * 0.2);
+  g += (vec2(vnoise(q + vec2(.13, 0.)) - vnoise(q - vec2(.13, 0.)), vnoise(q + vec2(0., .13)) - vnoise(q - vec2(0., .13)))) * 0.22;
   vec3 n = normalize(vec3(-g.x, 1.0, -g.y));
   vec3 v = normalize(cameraPosition - vWorld);
   float dist = length(cameraPosition.xz - vWorld.xz);
@@ -65,17 +72,22 @@ function Scene({ elevation = 4, azimuth = 180, deep = '#0d3f57', shallow = '#2a9
     return new THREE.Vector3().setFromSphericalCoords(1, phi, theta)
   }, [elevation, azimuth])
   const golden = elevation < 8
+  // Build the material ourselves: in React Three Fiber v9 a `uniforms={obj}` prop on <shaderMaterial> is copied,
+  // so per-frame updates to obj silently do nothing (found in the Bell Channel pilot). Same rule for every shader recipe.
   const uniforms = useMemo(() => ({
     uTime: { value: 0 }, uSun: { value: sun.clone() },
     uDeep: { value: new THREE.Color(deep) }, uShallow: { value: new THREE.Color(shallow) },
     uHorizon: { value: new THREE.Color(golden ? '#f2c9a0' : '#cfe3ea') }, uZenith: { value: new THREE.Color(golden ? '#7f9bb3' : '#5f93c4') },
     uSunColor: { value: new THREE.Color(golden ? '#ffd2a1' : '#ffffff') },
   }), [sun, deep, shallow, golden])
+  const material = useMemo(() => new THREE.ShaderMaterial({ vertexShader: oceanVert, fragmentShader: oceanFrag, uniforms }), [uniforms])
+  useEffect(() => () => material.dispose(), [material])
 
   useEffect(() => {
     gl.toneMapping = THREE.ACESFilmicToneMapping; gl.toneMappingExposure = golden ? 0.5 : 0.6
     const u = sky.current.material.uniforms
-    u.turbidity.value = golden ? 7 : 4; u.rayleigh.value = golden ? 2.2 : 1.2; u.mieCoefficient.value = 0.005; u.mieDirectionalG.value = 0.86
+    // turbidity above ~4 turns a sunset sky olive; keep it low and let rayleigh carry the colour
+    u.turbidity.value = golden ? 3 : 2.5; u.rayleigh.value = golden ? 2.4 : 1.2; u.mieCoefficient.value = 0.005; u.mieDirectionalG.value = 0.86
     u.sunPosition.value.copy(sun)
   }, [gl, sun, golden])
 
@@ -89,9 +101,8 @@ function Scene({ elevation = 4, azimuth = 180, deep = '#0d3f57', shallow = '#2a9
   return (
     <>
       <sky ref={sky} scale={10000} />
-      <mesh rotation-x={-Math.PI / 2}>
+      <mesh rotation-x={-Math.PI / 2} material={material}>
         <planeGeometry args={[12000, 12000, 1, 1]} />
-        <shaderMaterial vertexShader={oceanVert} fragmentShader={oceanFrag} uniforms={uniforms} />
       </mesh>
       {children}
     </>
