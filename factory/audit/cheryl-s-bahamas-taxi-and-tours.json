@@ -6,5 +6,34 @@
  "url": "cherylbahamastaxiandtours.com",
  "url_source": "prospects",
  "old_check": "LOADED: dated footer (2022)",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "JotForm airport transfer form (one-way/round trip, van or SUV, flight, arrival-sign name, passengers, kids seats, grocery pre-shop, hotel, bags)",
+  "products_or_listings": 22,
+  "pages": 9,
+  "platform": "static HTML (hand-built) + JotForm",
+  "latest_year": 2022,
+  "modernity": 2,
+  "concept_type": "booking: airport transfer request (arrival-sign name, flight, vehicle) + private tour builder from their real stops, both sending a prefilled email/call",
+  "must_keep": [
+   "airport transfer booking with arrival-sign name, flight details, van or SUV, one-way or round trip",
+   "the full list of real tour stops with sourced prices",
+   "English or Spanish tours",
+   "office and out-of-hours phone numbers, email",
+   "car and booster seats free",
+   "Registered Taxi Service #1080"
+  ],
+  "weaknesses": [
+   "Covid 19 banner still at the top",
+   "2022 footer and repeated Conch Demonstration heading",
+   "five different phone numbers",
+   "unsupported #1 claims",
+   "zoomed-out mobile viewport (minimum-scale 0.25); 22 tours in one long scroll",
+   "booking is an off-brand JotForm with a 200-country list and timezone picker"
+  ],
+  "priority": "A",
+  "note": "Small Nassau taxi and private tour operator, dated hand-built site with a working JotForm transfer booking."
+ }
 }

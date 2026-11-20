@@ -1,0 +1,56 @@
+// Every stop and fact below is from cherylbahamastaxiandtours.com/bahamas-tours.html (scraped 2026-11-20).
+export type Kind = "History" | "Food and rum" | "Beach and water" | "Culture and shopping"
+export type Stop = { id: string; name: string; kind: Kind; img?: string; alt?: string; pos?: string; line: string; tag?: string }
+
+export const STOPS: Stop[] = [
+  { id: "forts", name: "The forts", kind: "History", img: "the-forts.png", alt: "Fort Fincastle's stone walls and water tower beside the 66 Steps", pos: "30% 50%",
+    line: "Fort Charlotte, Fort Fincastle and the 66 Steps, Fort Montague: built in the 1700s against Spanish ships and pirates. Wednesday and Friday at 11:30am, a costumed re-enactment ends with the noon cannon.", tag: "Wed, Fri 11:30am" },
+  { id: "conch", name: "Conch demonstration", kind: "Food and rum", img: "conch.png", alt: "A guide holding a fresh conch at a waterfront conch stand", pos: "30% 50%",
+    line: "Conch 101: out of the shell, cleaned, every part explained, then fresh conch salad.", tag: "$10 a bowl, shares 4" },
+  { id: "fishfry", name: "The Fish Fry", kind: "Food and rum", img: "fish-fry.png", alt: "Brightly painted seafood shacks with picnic tables at the Fish Fry",
+    line: "Lunch with the locals: 15 to 20 restaurants, seafood fried, steamed or grilled." },
+  { id: "rumcake", name: "Rum Cake Factory", kind: "Food and rum", img: "rum-cake-factory.png", alt: "Rum Cake Factory, one of Cheryl's tour stops",
+    line: "Free tastings: piña colada, amaretto, banana, cinnamon. Over 1,000 cakes baked a day." },
+  { id: "distillery", name: "Rum distillery", kind: "Food and rum", img: "run-distillary.png", alt: "Rum distillery, one of Cheryl's tour stops",
+    line: "A history tour of one of Nassau's oldest restaurants, ending at the bar with drinks made from its rum." },
+  { id: "candy", name: "Bahamian candy store", kind: "Food and rum", img: "candy-store.png", alt: "Bahamian candy store, one of Cheryl's tour stops",
+    line: "An authentic Bahamian sugar rush. Ask about the candy store tour." },
+  { id: "cloisters", name: "The Cloisters", kind: "History", img: "cloisters.png", alt: "The stone arches of the Cloisters above formal gardens on Paradise Island",
+    line: "Built by French monks in the 14th century, now on Paradise Island, with the view back across to the mainland." },
+  { id: "batcave", name: "The Bat Cave", kind: "History", img: "bat-cave.png", alt: "The Bat Cave, one of Cheryl's tour stops",
+    line: "Lucayan history, pirate legends, fruit bats today, and the famous kissing chair for a photo." },
+  { id: "clifton", name: "Clifton Heritage Park", kind: "History", img: "clifton-heritage-park.png", alt: "Clifton Heritage Park, one of Cheryl's tour stops",
+    line: "A 45-minute walk through the history of the slave village, with ATV, beach, lunch or shore snorkel options.", tag: "45 min" },
+  { id: "junkanoo", name: "Junkanoo World Museum", kind: "Culture and shopping",
+    line: "Drums, horns, cowbells and the costumes. Try them on, play the drums, stay for conch fritters and jerk chicken." },
+  { id: "craft", name: "Straw market and hand craft", kind: "Culture and shopping", img: "shopping.jpeg", alt: "Walls of handmade straw bags and hats at the straw market", pos: "50% 40%",
+    line: "Souvenirs made from conch shell, coconut and straw, with help knowing a fair price." },
+  { id: "ardastra", name: "Ardastra Gardens and Zoo", kind: "Culture and shopping", img: "ardastra-gardens-zoo.png", alt: "Flamingos marching at Ardastra Gardens", pos: "80% 50%",
+    line: "Four acres of gardens, native birds and flowers, and the flamingo show every morning at 10:30.", tag: "$18 pp, under 4 free" },
+  { id: "lovebeach", name: "Time at Love Beach", kind: "Beach and water", img: "time-at-the-beach.png", alt: "A beach bar with umbrellas on the sand at Love Beach",
+    line: "A secluded beach away from downtown: music, food, drinks. Day package with lunch for six or more.", tag: "Snorkel $20" },
+  { id: "rose", name: "Snorkel cruise to Rose Island", kind: "Beach and water", img: "snorkeling.png", alt: "A sailing catamaran over clear turquoise water", pos: "50% 60%",
+    line: "About six hours: a coral reef, a secluded beach eight miles east of downtown, a BBQ lunch cooked at anchor. Hotel transfers included from most hotels.", tag: "About 6 hours" },
+  { id: "fishing", name: "Fishing and snorkelling", kind: "Beach and water", img: "fishing-and-snorkeling.png", alt: "Fishing and snorkelling, one of Cheryl's tour stops",
+    line: "Sightseeing by boat, reef fishing, optional snorkelling near a private island, Bahama Mama on board." },
+  { id: "bluelagoon", name: "Blue Lagoon beach day", kind: "Beach and water", img: "blue-lagoon-beach.png", alt: "White sand and a shallow turquoise lagoon at Blue Lagoon Island",
+    line: "A boat ride to Blue Lagoon Island: grilled lunch, inner tubes, the aqua park, dolphins and sea lions to watch." },
+  { id: "dolphin", name: "Dolphin swim", kind: "Beach and water", img: "dolphin-swim.png", alt: "Dolphin swim, one of Cheryl's tour stops",
+    line: "Meet the dolphins in an ocean lagoon: the kiss, the hug, the foot push. Sea lion programmes too." },
+  { id: "pigs8", name: "Pieces of 8: the swimming pigs", kind: "Beach and water", img: "swim-with-pigs.png", alt: "Pigs swimming in clear turquoise water off an Exuma cay", pos: "50% 75%",
+    line: "A 38 ft Fountain powerboat to five Exuma cays in a day: the pigs, rock iguanas, nurse sharks, a sandbar, lunch. Full refund 72 hours ahead.", tag: "$400 adult, $365 age 5-11" },
+  { id: "exuma", name: "Exuma day trip", kind: "Beach and water", img: "pieces-of-eight-2.png", alt: "Exuma day trip, one of Cheryl's tour stops",
+    line: "9am to 5pm: stingrays, sharks and the pigs. A plane and boat combination for anyone who gets seasick." , tag: "9am to 5pm" },
+  { id: "atv", name: "ATV adventure and beach", kind: "Beach and water", img: "atv-adventure.png", alt: "ATV adventure, one of Cheryl's tour stops",
+    line: "Off-road through Clifton's trails, then the beach with a cocktail. One rider per ATV, driver's licence needed, helmets and gloves provided." },
+  { id: "parasail", name: "Parasailing and jet ski", kind: "Beach and water", img: "parasailing-jetski.png", alt: "Parasailing and jet ski, one of Cheryl's tour stops",
+    line: "Up above the harbour, or fast across it." },
+  { id: "glass", name: "Glass bottom boat", kind: "Beach and water", img: "glass-bottom-boat.png", alt: "Glass bottom boat, one of Cheryl's tour stops",
+    line: "The reef below, without getting wet." },
+]
+
+export const KINDS: Kind[] = ["History", "Food and rum", "Beach and water", "Culture and shopping"]
+export const PRESETS: Record<string, string[]> = {
+  short: ["forts", "craft", "cloisters"],
+  full: ["forts", "lovebeach", "conch"],
+}

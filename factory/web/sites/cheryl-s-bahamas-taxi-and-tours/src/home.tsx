@@ -1,181 +1,300 @@
-import { useMemo, useState } from "react"
+import { useState, type FormEvent } from "react"
 import { AnimatePresence, motion } from "motion/react"
-import { ArrowRight, Mail, Phone, Check } from "lucide-react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Page, mount, Reveal, Head, ease, reveal, R, PHONE, TEL, PHONE2, TEL2, EMAIL } from "./site"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
+import { Page, Masthead, Dock, Contact, Photo, mount, useSignName, mailto, spring, ease, R, PHONE, TEL } from "./shared"
 
-function Hero() {
-  const [name, setName] = useState("")
-  const shown = name.trim() || "Your Name Here"
+function Hero({ name, setName }: { name: string; setName: (v: string) => void }) {
+  const shown = name.trim() || "Your name"
   return (
-    <section className="relative overflow-hidden bg-navy text-paper" aria-labelledby="hero-title">
-      <div className="mx-auto grid min-h-[calc(100svh-120px)] max-w-[1440px] items-center gap-12 px-5 py-14 md:px-10 lg:grid-cols-12">
-        <div className="lg:col-span-6">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }} className="label text-yellow">Cheryl's Bahamas Taxi and Tours · Nassau and Paradise Island</motion.p>
-          <h1 id="hero-title" className="mt-6 font-display text-[clamp(2.9rem,6.6vw,6.6rem)] leading-[0.95] font-bold tracking-[-0.045em]">
-            {["Look for your name", "at Nassau arrivals."].map((l, i) => <span key={l} className="block overflow-hidden pb-[0.06em]"><motion.span className={`block ${i ? "text-yellow" : ""}`} initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.1 + i * 0.1, duration: 1, ease: reveal }}>{l}</motion.span></span>)}
+    <section aria-labelledby="hero-title" className="relative overflow-hidden bg-deep text-white">
+      <Masthead />
+      <div className="mx-auto grid max-w-[1360px] gap-10 px-4 pb-16 pt-10 sm:px-8 lg:min-h-[calc(100svh-84px)] lg:grid-cols-12 lg:items-center lg:gap-6 lg:pb-24 lg:pt-4">
+        <div className="lg:col-span-7">
+          <h1 id="hero-title" className="poster text-[clamp(3.6rem,8.4vw,9.25rem)]">
+            {["look for", "your name."].map((l, i) => (
+              <motion.span key={l} className={`block ${i ? "text-yellow" : ""}`} initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, delay: 0.08 + i * 0.09 }}>{l}</motion.span>
+            ))}
           </h1>
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.8, ease }} className="mt-7 max-w-lg text-[18px] leading-relaxed text-paper/85">For over 25 years, Cheryl's has met visitors at the airport and shown them the island: air-conditioned taxis, trained drivers in navy and yellow, and private tours in English or Spanish.</motion.p>
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.8, ease }} className="mt-8 flex flex-col gap-2 sm:flex-row">
-            <a href="#airport" className="inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-yellow px-7 py-3.5 font-bold text-navy transition hover:-translate-y-px">Book my airport pickup <ArrowRight className="size-4" aria-hidden /></a>
-            <a href="#plan" className="inline-flex min-h-13 items-center justify-center rounded-full border-2 border-paper/40 px-6 py-3.5 font-bold transition hover:-translate-y-px hover:border-paper">Plan a private tour</a>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.35, ease }} className="mt-8 max-w-[34ch] text-[length:var(--t-4)] leading-snug text-white/90">
+            At Nassau airport arrivals, a Cheryl's driver in navy and yellow holds up a card with it. Taxis and private island tours for over 25 years.
+          </motion.p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5, ease }} className="mt-9 hidden flex-wrap items-center gap-x-7 gap-y-3 lg:flex">
+            <a href="#pickup" className="btn btn-primary">Book my airport pickup <ArrowRight className="size-[18px]" aria-hidden /></a>
+            <a href="tours.html" className="btn-text inline-flex items-center font-bold">Plan a private tour</a>
           </motion.div>
         </div>
-        <div className="lg:col-span-6">
-          <motion.div initial={{ opacity: 0, rotate: -6, y: 40 }} animate={{ opacity: 1, rotate: -2.5, y: 0 }} transition={{ delay: 0.35, duration: 1.1, ease }} className="mx-auto max-w-[560px] rounded-[10px] bg-paper p-6 text-ink shadow-[0_40px_80px_-30px_rgba(0,0,0,.6)] md:p-9">
-            <div className="flex items-center justify-between border-b-4 border-yellow pb-3"><span className="label text-navy">Cheryl's Bahamas Taxi</span><span className="label text-muted">Arrivals</span></div>
-            <AnimatePresence mode="wait"><motion.p key={shown} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.25 }} className="mt-6 min-h-[2.2em] font-display text-[clamp(2.2rem,4.4vw,3.8rem)] leading-[1.05] font-bold tracking-[-0.03em] break-words text-navy">{shown}</motion.p></AnimatePresence>
-            <p className="mt-4 text-[14px] text-muted">Welcome to Nassau</p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.8 }} className="mx-auto mt-8 max-w-[560px]">
-            <label htmlFor="sign" className="label text-yellow">Type the name for your sign</label>
-            <input id="sign" value={name} maxLength={40} onChange={e => setName(e.target.value)} placeholder="Your name or family" className="mt-2 block min-h-12 w-full rounded-full border-2 border-paper/30 bg-transparent px-5 text-[17px] text-paper placeholder:text-paper/45 outline-none focus:border-yellow" />
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  )
-}
 
-function KeyInfo() {
-  const items: [string, string, string][] = [["Office line", PHONE, TEL], ["Second line", PHONE2, TEL2], ["Hours", "9am to 6pm, 7 days", "#contact"], ["Licensed", "Registered Taxi Service #1080", "#airport"]]
-  return (
-    <section className="bg-yellow text-navy" aria-label="Key information">
-      <ul className="mx-auto grid max-w-[1440px] sm:grid-cols-2 lg:grid-cols-4">
-        {items.map(([k, v, h], i) => (
-          <li key={k} className="border-b border-navy/15 sm:odd:border-r lg:border-b-0 lg:border-l lg:first:border-l-0">
-            <a href={h} className="group block px-5 py-7 transition hover:bg-white/25 md:px-10 md:py-9"><span className="label">{k}</span><span className={`mt-2 block font-display font-bold tracking-tight ${i < 2 ? "whitespace-nowrap text-[clamp(1.7rem,2.3vw,2.3rem)]" : "text-[1.3rem] leading-snug"}`}>{v}</span><span className="mt-3 block h-[3px] w-0 bg-navy transition-all duration-500 group-hover:w-14" aria-hidden /></a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )
-}
-
-function Airport() {
-  const pts = ["A representative waits in the arrivals lounge with your name on a card.", "Drivers and reps wear a navy blue and yellow uniform with the company logo.", "Air-conditioned vehicles and drivers who know the roads.", "Car seats and booster seats at no charge, just ask.", "Lunch, dinner and downtown drop-offs while you're here.", "Baby-sitting and wheelchair rentals on request."]
-  return (
-    <section id="airport" className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32" aria-labelledby="air-title">
-      <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-        <div className="lg:col-span-6">
-          <Head index="01" label="Airport pickup" id="air-title" title={<>The most popular ride: airport to your door.</>} />
-          <ul className="mt-10">{pts.map((p, i) => <Reveal key={p} delay={i * 0.04}><li className="flex gap-4 border-t border-line py-4 last:border-b"><Check className="mt-1 size-5 shrink-0 text-navy" aria-hidden /><span className="text-[17px]">{p}</span></li></Reveal>)}</ul>
-        </div>
-        <Reveal delay={0.1} className="lg:col-span-5 lg:col-start-8">
-          <div className="overflow-hidden rounded-[10px] bg-[#c9d3e4]"><img src={R("fleet.jpeg")} alt="Cheryl's air-conditioned taxi fleet" width={900} height={600} loading="lazy" className="aspect-[3/2] w-full object-cover transition duration-700 hover:scale-[1.03]" /></div>
-          <div className="mt-4 overflow-hidden rounded-[10px] bg-[#c9d3e4]"><img src={R("cheryl-taxi.jpeg")} alt="A Cheryl's Bahamas Taxi vehicle" width={900} height={400} loading="lazy" className="aspect-[9/4] w-full object-cover transition duration-700 hover:scale-[1.03]" /></div>
-        </Reveal>
-      </div>
-    </section>
-  )
-}
-
-const STOPS = [
-  { id: "forts", n: "The Forts and the 66 Steps", d: "Fort Charlotte, Fort Fincastle and the 66 Steps, Fort Montague. Re-enactments Wednesday and Friday at 11:30am, cannon at noon.", img: "the-forts.png" },
-  { id: "conch", n: "Conch demonstration", d: "How conch is cleaned, then fresh conch salad: $10 a bowl, shared by four.", img: "conch.png" },
-  { id: "fry", n: "The Fish Fry", d: "Lunch with the locals, 15 to 20 restaurants of Bahamian seafood.", img: "fish-fry.png" },
-  { id: "junkanoo", n: "Junkanoo World Museum", d: "Drums, horns, cowbells and costumes you can try on.", img: "junkanoo.png" },
-  { id: "zoo", n: "Ardastra Gardens Zoo", d: "Four acres of gardens and the flamingo show at 10:30am. Entry $18 per person, under 4 free.", img: "ardastra-gardens-zoo.png" },
-  { id: "beach", n: "Time at Love Beach", d: "A secluded beach away from town. Snorkelling $20.", img: "time-at-the-beach.png" },
-  { id: "rumcake", n: "Rum Cake Factory", d: "Free tasting: pina colada, amaretto, banana, cinnamon and more.", img: "rum-cake-factory.png" },
-  { id: "clifton", n: "Clifton Heritage Park", d: "A 45-minute historical immersion, with ATV and snorkel options.", img: "clifton-heritage-park.png" },
-]
-const LENGTHS = ["Sightseeing and shopping, about 3 hours", "Full day with picnic lunch, at least 8 hours (6+ people)"]
-
-function Plan() {
-  const [picked, setPicked] = useState<string[]>(["forts", "fry"])
-  const [len, setLen] = useState(0)
-  const [people, setPeople] = useState(2)
-  const [lang, setLang] = useState("English")
-  const [date, setDate] = useState("")
-  const toggle = (id: string) => setPicked(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id])
-  const chosen = STOPS.filter(s => picked.includes(s.id))
-  const body = `Hello Cheryl,\n\nI'd like a private tour.\nLength: ${LENGTHS[len]}\nStops: ${chosen.map(s => s.n).join(", ") || "Please suggest"}\nPeople: ${people}\nLanguage: ${lang}\n${date ? `Date: ${date}\n` : ""}\nThank you!`
-  return (
-    <section id="plan" className="bg-paper-2" aria-labelledby="plan-title">
-      <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32">
-        <div className="grid gap-8 lg:grid-cols-12"><div className="lg:col-span-7"><Head index="02" label="Plan a private tour" id="plan-title" title={<>Pick the stops. We'll drive.</>} /></div><Reveal delay={0.1} className="lg:col-span-4 lg:col-start-9 lg:pt-12"><p className="text-[17px] leading-relaxed text-muted">Every tour is private and built around you. Drinks are included; most historic sites charge $3 to $5 entry.</p></Reveal></div>
-        <div className="mt-12 grid gap-10 lg:grid-cols-12">
-          <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-7">
-            {STOPS.map(s => {
-              const on = picked.includes(s.id)
-              return (
-                <li key={s.id}>
-                  <button type="button" aria-pressed={on} onClick={() => toggle(s.id)} className={`group flex w-full gap-4 rounded-[10px] border-2 p-3 text-left transition hover:-translate-y-0.5 ${on ? "border-navy bg-paper" : "border-transparent bg-paper/60 hover:border-navy/30"}`}>
-                    <span className="relative size-20 shrink-0 overflow-hidden rounded-[6px] bg-[#c9d3e4]"><img src={R(s.img)} alt="" width={160} height={160} loading="lazy" className="size-full object-cover" /></span>
-                    <span><span className="flex items-center gap-2 font-display text-[1.15rem] font-bold text-navy">{on && <Check className="size-4" aria-hidden />}{s.n}</span><span className="mt-1 block text-[14px] leading-snug text-muted">{s.d}</span></span>
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-          <div className="lg:col-span-5">
-            <div className="rounded-[10px] bg-navy p-6 text-paper md:p-8">
-              <p className="label text-yellow">Your tour</p>
-              <div className="mt-4 grid gap-2">{LENGTHS.map((l, i) => <button key={l} type="button" aria-pressed={len === i} onClick={() => setLen(i)} className={`min-h-11 rounded-full border-2 px-4 text-left text-[15px] transition ${len === i ? "border-yellow bg-yellow font-bold text-navy" : "border-paper/25 hover:border-paper"}`}>{l}</button>)}</div>
-              <div className="mt-5 grid grid-cols-2 gap-4">
-                <div><label htmlFor="ppl" className="label text-paper/70">People</label><input id="ppl" type="number" min={1} max={30} value={people} onChange={e => setPeople(Math.max(1, +e.target.value || 1))} className="mt-2 block min-h-12 w-full rounded-full border-2 border-paper/25 bg-transparent px-4 text-[17px] outline-none focus:border-yellow" /></div>
-                <div><label htmlFor="lang" className="label text-paper/70">Language</label><select id="lang" value={lang} onChange={e => setLang(e.target.value)} className="mt-2 block min-h-12 w-full rounded-full border-2 border-paper/25 bg-navy px-4 text-[17px] outline-none focus:border-yellow"><option>English</option><option>Spanish</option></select></div>
-                <div className="col-span-2"><label htmlFor="dt" className="label text-paper/70">Date</label><input id="dt" type="date" value={date} onChange={e => setDate(e.target.value)} className="mt-2 block min-h-12 w-full rounded-full border-2 border-paper/25 bg-transparent px-4 text-[17px] outline-none focus:border-yellow" /></div>
+        <div className="relative lg:col-span-5">
+          {/* the real team photo, as a print behind the sign */}
+          <motion.figure initial={{ opacity: 0, y: 60, rotate: 9 }} animate={{ opacity: 1, y: 0, rotate: 3.5 }} transition={{ ...spring, delay: 0.35 }}
+            className="relative ml-auto w-[88%] rounded-[6px] bg-white p-2.5 pb-3 shadow-[0_30px_60px_-28px_rgba(0,0,0,.6)] sm:w-[78%] lg:w-[92%]">
+            <Photo src={R("cheryl-taxi.jpeg")} alt="Two Cheryl's drivers in navy and yellow uniforms beside the company's white passenger van" ratio="1.98 / 1" eager className="rounded-[2px]" />
+            <figcaption className="mt-2 px-1 text-[13px] text-muted">Cheryl's drivers, in the uniform you will look for.</figcaption>
+          </motion.figure>
+          {/* the arrivals sign */}
+          <motion.div initial={{ opacity: 0, y: 140, rotate: -12 }} animate={{ opacity: 1, y: 0, rotate: -3 }} transition={{ ...spring, stiffness: 180, delay: 0.55 }}
+            className="relative z-10 -mt-14 w-[94%] origin-bottom sm:w-[84%] lg:-mt-20 lg:-ml-10 lg:w-[96%]">
+            <div className="sign-sway rounded-[10px] bg-card text-ink shadow-[0_40px_70px_-30px_rgba(0,0,0,.65)]">
+              <div className="flex items-center justify-between rounded-t-[10px] bg-yellow px-5 py-2.5 text-[14px] font-bold">
+                <span>Cheryl's Bahamas Taxi</span><span className="tnum">Reg. #1080</span>
               </div>
-              <ol className="mt-6 border-t border-paper/20 pt-4 text-[15px]">{chosen.length ? chosen.map((s, i) => <li key={s.id} className="flex gap-3 py-1"><span className="font-bold text-yellow">{i + 1}</span>{s.n}</li>) : <li className="text-paper/60">Pick a few stops, or leave it to Cheryl's.</li>}</ol>
-              {len === 1 && people < 6 && <p className="mt-3 text-[13px] text-yellow">The picnic full day is for groups of 6 or more.</p>}
-              <div className="mt-6 grid gap-2">
-                <a href={`mailto:${EMAIL}?subject=${encodeURIComponent("Private tour request")}&body=${encodeURIComponent(body)}`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-yellow px-6 font-bold text-navy transition hover:-translate-y-px"><Mail className="size-4" aria-hidden />Email this plan</a>
-                <a href={TEL} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-paper/30 px-6 transition hover:-translate-y-px hover:border-paper"><Phone className="size-4" aria-hidden />Or call {PHONE}</a>
+              <div className="px-5 pb-5 pt-4 sm:px-7 sm:pb-6">
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.p key={shown} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.18 }}
+                    className={`min-h-[1.15em] break-words text-[clamp(2.1rem,4.4vw,3.9rem)] font-bold leading-[1.1] tracking-[-0.01em] ${name.trim() ? "text-ink" : "text-ink/35"}`}>{shown}</motion.p>
+                </AnimatePresence>
+                <p className="mt-1 text-[15px] text-muted">Welcome to Nassau</p>
               </div>
             </div>
+          </motion.div>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.6 }} className="relative z-10 mt-6 max-w-[440px] lg:ml-[-40px]">
+            <label htmlFor="sign-name" className="text-[15px] font-bold text-white">Put your name on the card</label>
+            <input id="sign-name" value={name} onChange={e => setName(e.target.value.slice(0, 32))} autoComplete="name" placeholder="e.g. The Alvarez family"
+              className="mt-2 block min-h-[52px] w-full rounded-[12px] border-2 border-white/30 bg-white/10 px-4 text-[18px] text-white placeholder:text-white/55 focus:border-yellow focus:outline-none" />
+          </motion.div>
+          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 lg:hidden">
+            <a href="#pickup" className="btn btn-primary">Book my airport pickup <ArrowRight className="size-[18px]" aria-hidden /></a>
+            <a href="tours.html" className="btn-text inline-flex items-center font-bold">Plan a private tour</a>
           </div>
         </div>
-        <Reveal><a href="tours.html" className="mt-10 inline-flex items-center gap-2 font-bold text-navy"><span className="ulink">See every tour, from swimming pigs to glass-bottom boats</span><ArrowRight className="size-4" aria-hidden /></a></Reveal>
       </div>
     </section>
   )
 }
 
-type F = { k: string; type?: string; options?: string[] }
-const ENQ: Record<string, { label: string; fields: F[] }> = {
-  pickup: { label: "Airport pickup", fields: [{ k: "Flight number" }, { k: "Arrival date", type: "date" }, { k: "Arrival time", type: "time" }, { k: "Passengers", type: "number" }, { k: "Going to (hotel or address)" }, { k: "Car or booster seats", options: ["None", "1", "2", "3+"] }] },
-  ride: { label: "A taxi on the island", fields: [{ k: "Date", type: "date" }, { k: "Pickup time", type: "time" }, { k: "From" }, { k: "To" }, { k: "Passengers", type: "number" }] },
-}
-function Book() {
-  const [tab, setTab] = useState("pickup")
-  const [v, setV] = useState<Record<string, string>>({})
-  const [name, setName] = useState("")
-  const c = ENQ[tab]
-  const lines = useMemo(() => c.fields.map(f => v[`${tab}:${f.k}`] ? `${f.k}: ${v[`${tab}:${f.k}`]}` : null).filter(Boolean) as string[], [c, v, tab])
-  const href = `mailto:${EMAIL}?subject=${encodeURIComponent(c.label)}&body=${encodeURIComponent(`Hello Cheryl,\n\n${c.label} request:\n${lines.join("\n")}\n\nName on the sign: ${name}`)}`
-  const input = "mt-2 block min-h-12 w-full border-b-2 border-ink/20 bg-transparent text-[17px] outline-none transition focus:border-navy"
+const BEATS = [
+  { n: "1", t: "Your flight lands.", d: "Send your airline, flight number and arrival time when you book. That is all we need to meet you." },
+  { n: "2", t: "Look for navy and yellow.", d: "A Cheryl's representative waits in the arrivals lounge with a card showing your name. Every driver and rep wears the company uniform and logo." },
+  { n: "3", t: "Sit back, the air is on.", d: "Air-conditioned vehicles and trained drivers who know every road. Car and booster seats are free; just tell us the children's ages." },
+]
+
+function Arrival() {
   return (
-    <section className="mx-auto grid max-w-[1440px] gap-14 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-12" aria-labelledby="book-title">
-      <div className="lg:col-span-4"><Head index="03" label="Book a ride" id="book-title" title={<>Book your pickup.</>}><p className="mt-6 max-w-sm text-[17px] leading-relaxed text-muted">Send your flight details by email, or call the office from 9am to 6pm. Outside those hours, call {PHONE}.</p></Head></div>
-      <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
-        <Tabs value={tab} onValueChange={setTab}>
-          <TabsList className="h-auto w-full flex-wrap justify-start gap-1 rounded-full bg-paper-2 p-1">{Object.entries(ENQ).map(([k, x]) => <TabsTrigger key={k} value={k} className="min-h-11 flex-none rounded-full px-5 text-[15px] data-[state=active]:bg-navy data-[state=active]:text-paper">{x.label}</TabsTrigger>)}</TabsList>
-          {Object.entries(ENQ).map(([k, x]) => <TabsContent key={k} value={k} className="mt-8"><div className="grid gap-6 sm:grid-cols-2">{x.fields.map(f => { const id = `${k}-${f.k.replace(/\W+/g, "-").toLowerCase()}`, val = v[`${k}:${f.k}`] ?? ""; const set = (s: string) => setV(o => ({ ...o, [`${k}:${f.k}`]: s })); return <div key={f.k}><label htmlFor={id} className="label text-muted">{f.k}</label>{f.options ? <select id={id} value={val} onChange={e => set(e.target.value)} className={input}><option value="">Choose</option>{f.options.map(o => <option key={o}>{o}</option>)}</select> : <input id={id} type={f.type ?? "text"} value={val} onChange={e => set(e.target.value)} className={input} />}</div> })}</div></TabsContent>)}
-        </Tabs>
-        <div className="mt-6"><label htmlFor="nm" className="label text-muted">Name for the sign</label><input id="nm" value={name} onChange={e => setName(e.target.value)} autoComplete="name" className={input} /></div>
-        <div className="mt-8 flex flex-col gap-2 sm:flex-row">
-          <a href={href} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-navy px-7 font-bold text-paper transition hover:-translate-y-px"><Mail className="size-4" aria-hidden />Email my booking</a>
-          <a href={TEL} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-navy/30 px-6 font-bold text-navy transition hover:-translate-y-px hover:border-navy"><Phone className="size-4" aria-hidden />Call {PHONE}</a>
+    <section aria-labelledby="arrival-title" className="on-light bg-paper">
+      <div className="mx-auto max-w-[1360px] px-4 py-24 sm:px-8 lg:py-36">
+        <h2 id="arrival-title" className="poster max-w-[16ch] text-[length:var(--t-2)]">from the arrivals hall to your hotel door.</h2>
+        <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
+          <figure className="lg:col-span-7">
+            <Photo src={R("fleet.jpeg")} alt="Cheryl's fleet of taxis and vans with uniformed drivers standing beside them" ratio="2.25 / 1" className="rounded-[var(--radius-m)]" />
+            <figcaption className="mt-3 text-[15px] text-muted">The fleet: private vans and SUVs, all air-conditioned.</figcaption>
+          </figure>
+          <ol className="flex flex-col gap-10 lg:col-span-5">
+            {BEATS.map((b, i) => (
+              <motion.li key={b.n} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-15% 0px" }} transition={{ ...spring, delay: i * 0.06 }} className="grid grid-cols-[64px_1fr] gap-4">
+                <span className="poster tnum text-[64px] leading-[.8] text-deep" aria-hidden>{b.n}</span>
+                <div>
+                  <h3 className="display text-[length:var(--t-3)]">{b.t}</h3>
+                  <p className="mt-2 max-w-[42ch] text-muted">{b.d}</p>
+                </div>
+              </motion.li>
+            ))}
+          </ol>
         </div>
-        <p className="mt-3 text-[13px] text-muted">Opens your email app with your details filled in. All major credit cards accepted.</p>
-      </Reveal>
-    </section>
-  )
-}
-
-const FAQ = [["Where will I find my driver?", "In the arrivals lounge at Nassau airport, holding a card with your name. Drivers and representatives wear a navy blue and yellow uniform with the company logo."], ["Do you have car seats?", "Yes, car and booster seats at no charge. Just let us know."], ["Can I have a tour in Spanish?", "Yes. All tours are available in English or Spanish, and Spanish translators are available."], ["How do I pay?", "All major credit cards are accepted."], ["When can I call?", `The office is open 9am to 6pm, seven days a week, on ${PHONE} or ${PHONE2}. At all other times call ${PHONE} or 242-525-5729.`]]
-function Questions() {
-  return (
-    <section className="bg-paper-2" aria-labelledby="faq-title">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-12">
-        <div className="lg:col-span-4"><Head index="04" label="Questions" id="faq-title" title={<>Before you land.</>} /></div>
-        <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6"><Accordion type="single" collapsible defaultValue="q0" className="border-t border-line">{FAQ.map(([q, a], i) => <AccordionItem key={q} value={`q${i}`} className="border-line"><AccordionTrigger className="py-6 text-left font-display text-[1.3rem] font-bold text-navy hover:no-underline">{q}</AccordionTrigger><AccordionContent className="pb-6 text-[17px] leading-relaxed text-muted">{a}</AccordionContent></AccordionItem>)}</Accordion></Reveal>
+        <p className="mt-16 max-w-[60ch] border-t border-line pt-8 text-[length:var(--t-4)] leading-snug">
+          Anywhere on New Providence, west end to east end. Lunch, dinner, a downtown drop-off while you are here: same number. Baby-sitting and wheelchair rentals on request.
+        </p>
       </div>
     </section>
   )
 }
 
-mount(<Page current=""><Hero /><KeyInfo /><Airport /><Plan /><Book /><Questions /></Page>)
+function Pickup({ name, setName }: { name: string; setName: (v: string) => void }) {
+  const [trip, setTrip] = useState<"One way" | "Round trip">("Round trip")
+  const [car, setCar] = useState<"Van" | "SUV">("Van")
+  const [people, setPeople] = useState(2)
+  const [groceries, setGroceries] = useState(false)
+  const [hotel, setHotel] = useState("")
+  const [sent, setSent] = useState(false)
+  const submit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const f = new FormData(e.currentTarget)
+    const g = (k: string) => String(f.get(k) || "").trim()
+    window.location.href = mailto(`Airport pickup for ${name.trim() || g("contact")}`, [
+      `Name on the arrival sign: ${name.trim() || "(not given)"}`,
+      `Trip: ${trip}`, `Vehicle: ${car === "Van" ? "Van (private)" : "SUV (private luxury)"}`, `Passengers: ${people}`,
+      `Arrival flight: ${g("arrFlight")}`, `Arrival date and time: ${g("arrWhen")}`,
+      trip === "Round trip" && `Departure flight: ${g("depFlight")}`, trip === "Round trip" && `Departure date and time: ${g("depWhen")}`,
+      `Hotel or tower: ${g("hotel")}`, g("kids") && `Children and seats: ${g("kids")}`,
+      `Grocery shopping before arrival: ${groceries ? "Yes please (service fee applies)" : "No"}`,
+      `Bags: ${g("bags")}`, "", `Contact: ${g("contact")}  ${g("phone")}`, g("note") && `Note to driver: ${g("note")}`,
+    ])
+    setSent(true)
+  }
+  return (
+    <section id="pickup" aria-labelledby="pickup-title" className="on-light scroll-mt-4 bg-aqua">
+      <div className="mx-auto max-w-[1360px] px-4 py-24 sm:px-8 lg:py-32">
+        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <h2 id="pickup-title" className="poster max-w-[13ch] text-[length:var(--t-2)]">your pickup ticket.</h2>
+          <p className="max-w-[40ch] text-[length:var(--t-4)] leading-snug">Fill it in once. It lands in Cheryl's inbox as one complete booking: flight, sign name, seats, hotel.</p>
+        </div>
+
+        <form onSubmit={submit} className="mt-12 grid overflow-hidden rounded-[var(--radius-l)] bg-card shadow-[0_30px_60px_-36px_rgba(11,59,82,.6)] lg:grid-cols-[380px_28px_1fr]">
+          {/* stub */}
+          <div className="flex flex-col justify-between gap-8 bg-deep p-6 text-white sm:p-8">
+            <div>
+              <p className="text-[15px] font-bold text-aqua">Name on the arrival sign</p>
+              <input aria-label="Name on the arrival sign" value={name} onChange={e => setName(e.target.value.slice(0, 32))} placeholder="Your name"
+                className="mt-2 w-full border-b-2 border-white/30 bg-transparent pb-2 font-display text-[36px] font-bold tracking-[-0.03em] text-yellow placeholder:text-white/35 focus:border-yellow focus:outline-none" />
+            </div>
+            <div className="display text-[30px] leading-[1.05]" aria-hidden>
+              <p>Nassau airport</p>
+              <p className="my-1 text-aqua">{trip === "Round trip" ? "⇅" : "↓"}</p>
+              <p className="break-words text-white/90">{hotel.trim() || "your hotel"}</p>
+            </div>
+            <dl className="tnum grid grid-cols-2 gap-x-4 gap-y-4 text-[15px]">
+              <div><dt className="text-white/65">Trip</dt><dd className="font-bold">{trip}</dd></div>
+              <div><dt className="text-white/65">Vehicle</dt><dd className="font-bold">{car}</dd></div>
+              <div><dt className="text-white/65">Guests</dt><dd className="font-bold">{people}</dd></div>
+              <div><dt className="text-white/65">Groceries</dt><dd className="font-bold">{groceries ? "Yes" : "No"}</dd></div>
+            </dl>
+          </div>
+          <div className="perf h-[28px] w-full bg-card lg:h-auto" aria-hidden />
+          {/* body */}
+          <div className="grid gap-x-6 gap-y-6 p-6 sm:grid-cols-2 sm:p-8 lg:p-10">
+            <div className="field">
+              <span className="lab" id="trip-l">Trip</span>
+              <div className="seg w-full" role="group" aria-labelledby="trip-l">
+                {(["One way", "Round trip"] as const).map(t => <button type="button" key={t} aria-pressed={trip === t} onClick={() => setTrip(t)}>{t}</button>)}
+              </div>
+            </div>
+            <div className="field">
+              <span className="lab" id="car-l">Vehicle</span>
+              <div className="seg w-full" role="group" aria-labelledby="car-l">
+                <button type="button" aria-pressed={car === "Van"} onClick={() => setCar("Van")}>Private van</button>
+                <button type="button" aria-pressed={car === "SUV"} onClick={() => setCar("SUV")}>Luxury SUV</button>
+              </div>
+            </div>
+            <div className="field"><label htmlFor="arrFlight">Arrival airline and flight number</label><input id="arrFlight" name="arrFlight" required placeholder="e.g. AA 1234" /></div>
+            <div className="field"><label htmlFor="arrWhen">Arrival date and time</label><input id="arrWhen" name="arrWhen" type="datetime-local" required /></div>
+            <AnimatePresence initial={false}>
+              {trip === "Round trip" && (
+                <motion.div key="dep" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="contents">
+                  <div className="field"><label htmlFor="depFlight">Departure airline and flight number</label><input id="depFlight" name="depFlight" required placeholder="e.g. AA 4321" /></div>
+                  <div className="field"><label htmlFor="depWhen">Departure date and time</label><input id="depWhen" name="depWhen" type="datetime-local" required /></div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <div className="field">
+              <span className="lab" id="pp-l">Passengers</span>
+              <div className="flex items-center gap-2" role="group" aria-labelledby="pp-l">
+                <button type="button" aria-label="Fewer passengers" onClick={() => setPeople(p => Math.max(1, p - 1))} className="size-[50px] rounded-[10px] border-[1.5px] border-line text-[22px] font-bold">−</button>
+                <output className="tnum w-14 text-center font-display text-[28px] font-bold" aria-live="polite">{people}</output>
+                <button type="button" aria-label="More passengers" onClick={() => setPeople(p => Math.min(30, p + 1))} className="size-[50px] rounded-[10px] border-[1.5px] border-line text-[22px] font-bold">+</button>
+              </div>
+            </div>
+            <div className="field"><label htmlFor="hotel">Hotel or tower you are staying at</label><input id="hotel" name="hotel" required value={hotel} onChange={e => setHotel(e.target.value)} /></div>
+            <div className="field sm:col-span-2"><label htmlFor="kids">Children's ages, car or booster seats, strollers</label><input id="kids" name="kids" placeholder="e.g. 2 and 6, one booster seat, one stroller" /></div>
+            <div className="field"><label htmlFor="bags">Bags (checked and carry-on)</label><input id="bags" name="bags" placeholder="e.g. 3 checked, 2 carry-on" /></div>
+            <div className="field">
+              <span className="lab">Groceries waiting for you</span>
+              <label className="flex min-h-[50px] cursor-pointer items-center gap-3 rounded-[10px] border-[1.5px] border-line px-4 font-normal">
+                <input type="checkbox" checked={groceries} onChange={e => setGroceries(e.target.checked)} className="!min-h-0 !w-5 size-5 accent-[#0b4f6c]" />
+                <span>Shop for us before we land <span className="text-muted">(service fee)</span></span>
+              </label>
+            </div>
+            <div className="field"><label htmlFor="contact">Your full name</label><input id="contact" name="contact" required autoComplete="name" /></div>
+            <div className="field"><label htmlFor="phone">Phone or WhatsApp</label><input id="phone" name="phone" type="tel" autoComplete="tel" /></div>
+            <div className="field sm:col-span-2"><label htmlFor="note">Note to the driver</label><textarea id="note" name="note" rows={2} /></div>
+            <p className="tnum max-w-[68ch] text-[14px] text-muted sm:col-span-2">Each guest over 3 travels with one carry-on and one checked bag. Extra suitcases are $3.30, extra duffle bags $5.50. Backpacks and purses are free.</p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 sm:col-span-2">
+              <button type="submit" className="btn bg-deep text-white hover:bg-deep-2">Send my pickup request <ArrowRight className="size-[18px]" aria-hidden /></button>
+              <AnimatePresence>{sent && <motion.p initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} className="text-[15px] font-bold text-deep" role="status">Your email app should be open with the booking filled in.</motion.p>}</AnimatePresence>
+              {!sent && <p className="text-[15px] text-muted">Opens your email app, filled in. Or call <a href={TEL} className="tnum font-bold text-ink underline underline-offset-4">{PHONE}</a>.</p>}
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  )
+}
+
+const DAYS = [
+  { id: "short", hours: "3", unit: "hours", title: "sightseeing and shopping", img: "shopping.jpeg", alt: "The straw market in Nassau, walls of handmade bags and hats", pos: "50% 40%",
+    lines: ["Paradise Island and Atlantis", "The 66 Steps at Fort Fincastle", "Jaws Beach", "Souvenir shopping, with help on what a fair price is"] },
+  { id: "full", hours: "8", unit: "hours or more", title: "a full day out, picnic included", img: "desertedbeaches.jpeg", alt: "A quiet beach on New Providence shaded by casuarina trees", pos: "50% 60%",
+    lines: ["The 66 Steps", "Snorkelling at Jaws Beach, away from the crowds", "A picnic lunch, drinks kept cold on ice", "Picnic for groups of six or more"] },
+]
+
+function Days() {
+  return (
+    <section aria-labelledby="days-title" className="on-light bg-paper">
+      <div className="mx-auto max-w-[1360px] px-4 py-24 sm:px-8 lg:py-36">
+        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <h2 id="days-title" className="poster max-w-[12ch] text-[length:var(--t-2)]">two ways to spend a day.</h2>
+          <p className="max-w-[42ch] text-[length:var(--t-4)] leading-snug">Every tour is private. Start from one of these, then add or take away whatever you like.</p>
+        </div>
+        <div className="mt-14 grid gap-16 lg:mt-20 lg:grid-cols-2 lg:gap-10">
+          {DAYS.map((d, i) => (
+            <motion.article key={d.id} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ ...spring, delay: i * 0.08 }} className={i ? "lg:mt-24" : ""}>
+              <Photo src={R(d.img)} alt={d.alt} ratio="4 / 3" pos={d.pos} className="rounded-[var(--radius-m)]" />
+              <div className="mt-7 flex items-baseline gap-4">
+                <span className="poster tnum text-[clamp(4.5rem,8vw,7.5rem)] text-deep">{d.hours}</span>
+                <span className="display text-[length:var(--t-3)]">{d.unit}</span>
+              </div>
+              <h3 className="display mt-2 text-[length:var(--t-3)] text-muted">{d.title}</h3>
+              <ul className="mt-6 divide-y divide-line border-y border-line">
+                {d.lines.map(l => <li key={l} className="py-3">{l}</li>)}
+              </ul>
+              <a href={`tours.html?day=${d.id}`} className="btn-text mt-5 inline-flex items-center gap-1.5 font-bold">Start my day from this <ArrowUpRight className="size-[18px]" aria-hidden /></a>
+            </motion.article>
+          ))}
+        </div>
+        <a href="tours.html" className="group mt-20 flex items-center justify-between gap-6 border-t-2 border-ink pt-6">
+          <span className="display max-w-[30ch] text-[length:var(--t-3)]">Or build it from 22 real stops: forts, conch, rum cake, Rose Island, the pigs.</span>
+          <span className="grid size-14 shrink-0 place-items-center rounded-full bg-yellow transition-transform duration-200 group-hover:translate-x-1"><ArrowRight className="size-6" aria-hidden /></span>
+        </a>
+      </div>
+    </section>
+  )
+}
+
+const INCLUDED = [
+  ["Drinks on board.", "Bahama Mama, beer, sodas and water. You choose."],
+  ["Entry fees stay small.", "Most historic sites charge $3 to $5."],
+  ["Seats for the little ones.", "Car and booster seats, free of charge."],
+  ["Celebrating something?", "Say so. There is a gift: champagne, roses or chocolates."],
+  ["English or Spanish.", "Spanish tours and translators, for the day or the whole stay."],
+]
+
+function Included() {
+  return (
+    <section aria-labelledby="inc-title" className="on-light bg-yellow">
+      <div className="mx-auto grid max-w-[1360px] gap-14 px-4 py-24 sm:px-8 lg:grid-cols-12 lg:gap-10 lg:py-32">
+        <div className="lg:col-span-5">
+          <h2 id="inc-title" className="poster max-w-[10ch] text-[length:var(--t-2)]">on every private tour.</h2>
+          <figure className="mt-12">
+            <Photo src={R("conch.png")} alt="A Cheryl's guide in uniform holding a fresh conch at a conch stand on the waterfront" ratio="2.1 / 1" pos="30% 50%" className="rounded-[var(--radius-m)]" />
+            <figcaption className="mt-3 text-[15px] text-ink/75">The conch lesson: out of the shell, cleaned, then a bowl of fresh conch salad ($10, shares four).</figcaption>
+          </figure>
+        </div>
+        <ul className="lg:col-span-7 lg:pt-3">
+          {INCLUDED.map(([t, d], i) => (
+            <motion.li key={t} initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ ...spring, delay: i * 0.05 }} className="border-t-2 border-ink/80 py-6 first:border-t-0 first:pt-0">
+              <p className="display text-[length:var(--t-3)]">{t}</p>
+              <p className="mt-1 text-[length:var(--t-4)] leading-snug text-ink/80">{d}</p>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+function Home() {
+  const [name, setName] = useSignName()
+  return (
+    <Page>
+      <main id="main">
+        <Hero name={name} setName={setName} />
+        <Arrival />
+        <Pickup name={name} setName={setName} />
+        <Days />
+        <Included />
+      </main>
+      <Contact />
+      <Dock action={{ href: "#pickup", label: "Book pickup" }} />
+    </Page>
+  )
+}
+
+mount(<Home />)

@@ -29,3 +29,20 @@ Cruise passengers and resort guests (US), families, Spanish-speaking visitors; o
 - Type: Familjen Grotesk 500-700 + Atkinson Hyperlegible 400/700.
 - Palette (their uniform): --navy #1b2b52, --yellow #f5c84c, --paper #f4f4f0, --ink #141a2b, --muted #545b69, --line #d9dbd6.
 - Hero: arrivals name card: type your name, the card updates (signature interaction 1). Interaction 2: tour builder from their real stops -> email/call summary.
+
+## Gen-2 rebuild (2026-11-20)
+New facts (book-online JotForm + tours page, scraped today): transfer form asks one-way or round trip; VAN (private) or SUV (private luxury); arrival and departure flight, airline and number; "the name you would like to appear on arrival sign"; passengers; kids' ages and car or booster seats, strollers; grocery pre-arrival shopping (service fee applies); first-time or returning; hotel or tower; checked and carry-on bags (each person over 3: one carry-on and one checked bag; extra $3.30 suitcase, $5.50 duffle). Snorkel cruise: about 6 hours, Rose Island 8 miles east of downtown, BBQ lunch, hotel transfers from most hotels. Pieces of 8: 38 ft Fountain powerboats, 5 cays, $400 adult, $365 kids 5-11, cancellation 72h+ full refund. ATV: one rider per ATV, valid driver's licence, helmets and gloves provided. Fish Fry: 15-20 restaurants. Ardastra: 4+ acres, flamingo show 10:30am, $18pp, under 4 free.
+
+**Big idea:** The first thing a Cheryl's guest sees in Nassau is their own name on a card held up by someone in navy and yellow; the page is that card, a poster you put your name on, and everything after it (the ride, the booking ticket, the day you build from 16 real stops) carries your name.
+
+**Direction:** A09 Colour poster + P14 Blue hole + T06 Wide grotesk (Syne variable 600-800 lowercase display, Atkinson Hyperlegible 400/700 body: an airport-signage face for a company whose product is a sign with your name). Why: P14's deep blue and #F2D16B yellow are Cheryl's own uniform colours; the poster archetype matches a cheerful, signage-led taxi brand and its ticket booking block is exactly the transfer form; nav N4 floating dock = thumb-reachable Pickup / Tours / Call for cruise guests on phones. Motion M6: the name card springs up like it is being held, tour tickets spring into your day.
+
+**Storyboard (desktop 1440x900):**
+1. Hero, deep blue field: left, huge lowercase Syne "look for your name." with one line under it (25+ years, Nassau and Paradise Island) and Book my airport pickup (yellow) + Plan a tour; right, the white arrivals card, slightly tilted, showing what you type ("Your name") in Atkinson bold, with the real team photo (two drivers in navy and yellow beside the white van) as a print clipped under it. Dock at the bottom centre.
+2. Paper ground: "From the gate to your hotel" three beats in huge numerals beside the fleet photo (real fleet with uniformed drivers): you land, you see navy and yellow and your name, air-conditioned ride with free car and booster seats.
+3. Aqua field: the pickup ticket. A boarding-pass shaped form built from their real JotForm fields; the name typed in the hero is already on it; sends a prefilled email.
+4. Paper: "Build your day" teaser: two sourced templates (3-hour sightseeing and shopping, full day with picnic 8h) as big posters with real photos, linking to the tours page builder.
+5. Yellow field: what every private tour includes (drinks, entry fees $3-5, free car seats, a gift for special occasions, English or Spanish) in big type.
+6. Deep blue: one number, day or night (423 4982 is both office and out-of-hours), other numbers, email, hours, reg #1080, TripAdvisor Travellers' Choice 2022, credit cards. Footer.
+**Phone (390x844):** 1) headline + card with input + yellow CTA; dock at bottom. 2) the team photo then steps. 3) ticket form single column.
+**Tours page:** poster header "pick your stops", filter chips (history, food and rum, beach and water, culture), photo tickets with sourced times and prices, tap to add; your day ticket (sticky right desktop / bottom sheet phone) with tour length, language, people, date, send.

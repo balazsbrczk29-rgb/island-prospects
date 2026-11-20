@@ -1,96 +1,166 @@
-import { useState } from "react"
-import { AnimatePresence, motion } from "motion/react"
-import { Mail, Phone } from "lucide-react"
-import { Page, mount, Reveal, Head, ease, reveal, R, PHONE, TEL, EMAIL } from "./site"
+import { useEffect, useMemo, useState, type FormEvent } from "react"
+import { AnimatePresence, LayoutGroup, motion } from "motion/react"
+import { ArrowRight, Check, Plus, X } from "lucide-react"
+import { Page, Masthead, Dock, Contact, Photo, mount, useSignName, mailto, spring, R, PHONE, TEL } from "./shared"
+import { STOPS, KINDS, PRESETS, type Kind, type Stop } from "./stops"
 
-type T = { n: string; g: string; d: string; img?: string }
-const TOURS: T[] = [
-  { n: "The Forts and the 66 Steps", g: "History", d: "Fort Charlotte, Fort Fincastle and the 66 Steps, Fort Montague. Wednesday and Friday re-enactments at 11:30am with the cannon fired at noon; small entrance fee.", img: "the-forts.png" },
-  { n: "Clifton Heritage Park", g: "History", d: "A 45-minute historical immersion, with ATV, beach and shore-snorkel options. Ask for pricing.", img: "clifton-heritage-park.png" },
-  { n: "The Cloisters", g: "History", d: "A historic site on Paradise Island, popular for weddings and photos, with a view across to Nassau.", img: "cloisters.png" },
-  { n: "The Bat Cave", g: "History", d: "A limestone cave now home to fruit bats, and the famous kissing chair.", img: "bat-cave.png" },
-  { n: "Conch demonstration", g: "Food and culture", d: "Conch 101, then fresh conch salad: $10 a bowl, shared by four.", img: "conch.png" },
-  { n: "The Fish Fry", g: "Food and culture", d: "Lunch with the locals at 15 to 20 Bahamian seafood restaurants.", img: "fish-fry.png" },
-  { n: "Junkanoo World Museum", g: "Food and culture", d: "Hands-on Junkanoo: drums, horns, cowbells, costumes and a Bahamian lunch on site. Ask about pricing.", img: "junkanoo.png" },
-  { n: "Rum Cake Factory", g: "Food and culture", d: "Free tastings of flavours like pina colada, amaretto, banana and cinnamon.", img: "rum-cake-factory.png" },
-  { n: "Rum distillery", g: "Food and culture", d: "A historical tour that ends at the bar.", img: "run-distillary.png" },
-  { n: "Bahama hand craft and candy store", g: "Food and culture", d: "Locally made souvenirs of conch shell, coconut and straw, and a Bahamian sugar rush.", img: "hand-craft.png" },
-  { n: "Ardastra Gardens Zoo", g: "Nature", d: "Four acres of gardens, native birds and the flamingo show at 10:30am. $18 per person, under 4 free.", img: "ardastra-gardens-zoo.png" },
-  { n: "Time at Love Beach", g: "Beach and water", d: "A secluded beach with music, food and drinks; snorkelling $20. Day package with lunch for 6 or more.", img: "time-at-the-beach.png" },
-  { n: "All-day snorkel cruise to Rose Island", g: "Beach and water", d: "About 6 hours: reef snorkelling, a secluded beach and a BBQ lunch, unlimited soft drinks and rum punch on the sail back. Hotel transfers from most hotels.", img: "snorkeling.png" },
-  { n: "Blue Lagoon beach day", g: "Beach and water", d: "Boat ride to Blue Lagoon Island, grilled lunch, aqua parks and the Dolphin Encounters facility.", img: "blue-lagoon-beach.png" },
-  { n: "Dolphin swim", g: "Beach and water", d: "Orientation, then hugs, kisses and a foot push across the natural ocean lagoon.", img: "dolphin-swim.png" },
-  { n: "Swimming with the pigs", g: "Beach and water", d: "Exuma day trips 9am to 5pm, or Pieces of 8 Charters' 38 ft powerboats: $400 adults, $365 kids 5 to 11, lunch included.", img: "swim-with-pigs.png" },
-  { n: "Fishing and snorkeling", g: "Beach and water", d: "Sightseeing by boat, reef fishing and optional snorkelling near an exclusive island.", img: "fishing-and-snorkeling.png" },
-  { n: "Parasailing, jet ski, glass bottom boat", g: "Beach and water", d: "Ask what's running on your day.", img: "parasailing-jetski.png" },
-]
-const GROUPS = ["All", "History", "Food and culture", "Nature", "Beach and water"]
+const LENGTHS = ["About 3 hours", "Full day, 8 hours or more", "Not sure yet"] as const
 
-function Hero() {
+function StopItem({ s, on, toggle, i }: { s: Stop; on: boolean; toggle: () => void; i: number }) {
   return (
-    <section className="bg-navy text-paper" aria-labelledby="t-title">
-      <div className="mx-auto max-w-[1440px] px-5 pt-16 pb-16 md:px-10 md:pt-24">
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }} className="label text-yellow">Private tours · English or Spanish</motion.p>
-        <h1 id="t-title" className="mt-5 max-w-5xl font-display text-[clamp(2.8rem,6.6vw,6.6rem)] leading-[0.95] font-bold tracking-[-0.045em]">
-          {["Your island,", "your way, your driver."].map((l, i) => <span key={l} className="block overflow-hidden pb-[0.06em]"><motion.span className={`block ${i ? "text-yellow" : ""}`} initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.1 + i * 0.1, duration: 1, ease: reveal }}>{l}</motion.span></span>)}
-        </h1>
-        <p className="mt-7 max-w-2xl text-[18px] leading-relaxed text-paper/85">Every tour is private: add or take away anything. Drinks are included (Bahama Mama, beers, sodas, water), car seats are free, and if you're celebrating, tell us: there's a little gift.</p>
+    <motion.li layout initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ ...spring, delay: Math.min(i, 8) * 0.03 }}
+      className="grid grid-cols-[112px_1fr] gap-4 sm:block">
+      {s.img ? (
+        <div className="relative">
+          <Photo src={R(s.img)} alt={s.alt || s.name} ratio="4 / 3" pos={s.pos} className="rounded-[var(--radius-s)] sm:rounded-[var(--radius-m)]" />
+          {s.tag && <span className="tnum absolute bottom-3 left-3 hidden rounded-[6px] bg-yellow px-2.5 py-1 text-[14px] font-bold text-ink sm:inline-block">{s.tag}</span>}
+        </div>
+      ) : (
+        <div className="grid aspect-[4/3] place-items-end rounded-[var(--radius-s)] bg-deep p-3 text-yellow sm:rounded-[var(--radius-m)] sm:p-6">
+          <span className="poster text-[22px] sm:text-[52px]" aria-hidden>junkanoo</span>
+        </div>
+      )}
+      <div className="sm:mt-5">
+        <p className="text-[14px] font-bold text-deep">{s.kind}</p>
+        <h3 className="display mt-1 text-[22px] sm:text-[28px]">{s.name}</h3>
+        {s.tag && <p className="tnum mt-1 text-[15px] font-bold sm:hidden">{s.tag}</p>}
+        <p className="mt-2 text-[16px] leading-snug text-muted sm:text-[17px]">{s.line}</p>
+        <button type="button" onClick={toggle} aria-pressed={on}
+          className={`mt-4 inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-[15px] font-bold transition-colors duration-150 ${on ? "bg-deep text-white" : "border-2 border-ink/80 text-ink hover:bg-ink hover:text-white"}`}>
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.span key={on ? "y" : "n"} initial={{ scale: 0.4, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.4, opacity: 0 }} transition={spring} className="inline-flex">
+              {on ? <Check className="size-4" aria-hidden /> : <Plus className="size-4" aria-hidden />}
+            </motion.span>
+          </AnimatePresence>
+          {on ? "In my day" : "Add to my day"}
+        </button>
       </div>
-    </section>
+    </motion.li>
   )
 }
 
-function Examples() {
+function DayTicket({ picked, remove, name, setName }: { picked: Stop[]; remove: (id: string) => void; name: string; setName: (v: string) => void }) {
+  const [len, setLen] = useState<(typeof LENGTHS)[number]>("About 3 hours")
+  const [lang, setLang] = useState<"English" | "Español">("English")
+  const [people, setPeople] = useState(2)
+  const [sent, setSent] = useState(false)
+  useEffect(() => { const d = new URLSearchParams(location.search).get("day"); if (d === "full") setLen("Full day, 8 hours or more") }, [])
+  const submit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const f = new FormData(e.currentTarget); const g = (k: string) => String(f.get(k) || "").trim()
+    window.location.href = mailto(`Private tour for ${name.trim() || g("who")}`, [
+      `Name: ${name.trim() || g("who")}`, `Length: ${len}`, `Language: ${lang}`, `Guests: ${people}`, `Date: ${g("date")}`, `Pick up from: ${g("from")}`,
+      "", "Stops I would like:", ...(picked.length ? picked.map(s => `- ${s.name}`) : ["- Please suggest a day for us"]),
+      "", g("note") && `Anything else: ${g("note")}`, `Contact: ${g("contact")}`,
+    ])
+    setSent(true)
+  }
   return (
-    <section className="mx-auto grid max-w-[1440px] gap-6 px-5 py-20 md:grid-cols-2 md:px-10 md:py-28" aria-labelledby="ex-title">
-      <h2 id="ex-title" className="sr-only">Two popular tours</h2>
-      {[["3 hours", "Sightseeing and shopping", "Paradise Island (including Atlantis), the 66 Steps and Jaws Beach, with time for souvenirs and help negotiating a fair price."], ["8+ hours", "Full day out with picnic lunch", "The 66 Steps, snorkelling at Jaws Beach away from the crowds, and a picnic with drinks on ice. For 6 or more."]].map(([h, t, d], i) => (
-        <Reveal key={t} delay={i * 0.1} className={`rounded-[10px] p-7 md:p-10 ${i ? "bg-yellow text-navy" : "bg-paper-2"}`}>
-          <p className="font-display text-[clamp(3rem,6vw,5rem)] leading-none font-bold tracking-[-0.04em]">{h}</p>
-          <h3 className="mt-4 font-display text-[1.8rem] font-bold">{t}</h3>
-          <p className="mt-3 max-w-md text-[17px] leading-relaxed">{d}</p>
-        </Reveal>
-      ))}
-    </section>
-  )
-}
+    <form id="day" onSubmit={submit} className="scroll-mt-6 rounded-[var(--radius-l)] bg-deep p-6 text-white sm:p-8">
+      <h2 className="poster text-[44px]">your day.</h2>
+      <label htmlFor="who" className="mt-5 block text-[14px] font-bold text-aqua">Name on the card</label>
+      <input id="who" name="who" value={name} onChange={e => setName(e.target.value.slice(0, 32))} placeholder="Your name"
+        className="mt-1 w-full border-b-2 border-white/30 bg-transparent pb-1.5 font-display text-[26px] font-bold tracking-[-0.02em] text-yellow placeholder:text-white/35 focus:border-yellow focus:outline-none" />
 
-function Catalogue() {
-  const [g, setG] = useState("All")
-  const list = TOURS.filter(t => g === "All" || t.g === g)
-  return (
-    <section className="bg-paper-2" aria-labelledby="cat-title">
-      <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32">
-        <Head index="01" label="Every tour" id="cat-title" title={<>{TOURS.length} ways to spend a day.</>} />
-        <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Filter tours">{GROUPS.map(x => <button key={x} role="tab" type="button" aria-selected={g === x} onClick={() => setG(x)} className={`min-h-11 rounded-full border-2 px-4 text-[15px] font-bold transition hover:-translate-y-px ${g === x ? "border-navy bg-navy text-paper" : "border-navy/20 text-navy hover:border-navy"}`}>{x}</button>)}</div>
-        <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="popLayout">
-            {list.map(t => (
-              <motion.li key={t.n} layout initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.35, ease }} className="group overflow-hidden rounded-[10px] bg-paper">
-                {t.img && <div className="overflow-hidden bg-[#c9d3e4]"><img src={R(t.img)} alt={t.n} width={600} height={400} loading="lazy" className="aspect-[3/2] w-full object-cover transition duration-700 group-hover:scale-[1.03]" /></div>}
-                <div className="p-5"><p className="label text-muted">{t.g}</p><h3 className="mt-2 font-display text-[1.35rem] font-bold text-navy">{t.n}</h3><p className="mt-2 text-[15px] leading-relaxed text-muted">{t.d}</p></div>
+      <div className="mt-6">
+        <p className="text-[14px] font-bold text-aqua">{picked.length ? `${picked.length} stop${picked.length > 1 ? "s" : ""}` : "No stops yet"}</p>
+        <ul className="mt-2 flex flex-col">
+          <AnimatePresence initial={false}>
+            {picked.map(s => (
+              <motion.li key={s.id} layout initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} transition={spring}
+                className="flex items-center justify-between gap-3 border-b border-white/15 py-1">
+                <span className="font-bold">{s.name}</span>
+                <button type="button" onClick={() => remove(s.id)} aria-label={`Remove ${s.name}`} className="grid size-11 shrink-0 place-items-center rounded-full hover:bg-white/10"><X className="size-4" aria-hidden /></button>
               </motion.li>
             ))}
           </AnimatePresence>
         </ul>
+        {!picked.length && <p className="mt-1 text-[15px] text-white/75">Add stops from the list, or send it empty and Cheryl will suggest a day.</p>}
       </div>
-    </section>
+
+      <div className="mt-6 grid gap-5">
+        <div>
+          <span className="block text-[14px] font-bold text-aqua" id="len-l">How long</span>
+          <div className="mt-2 grid gap-1.5" role="group" aria-labelledby="len-l">
+            {LENGTHS.map(l => <button type="button" key={l} aria-pressed={len === l} onClick={() => setLen(l)}
+              className={`min-h-11 rounded-[10px] px-3 text-left text-[15px] font-bold transition-colors ${len === l ? "bg-yellow text-ink" : "bg-white/10 text-white hover:bg-white/15"}`}>{l}</button>)}
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <span className="block text-[14px] font-bold text-aqua" id="lang-l">Language</span>
+            <div className="mt-2 grid grid-cols-2 gap-1 rounded-[10px] bg-white/10 p-1" role="group" aria-labelledby="lang-l">
+              {(["English", "Español"] as const).map(l => <button type="button" key={l} aria-pressed={lang === l} onClick={() => setLang(l)} lang={l === "Español" ? "es" : "en"}
+                className={`min-h-11 rounded-[7px] text-[14px] font-bold ${lang === l ? "bg-white text-ink" : "text-white"}`}>{l}</button>)}
+            </div>
+          </div>
+          <div>
+            <span className="block text-[14px] font-bold text-aqua" id="ppl-l">Guests</span>
+            <div className="mt-2 flex items-center justify-between rounded-[10px] bg-white/10 p-1" role="group" aria-labelledby="ppl-l">
+              <button type="button" aria-label="Fewer guests" onClick={() => setPeople(p => Math.max(1, p - 1))} className="size-11 rounded-[7px] text-[20px] font-bold hover:bg-white/10">−</button>
+              <output className="tnum font-display text-[22px] font-bold" aria-live="polite">{people}</output>
+              <button type="button" aria-label="More guests" onClick={() => setPeople(p => Math.min(40, p + 1))} className="size-11 rounded-[7px] text-[20px] font-bold hover:bg-white/10">+</button>
+            </div>
+          </div>
+        </div>
+        <div><label htmlFor="date" className="block text-[14px] font-bold text-aqua">Date</label>
+          <input id="date" name="date" type="date" className="mt-2 min-h-12 w-full rounded-[10px] bg-white px-3 text-ink" /></div>
+        <div><label htmlFor="from" className="block text-[14px] font-bold text-aqua">Pick up from (hotel or cruise ship)</label>
+          <input id="from" name="from" className="mt-2 min-h-12 w-full rounded-[10px] bg-white px-3 text-ink" /></div>
+        <div><label htmlFor="contact" className="block text-[14px] font-bold text-aqua">Your email or phone</label>
+          <input id="contact" name="contact" required className="mt-2 min-h-12 w-full rounded-[10px] bg-white px-3 text-ink" /></div>
+        <div><label htmlFor="note" className="block text-[14px] font-bold text-aqua">Celebrating, or anything else?</label>
+          <input id="note" name="note" className="mt-2 min-h-12 w-full rounded-[10px] bg-white px-3 text-ink" /></div>
+      </div>
+      <button type="submit" className="btn btn-primary mt-7 w-full">Send my day to Cheryl <ArrowRight className="size-[18px]" aria-hidden /></button>
+      <p className="mt-3 text-[14px] text-white/75" role="status">{sent ? "Your email app should be open with your day filled in." : <>Opens your email app, filled in. Or call <a href={TEL} className="tnum font-bold text-white underline underline-offset-4">{PHONE}</a>.</>}</p>
+    </form>
   )
 }
 
-function Close() {
+function Tours() {
+  const [name, setName] = useSignName()
+  const [kind, setKind] = useState<Kind | "All">("All")
+  const [ids, setIds] = useState<string[]>([])
+  useEffect(() => { const d = new URLSearchParams(location.search).get("day"); if (d && PRESETS[d]) setIds(PRESETS[d]) }, [])
+  const list = useMemo(() => STOPS.filter(s => kind === "All" || s.kind === kind), [kind])
+  const picked = ids.map(id => STOPS.find(s => s.id === id)!).filter(Boolean)
+  const toggle = (id: string) => setIds(v => v.includes(id) ? v.filter(x => x !== id) : [...v, id])
   return (
-    <section className="bg-navy text-paper" aria-labelledby="c-title">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-20 md:flex-row md:items-end md:justify-between md:px-10 md:py-24">
-        <Reveal><h2 id="c-title" className="max-w-2xl font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1] font-bold tracking-[-0.035em]">Tell us what you like. We'll design the day.</h2></Reveal>
-        <Reveal delay={0.1} className="flex flex-col gap-3 sm:flex-row">
-          <a href="index.html#plan" className="inline-flex min-h-12 items-center justify-center rounded-full bg-yellow px-7 font-bold text-navy transition hover:-translate-y-px">Plan my tour</a>
-          <a href={`mailto:${EMAIL}`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-paper/30 px-6 transition hover:-translate-y-px hover:border-paper"><Mail className="size-4" aria-hidden />Email</a>
-          <a href={TEL} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-paper/30 px-6 transition hover:-translate-y-px hover:border-paper"><Phone className="size-4" aria-hidden />{PHONE}</a>
-        </Reveal>
+    <Page>
+      <div className="on-light bg-paper">
+        <Masthead dark={false} />
+        <main id="main">
+          <section aria-labelledby="t-title" className="mx-auto max-w-[1360px] px-4 pb-10 pt-14 sm:px-8 lg:pt-20">
+            <h1 id="t-title" className="poster text-[clamp(3.6rem,9vw,9rem)]">pick your <span className="text-deep">stops.</span></h1>
+            <p className="mt-6 max-w-[46ch] text-[length:var(--t-4)] leading-snug">Every Cheryl's tour is private. Add what you like, leave out what you don't, and the day is planned around you. Drinks are included; most historic sites charge $3 to $5 entry.</p>
+            <div className="mt-10 flex flex-wrap gap-2" role="group" aria-label="Filter stops">
+              {(["All", ...KINDS] as const).map(k => (
+                <button key={k} type="button" aria-pressed={kind === k} onClick={() => setKind(k)}
+                  className={`min-h-11 rounded-full px-5 text-[15px] font-bold transition-colors ${kind === k ? "bg-ink text-white" : "bg-paper-2 text-ink hover:bg-line"}`}>
+                  {k}{k !== "All" && <span className="tnum ml-1.5 opacity-60">{STOPS.filter(s => s.kind === k).length}</span>}
+                </button>
+              ))}
+            </div>
+          </section>
+          <div className="mx-auto grid max-w-[1360px] gap-12 px-4 pb-32 sm:px-8 lg:grid-cols-12 lg:gap-10">
+            <LayoutGroup>
+              <ul className="grid gap-x-8 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:col-span-8" aria-label="Tour stops">
+                <AnimatePresence mode="popLayout">
+                  {list.map((s, i) => <StopItem key={s.id} s={s} i={i} on={ids.includes(s.id)} toggle={() => toggle(s.id)} />)}
+                </AnimatePresence>
+              </ul>
+            </LayoutGroup>
+            <aside className="lg:col-span-4" aria-label="Your day">
+              <div className="lg:sticky lg:top-6"><DayTicket picked={picked} remove={id => toggle(id)} name={name} setName={setName} /></div>
+            </aside>
+          </div>
+        </main>
       </div>
-    </section>
+      <Contact />
+      <Dock action={{ href: "#day", label: picked.length ? `Your day · ${picked.length}` : "Your day" }} />
+    </Page>
   )
 }
 
-mount(<Page current="Private tours"><Hero /><Examples /><Catalogue /><Close /></Page>)
+mount(<Tours />)
