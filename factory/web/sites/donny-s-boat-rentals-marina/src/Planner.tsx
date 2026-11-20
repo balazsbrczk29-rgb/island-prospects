@@ -40,11 +40,12 @@ export default function Planner() {
   return (
     <section id="plan" data-quiet aria-labelledby="plan-title" className="bg-sand px-5 md:px-[4vw] py-20 md:py-28 scroll-mt-4">
       <div className="max-w-[1320px] mx-auto">
-        <h2 id="plan-title" className="text-[2.5rem] md:text-[4.5rem] tracking-[-0.045em] max-w-[14ch]">Plan your days with a boat</h2>
-        <p className="mt-4 max-w-[52ch] text-muted">Choose a boat and how long you stay. The total comes from Donny&rsquo;s published rates, and Taylor confirms it on WhatsApp.</p>
-
-        <div className="mt-12 md:mt-16 grid gap-12 lg:gap-20 lg:grid-cols-[1.15fr_1fr] items-start">
+        <div className="grid gap-12 lg:gap-20 lg:grid-cols-[1.15fr_1fr] items-start">
           <form className="grid gap-10" onSubmit={e => e.preventDefault()}>
+            <div>
+              <h2 id="plan-title" className="text-[2.5rem] md:text-[4rem] tracking-[-0.045em] max-w-[13ch]">Three days to two weeks: what your boat costs</h2>
+              <p className="mt-4 max-w-[48ch] text-muted">Choose a boat and how long you stay. The total comes from Donny&rsquo;s published rates, and Taylor confirms it on WhatsApp.</p>
+            </div>
             <fieldset>
               <legend className="font-semibold mb-4">Boat</legend>
               <div className="grid gap-2.5 sm:grid-cols-2">
@@ -70,7 +71,7 @@ export default function Planner() {
                 <div className="flex items-center gap-3" role="group" aria-labelledby={ids.days}>
                   <button type="button" aria-label="One day fewer" disabled={days <= MIN} onClick={() => setDays(d => Math.max(MIN, d - 1))}
                     className="grid place-items-center size-12 rounded-full bg-white disabled:opacity-35 hover:bg-flats transition-colors"><Minus size={18} strokeWidth={1.75} /></button>
-                  <output aria-live="polite" className="w-16 text-center font-display font-semibold text-[2.5rem] tnum tracking-[-0.03em]">{days}</output>
+                  <output aria-live="polite" className="w-16 text-center font-sans font-semibold text-[2.25rem] tnum">{days}</output>
                   <button type="button" aria-label="One day more" disabled={days >= MAX} onClick={() => setDays(d => Math.min(MAX, d + 1))}
                     className="grid place-items-center size-12 rounded-full bg-white disabled:opacity-35 hover:bg-flats transition-colors"><Plus size={18} strokeWidth={1.75} /></button>
                 </div>
@@ -101,7 +102,7 @@ export default function Planner() {
             <div className="mt-2 h-[5.5rem] md:h-[6.5rem] overflow-hidden">
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.p key={total} initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: '-60%', opacity: 0 }} transition={{ duration: 0.28, ease }}
-                  className="font-display font-semibold text-[4.5rem] md:text-[5.5rem] leading-none tracking-[-0.05em] tnum">{usd(total)}</motion.p>
+                  className="font-sans font-bold text-[4.25rem] md:text-[5.25rem] leading-none tracking-[-0.04em] tnum">{usd(total)}</motion.p>
               </AnimatePresence>
             </div>
             <p className="text-muted tnum">{breakdown}</p>

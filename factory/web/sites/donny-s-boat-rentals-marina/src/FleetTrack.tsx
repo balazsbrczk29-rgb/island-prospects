@@ -15,9 +15,9 @@ function BoatFrame({ b, i, active }: { b: Boat; i: number; active: boolean }) {
   return (
     <motion.article aria-labelledby={`boat-${b.id}`} animate={{ opacity: active ? 1 : 0.5, scale: active ? 1 : 0.955 }} transition={{ duration: 0.6, ease }}
       className="origin-center">
-      <div className="ph rounded-[var(--radius-md)] aspect-[4/3] md:aspect-auto md:h-[min(58svh,640px)]">
+      <div className="ph rounded-[var(--radius-md)] aspect-[4/3] md:aspect-auto md:h-[min(62svh,660px)]">
         <img src={wix(b.cover, 1600)} srcSet={`${wix(b.cover, 900)} 900w, ${wix(b.cover, 1600)} 1600w`} sizes="(min-width: 900px) 74vw, 86vw"
-          alt={`Donny's ${b.name} rental boat`} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+          alt={`Donny's ${b.name} rental boat`} style={{ objectPosition: b.pos }} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
       </div>
       <div className="mt-5 md:mt-6 grid gap-4 md:grid-cols-[1.25fr_1fr_auto] md:items-end">
         <div>
@@ -25,7 +25,7 @@ function BoatFrame({ b, i, active }: { b: Boat; i: number; active: boolean }) {
           <p className="mt-2 text-muted">{b.hp} 4-stroke, {b.people}{b.experience ? ', boating experience needed' : ''}</p>
         </div>
         <p className="tnum text-[1.0625rem] leading-snug">
-          <span className="font-display font-semibold text-[2rem] tracking-[-0.03em]">{usd(b.day)}</span> a day
+          <span className="font-sans font-semibold text-[2rem] tracking-[-0.02em] tnum">{usd(b.day)}</span> a day
           <br /><span className="text-muted">{usd(b.week)} for 7 days</span>
         </p>
         <button type="button" onClick={() => pickBoat(b.id)} className="btn btn-ghost justify-self-start md:justify-self-end">Plan this boat</button>
@@ -74,12 +74,13 @@ export default function FleetTrack() {
   }
 
   return (
-    <section ref={ref} id="fleet" data-stage aria-labelledby="fleet-title" className="relative md:h-[400svh]">
-      <div className="md:sticky md:top-0 md:h-svh md:overflow-hidden flex flex-col justify-center py-16 md:pt-0 md:pb-14">
-        <div className="px-5 md:px-[calc((100vw-min(74vw,1080px))/2)] mb-8 md:mb-7 md:flex md:items-end md:justify-between md:gap-10">
-          <h2 id="fleet-title" className="text-[2.5rem] md:text-[3.25rem] tracking-[-0.045em]">The four boats</h2>
-          <p className="mt-3 md:mt-0 max-w-[48ch] text-muted">Every one 4-stroke, every one with VHF and buoyancy aids. Three days minimum, only for guests staying on Green Turtle Cay.</p>
-        </div>
+    <div id="fleet" className="scroll-mt-2">
+    <div className="px-5 md:px-[calc((100vw-min(74vw,1080px))/2)] pt-20 md:pt-28 md:flex md:items-end md:justify-between md:gap-10">
+      <h2 id="fleet-title" className="text-[2.5rem] md:text-[4.25rem] tracking-[-0.045em] max-w-[13ch]">Four boats, 17 to 23 ft, all 4-stroke</h2>
+      <p className="mt-3 md:mt-0 max-w-[44ch] text-muted">Every one with VHF and buoyancy aids. Three days minimum, only for guests staying on Green Turtle Cay.</p>
+    </div>
+    <section ref={ref} data-stage aria-labelledby="fleet-title" className="relative md:h-[400svh]">
+      <div className="md:sticky md:top-0 md:h-svh md:overflow-hidden flex flex-col justify-center pt-8 pb-16 md:pt-0 md:pb-10">
         <motion.ul ref={ul} className="track-ul" style={{ x }}>
           {FLEET.map((b, i) => <li key={b.id} data-i={i}><BoatFrame b={b} i={i} active={focus === i} /></li>)}
         </motion.ul>
@@ -102,5 +103,6 @@ export default function FleetTrack() {
         <p className="md:hidden px-5 mt-4 text-[0.9375rem] text-muted" aria-hidden="true">Swipe for all four</p>
       </div>
     </section>
+    </div>
   )
 }

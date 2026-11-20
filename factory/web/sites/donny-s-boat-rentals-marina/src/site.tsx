@@ -101,6 +101,11 @@ function FloatingWhatsApp() {
     quiet.forEach(q => io.observe(q)); update()
     return () => io.disconnect()
   }, [])
+  // while the button shows on a phone, lift the concept tag above its row (--concept-offset, read by assets/concept.css)
+  useEffect(() => {
+    const phone = matchMedia('(max-width: 767px)').matches
+    document.documentElement.style.setProperty('--concept-offset', show && phone ? '68px' : '0px')
+  }, [show])
   return (
     <AnimatePresence>
       {show && (

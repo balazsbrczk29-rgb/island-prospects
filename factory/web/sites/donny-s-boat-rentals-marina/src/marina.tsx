@@ -66,7 +66,7 @@ function Marina() {
                   {MARINA.rates.map(r => (
                     <tr key={r.label} className="border-t border-line align-top">
                       <th scope="row" className="py-5 pr-4 font-semibold">{r.label}<span className="block font-normal text-[0.9375rem] text-muted mt-1">{r.note}</span></th>
-                      <td className="py-5 pr-4 font-display font-semibold text-[1.75rem] tracking-[-0.03em]">{usd(r.day)}</td>
+                      <td className="py-5 pr-4 font-sans font-semibold text-[1.625rem] tnum">{usd(r.day)}</td>
                       <td className="py-5 pr-4 text-[1.125rem]">{usd(r.week)}</td>
                       <td className="py-5 text-[1.125rem]">{usd(r.month)}</td>
                     </tr>
@@ -96,9 +96,14 @@ function Marina() {
               <div><dt className="text-ink/75">Ashore</dt><dd className="m-0 mt-1 font-semibold">New Plymouth, 10 minutes on foot</dd></div>
             </dl>
           </div>
-          <div className="ph min-h-[320px] lg:min-h-[80svh]">
-            <img src={wix(P.soundAir, 1800)} loading="lazy" decoding="async" alt="Aerial photograph of Black Sound, marked by Donny's with the dock and the mooring field" />
-          </div>
+          {/* the top of Donny's own annotated aerial, cropped above the burned-in labels; the callouts are set in the site's type */}
+          <figure className="relative m-0 min-h-[320px] lg:min-h-[80svh] overflow-hidden bg-flats-deep">
+            <img src={wix(P.soundAir, 1800)} loading="lazy" decoding="async" alt="Black Sound and Green Turtle Cay from the air, with the Sea of Abaco beyond"
+              className="absolute inset-0 size-full object-cover origin-top scale-[1.75]" style={{ objectPosition: '50% 0%' }} />
+            <figcaption className="absolute left-4 right-4 bottom-4 md:left-6 md:right-auto md:bottom-6 bg-ground text-ink rounded-[var(--radius-md)] px-4 py-3 text-[0.9375rem] max-w-[36ch]">
+              <span className="font-semibold">Black Sound from the air.</span> Donny&rsquo;s dock and mooring field are at the far end of the sound.
+            </figcaption>
+          </figure>
         </div>
       </section>
 

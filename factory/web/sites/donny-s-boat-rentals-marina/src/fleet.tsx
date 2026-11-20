@@ -23,16 +23,16 @@ function BoatSection({ b, i }: { b: Boat; i: number }) {
     <section id={b.id} aria-labelledby={`t-${b.id}`} className="px-5 md:px-[4vw] py-16 md:py-24 border-t border-line scroll-mt-4">
       <div className={`grid gap-10 lg:gap-[4vw] lg:grid-cols-[1.35fr_1fr] items-start ${flip ? 'lg:[&>*:first-child]:order-2' : ''}`}>
         <div className="grid grid-cols-2 gap-3">
-          <div className="ph col-span-2 aspect-[3/2] rounded-[var(--radius-md)]"><img src={wix(a, 1600)} alt={`Donny's ${b.name}`} loading={i ? 'lazy' : 'eager'} decoding="async" /></div>
-          <div className="ph aspect-[4/3] rounded-[var(--radius-md)]"><img src={wix(c, 800)} alt={`The ${b.name}, another view`} loading="lazy" decoding="async" /></div>
-          <div className="ph aspect-[4/3] rounded-[var(--radius-md)]"><img src={wix(d, 800)} alt={`On board the ${b.name}`} loading="lazy" decoding="async" /></div>
+          <div className="ph col-span-2 aspect-[3/2] rounded-[var(--radius-md)]"><img src={wix(a, 1600)} alt={`Donny's ${b.name}`} style={{ objectPosition: b.pos }} loading={i ? 'lazy' : 'eager'} decoding="async" /></div>
+          <div className={`ph rounded-[var(--radius-md)] ${d ? 'aspect-[4/3]' : 'col-span-2 aspect-[2/1]'}`}><img src={wix(c, d ? 800 : 1400)} alt={`On board the ${b.name}`} loading="lazy" decoding="async" /></div>
+          {d && <div className="ph aspect-[4/3] rounded-[var(--radius-md)]"><img src={wix(d, 800)} alt={`The ${b.name}, another view`} loading="lazy" decoding="async" /></div>}
         </div>
         <div className="lg:sticky lg:top-10">
           <h2 id={`t-${b.id}`} className="text-[2.75rem] md:text-[4.25rem] tracking-[-0.045em]">{b.name}</h2>
           <p className="mt-3 text-[1.25rem]">{b.hp} 4-stroke engine. Suits {b.people}.</p>
           <p className="mt-8 tnum flex flex-wrap gap-x-10 gap-y-4">
-            <span><span className="block font-display font-semibold text-[3rem] tracking-[-0.045em] leading-none">{usd(b.day)}</span><span className="text-muted">a day</span></span>
-            <span><span className="block font-display font-semibold text-[3rem] tracking-[-0.045em] leading-none">{usd(b.week)}</span><span className="text-muted">for 7 days</span></span>
+            <span><span className="block font-sans font-semibold text-[2.75rem] tracking-[-0.03em] leading-none tnum">{usd(b.day)}</span><span className="text-muted">a day</span></span>
+            <span><span className="block font-sans font-semibold text-[2.75rem] tracking-[-0.03em] leading-none tnum">{usd(b.week)}</span><span className="text-muted">for 7 days</span></span>
           </p>
           <p className="mt-4 text-muted">Three days minimum{b.experience ? '. Boating experience needed.' : '.'}</p>
           <p className="mt-8 font-semibold">On board</p>

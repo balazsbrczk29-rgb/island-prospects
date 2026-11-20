@@ -15,6 +15,8 @@ export const P = {
   walkway: '1c154a_513335e058724caf96d834cfa1763f19~mv2.jpg',
   morning: '1c154a_aed66bd991d64c718ae73d38dcf47ad2~mv2.jpg',
   teal: '1c154a_2bb05813534d457d9afa6e1b0ba263e8~mv2.jpg',
+  heroBoat: '1c154a_99171120631c43e18dba8efea634593f~mv2.jpg',
+  donnysBoat: '1c154a_6049786bfa3f4c89a483afb492f846d1~mv2_d_4032_3024_s_4_2.jpeg',
 }
 
 export const PHONE = '242 823 8733'
@@ -28,26 +30,27 @@ export const mail = (subject: string, body = '') => `mailto:${EMAIL}?subject=${e
 
 export type Boat = {
   id: string; name: string; short: string; length: string; hp: string; people: string; day: number; week: number
-  experience: boolean; kit: string[]; photos: string[]; cover: string
+  experience: boolean; kit: string[]; photos: string[]; cover: string; pos: string
 }
 
 export const FLEET: Boat[] = [
   { id: 'angler', name: '23 ft Angler', short: 'Angler', length: '23 ft', hp: '200 hp', people: '5 to 6 adults', day: 185, week: 1200, experience: true,
     kit: ['Buoyancy aids', 'Fixed VHF', 'Chart-plotter', 'Stereo', 'Ladder'],
-    cover: '1c154a_4ff246bf07cc42ea9ed873cc662b6875.jpg',
+    cover: '1c154a_4ff246bf07cc42ea9ed873cc662b6875.jpg', pos: '50% 62%',
     photos: ['1c154a_4ff246bf07cc42ea9ed873cc662b6875.jpg', '1c154a_b0da531e314e4c3abe5957099daa2f08~mv2.jpg', '1c154a_b0fc264e2c234e16910226e11f8d4adf~mv2.jpg'] },
   { id: 'century', name: '20 ft Century', short: 'Century', length: '20 ft', hp: '150 hp', people: '5 to 6 adults', day: 170, week: 1075, experience: true,
     kit: ['Buoyancy aids', 'VHF', 'Trim tabs', 'Chart-plotter', 'Stereo', 'Ladder', 'Anchor and rode', 'Cooler'],
-    cover: '1c154a_3d72f85cdb1640098b054f917382ca21~mv2_d_4032_3024_s_4_2.jpeg',
+    cover: '1c154a_3d72f85cdb1640098b054f917382ca21~mv2_d_4032_3024_s_4_2.jpeg', pos: '50% 66%',
     photos: ['1c154a_3d72f85cdb1640098b054f917382ca21~mv2_d_4032_3024_s_4_2.jpeg', '1c154a_1d4e6258cf5d4141963fe64cea0da41a~mv2.jpg', '1c154a_65f730f756f342c08d0396747fdda60a~mv2.jpg'] },
   { id: 'whaler19', name: '19 ft Boston Whaler', short: '19 ft Whaler', length: '19 ft', hp: '115 hp', people: '4 adults', day: 140, week: 880, experience: false,
     kit: ['Buoyancy aids', 'Fixed VHF', 'Chart-plotter', 'Ladder', 'Anchor and rode', 'Cooler'],
     cover: '1c154a_85b6ee3e9b314d0bb82f008894afcedc~mv2.jpg',
-    photos: ['1c154a_85b6ee3e9b314d0bb82f008894afcedc~mv2.jpg', '1c154a_e175631fc957408ab2d0d1dd25cd913f~mv2.jpg', '1c154a_7d6e166c753f424bb16373afcacb0c93~mv2.jpg'] },
+    pos: '50% 60%',
+    photos: ['1c154a_85b6ee3e9b314d0bb82f008894afcedc~mv2.jpg', '1c154a_e175631fc957408ab2d0d1dd25cd913f~mv2.jpg'] },
   { id: 'whaler17', name: '17 ft Boston Whaler', short: '17 ft Whaler', length: '17 ft', hp: '60 to 90 hp', people: '2 to 3 adults', day: 125, week: 805, experience: false,
     kit: ['Buoyancy aids', 'VHF', 'Ladder', 'Anchor and rode', 'Cooler'],
-    cover: '1c154a_99171120631c43e18dba8efea634593f~mv2.jpg',
-    photos: ['1c154a_99171120631c43e18dba8efea634593f~mv2.jpg', '1c154a_2bb05813534d457d9afa6e1b0ba263e8~mv2.jpg', '1c154a_aed66bd991d64c718ae73d38dcf47ad2~mv2.jpg'] },
+    cover: '1c154a_2bb05813534d457d9afa6e1b0ba263e8~mv2.jpg', pos: '50% 62%',
+    photos: ['1c154a_2bb05813534d457d9afa6e1b0ba263e8~mv2.jpg', '1c154a_99171120631c43e18dba8efea634593f~mv2.jpg', '1c154a_aed66bd991d64c718ae73d38dcf47ad2~mv2.jpg'] },
 ]
 
 /** Cost from the published rates: whole weeks at the 7-day price, the rest at the day price. */

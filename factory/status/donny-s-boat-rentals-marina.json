@@ -27,6 +27,11 @@
  "concept_type": "brochure + rental enquiry: fleet track, cost planner to WhatsApp/email, marina page with rates and slip check",
  "images": [
   {
+   "src": "https://static.wixstatic.com/media/1c154a_99171120631c43e18dba8efea634593f~mv2.jpg",
+   "source": "own",
+   "credit": "Donny’s Boat Rentals & Marina (hero: Whaler at the dock)"
+  },
+  {
    "src": "https://static.wixstatic.com/media/1c154a_788222cd60354b608e5d96e9b2767508~mv2_d_2000_1499_s_2.jpg",
    "source": "own",
    "credit": "Donny’s Boat Rentals & Marina (hero marina aerial)"
@@ -98,6 +103,19 @@
   "https://www.noonsite.com/business/donnys-boat-rentals-and-marina/",
   "https://www.waterwayguide.com/marina/donnys-boat-rentals-and-marina"
  ],
- "notes": "awaiting independent critic. BLIND: sandbox blocks outside images, look.mjs and fonts; references (stuartcove.com, airbnb experiences, porsche model pages for A11) judged from knowledge. Own photos viewed via Lovable gallery ip-assets-donny-s-boat-rentals-marina (59442f6d-fa81-460f-82a8-d55db2477b5d) and routed into QA screenshots as low-res crops, so photos look soft in screenshots; the live site serves Wix originals up to 2000 px. Self-critique scores, not an independent critic. interact.mjs flags sr-only radio inputs (cannot fill a radio) and off-screen Plan this boat buttons in the pinned track as dead: false positives, verified by clicking in Playwright. QA warns 1 tap target <40px per page = the shared concept tag button. Fonts self-hosted (Bricolage Grotesque, Figtree). Big idea: one day with your own boat from Donnys dock, 8 am to 5 pm.",
- "built_at": "2026-11-20T20:18:45.466Z"
+ "notes": "Fix pass 1 applied, awaiting independent critic re-score. Changes: the day is the hero (headline: Collect your boat at 8, island-hop all day, back by 5. From $125 a day, the lowest published day rate) with an 8 am to 5 pm time rail across the first screen that jumps to each chapter; sharp Whaler-at-the-dock photo in a split hero with the type on plain ground; the dock chapter is now a pinned stage with a scroll-driven clock rail, text vertically centred beside each photo, no ghosted headings or empty column; fleet heading moved out of the pinned frame, consistent crops per boat, prices in Figtree tabular figures, the 19 ft Whaler near-duplicate photo removed; planner total card sits at the top beside the heading and boat picker; the burned-in yellow labels are cropped out of the annotated aerial, with a typed caption; home marina teaser uses the clean marina aerial; the concept tag is lifted with --concept-offset only while the phone WhatsApp button shows; headlines made specific. BLIND: sandbox blocks outside images, look.mjs and fonts; references (stuartcove.com, airbnb experiences, porsche model pages for A11) judged from knowledge. Own photos viewed via Lovable gallery ip-assets-donny-s-boat-rentals-marina (59442f6d-fa81-460f-82a8-d55db2477b5d) and routed into QA screenshots as low-res crops, so photos look soft in screenshots; the live site serves Wix originals up to 2000 px. Self-critique scores, not an independent critic. interact.mjs flags sr-only radio inputs (cannot fill a radio) and off-screen Plan this boat buttons in the pinned track as dead: false positives, verified by clicking in Playwright. QA warns 1 tap target <40px per page = the shared concept tag button. Fonts self-hosted (Bricolage Grotesque, Figtree). Big idea: one day with your own boat from Donnys dock, 8 am to 5 pm.",
+ "built_at": "2026-11-20T21:25:29.118Z",
+ "critic_history": [
+  {
+   "pass": 0,
+   "by": "independent critic",
+   "photography": 3,
+   "typography": 4,
+   "composition": 3,
+   "colour": 4,
+   "fit": 4,
+   "distinct": 4,
+   "references": 3
+  }
+ ]
 }

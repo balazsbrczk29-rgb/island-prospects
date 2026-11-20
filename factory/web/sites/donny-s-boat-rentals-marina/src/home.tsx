@@ -11,7 +11,7 @@ function Terms() {
     <section aria-labelledby="terms-title" className="px-5 md:px-[4vw] py-20 md:py-32 border-t border-line">
       <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-[6vw]">
         <div>
-          <h2 id="terms-title" className="text-[2.5rem] md:text-[4rem] tracking-[-0.045em] max-w-[11ch]">Good to know before you go</h2>
+          <h2 id="terms-title" className="text-[2.5rem] md:text-[4rem] tracking-[-0.045em] max-w-[12ch]">No ATM on the island: the terms before you go</h2>
           <p className="mt-5 max-w-[38ch] text-muted">Green Turtle Cay runs on cash and the weather. These are Donny&rsquo;s rental terms in plain words.</p>
           <a href="fleet.html#terms" className="mt-6 inline-flex items-center gap-2 min-h-11 font-semibold underline decoration-[1.5px] underline-offset-[6px] hover:decoration-[3px]">The full terms<ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" /></a>
         </div>
@@ -34,15 +34,16 @@ function MarinaTeaser() {
     <section aria-labelledby="marina-title" className="bg-flats">
       <div className="grid lg:grid-cols-[1.2fr_1fr] items-stretch">
         <div className="ph min-h-[320px] lg:min-h-[86svh]">
-          <img src={wix(P.soundAir, 1800)} srcSet={srcSet(P.soundAir, [900, 1800])} sizes="(min-width: 1024px) 55vw, 100vw" loading="lazy" decoding="async"
-            alt="Aerial photograph of Black Sound and New Plymouth, marked by Donny's with the dock and the mooring field" />
+          <img src={wix(P.marinaAir, 1800)} srcSet={srcSet(P.marinaAir, [900, 1800])} sizes="(min-width: 1024px) 55vw, 100vw" loading="lazy" decoding="async"
+            alt="Donny's marina from the air: boats at the dock and on moorings in the blue water at the end of Black Sound" />
+          <p className="absolute left-4 bottom-4 md:left-6 md:bottom-6 bg-ground text-ink rounded-full px-4 py-2 text-[0.9375rem] font-medium">Donny&rsquo;s dock and moorings, from the air</p>
         </div>
         <div className="px-5 md:px-[4vw] py-16 md:py-24 flex flex-col justify-center">
           <h2 id="marina-title" className="text-[2.5rem] md:text-[4rem] tracking-[-0.045em] max-w-[12ch]">Coming in on your own boat?</h2>
           <p className="mt-5 max-w-[42ch] text-ink/80">Fixed-price dockage up to 50 ft LOA and 7 ft draft, moorings with plenty of swing room, and New Plymouth a ten-minute walk away. Donny lives on site.</p>
           <div className="mt-10 grid grid-cols-2 gap-8 max-w-[460px]">
-            <p className="tnum"><span className="block font-display font-semibold text-[3rem] tracking-[-0.045em] leading-none">{usd(small.day)}</span><span className="block mt-2 text-ink/80">a day at the dock, 45 ft and under</span></p>
-            <p className="tnum"><span className="block font-display font-semibold text-[3rem] tracking-[-0.045em] leading-none">{usd(moor.day)}</span><span className="block mt-2 text-ink/80">a day on a mooring</span></p>
+            <p className="tnum"><span className="block font-sans font-semibold text-[2.75rem] tracking-[-0.03em] leading-none tnum">{usd(small.day)}</span><span className="block mt-2 text-ink/80">a day at the dock, 45 ft and under</span></p>
+            <p className="tnum"><span className="block font-sans font-semibold text-[2.75rem] tracking-[-0.03em] leading-none tnum">{usd(moor.day)}</span><span className="block mt-2 text-ink/80">a day on a mooring</span></p>
           </div>
           <a href="marina.html" className="btn btn-ghost mt-10 self-start">Dockage, rates and the way in<ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" /></a>
         </div>
@@ -70,7 +71,7 @@ function Contact() {
           </dl>
         </div>
         <div className="ph aspect-[4/5] rounded-[var(--radius-lg)]">
-          <img src={wix(P.teal, 1200)} alt="A teal Boston Whaler from Donny's fleet tied at the dock in clear water" loading="lazy" decoding="async" />
+           <img src={wix(P.donnysBoat, 1200)} alt="A Donny's Boat Rentals boat on calm turquoise water off Green Turtle Cay" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
@@ -91,7 +92,6 @@ function Home() {
   return (
     <Page current="home">
       <Hero />
-      <Opening />
       <FleetTrack />
       <Planner />
       <DayFilm />
