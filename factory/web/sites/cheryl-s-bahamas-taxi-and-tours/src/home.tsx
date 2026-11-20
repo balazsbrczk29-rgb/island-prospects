@@ -34,12 +34,12 @@ function Hero({ name, setName }: { name: string; setName: (v: string) => void })
   return (
     <section id="hero" aria-labelledby="hero-title" className="relative overflow-hidden bg-deep text-white">
       <Masthead />
-      <div className="mx-auto max-w-[1360px] px-4 pb-14 pt-8 sm:px-8 lg:pb-20 lg:pt-6">
+      <div className="mx-auto max-w-[1360px] px-4 pb-28 pt-5 sm:px-8 lg:pb-20 lg:pt-6">
         <motion.h1 id="hero-title" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, delay: 0.05 }}
           className="poster text-[12.4vw] tracking-[-0.06em] lg:text-[clamp(3.3rem,7.3vw,7.9rem)]">
           look for <span className="text-yellow">your&nbsp;name.</span>
         </motion.h1>
-        <div className="mt-8 grid gap-8 lg:mt-10 lg:grid-cols-12 lg:gap-10">
+        <div className="mt-6 grid gap-6 lg:mt-10 lg:grid-cols-12 lg:gap-10">
           <motion.div initial={{ opacity: 0, y: 40, rotate: 1.5 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ ...spring, stiffness: 160, delay: 0.25 }}
             className="lg:order-2 lg:col-span-7" style={{ containerType: "inline-size" }}>
             <SignPhoto name={name} />
@@ -51,7 +51,7 @@ function Hero({ name, setName }: { name: string; setName: (v: string) => void })
             <label htmlFor="sign-name" className="display text-[24px] text-yellow lg:mt-10">Write your name on the card</label>
             <input id="sign-name" value={name} onChange={e => setName(e.target.value.slice(0, 28))} autoComplete="name" placeholder="e.g. The Alvarez family"
               className="mt-3 block min-h-[72px] w-full rounded-[14px] border-2 border-white bg-white px-5 font-display text-[26px] font-bold tracking-[-0.02em] text-ink placeholder:font-sans placeholder:text-[20px] placeholder:font-normal placeholder:tracking-normal placeholder:text-[#5b6b76] focus:border-yellow focus:outline-none focus:ring-4 focus:ring-yellow/50" />
-            <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
+            <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-1">
               <a href="#pickup" className="btn btn-primary">Book my airport pickup <ArrowRight className="size-[18px]" aria-hidden /></a>
               <a href="tours.html" className="btn-text inline-flex items-center font-bold">Plan a private tour</a>
             </div>
@@ -73,12 +73,10 @@ function Arrival() {
     <section aria-labelledby="arrival-title" className="on-light bg-paper">
       <div className="mx-auto max-w-[1360px] px-4 py-24 sm:px-8 lg:py-32">
         <h2 id="arrival-title" className="poster max-w-[16ch] text-[length:var(--t-2)]">from the arrivals hall to your hotel door.</h2>
-        <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
+        <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:items-center lg:gap-10">
           <figure className="lg:col-span-7">
-            <Photo src={R("cheryl-taxi.jpeg")} alt="Two Cheryl's drivers in navy and yellow uniforms beside the company's white passenger van" ratio="1.98 / 1" className="rounded-[var(--radius-m)]" />
-            <figcaption className="mt-3 text-[15px] text-muted">Cheryl's drivers, in the uniform you will look for.</figcaption>
-            <Photo src={R("fleet.jpeg")} alt="Cheryl's fleet of taxis and vans with uniformed drivers standing beside them" ratio="2.25 / 1" className="mt-8 rounded-[var(--radius-m)]" />
-            <figcaption className="mt-3 text-[15px] text-muted">The fleet: private vans and SUVs, all air-conditioned.</figcaption>
+            <Photo src={R("cheryl-taxi.jpeg")} alt="Two Cheryl's drivers in navy and yellow uniforms beside the company's white passenger van" ratio="4 / 3" pos="44% 70%" className="rounded-[var(--radius-m)]" />
+            <figcaption className="mt-3 text-[15px] text-muted">Cheryl's drivers, in the uniform you will look for, with one of the air-conditioned vans.</figcaption>
           </figure>
           <div className="lg:col-span-5">
             <ol className="flex flex-col gap-10">
@@ -92,11 +90,11 @@ function Arrival() {
                 </motion.li>
               ))}
             </ol>
-            <p className="mt-14 max-w-[44ch] border-t border-line pt-8 text-[length:var(--t-4)] leading-snug">
-              Anywhere on New Providence, west end to east end. Lunch, dinner, a downtown drop-off while you are here: same number. Baby-sitting and wheelchair rentals on request.
-            </p>
           </div>
         </div>
+        <p className="mt-16 max-w-[60ch] border-t border-line pt-8 text-[length:var(--t-4)] leading-snug">
+          Anywhere on New Providence, west end to east end. Lunch, dinner, a downtown drop-off while you are here: same number. Baby-sitting and wheelchair rentals on request.
+        </p>
       </div>
     </section>
   )

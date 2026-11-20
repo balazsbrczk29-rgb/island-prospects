@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState, type FormEvent } from "react"
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode, type MouseEvent } from "react"
 import { AnimatePresence, LayoutGroup, motion } from "motion/react"
+import { Dialog } from "radix-ui"
 import { ArrowRight, Check, Plus, X } from "lucide-react"
 import { Page, Masthead, Dock, Contact, Photo, mount, useSignName, mailto, spring, R, PHONE, TEL } from "./shared"
 import { STOPS, KINDS, PRESETS, type Kind, type Stop } from "./stops"
@@ -53,8 +54,9 @@ function DayTicket({ picked, remove, name, setName }: { picked: Stop[]; remove: 
     setSent(true)
   }
   return (
-    <form id="day" onSubmit={submit} className="scroll-mt-6 rounded-[var(--radius-l)] bg-deep p-6 text-white sm:p-8">
-      <h2 className="poster text-[38px]">your day.</h2>
+    <form onSubmit={submit} className="p-6 text-white sm:p-8">
+      <Dialog.Title className="poster pr-12 text-[38px]">your day.</Dialog.Title>
+      <Dialog.Description className="mt-2 text-[15px] text-white/80">Check the details, then send. Cheryl plans the day around them.</Dialog.Description>
       <label htmlFor="who" className="mt-5 block text-[14px] font-bold text-aqua">Name on the card</label>
       <input id="who" name="who" value={name} onChange={e => setName(e.target.value.slice(0, 32))} placeholder="Your name"
         className="mt-1 w-full border-b-2 border-white/30 bg-transparent pb-1.5 marker text-[28px] text-yellow placeholder:text-white/60 focus:border-yellow focus:outline-none" />
@@ -117,10 +119,52 @@ function DayTicket({ picked, remove, name, setName }: { picked: Stop[]; remove: 
   )
 }
 
+/* The compact "your day" card; the full form opens in a drawer that slides in from the right, where the card sits. */
+function DaySummary({ picked, name, open, setOpen, children }: { picked: Stop[]; name: string; open: boolean; setOpen: (v: boolean) => void; children: ReactNode }) {
+  const shown = picked.slice(0, 5)
+  return (
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <div id="day" className="scroll-mt-6 rounded-[var(--radius-l)] bg-deep p-6 text-white sm:p-7">
+        <h2 className="poster text-[36px]">your day.</h2>
+        <div className="mt-5 -rotate-1 rounded-[8px] bg-white px-5 py-4 text-ink shadow-[0_18px_30px_-18px_rgba(0,0,0,.6)]">
+          <p className={`marker truncate text-[26px] ${name.trim() ? "" : "text-ink/35"}`}>{name.trim() || "Your name"}</p>
+        </div>
+        <p className="mt-6 text-[15px] font-bold text-aqua" aria-live="polite">{picked.length ? `${picked.length} stop${picked.length > 1 ? "s" : ""} added` : "No stops yet"}</p>
+        {picked.length ? (
+          <ul className="mt-2 flex flex-col gap-1">
+            {shown.map(s => <li key={s.id} className="truncate font-bold">{s.name}</li>)}
+            {picked.length > shown.length && <li className="text-white/75">and {picked.length - shown.length} more</li>}
+          </ul>
+        ) : <p className="mt-1 text-[15px] text-white/80">Tap "add" on any stop, or send it empty and Cheryl will suggest a day.</p>}
+        <Dialog.Trigger asChild>
+          <button type="button" className="btn btn-primary mt-6 w-full">Send my day <ArrowRight className="size-[18px]" aria-hidden /></button>
+        </Dialog.Trigger>
+      </div>
+      <AnimatePresence>
+        {open && (
+          <Dialog.Portal forceMount>
+            <Dialog.Overlay asChild forceMount>
+              <motion.div className="fixed inset-0 z-[9100] bg-ink/45" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} />
+            </Dialog.Overlay>
+            <Dialog.Content asChild forceMount>
+              <motion.div className="fixed inset-y-0 right-0 z-[9200] w-full max-w-[480px] overflow-y-auto bg-deep shadow-[-30px_0_60px_-30px_rgba(0,0,0,.5)] focus:outline-none"
+                initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", stiffness: 320, damping: 34 }}>
+                <Dialog.Close className="absolute right-4 top-4 z-10 grid size-11 place-items-center rounded-full text-white hover:bg-white/10" aria-label="Close"><X className="size-5" aria-hidden /></Dialog.Close>
+                {children}
+              </motion.div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        )}
+      </AnimatePresence>
+    </Dialog.Root>
+  )
+}
+
 function Tours() {
   const [name, setName] = useSignName()
   const [kind, setKind] = useState<Kind | "All">("All")
   const [ids, setIds] = useState<string[]>([])
+  const [open, setOpen] = useState(false)
   useEffect(() => { const d = new URLSearchParams(location.search).get("day"); if (d && PRESETS[d]) setIds(PRESETS[d]) }, [])
   const list = useMemo(() => STOPS.filter(s => kind === "All" || s.kind === kind), [kind])
   const picked = ids.map(id => STOPS.find(s => s.id === id)!).filter(Boolean)
@@ -156,13 +200,13 @@ function Tours() {
               </LayoutGroup>
             </div>
             <aside className="lg:col-span-4" aria-label="Your day">
-              <div className="lg:sticky lg:top-4 lg:max-h-[calc(100svh-32px)] lg:overflow-y-auto lg:rounded-[var(--radius-l)]"><DayTicket picked={picked} remove={id => toggle(id)} name={name} setName={setName} /></div>
+              <div className="lg:sticky lg:top-6"><DaySummary picked={picked} name={name} open={open} setOpen={setOpen}><DayTicket picked={picked} remove={id => toggle(id)} name={name} setName={setName} /></DaySummary></div>
             </aside>
           </div>
         </main>
       </div>
       <Contact />
-      <Dock action={{ href: "#day", label: picked.length ? `Your day · ${picked.length}` : "Your day" }} hideWhile={["day"]} />
+      <Dock action={{ href: "#day", label: picked.length ? `Your day · ${picked.length}` : "Your day", onClick: (e: MouseEvent) => { e.preventDefault(); setOpen(true) } }} hideWhile={["day"]} />
     </Page>
   )
 }

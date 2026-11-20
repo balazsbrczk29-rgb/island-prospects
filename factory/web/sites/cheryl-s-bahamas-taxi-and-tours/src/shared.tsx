@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react"
+import { useEffect, useState, type ReactNode, type MouseEvent } from "react"
 import { createRoot } from "react-dom/client"
 import Lenis from "lenis"
 import { motion } from "motion/react"
@@ -70,7 +70,7 @@ export function Masthead({ dark = true }: { dark?: boolean }) {
 
 /* N4: floating dock, bottom centre. Solid, no blur. */
 /* Hidden while any of `hideWhile` sections is on screen, so it never competes with that screen's own primary action. */
-export function Dock({ action, hideWhile = [] }: { action: { href: string; label: string; onClick?: () => void }; hideWhile?: string[] }) {
+export function Dock({ action, hideWhile = [] }: { action: { href: string; label: string; onClick?: (e: MouseEvent) => void }; hideWhile?: string[] }) {
   const [hidden, setHidden] = useState(hideWhile.length > 0)
   useEffect(() => {
     if (!hideWhile.length) return
