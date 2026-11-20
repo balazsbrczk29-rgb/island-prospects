@@ -4,6 +4,8 @@
 @font-face { font-family: "Syne"; src: url("./fonts/syne-latin-wght-normal.woff2") format("woff2"); font-weight: 400 800; font-display: swap; }
 @font-face { font-family: "Atkinson Hyperlegible"; src: url("./fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Atkinson Hyperlegible"; src: url("./fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Permanent Marker"; src: url("./fonts/permanent-marker-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+.marker { font-family: "Permanent Marker", "Comic Sans MS", cursive; letter-spacing: 0; line-height: 1; }
 @font-face { font-family: "Syne Fallback"; src: local("Arial"); size-adjust: 104%; ascent-override: 92%; descent-override: 26%; }
 
 /* P14 Blue hole, tuned to Cheryl's own navy-and-yellow uniform */
@@ -38,7 +40,7 @@
   --dur-med: 420ms;
   --concept-offset: 0px;
 }
-@media (max-width: 767px) { :root { --concept-offset: 76px; } }
+@media (max-width: 767px) { :root { --concept-offset: calc(76px * var(--dock-on, 1)); } }
 
 html { background: var(--color-paper); color: var(--color-ink); }
 body { font-family: var(--font-sans); font-size: var(--t-5); line-height: 1.5; -webkit-font-smoothing: antialiased; }
@@ -50,7 +52,7 @@ html.lenis, html.lenis body { height: auto; }
 
 h1, h2, h3 { text-wrap: balance; }
 p, li { text-wrap: pretty; }
-.poster { font-family: var(--font-display); font-weight: 760; letter-spacing: -0.045em; line-height: .9; }
+.poster { font-family: var(--font-display); font-weight: 760; letter-spacing: -0.055em; line-height: .9; }
 .display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.035em; line-height: .98; }
 .tnum { font-variant-numeric: tabular-nums; }
 
@@ -76,6 +78,10 @@ p, li { text-wrap: pretty; }
 
 @keyframes sway { 0%,100% { transform: rotate(-0.6deg) } 50% { transform: rotate(0.6deg) } }
 .sign-sway { transform-origin: 50% 0; animation: sway 6s var(--ease-in-out-cubic) infinite; will-change: transform; }
+
+.field input::placeholder, .field textarea::placeholder { color: #5b6b76; opacity: 1; }
+.perf-ink { background-image: radial-gradient(circle at 50% 50%, var(--color-ink) 7px, transparent 7.5px); background-size: 100% 26px; background-repeat: repeat-y; }
+@media (max-width: 1023px) { .perf-ink { background-size: 26px 100%; background-repeat: repeat-x; } }
 
 /* the perforation on the pickup ticket */
 .perf { background-image: radial-gradient(circle at 50% 50%, var(--color-aqua) 7px, transparent 7.5px); background-size: 100% 26px; background-repeat: repeat-y; }

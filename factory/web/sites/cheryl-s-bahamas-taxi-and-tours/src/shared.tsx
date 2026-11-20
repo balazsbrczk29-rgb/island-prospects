@@ -69,15 +69,28 @@ export function Masthead({ dark = true }: { dark?: boolean }) {
 }
 
 /* N4: floating dock, bottom centre. Solid, no blur. */
-export function Dock({ action }: { action: { href: string; label: string; onClick?: () => void } }) {
+/* Hidden while any of `hideWhile` sections is on screen, so it never competes with that screen's own primary action. */
+export function Dock({ action, hideWhile = [] }: { action: { href: string; label: string; onClick?: () => void }; hideWhile?: string[] }) {
+  const [hidden, setHidden] = useState(hideWhile.length > 0)
+  useEffect(() => {
+    if (!hideWhile.length) return
+    const seen = new Map<Element, boolean>()
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => seen.set(en.target, en.isIntersecting))
+      setHidden([...seen.values()].some(Boolean))
+    }, { rootMargin: "0px 0px -18% 0px" })
+    hideWhile.forEach(id => { const el = document.getElementById(id); if (el) io.observe(el) })
+    return () => io.disconnect()
+  }, [hideWhile.join(",")])
+  useEffect(() => { document.documentElement.style.setProperty("--dock-on", hidden ? "0" : "1") }, [hidden])
   return (
-    <motion.nav aria-label="Quick links" initial={{ y: 90 }} animate={{ y: 0 }} transition={{ ...spring, delay: 0.9 }}
+    <motion.nav aria-label="Quick links" initial={{ y: 110 }} animate={{ y: hidden ? 110 : 0 }} transition={spring} aria-hidden={hidden}
       className="fixed inset-x-0 bottom-0 z-[8000] flex justify-center px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pointer-events-none">
-      <div className="pointer-events-auto flex items-center gap-1 rounded-[18px] bg-ink p-1.5 text-white shadow-[0_14px_40px_-12px_rgba(15,34,51,.55)]">
-        <a href="index.html#pickup" className="hidden min-h-12 items-center rounded-[12px] px-4 font-bold hover:bg-white/10 sm:inline-flex">Pickup</a>
-        <a href="tours.html" className="inline-flex min-h-12 items-center rounded-[12px] px-4 font-bold hover:bg-white/10">Tours</a>
-        <a href={TEL} className="inline-flex min-h-12 items-center gap-2 rounded-[12px] px-4 font-bold hover:bg-white/10"><Phone className="size-4" aria-hidden />Call</a>
-        <a href={action.href} onClick={action.onClick} className="inline-flex min-h-12 items-center rounded-[12px] bg-yellow px-5 font-bold text-ink transition-transform active:scale-[.97]">{action.label}</a>
+      <div className={`flex items-center gap-1 rounded-[18px] border border-white/15 bg-ink p-1.5 text-white shadow-[0_14px_40px_-12px_rgba(15,34,51,.55)] ${hidden ? "" : "pointer-events-auto"}`}>
+        <a tabIndex={hidden ? -1 : undefined} href="index.html#pickup" className="hidden min-h-12 items-center rounded-[12px] px-4 font-bold hover:bg-white/10 sm:inline-flex">Pickup</a>
+        <a tabIndex={hidden ? -1 : undefined} href="tours.html" className="inline-flex min-h-12 items-center rounded-[12px] px-4 font-bold hover:bg-white/10">Tours</a>
+        <a tabIndex={hidden ? -1 : undefined} href={TEL} className="inline-flex min-h-12 items-center gap-2 rounded-[12px] px-4 font-bold hover:bg-white/10"><Phone className="size-4" aria-hidden />Call</a>
+        <a tabIndex={hidden ? -1 : undefined} href={action.href} onClick={action.onClick} className="inline-flex min-h-12 items-center rounded-[12px] bg-yellow px-5 font-bold text-ink transition-transform active:scale-[.97]">{action.label}</a>
       </div>
     </motion.nav>
   )
