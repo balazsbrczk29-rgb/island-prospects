@@ -6,5 +6,34 @@
  "url": "donnysboatrentalsgtc.com",
  "url_source": "brief",
  "old_check": "NO OWN SITE LISTED: (Facebook only)",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "none (mailto Book Now links)",
+  "products_or_listings": 4,
+  "pages": 14,
+  "platform": "Wix",
+  "latest_year": 2020,
+  "modernity": 2,
+  "concept_type": "brochure + rental enquiry: fleet with real specs and prices, rental cost planner composing a WhatsApp/email request, marina page with dockage rates and slip check",
+  "must_keep": [
+   "four rental boats with specs and published day/week prices",
+   "3-day minimum and rental terms (cash only, $100 deposit)",
+   "dockage and mooring rates",
+   "phone, email (preferred), VHF 16",
+   "Black Sound entry note",
+   "activities: No Name Cay pigs, Manjack Cay turtles"
+  ],
+  "weaknesses": [
+   "Wix site, copyright 2020, a stale Covid entry link at the top",
+   "homepage photo descriptions read undefined",
+   "View More buttons for Dockage and Activities reload the homepage",
+   "Book Now buttons are bare mailto links",
+   "WhatsApp number and US number not on the site",
+   "typos: There is many things to do"
+  ],
+  "priority": "A",
+  "note": "Small family rental fleet and marina on a dated Wix brochure; mailto booking only."
+ }
 }

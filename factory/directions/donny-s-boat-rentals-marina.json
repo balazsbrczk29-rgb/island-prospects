@@ -1,13 +1,14 @@
 {
  "slug": "donny-s-boat-rentals-marina",
  "niche": "marina",
- "archetype": "A08",
- "archetype_name": "Fixed split",
- "lane": "P12",
- "lane_name": "Inagua salt",
- "type": "T01",
- "type_name": "Monumental serif",
- "nav": "N7",
- "motion": "M3",
- "dealt_at": "2026-11-08T15:22:55.705Z"
+ "archetype": "A11",
+ "archetype_name": "Horizontal journey",
+ "lane": "P02",
+ "lane_name": "Shallow flats",
+ "type": "T11",
+ "type_name": "Neo-grotesk display",
+ "nav": "N9",
+ "motion": "M2",
+ "dealt_at": "2026-11-20T19:58:02.761Z",
+ "chosen": true
 }

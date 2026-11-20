@@ -1,59 +1,112 @@
-import { lazy, Suspense } from "react"
-import { motion } from "motion/react"
-import { Page, mount, Reveal, Label, Photo, ease } from "./site"
-import { IMG, EMAIL, PHONE, TEL } from "./data"
-const SlipCheck = lazy(() => import("./SlipCheck"))
+import { useId, useState } from 'react'
+import { Check, X } from 'lucide-react'
+import { Page, mount } from './site'
+import { MARINA, P, wix, srcSet, usd, mail, PHONE, TEL } from './data'
 
-const SPECS: [string, string][] = [
-  ["Dockage", "Fixed price, up to 50 ft LOA and 7 ft draft"],
-  ["Moorings", "Plenty of swing room"],
-  ["Entering Black Sound", "6 ft draft at 2 ft above low water. Stay close to the last red marker, then aim for the middle of the sound."],
-  ["On the dock", "Shower and bathroom, trash cans, dinghy dock, electric, water, ice"],
-  ["Nearby", "Fuel dock and boat yard close by. Customs, restaurants and groceries in New Plymouth, 10 minutes' walk"],
-  ["Radio", "VHF 16, working channel 10"],
-  ["Position", "N 26° 45.460′ · W 077° 19.301′"],
-  ["Rates", "Fixed price: ask Donny"],
-]
-
-function Intro() {
+function SlipCheck() {
+  const [loa, setLoa] = useState('')
+  const [draft, setDraft] = useState('')
+  const a = useId(), b = useId()
+  const L = parseFloat(loa.replace(',', '.')), D = parseFloat(draft.replace(',', '.'))
+  const done = L > 0 && D > 0
+  const fits = done && L <= MARINA.loa && D <= MARINA.draft
+  const rate = done ? (L >= 46 ? MARINA.rates[2] : MARINA.rates[1]) : null
   return (
-    <section className="mx-auto grid max-w-[1440px] gap-10 px-5 pt-14 pb-16 md:px-10 md:pt-20 lg:grid-cols-12 lg:items-end" aria-labelledby="m-title">
-      <div className="lg:col-span-7">
-        <Label>Dockage and moorings · Black Sound</Label>
-        <h1 id="m-title" className="mt-5 font-display text-[clamp(2.8rem,6.4vw,5.8rem)] leading-[0.98]">
-          {["A cruiser-friendly dock,", "and Donny on site."].map((l, i) => <span key={l} className="block overflow-hidden pb-[0.06em]"><motion.span className={`block ${i ? "text-turtle" : ""}`} initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.1 + i * 0.1, duration: 1, ease: [0.77, 0, 0.175, 1] }}>{l}</motion.span></span>)}
-        </h1>
+    <div className="bg-white rounded-[var(--radius-lg)] p-6 md:p-10">
+      <h2 className="text-[2rem] md:text-[2.75rem] tracking-[-0.04em]">Will my boat fit?</h2>
+      <div className="mt-6 grid grid-cols-2 gap-4">
+        <div><label htmlFor={a} className="block font-semibold mb-2">Length overall (ft)</label>
+          <input id={a} inputMode="decimal" value={loa} onChange={e => setLoa(e.target.value)} placeholder="42" className="w-full h-12 px-4 rounded-[var(--radius-sm)] bg-ground text-[1.25rem] tnum shadow-[inset_0_0_0_1px_var(--color-line)]" /></div>
+        <div><label htmlFor={b} className="block font-semibold mb-2">Draft (ft)</label>
+          <input id={b} inputMode="decimal" value={draft} onChange={e => setDraft(e.target.value)} placeholder="5.5" className="w-full h-12 px-4 rounded-[var(--radius-sm)] bg-ground text-[1.25rem] tnum shadow-[inset_0_0_0_1px_var(--color-line)]" /></div>
       </div>
-      <Photo src={IMG.mooring.src} alt={IMG.mooring.alt} eager className="aspect-[4/3] rounded-[2rem] lg:col-span-5" />
-    </section>
-  )
-}
-
-function Specs() {
-  return (
-    <section className="mx-auto max-w-[1440px] px-5 pb-24 md:px-10" aria-label="Dock details">
-      <dl className="border-t border-ink">
-        {SPECS.map(([k, v], i) => (
-          <motion.div key={k} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04, duration: 0.6, ease }} className="grid gap-1 border-b border-line py-5 md:grid-cols-[1fr_2fr] md:gap-8">
-            <dt className="text-[13px] font-bold tracking-[0.14em] text-muted uppercase">{k}</dt>
-            <dd className={`font-display text-[1.35rem] leading-snug ${k === "Rates" ? "text-turtle" : ""}`}>{v}</dd>
-          </motion.div>
-        ))}
-      </dl>
-      <p className="mt-6 text-[15px] text-muted">Ask ahead: <a className="underline decoration-turtle underline-offset-4" href={`mailto:${EMAIL}`}>{EMAIL}</a> or <a className="underline decoration-turtle underline-offset-4" href={TEL}>{PHONE}</a>.</p>
-    </section>
-  )
-}
-
-function Check() {
-  return (
-    <section className="bg-sand/50" aria-labelledby="c-title">
-      <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-28">
-        <Reveal><Label>Slip checker</Label><h2 id="c-title" className="mt-5 font-display text-[clamp(2.2rem,4.4vw,3.8rem)] leading-[1]">Enter your length and draft.</h2></Reveal>
-        <div className="mt-12"><Suspense fallback={<div className="h-80 rounded-3xl bg-flats/30" />}><SlipCheck /></Suspense></div>
+      <div aria-live="polite" className="mt-6 min-h-[132px]">
+        {!done && <p className="text-muted">Enter your length and draft. Donny&rsquo;s takes up to {MARINA.loa} ft LOA and {MARINA.draft} ft draft at fixed prices.</p>}
+        {done && fits && rate && (
+          <div>
+            <p className="flex items-center gap-3 font-display font-semibold text-[1.75rem] tracking-[-0.03em]"><span className="grid place-items-center size-9 rounded-full bg-channel text-white"><Check size={18} strokeWidth={2.25} /></span>Within Donny&rsquo;s limits</p>
+            <p className="mt-3 tnum">{rate.label}: {usd(rate.day)} a day, {usd(rate.week)} a week, {usd(rate.month)} a month. {rate.note}.</p>
+            {D >= 6 && <p className="mt-2 text-muted">With {D} ft draft, come in on the tide: a 6 ft draft enters Black Sound when the tide is 2 ft above low water.</p>}
+            <a className="btn btn-primary mt-5" href={mail(`Dockage request: ${L} ft LOA, ${D} ft draft`, `Hello Donny, we'd like dockage for a ${L} ft boat with ${D} ft draft. Arrival date: \nNights: \nBoat name: `)}>Ask Donny for a slip</a>
+          </div>
+        )}
+        {done && !fits && (
+          <div>
+            <p className="flex items-center gap-3 font-display font-semibold text-[1.75rem] tracking-[-0.03em]"><span className="grid place-items-center size-9 rounded-full bg-ink text-white"><X size={18} strokeWidth={2.25} /></span>Beyond the published limits</p>
+            <p className="mt-3">The dock takes up to {MARINA.loa} ft LOA and {MARINA.draft} ft draft. A mooring may still work: ask Donny on VHF 16 or call <a className="font-semibold tnum underline" href={TEL}>{PHONE}</a>.</p>
+          </div>
+        )}
       </div>
-    </section>
+    </div>
   )
 }
 
-mount(<Page current="Dockage"><Intro /><Specs /><Check /></Page>)
+function Marina() {
+  return (
+    <Page current="marina">
+      <section aria-labelledby="m-h1" className="relative">
+        <div className="ph h-[48svh] md:h-[72svh]">
+          <img src={wix(P.dockAir, 2000)} srcSet={srcSet(P.dockAir, [900, 1600, 2000])} sizes="100vw" fetchPriority="high"
+            alt="Donny's dock from the air: sailboats and trawlers on the moorings and at the dock in Black Sound" className="max-md:scale-[1.5] max-md:origin-[50%_15%]" style={{ objectPosition: '50% 40%' }} />
+        </div>
+        <div className="px-5 md:px-[4vw] pt-10 md:pt-14 pb-16 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-[5vw] items-end">
+          <h1 id="m-h1" className="text-[3rem] md:text-[clamp(4rem,7vw,7rem)] tracking-[-0.05em] leading-[0.92]">Dockage at the end of Black Sound</h1>
+          <p className="text-[1.1875rem] text-muted max-w-[46ch]">A cruiser-friendly family marina on Green Turtle Cay: fixed-price dockage to 50 ft LOA and 7 ft draft, moorings with plenty of swing room, and New Plymouth a ten-minute walk away for Customs, restaurants and groceries.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="rates-h" className="px-5 md:px-[4vw] py-16 md:py-24 border-t border-line">
+        <div className="grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-[5vw] items-start">
+          <div className="min-w-0">
+            <h2 id="rates-h" className="text-[2.5rem] md:text-[3.75rem] tracking-[-0.045em]">Rates</h2>
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full min-w-[520px] tnum text-left border-collapse">
+                <thead><tr className="text-muted text-[0.9375rem]"><th scope="col" className="font-medium pb-3 pr-4"><span className="sr-only">Berth</span></th><th scope="col" className="font-medium pb-3 pr-4">Day</th><th scope="col" className="font-medium pb-3 pr-4">Week</th><th scope="col" className="font-medium pb-3">Month</th></tr></thead>
+                <tbody>
+                  {MARINA.rates.map(r => (
+                    <tr key={r.label} className="border-t border-line align-top">
+                      <th scope="row" className="py-5 pr-4 font-semibold">{r.label}<span className="block font-normal text-[0.9375rem] text-muted mt-1">{r.note}</span></th>
+                      <td className="py-5 pr-4 font-display font-semibold text-[1.75rem] tracking-[-0.03em]">{usd(r.day)}</td>
+                      <td className="py-5 pr-4 text-[1.125rem]">{usd(r.week)}</td>
+                      <td className="py-5 text-[1.125rem]">{usd(r.month)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-10 font-semibold">On the dock</p>
+            <p className="mt-2 text-muted max-w-[56ch]">Clean showers and bathroom, trash disposal, a dinghy dock, 15 to 30 amp electric and fresh water at the docks, and ice. A fuel dock and boat yard are close by.</p>
+            <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-2 list-none p-0 tnum">
+              {MARINA.extras.map(([k, v]) => <li key={k}><span className="font-semibold">{k}</span> <span className="text-muted">{v}</span></li>)}
+            </ul>
+          </div>
+          <SlipCheck />
+        </div>
+      </section>
+
+      <section aria-labelledby="in-h" className="bg-flats">
+        <div className="grid lg:grid-cols-[1fr_1.1fr] items-stretch">
+          <div className="px-5 md:px-[4vw] py-16 md:py-24 flex flex-col justify-center">
+            <h2 id="in-h" className="text-[2.5rem] md:text-[3.75rem] tracking-[-0.045em] max-w-[12ch]">The way in</h2>
+            <p className="mt-6 max-w-[44ch] text-[1.1875rem]">With a 6 ft draft, enter Black Sound when the tide is 2 ft above low water. Stay close to the last red marker, then head for the middle of the sound.</p>
+            <dl className="mt-10 grid grid-cols-2 gap-6 max-w-[520px] m-0">
+              <div><dt className="text-ink/75">Position</dt><dd className="m-0 mt-1 font-semibold tnum">N 26&deg; 45.460&prime;<br />W 077&deg; 19.301&prime;</dd></div>
+              <div><dt className="text-ink/75">Radio</dt><dd className="m-0 mt-1 font-semibold">VHF 16, working 10</dd></div>
+              <div><dt className="text-ink/75">Office</dt><dd className="m-0 mt-1 font-semibold tnum">8 am to 8 pm</dd></div>
+              <div><dt className="text-ink/75">Ashore</dt><dd className="m-0 mt-1 font-semibold">New Plymouth, 10 minutes on foot</dd></div>
+            </dl>
+          </div>
+          <div className="ph min-h-[320px] lg:min-h-[80svh]">
+            <img src={wix(P.soundAir, 1800)} loading="lazy" decoding="async" alt="Aerial photograph of Black Sound, marked by Donny's with the dock and the mooring field" />
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="note-h" className="px-5 md:px-[4vw] py-16 md:py-20">
+        <h2 id="note-h" className="sr-only">Liability notice</h2>
+        <p className="max-w-[80ch] text-[0.9375rem] text-muted">Donny&rsquo;s Boat Rentals is not liable for damage to boats or injury to owners, operators or guests caused by theft, failure of the mooring system, vandalism, accidents, storms, flood, fire or fireworks, or any other cause.</p>
+      </section>
+    </Page>
+  )
+}
+mount(<Marina />)

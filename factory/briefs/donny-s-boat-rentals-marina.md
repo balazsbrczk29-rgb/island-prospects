@@ -1,4 +1,4 @@
-# Donny's Boat Rentals & Marina: brief (session 2026-11-05)
+# Donny's Boat Rentals & Marina: brief (session 2026-11-05, rebuilt 2026-11-20)
 
 ## Track
 Record says Facebook only; research found a small Wix site, donnysboatrentalsgtc.com (Track A, thin and dated).
@@ -11,6 +11,9 @@ Record says Facebook only; research found a small Wix site, donnysboatrentalsgtc
 - Dockage: cruiser friendly, fixed-price dockage up to 50 ft LOA, 7 ft draft; moorings with plenty of swing room; shower and bathroom, trash, dinghy dock, electric, water, ice; fuel dock and boat yard close by; Donny lives on site; New Plymouth 10 minutes' walk (Customs check-in, restaurants, groceries, small hardware store). Entry: 6 ft draft can enter at tide 2 ft above low water, stay close to the last red marker then aim for the middle of the sound. Phone (242) 823-8733, donnysboatrentals@gmail.com, VHF 16, WhatsApp (Taylor) 242 815 9323. https://www.noonsite.com/business/donnys-boat-rentals-and-marina/
 - Hours 8am to 8pm; VHF 16 monitored, 10 working; US number (407) 610-7000; position N 26 45.460 / W 077 19.301. https://www.waterwayguide.com/reviews/1-4433/donnys-boat-rentals-and-marina + https://www.waterwayguide.com/marina/donnys-boat-rentals-and-marina
 - Facebook: https://www.facebook.com/p/Donnys-Boat-Rentals-and-Marina-100057220039045/
+
+- Dockage rates (2026-11-20): moorings $25/day, $150/week, $350/month; dockage 45 ft and less $80/day, $350/week, $1,075/month; 46 ft and over $100/day, $400/week, $1,300/month; 30 amp extra $5/day, $20/week, $100/month; shower $3, washer $4, dryer $4, water $0.20/gal; electric 15-30 amp. https://www.donnysboatrentalsgtc.com/services-3
+- Fleet equipment detail: 19' Whaler buoyancy aids, fixed VHF, chart-plotter, ladder, anchor and rode, cooler; 17' Whaler buoyancy aids, VHF, ladder, anchor and rode, cooler. Instagram @donnysboatrentalsandmarina. https://www.donnysboatrentalsgtc.com/our-fleet
 
 ## Photos (own Wix site; original files of the URLs seen on their pages, size parameters removed)
 - 1c154a_788222cd60354b608e5d96e9b2767508~mv2_d_2000_1499_s_2.jpg : aerial of the marina, boats in blue water, greenery (verified). HERO.
@@ -57,3 +60,23 @@ The family dock at the end of Black Sound, where Donny lives on site. Feel: salt
 ## Showcase scorecard
 First screen 5, typography 4, layout 4, context 5, motion 4, depth 4, detailing 4, mobile 4, references 4, owner proud 5, whole page 4.
 Uniqueness: full-bleed real aerial with glass panel, Young Serif, turtle green/sand; calculator + slip checker unlike other sites.
+
+
+## Generation 2 rebuild (2026-11-20)
+**Big idea:** one day with your own boat from Donny's dock at the end of Black Sound: collect it at 8, choose it from four real boats sliding past like a line at the dock, find the pigs at No Name Cay and the turtles at Manjack in their own photos, be back by 5, and the page adds up what your days cost and sends the request to Taylor on WhatsApp.
+
+**Direction:** A11 Horizontal journey + P02 Shallow flats + T11 Neo-grotesk display (Bricolage Grotesque + Figtree, self-hosted). Why: the buyer is choosing a boat, so the fleet sliding sideways IS the decision; shallow-flats aqua is literally the water in their own photos; a friendly contemporary grotesk suits a family rental business and differs from the marinas in the repo (serif luxury). Nav N9 (bottom progress along the fleet track), motion M2.
+
+**Photos (own, Wix):** 23 seen in Lovable gallery ip-assets-donny-s-boat-rentals-marina (#1 marina aerial = hero; #3 annotated aerial "Donnys Dock / Mooring field"; #7 turtle; #8 pigs; #13 Angler; #14 Century; #17 19' Whaler; #21 17' Whaler; #22 teal Whaler; #23 dock walkway; #6 beach; #9 Donny's boat on turquoise).
+
+### Storyboard (desktop 1440x900)
+1. Hero: their marina aerial full-bleed and alive (PhotoDepth, water shimmer), no overlay; an aqua flats panel bottom-left carries "Your own boat on the Sea of Abaco." + the one line + WhatsApp Taylor + call. Wordmark top-left, Fleet / Marina / phone top-right.
+2. Opening title on the aqua field: "Four boats, 17 to 23 feet, all 4-stroke. Collect at 8, back by 5." and the 3-day minimum, only for guests staying on Green Turtle Cay.
+3-6. Pinned horizontal fleet track: each boat a huge photo, name in display type, hp, people, $/day, $/7 days, "Plan this boat" (sets the planner). Bottom progress line with the four names = navigation.
+7. Planner (enlarged main feature): boat, days (3 to 14), date, people; live estimate from the published rates, deposit and cash-only shown; button opens WhatsApp to Taylor with the request filled in; email alternative.
+8. The day: sticky photo crossfade (pigs No Name Cay, turtles Manjack Cay, empty beach, back at the dock) with subtitle lines.
+9. Before you go: the terms in plain words, typographic list.
+10. Coming by boat: annotated aerial, dockage from $80/day, moorings $25/day, link to the marina page.
+11. Contact: Donny lives on site; WhatsApp, phone, email, VHF 16, hours, position.
+Phone (390x844): 1 hero photo top 58%, aqua panel below with headline and two buttons; 2 opening title; 3 fleet as native swipe cards with snap.
+Inner pages: fleet.html (each boat: 3 own photos, full equipment, prices, terms in full), marina.html (rates, slip check by LOA and draft, Black Sound entry note, amenities).
