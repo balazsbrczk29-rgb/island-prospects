@@ -8,7 +8,8 @@ export const W = 14.4, D = 9.2, H = 7.0          // building footprint and heigh
 const T = 0.32                                    // wall thickness
 const PARAPET = 0.85
 export const IW = W - T * 2, ID = D - T * 2       // roof area inside the parapet
-const SITE = { w: 17.6, d: 12.8, t: 0.9, z: 1.0 } // cut block of ground the building stands on
+const SITE = { w: 17.6, d: 12.2, t: 0.9, z: 0.7 }
+export const ROAD = 2.6 // cut block of ground the building stands on
 
 /* ---------- small helpers ---------- */
 function rng(seed: number) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296) }
@@ -65,9 +66,17 @@ class Bucket {
 function materials() {
   const fineBump = tex(512, 512, (c, w, h) => { c.fillStyle = '#808080'; c.fillRect(0, 0, w, h); grain(c, w, h, 7, 120); mottle(c, w, h, 3, 0.35, [40, 120]) }, false)
   const stuccoMap = tex(512, 512, (c, w, h) => { c.fillStyle = '#faf8f3'; c.fillRect(0, 0, w, h); mottle(c, w, h, 11, 0.09, [3, 9, 30]); grain(c, w, h, 5, 7) })
+  // painted render: limewash unevenness and the faint rain streaks every Nassau wall carries
+  const paintMap = tex(1024, 1024, (c, w, h) => {
+    c.fillStyle = '#f3c5b3'; c.fillRect(0, 0, w, h); mottle(c, w, h, 12, 0.13, [3, 8, 24, 80]); const r = rng(13)
+    for (let i = 0; i < 70; i++) { const x = r() * w, len = 120 + r() * 520, y = r() * h, a = 0.025 + r() * 0.05; const g = c.createLinearGradient(0, y, 0, y + len); g.addColorStop(0, `rgba(120,84,70,${a})`); g.addColorStop(1, 'rgba(120,84,70,0)'); c.fillStyle = g; c.fillRect(x, y, 2 + r() * 9, len) }
+    for (let i = 0; i < 30; i++) { const x = r() * w, len = 80 + r() * 300, y = r() * h; const g = c.createLinearGradient(0, y, 0, y + len); g.addColorStop(0, 'rgba(255,244,236,.07)'); g.addColorStop(1, 'rgba(255,244,236,0)'); c.fillStyle = g; c.fillRect(x, y, 6 + r() * 20, len) }
+    grain(c, w, h, 14, 8)
+  })
   const mk = (t: THREE.Texture, rx: number, ry = rx) => { const n = t.clone(); n.repeat.set(rx, ry); n.needsUpdate = true; return n }
 
-  const stucco = new THREE.MeshStandardMaterial({ map: mk(stuccoMap, 1 / 3.2), bumpMap: mk(fineBump, 1 / 0.9), bumpScale: 0.9, roughness: 0.94, color: '#ffffff' })
+  const stucco = new THREE.MeshStandardMaterial({ map: mk(paintMap, 1 / 7.3), bumpMap: mk(fineBump, 1 / 0.9), bumpScale: 1.1, roughness: 0.95, color: '#ffffff' })
+  const lime = new THREE.MeshStandardMaterial({ map: mk(stuccoMap, 1 / 3.2), bumpMap: mk(fineBump, 1 / 0.9), bumpScale: 0.9, roughness: 0.94 })
   const trim = new THREE.MeshStandardMaterial({ map: mk(stuccoMap, 1 / 2.4), bumpMap: mk(fineBump, 1 / 1.4), bumpScale: 0.4, roughness: 0.86, color: '#fffdf8' })
   const base = new THREE.MeshStandardMaterial({ map: mk(stuccoMap, 1 / 2), bumpMap: mk(fineBump, 1 / 0.7), bumpScale: 1.2, roughness: 0.96, color: '#cfc7b6' })
   const shutter = new THREE.MeshStandardMaterial({ color: '#2c6c70', roughness: 0.62, bumpMap: mk(fineBump, 1 / 0.5), bumpScale: 0.25 })
@@ -83,6 +92,9 @@ function materials() {
     for (let i = 0; i <= n; i++) { c.beginPath(); c.moveTo(i * s, 0); c.lineTo(i * s, h); c.moveTo(0, i * s); c.lineTo(w, i * s); c.stroke() }
   })
   const paving = new THREE.MeshStandardMaterial({ map: mk(pavers, 1 / 4.8), bumpMap: mk(fineBump, 1 / 0.8), bumpScale: 0.8, roughness: 0.9 })
+  const asphaltMap = tex(512, 512, (c, w, h) => { c.fillStyle = '#424444'; c.fillRect(0, 0, w, h); mottle(c, w, h, 25, 0.07, [20, 70]); grain(c, w, h, 26, 30); const r = rng(27); for (let i = 0; i < 1400; i++) { c.fillStyle = `rgba(${150 + r() * 80},${150 + r() * 80},${140 + r() * 70},${0.1 + r() * 0.3})`; c.fillRect(r() * w, r() * h, 1 + r() * 1.6, 1 + r() * 1.6) } })
+  const asphalt = new THREE.MeshStandardMaterial({ map: mk(asphaltMap, 1 / 2.2), bumpMap: mk(fineBump, 1 / 0.6), bumpScale: 1.4, roughness: 0.96 })
+  const kerb = new THREE.MeshStandardMaterial({ map: mk(stuccoMap, 1 / 1.5), bumpMap: mk(fineBump, 1 / 0.6), bumpScale: 1, roughness: 0.95, color: '#d5d0c4' })
   const strata = tex(1024, 256, (c, w, h) => {
     const g = c.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#c9c1ae'); g.addColorStop(0.1, '#e6dcc6'); g.addColorStop(0.55, '#dccfb4'); g.addColorStop(1, '#cdbf9f'); c.fillStyle = g; c.fillRect(0, 0, w, h)
     const r = rng(31)
@@ -105,7 +117,7 @@ function materials() {
 
   // 02 vapour retarder: dark self-adhered sheet, lapped every metre
   const vapourMap = tex(512, 512, (c, w, h) => {
-    c.fillStyle = '#2a2d2e'; c.fillRect(0, 0, w, h); mottle(c, w, h, 51, 0.25, [5, 16, 60]); grain(c, w, h, 52, 9)
+    c.fillStyle = '#2a2d2e'; c.fillRect(0, 0, w, h); mottle(c, w, h, 51, 0.07, [16, 60]); grain(c, w, h, 52, 9)
     for (let i = 0; i < 2; i++) { const x = i * w / 2; const g = c.createLinearGradient(x, 0, x + 26, 0); g.addColorStop(0, 'rgba(255,255,255,.16)'); g.addColorStop(0.2, 'rgba(0,0,0,.35)'); g.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = g; c.fillRect(x, 0, 26, h) }
   })
   const vapour = new THREE.MeshStandardMaterial({ map: mk(vapourMap, 1 / 2), roughness: 0.5, metalness: 0.15, bumpMap: mk(fineBump, 1 / 2.5), bumpScale: 0.3 })
@@ -117,42 +129,68 @@ function materials() {
     for (let j = 0; j < 4; j++) for (let i = -1; i < 2; i++) {
       const x = i * bw + (j % 2 ? bw / 2 : 0), y = j * bh; const v = (r() - 0.5) * 14
       c.fillStyle = `rgba(${v > 0 ? 255 : 0},${v > 0 ? 250 : 0},${v > 0 ? 235 : 0},${Math.abs(v) / 110})`; c.fillRect(x + 2, y + 2, bw - 4, bh - 4)
-      c.strokeStyle = joint; c.lineWidth = 3; c.strokeRect(x, y, bw, bh)
-      c.strokeStyle = 'rgba(255,255,255,.28)'; c.lineWidth = 1; c.strokeRect(x + 2.5, y + 2.5, bw - 5, bh - 5)
+      c.strokeStyle = joint; c.lineWidth = 4.5; c.strokeRect(x, y, bw, bh)
+      c.strokeStyle = 'rgba(255,255,255,.4)'; c.lineWidth = 1.5; c.strokeRect(x + 3.5, y + 3.5, bw - 7, bh - 7)
+      if (!plates) { c.fillStyle = 'rgba(96,80,44,.32)'; for (let k = 0; k < 3; k++) { c.fillRect(x + bw * (0.12 + k * 0.3), y + bh * 0.44, bw * 0.16, 5); c.fillRect(x + bw * (0.12 + k * 0.3), y + bh * 0.52, bw * 0.1, 3) } }
       if (plates) for (const [px, py] of [[0.12, 0.22], [0.38, 0.22], [0.62, 0.22], [0.88, 0.22], [0.12, 0.78], [0.38, 0.78], [0.62, 0.78], [0.88, 0.78], [0.25, 0.5], [0.75, 0.5]]) {
         const cx = x + px * bw, cy = y + py * bh
-        c.fillStyle = 'rgba(40,44,44,.35)'; c.beginPath(); c.arc(cx + 1.5, cy + 2, 9, 0, 7); c.fill()
-        c.fillStyle = '#b9bcba'; c.beginPath(); c.arc(cx, cy, 8.5, 0, 7); c.fill()
-        c.fillStyle = '#6d7272'; c.beginPath(); c.arc(cx, cy, 2.6, 0, 7); c.fill()
+        c.fillStyle = 'rgba(30,34,34,.5)'; c.beginPath(); c.arc(cx + 2, cy + 3, 12, 0, 7); c.fill()
+        c.fillStyle = '#d2d5d2'; c.beginPath(); c.arc(cx, cy, 11, 0, 7); c.fill()
+        c.strokeStyle = '#8b9090'; c.lineWidth = 1.5; c.beginPath(); c.arc(cx, cy, 7, 0, 7); c.stroke()
+        c.fillStyle = '#5a5f5f'; c.beginPath(); c.arc(cx, cy, 3.2, 0, 7); c.fill()
       }
     }
     mottle(c, w, h, seed + 1, 0.14, [8, 30, 110]); grain(c, w, h, seed + 2, 9)
   })
-  const insulTop = new THREE.MeshStandardMaterial({ map: mk(boards('#dccb9e', 'rgba(110,92,48,.75)', 61, false), 1 / 4.8), roughness: 0.82, bumpMap: mk(fineBump, 1 / 1.6), bumpScale: 0.35 })
+  const insulTop = new THREE.MeshStandardMaterial({ map: mk(boards('#d6c28d', 'rgba(84,68,30,.9)', 61, false), 1 / 4.8), roughness: 0.82, bumpMap: mk(fineBump, 1 / 1.6), bumpScale: 0.35 })
   const foam = tex(256, 256, (c, w, h) => { c.fillStyle = '#e3c468'; c.fillRect(0, 0, w, h); mottle(c, w, h, 66, 0.3, [20, 70, 200]); grain(c, w, h, 67, 22); c.fillStyle = 'rgba(120,96,40,.5)'; c.fillRect(0, 0, w, 5); c.fillRect(0, h / 2 - 2, w, 4); c.fillRect(0, h - 5, w, 5) })
   const insulSide = new THREE.MeshStandardMaterial({ map: (() => { const n = foam.clone(); n.repeat.set(1 / 1.2, 1 / 0.3); n.needsUpdate = true; return n })(), roughness: 0.95, bumpMap: mk(fineBump, 1 / 0.4), bumpScale: 1 })
 
   // 04 cover board: grey gypsum-fibre boards with their fastening plates
-  const cover = new THREE.MeshStandardMaterial({ map: mk(boards('#c3c7c1', 'rgba(70,76,74,.7)', 71, true), 1 / 4.8), roughness: 0.88, bumpMap: mk(fineBump, 1 / 1.2), bumpScale: 0.5 })
+  const cover = new THREE.MeshStandardMaterial({ map: mk(boards('#b9beb8', 'rgba(52,58,56,.9)', 71, true), 1 / 4.8), roughness: 0.88, bumpMap: mk(fineBump, 1 / 1.2), bumpScale: 0.5 })
   const coverSide = new THREE.MeshStandardMaterial({ color: '#aeb2ac', roughness: 0.95 })
 
   // 05 membrane: white single-ply, heat-welded laps every three metres
   const membraneMap = tex(1024, 512, (c, w, h) => {
     c.fillStyle = '#f6f5f0'; c.fillRect(0, 0, w, h); mottle(c, w, h, 81, 0.07, [4, 12, 40]); grain(c, w, h, 82, 4)
     const x = w * 0.5; let g = c.createLinearGradient(x - 14, 0, x + 26, 0)
-    g.addColorStop(0, 'rgba(120,124,124,0)'); g.addColorStop(0.3, 'rgba(120,124,124,.34)'); g.addColorStop(0.36, 'rgba(255,255,255,.9)'); g.addColorStop(0.9, 'rgba(150,154,152,.16)'); g.addColorStop(1, 'rgba(150,154,152,0)')
+    g.addColorStop(0, 'rgba(90,94,94,0)'); g.addColorStop(0.3, 'rgba(90,94,94,.6)'); g.addColorStop(0.36, 'rgba(255,255,255,.95)'); g.addColorStop(0.9, 'rgba(120,124,122,.3)'); g.addColorStop(1, 'rgba(150,154,152,0)')
     c.fillStyle = g; c.fillRect(x - 14, 0, 40, h)
   })
   const membraneBump = tex(1024, 512, (c, w, h) => { c.fillStyle = '#7a7a7a'; c.fillRect(0, 0, w, h); c.fillStyle = '#b4b4b4'; c.fillRect(w * 0.5, 0, w * 0.5, h); grain(c, w, h, 83, 20) }, false)
   const mrep = (t: THREE.Texture) => { const n = t.clone(); n.repeat.set(1 / 6, 1 / 3); n.needsUpdate = true; return n }
-  const membrane = new THREE.MeshPhysicalMaterial({ map: mrep(membraneMap), bumpMap: mrep(membraneBump), bumpScale: 0.6, roughness: 0.52, clearcoat: 0.12, clearcoatRoughness: 0.6, color: '#ffffff' })
+  const membrane = new THREE.MeshPhysicalMaterial({ map: mrep(membraneMap), bumpMap: mrep(membraneBump), bumpScale: 1.4, roughness: 0.52, clearcoat: 0.12, clearcoatRoughness: 0.6, color: '#dddcd6' })
+  const surface = membrane.clone()                                        // the roof surface the system picker re-dresses
+  const capMap = tex(1024, 1024, (c, w, h) => {                           // modified bitumen: mineral cap sheet in one-metre laps
+    c.fillStyle = '#989a97'; c.fillRect(0, 0, w, h); mottle(c, w, h, 91, 0.05, [30, 90]); grain(c, w, h, 92, 50)
+    for (let i = 0; i < 3; i++) { const y = i * h / 3; c.fillStyle = 'rgba(24,26,26,.8)'; c.fillRect(0, y, w, 7); const g = c.createLinearGradient(0, y + 7, 0, y + 40); g.addColorStop(0, 'rgba(30,30,30,.28)'); g.addColorStop(1, 'rgba(30,30,30,0)'); c.fillStyle = g; c.fillRect(0, y + 7, w, 33) }
+    c.fillStyle = 'rgba(24,26,26,.6)'; c.fillRect(w * 0.37, 0, 5, h / 3); c.fillRect(w * 0.81, h / 3, 5, h / 3); c.fillRect(w * 0.12, 2 * h / 3, 5, h / 3)
+  })
+  const tileMap = tex(1024, 1024, (c, w, h) => {                          // terrace: stone tile over a liquid-applied membrane
+    c.fillStyle = '#8f8a7d'; c.fillRect(0, 0, w, h); const r = rng(95), n = 8, t = w / n
+    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { const v = 214 + r() * 22; c.fillStyle = `rgb(${v + 6},${v},${v - 16})`; c.fillRect(i * t + 3, j * t + 3, t - 6, t - 6) }
+    mottle(c, w, h, 96, 0.2, [6, 20, 70, 200]); grain(c, w, h, 97, 10)
+  })
+  const gravelMap = tex(1024, 1024, (c, w, h) => {                        // overburden: washed gravel ballast
+    c.fillStyle = '#9d978a'; c.fillRect(0, 0, w, h); const r = rng(98)
+    for (let i = 0; i < 26000; i++) { const v = 120 + r() * 120; c.fillStyle = `rgb(${v + 8},${v + 2},${v - 10})`; c.beginPath(); c.ellipse(r() * w, r() * h, 2 + r() * 4.5, 1.6 + r() * 3.4, r() * 3, 0, 7); c.fill() }
+    mottle(c, w, h, 99, 0.12, [5, 18]); grain(c, w, h, 100, 16)
+  })
+  const rp = (t: THREE.Texture, r: number) => { const n = t.clone(); n.repeat.set(r, r); n.needsUpdate = true; return n }
+  const finishes = [
+    { map: surface.map!, bumpMap: surface.bumpMap!, bumpScale: 0.6, roughness: 0.52, clearcoat: 0.12 },
+    { map: rp(capMap, 1 / 3), bumpMap: mk(fineBump, 1 / 0.35), bumpScale: 2.2, roughness: 0.97, clearcoat: 0 },
+    { map: rp(tileMap, 1 / 4.8), bumpMap: mk(fineBump, 1 / 1.1), bumpScale: 0.5, roughness: 0.7, clearcoat: 0 },
+    { map: rp(gravelMap, 1 / 2.6), bumpMap: rp(gravelMap, 1 / 2.6), bumpScale: 5, roughness: 1, clearcoat: 0 },
+  ]
+  const setFinish = (i: number) => { Object.assign(surface, finishes[i] ?? finishes[0]); surface.needsUpdate = true }
 
   // 06 edge metal, curbs and plant
   const coping = new THREE.MeshStandardMaterial({ color: '#2c6c70', roughness: 0.38, metalness: 0.55 })
   const sheet = new THREE.MeshStandardMaterial({ color: '#c9ccc9', roughness: 0.42, metalness: 0.75 })
   const louvre = tex(128, 128, (c, w, h) => { c.fillStyle = '#b9bcb9'; c.fillRect(0, 0, w, h); for (let y = 6; y < h; y += 12) { c.fillStyle = '#3b3f40'; c.fillRect(8, y, w - 16, 5); c.fillStyle = 'rgba(255,255,255,.5)'; c.fillRect(8, y + 5, w - 16, 1.5) } })
   const acSide = new THREE.MeshStandardMaterial({ map: louvre, roughness: 0.5, metalness: 0.6 })
-  return { stucco, trim, base, shutter, bronze, glass, dark, paving, limestone, deck, vapour, insulTop, insulSide, cover, coverSide, membrane, coping, sheet, acSide }
+  return { stucco, lime, trim, base, shutter, bronze, glass, dark, paving, limestone, asphalt, kerb, deck, vapour, insulTop, insulSide, cover, coverSide, membrane, surface, setFinish, coping, sheet, acSide }
 }
 
 /* ---------- facades ---------- */
@@ -164,6 +202,8 @@ export type Roof = {
   layers: THREE.Group[]
   /** world-space height of each named layer when assembled, deck first (six entries) */
   rest: number[]
+  /** 0 single-ply, 1 modified bitumen, 2 tile terrace, 3 gravel ballast */
+  setFinish: (i: number) => void
   dispose: () => void
 }
 
@@ -175,6 +215,12 @@ export function buildRoof(): Roof {
   /* the cut block of ground */
   const site = new THREE.Mesh(box(SITE.w, SITE.t, SITE.d, 0, -SITE.t / 2, SITE.z), [M.limestone, M.limestone, M.paving, M.limestone, M.limestone, M.limestone])
   site.castShadow = site.receiveShadow = true; root.add(site)
+  const zf = SITE.z + SITE.d / 2
+  fixed.add(M.kerb, box(SITE.w, 0.2, 0.2, 0, -0.1, zf + 0.1))
+  const road = new THREE.Mesh(box(SITE.w, SITE.t - 0.16, ROAD, 0, -0.16 - (SITE.t - 0.16) / 2, zf + 0.2 + ROAD / 2 - 0.2), [M.limestone, M.limestone, M.asphalt, M.limestone, M.limestone, M.limestone])
+  road.castShadow = road.receiveShadow = true; root.add(road)
+  fixed.add(M.trim, box(SITE.w * 0.36, 0.006, 0.11, -SITE.w * 0.2, -0.157, zf + ROAD - 0.5)).add(M.trim, box(SITE.w * 0.22, 0.006, 0.11, SITE.w * 0.32, -0.157, zf + ROAD - 0.5))
+  fixed.add(M.sheet, box(0.42, 0.9, 0.16, W / 2 + 0.09, 1.45, 1.4)).add(M.bronze, box(0.03, 1.0, 0.03, W / 2 + 0.03, 0.5, 1.4))   // meter cabinet and its conduit
 
   /* walls: a facade is drawn in its own plane (u along, y up, +n outwards) and then turned to its side */
   const facade = (len: number, openings: Opening[], place: THREE.Matrix4) => {
@@ -231,8 +277,8 @@ export function buildRoof(): Roof {
   const side: Opening[] = [...sideBays.map(u => ({ u, w: 1.45, y0: 1.05, y1: 2.8 })), ...sideBays.map(u => ({ u, w: 1.45, y0: 4.45, y1: 6.15, shutter: true }))]
   facade(W, front, new THREE.Matrix4().makeTranslation(0, 0, D / 2))
   facade(D - T * 2, side, new THREE.Matrix4().makeRotationY(Math.PI / 2).setPosition(W / 2, 0, 0))
-  fixed.add(M.stucco, box(W, H + PARAPET, T, 0, (H + PARAPET) / 2, -D / 2 + T / 2))            // back and left walls are never seen
-  fixed.add(M.stucco, box(T, H + PARAPET, D - T * 2, -W / 2 + T / 2, (H + PARAPET) / 2, 0))
+  fixed.add(M.lime, box(W, H + PARAPET, T, 0, (H + PARAPET) / 2, -D / 2 + T / 2))            // back and left walls are never seen
+  fixed.add(M.lime, box(T, H + PARAPET, D - T * 2, -W / 2 + T / 2, (H + PARAPET) / 2, 0))
   fixed.add(M.dark, box(W - T * 2 - 0.5, H - 0.5, D - T * 2 - 0.5, 0, H / 2 - 0.1, 0))         // the dark behind the glass
 
   /* quoins on the two corners the camera sees, canopy over the door, downpipe from the scupper */
@@ -266,7 +312,7 @@ export function buildRoof(): Roof {
   const coverBoard = layer(g => g.add(slab(y, 0.09, M.cover, M.coverSide, 0.03))); rest.push(y); y += 0.09
   const yMem = y
   const membrane = layer((g, b) => {
-    g.add(slab(yMem, 0.035, M.membrane, M.membrane, 0.012))
+    g.add(slab(yMem, 0.035, M.surface, M.membrane, 0.012))
     const up = H + PARAPET - yMem - 0.01                                                     // the sheet turns up the parapet on all four sides
     b.add(M.membrane, box(IW - 0.02, up, 0.025, 0, yMem + up / 2, ID / 2 - 0.022)).add(M.membrane, box(IW - 0.02, up, 0.025, 0, yMem + up / 2, -ID / 2 + 0.022))
     b.add(M.membrane, box(0.025, up, ID - 0.02, IW / 2 - 0.022, yMem + up / 2, 0)).add(M.membrane, box(0.025, up, ID - 0.02, -IW / 2 + 0.022, yMem + up / 2, 0))
@@ -298,5 +344,5 @@ export function buildRoof(): Roof {
   }); rest.push(H + PARAPET)
 
   const dispose = () => root.traverse(o => { const m = o as THREE.Mesh; if (m.isMesh) { m.geometry.dispose(); for (const mat of Array.isArray(m.material) ? m.material : [m.material]) { for (const v of Object.values(mat)) if ((v as THREE.Texture)?.isTexture) (v as THREE.Texture).dispose(); mat.dispose() } } })
-  return { root, layers: [vapour, insulation, coverBoard, membrane, details], rest, dispose }
+  return { root, layers: [vapour, insulation, coverBoard, membrane, details], rest, setFinish: M.setFinish, dispose }
 }

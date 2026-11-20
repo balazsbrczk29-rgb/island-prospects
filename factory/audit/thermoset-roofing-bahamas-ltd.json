@@ -6,5 +6,32 @@
  "url": "thermosetroofing242.com",
  "url_source": "brief",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 7,
+  "platform": "Squarespace",
+  "latest_year": 2025,
+  "modernity": 3,
+  "concept_type": "brochure: services + client proof + maintenance program + free estimate request",
+  "must_keep": [
+   "full services list",
+   "client portfolio list",
+   "R.A.D.A.R. maintenance program",
+   "free estimate request",
+   "direct contacts for owner and general manager"
+  ],
+  "weaknesses": [
+   "second old site still says South Florida",
+   "cart icon with nothing to buy",
+   "client list buried under third-party resort photos",
+   "WhatsApp promised without a number",
+   "certifications as one red line of text"
+  ],
+  "priority": "A",
+  "note": "Squarespace brochure (cart icon is a template leftover). Audited 2026-11-20 from home, services, portfolio and R.A.D.A.R. pages."
+ }
 }

@@ -14,65 +14,71 @@
  "hours": null,
  "socials": [
   "https://www.facebook.com/thermosetroofing242",
-  "https://www.instagram.com/thermosetroofing242",
-  "https://www.tiktok.com/@thermosetroofing242"
+  "https://www.instagram.com/thermosetroofing242"
  ],
  "offer": [
   {
-   "name": "Single-ply TPO/PVC roofing",
+   "name": "TPO and PVC single-ply roofing",
    "kind": "service",
-   "summary": "",
+   "summary": "High-performance thermoplastic membranes for commercial and residential flat roofs.",
    "price": null,
    "source": "https://www.thermosetroofing242.com/services"
   },
   {
-   "name": "Modified bitumen",
+   "name": "Modified bitumen and torch-applied roofing",
    "kind": "service",
-   "summary": "",
+   "summary": "Durable multi-layer assemblies for waterproofing and UV resistance.",
    "price": null,
    "source": "https://www.thermosetroofing242.com/services"
   },
   {
-   "name": "Standing seam & metal roofing",
+   "name": "Standing seam and metal roofing",
    "kind": "service",
-   "summary": "",
+   "summary": "Custom fabricated aluminium or steel panels with concealed fasteners and Kynar finishes.",
    "price": null,
    "source": "https://www.thermosetroofing242.com/services"
   },
   {
    "name": "Shingle roofing",
    "kind": "service",
-   "summary": "",
+   "summary": "Architectural, synthetic and 3-tab shingles.",
    "price": null,
    "source": "https://www.thermosetroofing242.com/services"
   },
   {
-   "name": "Waterproofing",
+   "name": "Roof replacement and re-roofing",
    "kind": "service",
-   "summary": "",
+   "summary": "Full tear-off and reinstallation.",
    "price": null,
    "source": "https://www.thermosetroofing242.com/services"
   },
   {
-   "name": "R.A.D.A.R. maintenance program",
+   "name": "Terrace and balcony waterproofing",
    "kind": "service",
-   "summary": "",
+   "summary": "Liquid-applied membranes beneath tile or concrete toppings.",
    "price": null,
    "source": "https://www.thermosetroofing242.com/services"
   },
   {
    "name": "Custom fabrication",
    "kind": "service",
-   "summary": "",
+   "summary": "Edge metal, AC curbs, gutters and downspouts, skylight and hatch flashing.",
    "price": null,
    "source": "https://www.thermosetroofing242.com/services"
   },
   {
    "name": "General construction",
    "kind": "service",
-   "summary": "",
+   "summary": "Painting, pressure cleaning, carpentry, masonry, tree cutting and hauling.",
    "price": null,
    "source": "https://www.thermosetroofing242.com/services"
+  },
+  {
+   "name": "R.A.D.A.R. maintenance program",
+   "kind": "service",
+   "summary": "Scheduled maintenance, leak repair, condition reports, priority emergency service.",
+   "price": null,
+   "source": "https://www.thermosetroofing242.com/radar-program"
   }
  ],
  "platform": {
@@ -83,9 +89,7 @@
  "sources": [
   "https://www.thermosetroofing242.com/",
   "https://www.thermosetroofing242.com/services",
-  "https://www.thermosetroofing242.com/radar-program",
   "https://www.thermosetroofing242.com/portfolio",
-  "https://www.thermosetbahamas.com/about-us/",
-  "https://bahamas.yabsta.com/listing/view/96488/thermoset-roofing-bahamas-ltd"
+  "https://www.thermosetroofing242.com/radar-program"
  ]
 }
