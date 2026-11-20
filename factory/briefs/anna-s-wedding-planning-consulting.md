@@ -42,3 +42,29 @@ Split-screen editorial hero, photo bleeding right with a 200 px arched corner, h
 - Licence rules current with the Registrar General.
 ## Unknowns
 Email, hours, deluxe/ethnic/renewal prices.
+
+---
+## Generation 2 rebuild (2026-11-20)
+
+### New facts (research this session)
+- Booking page https://www.annasweddingbahamas.com/book-now is a request form (bride, groom, date and time, email, phone, cell, package select, message), no payment. Its select lists further published prices: Ethnic: Indian USD 3,680, Jewish USD 3,850. Deluxe: Garden USD 11,950, Bahamas Sunset USD 12,986, Royal USD 15,675. Renewal of vows: Basic USD 875, Romantic Dinner USD 1,595, Silver USD 2,250.
+- The same form disagrees with the package pages on three prices: Romantic 3,295 (page 3,995), Blue Ocean 6,645 (page 7,645), Tropical 10,595 (page 13,895). The concept shows the package-page prices and flags the conflict to Anna (sales point).
+- Newer photos: 2025/09/robs-wedding-scaled.jpg (white rose arbor on the beach, turquoise water, best photo they own) and 2025/09/anna-og.jpg (composite with logo, not used).
+- Audit verified: site_kind = packages with a booking request form (no cart, no payment). Concept keeps package selection plus a booking request.
+
+### Big idea
+The offer is the index: Anna's five kinds of wedding (beach, cruise day, cultural, deluxe, renewal) sit in a permanent left index like a bridal atelier's catalogue; touch one and her own photograph of that wedding fills the page, and the package finder turns "how do you arrive and who comes" into one published price.
+
+### Direction
+A02 Catalogue index + P02 Shallow flats + T09 Didone fashion (Bodoni Moda + Jost, self-hosted). Why: the index makes a buyer's real question (which package, what price) the structure of the page; Nassau's shallow water and sand are the colours of every photo she owns; a Didone is the type of bridal magazines, refined where Gloock was chunky. P03 Conch pink was refused because Bahamas Bridal Affairs (direct competitor) has it.
+
+### Storyboard (desktop 1440x900, fixed 300 px index column on the left of every screen)
+1. Hero: index column (wordmark, five wedding kinds with prices, licence/Anna/date links, both phones). Main: h1 "Barefoot vows in Nassau, planned by Anna." in Bodoni at ~120 px over sand ground, one line of proof (two decades, from USD 950, licence handled), CTA "Check your wedding date"; below, robs-wedding photo bleeding to the right edge and below the fold. Hovering a kind swaps the photo (clip wipe) and its caption.
+2. Package finder (main feature, a whole screen): arrival toggle and guest slider with a huge Bodoni guest number; the matching package name and price set large; inclusions; its photo large on the right. All seven priced packages as a typographic row beneath.
+3. Full-bleed spread: the Cloisters ceremony photo across the main area, caption, and the list of countries couples came from as running text.
+4. Licence (aqua field): "Your marriage licence, ticked off." checklist with progress; cruise purser rule shown first when cruise mode is chosen.
+5. Anna: "Two decades, one planner who answers." Services as a typographic list beside the jump-for-joy photo.
+6. Details spread: rings, cake, heart hands, sea couple in an asymmetric editorial layout.
+7. Check your date: the booking request (kind, date, guests, package, names) composing one line, call Nassau or the US line.
+8. Questions, then footer on aqua field.
+Phone 390x844: (1) wordmark bar + horizontal chip row of the five kinds; h1, proof line, CTA; photo 4:5 below. (2) finder: toggle, guest number, result card with photo above. (3) the spread photo full width with caption.

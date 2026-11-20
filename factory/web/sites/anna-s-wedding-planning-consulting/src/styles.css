@@ -1,29 +1,66 @@
 @import "tailwindcss" source(none);
 @source "./";
 @source "../../../src/components/ui/accordion.tsx";
-@source "../../../src/components/ui/sheet.tsx";
-@source "../../../src/components/ui/tabs.tsx";
+
+@font-face { font-family: "Bodoni Moda"; src: url("./fonts/bodoni-moda-latin-standard-normal.woff2") format("woff2-variations"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Bodoni Moda"; src: url("./fonts/bodoni-moda-latin-standard-italic.woff2") format("woff2-variations"); font-weight: 400 900; font-style: italic; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("./fonts/jost-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 100 900; font-style: normal; font-display: swap; }
+/* metric-close fallbacks so the swap does not shift the layout */
+@font-face { font-family: "Bodoni Fallback"; src: local("Georgia"); size-adjust: 96%; ascent-override: 98%; }
+@font-face { font-family: "Jost Fallback"; src: local("Arial"); size-adjust: 94%; }
 
 @theme {
-  --color-paper: #fbf8f5;
-  --color-blush: #f5e6e1;
-  --color-ink: #1f2a2e;
-  --color-muted: #625b58;
-  --color-rose: #b44c6e;
-  --color-lagoon: #8cc9c2;
-  --color-line: #eadfd8;
-  --font-display: "Gloock", Georgia, serif;
-  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  /* colour: P02 Shallow flats, refined from Anna's own beach photographs */
+  --color-ground: #f1f4ef;   /* sand-white with a breath of shallow water */
+  --color-sand: #e6e6dc;     /* image placeholder, quiet panels */
+  --color-flats: #c4e4dd;    /* the shallow-water field: two sections only */
+  --color-ink: #0d2b2e;
+  --color-muted: #48605f;
+  --color-channel: #1e6b72;  /* the one accent: primary action, active state */
+  --color-line: rgb(13 43 46 / 0.14);
+  --font-display: "Bodoni Moda", "Bodoni Fallback", Georgia, serif;
+  --font-sans: "Jost", "Jost Fallback", ui-sans-serif, sans-serif;
+  /* type scale */
+  --text-xs: 0.8125rem;   /* 13 */
+  --text-sm: 0.9375rem;   /* 15 */
+  --text-base: 1.0625rem; /* 17 */
+  --text-lg: 1.3125rem;   /* 21 */
+  --text-xl: 2rem;        /* 32 */
+  --text-2xl: clamp(2.5rem, 4.6vw, 4.5rem);
+  --text-3xl: clamp(3.1rem, 7.4vw, 8.25rem);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-wipe: cubic-bezier(0.77, 0, 0.175, 1);
+  --radius-sm: 6px;
 }
-html { background: var(--color-paper); color: var(--color-ink); }
-body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+:root { --index-w: 300px; --gutter: clamp(20px, 4.4vw, 72px); --concept-offset: 0px; }
+html { background: var(--color-ground); color: var(--color-ink); -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font-sans); font-size: var(--text-base); font-weight: 380; line-height: 1.55; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+h1, h2, h3 { text-wrap: balance; font-optical-sizing: auto; }
+p, li { text-wrap: pretty; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
-::selection { background: var(--color-blush); color: var(--color-ink); }
-:focus-visible { outline: 2px solid var(--color-rose); outline-offset: 3px; }
+::selection { background: var(--color-flats); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-channel); outline-offset: 3px; }
 .grid > * { min-width: 0; }
-.range { appearance: none; height: 4px; border-radius: 9px; background: var(--color-line); accent-color: var(--color-rose); }
-.range::-webkit-slider-thumb { appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--color-rose); border: 4px solid #fff; box-shadow: 0 2px 10px rgba(31,42,46,.25); cursor: grab; }
-.range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--color-rose); border: 4px solid #fff; }
-@media (max-width: 1023px) { body { padding-bottom: 64px; } }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+.display { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 0.98; }
+/* T09 spaced small caps: the only micro-label of the system */
+.smallcaps { font-family: var(--font-sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; max-width: max-content; }
+.wrap { padding-inline: var(--gutter); }
+@media (min-width: 1024px) { .with-index { margin-left: var(--index-w); } }
+.img-slot { background: var(--color-sand); }
+.img-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.range { appearance: none; -webkit-appearance: none; height: 44px; background: transparent; width: 100%; cursor: pointer; }
+.range::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(to right, var(--color-channel) var(--fill, 0%), var(--color-line) var(--fill, 0%)); }
+.range::-moz-range-track { height: 2px; background: var(--color-line); }
+.range::-moz-range-progress { height: 2px; background: var(--color-channel); }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; margin-top: -14px; border-radius: 50%; background: var(--color-ground); border: 2px solid var(--color-channel); transition: transform .18s var(--ease-out-soft); }
+.range:active::-webkit-slider-thumb { transform: scale(1.12); }
+.range::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--color-ground); border: 2px solid var(--color-channel); }
+.field { display: block; width: 100%; min-height: 48px; border: 0; border-bottom: 1px solid var(--color-line); background: transparent; font-family: var(--font-display); font-size: 1.375rem; color: var(--color-ink); outline: none; border-radius: 0; transition: border-color .2s; }
+.field:focus { border-color: var(--color-channel); }
+select.field { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--color-ink) 50%), linear-gradient(135deg, var(--color-ink) 50%, transparent 50%); background-position: calc(100% - 14px) 52%, calc(100% - 9px) 52%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 28px; }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
