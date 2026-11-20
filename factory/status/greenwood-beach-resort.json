@@ -8,29 +8,90 @@
  "generation": 2,
  "rebuild_of": 1,
  "claimed_at": "2026-11-20T19:55:53.812Z",
- "pages": ["index.html", "rooms.html", "getting-here.html"],
+ "pages": [
+  "index.html",
+  "rooms.html",
+  "getting-here.html"
+ ],
  "primary_cta": "Check dates and book (their direct-book.com engine, opened with the guest's room, dates and adults)",
  "brand_truth": "Pauline and Antoine's small beachfront resort at Port Howe, the south end of Cat Island, where the water decides the day: kitesurfing, reef snorkelling and, from March to June, oceanic whitetip dives.",
  "buyer": "Divers, kiters and couples from the US, Canada and France planning weeks or months ahead on a phone, comparing with Fernandez Bay and OTA listings; fear: hard journey, unclear rooms.",
- "direction": {"archetype": "A03 Cinematic chapters", "lane": "P01 Limestone", "type": "T01 Monumental serif (Noto Serif Display 300 + Source Serif 4)", "why": "Their own water photography is the asset; a letterboxed film lets each photo own the screen while all type sits on limestone bars, so nothing needs an overlay on bright sand and sky."},
+ "direction": {
+  "archetype": "A03 Cinematic chapters",
+  "lane": "P01 Limestone",
+  "type": "T01 Monumental serif (Noto Serif Display 300 + Source Serif 4)",
+  "why": "Their own water photography is the asset; a letterboxed film lets each photo own the screen while all type sits on limestone bars, so nothing needs an overlay on bright sand and sky."
+ },
  "tier_visual": "standard",
  "tier_visual_why": "A beach resort reached by plane and road; their own photographs carry the place, and no real-time 3D would explain the product better. Wow comes from the pinned letterbox film (scroll-scrubbed crossfades, slow Ken Burns) and monumental type.",
  "concept_type": "booking: room picker with dates handing off to their direct-book engine, plus whitetip package enquiry and getting-here guide",
  "images": [
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Kite-course-wind-window-1024x683.jpg", "source": "own", "credit": "Greenwood Beach Resort / Pauline Vaz Branco (watermark)"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/DSCF5316-2-1024x683.jpg", "source": "own", "credit": "Greenwood Beach Resort"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Surface-1024x683.jpg", "source": "own", "credit": "Greenwood Beach Resort"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Oceanic-White-tip_CatIsland_BAHAMAS_Pauline-VazBranco3-1024x683.jpg", "source": "own", "credit": "Pauline Vaz Branco"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Snorkel-trip-1024x672.jpg", "source": "own", "credit": "Greenwood Beach Resort"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Greenwood-Beach-Resort-Terasse-Restaurant-768x531.jpg", "source": "own", "credit": "Greenwood Beach Resort"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Local-Crabs-1-of-1-e1786812753461-768x550.jpg", "source": "own", "credit": "Greenwood Beach Resort"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Cat-Island-Greenwood-room-1024x683.jpg", "source": "own", "credit": "Greenwood Beach Resort"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/King-size-AC-room-1-of-1-scaled-e1786570117617-1024x623.jpg", "source": "own", "credit": "Greenwood Beach Resort"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/01-Cat-Island-Pauline-et-Antoine-1024x682.jpg", "source": "own", "credit": "Greenwood Beach Resort"},
-  {"src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/GOPR7892-768x576.jpg", "source": "own", "credit": "Greenwood Beach Resort"}
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Kite-course-wind-window-1024x683.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort / Pauline Vaz Branco (watermark)"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/DSCF5316-2-1024x683.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Surface-1024x683.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Oceanic-White-tip_CatIsland_BAHAMAS_Pauline-VazBranco3-1024x683.jpg",
+   "source": "own",
+   "credit": "Pauline Vaz Branco"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Snorkel-trip-1024x672.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Greenwood-Beach-Resort-Terasse-Restaurant-768x531.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Local-Crabs-1-of-1-e1786812753461-768x550.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/Cat-Island-Greenwood-room-1024x683.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/King-size-AC-room-1-of-1-scaled-e1786570117617-1024x623.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/01-Cat-Island-Pauline-et-Antoine-1024x682.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort"
+  },
+  {
+   "src": "https://greenwoodbeachresort.com/wp-content/uploads/2026/08/GOPR7892-768x576.jpg",
+   "source": "own",
+   "credit": "Greenwood Beach Resort"
+  }
  ],
- "critic": {"photography": 4, "typography": 4, "composition": 4, "colour": 4, "fit": 5, "distinct": 4, "references": 4},
- "critic_note": "Self-scores only (builder could not spawn a critic); awaiting independent critic.",
+ "critic": {
+  "photography": 3,
+  "typography": 4,
+  "composition": 3,
+  "colour": 4,
+  "fit": 3,
+  "distinct": 4,
+  "references": 3
+ },
+ "critic_note": "Independent critic, first pass (scores above). Fix pass 1 applied 2026-11-20, awaiting independent critic re-score.",
  "current_site_findings": [
   "Identical room descriptions; home and rooms page attach different photos to each room.",
   "Dead buttons: View room, Discover activities, Book your activities, Lunch, Dinner.",
@@ -57,6 +118,14 @@
   "https://direct-book.com/properties/greenwoodbeachresort/contact",
   "https://www.epicdiving.com/greenwood-beach-resort/"
  ],
- "notes": "Generation 2 rebuild, 2026-11-20. awaiting independent critic. BLIND: sandbox blocks their image host, Google Fonts and look.mjs; photos were viewed through the Lovable gallery project ip-assets-greenwood-beach-resort (2 rounds) and QA screenshots use crops of that gallery routed in with Playwright (so they look softer than the real 1024 px files). References (aman.com, belmond.com) judged from known patterns, not captured. Fonts self-hosted from fontsource. Interactions: room picker + dates composer to direct-book; whitetip package form writing their own email template; route toggle (USA / Nassau) on getting-here; full-screen Menu overlay. qa: 0 blockers (one sub-40px target is the shared concept tag button); interact: the two 'dead' buttons are stepper +/- at their limits (disabled by design); distinct: distinct.",
- "built_at": "2026-11-20T20:40:00Z"
+ "notes": "Generation 2 rebuild, 2026-11-20. awaiting independent critic (fix pass 1 applied). BLIND: sandbox blocks their image host, Google Fonts and look.mjs; photos were viewed through the Lovable gallery project ip-assets-greenwood-beach-resort (2 rounds) and QA screenshots use crops of that gallery routed in with Playwright (so they look softer than the real 1024 px files). References (aman.com, belmond.com) judged from known patterns, not captured. Fonts self-hosted from fontsource. Interactions: room picker + dates composer to direct-book; whitetip package form writing their own email template; route toggle (USA / Nassau) on getting-here; full-screen Menu overlay. qa: 0 blockers (one sub-40px target is the shared concept tag button); interact: the two 'dead' buttons are stepper +/- at their limits (disabled by design); distinct: distinct.",
+ "built_at": "2026-11-20T21:16:57.956Z",
+ "fix_pass_1": [
+  "Real film: fixed limestone bars (top 12svh with 01 / 05 counter and progress rule, bottom 16svh with word and copy); each photo scales and pans with scroll via function transforms; stage 640svh",
+  "Hero merged to one screen: Pauline and Antoine on their beach in the letterbox, Port Howe set large in the lower bar; kite lesson photo moved to the Wind chapter; old title card removed",
+  "One CTA system: teal is the only filled button; desktop floating black button deleted; phones get a safe-area teal bar (hidden on first screen and at the footer, concept tag lifted above it); whitetip form button is outlined",
+  "Booking strip enlarged into a ticket line: custom date field (showPicker), large steppers, 72px teal button",
+  "End credits: full-width two-column roll in three groups (journey, day, house) with tabular times and phones, address on one line",
+  "Rooms headline no longer hidden under the header; empty band after the rooms link removed; meal table columns widened and left column sticky"
+ ]
 }

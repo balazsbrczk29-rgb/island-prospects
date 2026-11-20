@@ -28,7 +28,7 @@ export const IMG = {
   crabs: { src: U + "Local-Crabs-1-of-1-e1786812753461-768x550.jpg", ratio: 1.4 },
   roomFamily: { src: U + "Cat-Island-Greenwood-room-1024x683.jpg", ratio: 1.5 },
   roomKing: { src: U + "King-size-AC-room-1-of-1-scaled-e1786570117617-1024x623.jpg", ratio: 1.64 },
-  hosts: { src: U + "01-Cat-Island-Pauline-et-Antoine-1024x682.jpg", ratio: 1.5 },
+  hosts: { src: U + "01-Cat-Island-Pauline-et-Antoine-1024x682.jpg", ratio: 1.5, pos: "50% 58%", posM: "64% 50%" },
   poolDive: { src: U + "GOPR7892-768x576.jpg", ratio: 1.33 },
   reefDivers: { src: U + "The-nursery-Dive-site-768x473.jpg", ratio: 1.62 },
 }
@@ -152,16 +152,21 @@ function Header() {
   )
 }
 
-/* ---------- the persistent "Check dates" (A03: small, bottom-right), hidden on the first screen ---------- */
-function FloatingDates() {
+/* ---------- phones only: one teal booking bar in the safe area, hidden on the first screen and at the footer ---------- */
+function MobileBookBar() {
   const { scrollY } = useScroll()
-  const o = useTransform(scrollY, (v) => (typeof window === "undefined" ? 0 : Math.min(1, Math.max(0, (v - window.innerHeight * 0.8) / 200))))
-  const pe = useTransform(o, (v) => (v > 0.5 ? "auto" : "none"))
+  const y = useTransform(scrollY, (v) => {
+    if (typeof window === "undefined") return "100%"
+    const end = document.documentElement.scrollHeight - window.innerHeight * 2.4
+    return v > window.innerHeight * 0.85 && v < end ? "0%" : "110%"
+  })
   return (
-    <motion.a href={BOOK} style={{ opacity: o, pointerEvents: pe, bottom: "calc(16px + env(safe-area-inset-bottom))" }}
-      className="btn btn-ink fixed right-4 z-30 min-h-12 px-5 shadow-[0_8px_24px_-12px_rgba(27,26,23,.5)] md:right-8">
-      Check dates
-    </motion.a>
+    <motion.div style={{ y }} transition={{ duration: 0.3 }} className="fixed inset-x-0 bottom-0 z-30 bg-glass pb-[env(safe-area-inset-bottom)] text-on-glass transition-transform duration-300 md:hidden">
+      <div className="flex h-14 items-stretch">
+        <a href={BOOK} className="flex flex-1 items-center justify-center text-[length:var(--t-sm)] font-medium">Check dates and book</a>
+        <a href={WA} className="flex items-center border-l border-on-glass/30 px-5 text-[length:var(--t-sm)]">WhatsApp</a>
+      </div>
+    </motion.div>
   )
 }
 
@@ -197,7 +202,7 @@ export function Page({ children }: { children: ReactNode }) {
       <Header />
       <main id="main">{children}</main>
       <Footer />
-      <FloatingDates />
+      <MobileBookBar />
     </>
   )
 }

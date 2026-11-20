@@ -1,4 +1,5 @@
 import { useId, useState } from "react"
+/* Booking: the room picker and the dates strip that hands off to their direct-book engine. */
 import { AnimatePresence, motion } from "motion/react"
 import { ROOMS, Photo, bookingUrl, ease } from "./site"
 
@@ -7,12 +8,14 @@ type RoomId = (typeof ROOMS)[number]["id"]
 function Stepper({ label, value, min, max, onChange, unit }: { label: string; value: number; min: number; max: number; onChange: (v: number) => void; unit: (v: number) => string }) {
   const id = useId()
   return (
-    <div className="field">
-      <span id={id}>{label}</span>
-      <div className="stepper" role="group" aria-labelledby={id}>
-        <button type="button" aria-label={`Fewer ${label.toLowerCase()}`} disabled={value <= min} onClick={() => onChange(value - 1)}>&minus;</button>
-        <output className="num text-[length:var(--t-base)]" aria-live="polite">{value} {unit(value)}</output>
-        <button type="button" aria-label={`More ${label.toLowerCase()}`} disabled={value >= max} onClick={() => onChange(value + 1)}>+</button>
+    <div className="strip-cell" role="group" aria-labelledby={id}>
+      <span className="k" id={id}>{label}</span>
+      <div className="stepper">
+        <output className="v" aria-live="polite">{value} <span className="text-[0.55em] italic">{unit(value)}</span></output>
+        <span className="flex gap-1">
+          <button type="button" className="rounded-full border border-line" aria-label={`Fewer ${label.toLowerCase()}`} disabled={value <= min} onClick={() => onChange(value - 1)}>&minus;</button>
+          <button type="button" className="rounded-full border border-line" aria-label={`More ${label.toLowerCase()}`} disabled={value >= max} onClick={() => onChange(value + 1)}>+</button>
+        </span>
       </div>
     </div>
   )
@@ -24,7 +27,7 @@ const fmt = (iso: string, add = 0) => {
 }
 
 /** Dates in, their own direct-book engine out (no fake availability on this page). */
-export function DatesComposer({ room, tone = "ground" }: { room?: RoomId; tone?: "ground" | "glass" }) {
+export function DatesComposer({ room }: { room?: RoomId }) {
   const [arrive, setArrive] = useState("")
   const [nights, setNights] = useState(4)
   const [adults, setAdults] = useState(2)
@@ -34,21 +37,24 @@ export function DatesComposer({ room, tone = "ground" }: { room?: RoomId; tone?:
   const href = bookingUrl({ roomTypeId: r?.roomTypeId, arrive, nights, adults: a })
   const today = new Date().toISOString().slice(0, 10)
   return (
-    <div className="grid gap-6">
-      <div className="grid gap-x-8 gap-y-5 sm:grid-cols-3">
-        <label className="field">
-          <span>Arrival</span>
-          <input type="date" className="input num" min={today} value={arrive} onChange={(e) => setArrive(e.target.value)} />
+    <div className="grid gap-4">
+      <div className="strip">
+        <label className="strip-cell cursor-pointer">
+          <span className="k">Arrival</span>
+          <span className="v" aria-hidden>{arrive ? fmt(arrive) : "Choose a date"}</span>
+          <input type="date" aria-label="Arrival date" className="absolute inset-0 h-full w-full cursor-pointer opacity-0" min={today} value={arrive}
+            onClick={(e) => { try { (e.currentTarget as HTMLInputElement & { showPicker?: () => void }).showPicker?.() } catch { /* not supported */ } }}
+            onChange={(e) => setArrive(e.target.value)} />
         </label>
         <Stepper label="Nights" value={nights} min={1} max={28} onChange={setNights} unit={(v) => (v === 1 ? "night" : "nights")} />
         <Stepper label="Adults" value={a} min={1} max={max} onChange={setAdults} unit={(v) => (v === 1 ? "adult" : "adults")} />
+        <div className="strip-go">
+          <a href={href} className="btn btn-xl w-full whitespace-nowrap">{arrive ? "See rates for these dates" : "Check dates and book"}</a>
+        </div>
       </div>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="num min-h-[1.6em] text-[length:var(--t-sm)] italic" aria-live="polite">
-          {arrive ? `${fmt(arrive)} to ${fmt(arrive, nights)}, ${a} ${a === 1 ? "adult" : "adults"}${r ? `, ${r.name}` : ""}.` : "Pick an arrival date to see live rates."}
-        </p>
-        <a href={href} className={`btn ${tone === "glass" ? "btn-ground" : ""}`}>{arrive ? "See rates for these dates" : "Open the booking page"}</a>
-      </div>
+      <p className="num min-h-[1.6em] max-w-[64ch] text-[length:var(--t-sm)] italic text-muted" aria-live="polite">
+        {arrive ? `${fmt(arrive)} to ${fmt(arrive, nights)}, ${a} ${a === 1 ? "adult" : "adults"}${r ? `, ${r.name}` : ""}. Live rates open on Greenwood's own booking page.` : "Choose your arrival; live rates and availability open on Greenwood's own booking page."}
+      </p>
     </div>
   )
 }
@@ -83,7 +89,7 @@ export function RoomPicker() {
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className="md:col-span-12 md:pt-4">
+      <div id="dates" className="scroll-mt-28 md:col-span-12 md:pt-6">
         <DatesComposer room={sel} />
       </div>
     </div>

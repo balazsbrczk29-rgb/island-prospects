@@ -28,7 +28,7 @@ function Meals() {
   ]
   return (
     <section aria-labelledby="meals-title" className="grid gap-10 border-t border-line py-[var(--s-16)] md:grid-cols-12 md:gap-8">
-      <div className="md:col-span-5">
+      <div className="self-start md:sticky md:top-28 md:col-span-5">
         <h2 id="meals-title" className="display text-[length:var(--t-2xl)]">At the table</h2>
         <p className="mt-5 max-w-[42ch] text-muted">Homemade cooking inspired by the ocean and the island, served on the terrace by the beach. Book dinner by WhatsApp a day ahead.</p>
         <a href={WA} className="link num mt-6 inline-block">WhatsApp {WHATSAPP}</a>
@@ -37,7 +37,7 @@ function Meals() {
         <Photo img={IMG.crabs} alt="Stuffed local crab with lime, served at Greenwood" className="aspect-[3/2] w-full" />
         <dl className="mt-8 grid">
           {rows.map(([m, h, n]) => (
-            <div key={m} className="grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-line py-4 sm:grid-cols-[140px_1fr_auto]">
+            <div key={m} className="grid grid-cols-[1fr_auto] items-baseline gap-4 border-b border-line py-4 sm:grid-cols-[minmax(200px,auto)_1fr_auto]">
               <dt className="display text-[length:var(--t-xl)]">{m}</dt>
               <dd className="num sm:order-none">{h}</dd>
               <dd className="col-span-2 text-[length:var(--t-sm)] italic text-muted sm:col-span-1">{n}</dd>

@@ -46,7 +46,7 @@ function PackageEnquiry() {
         <input className="input" value={dates} onChange={(e) => setDates(e.target.value)} placeholder="for example 12 to 19 April" />
       </label>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-        <button type="submit" className="btn btn-ground shrink-0 whitespace-nowrap">Ask for package rates</button>
+        <button type="submit" className="btn btn-line shrink-0 whitespace-nowrap">Ask for package rates</button>
         <p className="text-[length:var(--t-xs)] italic opacity-85">Opens your email with these details, addressed to {EMAIL}.</p>
       </div>
     </form>

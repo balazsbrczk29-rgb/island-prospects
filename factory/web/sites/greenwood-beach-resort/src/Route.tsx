@@ -35,29 +35,48 @@ export const telHref = (t: string) => "tel:" + (t.startsWith("+") ? t.replace(/[
 
 /* End credits on the home page: the practical facts, centred, like the end of a film. */
 export function EndCredits() {
-  const rows: [string, string][] = [
-    ["Hosts", "Pauline and Antoine"],
-    ["From Fort Lauderdale", "MakersAir, FXE to New Bight (CAT), 7am or 1pm. 10% off for Greenwood guests"],
-    ["From Nassau", "Western Air to New Bight, 1pm most days, noon on Sunday. About $260 round trip"],
-    ["Airport to the door", "Island taxis, or a rental car with free airport pick-up"],
-    ["Breakfast", "8am to 10am"],
-    ["Lunch", "Noon to 2pm, last order 1:45pm"],
-    ["Dinner", "6pm to 8pm, booked 24 hours ahead"],
-    ["Whitetip season", "March to June"],
-    ["Rooms", "Executive King Room, Executive Family Room"],
-    ["Address", "1 Ocean Drive, Port Howe, Cat Island, The Bahamas"],
+  const groups: { title: string; rows: [string, string][] }[] = [
+    { title: "The journey", rows: [
+      ["From Fort Lauderdale (FXE)", "MakersAir to New Bight (CAT), 7:00am or 1:00pm"],
+      ["Back to FXE", "10:20am or 4:20pm"],
+      ["Greenwood guests", "10% off MakersAir fares, ask for the code"],
+      ["From Nassau", "Western Air to New Bight, 1:00pm, Sunday 12:00pm"],
+      ["Western Air", "+1 242 377 2222, about $260 round trip"],
+      ["Taxi", "Miss Joyann Mackey, +1 242 819 9711"],
+      ["Taxi", "DLKing Taxi, +1 242 474 8462"],
+    ] },
+    { title: "The day", rows: [
+      ["Breakfast", "8:00am to 10:00am"],
+      ["Lunch", "12:00pm to 2:00pm, last order 1:45pm"],
+      ["Dinner", "6:00pm to 8:00pm, book 24 hours ahead"],
+      ["Whitetip season", "March to June"],
+    ] },
+    { title: "The house", rows: [
+      ["Hosts", "Pauline and Antoine"],
+      ["Rooms", "Executive King Room, Executive Family Room"],
+      ["WhatsApp", "+1 242 808 1846"],
+      ["Telephone", "+1 242 342 3053"],
+      ["Address", "1 Ocean Drive, Port Howe, Cat Island, The Bahamas"],
+    ] },
   ]
   return (
-    <section aria-labelledby="credits-title" className="px-[var(--gutter)] py-[var(--s-16)]">
-      <h2 id="credits-title" className="display mx-auto max-w-4xl text-center text-[length:var(--t-2xl)]">The way to Port Howe</h2>
-      <dl className="mx-auto mt-16 grid max-w-3xl gap-7">
-        {rows.map(([k, v]) => (
-          <div key={k} className="grid gap-1 text-center md:grid-cols-2 md:gap-8 md:text-left">
-            <dt className="text-[length:var(--t-sm)] italic text-muted md:text-right">{k}</dt>
-            <dd className="num">{v}</dd>
+    <section aria-labelledby="credits-title" className="border-t border-line px-[var(--gutter)] py-[var(--s-16)]">
+      <h2 id="credits-title" className="display text-center text-[length:var(--t-2xl)]">The way to Port Howe</h2>
+      <div className="mt-16 grid gap-16">
+        {groups.map((g) => (
+          <div key={g.title}>
+            <h3 className="mb-6 text-center text-[length:var(--t-sm)] italic text-muted">{g.title}</h3>
+            <dl className="grid gap-4 md:gap-3">
+              {g.rows.map(([k, v], i) => (
+                <div key={k + i} className="grid gap-0.5 text-center md:grid-cols-2 md:gap-12 md:text-left">
+                  <dt className="text-[length:var(--t-sm)] text-muted md:text-right md:text-[length:var(--t-base)]">{k}</dt>
+                  <dd className="num text-[length:var(--t-base)] md:text-[length:var(--t-lg)]">{v}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         ))}
-      </dl>
+      </div>
       <p className="mt-16 text-center"><a href="getting-here.html" className="link">Flights, taxis and car rentals in full</a></p>
     </section>
   )
