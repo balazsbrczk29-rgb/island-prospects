@@ -43,7 +43,7 @@ html.lenis, html.lenis body { height: auto; }
 :focus-visible { outline: 2px solid var(--color-navy); outline-offset: 3px; border-radius: 6px; }
 @layer components {
 .tnum { font-variant-numeric: tabular-nums; }
-.display { font-family: var(--font-display); letter-spacing: -0.022em; line-height: 1.02; font-kerning: normal; }
+.display { font-family: var(--font-display); letter-spacing: -0.022em; line-height: 1.02; font-kerning: normal; text-wrap: balance; }
 .t-cap { font-size: var(--t-cap); }
 .t-small { font-size: var(--t-small); }
 .t-lead { font-size: var(--t-lead); line-height: 1.5; }

@@ -49,13 +49,13 @@ function Dock({ current }: { current: string }) {
   })
   return (
     <nav aria-label="Main" className={`dock fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-[max(12px,env(safe-area-inset-bottom))] transition-[opacity,transform] duration-500 ease-[var(--ease-soft)] md:translate-y-0 md:opacity-100 ${shown || current !== "home" ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0 md:pointer-events-auto"}`}>
-      <div className="flex w-full max-w-[820px] items-center gap-1 rounded-[22px] bg-ink p-[6px] pl-5 text-cream shadow-[0_18px_40px_-18px_rgba(43,33,24,.55)]">
+      <div className="flex w-full max-w-[820px] items-center gap-1 rounded-[22px] bg-cream p-[6px] pl-5 text-ink shadow-[0_0_0_1px_rgba(43,33,24,.1),0_18px_40px_-18px_rgba(43,33,24,.45)]">
         <a href="index.html" className="display mr-auto py-2 text-[1.15rem] tracking-[-0.01em]" aria-current={current === "home" ? "page" : undefined}>Slim Upholstery</a>
         {NAV.map((n) => (
-          <a key={n.key} href={n.href} aria-current={current === n.key ? "page" : undefined} className="hidden min-h-[44px] items-center rounded-[16px] px-3.5 text-[0.9rem] text-cream/80 transition-colors hover:bg-cream/10 hover:text-cream md:inline-flex aria-[current=page]:text-cream">{n.label}</a>
+          <a key={n.key} href={n.href} aria-current={current === n.key ? "page" : undefined} className="hidden min-h-[44px] items-center rounded-[16px] px-3.5 text-[0.9rem] text-ink/75 transition-colors hover:bg-cream-2 hover:text-ink md:inline-flex aria-[current=page]:font-bold aria-[current=page]:text-ink">{n.label}</a>
         ))}
-        <a href={C.tel} className="inline-flex size-[44px] items-center justify-center rounded-[16px] text-cream/85 hover:bg-cream/10 md:hidden" aria-label={`Call ${C.phone}`}><Phone className="size-[18px]" strokeWidth={1.75} aria-hidden /></a>
-        <a href={waLink(QUOTE_TEXT)} className="inline-flex min-h-[44px] items-center gap-2 rounded-[16px] bg-straw px-4 text-[0.9rem] font-bold text-ink transition-colors hover:bg-cream">
+        <a href={C.tel} className="inline-flex size-[44px] items-center justify-center rounded-[16px] text-ink hover:bg-cream-2 md:hidden" aria-label={`Call ${C.phone}`}><Phone className="size-[18px]" strokeWidth={1.75} aria-hidden /></a>
+        <a href={waLink(QUOTE_TEXT)} className="inline-flex min-h-[44px] items-center gap-2 rounded-[16px] bg-navy px-4 text-[0.9rem] font-bold text-cream transition-colors hover:bg-navy-deep">
           <MessageCircle className="size-[17px]" strokeWidth={1.9} aria-hidden /> Free quote
         </a>
       </div>
@@ -84,7 +84,7 @@ export function Footer() {
             <p className="mt-3 flex gap-4"><a className="underline decoration-line underline-offset-4 hover:decoration-ink" href={C.fb}>Facebook</a><a className="underline decoration-line underline-offset-4 hover:decoration-ink" href={C.ig}>Instagram</a><a className="underline decoration-line underline-offset-4 hover:decoration-ink" href={C.tt}>TikTok</a></p>
           </div>
         </div>
-        <p className="t-cap mt-14 text-muted">Photographs on this concept are illustrative, made for the preview, and would be replaced with Slim's own project photos.</p>
+        <p className="t-cap mt-14 text-ink/75">Photographs on this concept are illustrative, made for the preview, and would be replaced with Slim Upholstery's own project photos.</p>
       </div>
     </footer>
   )

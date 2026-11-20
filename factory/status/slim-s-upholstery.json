@@ -7,32 +7,106 @@
  "state": "needs-review",
  "generation": 2,
  "rebuild_of": 1,
- "pages": ["index.html", "what-we-upholster.html"],
+ "pages": [
+  "index.html",
+  "what-we-upholster.html"
+ ],
  "primary_cta": "WhatsApp a free quote (242) 814-5451",
  "brand_truth": "A Claridge Road upholstery workshop whose own line is 'From worn to wow, quality craftsmanship, one stitch at a time', re-covering home, auto, marine, aircraft and church seating.",
  "buyer": "Nassau homeowners weighing reupholstery against buying new, boat and car owners, church committees; they fear amateur results and want to see the craft and get a free quote on WhatsApp.",
- "direction": {"archetype": "A06 Object study", "lane": "P11 Straw market (accent swapped to their real brand navy)", "type": "T08 Warm humanist: Gloock 400 + Mulish", "nav": "N4 floating bottom dock", "motion": "M4 object scrub", "why": "The archetype names an upholstered chair explained part by part, which is exactly the big idea; straw, jute and sisal are the materials inside every seat; navy is the colour of Slim's own logo and fabric work."},
+ "direction": {
+  "archetype": "A06 Object study",
+  "lane": "P11 Straw market (accent swapped to their real brand navy)",
+  "type": "T08 Warm humanist: Gloock 400 + Mulish",
+  "nav": "N4 floating bottom dock",
+  "motion": "M4 object scrub",
+  "why": "The archetype names an upholstered chair explained part by part, which is exactly the big idea; straw, jute and sisal are the materials inside every seat; navy is the colour of Slim's own logo and fabric work."
+ },
  "tier_visual": "standard",
  "tier_visual_why": "A photo-sequence object study (the same chair photographed at five stages, crossfaded by scroll) explains the layers better than a procedural 3D chair, which would read as a toy next to real cloth texture.",
  "concept_type": "brochure: craft story + what we upholster + WhatsApp free-quote builder",
  "images": [
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/hero-stitch.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/hero-stitch-m.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/worn-chair.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-frame.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-webbing.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-foam.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-fabric.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/hands-staple.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/sofa-living.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/marine-cushions.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/auto-seat.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/swatches.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/church-pew.jpg", "source": "generated", "credit": "Illustrative photography, replace with your own"},
-  {"src": "https://www.bahamaslocal.com/img/users/sz1_QOAmFQ.jpg", "source": "own", "credit": "Slim Upholstery logo, uploaded to their BahamasLocal listing"}
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/hero-stitch.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/hero-stitch-m.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/worn-chair.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-frame.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-webbing.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-foam.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/layer-fabric.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/hands-staple.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/sofa-living.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/marine-cushions.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/auto-seat.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/church-pew.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-slim-s-upholstery.lovable.app/assets/aircraft-seat.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://www.bahamaslocal.com/img/users/sz1_QOAmFQ.jpg",
+   "source": "own",
+   "credit": "Slim Upholstery logo, uploaded to their BahamasLocal listing"
+  }
  ],
- "critic": {"photography": 4, "typography": 4, "composition": 4, "colour": 4, "fit": 4, "distinct": 4, "references": 4},
- "critic_note": "Self-scores only (builder cannot spawn subagents); awaiting independent critic.",
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 4,
+  "distinct": 4,
+  "references": 4
+ },
+ "critic_note": "Independent critic round 1: photography 3, type 4, composition 3, colour 4, fit 4, distinct 4, references 3. Fix pass 1 applied; awaiting independent re-score. Builder self-scores after pass 1: all 4.",
  "current_site_findings": [
   "slimupholstery.com is listed in directories but does not resolve",
   "Two phone numbers in circulation (814-5451 and 341-2149); Saturday hours differ between directories",
@@ -59,6 +133,6 @@
   "https://www.tiktok.com/@slimupholstery",
   "https://www.findyello.com/bahamas/slim-upholstery/profile/"
  ],
- "notes": "BLIND: look.mjs, Google Fonts and lovable.app images are blocked in the sandbox; references (apple.com product pages, aesop.com) judged from knowledge. QA screenshots use crops of the Lovable gallery screenshot routed in via Playwright (low-res thumbnails, so photos look softer than live). Fonts self-hosted from @fontsource. Facebook/Instagram/TikTok photos not readable by Firecrawl, so all photography is illustrative (Lovable project ip-assets-slim-s-upholstery, one round, 1.8 credits); only their logo is their own. The five chair stages were generated from one base image so the chair, angle and wall match. qa 0 blockers (remaining warning is the shared concept-tag button height), interact 0 dead/0 errors, distinct: distinct (closest bahamas-rum-cake-factory 68). Awaiting independent critic.",
- "built_at": "2026-11-20T20:40:00Z"
+ "notes": "BLIND: look.mjs, Google Fonts and lovable.app images are blocked in the sandbox; references (apple.com product pages, aesop.com) judged from knowledge. QA screenshots use crops of the Lovable gallery screenshot routed in via Playwright (low-res thumbnails, so photos look softer than live). Fonts self-hosted from @fontsource. Facebook/Instagram/TikTok photos not readable by Firecrawl, so all photography is illustrative (Lovable project ip-assets-slim-s-upholstery, one round, 1.8 credits); only their logo is their own. The five chair stages were generated from one base image so the chair, angle and wall match. qa 0 blockers (remaining warning is the shared concept-tag button height), interact 0 dead/0 errors, distinct: distinct (closest bahamas-rum-cake-factory 68). Awaiting independent critic. FIX PASS 1 (critic): chair sequence regenerated as one locked-camera, pixel-registered series from the finished-chair base (worn, frame, jute webbing and springs, foam block, navy cloth; second and last Lovable image round, 2.3 + 0.6 credits); stage now shows the chair full height (100svh, 4:5) on desktop and full width on phones, each layer wiping up over the last with a running-stitch seam (transform-only mask), step text tied to the wipe so no duplicates; what-we-upholster rebuilt as one large type index with a sticky full-height photo that follows scroll/hover, aircraft now has a generated aircraft-cabin seat, repeated navy band removed; one name (Slim Upholstery, as on their logo and Facebook) and no \"Slim's\" copy; dock is cream with the only navy CTA, hero secondary is a text link; display type balance-wrapped, muted labels raised to ink/75-80. qa 0 blockers, interact 0 dead, distinct: distinct (closest rum cake 70).",
+ "built_at": "2026-11-20T21:01:36.513Z"
 }
