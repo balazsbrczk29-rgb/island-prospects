@@ -5,7 +5,7 @@ export type KindId = "beach" | "cruise" | "cultural" | "deluxe" | "renewal"
 export type Kind = { id: KindId; name: string; one: string; short: string; from: number; img: string; alt: string; pos: string }
 
 export const KINDS: Kind[] = [
-  { id: "beach", name: "Beach weddings", one: "Beach wedding", short: "Beach", from: 950, img: IMG + "2025/09/robs-wedding-scaled.jpg", alt: "A bride and groom under a white rose arbor on the beach in Nassau, with turquoise water behind them", pos: "50% 35%" },
+  { id: "beach", name: "Beach weddings", one: "Beach wedding", short: "Beach", from: 950, img: IMG + "2025/09/robs-wedding-scaled.jpg", alt: "A bride and groom under a white rose arbor on the beach in Nassau, with turquoise water behind them", pos: "64% 30%" },
   { id: "cruise", name: "Cruise-day weddings", one: "Cruise-day wedding", short: "Cruise day", from: 3495, img: IMG + "2015/11/cruise-package-img1.jpg", alt: "A couple under a parasol on the beach with their cruise ship anchored behind them", pos: "40% 40%" },
   { id: "cultural", name: "Cultural ceremonies", one: "Cultural ceremony", short: "Cultural", from: 3680, img: IMG + "2015/11/ethinic.jpg", alt: "A carved mandap set on the lawn above the sea for a ceremony planned by Anna's", pos: "50% 55%" },
   { id: "deluxe", name: "Deluxe weddings", one: "Deluxe wedding", short: "Deluxe", from: 11950, img: IMG + "2015/11/Delux-Package-img.jpg", alt: "A couple walking down a petal aisle through a garden of stone arches in Nassau", pos: "50% 45%" },
