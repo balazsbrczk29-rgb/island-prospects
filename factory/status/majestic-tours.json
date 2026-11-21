@@ -4,8 +4,144 @@
  "name": "Majestic Tours",
  "batch": "11",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T18:20:18.623Z"
+ "pages": [
+  "index.html",
+  "excursions.html",
+  "transfers.html"
+ ],
+ "primary_cta": "Plan my excursion",
+ "brand_truth": "A Bahamian family company that has met guests at the airport and taken them across the water since June 1959.",
+ "buyer": "Resort guests on Paradise Island and Cable Beach, cruise passengers and arriving air travellers, deciding on a phone today or tomorrow; travel agents and groups.",
+ "direction": {
+  "archetype": "A11 Horizontal journey",
+  "lane": "P08 Bay Street pastel",
+  "type": "T01 Monumental serif (Playfair Display + Newsreader)",
+  "why": "The business sells where the day goes from Nassau, so the page is a sideways voyage stop by stop; Bay Street pastel is Cumberland Street itself, a gracious 1959 Nassau family firm."
+ },
+ "big_idea": "The page is a boat leaving Nassau Harbour: scroll carries you sideways from the Flying Cloud sunset sail out to Blue Lagoon, Rose Island, the reefs, the Exuma Cays 38 nm out and Harbour Island, with the real trips at every stop, ending at the booking desk.",
+ "tier_visual": "standard",
+ "tier_why": "A day out is explained by the journey and their own photographs; no 3D needed.",
+ "concept_type": "brochure + enquiry: excursion catalogue with filters, transfers explainer, prefilled enquiry",
+ "images": [
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/flying-cloud/evening/flying-cloud-sunset-picture-1.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/seahorse-sailing/sunset-01.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/blue-lagoon/BLI12.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/dolphin-encounters/swim-05.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/rose-half-day/1.webp",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/perfect-day/1.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/stuart-coves/wall-01.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/powerboat/powerboat.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/born-free-charters/20210104_173005000_iOS.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/born-free-charters/pink_sand_walk.png",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://www.majestictoursbahamas.com/data/tours/images/culture-tour/displaycase.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  },
+  {
+   "src": "https://majestictoursbahamas.com/transportation/images/fleet.jpg",
+   "source": "own",
+   "credit": "majestictoursbahamas.com"
+  }
+ ],
+ "critic": {
+  "photography": 4,
+  "typography": 5,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 5,
+  "references": 4
+ },
+ "plan_gate": {
+  "verdict": "approved after one revision",
+  "scores": {
+   "photography": 4,
+   "typography": 5,
+   "composition": 4,
+   "colour": 4,
+   "fit": 5,
+   "distinct": 5,
+   "references": 4
+  },
+  "revisions": [
+   "stop rail on the phone first screen",
+   "timeline starts at Depart",
+   "frames varied, photos at source size, Blue Lagoon mostly photo",
+   "passage lines between stops (sourced times/distances only)",
+   "Book frame without shadow"
+  ],
+  "nits_applied": [
+   "Harbour Island heading enlarged"
+  ]
+ },
+ "current_site_findings": [
+  "The footer still says 2012-2021, and the homepage shows no phone number or email.",
+  "Every tour page sends guests to info@majestictourbahamas.com, which is missing an s: those emails probably never arrive.",
+  "Two pages list different hotel desks and different extensions.",
+  "37 excursions sit in one alphabetical list with no filters.",
+  "The 1959 founding and five industry awards are hidden on the About page."
+ ],
+ "pitch_line": "You have taken Nassau guests out on the water since 1959, but your site still says 2021 and your tour emails go to a misspelled address; this concept sails a guest from the harbour to the Exumas in one scroll and books it in one message.",
+ "assumptions": [
+  "Which hotel desks are current (two pages of the current site disagree)",
+  "Listed prices for the Flying Cloud Evening Dinner and the Exuma Day Trip are still current",
+  "Tour enquiries by email to transport@majesticholidays.com are accepted",
+  "Our tour groupings by place and kind of day",
+  "Passage lines for Blue Lagoon, Rose Island, reefs and Harbour Island are plain geography, not timed routes"
+ ],
+ "sources": [
+  "https://majestictoursbahamas.com/",
+  "https://majestictoursbahamas.com/about/",
+  "https://majestictoursbahamas.com/contact.php",
+  "https://majestictoursbahamas.com/transportation/",
+  "https://majestictoursbahamas.com/tours/",
+  "https://www.majestictoursbahamas.com/tours/?id=09",
+  "https://www.majestictoursbahamas.com/tours/?id=35"
+ ],
+ "notes": "Generation 2 rebuild (site worker, Nov 21). BLIND: sandbox cannot load outside photos or look.mjs; photos seen and measured via Lovable gallery ip-assets-majestic-tours, crops routed into QA screenshots. No photo is shown larger than its source (several are 285 to 350 px and sit in small intentional frames). Plan gate: independent critic subagent, revise then approved (scores above are its predictions, no final mode-2 critic run). qa.mjs: 1 blocker is a false positive (dead-space strip = the pinned horizontal stage, 9,700 px tall, which renders empty in a full-page screenshot; data-stage set); the remaining tap-target warning is the shared concept label button. interact.mjs: 0 dead, 0 JS errors on all pages. distinct.mjs: distinct. No WhatsApp found; enquiry composes an email. Ask owner for logo files and high-res photography.",
+ "built_at": "2026-11-21T18:43:14.987Z"
 }
