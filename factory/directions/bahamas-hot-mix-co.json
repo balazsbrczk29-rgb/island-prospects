@@ -7,7 +7,8 @@
  "lane_name": "Inagua salt",
  "type": "T04",
  "type_name": "Technical mono",
- "nav": "N5",
+ "nav": "N1",
  "motion": "M9",
- "dealt_at": "2026-11-08T15:22:55.702Z"
+ "dealt_at": "2026-11-21T15:23:41.514Z",
+ "chosen": true
 }

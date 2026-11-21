@@ -3,8 +3,37 @@
  "id": 56,
  "size": "Small",
  "niche": "industrial-b2b",
- "url": null,
- "url_source": "prospects",
+ "url": "https://bhmgroup.com/",
+ "url_source": "research",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 60,
+  "pages": 25,
+  "platform": "WordPress Divi 4.27",
+  "latest_year": 2026,
+  "modernity": 3,
+  "concept_type": "brochure: capability story + filterable project portfolio + quote enquiry by office",
+  "must_keep": [
+   "filterable project portfolio by category",
+   "nine expertise areas",
+   "ISO certification",
+   "three offices with phone",
+   "asphalt and ready mix supply",
+   "careers"
+  ],
+  "weaknesses": [
+   "slider arrows and dots link to #",
+   "nine expertise icons without words or links",
+   "Bahamas Hot Mix never named",
+   "reCAPTCHA error text in every footer",
+   "drone photography shown as 400x284 thumbnails",
+   "unsourced #1 claim"
+  ],
+  "priority": "B",
+  "note": "Established civil contractor with a decent but dated Divi brochure and a 60-project portfolio."
+ }
 }
