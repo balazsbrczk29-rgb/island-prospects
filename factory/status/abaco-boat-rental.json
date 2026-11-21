@@ -1,99 +1,100 @@
 {
- "slug": "abaco-boat-rental",
- "id": 51,
- "name": "Abaco Boat Rental",
- "batch": "09",
- "tier": "B",
- "state": "needs-review",
- "generation": 2,
- "pages": [
-  "index.html",
-  "faq.html"
- ],
- "primary_cta": "Check availability & book",
- "brand_truth": "One boat, done right: identical 24 ft Key Wests kept on Man-O-War Cay and delivered to your dock.",
- "buyer": "Families and friends (mostly US) staying a week on Elbow Cay, Hope Town, Guana Cay or Marsh Harbour, planning on a phone, comparing other Abaco rentals on boat condition, delivery hassle and the real total.",
- "direction": {
-  "archetype": "A06 Object study",
-  "lane": "P14 Blue hole",
-  "type": "T06 Wide grotesk (Syne 600/700 + Work Sans 400/500/600)",
-  "why": "They rent exactly one object, so the boat and its price are the hero. Deep blue field frames their overcast boat photo; one sun-yellow accent for the action. Unlike Donny's horizontal journey and time rail."
- },
- "design": {
-  "display_font": "Syne 600/700",
-  "body_font": "Work Sans 400/500/600",
-  "palette": [
-   "#f3f7f6",
-   "#0a2b3a",
-   "#0b4f6c",
-   "#9ed8db",
-   "#f2d16b"
+  "slug": "abaco-boat-rental",
+  "id": 51,
+  "name": "Abaco Boat Rental",
+  "batch": "09",
+  "tier": "B",
+  "state": "needs-review",
+  "generation": 2,
+  "pages": [
+    "index.html",
+    "faq.html"
   ],
-  "hero_pattern": "object-on-field-with-day-ruler",
-  "signature": "A day ruler on the first screen rolls the published day rate; one running estimate (days, delivery cay, add-ons) follows the visitor to their Booqable page or a prefilled WhatsApp message"
- },
- "concept_type": "booking: one boat, day-rate and delivery estimate, handing off to their live Booqable booking page",
- "tier_visual": "standard",
- "tier_visual_why": "A rental of one stock boat is explained by price and delivery, not by geometry, so no real-time 3D. The wow is type, the rolling price ruler and one living-water photograph (a small shader over their own photo, three.js loaded lazily, paused off screen).",
- "images": [
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/b401ff69-86a6-489f-8c4c-714b9b292c18/Abaco-Boat-Rental-17.jpg",
-   "source": "own",
-   "credit": "abacoboatrental.com (844 x 844 px source, shown at 620 css px or less)"
+  "primary_cta": "Check availability & book",
+  "brand_truth": "One boat, done right: identical 24 ft Key Wests kept on Man-O-War Cay and delivered to your dock.",
+  "buyer": "Families and friends (mostly US) staying a week on Elbow Cay, Hope Town, Guana Cay or Marsh Harbour, planning on a phone, comparing other Abaco rentals on boat condition, delivery hassle and the real total.",
+  "direction": {
+    "archetype": "A06 Object study",
+    "lane": "P14 Blue hole",
+    "type": "T06 Wide grotesk (Syne 600/700 + Work Sans 400/500/600)",
+    "why": "They rent exactly one object, so the boat and its price are the hero. Deep blue field frames their overcast boat photo; one sun-yellow accent for the action. Unlike Donny's horizontal journey and time rail."
   },
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/d528242a-93ae-4ef9-abe7-5e95516dcac0/Abaco-Boat-Rental-15.jpg",
-   "source": "own",
-   "credit": "abacoboatrental.com"
+  "design": {
+    "display_font": "Syne 600/700",
+    "body_font": "Work Sans 400/500/600",
+    "palette": [
+      "#f3f7f6",
+      "#0a2b3a",
+      "#0b4f6c",
+      "#9ed8db",
+      "#f2d16b"
+    ],
+    "hero_pattern": "object-on-field-with-day-ruler",
+    "signature": "A day ruler on the first screen rolls the published day rate; one running estimate (days, delivery cay, add-ons) follows the visitor to their Booqable page or a prefilled WhatsApp message"
   },
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/c0d4c408-6d5e-4e99-acf9-957f8e218cae/Abaco-Boat-Rental-5.jpg",
-   "source": "own",
-   "credit": "abacoboatrental.com"
+  "concept_type": "booking: one boat, day-rate and delivery estimate, handing off to their live Booqable booking page",
+  "tier_visual": "standard",
+  "tier_visual_why": "A rental of one stock boat is explained by price and delivery, not by geometry, so no real-time 3D. The wow is type, the rolling price ruler and one living-water photograph (a small shader over their own photo, three.js loaded lazily, paused off screen).",
+  "images": [
+    {
+      "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/b401ff69-86a6-489f-8c4c-714b9b292c18/Abaco-Boat-Rental-17.jpg",
+      "source": "own",
+      "credit": "abacoboatrental.com (844 x 844 px source, shown at 620 css px or less)"
+    },
+    {
+      "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/d528242a-93ae-4ef9-abe7-5e95516dcac0/Abaco-Boat-Rental-15.jpg",
+      "source": "own",
+      "credit": "abacoboatrental.com"
+    },
+    {
+      "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/c0d4c408-6d5e-4e99-acf9-957f8e218cae/Abaco-Boat-Rental-5.jpg",
+      "source": "own",
+      "credit": "abacoboatrental.com"
+    },
+    {
+      "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/4e83e744-5cdd-4f27-a93c-4e5a79f8737e/Abaco-Boat-Rental-7.jpg",
+      "source": "own",
+      "credit": "abacoboatrental.com (faq.html)"
+    }
+  ],
+  "critic": {
+    "photography": 4,
+    "typography": 4,
+    "composition": 4,
+    "colour": 4,
+    "fit": 5,
+    "distinct": 4,
+    "references": 4
   },
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/4e83e744-5cdd-4f27-a93c-4e5a79f8737e/Abaco-Boat-Rental-7.jpg",
-   "source": "own",
-   "credit": "abacoboatrental.com (faq.html)"
-  }
- ],
- "critic": {
-  "photography": 4,
-  "typography": 4,
-  "composition": 4,
-  "colour": 4,
-  "fit": 5,
-  "distinct": 4,
-  "references": 4
- },
- "critic_note": "Self-scores only. Awaiting independent critic.",
- "current_site_findings": [
-  "Homepage hero shows 'Unable to load video. Try again later.'",
-  "Only one real boat photo; pages open with a video, an Unsplash stock photo and a swimming pig",
-  "No price on the homepage; rates, delivery and add-ons are plain text on an inner page",
-  "Nobody can total a trip (days, delivery both ways, extras)",
-  "Empty homepage meta description; title is only the name",
-  "WhatsApp only in the footer"
- ],
- "pitch_line": "Your rates are your best argument and they are a click away as plain text. Here a family drags to seven days, taps Hope Town, sees the whole price and lands on your booking page in under a minute.",
- "assumptions": [
-  "Estimate uses the published rates, VAT excluded; snorkel sets priced at the 'from $5 a day' floor",
-  "The free crew-return option is offered for Elbow Cay and Marsh Harbour only, as their rates page states (Hope Town is listed separately at $100 each way)",
-  "The ruler stops at 14 days; longer rentals keep the $303 rate",
-  "Guest notes are verbatim excerpts from their homepage, unnamed, labelled as such",
-  "The sea-life photos are on their site but may be stock: confirm rights, or replace with their own",
-  "Their boat photo is small (844 px): a new shoot of the boat would lift the whole page"
- ],
- "sources": [
-  "https://www.abacoboatrental.com/",
-  "https://www.abacoboatrental.com/our-fleet-rates",
-  "https://www.abacoboatrental.com/faqs",
-  "https://www.abacoboatrental.com/contact"
- ],
- "qa": {
-  "blockers": 0,
-  "warnings": 1
- },
- "notes": "awaiting independent critic. BLIND: the sandbox blocks outside hosts, so look.mjs references and their live site were not seen; their photos were viewed through a Lovable contact sheet (project b5272829, two rounds, own photos only, nothing generated) and QA screenshots use low-resolution crops of that sheet routed in with page.route, so photos look softer there than live. Audit done this session (Squarespace + Booqable, booking-site, priority B). qa.mjs: 0 blockers; the one warning is the shared concept button (32 px tall). interact.mjs: 18 buttons, 0 dead, 0 JS errors on index; faq.html uses native details, which the tool does not count. distinct.mjs: distinct (closest 66). LivingWater needs CORS from the Squarespace CDN; if refused, the plain photo stays (not verifiable here). Decisions: boat photo kept at 620 css px or less because the source is 844 px; pig photos, Unsplash hero and the Google Maps boundary screenshot not used; reviews shown without names or stars; no aggregateRating. Stitched full-page screenshots hide the fixed tab and concept tag after the first viewport.",
- "built_at": "2026-11-21T12:48:41.857384+00:00"
+  "critic_note": "Self-scores only. Awaiting independent critic.",
+  "current_site_findings": [
+    "Homepage hero shows 'Unable to load video. Try again later.'",
+    "Only one real boat photo; pages open with a video, an Unsplash stock photo and a swimming pig",
+    "No price on the homepage; rates, delivery and add-ons are plain text on an inner page",
+    "Nobody can total a trip (days, delivery both ways, extras)",
+    "Empty homepage meta description; title is only the name",
+    "WhatsApp only in the footer"
+  ],
+  "pitch_line": "Your rates are your best argument and they are a click away as plain text. Here a family drags to seven days, taps Hope Town, sees the whole price and lands on your booking page in under a minute.",
+  "assumptions": [
+    "Estimate uses the published rates, VAT excluded; snorkel sets priced at the 'from $5 a day' floor",
+    "The free crew-return option is offered for Elbow Cay and Marsh Harbour only, as their rates page states (Hope Town is listed separately at $100 each way)",
+    "The ruler stops at 14 days; longer rentals keep the $303 rate",
+    "Guest notes are verbatim excerpts from their homepage, unnamed, labelled as such",
+    "The sea-life photos are on their site but may be stock: confirm rights, or replace with their own",
+    "Their boat photo is small (844 px): a new shoot of the boat would lift the whole page"
+  ],
+  "sources": [
+    "https://www.abacoboatrental.com/",
+    "https://www.abacoboatrental.com/our-fleet-rates",
+    "https://www.abacoboatrental.com/faqs",
+    "https://www.abacoboatrental.com/contact"
+  ],
+  "qa": {
+    "blockers": 0,
+    "warnings": 1
+  },
+  "notes": "awaiting independent critic. BLIND: the sandbox blocks outside hosts, so look.mjs references and their live site were not seen; their photos were viewed through a Lovable contact sheet (project b5272829, two rounds, own photos only, nothing generated) and QA screenshots use low-resolution crops of that sheet routed in with page.route, so photos look softer there than live. Audit done this session (Squarespace + Booqable, booking-site, priority B). qa.mjs: 0 blockers; the one warning is the shared concept button (32 px tall). interact.mjs: 18 buttons, 0 dead, 0 JS errors on index; faq.html uses native details, which the tool does not count. distinct.mjs: distinct (closest 66). LivingWater needs CORS from the Squarespace CDN; if refused, the plain photo stays (not verifiable here). Decisions: boat photo kept at 620 css px or less because the source is 844 px; pig photos, Unsplash hero and the Google Maps boundary screenshot not used; reviews shown without names or stars; no aggregateRating. Stitched full-page screenshots hide the fixed tab and concept tag after the first viewport.",
+  "built_at": "2026-11-21T12:48:41.857384+00:00",
+  "review_claimed_at": "2026-11-21T13:20:20.943Z"
 }
