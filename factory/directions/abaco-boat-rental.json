@@ -1,13 +1,14 @@
 {
  "slug": "abaco-boat-rental",
  "niche": "tours-experiences",
- "archetype": "A03",
- "archetype_name": "Cinematic chapters",
- "lane": "P02",
- "lane_name": "Shallow flats",
+ "archetype": "A06",
+ "archetype_name": "Object study",
+ "lane": "P14",
+ "lane_name": "Blue hole",
  "type": "T06",
  "type_name": "Wide grotesk",
- "nav": "N3",
- "motion": "M7",
- "dealt_at": "2026-11-08T15:22:55.722Z"
+ "nav": "N5",
+ "motion": "M4",
+ "dealt_at": "2026-11-20T22:04:56.568Z",
+ "chosen": true
 }

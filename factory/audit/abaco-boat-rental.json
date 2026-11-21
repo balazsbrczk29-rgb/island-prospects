@@ -6,5 +6,34 @@
  "url": "abacoboatrental.com",
  "url_source": "prospects",
  "old_check": "LOADED",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": true,
+  "online_payments": false,
+  "booking_engine": "Booqable (live availability, cart, pay on the day)",
+  "products_or_listings": 1,
+  "pages": 5,
+  "platform": "Squarespace + Booqable",
+  "latest_year": 2026,
+  "modernity": 3,
+  "concept_type": "booking: one boat, day-rate and delivery estimate, handing off to their live Booqable booking page",
+  "must_keep": [
+   "Check availability & book link to their live Booqable page",
+   "published day rates and delivery fees",
+   "add-ons",
+   "FAQ",
+   "WhatsApp and email",
+   "Salted Lime sister link"
+  ],
+  "weaknesses": [
+   "hero video fails with 'Unable to load video'",
+   "only one real boat photo, the rest is stock-like sea life and an Unsplash hero",
+   "no price on the homepage",
+   "rates and delivery are plain text, nobody can total a trip",
+   "empty homepage meta description",
+   "WhatsApp only in the footer"
+  ],
+  "priority": "B",
+  "note": "Recent Squarespace site with a working booking engine; pitch a conversion upgrade, not a rescue."
+ }
 }
