@@ -32,6 +32,9 @@ export function Hero() {
         </AnimatePresence>
       </div>
       <div className="price">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.p key={f.handle} className="price__name" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.22 }}>{f.name}</motion.p>
+        </AnimatePresence>
         {[v20, v4].map(v => (
           <div className="price__row" key={v.t}>
             <span><b>{v.t}</b><em className="tnum">{money(v.p)}</em></span>
@@ -60,6 +63,7 @@ export function SixPack() {
   return (
     <section className="six" id="six" aria-labelledby="six-h">
       <div className="six__copy">
+        <img className="six__pack" src={img('Six_Pack_Mixed.png', 700)} alt="The Rum Cake Factory six pack box with six 4 oz cakes" loading="lazy" width={300} height={300} />
         <h2 id="six-h">Fill a six pack.</h2>
         <p>Six 4 oz cakes, any flavours you like, for {money(v.p)}. Tap a flavour to drop it in a slot.</p>
         <div className="flavlist">

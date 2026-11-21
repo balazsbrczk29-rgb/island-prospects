@@ -69,3 +69,5 @@ Dock (N4): Flavours, Six pack, Visit, Bag (count).
 **Conversion:** Add to bag -> cart drawer -> "Checkout on thebahamasrumcakefactory.com" (real cart permalink); visit the shop for cruise passengers.
 
 **Tier:** standard. Distinct: only colour-poster food site; their own studio grounds drive the colour.
+
+**Plan gate (2026-11-21):** revise x5, applied (see status). Treated as approved after the one revision.

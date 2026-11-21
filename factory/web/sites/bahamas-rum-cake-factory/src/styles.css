@@ -46,7 +46,7 @@ a { color: inherit; }
 
 /* hero (A09 colour poster) */
 .hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; transition: background 600ms var(--ease); }
-.hero__photo { position: absolute; left: 50%; bottom: 0; height: 76vh; aspect-ratio: 4 / 3; transform: translateX(-50%); -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); }
+.hero__photo { position: absolute; left: 50%; bottom: 0; height: 76vh; aspect-ratio: 4 / 3; transform: translateX(-50%); -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 52%, #000 52%, transparent 98%); mask-image: radial-gradient(ellipse 50% 50% at 50% 52%, #000 52%, transparent 98%); }
 .hero__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .top { position: absolute; z-index: 3; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); padding: var(--s-3) var(--pad); }
 .mark { font: 800 1.05rem/1 var(--display); letter-spacing: -0.03em; text-decoration: none; }
@@ -60,12 +60,13 @@ a { color: inherit; }
 .hero__flav { margin-top: var(--s-2); font-size: var(--t-3); font-weight: 500; }
 .is-dark .hero__type, .is-dark .top .mark, .is-dark .top__nav { color: var(--paper); }
 .price { position: absolute; z-index: 2; right: var(--pad); top: 46%; width: min(19rem, 24vw); background: var(--paper); border-radius: var(--r-2); padding: .6rem; display: grid; gap: .4rem; }
+.price__name { font: 800 clamp(1.6rem, 1.1rem + 1.2vw, 2.3rem)/1 var(--display); letter-spacing: -0.04em; padding: .5rem .6rem .35rem; }
 .price__row { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .35rem .35rem .35rem .8rem; border-radius: calc(var(--r-2) - .6rem); background: #fff; }
 .price__row b { display: block; font: 700 1.05rem/1.1 var(--display); letter-spacing: -0.02em; }
 .price__row em { font-style: normal; color: var(--muted); font-size: var(--t-1); }
 .price .btn { min-height: 44px; padding: 0 1rem; font-size: .95rem; }
 .sold { font-size: var(--t-1); color: var(--muted); padding-right: .6rem; }
-.chips { position: absolute; z-index: 2; left: 0; right: 0; bottom: 5.25rem; display: flex; gap: .45rem; padding: 0 var(--pad); overflow-x: auto; scrollbar-width: none; justify-content: safe center; }
+.chips { position: absolute; z-index: 2; left: 0; right: 0; bottom: 4.75rem; display: flex; gap: .45rem; padding: 0 var(--pad); flex-wrap: wrap; justify-content: center; max-width: 1180px; margin: 0 auto; }
 .chips::-webkit-scrollbar { display: none; }
 .chips button { all: unset; cursor: pointer; flex: none; display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; padding: 0 .95rem 0 .55rem; border-radius: 999px; background: rgba(247,240,224,.88); font: 600 .9rem/1 var(--text); white-space: nowrap; transition: background 160ms, color 160ms; }
 .chips button i { width: 22px; height: 22px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(43,33,24,.18); }
@@ -73,13 +74,16 @@ a { color: inherit; }
 .chips button:focus-visible { outline: 3px solid var(--palm); outline-offset: 2px; }
 @media (max-width: 900px) {
   .top__nav { display: none; }
-  .hero { height: auto; min-height: 0; padding-bottom: var(--s-3); }
-  .hero__photo { position: relative; left: auto; bottom: auto; transform: none; height: auto; width: 100%; margin-top: 15.5rem; aspect-ratio: 4 / 3; -webkit-mask-image: none; mask-image: none; }
-  .hero__type { top: 4.6rem; }
+  .hero { height: auto; min-height: 0; padding: 4.6rem 0 var(--s-4); display: flex; flex-direction: column; }
+  .hero__type { position: static; order: 1; }
+  .hero__photo { position: relative; order: 2; left: auto; bottom: auto; transform: none; height: auto; width: 100%; margin-top: -.5rem; aspect-ratio: 4 / 3; -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 98%), linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to bottom, #000 70%, transparent 98%), linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%); mask-composite: intersect; }
+  .chips { order: 3; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; max-width: none; margin-top: -1.2rem; padding-bottom: 4px; }
+  .price { order: 4; }
+  .price__name { font-size: 1.6rem; }
   .hero h1 { font-size: clamp(2.3rem, 10.5vw, 3.2rem); }
   .hero__flav { font-size: 1.02rem; }
   .price { position: relative; right: auto; top: auto; width: auto; margin: var(--s-2) var(--pad) 0; }
-  .chips { position: relative; bottom: auto; margin-top: var(--s-2); justify-content: flex-start; }
+  .chips { position: relative; bottom: auto; }
 }
 
 /* six-pack builder */
@@ -94,7 +98,7 @@ a { color: inherit; }
 .flavlist button:focus-visible { outline: 3px solid var(--palm); }
 .six__box { background: var(--paper); border-radius: var(--r-3); padding: var(--s-3); }
 .slots { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
-.slots li { position: relative; aspect-ratio: 1; border-radius: var(--r-2); background: #efe5cf; display: grid; place-items: center; overflow: hidden; }
+.slots li { position: relative; aspect-ratio: 1; border-radius: var(--r-2); background: #f3e8cf; outline: 2px dashed rgba(140,90,43,.28); outline-offset: -8px; display: grid; place-items: center; overflow: hidden; }
 .slot__empty { font: 700 2rem/1 var(--display); color: rgba(43,33,24,.22); }
 .slot__cake { all: unset; cursor: pointer; position: absolute; inset: 0; display: grid; place-items: center; }
 .slot__cake img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; transform: scale(1.35); }
@@ -186,3 +190,6 @@ a { color: inherit; }
 .prod select { min-height: 44px; border-radius: 999px; border: 1px solid var(--line); padding: 0 .8rem; font: 500 .9rem var(--text); background: #fff; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; } }
+
+.six__pack { width: min(15rem, 60%); margin-bottom: var(--s-3); border-radius: var(--r-2); background: #fff; }
+.slot__empty { color: rgba(140,90,43,.35); }
