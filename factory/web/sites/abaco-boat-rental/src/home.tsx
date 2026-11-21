@@ -40,22 +40,22 @@ function Hero({ plan }: { plan: Plan }) {
           </a>
         </div>}
         <div className="relative h-[54svh] min-h-[380px] lg:absolute lg:inset-0 lg:h-auto">
-          <Chart plan={plan} inset={wide ? 528 : 0} insetBottom={wide ? 0 : 76} focus={wide ? undefined : PHONE_FOCUS} className="size-full" label="Chart of the Sea of Abaco. Tap a delivery point to price your boat. Illustration, not for navigation." />
+          <Chart plan={plan} inset={wide ? 528 : 0} insetRight={wide ? 290 : 0} insetBottom={wide ? 0 : 92} focus={wide ? undefined : PHONE_FOCUS} className="size-full" label="Chart of the Sea of Abaco. Tap a delivery point to price your boat. Illustration, not for navigation." />
           {wide && <BoatChip className="absolute top-24 right-6 w-[250px] xl:w-[270px]" />}
           {/* phone: live total strip on the chart */}
           <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-md bg-paper/95 py-2 pr-2 pl-4 shadow-[0_14px_34px_-20px_rgba(14,40,30,.8)] lg:hidden">
             <span className="min-w-0 text-[13px] leading-tight"><span className="block truncate text-muted">{plan.place.short} · {plan.days} {plan.days === 1 ? "day" : "days"}</span><Money value={plan.total} className="font-display text-[1.45rem] leading-none font-semibold" /></span>
-            <a href="#plan" className="inline-flex min-h-11 shrink-0 items-center rounded-full bg-ink px-4 text-[14px] font-semibold text-paper">Adjust and book</a>
+            <a href="#plan" className="inline-flex min-h-11 shrink-0 items-center rounded-full bg-pine px-4 text-[14px] font-semibold text-paper">Adjust and book</a>
           </div>
         </div>
       </div>
       {/* the legend panel: the planner */}
       <motion.div id="plan" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}
-        className="relative z-10 scroll-mt-4 bg-paper px-4 pt-6 pb-8 lg:absolute lg:top-5 lg:bottom-5 lg:left-5 lg:flex lg:w-[480px] lg:flex-col lg:overflow-hidden lg:rounded-lg lg:px-7 lg:pt-6 lg:pb-6 lg:shadow-[0_30px_70px_-40px_rgba(14,40,30,.75)]">
+        className="relative z-10 scroll-mt-4 bg-paper px-4 pt-6 pb-8 lg:absolute lg:top-5 lg:bottom-[84px] lg:left-5 lg:flex lg:w-[480px] lg:flex-col lg:overflow-hidden lg:rounded-lg lg:px-7 lg:pt-6 lg:pb-6 lg:shadow-[0_30px_70px_-40px_rgba(14,40,30,.75)]">
         <a href="#top" className="hidden font-display text-[1.2rem] leading-none font-semibold tracking-tight lg:block">Abaco Boat Rental</a>
-        {wide && <h1 id="hero-title" className="hidden lg:mt-5 lg:block lg:text-[2.85rem] lg:leading-[0.98] lg:font-semibold lg:tracking-[-0.04em]">Tap your cay. The boat comes to you.</h1>}
-        <p className="hidden text-[15.5px] leading-snug text-muted lg:mt-3 lg:block">One 24 ft Key West, picked up free at Man-O-War Cay or delivered from Treasure Cay to Little Harbour. Pick your cay and your days: the price below is the real one.</p>
-        <div className="space-y-5 lg:mt-5 lg:flex lg:min-h-0 lg:flex-1 lg:flex-col lg:space-y-4">
+        {wide && <h1 id="hero-title" className="hidden lg:mt-4 lg:block lg:text-[2.55rem] lg:leading-[0.98] lg:font-semibold lg:tracking-[-0.04em]">Tap your cay. The boat comes to you.</h1>}
+        <p className="hidden text-[15.5px] leading-snug text-muted lg:mt-3 lg:block">One 24 ft Key West, free at Man-O-War Cay or delivered to your dock. Pick your cay and days: this is the real price.</p>
+        <div className="space-y-5 lg:mt-4 lg:flex lg:min-h-0 lg:flex-1 lg:flex-col lg:space-y-3.5">
           <div><PlacePicker plan={plan} /><p className="mt-2 text-[13px] text-muted num" aria-live="polite">{plan.place.id === "mow" ? "Our home dock: pickup is free." : `${plan.place.name} is about ${nm(PLACES[0], plan.place).toFixed(0)} nm from our Man-O-War dock.`}</p></div>
           <DayPicker plan={plan} />
           <Extras plan={plan} />
@@ -124,17 +124,17 @@ function Rates({ plan }: { plan: Plan }) {
       <div className="mx-auto max-w-[1320px] px-4 py-20 md:px-8 md:py-28">
         <SectionHead id="rates-title" kicker="Rates and delivery" title="The longer you float, the more you save." />
         <div className="mt-12 grid gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
-          <div>
+          <div className="min-w-0">
             <p className="text-sm font-semibold">Day rate, VAT exclusive</p>
             <ul className="mt-4 space-y-2.5">
               {TIERS.map(t => {
                 const on = t.rate === plan.rate
                 return (
                   <li key={t.label}>
-                    <button type="button" onClick={() => plan.setDays(t.min)} aria-pressed={on} className="group grid w-full grid-cols-[6.5rem_1fr_auto] items-center gap-4 text-left">
+                    <button type="button" onClick={() => plan.setDays(t.min)} aria-pressed={on} className="group grid w-full grid-cols-[5.5rem_1fr_auto] items-center gap-3 md:grid-cols-[6.5rem_1fr_auto] md:gap-4 text-left">
                       <span className="text-[15px] font-medium">{t.label}</span>
                       <span className="relative h-11 overflow-hidden rounded-sm bg-ink/[.06]"><motion.span className={`absolute inset-y-0 left-0 rounded-sm ${on ? "bg-pine" : "bg-ink/25 group-hover:bg-ink/40"}`} initial={{ scaleX: 0 }} whileInView={{ scaleX: t.rate / 475 }} viewport={{ once: true }} transition={{ duration: 1, ease }} style={{ width: "100%", transformOrigin: "left" }} /></span>
-                      <span className="w-24 text-right font-display text-[1.7rem] leading-none font-semibold num">${t.rate}</span>
+                      <span className="w-20 text-right font-display text-[1.5rem] md:w-24 md:text-[1.7rem] leading-none font-semibold num">${t.rate}</span>
                     </button>
                   </li>
                 )
@@ -146,7 +146,7 @@ function Rates({ plan }: { plan: Plan }) {
                 <thead><tr className="border-b border-ink text-[13px] text-muted">{EXAMPLES.map(d => <th key={d} scope="col" className="py-2 pr-3 font-medium">{d} {d === 1 ? "day" : "days"}</th>)}</tr></thead>
                 <tbody><tr>{EXAMPLES.map(d => <td key={d} className="py-3 pr-3 font-display text-[1.25rem] font-semibold">${(d * (d >= 7 ? 303 : d >= 3 ? 330 : d === 2 ? 450 : 475)).toLocaleString("en-US")}</td>)}</tr></tbody>
               </table>
-              <p className="mt-2 text-[13px] text-muted">Rentals run on a 24-hour period: pick a return time earlier than your pickup time so you aren't charged an extra day.</p>
+              <p className="mt-2 max-w-xl text-[13px] text-muted">Rentals run on a 24-hour period: pick a return time earlier than your pickup time so you aren't charged an extra day.</p>
             </div>
           </div>
           <div>
@@ -166,7 +166,7 @@ function Rates({ plan }: { plan: Plan }) {
                 <li key={t} className="grid grid-cols-[1fr_auto] gap-x-4 border-b border-line py-4"><span className="font-display text-[1.15rem] font-semibold">{t}</span><span className="font-display text-[1.15rem] font-semibold text-pine num">{p}</span><span className="col-span-2 mt-1 text-[15px] text-muted">{d}</span></li>
               ))}
             </ul>
-            <a href="#plan" className="mt-8 inline-flex min-h-12 items-center gap-1.5 rounded-full bg-ink px-6 font-semibold text-paper transition hover:bg-pine-deep">Price your week on the chart <ArrowUpRight className="size-4" aria-hidden /></a>
+            <a href="#plan" className="mt-8 inline-flex min-h-12 items-center gap-1.5 rounded-full bg-pine px-6 font-semibold text-paper transition hover:bg-pine-deep">Price your week on the chart <ArrowUpRight className="size-4" aria-hidden /></a>
           </div>
         </div>
       </div>
@@ -258,7 +258,7 @@ function Contact() {
             <li className="flex gap-3"><MapPin className="mt-1 size-4 shrink-0 text-needle" aria-hidden /><span>Man-O-War Cay, Abaco, The Bahamas<br /><a href={SALTED_LIME} className="ulink text-paper/70">Need a drink? Salted Lime</a></span></li>
           </ul>
         </div>
-        <p className="mt-20 border-t border-paper/15 pt-6 text-[12.5px] leading-relaxed text-paper/60">Concept by ESTATIQ AI Solutions. Photos and guest reviews from abacoboatrental.com. Chart drawn from Natural Earth (public domain), an illustration, not for navigation. Prices from the published rates, before VAT.</p>
+        <p className="mt-20 max-w-3xl border-t border-paper/15 pt-6 text-[12.5px] leading-relaxed text-paper/60">Concept by ESTATIQ AI Solutions. Photos and guest reviews from abacoboatrental.com. Chart drawn from Natural Earth (public domain), an illustration, not for navigation. Prices from the published rates, before VAT.</p>
       </div>
     </footer>
   )

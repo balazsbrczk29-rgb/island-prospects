@@ -21,8 +21,8 @@ export const PLACES: Place[] = [
   { id: "mh", name: "Marsh Harbour", short: "Marsh Harbour", lat: 26.546, lon: -77.062, fee: 100, freeIfReturn: true, ctrl: [26.578, -77.045], lab: "l" },
   { id: "sc", name: "Scotland Cay", short: "Scotland Cay", lat: 26.637, lon: -77.068, fee: 100, ctrl: [26.618, -77.030], lab: "l" },
   { id: "gc", name: "Great Guana Cay", short: "Guana Cay", lat: 26.664, lon: -77.118, fee: 100, ctrl: [26.628, -77.070], lab: "l" },
-  { id: "tc", name: "Treasure Cay", short: "Treasure Cay", lat: 26.668, lon: -77.283, fee: 300, ctrl: [26.618, -77.150], lab: "b" },
-  { id: "lh", name: "Little Harbour", short: "Little Harbour", lat: 26.332, lon: -76.998, fee: 300, ctrl: [26.455, -77.040], lab: "r" },
+  { id: "tc", name: "Treasure Cay", short: "Treasure Cay", lat: 26.668, lon: -77.283, fee: 300, ctrl: [26.648, -77.165], lab: "b" },
+  { id: "lh", name: "Little Harbour", short: "Little Harbour", lat: 26.332, lon: -76.998, fee: 300, ctrl: [26.455, -77.040], lab: "l" },
 ]
 /* Places guests say they took the boat (published guest reviews on abacoboatrental.com) */
 const DAYS_OUT = [
@@ -94,7 +94,7 @@ export const PHONE_FOCUS = bboxOf([proj(26.70, -77.15), proj(26.325, -76.93)], 1
 const ALL = bboxOf([...PLACES.map(pt), proj(26.77, -77.32)], 40, 300)
 
 let uid = 0
-export function Chart({ plan, inset = 0, insetBottom = 0, focus, interactive = true, showTrips = true, className = "", label }: { plan?: Plan; inset?: number; insetBottom?: number; focus?: Box; interactive?: boolean; showTrips?: boolean; className?: string; label: string }) {
+export function Chart({ plan, inset = 0, insetBottom = 0, insetRight = 0, focus, interactive = true, showTrips = true, className = "", label }: { plan?: Plan; inset?: number; insetBottom?: number; insetRight?: number; focus?: Box; interactive?: boolean; showTrips?: boolean; className?: string; label: string }) {
   const wrap = useRef<HTMLDivElement>(null)
   const svg = useRef<SVGSVGElement>(null)
   const boat = useRef<SVGGElement>(null)
@@ -107,7 +107,7 @@ export function Chart({ plan, inset = 0, insetBottom = 0, focus, interactive = t
 
   const fit = (b: Box): Box => {
     const el = wrap.current; if (!el) return b
-    const cw = el.clientWidth, ch = el.clientHeight, vw = Math.max(cw - inset, 1), vh = Math.max(ch - insetBottom, 1)
+    const cw = el.clientWidth, ch = el.clientHeight, vw = Math.max(cw - inset - insetRight, 1), vh = Math.max(ch - insetBottom, 1)
     const s = Math.max(b.w / vw, b.h / vh) // map units per px
     const w = cw * s, h = ch * s
     const cx = b.x + b.w / 2, cy = b.y + b.h / 2
@@ -116,7 +116,7 @@ export function Chart({ plan, inset = 0, insetBottom = 0, focus, interactive = t
   const apply = (b: Box) => {
     const s = svg.current, el = wrap.current; if (!s || !el) return
     s.setAttribute("viewBox", `${b.x.toFixed(2)} ${b.y.toFixed(2)} ${b.w.toFixed(2)} ${b.h.toFixed(2)}`)
-    s.style.setProperty("--u", String(b.w / el.clientWidth))
+    s.style.setProperty("--u", String((b.w / el.clientWidth) * (el.clientWidth < 640 ? 0.9 : 1)))
   }
   const target = (): Box => {
     if (!place || !touched.current || place.id === "mow") return focus ?? ALL
@@ -128,7 +128,7 @@ export function Chart({ plan, inset = 0, insetBottom = 0, focus, interactive = t
     const ro = new ResizeObserver(go); if (wrap.current) ro.observe(wrap.current)
     return () => ro.disconnect()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inset, insetBottom, focus])
+  }, [inset, insetBottom, insetRight, focus])
   useEffect(() => {
     if (sel !== firstSel.current) touched.current = true
     const to = fit(target()), from = { ...cam.current }
@@ -181,8 +181,12 @@ export function Chart({ plan, inset = 0, insetBottom = 0, focus, interactive = t
           <text fontSize="11" letterSpacing="2.2" fontWeight="600">ATLANTIC</text>
           <text y="15" fontSize="11" fillOpacity=".8">outside the rental area</text>
         </g>
-        <g style={{ transform: `translate(${proj(26.6, -77.17)[0]}px, ${proj(26.6, -77.17)[1]}px) scale(var(--u))` }} fill="#15261c" fillOpacity=".5" fontFamily="Bricolage, sans-serif"><text fontSize="13" letterSpacing="5" fontWeight="600">SEA OF ABACO</text></g>
+        <g style={{ transform: `translate(${proj(26.615, -77.235)[0]}px, ${proj(26.615, -77.235)[1]}px) scale(var(--u))` }} fill="#15261c" fillOpacity=".5" fontFamily="Bricolage, sans-serif"><text fontSize="13" letterSpacing="5" fontWeight="600">SEA OF ABACO</text></g>
 
+        <g style={{ transform: `translate(${proj(26.762, -77.315)[0]}px, ${proj(26.762, -77.315)[1]}px) scale(var(--u))` }} fill="#15261c" fontFamily="Figtree, sans-serif" aria-hidden>
+          <text fontSize="12" fontWeight="600" paintOrder="stroke" stroke="#e8f5ef" strokeWidth="3.5">Green Turtle Cay</text>
+          <text y="14" fontSize="11" fillOpacity=".7" paintOrder="stroke" stroke="#e8f5ef" strokeWidth="3">north end of the rental area</text>
+        </g>
         {/* every delivery route, faint; the chosen one drawn */}
         {PLACES.slice(1).map(p => <path key={p.id} d={routeD(p)} fill="none" stroke="#15261c" strokeOpacity={sel === p.id ? 0 : 0.18} strokeWidth="1.2" strokeDasharray="3 5" vectorEffect="non-scaling-stroke" />)}
         {place && place.id !== "mow" && (
@@ -194,7 +198,7 @@ export function Chart({ plan, inset = 0, insetBottom = 0, focus, interactive = t
         {showTrips && DAYS_OUT.map(d => { const [x, y] = pt(d); const n = nm(BASE, d); return (
           <g key={d.id} style={{ transform: `translate(${x}px, ${y}px) scale(var(--u))` }} aria-hidden>
             <rect x="-4" y="-4" width="8" height="8" transform="rotate(45)" fill="#f4f1e6" stroke="#15261c" strokeWidth="1.2" />
-            <text x="9" y="-6" fontSize="11.5" fontFamily="Figtree, sans-serif" fill="#15261c" fillOpacity=".8" className="num" paintOrder="stroke" stroke="#cdeee3" strokeWidth="3" strokeLinejoin="round">{d.name} · {n.toFixed(0)} nm</text>
+            <text x={d.id === "fowl" ? 0 : -9} y={d.id === "fowl" ? 18 : -6} textAnchor={d.id === "fowl" ? "middle" : "end"} fontSize="11.5" fontFamily="Figtree, sans-serif" fill="#15261c" fillOpacity=".8" className="num" paintOrder="stroke" stroke="#cdeee3" strokeWidth="3" strokeLinejoin="round">{d.name} · {n.toFixed(0)} nm</text>
           </g>) })}
 
         {/* delivery points */}
@@ -295,7 +299,7 @@ export function Extras({ plan }: { plan: Plan }) {
   const n = (plan.nightOk ? plan.night : 0) + plan.intro + plan.snorkel
   return (
     <div className="border-t border-ink/12">
-      <button type="button" aria-expanded={open} onClick={() => setOpen(!open)} className="flex min-h-12 w-full items-center justify-between text-left text-sm font-semibold">
+      <button type="button" aria-expanded={open} onClick={() => setOpen(!open)} className="flex min-h-11 w-full items-center justify-between text-left text-sm font-semibold">
         <span>Captain and snorkel add-ons{n ? <span className="ml-2 rounded-full bg-needle/40 px-2 py-0.5 text-[12px] num">{n}</span> : null}</span>
         <ChevronDown className={`size-4 transition duration-300 ${open ? "rotate-180" : ""}`} aria-hidden />
       </button>
@@ -328,7 +332,7 @@ export function Receipt({ plan, big = true }: { plan: Plan; big?: boolean }) {
       </ul>
       <p className="mt-3 flex items-baseline justify-between border-t border-ink pt-3">
         <span className="text-sm font-semibold">Your estimate <span className="font-normal text-muted">before VAT</span></span>
-        <Money value={plan.total} className={`font-display font-semibold tracking-tight ${big ? "text-[2.4rem] leading-none" : "text-[1.8rem] leading-none"}`} />
+        <Money value={plan.total} className={`font-display font-semibold tracking-tight ${big ? "text-[2.15rem] leading-none" : "text-[1.8rem] leading-none"}`} />
       </p>
     </div>
   )
@@ -338,7 +342,7 @@ export function Actions({ plan }: { plan: Plan }) {
   return (
     <div className="grid gap-2 sm:grid-cols-[1.25fr_1fr]">
       <a href={BOOK} className="inline-flex min-h-13 items-center justify-center gap-1.5 rounded-full bg-pine px-5 text-[15.5px] font-semibold text-paper transition duration-200 hover:bg-pine-deep active:scale-[.98]">Book these dates <ArrowUpRight className="size-4" aria-hidden /></a>
-      <a href={wa(plan.msg)} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-ink/25 px-4 text-[15px] font-medium transition duration-200 hover:border-ink active:scale-[.98]"><MessageCircle className="size-4" aria-hidden />Send on WhatsApp</a>
+      <a href={wa(plan.msg)} className="inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-ink/25 px-4 text-[15px] font-medium whitespace-nowrap transition duration-200 hover:border-ink active:scale-[.98]"><MessageCircle className="size-4" aria-hidden />WhatsApp this plan</a>
     </div>
   )
 }
