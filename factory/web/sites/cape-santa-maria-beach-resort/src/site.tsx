@@ -44,6 +44,11 @@ export function Lead() {
             <motion.span key={r.k} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>, {r.line}</motion.span>
           </AnimatePresence>
         </p>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.ol key={r.k + '-legs'} className="legline" aria-label="Your route" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+            {r.steps.map(([s], k) => <motion.li key={s} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.08 * k, duration: 0.4, ease }}>{s}</motion.li>)}
+          </motion.ol>
+        </AnimatePresence>
         <div className="lead__acts"><a className="btn" href={BOOK}>Check availability</a><a className="ul" href="getting-here.html">Every route, step by step</a></div>
       </div>
     </section>
@@ -53,9 +58,12 @@ export function Lead() {
 export function Opening() {
   return (
     <section className="open" aria-label="The place">
+      <div>
       <div className="open__cols">
         <p className="dropcap">Cape Santa Maria sits at the far northern tip of Long Island, where the beach runs long and white and the water turns every shade of turquoise. The beachfront bungalows line the sand beside the Beach House, so the walk from your door to the sea is a few barefoot steps.</p>
         <p>Days here are as busy or as empty as you make them: scuba diving, snorkelling and a nature cruise, fishing, kayaking and paddleboarding from the beach, or nothing at all. The resort hosts weddings too. In the evening the villas' west-facing windows and the bungalow verandas look straight into the sunset.</p>
+      </div>
+      <figure className="open__pic"><Img k="beach" /><figcaption>The beach at Cape Santa Maria.</figcaption></figure>
       </div>
       <aside className="facts" aria-label="At a glance">
         <h2>At a glance</h2>
@@ -104,7 +112,6 @@ export function Rooms() {
 export function Essay() {
   const items: { k: K; c: string }[] = [
     { k: 'paddle', c: 'Paddleboarding off the beach.' },
-    { k: 'scuba', c: 'Scuba diving on Long Island reefs.' },
     { k: 'fishing', c: 'Fishing the flats.' },
     { k: 'coast', c: 'The Long Island coast.' },
   ]

@@ -44,3 +44,5 @@ Audit: booking site on Tambourine with bookonthenet engine (priority B). Own pho
 **Phone:** masthead, aerial 4:3, H1, route sentence; tear-off strip with Check availability and Call.
 **Conversion:** Check availability (bookonthenet) everywhere; call toll free; email.
 **Tier:** standard.
+
+**Plan gate (2026-11-21):** revise x5, applied (see status). Treated as approved after the one revision.
