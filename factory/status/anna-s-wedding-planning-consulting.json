@@ -180,5 +180,6 @@
     "Phone: the concept label now sits above the 'Request your date' bar via --concept-offset (64 px). The label's compact state after scrolling is assets/concept.js shared behaviour, not changed here."
    ]
   }
- ]
+ ],
+ "review_claimed_at": "2026-11-21T13:22:04.658Z"
 }
