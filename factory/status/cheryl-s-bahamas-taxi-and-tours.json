@@ -1,104 +1,105 @@
 {
- "slug": "cheryl-s-bahamas-taxi-and-tours",
- "id": 63,
- "name": "Cheryl's Bahamas Taxi and Tours",
- "batch": "10",
- "tier": "A",
- "state": "needs-review",
- "generation": 2,
- "rebuild_of": 1,
- "claimed_at": "2026-11-20T19:55:53.017Z",
- "pages": [
-  "index.html",
-  "tours.html"
- ],
- "primary_cta": "Book my airport pickup",
- "brand_truth": "Cheryl's driver is the one in navy and yellow holding a card with your name at Nassau arrivals.",
- "buyer": "Cruise passengers and resort guests (US, families, Spanish speakers) booking a Nassau airport ride or a private tour on a phone, afraid of being left at the airport or overpaying.",
- "direction": {
-  "archetype": "A09 Colour poster",
-  "lane": "P14 Blue hole",
-  "type": "T06 Wide grotesk (Syne variable 600-800 lowercase + Atkinson Hyperlegible 400/700)",
-  "nav": "N4 floating dock",
-  "motion": "M6 spring",
-  "why": "P14 deep blue and yellow are Cheryl's own uniform colours; a poster with a sign you put your name on is the brand truth; the ticket block is their real JotForm transfer booking; the dock keeps Pickup, Tours, Call under the thumb."
- },
- "tier_visual": "standard",
- "tier_why": "A taxi and private tour operator: the product is a person holding your name and a day on the island, best shown with their own photos and an interaction, not real-time 3D.",
- "concept_type": "booking: airport transfer ticket (all JotForm fields) + private tour builder from 22 real stops, both sending a prefilled email",
- "images": [
-  {
-   "src": "arrivals-sign.jpg",
-   "source": "generated",
-   "credit": "Illustrative photography (Lovable asset project ip-assets-cheryl-s-bahamas-taxi-and-tours), replace with your own: a real Cheryl's driver holding a blank card at Nassau arrivals"
+  "slug": "cheryl-s-bahamas-taxi-and-tours",
+  "id": 63,
+  "name": "Cheryl's Bahamas Taxi and Tours",
+  "batch": "10",
+  "tier": "A",
+  "state": "needs-review",
+  "generation": 2,
+  "rebuild_of": 1,
+  "claimed_at": "2026-11-20T19:55:53.017Z",
+  "pages": [
+    "index.html",
+    "tours.html"
+  ],
+  "primary_cta": "Book my airport pickup",
+  "brand_truth": "Cheryl's driver is the one in navy and yellow holding a card with your name at Nassau arrivals.",
+  "buyer": "Cruise passengers and resort guests (US, families, Spanish speakers) booking a Nassau airport ride or a private tour on a phone, afraid of being left at the airport or overpaying.",
+  "direction": {
+    "archetype": "A09 Colour poster",
+    "lane": "P14 Blue hole",
+    "type": "T06 Wide grotesk (Syne variable 600-800 lowercase + Atkinson Hyperlegible 400/700)",
+    "nav": "N4 floating dock",
+    "motion": "M6 spring",
+    "why": "P14 deep blue and yellow are Cheryl's own uniform colours; a poster with a sign you put your name on is the brand truth; the ticket block is their real JotForm transfer booking; the dock keeps Pickup, Tours, Call under the thumb."
   },
-  {
-   "src": "https://www.cherylbahamastaxiandtours.com/Resources/cheryl-taxi.jpeg",
-   "source": "own",
-   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  "tier_visual": "standard",
+  "tier_why": "A taxi and private tour operator: the product is a person holding your name and a day on the island, best shown with their own photos and an interaction, not real-time 3D.",
+  "concept_type": "booking: airport transfer ticket (all JotForm fields) + private tour builder from 22 real stops, both sending a prefilled email",
+  "images": [
+    {
+      "src": "arrivals-sign.jpg",
+      "source": "generated",
+      "credit": "Illustrative photography (Lovable asset project ip-assets-cheryl-s-bahamas-taxi-and-tours), replace with your own: a real Cheryl's driver holding a blank card at Nassau arrivals"
+    },
+    {
+      "src": "https://www.cherylbahamastaxiandtours.com/Resources/cheryl-taxi.jpeg",
+      "source": "own",
+      "credit": "Cheryl's Bahamas Taxi and Tours website"
+    },
+    {
+      "src": "https://www.cherylbahamastaxiandtours.com/Resources/shopping.jpeg",
+      "source": "own",
+      "credit": "Cheryl's Bahamas Taxi and Tours website"
+    },
+    {
+      "src": "https://www.cherylbahamastaxiandtours.com/Resources/desertedbeaches.jpeg",
+      "source": "own",
+      "credit": "Cheryl's Bahamas Taxi and Tours website"
+    },
+    {
+      "src": "https://www.cherylbahamastaxiandtours.com/Resources/conch.png",
+      "source": "own",
+      "credit": "Cheryl's Bahamas Taxi and Tours website"
+    },
+    {
+      "src": "https://www.cherylbahamastaxiandtours.com/Resources/the-forts.png",
+      "source": "own",
+      "credit": "Cheryl's Bahamas Taxi and Tours website"
+    },
+    {
+      "src": "https://www.cherylbahamastaxiandtours.com/Resources/fish-fry.png",
+      "source": "own",
+      "credit": "Cheryl's Bahamas Taxi and Tours website"
+    },
+    {
+      "src": "https://www.cherylbahamastaxiandtours.com/Resources/swim-with-pigs.png",
+      "source": "own",
+      "credit": "Cheryl's Bahamas Taxi and Tours website"
+    }
+  ],
+  "critic": {
+    "photography": 4,
+    "typography": 4,
+    "composition": 3,
+    "colour": 4,
+    "fit": 4,
+    "distinct": 5,
+    "references": 4,
+    "by": "independent critic after fix pass 1; fix pass 2 applied (composition fixes), composition pending the coordinator's final check"
   },
-  {
-   "src": "https://www.cherylbahamastaxiandtours.com/Resources/shopping.jpeg",
-   "source": "own",
-   "credit": "Cheryl's Bahamas Taxi and Tours website"
-  },
-  {
-   "src": "https://www.cherylbahamastaxiandtours.com/Resources/desertedbeaches.jpeg",
-   "source": "own",
-   "credit": "Cheryl's Bahamas Taxi and Tours website"
-  },
-  {
-   "src": "https://www.cherylbahamastaxiandtours.com/Resources/conch.png",
-   "source": "own",
-   "credit": "Cheryl's Bahamas Taxi and Tours website"
-  },
-  {
-   "src": "https://www.cherylbahamastaxiandtours.com/Resources/the-forts.png",
-   "source": "own",
-   "credit": "Cheryl's Bahamas Taxi and Tours website"
-  },
-  {
-   "src": "https://www.cherylbahamastaxiandtours.com/Resources/fish-fry.png",
-   "source": "own",
-   "credit": "Cheryl's Bahamas Taxi and Tours website"
-  },
-  {
-   "src": "https://www.cherylbahamastaxiandtours.com/Resources/swim-with-pigs.png",
-   "source": "own",
-   "credit": "Cheryl's Bahamas Taxi and Tours website"
-  }
- ],
- "critic": {
-  "photography": 4,
-  "typography": 4,
-  "composition": 3,
-  "colour": 4,
-  "fit": 4,
-  "distinct": 5,
-  "references": 4,
-  "by": "independent critic after fix pass 1; fix pass 2 applied (composition fixes), composition pending the coordinator's final check"
- },
- "current_site_findings": [
-  "Covid 19 banner still at the top",
-  "2022 footer, repeated Conch Demonstration heading",
-  "five phone numbers, no clear one",
-  "zoomed-out mobile viewport (minimum-scale 0.25)",
-  "off-brand JotForm booking with 200-country list and timezone picker",
-  "22 tours in one long scroll"
- ],
- "pitch_line": "Your guests already remember one thing about you: their name on your card at arrivals. This site starts there, books the ride in one ticket and lets them build a tour from your 22 stops.",
- "assumptions": [
-  "Hero photo is generated illustrative photography (driver in navy with yellow trim holding a blank card at an arrivals hall), labelled on the page; replace with a real photo of a Cheryl's driver",
-  "Tour presets (3-hour: forts, straw market, Cloisters; full day: forts, Love Beach, conch) are suggestions based on the two sample tours on their site",
-  "Forms send by email (no WhatsApp number was found)",
-  "Atkinson Hyperlegible draws a slashed zero by design"
- ],
- "sources": [
-  "https://www.cherylbahamastaxiandtours.com/",
-  "https://www.cherylbahamastaxiandtours.com/bahamas-tours.html",
-  "https://www.cherylbahamastaxiandtours.com/book-online/index.html"
- ],
- "notes": "Independent critic after pass 1: photography 4, type 4, composition 3, colour 4, fit 4, distinct 5, references 4. Fix pass 2 (last): tours 'your day' panel collapsed to the arrivals card, stop count and 'Send my day', with the full form in a Radix Dialog drawer sliding in from the right (motion spring, Escape and focus return verified); home arrival section drops the fleet photo, team photo cropped 4:3 and vertically centred against the three steps, the New Providence line runs full width below; phone hero gets more bottom padding so 'Plan a private tour' clears the concept label. Composition pending the coordinator's final check. Earlier: hero is a generated arrivals photo (illustrative, labelled) with the typed name written live in Permanent Marker on the card; staged three-step pickup ticket; editorial tour list. BLIND: sandbox blocks outside images; QA screenshots route crops of their own photos. qa: 0 blockers (mobile tap-target warning is the shared concept label button); distinct: closest unexso 61. | Final critic re-score pending after fix pass 2 (queued for the worker review).",
- "built_at": "2026-11-20T21:33:42.366Z",
- "fix_pass": 2
+  "current_site_findings": [
+    "Covid 19 banner still at the top",
+    "2022 footer, repeated Conch Demonstration heading",
+    "five phone numbers, no clear one",
+    "zoomed-out mobile viewport (minimum-scale 0.25)",
+    "off-brand JotForm booking with 200-country list and timezone picker",
+    "22 tours in one long scroll"
+  ],
+  "pitch_line": "Your guests already remember one thing about you: their name on your card at arrivals. This site starts there, books the ride in one ticket and lets them build a tour from your 22 stops.",
+  "assumptions": [
+    "Hero photo is generated illustrative photography (driver in navy with yellow trim holding a blank card at an arrivals hall), labelled on the page; replace with a real photo of a Cheryl's driver",
+    "Tour presets (3-hour: forts, straw market, Cloisters; full day: forts, Love Beach, conch) are suggestions based on the two sample tours on their site",
+    "Forms send by email (no WhatsApp number was found)",
+    "Atkinson Hyperlegible draws a slashed zero by design"
+  ],
+  "sources": [
+    "https://www.cherylbahamastaxiandtours.com/",
+    "https://www.cherylbahamastaxiandtours.com/bahamas-tours.html",
+    "https://www.cherylbahamastaxiandtours.com/book-online/index.html"
+  ],
+  "notes": "Independent critic after pass 1: photography 4, type 4, composition 3, colour 4, fit 4, distinct 5, references 4. Fix pass 2 (last): tours 'your day' panel collapsed to the arrivals card, stop count and 'Send my day', with the full form in a Radix Dialog drawer sliding in from the right (motion spring, Escape and focus return verified); home arrival section drops the fleet photo, team photo cropped 4:3 and vertically centred against the three steps, the New Providence line runs full width below; phone hero gets more bottom padding so 'Plan a private tour' clears the concept label. Composition pending the coordinator's final check. Earlier: hero is a generated arrivals photo (illustrative, labelled) with the typed name written live in Permanent Marker on the card; staged three-step pickup ticket; editorial tour list. BLIND: sandbox blocks outside images; QA screenshots route crops of their own photos. qa: 0 blockers (mobile tap-target warning is the shared concept label button); distinct: closest unexso 61. | Final critic re-score pending after fix pass 2 (queued for the worker review).",
+  "built_at": "2026-11-20T21:33:42.366Z",
+  "fix_pass": 2,
+  "review_claimed_at": "2026-11-21T13:28:10.739Z"
 }
