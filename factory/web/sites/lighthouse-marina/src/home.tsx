@@ -8,7 +8,7 @@ function Home() {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <main id="main">
+      <main id="main" className="home">
         <Hero />
         <Sections />
         <Contact />

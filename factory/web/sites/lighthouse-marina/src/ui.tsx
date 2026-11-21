@@ -26,7 +26,7 @@ export function Header({ page }: { page: 'home' | 'boatyard' }) {
         <a href={`${h}#contact`}>Contact</a>
       </nav>
       <a className="hdr__call num" href={`tel:${biz.phones[0].tel}`}>{biz.phones[0].label}<span className="muted" style={{ fontWeight: 500 }}> &middot; VHF {biz.vhf}</span></a>
-      {page !== 'home' && <a className="btn" href={`${h}#contact`}>Request a slip</a>}
+      <a className="btn" href={`${h}#contact`}>Request a slip</a>
     </header>
   )
 }
@@ -61,10 +61,10 @@ export function Contact({ preset }: { preset?: string }) {
             <li className="t18" style={{ marginTop: 'var(--s-1)' }}><a className="link" href={`mailto:${biz.email}`}>{biz.email}</a></li>
           </ul>
           <dl className="t14" style={{ margin: 'var(--s-6) 0 0', display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '6px var(--s-3)' }}>
-            <dt className="muted">Ship's store</dt><dd style={{ margin: 0 }} className="num">Monday to Saturday, 8:00 to 4:00</dd>
-            <dt className="muted">Boatyard</dt><dd style={{ margin: 0 }} className="num">Monday to Friday, 8:00 to 4:00</dd>
+            <dt className="muted">Ship's store</dt><dd style={{ margin: 0 }}>Monday to Saturday, 8:00 to 4:00</dd>
+            <dt className="muted">Boatyard</dt><dd style={{ margin: 0 }}>Monday to Friday, 8:00 to 4:00</dd>
             <dt className="muted">Mechanic</dt><dd style={{ margin: 0 }}>Monday to Friday</dd>
-            <dt className="muted">Laundry</dt><dd style={{ margin: 0 }} className="num">Every day, 8:00 to 6:00</dd>
+            <dt className="muted">Laundry</dt><dd style={{ margin: 0 }}>Every day, 8:00 to 6:00</dd>
           </dl>
         </div>
         <form className="enquiry" data-enquiry data-business="Lighthouse Marina" data-whatsapp="" data-email={biz.email}
