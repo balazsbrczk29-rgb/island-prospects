@@ -9,8 +9,8 @@
 
 :root {
   /* P07 Abaco pine: casuarina, sea grape, needle */
-  --paper: #f3f4ee;
-  --paper-2: #e6eadc;
+  --paper: #edf1e8;
+  --paper-2: #e0e7d7;
   --ink: #15261c;
   --muted: #4e5d52;
   --line: #d3d9c8;
@@ -22,7 +22,7 @@
   --accent: #2f5b3a;
   --display: "Gloock", "Display Fallback", Georgia, serif;
   --text: "Mulish", "Text Fallback", Arial, sans-serif;
-  --t-xs: 0.8125rem; --t-s: 0.9375rem; --t-m: 1.0625rem; --t-l: 1.375rem;
+  --t-xs: 0.875rem; --t-s: 1rem; --t-m: 1.125rem; --t-l: 1.375rem;
   --t-xl: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem);
   --t-2xl: clamp(2.5rem, 1.6rem + 3vw, 4.5rem);
   --s2: 8px; --s3: 16px; --s4: 24px; --s5: 32px; --s6: 48px; --s7: 64px; --s8: 96px; --s9: 144px;
@@ -110,7 +110,7 @@ p { text-wrap: pretty; }
 .stay-img { aspect-ratio: 3 / 2; overflow: hidden; border-radius: var(--r); background: var(--paper-2); margin-bottom: 12px; }
 .stay-img img { width: 100%; height: 100%; object-fit: cover; }
 .stay.big .h3 { font-size: var(--t-xl); }
-.stay .small { margin-top: 4px; max-width: 40em; }
+.stay .small { margin-top: 4px; max-width: 40em; font-size: 1.0625rem; }
 .planner-acts { display: flex; gap: var(--s4); align-items: center; margin-top: var(--s6); flex-wrap: wrap; }
 
 /* ---------- getting here (the one pine band) ---------- */

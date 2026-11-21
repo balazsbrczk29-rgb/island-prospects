@@ -4,7 +4,117 @@
  "name": "Fernandez Bay Village",
  "batch": "10",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
- "claimed_at": "2026-11-21T18:05:10.579Z"
+ "rebuild_of": 1,
+ "claimed_at": "2026-11-21T18:05:10.579Z",
+ "pages": [
+  "index.html",
+  "stay.html"
+ ],
+ "primary_cta": "Check availability (innRoad), in the film letterbox for the whole film",
+ "brand_truth": "A family-run village of cottages in Fernandez Bay, Cat Island, where every room looks at the beach and the day ends at a bonfire on the sand.",
+ "buyer": "US couples 40-70, families and groups of friends, private pilots; planning on a phone, comparing small Out Island resorts.",
+ "direction": {
+  "archetype": "A03 Cinematic chapters",
+  "lane": "P07 Abaco pine",
+  "type": "T08 Warm humanist (Gloock + Mulish)",
+  "why": "Their professional 2500 px photography carries a film of one day in the bay; the letterbox bar holds subtitles of real facts and the booking button for the whole film. Pine only for the top letterbox bar and the Getting here band; the page is pale sea-grape paper."
+ },
+ "tier_visual": "standard",
+ "tier_why": "Their photography as scroll-scrubbed film with slow Ken Burns; no 3D needed.",
+ "concept_type": "booking: cottages and villas handing off to innRoad, WhatsApp enquiry",
+ "images": [
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/64f009b8e4a9e046e2b1a2c9/4d8b8a60-415b-49d4-a650-b2068cd4f231/5T1A8323.jpg",
+   "source": "own",
+   "credit": "Fernandez Bay Village"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/64f009b8e4a9e046e2b1a2c9/e61c5395-c1e9-4699-a10a-06406e942657/5T1A7817.jpg",
+   "source": "own",
+   "credit": "Fernandez Bay Village"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/64f009b8e4a9e046e2b1a2c9/fe6f4fea-aa9b-4dc1-9ec7-03689166c193/5T1A8209.jpg",
+   "source": "own",
+   "credit": "Fernandez Bay Village"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/64f009b8e4a9e046e2b1a2c9/c20ffc5a-e206-4fea-b898-fb49a13b3a41/5T1A8430.jpg",
+   "source": "own",
+   "credit": "Fernandez Bay Village"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/64f009b8e4a9e046e2b1a2c9/9202e27f-5c59-425e-ac55-b53ed8c7a80d/5T1A7819-2.jpg",
+   "source": "own",
+   "credit": "Fernandez Bay Village"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/64f009b8e4a9e046e2b1a2c9/dbaf91be-dc01-4852-8145-dddfa5c6394a/5T1A8406.jpg",
+   "source": "own",
+   "credit": "Fernandez Bay Village"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/64f009b8e4a9e046e2b1a2c9/cottage and villa photos 5T1A8392, 8089, 8094, 8099, 8106, 8131, 8120, 7736, 7792",
+   "source": "own",
+   "credit": "Fernandez Bay Village"
+  }
+ ],
+ "plan_gate": {
+  "verdict": "revise, applied once",
+  "predicted": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 5,
+   "distinct": 4,
+   "references": 4
+  },
+  "changes_applied": [
+   "subtitle band on paper, pine only for the top bar and Getting here",
+   "subtitles clamped to two lines, concept label lifted above the band while the film is pinned",
+   "WhatsApp us spacing fixed",
+   "film cut from 8 to 6 frames, Shane's Shack as frame 2 linking to stay.html",
+   "meals as a left-aligned schedule with the WhatsApp enquiry beside it"
+  ]
+ },
+ "critic": {
+  "photography": 0,
+  "typography": 0,
+  "composition": 0,
+  "colour": 0,
+  "fit": 0,
+  "distinct": 0,
+  "references": 0
+ },
+ "critic_note": "Final critic not run (plan-gate workflow); self-critique against art-director section 7 and craft checklist A/B done.",
+ "current_site_findings": [
+  "homepage video fails to load twice",
+  "newsletter block shows a setup error to visitors",
+  "no meta descriptions, default Squarespace favicon",
+  "Cat Island and New Bight missing from the first screen",
+  "two front-desk numbers on different pages",
+  "Click Here / Learn More buttons"
+ ],
+ "pitch_line": "Your own photographs play as a film of one day in the bay, with Check availability in the frame the whole time, then guests pick couple, family or friends and see exactly which cottages fit.",
+ "assumptions": [
+  "front-desk number shown as (954) 518-4500 (homepage footer); contact page lists (954) 302-7422",
+  "WhatsApp 1 (242) 808-5711 used for the enquiry",
+  "photos matched to cottages by their order on the cottages page",
+  "Beach House illustrated with the garden-shower photo (garden bathrooms), not a confirmed Beach House shot",
+  "Caretaker's Cottage bed type not published"
+ ],
+ "sources": [
+  "https://www.fernandezbayvillage.com/",
+  "https://www.fernandezbayvillage.com/cottages",
+  "https://www.fernandezbayvillage.com/activities",
+  "https://www.fernandezbayvillage.com/dining",
+  "https://www.fernandezbayvillage.com/clubhouse",
+  "https://www.fernandezbayvillage.com/gettinghere",
+  "https://www.fernandezbayvillage.com/contact"
+ ],
+ "notes": "BLIND: outside images blocked in the sandbox; photos verified through Lovable gallery ip-assets-fernandez-bay-village (3815ea9b), crops routed into QA shots. Gen-1 getting-here.html removed (routes now on home). qa.mjs 0 blockers; interact 0 JS errors; distinct.mjs distinct (ground retinted to #edf1e8 after its cream warning).",
+ "built_at": "2026-11-21T18:17:57.371Z"
 }
