@@ -6,5 +6,33 @@
  "url": "seasprayresort.com",
  "url_source": "brief",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "Guesty (stays, external) + 'Book a slip' form; Revel online ordering for food",
+  "products_or_listings": 0,
+  "pages": 12,
+  "platform": "Webflow (template)",
+  "latest_year": 2026,
+  "modernity": 3,
+  "concept_type": "marina-first resort site: slip rates and fit check with a slip request, stay booking handing off to Guesty, eat and drink with Order Online, events, residences",
+  "must_keep": [
+   "Book a slip",
+   "Book your stay (Guesty)",
+   "Order online (Revel)",
+   "published slip rates by season",
+   "events (Happy Hour, Thursday entertainment, Game Night, Karaoke)",
+   "residences and sales package"
+  ],
+  "weaknesses": [
+   "header phone link dials a US number (606-706-9411) instead of +1 242 577 4696",
+   "event buttons read 'Button Button' and the event rows repeat three times",
+   "homepage leads with 'Own a Piece of Paradise' before telling boaters where or how to dock",
+   "WhatsApp link lacks the country code",
+   "specs and rates only on the inner marina page"
+  ],
+  "priority": "B",
+  "note": "Webflow template site rebuilt 2026 with published marina specs and rates; concept keeps all booking hand-offs, marina-first."
+ }
 }

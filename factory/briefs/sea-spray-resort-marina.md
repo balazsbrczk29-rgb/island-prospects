@@ -51,3 +51,20 @@ Pages: index (marina-first), marina.html (specs + slip checker + request), resid
 
 ## Assumptions to confirm
 - Hours not stated (FB gas & ice 8-5 omitted as possibly outdated). Slip rates not published: "Rates on request". Power amperage only third-party (sailabacos): shown as "Shore power".
+
+
+## Generation 2 design plan (2026-11-21)
+Research this session: homepage and /marina. Own site now says **62 slips** (supersedes 68 from All At Sea), boats 20 to 130 ft, drafts to 7 ft, gas and diesel, 30/50/100 amp (daily minimums), water $0.40/gal, bait (ballyhoo, chum block, squid, shrimp), ice, restrooms and showers, trash, wifi at office, VHF 16. Published rates: high season Mar 1 to Aug 31 $5.65/ft/night, $4.45 (30+ days), $3.75 (90+), $1.25 annual; low season Sep 1 to Feb 28 $3.65, $2.75 (30+), $1.25 annual. Boaters' Choice Award 2025 (marinas.com badge on own site). Marsh Harbour 20 minutes by boat, Tahiti Beach closer, offshore banks and Marls within reach (own copy). Header tel link dials 606-706-9411 (bug).
+
+**Big idea.** White Sound at rest, then a captain's question answered on the second screen: "Will she fit, and what will it cost?" Length, draft, month and nights give a yes or no against the real limits and an estimate from the published rates, then one tap sends the slip request on WhatsApp; the rest is a day at Sea Spray told as a short film in their own photographs.
+
+**Direction.** A03 Cinematic chapters + P02 Shallow flats (sand ground #f4efe4, aqua field #bfe3dc for the calculator and the story card, channel #1e6b72 CTA) + T01 Monumental serif (Fraunces opsz 144 soft 50 display, "White Sound." at 17vw; Source Serif 4 text; labels lowercase italic). N3 "Menu" word opening a full-screen chapter list; persistent "Request a slip" pill bottom-right after the first screens. Motion: slow Ken Burns on the hero, scroll-scrubbed crossfades between pinned chapter photographs (function transforms, no state per frame).
+
+**Photos (all own, seen in Lovable gallery ip-assets-sea-spray-resort-marina, all >= 3447 px wide except the award badge):** hero CR2A2252 (fleet reflected in still water, 8029x5355); Out CR2A4342 (four sportfishers running, 8192x5464); Back G65A0686 (docks under a palm, 3447x5171); The bar G65A5816 (5331x3554); Thursday CR2A5845 (Junkanoo, 8021x5350); Ashore G65A0914 (surf on a white beach, 5435x3623); Boaters' Choice badge 600x453 shown at 200 px.
+
+**Storyboard (desktop):** 1) full-bleed White Sound reflections, name small top-left, "Menu" top-right, one film subtitle low centre. 2) Title card on sand: "White Sound." huge, place line, phone, VHF 16, "62 slips to 130 ft", "Check your slip" button; the calculator (aqua panel, largest element) beside "Will she fit, and what will it cost?". 3-7) pinned film: Out, Back, The bar (Order online), Thursday, Ashore (Book a stay on Guesty), each a sand caption card bottom-left. 8) Story card on aqua: the Alburys built Sea Spray boats here in the 1980s; after Dorian four friends from Charleston began bringing it back (Feb 2022). 9) Credits for the captain: specs rolling as centred credits, both seasons' rates, award. 10) Request a slip form (boat, LOA, draft, dates, power) to WhatsApp, link to their booking form. 11) Residences line with the 2026 sales package. Footer.
+**Phone:** 1) 54svh photo with subtitle, "White Sound.", phone, VHF, "Check your slip" inside 844 px. 2) calculator. 3) chapters as 4:5 photographs with text below.
+
+**Conversion.** Primary "Request this slip" (WhatsApp +1 242 577 4696 prefilled) / "Check your slip". Secondary: call, VHF 16, Book a stay (Guesty), Order online (Revel), sales package.
+**Tier.** Standard (their photography is excellent; no 3D needed). **Distinct:** no other marina in the repo uses a rate calculator or the cinematic chapter film with sand caption cards; Bell Channel, Hope Town Inn and others use different archetypes.
+**Pages:** single page; marina.html and residences.html from gen 1 removed (everything a captain needs is on the home page; residences link to their PDF and page).
