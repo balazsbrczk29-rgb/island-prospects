@@ -1,7 +1,8 @@
 import { useState } from "react"
-import { ArrowRight } from "lucide-react"
-import { Foot, LaidPrint, Letterhead, Page, mount } from "./site"
-import { COSTS, PHONE, PHOTOS, TEL } from "./facts"
+import { ArrowUpRight } from "lucide-react"
+import { Foot, Img, Masthead, Page, mount } from "./site"
+import { BOOK, PHONE, PHOTOS, TEL } from "./facts"
+import RouteMap from "./RouteMap"
 
 const WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const
 const FULL = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -41,69 +42,61 @@ const ASKED: [string, string][] = [
 function GettingHere() {
   return (
     <Page home={false}>
-      <Letterhead home={false} />
-      <main id="letter">
-        <div className="sheet sheet--below sheet--above">
-          <section className="arrive" data-hides-reply aria-labelledby="arrive-title">
-            <div className="stack-gap">
-              <p className="voice">How to reach Orange Creek Inn, Cat Island</p>
-              <h1 id="arrive-title">One short flight, then three and a half miles.</h1>
-              <p className="measure">
-                Most guests fly to Nassau and take a domestic flight on to Cat Island. From Florida there is a direct flight four days a week. Either way, the last stretch is a quiet road north from Arthur&rsquo;s Town Airport.
-              </p>
-              <p><a className="btn" href="index.html#reply">Check dates <ArrowRight aria-hidden /></a></p>
-            </div>
-            <LaidPrint photo={PHOTOS.road} className="arrive__print" turn={2} />
-          </section>
+      <Masthead home={false} />
+      <main id="main" className="guide">
+        <section className="guide__top" aria-labelledby="g-h1">
+          <div>
+            <h1 id="g-h1">Getting to Orange Creek Inn, Cat Island.</h1>
+            <p className="lead">Most guests fly to Nassau and take a short domestic flight to Arthur&rsquo;s Town. From Florida there is a direct flight four days a week. Then it is 3.5 miles up a quiet road to the inn.</p>
+            <p><a className="btn" href={BOOK} target="_blank" rel="noopener">Check availability <ArrowUpRight aria-hidden /></a></p>
+          </div>
+          <figure><Img photo={PHOTOS.road} eager sizes="(min-width: 1100px) 640px, 100vw" /><figcaption>{PHOTOS.road.caption}</figcaption></figure>
+        </section>
 
-          <section aria-labelledby="day-title">
-            <div className="dayday">
-              <div className="stack-gap">
-                <h2 id="day-title">Pick the day you want to land.</h2>
-                <p className="measure">Flight times are the ones we publish for guests. Airlines change them, so confirm when you book.</p>
-              </div>
-              <DayPlan />
-            </div>
-            <div className="routes">
-              <div>
-                <h3>Through Nassau</h3>
-                <dl>
-                  <dt>Airline</dt><dd>Western Air</dd>
-                  <dt>Lands</dt><dd className="num">9:30 am and 4:00 pm</dd>
-                  <dt>Fare</dt><dd className="num">about $190 round trip</dd>
-                </dl>
-              </div>
-              <div>
-                <h3>Direct from Fort Lauderdale</h3>
-                <dl>
-                  <dt>Airline</dt><dd>Makers Air, from Fort Lauderdale Executive (FXE)</dd>
-                  <dt>Days</dt><dd>Monday, Wednesday, Friday, Saturday</dd>
-                  <dt>Out</dt><dd className="num">6:45 am and 12:45 pm</dd>
-                  <dt>Home</dt><dd className="num">10:00 am from Cat Island</dd>
-                  <dt>Charters</dt><dd>Private flights at the time you choose</dd>
-                </dl>
-              </div>
-            </div>
-          </section>
+        <section className="guide__sec" aria-labelledby="day-h">
+          <h2 id="day-h">Pick the day you want to land.</h2>
+          <div>
+            <DayPlan />
+            <p className="lead" style={{ marginTop: 24, fontSize: "1rem" }}>Flight times are the ones the inn publishes for guests. Airlines change them, so confirm when you book.</p>
+          </div>
+        </section>
 
-          <section className="onsite" aria-labelledby="costs-title">
-            <div className="stack-gap">
-              <h2 id="costs-title">What things cost up here.</h2>
-              <p className="measure">Rough figures so you can plan the week. Room rates depend on your dates: send them and we will reply.</p>
-              <p><a className="link tap" href="index.html#reply">Send your dates</a> or call <a className="link num tap" href={TEL}>{PHONE}</a></p>
+        <section className="guide__sec" aria-labelledby="routes-h">
+          <h2 id="routes-h">The two ways in.</h2>
+          <div className="routes">
+            <div>
+              <h3>Through Nassau</h3>
+              <dl>
+                <dt>Airline</dt><dd>Western Air</dd>
+                <dt>Lands</dt><dd className="num">9:30 am and 4:00 pm</dd>
+                <dt>Fare</dt><dd className="num">about $190 round trip</dd>
+              </dl>
             </div>
-            <ul className="costs">
-              {COSTS.map(([what, price]) => <li key={what}><span>{what}</span><span className="num">{price}</span></li>)}
-            </ul>
-          </section>
+            <div>
+              <h3>Direct from Fort Lauderdale</h3>
+              <dl>
+                <dt>Airline</dt><dd>Makers Air, from Fort Lauderdale Executive (FXE)</dd>
+                <dt>Days</dt><dd>Monday, Wednesday, Friday, Saturday</dd>
+                <dt>Out</dt><dd className="num">6:45 am and 12:45 pm</dd>
+                <dt>Home</dt><dd className="num">10:00 am from Cat Island</dd>
+                <dt>Charters</dt><dd>Private flights at the time you choose</dd>
+              </dl>
+            </div>
+          </div>
+        </section>
 
-          <section aria-labelledby="asked-title">
-            <h2 id="asked-title">What guests ask before they come.</h2>
-            <div className="asked">
-              {ASKED.map(([q, a]) => <div key={q}><h3>{q}</h3><p>{a}</p></div>)}
-            </div>
-          </section>
-        </div>
+        <section className="guide__sec guide__sec--map" aria-labelledby="map-h">
+          <h2 id="map-h">Your route, and what the week costs.</h2>
+          <div><RouteMap /></div>
+        </section>
+
+        <section className="guide__sec" aria-labelledby="asked-h">
+          <h2 id="asked-h">What guests ask before they come.</h2>
+          <div className="asked">
+            {ASKED.map(([q, a]) => <div key={q}><h3>{q}</h3><p>{a}</p></div>)}
+            <div><h3>Can I just call?</h3><p>Of course: <a className="link num" href={TEL}>{PHONE}</a>.</p></div>
+          </div>
+        </section>
       </main>
       <Foot />
     </Page>

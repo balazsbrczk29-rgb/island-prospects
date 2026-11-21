@@ -89,3 +89,32 @@ export const COSTS: [string, string][] = [
   ["A bicycle for the day", "$10"],
   ["Dinner at one of the six restaurants nearby", "$12 to $18"],
 ]
+
+/** The six published offers, as listed on orangecreekinn.com (Bahama Out Islands Promotion Board programme). */
+export const SPECIALS = [
+  { ids: ["fee300"], title: "$300 fee credit", who: "Stays of four nights or longer.", book: "1 Jul 2026 to 30 Jun 2027", travel: "5 Jul 2026 to 31 Oct 2027", out: "Holiday blackouts apply" },
+  { ids: ["fee150"], title: "$150 fee credit", who: "A pre-booked two-night stay.", book: "1 Jul 2026 to 30 Jun 2027", travel: "5 Jul 2026 to 31 Oct 2027", out: "Holiday blackouts apply" },
+  { ids: ["fly1", "fly2"], title: "Fly free from Nassau", who: "One free airline ticket for a pre-booked two-night stay, two for four nights or longer.", book: "1 Jul 2026 to 30 Jun 2027", travel: "5 Jul 2026 to 31 Oct 2027", out: "Holiday blackouts apply" },
+  { ids: ["air"], title: "Air-inclusive from Nassau", who: "Four to six nights: one free round trip. Seven nights: two.", book: "1 Jul 2026 to 30 Jun 2027", travel: "2 Jul 2026 to 31 Oct 2027", out: "No blackout dates" },
+  { ids: ["fl250"], title: "Up to $250 from Florida", who: "Air or ferry inclusive packages from Florida, four nights or longer.", book: "1 Nov 2026 to 31 Jan 2027", travel: "2 Nov 2026 to 31 Oct 2027", out: "Holiday blackouts apply" },
+  { ids: ["eu"], title: "Europe and Latin America", who: "Residents of Europe, Argentina, Brazil, Colombia and Mexico: one free ticket from Nassau for four to six nights, two for seven, double occupancy.", book: "1 Jul 2026 to 30 Jun 2027", travel: "2 Jul 2026 to 31 Oct 2027", out: "Thanksgiving and Christmas blackouts" },
+] as const
+export const BLACKOUTS = ["26 to 28 Nov 2026", "19 Dec 2026 to 1 Jan 2027", "25 to 28 Mar 2027", "1 to 4 Jul 2027"]
+
+const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const MAKERS_DAYS = [1, 3, 5, 6]
+/** Getting-here line for an arrival day and a starting point (times as the inn publishes them). */
+export function wayFor(arrive: string | null, origin: Origin) {
+  const wd = arrive ? new Date(day(arrive)).getUTCDay() : null
+  const dayName = wd === null ? null : WEEKDAYS[wd]
+  const nassau = { air: "Western Air from Nassau", times: "9:30 am or 4:00 pm", note: "About $190 round trip." }
+  if (origin === "florida") {
+    if (wd === null || MAKERS_DAYS.includes(wd)) return { air: "Makers Air from Fort Lauderdale (FXE)", times: "6:45 am or 12:45 pm", note: wd === null ? "Monday, Wednesday, Friday and Saturday." : `Flies on ${dayName}s.`, ok: true }
+    const next = WEEKDAYS[[1, 2, 3].map(k => (wd + k) % 7).find(i => MAKERS_DAYS.includes(i))!]
+    return { air: "Makers Air from Fort Lauderdale (FXE)", times: "not on " + dayName + "s", note: `Nearest flight ${next}, or connect through Nassau.`, ok: false }
+  }
+  if (origin === "nassau") return { ...nassau, ok: true }
+  return { air: "Into Nassau, then Western Air", times: "lands 9:30 am or 4:00 pm", note: "About $190 round trip from Nassau.", ok: true }
+}
+export function inDays(n: number) { const t = new Date(); t.setDate(t.getDate() + n); return t.toISOString().slice(0, 10) }
+export function shortDate(s: string, plus = 0) { const d = new Date(day(s) + plus * 864e5); return `${DAYS[d.getUTCDay()].slice(0, 3)} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()].slice(0, 3)}` }

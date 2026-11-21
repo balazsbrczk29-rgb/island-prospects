@@ -1,194 +1,104 @@
-import { useRef } from "react"
-import { ArrowLeft, ArrowRight } from "lucide-react"
-import { Foot, LaidPrint, Letterhead, Page, Print, mount } from "./site"
-import PrintPile from "./PrintPile"
-import ReplyCard from "./ReplyCard"
-import Way from "./Way"
-import { COSTS, NAME, PHONE, PHOTOS, TEL } from "./facts"
+import { motion } from "motion/react"
+import { ArrowUpRight, Mail, Phone } from "lucide-react"
+import { BOOK, EMAIL, FACEBOOK, PHONE, PHOTOS, TEL } from "./facts"
+import { Foot, Img, Masthead, Page, mount } from "./site"
+import DatesBar from "./DatesBar"
+import RouteMap from "./RouteMap"
+import Specials from "./Specials"
+import Strip from "./Strip"
 
-function Opening() {
-  return (
-    <section className="spread opening" data-hides-reply aria-labelledby="opening-title">
-      <div className="spread__words">
-        <p className="voice">Dear traveller,</p>
-        <h1 id="opening-title">The beach is across the road.</h1>
-        <p className="opening__lead">
-          {NAME} sits at the top of Cat Island, just north of Arthur&rsquo;s Town: studios with their own kitchenettes, a grocery store on site, and white sand the width of one quiet road away.
-        </p>
-        <div className="opening__act">
-          <a className="btn" href="#reply">Check dates <ArrowRight aria-hidden /></a>
-          <span>or call <a className="link num tap" href={TEL}>{PHONE}</a></span>
-        </div>
-      </div>
-      <PrintPile photos={[PHOTOS.road, PHOTOS.inn, PHOTOS.sandbar, PHOTOS.rocks]} />
-    </section>
-  )
-}
-
-function Place() {
-  return (
-    <section id="place" className="spread" aria-labelledby="place-title">
-      <div className="spread__words">
-        <h2 id="place-title">Where the creek runs out to the sea.</h2>
-        <p className="measure">
-          Orange Creek is the settlement immediately north of Arthur&rsquo;s Town. The inn is a white two-storey building with the beach in front of it and the creek a walk away. Cat Island is one of the least crowded islands in the Bahamas, and up here you will often have the sand to yourself.
-        </p>
-        <p className="measure">
-          December to April are the most popular months. The airport is 3.5 miles down the road, and we can come and collect you.
-        </p>
-        <blockquote className="quote measure">
-          <p>&ldquo;The creek further up is full of turtles, stingrays and baby nurse sharks.&rdquo;</p>
-          <footer>Marquis Knowles, a guest, on Google in June 2024</footer>
-        </blockquote>
-      </div>
-      <LaidPrint photo={PHOTOS.aerial} className="spread__margin" turn={2} />
-    </section>
-  )
-}
-
-const IN_ROOM = [
-  "Stove-top kitchenette", "Toaster and coffee maker", "Dining table and chairs", "Air conditioning and a ceiling fan",
-  "Television and internet", "Alarm clock and radio", "Iron and ironing board", "Laundry and ice machine close by",
+const ease = [0.2, 0.7, 0.2, 1] as const
+const IN_STUDIO = [
+  "Stove-top kitchenette", "Toaster and coffee maker", "Dining table and chairs", "Air conditioning and ceiling fan",
+  "Television and internet", "Alarm clock radio", "Iron and ironing board",
 ]
-
-function Studios() {
-  return (
-    <section id="studios" className="spread" aria-labelledby="studios-title">
-      <div className="spread__words">
-        <h2 id="studios-title">A studio with its own stove.</h2>
-        <p className="measure">
-          Every room is a spacious studio, so you can cook what you bought at the store and eat at your own table. Come and go as you like.
-        </p>
-        <ul className="inroom">
-          {IN_ROOM.map(i => <li key={i}>{i}</li>)}
-        </ul>
-        <dl className="terms">
-          <dt>Check-in</dt><dd className="num">2:00 pm</dd>
-          <dt>Check-out</dt><dd className="num">12:00 pm</dd>
-          <dt>Rates</dt><dd>On request, <a className="link" href="#reply">with your dates</a></dd>
-          <dt>Payment</dt><dd>Visa, MasterCard, or cash on arrival</dd>
-        </dl>
-      </div>
-      <div className="pair spread__margin">
-        <LaidPrint photo={PHOTOS.studioA} turn={2.2} />
-        <LaidPrint photo={PHOTOS.studioB} turn={-2.4} />
-      </div>
-    </section>
-  )
-}
-
-function OnSite() {
-  return (
-    <section className="onsite" aria-labelledby="onsite-title">
-      <div className="stack-gap">
-        <h2 id="onsite-title">What things cost up here.</h2>
-        <p className="measure">
-          The grocery store, the laundry and the ice machine are on the property. We rent cars and bicycles, and a car can be waiting at the airport when you land. Around us there are about six restaurants, all cooking Bahamian food.
-        </p>
-      </div>
-      <ul className="costs">
-        {COSTS.map(([what, price]) => <li key={what}><span>{what}</span><span className="num">{price}</span></li>)}
-      </ul>
-    </section>
-  )
-}
-
-const DAYS = [PHOTOS.flats, PHOTOS.bonefish, PHOTOS.angler, PHOTOS.egrets, PHOTOS.kayak, PHOTOS.creek]
-
-function Days() {
-  const strip = useRef<HTMLDivElement>(null)
-  const hold = useRef<{ x: number; left: number } | null>(null)
-  const step = (dir: number) => {
-    const el = strip.current
-    if (!el) return
-    const card = el.firstElementChild as HTMLElement | null
-    el.scrollBy({ left: dir * ((card?.offsetWidth ?? 500) + 32), behavior: "smooth" })
-  }
-  return (
-    <section id="days" className="days on-deep" aria-labelledby="days-title">
-      <div className="days__head">
-        <div className="stack-gap">
-          <h2 id="days-title">Days here are mostly water.</h2>
-          <p>
-            Some of Cat Island&rsquo;s best bonefishing flats are close by. There is saltwater fishing, kayaking, bicycling, boat rides and sightseeing tours, the straw markets, and the Blue Hole, Port Royal Beach and Fernandez Bay to drive to.
-          </p>
-        </div>
-        <div className="days__tools">
-          <button type="button" className="round" aria-label="Earlier photographs" onClick={() => step(-1)}><ArrowLeft aria-hidden /></button>
-          <button type="button" className="round" aria-label="More photographs" onClick={() => step(1)}><ArrowRight aria-hidden /></button>
-        </div>
-      </div>
-      <div
-        ref={strip}
-        className="strip"
-        tabIndex={0}
-        role="group"
-        aria-label="Photographs of days at Orange Creek"
-        onPointerDown={e => { if (e.pointerType === "mouse") { hold.current = { x: e.clientX, left: e.currentTarget.scrollLeft }; e.currentTarget.classList.add("is-held") } }}
-        onPointerMove={e => { if (hold.current) e.currentTarget.scrollLeft = hold.current.left - (e.clientX - hold.current.x) }}
-        onPointerUp={e => { hold.current = null; e.currentTarget.classList.remove("is-held") }}
-        onPointerLeave={e => { hold.current = null; e.currentTarget.classList.remove("is-held") }}
-      >
-        {DAYS.map(photo => <figure key={photo.src} className="print"><Print photo={photo} /></figure>)}
-      </div>
-    </section>
-  )
-}
-
-function GettingHere() {
-  return (
-    <section id="way" aria-labelledby="way-title">
-      <h2 id="way-title" className="measure">One short flight, then three and a half miles.</h2>
-      <Way more={<a className="link" href="getting-here.html">Flight days, prices and what guests ask</a>} />
-    </section>
-  )
-}
-
-function Reply() {
-  return (
-    <section id="reply" data-hides-reply aria-labelledby="reply-title">
-      <h2 id="reply-title" className="measure">Tell us when. We will tell you what fits.</h2>
-      <p className="measure" style={{ marginTop: "var(--s5)" }}>
-        Six offers are published for the Out Islands this season. Set your dates and the card shows the ones your stay qualifies for.
-      </p>
-      <div className="reply"><ReplyCard /></div>
-    </section>
-  )
-}
-
-function SignOff() {
-  return (
-    <section className="signoff" aria-labelledby="signoff-title">
-      <div>
-        <p className="voice">With warm wishes from the top of Cat Island,</p>
-        <h2 id="signoff-title">Come up and see us.</h2>
-        <p className="signoff__name">{NAME}</p>
-      </div>
-      <blockquote className="quote">
-        <p>&ldquo;Staying at Orange Creek Inn felt like visiting family in the best way.&rdquo;</p>
-        <footer>SamMcK2022, a guest, on Tripadvisor in March 2022</footer>
-      </blockquote>
-    </section>
-  )
-}
 
 function Home() {
   return (
     <Page home>
-      <Letterhead home />
-      <main id="letter">
-        <div className="sheet sheet--below">
-          <Opening />
-          <Place />
-          <Studios />
-          <OnSite />
-        </div>
-        <Days />
-        <div className="sheet sheet--above">
-          <GettingHere />
-          <Reply />
-          <SignOff />
-        </div>
+      <Masthead home />
+      <main id="main">
+        <section className="hero" aria-labelledby="h1">
+          <div className="hero__words">
+            <motion.h1 id="h1" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease }}>
+              The beach is across the&nbsp;road.
+            </motion.h1>
+            <motion.p className="hero__lede" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.12, ease }}>
+              Spacious studios with their own kitchenettes at the top of Cat Island, just north of Arthur&rsquo;s Town. A grocery store, laundry and cars on site, and bonefish flats close by.
+            </motion.p>
+          </div>
+          <motion.figure className="hero__photo" initial={{ clipPath: "inset(12% 0 0 0)", opacity: 0.4 }} animate={{ clipPath: "inset(0% 0 0 0)", opacity: 1 }} transition={{ duration: 1.1, ease }}>
+            <div className="hero__frame"><Img photo={PHOTOS.road} eager sizes="(min-width: 1100px) 860px, 100vw" className="hero__img" /></div>
+          </motion.figure>
+          <motion.div className="hero__bar" data-hides-key initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25, ease }}>
+            <DatesBar />
+          </motion.div>
+        </section>
+
+        <section id="studio" className="studio" aria-labelledby="studio-h">
+          <div className="studio__photos">
+            <figure className="studio__a"><Img photo={PHOTOS.studioA} sizes="(min-width: 1100px) 640px, 100vw" /><figcaption>{PHOTOS.studioA.caption}</figcaption></figure>
+            <figure className="studio__b"><Img photo={PHOTOS.studioB} sizes="(min-width: 1100px) 380px, 100vw" /><figcaption>{PHOTOS.studioB.caption}</figcaption></figure>
+            <dl className="facts">
+              <div><dt>Check-in</dt><dd className="num">2:00 pm</dd></div>
+              <div><dt>Check-out</dt><dd className="num">12:00 noon</dd></div>
+              <div><dt>Rates</dt><dd>On request, or live on <a className="link" href={BOOK} target="_blank" rel="noopener">BahamaGo</a></dd></div>
+              <div><dt>Payment</dt><dd>Visa, MasterCard, or cash on arrival</dd></div>
+            </dl>
+          </div>
+          <div className="studio__text">
+            <h2 id="studio-h">Your studio: room to cook, eat and spread out.</h2>
+            <p className="lead">Every studio is spacious, with its own kitchenette and a table to eat at. Swim before breakfast, then cook what you caught for dinner.</p>
+            <ul className="ticks">{IN_STUDIO.map(t => <li key={t}>{t}</li>)}</ul>
+            <div className="onsite">
+              <h3>On site</h3>
+              <p>A grocery store, laundry and an ice machine. Cars for about <span className="num">$80</span> a day, waiting at the airport if you like, and bicycles for <span className="num">$10</span>.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="around" className="around" aria-labelledby="around-h">
+          <div className="around__top">
+            <figure className="around__aerial"><Img photo={PHOTOS.aerial} sizes="(min-width: 1100px) 760px, 100vw" /><figcaption>{PHOTOS.aerial.caption}</figcaption></figure>
+            <div className="around__text">
+              <h2 id="around-h">The top of Cat Island, at walking pace.</h2>
+              <p className="lead">Orange Creek is where a creek runs out to the sea, with white sandbars at low water and bonefishing flats nearby. Guests write about turtles, stingrays and bonefish in the creek.</p>
+              <ul className="near">
+                <li><strong>On the water</strong> Bonefishing, saltwater fishing, kayaking and boat rides.</li>
+                <li><strong>Along the island</strong> The Blue Hole, Port Royal Beach, Fernandez Bay, straw markets and sightseeing tours.</li>
+                <li><strong>Dinner out</strong> About six restaurants nearby serve Bahamian food, <span className="num">$12 to $18</span> a meal.</li>
+              </ul>
+            </div>
+          </div>
+          <Strip photos={[PHOTOS.flats, PHOTOS.bonefish, PHOTOS.angler, PHOTOS.egrets, PHOTOS.kayak, PHOTOS.creek, PHOTOS.sandbar, PHOTOS.rocks]} />
+        </section>
+
+        <section id="getting-here" className="getting" aria-labelledby="get-h">
+          <div className="getting__head">
+            <h2 id="get-h">One short flight, then three and a half miles.</h2>
+            <p className="lead">Pick where you start. The route, the flight on your arrival day and what the week costs follow your dates. <a className="link" href="getting-here.html">The full travel guide</a></p>
+          </div>
+          <RouteMap />
+        </section>
+
+        <section id="offers" className="offers-sec" data-hides-key aria-labelledby="offers-h">
+          <h2 id="offers-h">Six published offers, checked against your dates.</h2>
+          <Specials />
+        </section>
+
+        <section id="contact" className="contact" data-hides-key aria-labelledby="contact-h">
+          <figure className="contact__photo"><Img photo={PHOTOS.inn} sizes="(min-width: 1100px) 620px, 100vw" /><figcaption>{PHOTOS.inn.caption}</figcaption></figure>
+          <div className="contact__text">
+            <h2 id="contact-h">Call us, write, or book online.</h2>
+            <p className="lead">Ask about dates, airport pick-up, a car waiting at the airport or a late arrival.</p>
+            <ul className="reach">
+              <li><a href={TEL}><Phone aria-hidden /><span className="num">{PHONE}</span></a></li>
+              <li><a href={`mailto:${EMAIL}`}><Mail aria-hidden /><span>{EMAIL}</span></a></li>
+              <li><a href={BOOK} target="_blank" rel="noopener"><ArrowUpRight aria-hidden /><span>Live availability on BahamaGo</span></a></li>
+              <li><a href={FACEBOOK} target="_blank" rel="noopener"><ArrowUpRight aria-hidden /><span>Orange Creek Inn on Facebook</span></a></li>
+            </ul>
+          </div>
+        </section>
       </main>
       <Foot />
     </Page>
