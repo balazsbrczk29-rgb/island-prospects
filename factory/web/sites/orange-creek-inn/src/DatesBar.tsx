@@ -2,7 +2,6 @@ import { useMemo } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { ArrowUpRight, Minus, Plane, Plus, Car } from "lucide-react"
 import { BOOK, EMAIL, NAME, ORIGINS, longDate, offersFor, shortDate, specialTitle, wayFor, type Origin } from "./facts"
-import { MiniRoute } from "./RouteMap"
 import { usePlan } from "./site"
 
 function Stepper({ id, label, value, set, min, max, unit }: { id: string; label: string; value: number; set: (n: number) => void; min: number; max: number; unit: [string, string] }) {
@@ -73,10 +72,7 @@ export default function DatesBar() {
           {offers.some(o => o.status !== "ok") && <a className="out__n link" href="#offers">Why some do not fit</a>}
         </div>
         <div className="out out--way">
-          <div className="out__way">
-            <p className="out__k">Your way here</p>
-            <MiniRoute />
-          </div>
+          <p className="out__k">Your way here</p>
           <p className="out__v"><Plane aria-hidden /> <span>{way.air}, <span className="num" data-warn={!way.ok}>{way.times}</span></span></p>
           <p className="out__v"><Car aria-hidden /> <span>Then 3.5 miles: we collect you, or a taxi is about $15.</span></p>
           <p className="out__n">{way.note}</p>

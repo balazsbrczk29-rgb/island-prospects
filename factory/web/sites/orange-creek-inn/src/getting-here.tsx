@@ -51,7 +51,7 @@ function GettingHere() {
             <p className="lead">Most guests fly to Nassau and take a short domestic flight to Arthur&rsquo;s Town. From Florida there is a direct flight four days a week. Then it is 3.5 miles up a quiet road to the inn.</p>
             <p><a className="btn" href={BOOK} target="_blank" rel="noopener">Check availability <ArrowUpRight aria-hidden /></a></p>
           </div>
-          <figure><Img photo={PHOTOS.road} eager sizes="(min-width: 1100px) 640px, 100vw" /><figcaption>{PHOTOS.road.caption}</figcaption></figure>
+          <figure><Img photo={PHOTOS.aerial} eager sizes="(min-width: 1100px) 640px, 100vw" /><figcaption>{PHOTOS.aerial.caption}</figcaption></figure>
         </section>
 
         <section className="guide__sec" aria-labelledby="day-h">

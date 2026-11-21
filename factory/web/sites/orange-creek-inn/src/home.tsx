@@ -3,7 +3,7 @@ import { ArrowUpRight, Mail, Phone } from "lucide-react"
 import { BOOK, EMAIL, FACEBOOK, PHONE, PHOTOS, TEL } from "./facts"
 import { Foot, Img, Masthead, Page, mount } from "./site"
 import DatesBar from "./DatesBar"
-import RouteMap from "./RouteMap"
+import RouteMap, { MiniRoute } from "./RouteMap"
 import Specials from "./Specials"
 import Strip from "./Strip"
 
@@ -28,7 +28,7 @@ function Home() {
             </motion.p>
           </div>
           <motion.figure className="hero__photo" initial={{ clipPath: "inset(12% 0 0 0)", opacity: 0.4 }} animate={{ clipPath: "inset(0% 0 0 0)", opacity: 1 }} transition={{ duration: 1.1, ease }}>
-            <div className="hero__frame"><Img photo={PHOTOS.road} eager sizes="(min-width: 1100px) 860px, 100vw" className="hero__img" /></div>
+            <div className="hero__frame"><Img photo={PHOTOS.road} eager sizes="(min-width: 1100px) 860px, 100vw" className="hero__img" /><MiniRoute /></div>
           </motion.figure>
           <motion.div className="hero__bar" data-hides-key initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25, ease }}>
             <DatesBar />
