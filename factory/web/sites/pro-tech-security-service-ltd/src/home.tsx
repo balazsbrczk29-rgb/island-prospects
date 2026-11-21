@@ -18,18 +18,18 @@ function Hero({ hour, setHour, live, weekday }: { hour: number; setHour: (h: num
       </div>
       <div className="strip">
         <div>
-          <h1 id="h1"><span className="clock num">{live ? "It is " : "At "}{fmt(hour)}{live ? " in Nassau." : ","}</span> {live ? officeLine(hour, weekday) : hour >= 9 && hour < 17 ? "our office on Farrington Road is open." : "our office is closed."} The central station is watching.</h1>
-          <p className="sub">Pro-Tech Security: guards, CCTV and alarms, and 24/7 monitoring, from Nassau since 2004.</p>
+          <p className="now" aria-live="polite"><span className="clock num">{live ? "It is " : "At "}{fmt(hour)}{live ? " in Nassau." : ","}</span> {live ? officeLine(hour, weekday) : hour >= 9 && hour < 17 ? "our office on Farrington Road is open." : "our office is closed."} The central station is watching.</p>
+          <h1 id="h1" className="sub">Pro-Tech Security: guards, CCTV and alarms, and 24/7 monitoring, from Nassau since 2004.</h1>
         </div>
         <a className="btn num" href={`tel:${TEL}`}>Call {PHONE}</a>
         <div className="track">
           <label className="sr" htmlFor="hour" style={{ position: "absolute", left: -9999 }}>Time of day in Nassau</label>
           <input id="hour" type="range" min={0} max={23.5} step={0.25} value={hour} aria-valuetext={fmt(hour)} onChange={e => setHour(Number(e.target.value))} />
           <div className="stops">
-            <button type="button" aria-pressed={live} onClick={() => setHour(nassauNow().hour, true)}><b>Now</b>Nassau time</button>
-            {STOPS.map(s => <button key={s.label} type="button" aria-pressed={!live && hour === s.hour} onClick={() => setHour(s.hour)}><b className="num">{s.label}</b>{s.title}</button>)}
+            {STOPS.map(st => <button key={st.label} type="button" style={{ left: `${(st.hour / 23.5) * 100}%` }} aria-pressed={!live && hour === st.hour} onClick={() => setHour(st.hour)}><b className="num">{st.label}</b><span>{st.title}</span></button>)}
           </div>
         </div>
+        <button type="button" className="nowbtn" aria-pressed={live} onClick={() => setHour(nassauNow().hour, true)}>Now</button>
       </div>
     </section>
   )

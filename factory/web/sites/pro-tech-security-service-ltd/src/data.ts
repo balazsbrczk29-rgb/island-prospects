@@ -30,7 +30,8 @@ export function officeLine(hour: number, weekday: number) {
   const weekdayOpen = weekday >= 1 && weekday <= 5
   if (weekdayOpen && hour >= 9 && hour < 17) return "Our office on Farrington Road is open until 5."
   if (weekdayOpen && hour < 9) return "Our office opens at 9."
-  return "Our office is closed for the day."
+  if (weekday === 6 || weekday === 0 || (weekday === 5 && hour >= 17)) return "Our office reopens Monday at 9."
+  return "Our office has closed for the day."
 }
 
 export const STOPS = [

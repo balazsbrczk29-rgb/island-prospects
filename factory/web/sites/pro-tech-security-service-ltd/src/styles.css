@@ -64,29 +64,40 @@ img { display: block; max-width: 100%; }
 .hero { position: relative; height: 100svh; min-height: 640px; display: grid; grid-template-rows: 1fr auto; background: var(--night); }
 .frames { position: relative; overflow: hidden; }
 .frames img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; transition: opacity var(--d-scene) var(--ease); }
-.strip { background: var(--night); color: var(--on-night); padding: var(--s3) var(--pad) var(--s4); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s2) var(--s5); align-items: end; }
-.strip h1 { font-size: var(--t3); line-height: 1.2; font-weight: 500; letter-spacing: -0.01em; max-width: 36ch; }
-.strip h1 .clock { color: var(--brass); }
-.strip .sub { margin-top: 6px; color: var(--on-night-muted); }
-.track { grid-column: 1 / -1; }
+.strip { background: var(--night); color: var(--on-night); padding: var(--s2) var(--pad) 84px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s2) var(--s5); align-items: end; }
+.strip > div:first-child { grid-row: 2; }
+.strip > .btn { grid-row: 2; }
+.track { grid-row: 1; }
+.nowbtn { grid-row: 1; }
+.strip .now { font-size: var(--t3); line-height: 1.2; font-weight: 500; letter-spacing: -0.01em; max-width: 36ch; text-wrap: balance; }
+.strip .now .clock { color: var(--brass); }
+.strip .sub { margin-top: 6px; color: var(--on-night-muted); font-size: var(--t2); font-weight: 400; letter-spacing: 0; }
+.track { grid-column: 1 / 2; position: relative; padding-bottom: 50px; }
+.nowbtn { align-self: start; justify-self: end; font: inherit; font-weight: 600; color: var(--on-night-muted); background: none; border: 0; min-height: 44px; padding: 0; cursor: pointer; }
+.nowbtn[aria-pressed="true"] { color: var(--brass); }
 .track input[type="range"] { width: 100%; margin: 0; height: 44px; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; }
 .track input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: var(--line-night); }
 .track input[type="range"]::-moz-range-track { height: 2px; background: var(--line-night); }
 .track input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -10px; border-radius: 50%; background: var(--brass); border: 4px solid var(--night); box-shadow: 0 0 0 1px var(--brass); }
 .track input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--brass); border: 4px solid var(--night); }
-.stops { display: grid; grid-template-columns: repeat(5, auto); justify-content: space-between; margin-top: 2px; }
-.stops button { font: inherit; font-size: var(--t1); color: var(--on-night-muted); background: none; border: 0; padding: 10px 0; min-height: 44px; cursor: pointer; text-align: left; }
+.stops { position: absolute; left: 11px; right: 11px; top: 44px; height: 56px; }
+.stops button { position: absolute; top: 0; transform: translateX(-11px); white-space: nowrap; font: inherit; font-size: var(--t1); color: var(--on-night-muted); background: none; border: 0; padding: 10px 0; min-height: 44px; cursor: pointer; text-align: left; }
+.stops button span { display: block; }
 .stops button b { display: block; color: var(--on-night); font-weight: 600; font-size: var(--t2); }
 .stops button[aria-pressed="true"] b { color: var(--brass); }
 @media (max-width: 760px) {
   .hero { min-height: 0; }
   .frames img { object-position: 68% 50%; }
   .strip { grid-template-columns: 1fr; padding-top: var(--s3); padding-bottom: var(--s3); }
-  .strip h1 { font-size: 1.375rem; }
+  .strip .now { font-size: 1.375rem; }
   .strip .btn { width: 100%; }
-  .stops { grid-template-columns: repeat(5, 1fr); }
-  .stops button { font-size: 0.75rem; }
-  .stops button b { font-size: 1rem; }
+  .strip { grid-template-columns: minmax(0, 1fr) auto; }
+  .strip > div:first-child { grid-column: 1 / -1; grid-row: 2; }
+  .strip > .btn { grid-column: 1 / -1; grid-row: 3; }
+  .strip { padding-bottom: 76px; }
+  .track { padding-bottom: 40px; }
+  .stops button span { display: none; }
+  .stops button b { font-size: 0.9375rem; }
 }
 
 /* title card */
@@ -171,3 +182,7 @@ img { display: block; max-width: 100%; }
 .faq details p { margin-top: var(--s1); color: var(--muted); max-width: 62ch; padding-bottom: var(--s2); }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (max-width: 760px) {
+  .hdr .right a.num { display: none; }
+  .stops button b { font-size: 0.8125rem; }
+}
