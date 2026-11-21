@@ -8,7 +8,7 @@
 :root {
   /* colour: blue hole lane. Paper ground, deep blue fields, one sun accent for the action. */
   --paper: #f3f7f6; --paper-2: #e2eded; --ink: #0a2b3a; --muted: #46606b; --line: #c6d8da;
-  --blue: #0b4f6c; --blue-2: #0f5f80; --on-blue: #f3f7f6; --on-blue-muted: #bcdbe2; --on-blue-line: rgba(243, 247, 246, .24);
+  --blue: #0b4f6c; --blue-2: #0f5f80; --on-blue: #f3f7f6; --on-blue-muted: #d0e6eb; --on-blue-line: rgba(243, 247, 246, .24);
   --aqua: #9ed8db; --sun: #f2d16b; --sun-2: #f7dd8c;
   /* type */
   --f-display: "Syne", "Syne fallback", sans-serif; --f-text: "Work Sans", "Work fallback", sans-serif;
@@ -78,14 +78,16 @@ address { font-style: normal; }
 
 /* 1. the first screen: the boat, and the ruler that prices it */
 .hero { background: var(--blue); color: var(--on-blue); height: max(100svh, 700px); display: grid; grid-template-rows: minmax(0, 1fr) auto; padding-top: 76px; }
-.hero__main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 43%); gap: var(--s-7); align-items: center; padding-block: var(--s-4) var(--s-6); min-height: 0; }
+.hero__main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 50%); gap: var(--s-7); align-items: center; padding-block: var(--s-4) var(--s-6); min-height: 0; }
 .hero__title { font: 700 var(--t-7)/.96 var(--f-display); letter-spacing: -.045em; }
 .hero__title span { display: block; overflow: hidden; padding-bottom: .08em; }
 .hero__title i { display: block; font-style: normal; animation: rise var(--d-3) var(--e-out) both; }
 .hero__title span + span i { animation-delay: 90ms; }
 .hero__lede { margin-top: var(--s-5); font-size: var(--t-4); line-height: 1.4; max-width: 27em; color: var(--on-blue-muted); animation: fade var(--d-3) ease 250ms both; }
-.hero__photo { position: relative; height: 100%; max-height: 600px; min-height: 280px; border-radius: var(--r-2); overflow: hidden; background: var(--blue-2); animation: fade var(--d-3) ease 120ms both; }
-.hero__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 72%; transform-origin: 58% 72%; transition: transform var(--d-3) var(--e-out); }
+.hero__photo { position: relative; height: 100%; max-height: 640px; min-height: 280px; width: min(calc(100% + max(var(--gutter), (100vw - 1368px) / 2 + var(--gutter))), 820px); justify-self: start; border-radius: var(--r-2) 0 0 var(--r-2); overflow: hidden; background: var(--blue-2); animation: fade var(--d-3) ease 120ms both; }
+.hero__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 72%; transform-origin: 58% 72%; transition: transform var(--d-3) var(--e-out); animation: drift 22s ease-in-out 1.2s infinite alternate; will-change: transform; }
+@keyframes drift { from { scale: 1; translate: 0 0; } to { scale: 1.045; translate: -1.2% -.8%; } }
+@media (prefers-reduced-motion: reduce) { .hero__photo img { animation: none; } }
 .hero__rate { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-8); align-items: end; padding-block: var(--s-5) 104px; border-top: 1px solid var(--on-blue-line); max-width: none; padding-inline: max(var(--gutter), calc((100vw - 1368px) / 2 + var(--gutter))); }
 .hero__ask { font-size: var(--t-3); font-weight: 600; margin-bottom: var(--s-4); }
 .hero__ask span { font-weight: 400; color: var(--on-blue-muted); margin-left: var(--s-2); }
@@ -116,21 +118,21 @@ address { font-style: normal; }
   .hero { height: auto; padding-top: 60px; display: block; }
   .hero__main { display: flex; flex-direction: column; align-items: stretch; gap: var(--s-4); padding-block: var(--s-2) var(--s-4); }
   .hero__lede { margin-top: var(--s-3); font-size: 16px; }
-  .hero__photo { height: auto; aspect-ratio: 16 / 9; min-height: 0; max-height: 46svh; }
+  .hero__photo { height: auto; width: auto; margin-right: calc(-1 * var(--gutter)); border-radius: var(--r-2) 0 0 var(--r-2); aspect-ratio: 16 / 9; min-height: 0; max-height: 46svh; }
   .hero__photo img { object-position: 55% 74%; }
   .hero__rate { grid-template-columns: minmax(0, 1fr); gap: var(--s-3); border-top: 0; padding-block: 0 76px; }
   .hero__ask { font-size: 16px; margin-bottom: var(--s-1); } .hero__ask span { display: none; }
-  .ruler__track { height: 66px; } .ruler__line { top: 44px; } .ruler__rider { top: 45px; }
+  .ruler__track { height: 72px; } .ruler__cells span { height: 30px; padding-top: 6px; } .ruler__line { top: 48px; } .ruler__rider { top: 49px; }
   .ruler__cells { margin-inline: 0; }
-  .ruler__tiers { display: flex; flex-wrap: wrap; gap: 2px var(--s-4); margin-top: 0; }
-  .ruler__tiers li { border: 0; padding: 0; } .ruler__tiers li span, .ruler__tiers li b { display: inline; font-size: var(--t-1); }
+  .ruler__tiers { display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; gap: 0 var(--s-3); margin-top: var(--s-1); }
+  .ruler__tiers li { grid-column: auto !important; border: 0; padding: 0; white-space: nowrap; } .ruler__tiers li span { display: block; font-size: 12px; } .ruler__tiers li b { display: block; font-size: var(--t-2); }
   .hero__dial { min-width: 0; }
   .hero__result { grid-template-columns: auto 1fr; align-items: center; min-width: 0; gap: var(--s-2) var(--s-4); }
   .hero__figure { font-size: 56px; } .hero__per { font-size: var(--t-3); }
   .hero__total { grid-column: 1 / -1; font-size: var(--t-2); margin: 0; order: 3; }
   .hero__result .btn { grid-column: 1 / -1; order: 4; width: 100%; }
   .hero__step .stepper button { width: 44px; } .hero__step .stepper output { min-width: 4.6em; }
-  .hero__step { display: block; justify-self: end; }
+  .hero__step { display: none; }
 }
 
 /* 2. the boat, in words */

@@ -62,9 +62,11 @@
     "typography": 4,
     "composition": 4,
     "colour": 4,
-    "fit": 5,
+    "fit": 4,
     "distinct": 4,
-    "references": 4
+    "references": 3,
+    "by": "independent critic mode 2, after one fix pass",
+    "date": "2026-11-21"
   },
   "critic_note": "Self-scores only. Awaiting independent critic.",
   "current_site_findings": [
@@ -94,7 +96,7 @@
     "blockers": 0,
     "warnings": 1
   },
-  "notes": "awaiting independent critic. BLIND: the sandbox blocks outside hosts, so look.mjs references and their live site were not seen; their photos were viewed through a Lovable contact sheet (project b5272829, two rounds, own photos only, nothing generated) and QA screenshots use low-resolution crops of that sheet routed in with page.route, so photos look softer there than live. Audit done this session (Squarespace + Booqable, booking-site, priority B). qa.mjs: 0 blockers; the one warning is the shared concept button (32 px tall). interact.mjs: 18 buttons, 0 dead, 0 JS errors on index; faq.html uses native details, which the tool does not count. distinct.mjs: distinct (closest 66). LivingWater needs CORS from the Squarespace CDN; if refused, the plain photo stays (not verifiable here). Decisions: boat photo kept at 620 css px or less because the source is 844 px; pig photos, Unsplash hero and the Google Maps boundary screenshot not used; reviews shown without names or stars; no aggregateRating. Stitched full-page screenshots hide the fixed tab and concept tag after the first viewport.",
+  "notes": "awaiting independent critic. BLIND: the sandbox blocks outside hosts, so look.mjs references and their live site were not seen; their photos were viewed through a Lovable contact sheet (project b5272829, two rounds, own photos only, nothing generated) and QA screenshots use low-resolution crops of that sheet routed in with page.route, so photos look softer there than live. Audit done this session (Squarespace + Booqable, booking-site, priority B). qa.mjs: 0 blockers; the one warning is the shared concept button (32 px tall). interact.mjs: 18 buttons, 0 dead, 0 JS errors on index; faq.html uses native details, which the tool does not count. distinct.mjs: distinct (closest 66). LivingWater needs CORS from the Squarespace CDN; if refused, the plain photo stays (not verifiable here). Decisions: boat photo kept at 620 css px or less because the source is 844 px; pig photos, Unsplash hero and the Google Maps boundary screenshot not used; reviews shown without names or stars; no aggregateRating. Stitched full-page screenshots hide the fixed tab and concept tag after the first viewport. | 2026-11-21 final check: independent critic (mode 2) first scored photo 3, comp 3, refs 3. One fix pass: boat photo unboxed and bleeding off the right edge (about 720 css px, source 844) with a slow push-in drift, muted text contrast raised, phone stepper removed so the ruler is the one duration control, tiers in one tabular row. Re-score: all 4 except references 3. Left needs-review. Reason: the delivery chips and add-on steppers mid-page read like a form (critic suggests a tappable Sea of Abaco map of cays), the FAQ page reads like paperwork (lead with a large tariff card), and the 7 tick label hides under the ruler thumb.",
   "built_at": "2026-11-21T12:48:41.857384+00:00",
   "review_claimed_at": "2026-11-21T13:20:20.943Z"
 }
