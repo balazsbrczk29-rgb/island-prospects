@@ -6,5 +6,34 @@
  "url": "fernandezbayvillage.com",
  "url_source": "prospects",
  "old_check": "LOADED",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": true,
+  "booking_engine": "innRoad (fernandezbayvillage.client.innroad.com)",
+  "products_or_listings": 10,
+  "pages": 11,
+  "platform": "Squarespace",
+  "latest_year": 2024,
+  "modernity": 3,
+  "concept_type": "booking: cottages and villas handing off to their innRoad engine, plus WhatsApp enquiry for villas, groups and pilots",
+  "must_keep": [
+   "Book now to innRoad",
+   "8 cottages and 2 villas with features",
+   "dining prices and meal plan",
+   "getting here (Makers Air, Western Air, private pilots, 15% PILOT code)",
+   "WhatsApp 242-808-5711 and reservations email",
+   "weddings and events"
+  ],
+  "weaknesses": [
+   "homepage video fails to load twice",
+   "newsletter block shows a setup error to visitors",
+   "no meta descriptions and the default Squarespace favicon",
+   "Cat Island and New Bight absent from the first screen",
+   "two front-desk numbers on different pages",
+   "Click Here and Learn More buttons"
+  ],
+  "priority": "A",
+  "note": "Family-run Cat Island cottage resort on Squarespace with innRoad booking; strong own photography."
+ }
 }

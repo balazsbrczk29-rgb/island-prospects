@@ -1,13 +1,14 @@
 {
  "slug": "fernandez-bay-village",
  "niche": "hospitality-stay",
- "archetype": "A11",
- "archetype_name": "Horizontal journey",
+ "archetype": "A03",
+ "archetype_name": "Cinematic chapters",
  "lane": "P07",
  "lane_name": "Abaco pine",
  "type": "T08",
  "type_name": "Warm humanist",
- "nav": "N9",
- "motion": "M2",
- "dealt_at": "2026-11-08T15:22:55.728Z"
+ "nav": "N3",
+ "motion": "M1",
+ "dealt_at": "2026-11-21T18:05:53.515Z",
+ "chosen": true
 }

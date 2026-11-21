@@ -78,3 +78,32 @@ Room rates (booking engine shows them), check-in times, exact street address (no
 
 ## Scorecard (after QA)
 See status notes.
+
+---
+# Generation 2 design plan (2026-11-21)
+
+**Big idea.** The site is a film of one day in Fernandez Bay, shot in their own photographs: the page opens letterboxed like a cinema screen, and scrolling plays the day (the beach through the sea grape, coffee on the porch, breakfast, kayaks, the Hermitage, sunset, the Tiki Bar, dinner and the bonfire), with each line of subtitle a real fact and price. Check availability sits in the letterbox for the whole film.
+
+**Direction.** A03 Cinematic chapters + P07 Abaco pine + T08 Warm humanist (Gloock display, Mulish text). Why: their photographs (2500 px, one professional shoot, one grade) are the best asset of any resort in this batch, and the brand truth is a day that ends at a bonfire; a film of that day is the truest structure. Pine (#2F5B3A family, casuarinas of the bay) for the letterbox bars and one section; the rest of the page on a pale sea-grape paper (#f3f4ee). Nav N3 (chapter list in the top letterbox bar), motion M1 (scroll-scrubbed crossfades, slow Ken Burns).
+
+**Fonts.** Gloock 400 (display, 64-96 px, sentence case) + Mulish variable (text and subtitles). Self-hosted.
+
+**Photo set (own, images.squarespace-cdn.com, Lovable gallery ip-assets-fernandez-bay-village, all 2500x1667 except 7817 at 2048x1365):**
+Film frames: 8323 beach through sea grape (title frame), 7817 Adirondack chair on Shane's Shack porch, french toast, 8209 kayaks on the sand, 8430 the Hermitage, 7819 sunset beach and palms, 8406 Tiki Bar drinks, 8141 Clubhouse at dusk. Planner and stay page: 8392 Coconut Palm, 8089 Royal Palm, 8106 Seabreeze, 8099 Tamarind, 8120 Caretaker's, 8131 Reefs Room, 8094 Traveler's Palm, 7736 Manor House, 7792 garden shower. Displayed at most 1440 wide (under source). Not used: guest portrait (8273, a person), bottle close-up.
+
+**Storyboard (desktop 1440x900).**
+1-8. The film (pinned, 8 frames, ~6 screens of scroll): top letterbox bar (name, chapter list, phone), the frame (photo, slow Ken Burns, crossfade), bottom letterbox bar with the subtitle on the left (chapter name + one sourced line) and Check availability + WhatsApp on the right. Frame 1 subtitle: "A beach view from every room. Fernandez Bay, Cat Island, five minutes from New Bight airport."
+9. Who's coming? Choose two of us / a family / friends together: the cottages or villa that fit light up with their photos (king cottages; adjoining pairs Coconut Palm + Royal Palm and Traveler's Palm + Tamarind; the Beach House and the four-bedroom Manor House), each with Check availability.
+10. Getting here, three routes in one row of text: Fort Lauderdale on Makers Air (10% off for guests), Nassau on Western Air (three times a week, about thirty minutes), your own plane (5,000 ft paved, customs 9 to 5, 15% off with PILOT).
+11. End credits on pine: every practical fact rolling in centred columns (meals and prices, Clubhouse, activities, phone, WhatsApp, email), then the WhatsApp enquiry on paper.
+Inner page stay.html: eight cottages and two villas with photos and features, Check availability.
+
+**Phone first three screens.** 1. Top bar (name, Book), the frame (portrait crop of the beach), bottom bar with subtitle and a full-width Check availability. 2-3. The film continues, subtitle and button stay in the bottom bar.
+
+**Conversion.** Primary: Check availability (innRoad) in the letterbox for the whole film, then in the planner. Secondary: WhatsApp 242-808-5711 enquiry, reservations email.
+
+**Tier.** Standard: their photography carried as film. No 3D.
+
+**Differs.** No other site opens as a letterboxed film with a persistent booking bar; not the gen-1 passe-partout frame.
+
+BLIND: outside images blocked in the sandbox; verified via the Lovable gallery screenshot.
