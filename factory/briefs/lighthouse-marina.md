@@ -41,3 +41,35 @@ Feel: practical, salty, trusted, compact, nautical.
 
 ## Assumptions to confirm
 Liquor store status; cottages availability; dockage rates (not published, shown as "ask"); DIY rate ($50 used, rates page is newer); lighthouse colours/date from another Hope Town business's FAQ.
+
+---
+# Generation 2 design plan (Nov 21, 2026)
+
+**Big idea.** You start on the gallery of the Elbow Reef Lighthouse, 1862: scrolling turns your head slowly across a real panorama of Hope Town Harbour shot from that gallery, then brings you down the tower to the fuel dock at its foot, the only marine fuel on Elbow Cay.
+
+**Direction.** A11 Horizontal journey + P13 Hull and brass (light hull-paper ground #F1EADB, navy #13263F fields, brass #C9A15B accent, teak #8A5A3B rare) + T03 Swiss grotesk (Schibsted Grotesk only, 400/600, sizes 14/18/28/56/120). Why: the marina's one true asset is a place you see sideways, from the lighthouse and along the dock; a precise grotesk suits a working fuel dock and boatyard (captains, renters, owners), not a luxury serif. Hope Town Inn & Marina (same harbour) is A08 split + P12 + Fraunces serif; Conch Inn is A07 letter + Newsreader serif; this is a sideways grotesk film, nothing alike.
+
+**Fonts.** Schibsted Grotesk variable, self-hosted (@fontsource-variable/schibsted-grotesk).
+
+**Photos (sources and sizes; never shown larger).**
+- Panorama from the lighthouse gallery, Roman Tokman, CC BY-SA 4.0, Commons 3840x880 thumb (original 16382x3754): hero band at max 720 px tall desktop (3140 px wide).
+- Own (htlighthousemarina.com, Wix originals): dock + boat under the lighthouse 2869x3869; fuel dock wide 2048x1533; OPEN flag dock 3024x4032; ship's store building 3024x4032; forklift with boat and lighthouse 3621x2716; cottage 2931x3908; store merch 3024x3024 (lighthouse glass), 3024x3024 (calendar crate), 1242x1242 (bags).
+- Commons Hopetown-lighthouse.jpg, Dmadeo, CC BY-SA 4.0, 1308x982 (small: only in a small frame if used).
+- One grade: their photos are HDR-ish and saturated; present them unfiltered but slightly lower saturation via CSS (filter on img is static, ok) for consistency.
+
+**Storyboard (desktop 1440x900).**
+1. Hero (pinned 260vh): thin header (wordmark, Fuel / Slips / Boatyard / Store, phone). Headline 120px: "The only marine fuel on Elbow Cay." Line: "At the foot of the Hope Town lighthouse since 1980. Six slips, a boatyard and a ship's store." Brass CTA "Request a slip or service", text links "Call 242 366 0154" and "VHF 16". Lower 60% of the screen: the panorama band; scroll pans it left to right with three film-subtitle captions ("From the lighthouse gallery", "Hope Town across the harbour", "The lantern room, built 1862"). Credit line under band.
+2. "At the foot of the tower." Navy field: the dock photo with the lighthouse, tall, left 5/12; right: fuel facts as large type: 2 gas, 1 diesel; the only marine fuel station on Elbow Cay; docks and fuel station rebuilt; bait and ice on the dock.
+3-5. Horizontal journey (pinned track, paper ground, progress timeline at the bottom doubling as nav): frames, each a large photo + name + one sourced line + action: Slips (OPEN flag: 6 protected slips, 60 ft LOA, 6 ft at low water, 30 and 50 amp) / Boatyard (forklift: haul and dry storage to 10 tons, Mon-Fri 8-4) / Mechanic (fuel dock wide: factory-trained technicians, Mercury Outboard sales and service) / Ship's store (store building: largest rod and tackle selection on the island, Mon-Sat 8-4) / Ashore (cottage: Westview Cottage and Lighthouse Point, currently on long-term rental) / last frame: booking frame (request a slip).
+6. "Will she fit?" checker, the largest thing on its screen: LOA and draft sliders vs 60 ft / 6 ft at low water, live answer (yes / talk to the dockmaster), then "Request this slip" prefilled.
+7. Boatyard rates teaser: three published numbers (haul $5.50/ft single hull, storage from $200/month, mechanic $110/hr) with "Estimate your haul-out" to boatyard.html.
+8. Contact (navy field, calling card): phones (tabular), VHF 16, email, enquiry form (slip / fuel / haul and storage / mechanic / store), hours list (store Mon-Sat 8-4, boatyard Mon-Fri 8-4, laundry daily 8-6). Footer with credits.
+Inner page boatyard.html: the full Nov 2024 rate sheet (tabular, it is published tabular data) + haul-out and storage estimator with VAT.
+
+**Phone (390x844).** 1: header, headline (56px), line, CTA + call, panorama band 300 px tall panning on scroll. 2: dock photo full width then fuel facts. 3: dock frames as native swipe with snap.
+
+**Conversion.** Primary: "Request a slip or service" (email via enquiry.js, mailto lighthousemarinaht@gmail.com, no WhatsApp sourced). Secondary: tap to call 242 366 0154, VHF 16. Phone and VHF on the first screen.
+
+**Tier.** Standard (no WebGL): the arrival is carried by a real panorama scrubbed by scroll, plus photography and type. 3D adds nothing a real photo from the gallery doesn't already prove.
+
+**Distinct.** No serif, no split, no letter; the page moves sideways twice (the view, then the dock), grotesk on hull-paper with navy fields.

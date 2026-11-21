@@ -6,5 +6,34 @@
  "url": "htlighthousemarina.com",
  "url_source": "prospects",
  "old_check": "LOADED: (c) 2023, gmail contact",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 8,
+  "platform": "Wix",
+  "latest_year": 2023,
+  "modernity": 2,
+  "concept_type": "brochure: harbour services + boatyard rates + slip/service request",
+  "must_keep": [
+   "fuel dock and only marine fuel on Elbow Cay",
+   "6 slips, 60 ft LOA, 6 ft draft",
+   "boatyard haul-out and storage rates (Nov 2024)",
+   "ship store with hours",
+   "mechanic and Mercury service",
+   "phones, VHF 16, email",
+   "rental cottages mention"
+  ],
+  "weaknesses": [
+   "(c) 2023 footer, Gmail contact, default Wix favicon and title",
+   "no dockage rates; Dockage button leads to boatyard rates",
+   "DIY rate $40/day on one page, $50/day on another",
+   "liquor store reopening soon vs listed as open",
+   "small blurred thumbnails, all-caps shouting headline"
+  ],
+  "priority": "A",
+  "note": "Dated Wix brochure for a small working fuel dock and boatyard; weak, easy win."
+ }
 }
