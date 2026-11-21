@@ -6,5 +6,30 @@
  "url": "hardinglee.com",
  "url_source": "brief",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 3,
+  "platform": "WordPress (WPBakery, Slider Revolution)",
+  "latest_year": 2022,
+  "modernity": 2,
+  "concept_type": "brochure: practice areas routed to the right attorney + offices + enquiry",
+  "must_keep": [
+   "both offices (Nassau, Long Island) with phones and fax",
+   "two attorney bios",
+   "direct message / enquiry form"
+  ],
+  "weaknesses": [
+   "'Welcome To' hero with one long paragraph",
+   "not updated since July 2022, titles 'Front page', ?page_id URLs",
+   "associate surname differs between pages (Adderley vs Johnson)",
+   "senior partner's Bank of The Bahamas chair hidden in bold bio text",
+   "no addresses on the homepage, Long Island office under-presented"
+  ],
+  "priority": "A",
+  "note": "Three-page 2022 WordPress brochure for a two-attorney boutique firm; weak, dated."
+ }
 }

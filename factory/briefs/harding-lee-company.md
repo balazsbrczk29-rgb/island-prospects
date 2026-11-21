@@ -46,3 +46,31 @@ Interactions: matter selector (maps matter to attorney by their published areas,
 
 ## Unknowns
 Office hours, year of Bank of The Bahamas appointment, social links.
+
+---
+# Generation 2 design plan (2026-11-21)
+
+**Big idea:** the first screen asks the client what they are dealing with (buying land on Long Island, forming a company, an adoption) and answers on the spot with the Harding-Lee attorney whose published practice covers it, her direct line and a prepared letter, beside sea light falling through Nassau louvres onto a ribboned deed.
+
+**Direction:** A12 Service desk + P08 Bay Street pastel + T02 Text-led editorial (nav N10, motion M10). Why: a two-attorney boutique wins on "a senior lawyer will take my call", so the client's task is the hero (service desk), set with the quiet authority of editorial book type; Bay Street pastel because the chambers sit on Dowdeswell & Deveaux Streets in old Nassau. Pastel yellow is a field for ONE band (the record); page ground is a warm off-white (#FBF7EC); ink #2A2420; shutter green #3E7A63 is the only accent (primary CTA, active matter).
+**Fonts:** Newsreader variable (opsz + wght), self-hosted, one family: display 64-72 px max, text 19 px, labels in small caps of the text face. Tabular figures for phones and years.
+
+**Photos (seen in Lovable gallery ip-assets-harding-lee-company; illustrative, replace with your own):**
+- louvre-desk.jpg (generated, >=1600 w): hero right column, shown at most ~620 css px wide (1240 device px), never larger than source.
+- dowdeswell-facade.jpg (generated, 4:5, >=1600 w): record band, ~460 px wide. Captioned "Downtown Nassau (illustrative)", never claimed as Mecam House.
+- salt-pond-dock.jpg (generated, 16:9, >=1600 w): offices screen, full content width max 1360 px.
+- Portraits donna1 / nadia1 (own site, 184x218 shown on site, 253x300 og variant): shown at 120-150 px wide in small fixed frames only.
+
+**Storyboard (desktop 1440x900):**
+1. Header (wordmark left, Practice / Attorneys / Offices, Nassau phone as text right). Left 7 cols: H1 "What are you dealing with? We will tell you who handles it." + one line (Nassau and Salt Pond, Long Island, since 1996) + six matters as large serif rows with hairlines (the router). Right 5 cols: louvre-desk photograph full hero height; the answer card sits on paper at its foot: portrait, name, why her (her listed areas), primary "Write to Mrs. Harding-Lee", secondary "Call Nassau chambers (242) 326-4065".
+2. The record, on the pastel yellow field: facade photo left, and a dated sentence column right: 1982 called to the Bahamas Bar; 14 years at Cash, Fountain & Company (partner; worked with Sir Gerald Cash, tutored under Sir Cyril Fountain); 1996 founds the firm; Nov 2005 Nadia Hope Johnson joins; today Chairperson of the Board of Bank of The Bahamas. Years in tabular figures in a hanging margin.
+3. The two attorneys: one wide letterhead row each, Donna first and larger; small framed portrait, name 48 px, role, areas as a run-in sentence, service, direct email link. No cards.
+4. Practice in plain words: a two-column typeset index of what the firm does (commercial, conveyancing, incorporation, transactions, insurance, banking, estates, resort development, gaming, employment, family), each with the attorney's initials, "Every court of the Commonwealth" as the closing line; link to practice.html.
+5. Two offices: the Salt Pond dock photograph full width, office switcher (Nassau chambers / Salt Pond, Long Island) with address, tap-to-call numbers, fax, directions link.
+6. Write to us: the enquiry (matter prefilled from the router, attorney, office, name, how to reply, short note with "do not include confidential details") composing an email to the right attorney. Calling-card footer with both offices.
+**Phone 390x844:** (1) header, H1, one-line context, the six matter rows; (2) the answer card with portrait and full-width "Write to ..." CTA and call link (headline + CTA inside 844 px: router rows are compact 48 px), then the desk photo as a 4:3 frame; (3) the record on yellow, years in the margin.
+**Inner page practice.html:** each matter in plain language with the responsible attorney and a "Write about this" link, plus an FAQ accordion.
+
+**Conversion:** router -> answer card -> "Write to <attorney>" (prepared email) on screen 1; call Nassau or Long Island as text links on every screen; full enquiry at the end.
+**Tier:** standard (no 3D: a law firm wins on calm, type and light).
+**Different from competitors in this repo:** no full-bleed hero, no scroll film, no dark ground; the client's task leads, set as a service desk in book type on Bay Street pastel.
