@@ -1,18 +1,101 @@
-export const IMG = "https://i0.wp.com/www.hardinglee.com/wp-content/uploads/2022/07/"
+export const IMG = "https://ip-assets-harding-lee-company.lovable.app/assets/"
 
-export const ATTORNEYS = {
-  dhl: { name: "Donna M. Harding-Lee", role: "Senior Partner", email: "dharding-lee@hardinglee.com", photo: `${IMG}donna1.jpg?resize=368%2C436` },
-  nhj: { name: "Nadia Hope Johnson", role: "Associate", email: "nhjohnson@hardinglee.com", photo: `${IMG}nadia1.jpg?resize=368%2C436` },
-} as const
-export type AKey = keyof typeof ATTORNEYS
+export type AKey = "dhl" | "nhj"
 
-// Matters drawn only from the practice areas the firm and its attorneys publish.
-export const MATTERS: { id: string; label: string; area: string; who: AKey[]; note: string; ask: string[] }[] = [
-  { id: "property", label: "Buying or selling property", area: "Conveyancing and real property", who: ["dhl", "nhj"], note: "Conveyancing is a core practice of the firm and an area of both attorneys.", ask: ["Buying or selling", "Island and property", "Target completion"] },
-  { id: "company", label: "Forming or running a company", area: "Company incorporation, corporate and commercial law", who: ["dhl"], note: "Company incorporation and commercial law are among the firm's stated focus areas.", ask: ["Company name, if chosen", "Local or international owners", "Purpose of the company"] },
-  { id: "family-island", label: "A resort or Family Island development", area: "Resort development, with particular focus on the Family Islands", who: ["dhl"], note: "Mrs. Harding-Lee's practice includes resort development, with particular focus in the Family Islands.", ask: ["Island and site", "Stage of the project", "Your role"] },
-  { id: "estate", label: "Planning an estate", area: "Estate planning", who: ["dhl"], note: "Estate planning is listed among the Senior Partner's areas of practice.", ask: ["Who the plan is for", "Assets in The Bahamas", "Anything urgent"] },
-  { id: "employment", label: "An employment question", area: "Employment law", who: ["dhl", "nhj"], note: "Employment law is an area of both attorneys.", ask: ["Employer or employee", "What happened, briefly", "Any deadline"] },
-  { id: "family", label: "A family or adoption matter", area: "Family law", who: ["nhj"], note: "Family law is an area of interest of Mrs. Johnson, an adoption advocate.", ask: ["Type of matter", "Island", "Best time to call"] },
-  { id: "finance", label: "Banking, insurance or gaming", area: "Banking, insurance and gaming law", who: ["dhl"], note: "Banking and insurance are firm focus areas; gaming law is among the Senior Partner's practice areas.", ask: ["Your organisation", "Nature of the matter", "Local or international"] },
+export const ATTORNEYS: Record<AKey, {
+  name: string; short: string; role: string; email: string; portrait: string; initials: string
+  areas: string; record: string[]
+}> = {
+  dhl: {
+    name: "Donna M. Harding-Lee",
+    short: "Mrs. Harding-Lee",
+    role: "Senior Partner",
+    initials: "DHL",
+    email: "dharding-lee@hardinglee.com",
+    portrait: "https://i0.wp.com/www.hardinglee.com/wp-content/uploads/2022/07/donna1.jpg",
+    areas: "Corporate and commercial law, conveyancing, real property, estate planning, resort development with a particular focus on the Family Islands, banking, gaming and employment law.",
+    record: [
+      "Former partner of Cash, Fountain & Company, where she worked closely with Sir Gerald Cash and tutored under Sir Cyril Fountain, a former Chief Justice.",
+      "Chairperson of the Board of Bank of The Bahamas.",
+      "Has served on the Judicial and Legal Services Commission and the Disciplinary Tribunal of The Bahamas Bar Association.",
+    ],
+  },
+  nhj: {
+    name: "Nadia Hope Johnson",
+    short: "Mrs. Johnson",
+    role: "Attorney",
+    initials: "NHJ",
+    email: "nhjohnson@hardinglee.com",
+    portrait: "https://i0.wp.com/www.hardinglee.com/wp-content/uploads/2022/07/nadia1.jpg",
+    areas: "Conveyancing, employment and family law. An adoption advocate, passionate about children's rights.",
+    record: [
+      "LLB, University of Buckingham. Called to the Bar of England & Wales on 24 November 2005 (Middle Temple) and to The Bahamas Bar on 9 December 2005.",
+      "With the firm since November 2005.",
+      "Mentor and board member, Ranfurly Homes for Children.",
+    ],
+  },
+}
+
+export type Matter = { id: string; label: string; who: AKey[]; why: string; plain: string }
+
+export const MATTERS: Matter[] = [
+  { id: "property", label: "Buying or selling property", who: ["dhl", "nhj"],
+    why: "Conveyancing and real property are in both attorneys' practice, in Nassau and on Long Island.",
+    plain: "Title, conveyancing and the transfer of land and homes, for buyers and sellers in Nassau, on Long Island and across the Family Islands." },
+  { id: "development", label: "Land or resort development in the Family Islands", who: ["dhl"],
+    why: "Resort development, with a particular focus on the Family Islands, is one of Mrs. Harding-Lee's areas.",
+    plain: "The legal side of developing land and resorts outside Nassau, from acquisition to the transactions that follow." },
+  { id: "company", label: "Forming or running a company", who: ["dhl"],
+    why: "Company incorporation and commercial law are at the core of the firm's practice and of Mrs. Harding-Lee's.",
+    plain: "Company incorporation, corporate and commercial law, and international and domestic transactions." },
+  { id: "finance", label: "A banking, insurance or gaming matter", who: ["dhl"],
+    why: "Banking and gaming law are among Mrs. Harding-Lee's areas; insurance and banking are a focus of the firm.",
+    plain: "Banking, insurance and gaming law, for institutional and individual clients, locally and worldwide." },
+  { id: "estate", label: "Planning an estate", who: ["dhl"],
+    why: "Estate planning is one of Mrs. Harding-Lee's areas.",
+    plain: "Estate planning for families with property and interests in The Bahamas." },
+  { id: "employment", label: "An employment question", who: ["dhl", "nhj"],
+    why: "Employment law is in both attorneys' practice.",
+    plain: "Employment law for employers and employees." },
+  { id: "family", label: "Family law or an adoption", who: ["nhj"],
+    why: "Family law is one of Mrs. Johnson's areas, and she is an adoption advocate.",
+    plain: "Family law and adoption, handled with care for the children involved." },
 ]
+
+export const OFFICES = {
+  nassau: {
+    name: "Nassau chambers",
+    island: "New Providence",
+    lines: ["Mecam House", "Dowdeswell & Deveaux Streets", "P.O. Box N-877, Nassau"],
+    phones: [["(242) 326-4065", "+12423264065"], ["(242) 326-4066", "+12423264066"], ["(242) 328-7712", "+12423287712"]],
+    fax: "(242) 326-4067",
+    map: "https://www.google.com/maps/search/?api=1&query=Dowdeswell+Street+and+Deveaux+Street+Nassau+Bahamas",
+  },
+  longisland: {
+    name: "Long Island office",
+    island: "Long Island",
+    lines: ["Salt Pond, Long Island", "P.O. Box LI 30-129"],
+    phones: [["(242) 338-0009", "+12423380009"], ["(242) 338-0042", "+12423380042"]],
+    fax: "(242) 338-0092",
+    map: "https://www.google.com/maps/search/?api=1&query=Salt+Pond+Long+Island+Bahamas",
+  },
+} as const
+
+export type OKey = keyof typeof OFFICES
+
+export function letter(m: Matter | null, to: AKey, name = "", reply = "", note = "") {
+  const a = ATTORNEYS[to]
+  const others = m ? m.who.filter(k => k !== to).map(k => ATTORNEYS[k].email) : []
+  const subject = m ? `Enquiry: ${m.label.toLowerCase()}` : "Enquiry"
+  const body = [
+    `Dear ${a.short},`,
+    "",
+    m ? `I would like to discuss a matter concerning ${m.label.charAt(0).toLowerCase() + m.label.slice(1)}.` : "I would like to discuss a matter with you.",
+    note ? `\n${note}` : "",
+    "",
+    `Name: ${name}`,
+    `Best way to reach me: ${reply}`,
+  ].join("\n")
+  const cc = others.length ? `&cc=${others.join(",")}` : ""
+  return `mailto:${a.email}?subject=${encodeURIComponent(subject)}${cc}&body=${encodeURIComponent(body)}`
+}
