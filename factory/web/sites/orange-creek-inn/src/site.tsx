@@ -1,17 +1,34 @@
-import { useEffect, useRef, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
 import { createRoot } from "react-dom/client"
 import Lenis from "lenis"
-import { AnimatePresence, MotionConfig, motion } from "motion/react"
-import { ArrowRight, Menu, X } from "lucide-react"
-import { NAME, PHONE, TEL, EMAIL, BOOK, FACEBOOK, TRIPADVISOR, type Photo } from "./facts"
+import { MotionConfig } from "motion/react"
+import { NAME, PHONE, TEL, EMAIL, BOOK, FACEBOOK, TRIPADVISOR, inDays, offersFor, wayFor, type Origin, type Photo } from "./facts"
 import "./styles.css"
 
-export const spring = { type: "spring", stiffness: 210, damping: 24, mass: 0.9 } as const
+/** A sensible first suggestion: about three weeks out, on a day Makers Air flies, clear of the holiday blackouts. */
+function firstGoodDay() {
+  for (let n = 21; n < 80; n++) {
+    const d = inDays(n)
+    if (wayFor(d, "florida").ok && offersFor(4, "florida", d).every(o => o.status === "ok")) return d
+  }
+  return inDays(21)
+}
+
+/* ---------- the stay being planned, shared by the dates bar, the map and the offers ---------- */
+type Plan = { arrive: string; nights: number; guests: number; origin: Origin }
+type Ctx = Plan & { set: (p: Partial<Plan>) => void }
+const PlanCtx = createContext<Ctx | null>(null)
+export function PlanProvider({ children }: { children: ReactNode }) {
+  const [plan, setPlan] = useState<Plan>(() => ({ arrive: firstGoodDay(), nights: 4, guests: 2, origin: "florida" }))
+  const value = useMemo(() => ({ ...plan, set: (p: Partial<Plan>) => setPlan(o => ({ ...o, ...p })) }), [plan])
+  return <PlanCtx.Provider value={value}>{children}</PlanCtx.Provider>
+}
+export const usePlan = () => useContext(PlanCtx)!
 
 function useWheelSmoothing() {
   useEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches || !matchMedia("(pointer: fine)").matches) return
-    const lenis = new Lenis({ duration: 1, smoothWheel: true, anchors: true })
+    const lenis = new Lenis({ duration: 1, smoothWheel: true, anchors: { offset: -16 } })
     let id = 0
     const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
     id = requestAnimationFrame(raf)
@@ -19,122 +36,79 @@ function useWheelSmoothing() {
   }, [])
 }
 
-/** The reply tab shows only between the first screen and the reply card (a class on <html>, never React state per frame). */
-function useReplyTab() {
+/** The small "Dates" key appears once the dates bar has scrolled away, and hides at the offers and contact (a class on <html>). */
+function useDatesKey() {
   useEffect(() => {
-    const hide = [...document.querySelectorAll("[data-hides-reply]")]
+    const watch = [...document.querySelectorAll("[data-hides-key]")]
     const seen = new Set<Element>()
     const io = new IntersectionObserver(es => {
       es.forEach(e => { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target) })
-      document.documentElement.classList.toggle("show-reply", seen.size === 0)
-    }, { rootMargin: "-80px 0px -80px 0px" })
-    hide.forEach(h => io.observe(h))
-    let down = false
-    const onScroll = () => { const d = window.scrollY > 240; if (d !== down) { down = d; document.documentElement.classList.toggle("scrolled", d) } }
-    window.addEventListener("scroll", onScroll, { passive: true }); onScroll()
-    return () => { window.removeEventListener("scroll", onScroll); io.disconnect(); document.documentElement.classList.remove("show-reply") }
+      document.documentElement.classList.toggle("show-key", seen.size === 0)
+    })
+    watch.forEach(w => io.observe(w))
+    return () => io.disconnect()
   }, [])
 }
 
-const CONTENTS = [
-  ["The inn", "index.html#place"], ["Your studio", "index.html#studios"], ["Days here", "index.html#days"],
-  ["Getting here", "getting-here.html"], ["Check dates", "index.html#reply"],
-] as const
+const LINKS = [["The studio", "#studio"], ["Around you", "#around"], ["Getting here", "#getting-here"], ["Offers", "#offers"]] as const
 
-function Contents({ home }: { home: boolean }) {
-  const [open, setOpen] = useState(false)
-  const opener = useRef<HTMLButtonElement>(null)
-  useEffect(() => {
-    if (!open) return
-    const key = (e: KeyboardEvent) => { if (e.key === "Escape") { setOpen(false); opener.current?.focus() } }
-    addEventListener("keydown", key)
-    return () => removeEventListener("keydown", key)
-  }, [open])
-  const href = (h: string) => (home && h.startsWith("index.html#") ? h.slice(10) : h)
+export function Masthead({ home }: { home: boolean }) {
+  const at = (h: string) => (home ? h : "index.html" + h)
   return (
-    <>
-      <button ref={opener} type="button" className="tab" aria-haspopup="dialog" aria-expanded={open} aria-controls="contents" onClick={() => setOpen(true)}>
-        <Menu aria-hidden /> Contents
-      </button>
-      <AnimatePresence>
-        {open && (
-          <>
-            <motion.button key="veil" type="button" className="veil" aria-label="Close contents" tabIndex={-1} onClick={() => setOpen(false)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} />
-            <motion.nav key="panel" id="contents" className="contents" role="dialog" aria-modal="true" aria-label="Contents" initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", stiffness: 320, damping: 34 }}>
-              <button type="button" className="round contents__close" aria-label="Close contents" autoFocus onClick={() => { setOpen(false); opener.current?.focus() }}><X aria-hidden /></button>
-              <ol>
-                {CONTENTS.map(([label, h]) => <li key={h}><a href={href(h)} onClick={() => setOpen(false)}>{label}</a></li>)}
-              </ol>
-              <div className="contents__foot">
-                <a className="link num" href={TEL}>{PHONE}</a>
-                <a className="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-                <a className="link" href={BOOK} target="_blank" rel="noopener">Book online at BahamaGo</a>
-              </div>
-            </motion.nav>
-          </>
-        )}
-      </AnimatePresence>
-    </>
+    <header className="mast">
+      <a className="mast__name" href={home ? "#top" : "index.html"} aria-label={`${NAME}, home`}>
+        <span>Orange Creek</span> <span>Inn</span>
+      </a>
+      <nav className="mast__nav" aria-label="Sections">
+        {LINKS.map(([l, h]) => <a key={h} href={h === "#getting-here" && !home ? "getting-here.html" : at(h)}>{l}</a>)}
+        {home && <a href="getting-here.html" className="mast__more">Travel guide</a>}
+      </nav>
+      <a className="mast__tel num" href={TEL}>{PHONE}</a>
+    </header>
   )
 }
 
-export function Letterhead({ home }: { home: boolean }) {
+export function Img({ photo, eager = false, sizes, className = "" }: { photo: Photo; eager?: boolean; sizes?: string; className?: string }) {
   return (
-    <header className="sheet sheet--first sheet--above"><div className="letterhead">
-      <a className="letterhead__name" href={home ? "#top" : "index.html"} aria-label={`${NAME}, home`}>{NAME}</a>
-      <p className="letterhead__line">
-        <span>Orange Creek, Cat Island, The Bahamas</span>
-        <a className="num" href={TEL}>{PHONE}</a>
-      </p>
-    </div></header>
-  )
-}
-
-export function Print({ photo, eager = false }: { photo: Photo; eager?: boolean }) {
-  return (
-    <>
-      <img src={photo.src} alt={photo.alt} width={photo.w} height={photo.h} loading={eager ? "eager" : "lazy"} decoding="async" fetchPriority={eager ? "high" : undefined} draggable={false} />
-      <figcaption>{photo.caption}</figcaption>
-    </>
-  )
-}
-
-/** A print set down on the letter: it arrives slightly turned and settles straight, once. */
-export function LaidPrint({ photo, turn = -2.2, className = "" }: { photo: Photo; turn?: number; className?: string }) {
-  return (
-    <motion.figure className={`print ${className}`} initial={{ rotate: turn, y: 22 }} whileInView={{ rotate: 0, y: 0 }} viewport={{ once: true, amount: 0.45 }} transition={spring} whileHover={{ y: -5 }}>
-      <Print photo={photo} />
-    </motion.figure>
+    <img className={className} src={photo.src} alt={photo.alt} width={photo.w} height={photo.h} loading={eager ? "eager" : "lazy"}
+      decoding="async" fetchPriority={eager ? "high" : undefined} sizes={sizes} draggable={false} />
   )
 }
 
 export function Foot() {
   return (
-    <footer className="sheet sheet--below"><div className="foot">
-      <p>{NAME}, Orange Creek, Cat Island, The Bahamas</p>
-      <div className="foot__row">
-        <a className="link num" href={TEL}>{PHONE}</a>
-        <a className="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-        <a className="link" href={FACEBOOK} target="_blank" rel="noopener">Facebook</a>
-        <a className="link" href={TRIPADVISOR} target="_blank" rel="noopener">Tripadvisor</a>
-        <a className="link" href={BOOK} target="_blank" rel="noopener">Book online at BahamaGo</a>
+    <footer className="foot">
+      <div className="foot__in">
+        <p className="foot__name">Orange Creek Inn</p>
+        <p>Orange Creek, just north of Arthur&rsquo;s Town, Cat Island, The Bahamas</p>
+        <ul className="foot__row">
+          <li><a className="link num" href={TEL}>{PHONE}</a></li>
+          <li><a className="link" href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+          <li><a className="link" href={BOOK} target="_blank" rel="noopener">Book on BahamaGo</a></li>
+          <li><a className="link" href={FACEBOOK} target="_blank" rel="noopener">Facebook</a></li>
+          <li><a className="link" href={TRIPADVISOR} target="_blank" rel="noopener">Tripadvisor</a></li>
+        </ul>
+        <p className="foot__small">Photographs by Orange Creek Inn. Offers are published by the Bahama Out Islands Promotion Board and can change; flight times as published by the inn. Map data: Natural Earth.</p>
       </div>
-      <p>Photographs by {NAME}. Offers are published by the Bahama Out Islands Promotion Board and can change.</p>
-    </div></footer>
+    </footer>
   )
+}
+
+export function DatesKey({ home }: { home: boolean }) {
+  return <a className="datekey" href={home ? "#top" : "index.html#top"}>Check dates</a>
 }
 
 export function Page({ home, children }: { home: boolean; children: ReactNode }) {
   useWheelSmoothing()
-  useReplyTab()
+  useDatesKey()
   return (
     <MotionConfig reducedMotion="user">
-      <a className="skip" href="#letter">Skip to the letter</a>
-      <Contents home={home} />
-      <a className="replytab" href={home ? "#reply" : "index.html#reply"}>Check dates <ArrowRight aria-hidden /></a>
-      <div id="top" />
-      {children}
-      <div className="end" />
+      <PlanProvider>
+        <a className="skip" href="#main">Skip to content</a>
+        <div id="top" />
+        {children}
+        <DatesKey home={home} />
+      </PlanProvider>
     </MotionConfig>
   )
 }
