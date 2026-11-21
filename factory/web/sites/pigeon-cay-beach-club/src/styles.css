@@ -8,7 +8,7 @@
 :root {
   /* colour: the Straw market lane, taken from the palapa thatch, the sand and the deep water */
   --ground: #faf5e9; --shell: #fffdf7; --straw: #e4d2a6; --straw-deep: #d6c08c;
-  --ink: #2b2118; --muted: #65533f; --line: #dccfae; --tint: #d9ceb4;
+  --ink: #2b2118; --muted: #574633; --line: #dccfae; --tint: #d9ceb4;
   --teal: #1f4f4a; --teal-deep: #173d39; --on-teal: #f6f0df; --on-teal-muted: #c0d2c9;
   /* type scale */
   --t-xs: 0.8125rem; --t-sm: 0.9375rem; --t-base: 1.0625rem; --t-md: 1.3125rem; --t-lg: 1.75rem; --t-xl: clamp(2rem, 3.4vw, 3rem);
@@ -123,7 +123,7 @@ p { text-wrap: pretty; }
 
 /* 4. the tab: straw field */
 .tab { background: var(--straw); padding-block: var(--s9); }
-.tab-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 27rem); gap: var(--s8); align-items: start; }
+.tab-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 31rem); gap: var(--s8); align-items: start; }
 .field { padding-block: var(--s4); border-top: 1.5px solid var(--ink); display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: var(--s3) var(--s5); align-items: center; }
 .field > label, .field > .lab { font-weight: 600; }
 .field .hint { grid-column: 2; font-size: var(--t-sm); color: var(--muted); margin-top: calc(-1 * var(--s2)); }
@@ -139,15 +139,15 @@ p { text-wrap: pretty; }
 .step button svg { width: 18px; height: 18px; }
 .step output { min-width: 2.5rem; text-align: center; font-family: var(--font-display); font-weight: 620; font-size: var(--t-lg); }
 .date { min-height: 44px; padding: 0 var(--s3); border-radius: var(--r-ctl); border: 1.5px solid var(--ink); background: transparent; font: inherit; color: inherit; max-width: 100%; }
-.bill { position: sticky; top: var(--s5); background: var(--shell); border-radius: var(--r-panel); padding: var(--s6); }
+.bill { position: sticky; top: var(--s5); background: var(--shell); border-radius: var(--r-panel); padding: var(--s7, 40px); box-shadow: 0 30px 60px -40px rgb(43 33 24 / .45); }
 .bill h3 { font-family: var(--font-display); font-weight: 620; font-size: var(--t-lg); letter-spacing: -0.02em; line-height: 1.1; }
 .bill dl { margin-top: var(--s4); }
 .bill dl > div { display: flex; justify-content: space-between; gap: var(--s4); padding-block: 7px; font-size: var(--t-sm); }
 .bill dt { color: var(--muted); }
 .bill .sum { border-top: 1.5px solid var(--ink); margin-top: var(--s2); padding-top: var(--s4); display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); }
 .bill .sum b { font-family: var(--font-display); font-weight: 640; font-size: clamp(2rem, 3vw, 2.75rem); letter-spacing: -0.03em; line-height: 1; }
-.bill .today { margin-top: var(--s3); display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; color: var(--teal); }
-.bill .today b { font-family: var(--font-display); font-size: var(--t-lg); }
+.bill .today { margin-top: var(--s4); padding: var(--s4) var(--s5); border-radius: var(--r-ctl); background: var(--teal); color: var(--shell); display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: var(--t-lg); }
+.bill .today b { font-family: var(--font-display); font-weight: 640; font-size: clamp(2.75rem, 4.4vw, 4rem); letter-spacing: -0.04em; line-height: 1; }
 .bill .btn { width: 100%; margin-top: var(--s5); }
 .bill .link { margin-top: var(--s2); width: 100%; justify-content: center; }
 .bill small { display: block; margin-top: var(--s3); font-size: var(--t-xs); line-height: 1.45; color: var(--muted); }

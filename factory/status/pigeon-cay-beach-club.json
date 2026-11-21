@@ -142,7 +142,9 @@
     "colour": 4,
     "fit": 4,
     "distinct": 4,
-    "references": 3
+    "references": 3,
+    "by": "independent critic mode 2, after one fix pass",
+    "date": "2026-11-21"
   },
   "critic_note": "Self-scores only, awaiting independent critic. Photography is scored 3 because the club's own files are small and uneven and I never saw their pixels.",
   "current_site_findings": [
@@ -169,7 +171,7 @@
     "https://direct-book.com/properties/pigeoncaydirect",
     "https://www.tripadvisor.com/ShowUserReviews-g147427-d151487-r1008992098-Pigeon_Cay_Beach_Club-Cat_Island_Out_Islands_Bahamas.html (guest quote as republished on the club's site)"
   ],
-  "notes": "awaiting independent critic. BLIND: look.mjs, outside fonts and photos do not load in the sandbox; references (aman.com, palmheights.com for tone) judged from knowledge. Photos were never seen as pixels: the Lovable screenshot fetch timed out three times, so selection, crops and alt text come from a written photo-editor report produced in the Lovable gallery project ip-assets-pigeon-cay-beach-club (3 short rounds, about 9 credits). QA screenshots show colour swatches built from each photo's dominant colours, not the photographs. Audit: live WordPress one-pager with a direct-book engine (record said no site). Old 3-page concept replaced by one page, matching their one-page site. interact.mjs reports 2 dead buttons: these are stepper buttons correctly disabled at their limit. Their YouTube film is linked, not embedded. Weddings section has no photograph because their wedding photos are low quality and show recognisable guests.",
+  "notes": "awaiting independent critic. BLIND: look.mjs, outside fonts and photos do not load in the sandbox; references (aman.com, palmheights.com for tone) judged from knowledge. Photos were never seen as pixels: the Lovable screenshot fetch timed out three times, so selection, crops and alt text come from a written photo-editor report produced in the Lovable gallery project ip-assets-pigeon-cay-beach-club (3 short rounds, about 9 credits). QA screenshots show colour swatches built from each photo's dominant colours, not the photographs. Audit: live WordPress one-pager with a direct-book engine (record said no site). Old 3-page concept replaced by one page, matching their one-page site. interact.mjs reports 2 dead buttons: these are stepper buttons correctly disabled at their limit. Their YouTube film is linked, not embedded. Weddings section has no photograph because their wedding photos are low quality and show recognisable guests. | 2026-11-21 final check: own photos finally seen through the Lovable gallery screenshot (16 of 72 frames; cottage interiors still unseen, so their filenames are unverified). Critic mode 2 first scored photo 2, comp 3, refs 3; part of that was capture artifacts (low-res crops, unrouted cottage photos). One fix pass: the tab receipt is wider and raised, Due today $0 set at display size on a deep-green bar, muted text darkened. Re-score: photo 3, refs 3, rest 4. Left needs-review. Remaining: verify the cottage photo URLs exist and show one changing print per selected cottage; restyle the tab chips, steppers and native date input as hairline rows in the straw system.",
   "built_at": "2026-11-21T12:21:07.758668Z",
   "review_claimed_at": "2026-11-21T13:30:08.002Z"
 }
