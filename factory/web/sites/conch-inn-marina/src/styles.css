@@ -44,7 +44,7 @@ p { text-wrap: pretty; }
 .wrap { padding-inline: var(--gutter); max-width: 1600px; margin-inline: auto; }
 .h2 { font-size: var(--t-2xl); line-height: 1.04; letter-spacing: -0.02em; font-variation-settings: "opsz" 72; font-weight: 380; }
 .h3 { font-size: var(--t-l); line-height: 1.2; letter-spacing: -0.01em; font-variation-settings: "opsz" 36; }
-.lede { font-size: clamp(1.1875rem, 1.05rem + 0.45vw, 1.4375rem); line-height: 1.5; max-width: 34em; }
+.lede { font-size: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem); line-height: 1.5; max-width: 34em; }
 .muted { color: var(--muted); }
 .small { font-size: var(--t-s); }
 
