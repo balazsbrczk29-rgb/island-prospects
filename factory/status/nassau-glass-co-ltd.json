@@ -108,7 +108,29 @@
     "warnings": 3,
     "note": "1 tap target under 40 px per page (not located; all own controls are 44 px), 5 pressed/filled control styles counted by the craft metric (one filled primary per screen; the rest are pressed states). distinct.mjs: distinct (closest 65). interact.mjs timed out under software WebGL in the sandbox, not completed."
   },
-  "notes": "BLIND: look.mjs, outside fonts and images do not load in the sandbox. Their photos were seen through a Lovable gallery (project 10bb2ab9, two rounds, 'Nassau Glass Gallery') and cropped thumbnails were routed into Playwright for screenshots. Font self-hosted (Instrument Sans variable, npm). References judged from knowledge: apple.com product pages, teenage.engineering. Awaiting independent critic. Record said no site; nassauglass.com is live. Business is advertised for sale (contact Andrew Rogers): pitch on sale value. Performance: one canvas, no transmission or shadow pass, dpr 1.25 on phones, paused offscreen, scroll read through a motion value in the frame loop, three.js lazy-loaded behind a rendered poster.",
+  "notes": "BLIND: look.mjs, outside fonts and images do not load in the sandbox. Their photos were seen through a Lovable gallery (project 10bb2ab9, two rounds, 'Nassau Glass Gallery') and cropped thumbnails were routed into Playwright for screenshots. Font self-hosted (Instrument Sans variable, npm). References judged from knowledge: apple.com product pages, teenage.engineering. Awaiting independent critic. Record said no site; nassauglass.com is live. Business is advertised for sale (contact Andrew Rogers): pitch on sale value. Performance: one canvas, no transmission or shadow pass, dpr 1.25 on phones, paused offscreen, scroll read through a motion value in the frame loop, three.js lazy-loaded behind a rendered poster. | Final critic 2026-11-21 (mode 2, photos BLIND as labelled boxes): fix pass applied (laminated chapter 1 shows two plies only, chapter 2 shows a milky interlayer film; phone picker labels above rows so all six thicknesses fit). Still below 4 after re-score: photography 3 (shower strip reads as a same-size row), composition 3 (Departments page is a plain text list), references 3. Left needs-review for a human decision or a reroll.",
   "built_at": "2026-11-21T12:27:00Z",
-  "review_claimed_at": "2026-11-21T13:25:04.449Z"
+  "review_claimed_at": "2026-11-21T13:25:04.449Z",
+  "final_critic": {
+    "date": "2026-11-21",
+    "before": {
+      "photography": 2,
+      "typography": 4,
+      "composition": 3,
+      "colour": 4,
+      "fit": 4,
+      "distinct": 4,
+      "references": 3
+    },
+    "after_fix": {
+      "photography": 3,
+      "typography": 4,
+      "composition": 3,
+      "colour": 4,
+      "fit": 4,
+      "distinct": 4,
+      "references": 3
+    }
+  },
+  "updated_at": "2026-11-21T13:28:33.110Z"
 }

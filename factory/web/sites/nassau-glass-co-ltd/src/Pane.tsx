@@ -145,8 +145,8 @@ function Sheet({ pick, progress, phone, still }: { pick: Pick; progress: MotionV
     fShine.current.position.z = c.ply / 2 + 0.0008; bShine.current.position.z = c.ply / 2 + 0.0008
     bShine.current.visible = c.sep > 0.02
     inter.current.scale.z = Math.max(0.0005, gap); inter.current.visible = c.inter > 0.02
-    m.inter.opacity = 0.16 * c.inter + 0.3 * ss(0.4, 0.5, p) * (1 - ss(0.58, 0.64, p)) + 0.5 * ss(0.6, 0.66, p)
-    m.inter.color.lerp(target.edge.set(study > 0.5 && p >= 0.62 ? tint.edge : "#e8fff6"), k)
+    m.inter.opacity = 0.16 * c.inter * (1 - study) + 0.62 * ss(0.4, 0.48, p) * (1 - ss(0.58, 0.64, p)) + 0.5 * ss(0.6, 0.66, p)
+    m.inter.color.lerp(target.edge.set(study > 0.5 && p >= 0.62 ? tint.edge : study > 0.5 ? "#f6eed6" : "#e8fff6"), k)
     mirror.current.position.z = -(c.ply + gap / 2) - 0.001
     // pose: three-quarter view in the hero, nearer edge-on while the plies are apart
     if (!l.down) l.drag *= 1 - k * 0.6

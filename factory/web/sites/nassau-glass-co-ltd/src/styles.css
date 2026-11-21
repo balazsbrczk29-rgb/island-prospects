@@ -213,3 +213,5 @@ p { text-wrap: pretty; }
 @media (min-width: 900px) { .dept { grid-template-columns: 6fr 5fr 2fr; } .dept .link, .dept .act { justify-self: end; } }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+@media (max-width: 899px) { .picker fieldset { display: block; } .picker legend { float: none; width: auto; margin-bottom: 4px; } .picker .opts { overflow: visible; margin-right: 0; padding-right: 0; flex-wrap: wrap; } .opt { padding: 0 10px; } }
