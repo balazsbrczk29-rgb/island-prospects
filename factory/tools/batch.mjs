@@ -17,6 +17,12 @@ const size = r => ({ Small: 0, Medium: 1, Large: 2 })[r.size] ?? 1;   // easy (s
 const prio = slug => ({ A: 0, B: 1, C: 2, D: 3 })[audit[slug]?.priority] ?? 1.5;   // unaudited sits between B and C
 const GEN = 2;   // generation 2 = rebuilt with the art-director pipeline; generation-1 'built' sites are pending again
 const needsWork = s => !s || (s.state === 'built' && (s.generation || 1) < GEN);
+if (mode === 'active') {   // number of live building claims (each worker session holds one); used to cap parallel workers
+  const dir = path.join(root, 'factory/status');
+  const n = fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')))
+    .filter(s => (s.state === 'building' && Date.now() - new Date(s.claimed_at).getTime() < 2.5 * 3600 * 1000) || (s.review_claimed_at && s.state === 'needs-review' && Date.now() - new Date(s.review_claimed_at).getTime() < 1.5 * 3600 * 1000)).length;
+  console.log(n); process.exit(0);
+}
 if (mode === 'review') {   // sites published as needs-review that still wait for the independent critic
   const dir = path.join(root, 'factory/status');
   const rows = fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))).filter(s => s.state === 'needs-review' && (s.generation || 1) >= GEN && !s.review_claimed_at);

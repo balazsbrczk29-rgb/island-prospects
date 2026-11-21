@@ -1,5 +1,17 @@
 # Master prompt: Bahamas website concept factory, generation 2
 
+## Parallel workers (the scheduled "Site worker 1/2/3/4" tasks run THIS section)
+Each scheduled worker is its own chat. It builds one business at a time, start to finish, and goes straight to the next with no gap, until the queue is empty or the account usage limit stops it. Four workers fire on staggered schedules. A worker that finds 4 or more live claims exits immediately, so at most four build at once and a crashed or limited worker is replaced at the next firing.
+1. Run `bash factory/tools/setup.sh` and `git pull --rebase origin main`. If `node factory/tools/batch.mjs active` prints 4 or more, end the run at once with no notification.
+2. **Loop:**
+   - **Waiting sites first:** if `batch.mjs review` lists a slug, set `review_claimed_at` in its status, push it, then do the final check. Capture screenshots of its build with photo crops routed in, run ONE fresh critic subagent with `factory/CRITIC.md` mode 2, apply at most one fix pass, set "built" if every line scores 4 or higher, and push.
+   - **Otherwise build:** take the first slug from `batch.mjs pending 3` and claim it. If it prints SKIP, take the next one. Follow `factory/BUILDER.md` yourself, in this session, in your working directory.
+     - At the phase-1 point, spawn ONE fresh critic subagent with `factory/CRITIC.md` mode 1 (the plan gate), giving it the brief path and the two first-screen PNGs. Apply its verdict (one revision at most), then do phase 2 and publish to main as "built".
+     - Pull before each claim and push after each site, so the live link is replaced immediately.
+   - Repeat at once with the next business. Never stop between sites.
+3. Keep context lean so the loop can run many sites in one chat: don't re-read the skills for every site (read them once), keep tool outputs short, and look only at the screenshots you need.
+4. If you hit a usage limit (HTTP 429), stop cleanly. Everything published is saved, and your claim expires and returns to the queue.
+
 ## Continuous orchestrator (the scheduled "Site factory worker" runs THIS section)
 Goal: a mass remodel of nearly every site in the repo to the generation-2 standard. Building is constant with no gaps. Easy businesses come first, and every site stays the same kind of site the business already has. Quality is **guaranteed up front by a plan gate, not repaired at the end.**
 Every run is an orchestrator session: builders do the work, and critics judge it.
