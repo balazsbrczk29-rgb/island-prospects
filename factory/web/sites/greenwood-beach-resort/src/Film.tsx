@@ -35,12 +35,12 @@ export function HomeHero() {
   return (
     <section className="frame" aria-labelledby="hero-title">
       <div aria-hidden />
-      <div className="relative overflow-hidden">
-        <motion.div className="absolute inset-0" initial={reduce ? false : { scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 2.8, ease }}>
-          <Photo img={IMG.hosts} eager alt="Pauline and Antoine on Greenwood's white beach at Port Howe, the sea to the left and the old wooden shade above them" className="h-full w-full" />
+      <div className="relative mx-auto w-full max-w-[1024px] overflow-hidden">
+        <motion.div className="absolute inset-0" initial={reduce ? false : { scale: 1.06 }} animate={{ scale: 1 }} transition={{ duration: 2.8, ease }}>
+          <Photo img={IMG.kiteLesson} eager alt="A Greenwood kite lesson on the beach at Port Howe: the instructor points out the wind window as an orange kite rises over turquoise water" className="h-full w-full" />
         </motion.div>
       </div>
-      <div className="grid gap-5 px-[var(--gutter)] pt-5 pb-[calc(132px+env(safe-area-inset-bottom))] md:h-[clamp(230px,30svh,290px)] md:grid-cols-12 md:gap-8 md:pt-7 md:pb-7">
+      <div className="grid gap-5 px-[var(--gutter)] pt-5 pb-[calc(132px+env(safe-area-inset-bottom))] md:h-[clamp(260px,34svh,320px)] md:grid-cols-12 md:gap-8 md:pt-7 md:pb-[84px]">
         <h1 id="hero-title" className="leading-none text-[19vw] md:text-[clamp(96px,10.4vw,168px)] order-1 md:order-2 md:col-span-7 md:col-start-6 md:self-end md:text-right">
           <span className="block text-[length:var(--t-sm)] leading-[1.4] italic text-muted md:mb-1">Greenwood Beach Resort, Cat Island</span>
           <span className="-mb-[0.12em] block overflow-hidden pb-[0.12em]">
@@ -48,7 +48,7 @@ export function HomeHero() {
           </span>
         </h1>
         <motion.div className="order-2 grid content-start gap-5 md:order-1 md:col-span-5" initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.9, ease }}>
-          <p className="max-w-[40ch] text-muted">Pauline and Antoine's small beachfront resort at the south end of Cat Island: two rooms in the garden, a kitchen by the sand, and the water for diving and kitesurfing.</p>
+          <p className="max-w-[42ch]"><span className="display text-[length:var(--t-lg)] leading-[1.2]">Here the water decides the day.</span> <span className="text-muted">Kite lessons, reef snorkelling and, from March to June, oceanic whitetip dives, from Pauline and Antoine's small beachfront resort at the south end of Cat Island.</span></p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-7">
             <a href="#dates" className="btn">Check dates and book</a>
             <a href={WA} className="link num hidden self-start text-[length:var(--t-sm)] sm:inline sm:self-auto">WhatsApp {WHATSAPP}</a>
@@ -62,7 +62,7 @@ export function HomeHero() {
 /* ---------- the film: fixed limestone bars, the photo scales and pans with scroll (A03 / M1) ---------- */
 type Chapter = { word: string; img: Img; alt: string; lines: [string, string]; pan: [number, number, number, number] }
 export const CHAPTERS: Chapter[] = [
-  { word: "Wind", img: IMG.kiteRide, alt: "A kitesurfer riding the open water off Cat Island under an orange kite", lines: ["Kitesurfing on Cat Island's steady wind and open turquoise water.", "Diving and kitesurfing here are supervised by professionals."], pan: [-3, 0, 3, -2] },
+  { word: "Wind", img: IMG.kiteRide, alt: "A kitesurfer riding the open water off Cat Island under an orange kite", lines: ["Kitesurfing on Cat Island's steady wind and open turquoise water.", "Lessons and rides from the beach in front of the rooms."], pan: [-3, 0, 3, -2] },
   { word: "Deep blue", img: IMG.whitetipSurface, alt: "An oceanic whitetip shark just below the surface off Cat Island", lines: ["From March to June, oceanic whitetip sharks visit these waters.", "Guided boat dives, small groups, and respect for the animal."], pan: [4, 2, -2, -2] },
   { word: "The reef", img: IMG.snorkel, alt: "Yellow grunts over a small coral reef in clear water", lines: ["A snorkel over a small reef, then a secluded beach.", "The island's only sea-accessible bat cave is reached by boat."], pan: [0, 3, 0, -3] },
   { word: "Table", img: IMG.terrace, alt: "Greenwood's terrace restaurant with the beach and sea beyond the palms", lines: ["Breakfast eight to ten. Lunch noon to two. Dinner six to eight.", "Dinner is booked a day ahead, on the terrace by the beach."], pan: [-3, -1, 3, 1] },
@@ -78,7 +78,7 @@ function Shot({ p, i, n, ch }: { p: MotionValue<number>; i: number; n: number; c
   const transform = useTransform(p, (v) => {
     if (reduce) return "none"
     const t = local(v, i, n, f), [x0, y0, x1, y1] = ch.pan
-    const s = 1.18 - 0.1 * t
+    const s = 1.06 - 0.05 * t
     return `translate3d(${x0 + (x1 - x0) * t}%, ${y0 + (y1 - y0) * t}%, 0) scale(${s})`
   })
   return (
@@ -131,7 +131,7 @@ export function FilmStage() {
           </div>
           <motion.div aria-hidden className="absolute inset-x-0 bottom-0 h-px origin-left bg-ink" style={{ scaleX: scrollYProgress }} />
         </div>
-        <div className="relative overflow-hidden">
+        <div className="relative mx-auto w-full max-w-[1100px] overflow-hidden">
           {CHAPTERS.map((c, i) => <Shot key={c.word} p={scrollYProgress} i={i} n={n} ch={c} />)}
         </div>
         <div className="relative">

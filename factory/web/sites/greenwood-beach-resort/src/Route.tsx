@@ -68,7 +68,7 @@ export function EndCredits() {
           <div className="absolute inset-x-0 bottom-0 h-[18svh] bg-gradient-to-t from-glass to-transparent" />
         </div>
       </div>
-      <div className="px-[var(--gutter)] pt-[46svh] pb-[30svh]">
+      <div className="px-[var(--gutter)] pt-[22svh] pb-[14svh]">
         <h2 id="credits-title" className="display text-center text-[length:var(--t-2xl)]">The way to Port Howe</h2>
         <div className="mt-24 grid gap-24">
           {groups.map((g) => (
@@ -85,10 +85,10 @@ export function EndCredits() {
             </div>
           ))}
         </div>
-        <div className="mt-32 grid justify-items-center gap-8 text-center">
+        <div className="mt-20 grid justify-items-center gap-8 text-center">
           <p className="mono-word !text-[clamp(56px,9vw,140px)]">Then, the beach.</p>
           <div className="flex flex-col items-center gap-5 sm:flex-row sm:gap-8">
-            <a href="#dates" className="btn btn-line btn-xl">Check dates and book</a>
+            <a href="#dates" className="btn btn-paper btn-xl">Check dates and book</a>
             <a href="getting-here.html" className="link">Flights, taxis and car rentals in full</a>
           </div>
         </div>

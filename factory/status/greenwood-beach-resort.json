@@ -83,12 +83,12 @@
     }
   ],
   "critic": {
-    "photography": 3,
+    "photography": 4,
     "typography": 4,
-    "composition": 4,
+    "composition": 3,
     "colour": 4,
     "fit": 4,
-    "distinct": 4,
+    "distinct": 3,
     "references": 3
   },
   "critic_note": "Independent critic re-score after fix pass 1 (above). Fix pass 2 (final) applied; per coordinator instruction state set to built. Photography and references were 3 before pass 2.",
@@ -118,7 +118,7 @@
     "https://direct-book.com/properties/greenwoodbeachresort/contact",
     "https://www.epicdiving.com/greenwood-beach-resort/"
   ],
-  "notes": "Generation 2 rebuild, 2026-11-20. fix passes 1 and 2 applied. BLIND: sandbox blocks their image host, Google Fonts and look.mjs; photos were viewed through the Lovable gallery project ip-assets-greenwood-beach-resort (2 rounds) and QA screenshots use crops of that gallery routed in with Playwright (so they look softer than the real 1024 px files). References (aman.com, belmond.com) judged from known patterns, not captured. Fonts self-hosted from fontsource. Interactions: room picker + dates composer to direct-book; whitetip package form writing their own email template; route toggle (USA / Nassau) on getting-here; full-screen Menu overlay. qa: 0 blockers (one sub-40px target is the shared concept tag button); interact: the two 'dead' buttons are stepper +/- at their limits (disabled by design); distinct: distinct. | Final critic re-score pending after fix pass 2 (queued for the worker review).",
+  "notes": "Generation 2 rebuild, 2026-11-20. fix passes 1 and 2 applied. BLIND: sandbox blocks their image host, Google Fonts and look.mjs; photos were viewed through the Lovable gallery project ip-assets-greenwood-beach-resort (2 rounds) and QA screenshots use crops of that gallery routed in with Playwright (so they look softer than the real 1024 px files). References (aman.com, belmond.com) judged from known patterns, not captured. Fonts self-hosted from fontsource. Interactions: room picker + dates composer to direct-book; whitetip package form writing their own email template; route toggle (USA / Nassau) on getting-here; full-screen Menu overlay. qa: 0 blockers (one sub-40px target is the shared concept tag button); interact: the two 'dead' buttons are stepper +/- at their limits (disabled by design); distinct: distinct. | Final critic re-score pending after fix pass 2 (queued for the worker review). | Final critic (mode 2) 2026-11-21: first pass 3/4/3/3/4/3/3; one fix pass (hero opens on their kite-lesson photo letterboxed at source width with 'Here the water decides the day', couple moved to the hosts chapter, key-info strip removed, film frames capped at 1100 px with less zoom, filled limestone CTAs on teal, shorter teal end roll, tabular figures). Re-score 4/4/3/4/4/3/3. Left needs-review. Reason: the five film chapters share one layout (vary scale and placement per chapter), 'The way to Port Howe' is still a centred table (make it a stepped route with flight times as markers), and the hero should make the water line the display headline with Port Howe secondary.",
   "built_at": "2026-11-20T21:58:02.729Z",
   "fix_pass_1": [
     "Real film: fixed limestone bars (top 12svh with 01 / 05 counter and progress rule, bottom 16svh with word and copy); each photo scales and pans with scroll via function transforms; stage 640svh",
@@ -134,5 +134,18 @@
     "Getting here: the doubled Ask about your dates was a screenshot stitching artifact (last capture clamped to page end); stitching now uses real scroll offsets, page itself has one footer",
     "Mobile: concept pill only rises while the teal booking bar is visible (discrete state, not per frame); hero keeps 132px bottom padding so nothing sits under the pill"
   ],
-  "review_claimed_at": "2026-11-21T13:29:05.472630Z"
+  "review_claimed_at": "2026-11-21T13:29:05.472630Z",
+  "final_critic": {
+    "mode": 2,
+    "scores": {
+      "photography": 4,
+      "typography": 4,
+      "composition": 3,
+      "colour": 4,
+      "fit": 4,
+      "distinct": 3,
+      "references": 3
+    },
+    "at": "2026-11-21T13:33:18.197298+00:00"
+  }
 }
