@@ -4,8 +4,143 @@
  "name": "Ocean West Boutique Hotel",
  "batch": "12",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T18:43:25.636Z"
+ "pages": [
+  "index.html",
+  "rooms.html"
+ ],
+ "primary_cta": "Check dates (innRoad)",
+ "brand_truth": "Ten gem-named rooms in a pink colonial house on a ridge seventy feet above the sea, between Lake Killarney and the Atlantic, five minutes from the airport.",
+ "buyer": "US couples and business travellers planning on a phone; compare with Cable Beach resorts and Airbnb; want the room seen, the price range clear, the airport close.",
+ "direction": {
+  "archetype": "A02 Catalogue index",
+  "lane": "P03 Conch pink",
+  "type": "T09 Didone fashion (Prata + Jost)",
+  "why": "The product is ten distinct rooms, so the room register is the hero; the hotel is literally pink stucco; a Didone reads as engraving for gem names."
+ },
+ "big_idea": "The room register is the front door: ten stones in a fixed index column; touch a name and that room appears on the stage with its bed, floor and view, and Check dates opens innRoad.",
+ "tier_visual": "standard",
+ "tier_why": "Ten rooms are explained by their own photographs and a hover swap; 3D adds nothing.",
+ "concept_type": "booking: ten-room picker with views, rates range, Check dates handing off to innRoad",
+ "images": [
+  {
+   "src": "https://oceanwestbahamas.com/images/1a.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/images/1.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/images/4.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/ndiam.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/n-sapph.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/nruby.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/13.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/12.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/ntanz.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/n-onyx.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/nivory.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/npearl.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  },
+  {
+   "src": "https://oceanwestbahamas.com/gallery/ncoral.jpg",
+   "source": "own",
+   "credit": "oceanwestbahamas.com"
+  }
+ ],
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 4.5,
+  "distinct": 4.5,
+  "references": 4
+ },
+ "plan_gate": {
+  "verdict": "approved after one revision",
+  "scores": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 4.5,
+   "distinct": 4.5,
+   "references": 4
+  },
+  "revisions": [
+   "fixed 4:3 stage frame (no jump on hover), aligned to the h1",
+   "register rows taller, flush, active marked by a rule; filter moved into the register",
+   "one CTA per screen (stage link only when a room is selected)",
+   "phone gem row unboxed, snapping, active underlined, Terrace first",
+   "comparison list replaced by one room in full (Emerald)"
+  ]
+ },
+ "current_site_findings": [
+  "Every page has the same keyword-stuffed title, so Google cannot tell the pages apart.",
+  "Headings are pictures inside tables: phones and search engines cannot read them.",
+  "Address and phone are not on the homepage.",
+  "Ten gem-named rooms appear as small thumbnails with no way to compare beds, views or balconies.",
+  "The 70 ft ridge between Lake Killarney and the Atlantic is a single sentence."
+ ],
+ "pitch_line": "Your ten rooms have names most hotels would envy; this concept makes them the front door: touch Emerald and see the arched window over the sea, then book it on your own engine instead of paying the OTAs.",
+ "assumptions": [
+  "Current rates ($215 to $600) and fees",
+  "Sapodilla restaurant still operating",
+  "Room photos match current decor",
+  "Badge years (Travellers Choice 2023)"
+ ],
+ "sources": [
+  "https://oceanwestbahamas.com/",
+  "https://oceanwestbahamas.com/about-us.html",
+  "https://oceanwestbahamas.com/accommodations.html",
+  "https://oceanwestbahamas.com/amenities.html",
+  "https://oceanwestbahamas.com/getting-here.html",
+  "https://oceanwestbahamas.com/contactus.html"
+ ],
+ "notes": "Generation 2 rebuild (site worker, Nov 21). BLIND: outside photos blocked in the sandbox; all photos seen and measured via Lovable gallery ip-assets-ocean-west-boutique-hotel; crops routed into screenshots. Photos never exceed source size (stage frame 704x528 under 800x600 and 1200x535 sources). Plan gate by an independent critic subagent: revise, then approved; scores are its predictions (no mode-2 final critic). qa.mjs: the dead-space blocker is a false positive: the strip is the sticky full-height index column, which renders once in a full-page screenshot; remaining tap-target warning is the shared concept label button. interact: index 14 buttons, 0 dead, 0 JS errors; rooms.html is a link list. distinct.mjs: distinct.",
+ "built_at": "2026-11-21T18:58:21.208Z"
 }

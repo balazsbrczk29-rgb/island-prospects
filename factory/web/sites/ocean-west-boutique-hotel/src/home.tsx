@@ -33,7 +33,7 @@ function Index({ sel, setSel }: { sel: number; setSel: (i: number) => void }) {
         <span className="font-display text-[1.5rem] leading-none">Ocean West</span>
       </a>
       <p className="label text-muted">Ten rooms on West Bay Street, Nassau</p>
-      <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, ease }} className="mt-[min(3.6vh,32px)] max-w-[15ch] text-[clamp(1.8rem,2.3vw,2.3rem)] leading-[1.08]">Ten rooms on a ridge, seventy feet above the sea.</motion.h1>
+      <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, ease }} className="mt-[min(3.4vh,30px)] max-w-[12ch] text-[clamp(2.3rem,3.45vw,3.3rem)] leading-[1.02]">Seventy feet above the sea.</motion.h1>
       <div className="mt-[min(3vh,26px)] flex gap-4" role="group" aria-label="Filter rooms">
         {FILTERS.map(([k, l]) => <button key={k} type="button" aria-pressed={f === k} onClick={() => setF(k)} className={`min-h-9 text-cap transition-colors ${f === k ? "text-ink underline underline-offset-4" : "text-muted hover:text-ink"}`}>{l}</button>)}
       </div>
@@ -45,7 +45,7 @@ function Index({ sel, setSel }: { sel: number; setSel: (i: number) => void }) {
               <li key={r.key} className="relative">
                 <span className={`absolute top-1/2 -left-[calc(var(--pad)-6px)] h-px w-[calc(var(--pad)-14px)] bg-rose transition-transform duration-300 origin-left ${sel === i ? "scale-x-100" : "scale-x-0"}`} aria-hidden />
                 <button type="button" onMouseEnter={() => setSel(i)} onFocus={() => setSel(i)} onClick={() => pick(i)} aria-pressed={sel === i}
-                  className={`group flex h-[clamp(32px,4.1vh,42px)] w-full items-center justify-between gap-4 border-b border-line text-left transition-opacity duration-300 ${on ? "opacity-100" : "opacity-30"}`}>
+                  className={`group flex h-[clamp(30px,3.9vh,40px)] w-full items-center justify-between gap-4 border-b border-line text-left transition-opacity duration-300 ${on ? "opacity-100" : "opacity-30"}`}>
                   <span className={`font-display text-[clamp(1.35rem,1.95vw,1.85rem)] leading-none transition-colors duration-300 ${sel === i ? "text-rose" : "group-hover:text-rose"}`}>{r.name}</span>
                   <span className="tnum shrink-0 text-cap text-muted">{short(r)}</span>
                 </button>
@@ -80,7 +80,7 @@ function Stage({ sel, setSel }: { sel: number; setSel: (i: number) => void }) {
           <a href={BOOK} target="_blank" rel="noopener" className="book min-h-11 px-4">Check dates</a>
         </div>
         <p className="label mt-5 text-muted">Ten rooms on West Bay Street, Nassau</p>
-        <p className="mt-3 font-display text-[2.35rem] leading-[1.06]">Ten rooms on a ridge, seventy feet above the sea.</p>
+        <p className="mt-3 font-display text-[2.6rem] leading-[1.04]">Seventy feet above the sea.</p>
       </div>
       <div className="w-full px-5 pt-6 lg:px-0 lg:pt-0">
         <div className="relative mx-auto w-full lg:w-[min(704px,calc((100svh-clamp(110px,15vh,150px)-150px)*1.333))]" style={{ aspectRatio: "4 / 3" }}>
@@ -129,10 +129,10 @@ function Feature() {
     <section id="rooms" aria-labelledby="rooms-h" className="border-t border-line px-[var(--pad)] py-[clamp(72px,10vw,140px)]">
       <p className="label text-muted">One room, in full</p>
       <h2 id="rooms-h" className="mt-4 max-w-[18ch] text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">Emerald: a queen bed, an arched window, the sea.</h2>
-      <div className="mt-10 grid max-w-[1100px] items-end gap-x-10 gap-y-8 xl:grid-cols-[minmax(0,800px)_minmax(0,1fr)]">
+      <div className="mt-10 grid max-w-[800px] gap-y-8">
         <Photo pic={r.pic} className="w-full" />
         <div>
-          <dl className="border-t border-line">
+          <dl className="grid border-t border-line md:grid-cols-2 md:gap-x-10">
             {[["Bed", r.bed], ["Floor", floorName(r.floor)], ["View", r.view], ["Outside", "Private balcony"], ["In the room", "Fridge, microwave, cable TV, hair dryer, free Wi-Fi"]].map(([k, v]) => (
               <div key={k} className="grid grid-cols-[7rem_minmax(0,1fr)] gap-3 border-b border-line py-3"><dt className="text-cap text-muted">{k}</dt><dd className="m-0 text-small">{v}</dd></div>
             ))}
@@ -221,17 +221,17 @@ function Home() {
   return (
     <>
       <a href="#main" className="skip">Skip to content</a>
-      <div className="lg:grid lg:grid-cols-[var(--idx)_minmax(0,1fr)]">
+      <main id="main" className="lg:grid lg:grid-cols-[var(--idx)_minmax(0,1fr)]">
         <Index sel={sel} setSel={setSel} />
-        <main id="main">
+        <div>
           <Stage sel={sel} setSel={setSel} />
           <Ridge />
           <Feature />
           <Days />
           <Rates />
           <Arrive />
-        </main>
-      </div>
+        </div>
+      </main>
     </>
   )
 }
