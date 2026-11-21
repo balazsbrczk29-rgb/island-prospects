@@ -41,3 +41,31 @@ All lines 4.
 
 ## Unknowns
 Email, WhatsApp, closing hours, current owner title (a fan post calls Simon the owner).
+
+---
+# Generation 2 design plan (2026-11-21)
+Audit (Nov 21, products.json, 2 calls): Shopify webshop, 80 products: 14 rum cake flavours at 4 oz $6.99 / 20 oz $21.99 (Strawberry sold out; Pumpkin Spice 20 oz sold out), single-flavour 4 oz six packs $37.75, mix-and-match Six Pack $37.75, 20 oz 2-packs $39.58, apparel $15 / $20, hair and skin care and air fresheners $10 to $31.50. Priority C. Concept = the same webshop, better: catalogue, six-pack builder, cart drawer, checkout preview that hands off to their real Shopify cart (cart permalink with their variant IDs).
+
+**Photos (all their own, Shopify CDN):** 14 studio shots "20oz_bundt_<flavour>.png" 2718x2048, each the cake on its own colour ground (orange, pineapple yellow, coconut white, lime green, chocolate brown...); Six_Pack_*.png 2500x2500 packshots; shop photos IMG_5409 / IMG_5561 / IMG_5548 1024x683 (tasting at the counter, the storefront sign) and Carnival_3_smiling__customers_six_packs.jpg 5472x3648 (storefront, customers with six packs). AdobeStock-named files not used.
+
+**Big idea:** the shop's own studio photographs already give every flavour its own colour, so the page is a colour poster that changes with the flavour you pick: choose Key Lime and the whole first screen turns lime green with the Key Lime cake on it, price and Add to bag beside it.
+
+**Direction:** A09 Colour poster + P11 Straw market + T11 Neo-grotesk display (N4 floating dock, M3). Why: rum cake is a gift bought on impulse by cruise visitors; flavour colour is the product truth and the most appetising thing they own; straw, rum brown and palm green from the lane carry the sections between the flavour grounds.
+
+**Fonts:** Bricolage Grotesque (display, opsz, tight -0.04em, sentence case) + Figtree (text).
+
+**Storyboard (desktop):**
+1. Hero: full-bleed 20 oz photo of the chosen flavour (cover, anchored top), H1 "The Official Rum Cake of The Bahamas." centred above the cake; flavour row of 14 chips along the bottom ground; right of the cake a price card (20 oz $21.99 / 4 oz $6.99, Add to bag; sold-out states real). Changing flavour crossfades the photo (the colour wipe).
+2. Six-pack builder on straw ground: six slots, tap flavours to fill, $37.75, Add six pack (mix-and-match product, flavours in the order note) beside the real Six Pack packshot.
+3. Story on rum-brown ground: downtown Nassau, 2000, George Bates, same shop since, 2014 Official Rum Cake of The Bahamas, marinated in Ole Nassau Bahamian Rum; IMG_5409 (tasting at the counter) at <= 680 px.
+4. Visit the shop: Carnival_3 storefront photo full-bleed (5472 source), 602 East Bay Street, (242) 328-3750, opens 7:30 am Mon to Sat, 8 am Sun (Yelp, to confirm).
+5. More from the shop: 2-packs, six packs by flavour, apparel, hair and skin care as a row with link to the full shop page.
+6. Footer: free shipping on US orders over $55, store link.
+Shop page: full catalogue with category filter and search, cart drawer, checkout preview.
+Dock (N4): Flavours, Six pack, Visit, Bag (count).
+
+**Phone:** 1) H1 on the flavour ground, the 4:3 photo full width, chips scroll sideways, price buttons; 2) six-pack slots 3x2; 3) story.
+
+**Conversion:** Add to bag -> cart drawer -> "Checkout on thebahamasrumcakefactory.com" (real cart permalink); visit the shop for cruise passengers.
+
+**Tier:** standard. Distinct: only colour-poster food site; their own studio grounds drive the colour.

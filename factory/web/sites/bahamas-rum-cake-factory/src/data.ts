@@ -1,25 +1,34 @@
-const F = "https://thebahamasrumcakefactory.com/cdn/shop/files/"
-export const STORE = "https://thebahamasrumcakefactory.com/"
-export const IMG = {
-  hero: `${F}20oz_bundt_original.png?v=1766596271&width=1200`,
-  beach: `${F}6pack_4oz_Pineapple_Beach_SoGood.png?v=1787842340&width=1600`,
-  friends: `${F}6pack_4oz_Pineapple_2girls_SoGood.png?v=1787844886&width=1600`,
-  six: `${F}Six_Pack_Mixed.png?v=1766589573&width=800`,
-  shop: `${F}IMG_5312.jpg?v=1770928005&width=900`,
+import cat from './catalogue.json'
+
+export const CDN = 'https://cdn.shopify.com/s/files/1/0584/6748/3722/files/'
+export const STORE = 'https://thebahamasrumcakefactory.com'
+export const img = (f: string | null | undefined, w?: number) => (f ? CDN + f + (w ? `?width=${w}` : '') : '')
+
+export type Variant = { t: string; p: number; ok: boolean; id: number }
+export type Item = { name: string; title?: string; handle: string; img: string | null; v: Variant[]; cat?: string }
+
+// colour of each studio photograph's own ground (sampled from their photos)
+const GROUND: Record<string, string> = {
+  'Original': '#fdd29c', 'Original with Pecans': '#fdd29c', 'Pineapple': '#fcd956', 'Coconut': '#ede9e8', 'Banana': '#fedd28',
+  'Amaretto': '#f6cfa8', 'Kentucky Bourbon': '#faa94e', 'Irish Cream': '#dfcfb2', 'Strawberry': '#fcccbe', 'Pumpkin Spice': '#fecfaf',
+  'Caramel Caribbean': '#feceb2', 'Chocolate': '#a0775c', 'Key Lime': '#b5d88a', 'Pina Colada': '#ecd591',
 }
-export const FLAVOURS: { name: string; note: string; img: string; seasonal?: boolean }[] = [
-  { name: "Original", note: "George Bates's recipe, the one that started the shop in 2000.", img: `${F}20oz_bundt_original.png?v=1766596271&width=700` },
-  { name: "Original with pecans", note: "", img: `${F}20oz_bundt_original_with_pecans.png?v=1766596261&width=700` },
-  { name: "Pineapple", note: "", img: `${F}20oz_bundt_pineapple.png?v=1766596103&width=700` },
-  { name: "Pina colada", note: "", img: `${F}20oz_bundt_pina_colada.png?v=1766596116&width=700` },
-  { name: "Coconut", note: "", img: `${F}20oz_bundt_coconut.png?v=1771538307&width=700` },
-  { name: "Banana", note: "", img: "" },
-  { name: "Chocolate", note: "", img: `${F}20oz_bundt_chocolate.png?v=1766596159&width=700` },
-  { name: "Caramel Caribbean", note: "", img: `${F}20oz_bundt_caramel.png?v=1766596224&width=700` },
-  { name: "Key lime", note: "", img: "" },
-  { name: "Amaretto", note: "", img: `${F}20oz_bundt_amaretto.png?v=1766596250&width=700` },
-  { name: "Irish cream", note: "", img: `${F}20oz_bundt_irish_cream.png?v=1766596144&width=700` },
-  { name: "Kentucky bourbon", note: "", img: `${F}20oz_bundt_kentucky_bourbon.png?v=1766596132&width=700` },
-  { name: "Strawberry", note: "", img: `${F}20oz_bundt_strawberry.png?v=1766587204&width=700` },
-  { name: "Pumpkin spice", note: "Listed in the current range.", img: `${F}20oz_bundt_pumpkin_spice.png?v=1766595762&width=700`, seasonal: true },
-]
+const ORDER = ['Original', 'Original with Pecans', 'Pineapple', 'Pina Colada', 'Coconut', 'Banana', 'Key Lime', 'Caramel Caribbean', 'Chocolate', 'Amaretto', 'Kentucky Bourbon', 'Irish Cream', 'Strawberry', 'Pumpkin Spice']
+
+export const flavours = (cat.flavours as Item[])
+  .map(f => ({ ...f, ground: GROUND[f.name] || '#fdd29c', dark: f.name === 'Chocolate' }))
+  .sort((a, b) => ORDER.indexOf(a.name) - ORDER.indexOf(b.name))
+export type Flavour = typeof flavours[number]
+
+export const sixpacks = cat.sixpacks as Item[]
+export const twopacks = cat.twopacks as Item[]
+export const mix = cat.mix as Item
+export const other = cat.other as Item[]
+
+export const shop = {
+  address: '602 East Bay Street, Nassau',
+  phone: { label: '(242) 328-3750', tel: '+12423283750' },
+  hours: 'Opens 7:30 am Monday to Saturday, 8 am Sunday',
+}
+
+export const money = (n: number) => '$' + n.toFixed(2)

@@ -1,0 +1,1214 @@
+{
+ "flavours": [
+  {
+   "name": "Pumpkin Spice",
+   "title": "Pumpkin Spice Rum Cake",
+   "handle": "pumpkin-spice-rum-cake",
+   "img": "20oz_bundt_pumpkin_spice.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 40733166764106
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": false,
+     "id": 40733166796874
+    }
+   ]
+  },
+  {
+   "name": "Strawberry",
+   "title": "Strawberry Rum Cake",
+   "handle": "strawberry-rum-cake",
+   "img": "20oz_bundt_strawberry.png",
+   "v": [
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": false,
+     "id": 42575522529354
+    },
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": false,
+     "id": 42665855811658
+    }
+   ]
+  },
+  {
+   "name": "Pineapple",
+   "title": "Pineapple Rum Cake",
+   "handle": "pineapple-rum-cake",
+   "img": "20oz_bundt_pineapple.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 40733419601994
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733419667530
+    }
+   ]
+  },
+  {
+   "name": "Pina Colada",
+   "title": "Pina Colada Rum Cake",
+   "handle": "pina-colada-rum-cake",
+   "img": "20oz_bundt_pina_colada.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 40733412753482
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733412819018
+    }
+   ]
+  },
+  {
+   "name": "Key Lime",
+   "title": "Key Lime Rum Cake",
+   "handle": "keylime-rum-cake",
+   "img": "20oz_bundt_key_lime.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 42141590192202
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733397090378
+    }
+   ]
+  },
+  {
+   "name": "Kentucky Bourbon",
+   "title": "Kentucky Bourbon Cake",
+   "handle": "kentucky-bourbon-cake",
+   "img": "20oz_bundt_kentucky_bourbon.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 42108319924298
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733307666506
+    }
+   ]
+  },
+  {
+   "name": "Irish Cream",
+   "title": "Irish Cream Rum Cake",
+   "handle": "irish-cream-rum-cake",
+   "img": "20oz_bundt_irish_cream.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 42293750431818
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733303898186
+    }
+   ]
+  },
+  {
+   "name": "Coconut",
+   "title": "Coconut Rum Cake",
+   "handle": "coconut-rum-cake",
+   "img": "20oz_bundt_coconut.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 40733282140234
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733282205770
+    }
+   ]
+  },
+  {
+   "name": "Chocolate",
+   "title": "Chocolate Rum Cake",
+   "handle": "chocolate-rum-cake",
+   "img": "20oz_bundt_chocolate.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 42004726808650
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733153001546
+    }
+   ]
+  },
+  {
+   "name": "Caramel Caribbean",
+   "title": "Caramel Caribbean Rum Cake",
+   "handle": "caramel-rum-cake",
+   "img": "20oz_bundt_caramel.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 42532975345738
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733142777930
+    }
+   ]
+  },
+  {
+   "name": "Banana",
+   "title": "Banana Rum Cake",
+   "handle": "banana-rum-cake",
+   "img": "20oz_bundt_banana.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 42293743222858
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40732978184266
+    }
+   ]
+  },
+  {
+   "name": "Amaretto",
+   "title": "Amaretto Rum Cake",
+   "handle": "amaretto-cake",
+   "img": "20oz_bundt_amaretto.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 42141593665610
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40732961112138
+    }
+   ]
+  },
+  {
+   "name": "Original with Pecans",
+   "title": "Original Rum Cake with Pecans",
+   "handle": "original-rum-cake-with-pecans",
+   "img": "20oz_bundt_original_with_pecans.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 42532975968330
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733401219146
+    }
+   ]
+  },
+  {
+   "name": "Original",
+   "title": "Original Rum Cake",
+   "handle": "original-rum-cake",
+   "img": "20oz_bundt_original.png",
+   "v": [
+    {
+     "t": "4 oz",
+     "p": 6.99,
+     "ok": true,
+     "id": 40733082910794
+    },
+    {
+     "t": "20 oz",
+     "p": 21.99,
+     "ok": true,
+     "id": 40733082976330
+    }
+   ]
+  }
+ ],
+ "sixpacks": [
+  {
+   "name": "Pumpkin Spice",
+   "handle": "pumpkin-spice-rum-cake-4-oz-six-pack",
+   "img": "Six_Pack_Pumpkin_Spice_5ecf72f7-db46-408f-b5bd-6dfac6cb9da0.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 67705164857418
+    }
+   ]
+  },
+  {
+   "name": "Amaretto",
+   "handle": "amaretto-4-oz-six-pack",
+   "img": "Six_Pack_Amaretto_c839c253-2488-451e-ad5f-e243690ea2b5.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712719065162
+    }
+   ]
+  },
+  {
+   "name": "Mixed",
+   "handle": "mixed-flavors-six-pack",
+   "img": "Six_Pack_Mixed.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 43185519984714
+    }
+   ]
+  },
+  {
+   "name": "Original with Pecans",
+   "handle": "original-with-pecans-4-oz-six-pack",
+   "img": "Six_Pack_Pecans.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712731123786
+    }
+   ]
+  },
+  {
+   "name": "Irish Cream",
+   "handle": "irish-cream-4-oz-six-pack",
+   "img": "Six_Pack_Irish_Cream.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712701861962
+    }
+   ]
+  },
+  {
+   "name": "Chocolate",
+   "handle": "chocolate-4-oz-six-pack",
+   "img": "Six_Pack_Chocolate.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712682627146
+    }
+   ]
+  },
+  {
+   "name": "Banana",
+   "handle": "banana-4-oz-six-pack",
+   "img": "Six_Pack_Banana.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712668602442
+    }
+   ]
+  },
+  {
+   "name": "Coconut",
+   "handle": "coconut-4-oz-six-pack",
+   "img": "Six_Pack_Coconut_534f5369-0d67-4b68-b47c-2861ddf3b80b.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712663359562
+    }
+   ]
+  },
+  {
+   "name": "Strawberry",
+   "handle": "strawberry-4-oz-six-pack",
+   "img": "Six_Pack_Strawberry_96950061-4f87-4e8f-925e-07fdb7dcc6a7.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": false,
+     "id": 42712612601930
+    }
+   ]
+  },
+  {
+   "name": "Kentucky Bourbon",
+   "handle": "kentucky-bourbon-4-oz-six-pack",
+   "img": "Six_Pack_Kentucky_Bourbon.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712590385226
+    }
+   ]
+  },
+  {
+   "name": "Caramel",
+   "handle": "caramel-4-oz-six-pack",
+   "img": "Six_Pack_Caramel_adb0c9cd-ee4f-4ea5-8270-30e4a9eefcc3.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712586190922
+    }
+   ]
+  },
+  {
+   "name": "Pineapple",
+   "handle": "pineapple-4-oz-six-pack",
+   "img": "Six_Pack_Pineapple_56ac7c07-fd31-45e3-b786-c4d446cb86db.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712575148106
+    }
+   ]
+  },
+  {
+   "name": "Key Lime",
+   "handle": "key-lime-4-oz-six-pack",
+   "img": "Six_Pack_Key_Lime_190250bc-5524-4a17-ba4e-51f480e78de0.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42712560304202
+    }
+   ]
+  },
+  {
+   "name": "Original",
+   "handle": "original-4-oz-six-pack",
+   "img": "Six_Pack_Original.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42711374889034
+    }
+   ]
+  },
+  {
+   "name": "Pina Colada",
+   "handle": "pina-colada-4-oz-six-pack",
+   "img": "Six_Pack_Pina_Colada.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 37.75,
+     "ok": true,
+     "id": 42710702424138
+    }
+   ]
+  }
+ ],
+ "twopacks": [
+  {
+   "name": "Key Lime and Kentucky Bourbon Rum Cakes - 20 oz - 2 pack",
+   "handle": "key-lime-and-kentucky-bourbon-rum-cakes-20-oz-2-pack",
+   "img": "20oz_bundt_2_pack_KL-KB.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 39.58,
+     "ok": true,
+     "id": 41889947058250
+    }
+   ]
+  },
+  {
+   "name": "Strawberry and Banana Rum Cakes - 20 oz - 2 pack",
+   "handle": "banana-and-irish-cream-rum-cakes-20-oz-2-pack",
+   "img": "20oz_bundt_2_pack_ST_BA.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 39.58,
+     "ok": false,
+     "id": 41889889419338
+    }
+   ]
+  },
+  {
+   "name": "Pineapple and Pina Colada Rum Cakes - 20 oz - 2 pack",
+   "handle": "pineapple-and-pina-colada-20-oz-2-pack",
+   "img": "20oz_bundt_2_pack_PI_PC.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 39.58,
+     "ok": true,
+     "id": 41389058818122
+    }
+   ]
+  },
+  {
+   "name": "Chocolate and Caramel Rum Cakes - 20 oz - 2 pack",
+   "handle": "chocolate-and-caramel-rum-cakes-20-oz-2-pack",
+   "img": "20oz_bundt_2_pack_CH_CA.png",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 39.58,
+     "ok": true,
+     "id": 41389118881866
+    }
+   ]
+  }
+ ],
+ "mix": {
+  "name": "Six Pack",
+  "handle": "six-pack",
+  "img": "Six_Pack_edited_1.png",
+  "v": [
+   {
+    "t": "Default Title",
+    "p": 37.75,
+    "ok": true,
+    "id": 40732896034890
+   }
+  ]
+ },
+ "other": [
+  {
+   "name": "The Ultimate Vanilla Spa Experience",
+   "handle": "vanilla",
+   "cat": "Hair and skin",
+   "img": "vanilla_bundle.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 31.5,
+     "ok": true,
+     "id": 43747841179722
+    }
+   ]
+  },
+  {
+   "name": "Vanilla Sugar Scrub",
+   "handle": "vanilla-sugar-scrub",
+   "cat": "Hair and skin",
+   "img": "sugar_scrub_vanilla.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 43742536007754
+    }
+   ]
+  },
+  {
+   "name": "Lemongrass Soap",
+   "handle": "lemongrass-soap",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20_1.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102252470346
+    }
+   ]
+  },
+  {
+   "name": "Strawberry Soap",
+   "handle": "strawberry-soap",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_12.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102249816138
+    }
+   ]
+  },
+  {
+   "name": "Coconut Soap",
+   "handle": "coconut-soap",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.19_1.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102248144970
+    }
+   ]
+  },
+  {
+   "name": "Charcoal Soap",
+   "handle": "charcoal-soap",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.19.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": false,
+     "id": 42102257811530
+    }
+   ]
+  },
+  {
+   "name": "Vanilla Soap",
+   "handle": "vanilla-soap",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_13.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102256762954
+    }
+   ]
+  },
+  {
+   "name": "Cucumber Melon soap",
+   "handle": "cucumber-melon-soap",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.19_2.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102255812682
+    }
+   ]
+  },
+  {
+   "name": "Lavender Soap",
+   "handle": "lavender-soap",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102255091786
+    }
+   ]
+  },
+  {
+   "name": "Strawberry Body Butter",
+   "handle": "strawberry-body-butter",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.07_3.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 20.0,
+     "ok": false,
+     "id": 42102262825034
+    }
+   ]
+  },
+  {
+   "name": "Lemongrass Body Butter",
+   "handle": "lemongrass-body-butter",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.07_2.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 20.0,
+     "ok": false,
+     "id": 42102262366282
+    }
+   ]
+  },
+  {
+   "name": "Coconut Body Butter",
+   "handle": "coconut-body-butter",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.07_1.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 20.0,
+     "ok": false,
+     "id": 42102259220554
+    }
+   ]
+  },
+  {
+   "name": "Seabreeze Soap",
+   "handle": "seabreeze-soap",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-09-17at14.30.532.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": false,
+     "id": 42102258270282
+    }
+   ]
+  },
+  {
+   "name": "Seabreeze Lotion",
+   "handle": "seabreeze-lotion",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20_10.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": false,
+     "id": 42102293233738
+    }
+   ]
+  },
+  {
+   "name": "Vanilla Lotion",
+   "handle": "vanilla-lotion",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_1.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102279995466
+    }
+   ]
+  },
+  {
+   "name": "Coconut Lotion",
+   "handle": "coconut-lotion",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20_8.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": false,
+     "id": 42102269804618
+    }
+   ]
+  },
+  {
+   "name": "Seabreeze Hair & Skin Oil",
+   "handle": "seabreeze-hair-skin-oil",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_8.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": false,
+     "id": 42102331211850
+    }
+   ]
+  },
+  {
+   "name": "Strawberry Hair & Skin Oil",
+   "handle": "strawberry-hair-skin-oil",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_9.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102330523722
+    }
+   ]
+  },
+  {
+   "name": "Coconut Hair & Skin Oil",
+   "handle": "coconut-hair-skin-oil",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_11.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": false,
+     "id": 42102325477450
+    }
+   ]
+  },
+  {
+   "name": "Lavender Lotion",
+   "handle": "lavender-lotion",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20_9.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102301098058
+    }
+   ]
+  },
+  {
+   "name": "Strawberry Air Freshener",
+   "handle": "strawberry-air-freshener",
+   "cat": "Air fresheners",
+   "img": "WhatsAppImage2025-08-16at20.11.06_5.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102347464778
+    }
+   ]
+  },
+  {
+   "name": "Orange Air Freshener",
+   "handle": "orange-air-freshener",
+   "cat": "Air fresheners",
+   "img": "WhatsAppImage2025-08-16at20.11.06_3.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102339141706
+    }
+   ]
+  },
+  {
+   "name": "Coconut Air Freshener",
+   "handle": "coconut-air-freshener",
+   "cat": "Air fresheners",
+   "img": "WhatsAppImage2025-08-16at20.11.06.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": false,
+     "id": 42102339010634
+    }
+   ]
+  },
+  {
+   "name": "Vanilla Hair & Skin Oil",
+   "handle": "vanilla-hair-skin-oil",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_10.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102333440074
+    }
+   ]
+  },
+  {
+   "name": "Seabreeze Air Freshener",
+   "handle": "seabreeze-air-freshener",
+   "cat": "Air fresheners",
+   "img": "WhatsAppImage2025-08-16at20.11.06_4.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102364176458
+    }
+   ]
+  },
+  {
+   "name": "Vanilla Air Freshener",
+   "handle": "vanilla-air-freshener",
+   "cat": "Air fresheners",
+   "img": "WhatsAppImage2025-08-16at20.11.06_6.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102354280522
+    }
+   ]
+  },
+  {
+   "name": "Lavender Air Freshener",
+   "handle": "lavender-air-freshener",
+   "cat": "Air fresheners",
+   "img": "WhatsAppImage2025-08-16at20.11.06_1.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102352511050
+    }
+   ]
+  },
+  {
+   "name": "Lemongrass Air Freshener",
+   "handle": "lemongrass-air-freshener",
+   "cat": "Air fresheners",
+   "img": "WhatsAppImage2025-08-16at20.11.06_2.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 10.0,
+     "ok": true,
+     "id": 42102348152906
+    }
+   ]
+  },
+  {
+   "name": "Seabreeze Body Wash",
+   "handle": "seabreeze-body-wash",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-09-17at14.30.53.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 12.0,
+     "ok": false,
+     "id": 42102395732042
+    }
+   ]
+  },
+  {
+   "name": "Deodorant",
+   "handle": "deodorant",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.19_3_f7047de6-7516-4327-ab9b-33f7939deb90.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102394486858
+    }
+   ]
+  },
+  {
+   "name": "Coconut Sugar Scrub",
+   "handle": "coconut-sugar-scrub",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_2.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102399205450
+    }
+   ]
+  },
+  {
+   "name": "Strawberry Body Wash",
+   "handle": "strawberry-body-wash",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.07.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 12.0,
+     "ok": false,
+     "id": 42102397239370
+    }
+   ]
+  },
+  {
+   "name": "Vanilla Body Wash",
+   "handle": "vanilla-body-wash",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.06_8.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 12.0,
+     "ok": false,
+     "id": 42102397042762
+    }
+   ]
+  },
+  {
+   "name": "Coconut Body Wash",
+   "handle": "coconut-body-wash",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.06_7.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 12.0,
+     "ok": false,
+     "id": 42102396616778
+    }
+   ]
+  },
+  {
+   "name": "Coconut Lotion Bar",
+   "handle": "coconut-lotion-bar",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20_2.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102406316106
+    }
+   ]
+  },
+  {
+   "name": "Strawberry Sugar Scrub",
+   "handle": "strawberry-sugar-scrub",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_7.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": false,
+     "id": 42102404218954
+    }
+   ]
+  },
+  {
+   "name": "Cucumber Melon Sugar Scrub",
+   "handle": "cucumber-melon-sugar-scrub",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_3.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102403661898
+    }
+   ]
+  },
+  {
+   "name": "Seabreeze Sugar Scrub",
+   "handle": "seabreeze-sugar-scrub",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.21_6.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102402515018
+    }
+   ]
+  },
+  {
+   "name": "Vanilla Lotion Bar",
+   "handle": "vanilla-lotion-bar",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20_7.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102407954506
+    }
+   ]
+  },
+  {
+   "name": "Strawberry Lotion Bar",
+   "handle": "strawberry-lotion-bar",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20_6.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102407561290
+    }
+   ]
+  },
+  {
+   "name": "Seabreeze Lotion Bar",
+   "handle": "seabreeze-lotion-bar",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20_5.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102407102538
+    }
+   ]
+  },
+  {
+   "name": "Lemongrass Lotion Bar",
+   "handle": "lemongrass-lotion-bar",
+   "cat": "Hair and skin",
+   "img": "WhatsAppImage2025-08-16at20.11.20_4.jpg",
+   "v": [
+    {
+     "t": "Default Title",
+     "p": 15.0,
+     "ok": true,
+     "id": 42102406447178
+    }
+   ]
+  },
+  {
+   "name": "Bahamas Rum Cake Factory Garment-Dyed 6.1 oz T-Shirt",
+   "handle": "bahamas-comfort-blue-t-shirt",
+   "cat": "Apparel",
+   "img": "BRCF-comfort-colors-1717-front.png",
+   "v": [
+    {
+     "t": "Small",
+     "p": 15.0,
+     "ok": true,
+     "id": 40771708289098
+    },
+    {
+     "t": "Medium",
+     "p": 15.0,
+     "ok": false,
+     "id": 40771708321866
+    },
+    {
+     "t": "Large",
+     "p": 15.0,
+     "ok": false,
+     "id": 40771708354634
+    },
+    {
+     "t": "XL",
+     "p": 15.0,
+     "ok": false,
+     "id": 40771708387402
+    },
+    {
+     "t": "2XL",
+     "p": 15.0,
+     "ok": false,
+     "id": 40771708420170
+    }
+   ]
+  },
+  {
+   "name": "Bahamas Rum Cake Factory Adult Unisex Heavy Cotton 5.3 oz. T-Shirt",
+   "handle": "bahamas-rum-cake-factory-white-t-shirt",
+   "cat": "Apparel",
+   "img": "BRCF-gildan5000-white-front.png",
+   "v": [
+    {
+     "t": "Small",
+     "p": 20.0,
+     "ok": true,
+     "id": 40771713826890
+    },
+    {
+     "t": "Medium",
+     "p": 20.0,
+     "ok": true,
+     "id": 40771713859658
+    },
+    {
+     "t": "Large",
+     "p": 20.0,
+     "ok": true,
+     "id": 40771713892426
+    },
+    {
+     "t": "XL",
+     "p": 20.0,
+     "ok": true,
+     "id": 40771713925194
+    },
+    {
+     "t": "2XL",
+     "p": 20.0,
+     "ok": true,
+     "id": 40771713957962
+    }
+   ]
+  }
+ ]
+}

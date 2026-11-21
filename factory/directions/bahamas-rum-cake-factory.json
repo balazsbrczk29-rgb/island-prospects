@@ -1,13 +1,14 @@
 {
  "slug": "bahamas-rum-cake-factory",
  "niche": "food-events",
- "archetype": "A01",
- "archetype_name": "Magazine feature",
- "lane": "P06",
- "lane_name": "Junkanoo",
- "type": "T05",
- "type_name": "Script and sans",
- "nav": "N1",
- "motion": "M1",
- "dealt_at": "2026-11-08T15:22:55.722Z"
+ "archetype": "A09",
+ "archetype_name": "Colour poster",
+ "lane": "P11",
+ "lane_name": "Straw market",
+ "type": "T11",
+ "type_name": "Neo-grotesk display",
+ "nav": "N4",
+ "motion": "M3",
+ "dealt_at": "2026-11-21T16:01:36.835Z",
+ "chosen": true
 }

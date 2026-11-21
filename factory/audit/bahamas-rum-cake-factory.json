@@ -3,8 +3,34 @@
  "id": 57,
  "size": "Small",
  "niche": "food-events",
- "url": "bacardirumcake.com",
+ "url": "https://thebahamasrumcakefactory.com/",
  "url_source": "prospects",
  "old_check": "FETCH-BLOCKED (robots)",
- "audit": null
+ "audit": {
+  "site_kind": "webshop",
+  "cart": true,
+  "online_payments": true,
+  "booking_engine": "",
+  "products_or_listings": 80,
+  "pages": 20,
+  "platform": "Shopify",
+  "latest_year": 2025,
+  "modernity": 3,
+  "concept_type": "webshop: rum cake catalogue (13 flavours, 4 oz / 20 oz, six packs, 20 oz 2-packs) + six-pack builder + cart drawer + checkout preview handing off to their Shopify store; shop visit info for cruise passengers",
+  "must_keep": [
+   "Shopify cart and checkout (hand-off)",
+   "4 oz and 20 oz sizes with prices",
+   "six packs and mix-and-match six pack",
+   "sold-out states",
+   "apparel and hair & skin care lines (secondary)"
+  ],
+  "weaknesses": [
+   "Old listings point to bacardirumcake.com",
+   "Shop address and hours not prominent",
+   "Stock-named (AdobeStock) product images",
+   "Long repeated grids on mobile"
+  ],
+  "priority": "C",
+  "note": "Shopify store with 80 products (rum cakes $6.99 4 oz / $21.99 20 oz, six packs $37.75, 2-packs $39.58, plus beauty and apparel). Audited 2026-11-21 via products.json."
+ }
 }
