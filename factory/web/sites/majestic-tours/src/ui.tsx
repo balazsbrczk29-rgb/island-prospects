@@ -45,7 +45,7 @@ export const NAV = [
 
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <a href="index.html" className={`no-underline leading-none ${className}`} aria-label="Majestic Tours, home">
+    <a href="index.html" className={`inline-flex min-h-11 items-center no-underline leading-none ${className}`} aria-label="Majestic Tours, home">
       <span className="font-display text-[1.6rem] tracking-[-0.02em]">Majestic Tours</span>
     </a>
   )

@@ -36,7 +36,7 @@ function Transfers() {
         <section className="grid items-end gap-x-[5vw] gap-y-10 px-[var(--pad)] pt-[clamp(40px,7vw,96px)] pb-[clamp(56px,7vw,96px)] md:grid-cols-[minmax(0,1fr)_auto]">
           <div>
             <p className="text-small text-muted italic">Lynden Pindling International to your hotel, and back</p>
-            <h1 className="display mt-3 text-[clamp(3.4rem,7.6vw,7.8rem)] leading-[0.88]">Met outside Customs, driven to your hotel.</h1>
+            <h1 className="display mt-3 text-[clamp(3.2rem,6vw,6.2rem)] leading-[0.9]">Met outside Customs, driven to your hotel.</h1>
             <p className="mt-8 max-w-[36rem] text-lead leading-snug">Air-conditioned vans, buses, limousines, town cars and SUVs. Finalise transportation bookings at least five days ahead.</p>
             <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-2">
               <a href="#page-form" className="btn">Ask for a transfer</a>

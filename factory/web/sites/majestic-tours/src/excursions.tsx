@@ -17,7 +17,7 @@ const PLACES: { key: Place; name: string; note: string; pic: Pic }[] = [
 const KINDS: Kind[] = ["Sea and islands", "Sail and evening", "Dive and snorkel", "Culture and family", "Fishing"]
 
 function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
-  return <button type="button" aria-pressed={on} onClick={onClick} className={`min-h-11 border px-4 text-small transition-colors duration-200 ${on ? "border-green bg-green text-white" : "border-ink/20 hover:border-ink/50"}`}>{children}</button>
+  return <button type="button" aria-pressed={on} onClick={onClick} className={`min-h-11 shrink-0 whitespace-nowrap border px-4 text-small transition-colors duration-200 ${on ? "border-green bg-green text-white" : "border-ink/20 hover:border-ink/50"}`}>{children}</button>
 }
 
 function Excursions() {
@@ -37,10 +37,10 @@ function Excursions() {
           <h1 className="display tnum mt-3 max-w-[14ch] text-[clamp(3.4rem,8.4vw,8.6rem)] leading-[0.88]">37 ways out of Nassau.</h1>
           <p className="mt-8 max-w-[38rem] text-lead leading-snug">Pick a place or the kind of day you want. Every name opens its full tour page with times and what is included.</p>
         </section>
-        <div className="sticky top-0 z-30 border-y border-line bg-ground/95 px-[var(--pad)] py-3 backdrop-blur-sm">
+        <div className="sticky top-0 z-30 border-y border-line bg-ground px-[var(--pad)] py-3 md:pr-[220px]">
           <div className="flex gap-2 overflow-x-auto [scrollbar-width:none]" role="group" aria-label="Where">
             <Chip on={place === "all"} onClick={() => setPlace("all")}>Everywhere</Chip>
-            {PLACES.map(p => <Chip key={p.key} on={place === p.key} onClick={() => setPlace(p.key)}>{p.name.replace("The ", "")}</Chip>)}
+            {PLACES.map(p => <Chip key={p.key} on={place === p.key} onClick={() => setPlace(p.key)}>{p.name.replace("The southwest reefs", "Reefs").replace("The ", "")}</Chip>)}
           </div>
           <div className="mt-2 flex items-center gap-2 overflow-x-auto [scrollbar-width:none]" role="group" aria-label="Kind of day">
             <Chip on={kind === "all"} onClick={() => setKind("all")}>Any day</Chip>

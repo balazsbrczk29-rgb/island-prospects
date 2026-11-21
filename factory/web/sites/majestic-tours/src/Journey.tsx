@@ -297,7 +297,7 @@ export function JourneyPhone({ where, setWhere }: { where: string; setWhere: (v:
           <a href={TEL} className="grid size-11 place-items-center" aria-label={`Call ${PHONE}`}><Phone className="size-5" strokeWidth={1.5} aria-hidden /></a>
         </header>
         <div className="px-5 pt-8">
-          <h1 className="display text-[clamp(4.2rem,21vw,5.6rem)] leading-[0.9]">Out of<br />Nassau.</h1>
+          <p className="display text-[clamp(4.2rem,21vw,5.6rem)] leading-[0.9]">Out of<br />Nassau.</p>
           <p className="mt-6 text-[1.2rem] leading-snug">Sails, islands, reefs and airport transfers, from the Bahamian family company that has met Nassau's guests since 1959.</p>
           <div className="mt-6 flex flex-col items-start gap-1">
             <a href="#book-phone" className="btn w-full">Plan my excursion</a>
@@ -322,9 +322,9 @@ export function JourneyPhone({ where, setWhere }: { where: string; setWhere: (v:
       </section>
       <section id="stops" aria-label="Where the day goes" className="scroll-mt-4 pt-10 pb-6">
         <p className="px-5 text-small text-muted italic">Swipe, and the boat leaves the harbour</p>
-        <div ref={rail} className="mt-3 flex gap-1 overflow-x-auto px-4 [scrollbar-width:none]" role="tablist" aria-label="Stops">
+        <div ref={rail} className="mt-3 flex gap-1 overflow-x-auto px-4 [scrollbar-width:none]" role="group" aria-label="Stops">
           {STOPS.map((s, i) => (
-            <button key={s.place} role="tab" aria-selected={cur === i} type="button" onClick={() => goTo(i)} className={`min-h-11 shrink-0 border-b-2 px-3 text-small whitespace-nowrap transition-colors ${cur === i ? "border-green text-ink" : "border-transparent text-muted"}`}>{s.tab}</button>
+            <button key={s.place} aria-pressed={cur === i} type="button" onClick={() => goTo(i)} className={`min-h-11 shrink-0 border-b-2 px-3 text-small whitespace-nowrap transition-colors ${cur === i ? "border-green text-ink" : "border-transparent text-muted"}`}>{s.tab}</button>
           ))}
         </div>
         <ul ref={track} onScroll={onScroll} className="mt-5 flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none]">
