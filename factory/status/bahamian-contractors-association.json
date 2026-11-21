@@ -1,11 +1,101 @@
 {
  "slug": "bahamian-contractors-association",
  "id": 58,
- "name": "Bahamian Contractors Association",
+ "name": "Bahamian Contractors' Association",
  "batch": "03",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
- "rebuild_of": 1,
- "claimed_at": "2026-11-21T15:36:32.259Z"
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "Find your membership",
+ "brand_truth": "The construction industry's own voice since 1959: 209 member firms, the 2016 Contractors Act, and the push for the Contractors Board.",
+ "buyer": "Bahamian contractors, trades, suppliers and developers deciding whether dues are worth it; developers and officials looking for a local firm.",
+ "direction": {
+  "archetype": "A04 Swiss information grid",
+  "lane": "P09 Shipyard steel",
+  "type": "T03 Swiss grotesk (Hanken Grotesk)",
+  "nav": "N1",
+  "motion": "M7",
+  "why": "A register of firms and an association of builders want order, tables and visible structure; galvanised steel and safety yellow are the building site itself."
+ },
+ "concept_type": "association-directory",
+ "tier_visual": "standard",
+ "big_idea": "The member register is the front door: 209 firms, searchable from the first screen, beside 'One voice since 1959'; then the record, a two-tap tier finder and the next event.",
+ "images": [
+  {
+   "src": "https://ip-assets-bahamian-contractors-association.lovable.app/assets/g3.jpg",
+   "source": "generated",
+   "credit": "illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://unicorn-images.b-cdn.net/f17cf6cc-c6e0-4a1b-96e2-0cc3f01ceabe?optimizer=gif",
+   "source": "own",
+   "credit": "BCA Mix & Mingle 2025"
+  },
+  {
+   "src": "https://unicorn-images.b-cdn.net/24b65dcb-a0e1-4f8f-9e2c-155489e3d779?optimizer=gif",
+   "source": "own",
+   "credit": "BCA Mix & Mingle 2025"
+  }
+ ],
+ "plan_gate": {
+  "first": {
+   "photography": 4,
+   "typography": 5,
+   "composition": 4,
+   "colour": 4,
+   "fit": 5,
+   "distinct": 4,
+   "references": 4,
+   "verdict": "revise (5 changes: advocacy block, event photo span, finder rows + preselect, phone header, band crop)"
+  },
+  "after_revision": {
+   "photography": 4,
+   "typography": 5,
+   "composition": 4,
+   "colour": 4,
+   "fit": 5,
+   "distinct": 4,
+   "references": 4,
+   "verdict": "approved"
+  }
+ },
+ "critic": {
+  "photography": 4,
+  "typography": 5,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 4,
+  "references": 4
+ },
+ "current_site_findings": [
+  "Hero subtitle misspells the association's own name as 'Assoication', and the hero block appears twice",
+  "Own site says founded 1959; ZNS reports 1958",
+  "Newest homepage post is from May 2025",
+  "Membership dues hidden inside an FAQ accordion",
+  "The 209-firm member directory, the association's strongest asset, sits on a separate page as logo tiles mostly reading 'coming soon'"
+ ],
+ "pitch_line": "Your register of 209 firms is the most persuasive thing you own; this concept puts it on the first screen and turns dues into a two-tap answer.",
+ "assumptions": [
+  "Founding year 1959 per own site (ZNS says 1958)",
+  "Developers under $10M turnover: no published tier, finder says 'ask the office'",
+  "Skyfall venue address not published; shown by name only"
+ ],
+ "sources": [
+  "https://www.bahamiancontractors.org/",
+  "https://www.bahamiancontractors.org/members",
+  "https://www.bahamiancontractors.org/events/mix-mingle-2025",
+  "https://www.bahamiancontractors.org/events/skyfall-2026"
+ ],
+ "notes": "Gen-2 rebuild 2026-11-21 by scheduled site worker. BLIND: sandbox blocks outside images and look.mjs; photos seen via Lovable gallery ip-assets-bahamian-contractors-association (4 generated, 15 own event photos) and routed as crops into QA. Gen-1 SVG skyline and membership.html removed; single page with the finder. Mobile tap-target warning is the shared concept-label button. Plan gate revise then approved after one revision.",
+ "history": [
+  {
+   "generation": 1,
+   "built_at": null
+  }
+ ],
+ "built_at": "2026-11-21T15:51:50Z"
 }

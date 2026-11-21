@@ -59,3 +59,27 @@ The construction industry's own voice since 1959, building the Bahamian horizon.
 
 ## Showcase scorecard
 All lines 4. Uniqueness: Archivo heavy grotesk, Bahamian flag palette, line-drawn construction horizon; differs from CBS (green, house drawing) and the others.
+
+
+## Generation 2 design plan (2026-11-21)
+Research this session: homepage (facts unchanged, still "Assoication" typo twice, hero duplicated, newest post May 27 2025), /members (209 member firms with phone and profile URL, parsed), /events/mix-mingle-2025 (event photos, April 25 2025). Skyfall Q4 Mix & Mingle: Friday 11 December 2026, Royal Blue Tavern (still upcoming).
+
+**Big idea.** The BCA's own member register is the front door: "209 Bahamian firms. One voice since 1959." beside the live, searchable register of every member firm, so a contractor sees the size of the industry and a developer finds a firm in seconds; the rest of the page is the record (1959, the 2016 Act, the Contractors Board) and a two-tap tier finder.
+
+**Direction.** A04 Swiss information grid + P09 Shipyard steel (light steel ground, steel field band for membership, safety-yellow CTA) + T03 Swiss grotesk (Hanken Grotesk, sizes 14/18/28/56/120, weights 400/600, section numbers 1.0-5.0), nav N1 numbered text row, motion M7 (grid lines draw on load only). Why: an association of builders and a register of firms want order, tables and visible structure; safety yellow and galvanised steel are the site, not decoration. (A04+P12 refused: rand-memorial-hospital.)
+
+**Photos.**
+| use | source | size | shown |
+|---|---|---|---|
+| band after hero | Lovable g3.jpg, crew walking on a poured slab, sea beyond (illustrative, labelled) | 2752x1536 | 1440x630 |
+| advocacy | own event photo f17cf6cc (member speaking at Mix & Mingle 2025) | 2048x1153 | 7 cols ~830 px |
+| events | own event photo 24b65dcb (members on the waterfront deck at dusk) | 2048x1153 | 8 cols ~950 px |
+Generated g1, g2, g4 not used.
+
+**Storyboard (desktop):** 1) hairline grid; numbered nav; H1 at 120 px over 8 columns; lead; "Find your membership" (yellow) + "Search the register"; right 4 columns: the register, search field, scrolling rows of firm + phone, count "209 of 209". 2) full-width construction photograph. 3) 2.0 advocacy: headline, speaker photo, record table (1959, 2016, Now, Ongoing). 4) 3.0 membership on the steel field: two-tap finder (role, revenue) to tier + dues + "Apply by email", the tier table highlights the match. 5) 3.1 benefits table. 6) 4.0 events: Skyfall 11 Dec with RSVP; Mix & Mingle 2025 with the dusk photo. 7) 5.0 office table (address/map, hours, phone, email). Footer.
+**Phone:** 1) H1 56 px, lead, CTA in first screen; 2) register search and rows; 3) photo then advocacy. Fixed bar (Call / Find your membership) hidden on first screen and over the office table.
+
+**Conversion.** Primary "Find your membership" (tier finder to application email to admin@). Secondary: call the office, RSVP to Skyfall, search the register (links to member profiles on their site).
+
+**Tier.** Standard. **Distinct:** no other site in the repo leads with a searchable register; steel and safety yellow lane; one grotesk at strict sizes.
+**Pages:** single page (their membership page folds into the finder). Gen-1 SVG skyline removed.

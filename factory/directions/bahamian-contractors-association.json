@@ -1,13 +1,14 @@
 {
  "slug": "bahamian-contractors-association",
  "niche": "institution",
- "archetype": "A05",
- "archetype_name": "Chart and map",
- "lane": "P12",
- "lane_name": "Inagua salt",
- "type": "T02",
- "type_name": "Text-led editorial",
- "nav": "N6",
- "motion": "M5",
- "dealt_at": "2026-11-08T15:22:55.702Z"
+ "archetype": "A04",
+ "archetype_name": "Swiss information grid",
+ "lane": "P09",
+ "lane_name": "Shipyard steel",
+ "type": "T03",
+ "type_name": "Swiss grotesk",
+ "nav": "N1",
+ "motion": "M7",
+ "dealt_at": "2026-11-21T15:40:58.334Z",
+ "chosen": true
 }
