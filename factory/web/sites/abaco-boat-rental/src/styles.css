@@ -1,30 +1,53 @@
 @import "tailwindcss" source(none);
 @source "./";
 @source "../../../src/components/ui/accordion.tsx";
-@source "../../../src/components/ui/sheet.tsx";
-@source "../../../src/components/ui/tabs.tsx";
+
+@font-face { font-family: "Bricolage"; src: url("./fonts/bricolage-grotesque-latin-standard-normal.woff2") format("woff2-variations"); font-weight: 200 800; font-stretch: 75% 100%; font-display: swap; }
+@font-face { font-family: "Figtree"; src: url("./fonts/figtree-latin-wght-normal.woff2") format("woff2-variations"); font-weight: 300 900; font-display: swap; }
+@font-face { font-family: "Bricolage Fallback"; src: local("Arial"); size-adjust: 98%; ascent-override: 92%; descent-override: 26%; }
+@font-face { font-family: "Figtree Fallback"; src: local("Arial"); size-adjust: 96%; ascent-override: 96%; descent-override: 26%; }
 
 @theme {
-  --color-paper: #f3f6f4;
-  --color-paper-2: #e5eeeb;
-  --color-ink: #0b2a33;
-  --color-muted: #4e626a;
-  --color-sea: #0f6f7a;
-  --color-sea-deep: #0b525b;
-  --color-aqua: #7fd6d3;
-  --color-sand: #efe3c8;
-  --color-line: #d3dfdc;
-  --font-display: "Unbounded", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  /* P07 Abaco pine, with the Sea of Abaco for the chart */
+  --color-ground: #dce3cf;
+  --color-paper: #f4f1e6;
+  --color-ink: #15261c;
+  --color-muted: #44564a;
+  --color-line: #bfc9b4;
+  --color-pine: #2f5b3a;
+  --color-pine-deep: #224430;
+  --color-needle: #c9a46a;
+  --color-slate: #6e8f9c;
+  --color-shallow: #9fd8cb;
+  --color-bank: #cdeee3;
+  --color-deep: #1f5d78;
+  --font-display: "Bricolage", "Bricolage Fallback", sans-serif;
+  --font-sans: "Figtree", "Figtree Fallback", sans-serif;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: clamp(2rem, 3.4vw, 3rem);
+  --text-3xl: clamp(2.4rem, 5.2vw, 4.6rem);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
-html { background: var(--color-paper); color: var(--color-ink); }
-body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+:root { --concept-offset: 0px; }
+html { background: var(--color-ground); color: var(--color-ink); -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.55; -webkit-font-smoothing: antialiased; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
-::selection { background: var(--color-aqua); }
-.label { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; }
-.ulink { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s cubic-bezier(.16,1,.3,1); }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; font-variation-settings: "opsz" 96; }
+p { text-wrap: pretty; }
+.num { font-variant-numeric: tabular-nums; }
+::selection { background: var(--color-shallow); }
+:focus-visible { outline: 2px solid var(--color-pine); outline-offset: 3px; border-radius: 6px; }
+.ulink { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s var(--ease-out-soft); }
 .ulink:hover, .ulink:focus-visible { background-size: 100% 1px; }
-:focus-visible { outline: 2px solid var(--color-sea); outline-offset: 3px; }
-@media (max-width: 767px) { body { padding-bottom: calc(56px + env(safe-area-inset-bottom)); } }
+.glint { background-image: radial-gradient(120% 60% at 70% 20%, rgba(255,255,255,.28), transparent 60%); }
+.water-shimmer { animation: shimmer 14s ease-in-out infinite alternate; will-change: transform; }
+@keyframes shimmer { from { transform: translate3d(-1.5%, -1%, 0) scale(1.04); } to { transform: translate3d(1.5%, 1%, 0) scale(1.04); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
