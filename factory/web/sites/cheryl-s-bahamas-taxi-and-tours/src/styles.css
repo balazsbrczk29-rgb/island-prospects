@@ -8,11 +8,11 @@
 
 /* Cheryl's own navy-and-yellow uniform, on a warm island paper */
 @theme {
-  --color-paper: #f6f3ec;
-  --color-paper-2: #ece7dc;
+  --color-paper: #f3f4f1;
+  --color-paper-2: #e6e8e3;
   --color-ink: #101a33;
   --color-muted: #4d5568;
-  --color-line: #d8d2c4;
+  --color-line: #d3d6cf;
   --color-navy: #14254a;
   --color-navy-2: #0d1a36;
   --color-deep: #14254a;
@@ -43,7 +43,7 @@
   --dur-med: 420ms;
   --concept-offset: 0px;
 }
-@media (max-width: 767px) { :root { --concept-offset: calc(76px * var(--dock-on, 1)); } }
+@media (max-width: 767px) { :root { --concept-offset: calc(76px * max(var(--dock-on, 1), var(--tourbar, 0))); } }
 
 html { background: var(--color-paper); color: var(--color-ink); }
 body { font-family: var(--font-sans); font-size: var(--t-5); line-height: 1.5; -webkit-font-smoothing: antialiased; }
