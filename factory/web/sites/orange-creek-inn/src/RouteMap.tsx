@@ -39,7 +39,7 @@ export default function RouteMap() {
             <circle cx={atc[0]} cy={atc[1]} r="5" />
             <circle cx={inn[0]} cy={inn[1]} r="11" className="route__pulse" />
             <circle cx={inn[0]} cy={inn[1]} r="11" className="route__inn" />
-            <text x={inn[0] - 18} y={inn[1] - 16} textAnchor="end" className="route__here">Orange Creek Inn</text>
+            <text x={inn[0] - 20} y={inn[1] + 44} textAnchor="end" className="route__here">Orange Creek Inn</text>
             <text x={atc[0] + 18} y={atc[1] + 34} className="route__small">Cat Island</text>
           </g>
         </svg>
