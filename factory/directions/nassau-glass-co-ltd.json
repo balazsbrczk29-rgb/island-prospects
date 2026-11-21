@@ -1,13 +1,14 @@
 {
  "slug": "nassau-glass-co-ltd",
  "niche": "trade-retail",
- "archetype": "A02",
- "archetype_name": "Catalogue index",
- "lane": "P11",
- "lane_name": "Straw market",
- "type": "T11",
- "type_name": "Neo-grotesk display",
- "nav": "N2",
- "motion": "M10",
- "dealt_at": "2026-11-08T15:22:55.711Z"
+ "archetype": "A06",
+ "archetype_name": "Object study",
+ "lane": "P01",
+ "lane_name": "Limestone",
+ "type": "T03",
+ "type_name": "Swiss grotesk",
+ "nav": "N5",
+ "motion": "M4",
+ "dealt_at": "2026-11-20T22:03:38.973Z",
+ "chosen": true
 }

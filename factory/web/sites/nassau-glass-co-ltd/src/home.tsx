@@ -1,123 +1,151 @@
-import { lazy, Suspense, useState } from "react"
-import { motion } from "motion/react"
-import { ArrowRight, Phone } from "lucide-react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Page, mount, Reveal, Label, ease } from "./site"
-import { PHONE, TEL, PHONE2, TEL2, PHONE_INTL, ADDRESS, DEPTS, ITEMS } from "./data"
-const Scene = lazy(() => import("./Scene"))
+import { lazy, Suspense, useEffect, useRef, useState } from "react"
+import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react"
+import { Bars, Footer, Toolbar, mount, usePhone, useWheelSmoothing } from "./shell"
+import { IMG, JOBS, PHONE, PHONE2, PHONE_INTL, FAX, RACK, SHOWERS, SHOWER_ALT, STOCK, SWATCH, TEL, TEL2, TEL_INTL, YEARS, describe, type Kind, type Pick } from "./data"
 
-function Hero() {
+const Pane = lazy(() => import("./Pane"))
+const ss = (a: number, b: number, v: number) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t) }
+const band = (a: number, b: number, f = 0.035) => (v: number) => ss(a - f, a + f, v) * (1 - ss(b - f, b + f, v))
+const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+
+function Picker({ pick, setPick }: { pick: Pick; setPick: (p: Pick) => void }) {
+  const s = STOCK[pick.kind]
+  const kind = (k: Kind) => { const n = STOCK[k]; setPick({ kind: k, thick: n.thick.includes(pick.thick) ? pick.thick : n.thick[Math.min(1, n.thick.length - 1)] ?? "", tint: n.tints.some(t => t.id === pick.tint) ? pick.tint : n.tints[0].id }) }
   return (
-    <section className="relative" aria-labelledby="hero-title">
-      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 pt-10 pb-12 md:px-10 lg:min-h-[calc(100svh-120px)] lg:grid-cols-12 lg:items-center lg:pt-6">
-        <div className="lg:col-span-6">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}><Label>The Bahamas' first glass fabricator</Label></motion.div>
-          <h1 id="hero-title" className="mt-6 font-display text-[clamp(3rem,6.8vw,7rem)] leading-[0.95] tracking-[-0.02em]">
-            <span className="sr-only">Nassau Glass Co Ltd: </span>
-            {["Glass, cut on", "Mackey Street", "since 1959."].map((l, i) => <span key={l} className="block overflow-hidden pb-[0.06em]"><motion.span className={`block ${i === 2 ? "text-steel" : ""}`} initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.15 + i * 0.1, duration: 1.1, ease: [0.77, 0, 0.175, 1] }}>{l}</motion.span></span>)}
-          </h1>
-          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.9, ease }} className="mt-7 max-w-[34rem] text-[clamp(1.05rem,1.3vw,1.18rem)] leading-relaxed text-ink/80">Mirrors, shower enclosures and every kind of glass, measured, made and fitted from the same hill for more than sixty years. Plus Hunter fans, bulbs, lamps and framing in the showroom.</motion.p>
-          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 0.9, ease }} className="mt-8 flex flex-wrap gap-3">
-            <a href="#measure" className="group inline-flex min-h-12 items-center gap-2 bg-ink px-6 font-medium text-paper transition hover:-translate-y-px hover:bg-steel">Request a glass quote <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden /></a>
-            <a href={TEL} className="inline-flex min-h-12 items-center gap-2 border border-ink/30 px-6 transition hover:-translate-y-px hover:border-ink"><Phone className="size-4" aria-hidden /> {PHONE}</a>
-          </motion.div>
-        </div>
-        <motion.div className="relative lg:col-span-6" initial={{ opacity: 0, clipPath: "inset(10% 10% 10% 10%)" }} animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }} transition={{ delay: 0.3, duration: 1.4, ease: [0.77, 0, 0.175, 1] }}>
-          <div className="aspect-[5/4] w-full overflow-hidden bg-edge lg:aspect-[4/5]">
-            <Suspense fallback={<div className="size-full bg-gradient-to-br from-edge to-paper" />}><Scene /></Suspense>
-          </div>
-          <p className="mt-3 text-[11px] font-bold tracking-[0.18em] text-muted uppercase">Illustration: light through float glass</p>
-        </motion.div>
-      </div>
-    </section>
+    <div className="picker">
+      <fieldset>
+        <legend>Sheet</legend>
+        <div className="opts">{(Object.keys(STOCK) as Kind[]).map(k => <button key={k} type="button" className="opt" aria-pressed={pick.kind === k} onClick={() => kind(k)}>{STOCK[k].label}</button>)}</div>
+      </fieldset>
+      <fieldset>
+        <legend>Thickness</legend>
+        {s.thick.length ? <div className="opts">{s.thick.map(t => <button key={t} type="button" className="opt num" aria-pressed={pick.thick === t} aria-label={`${t} of an inch`} onClick={() => setPick({ ...pick, thick: t })}>{t}</button>)}</div> : <span className="thick-note">{s.thickNote}</span>}
+      </fieldset>
+      <fieldset>
+        <legend>Tint</legend>
+        <div className="opts">{s.tints.map(t => <button key={t.id} type="button" className="opt" aria-pressed={pick.tint === t.id} onClick={() => setPick({ ...pick, tint: t.id })}><i className="dot" style={{ background: t.edge }} aria-hidden />{t.name}</button>)}</div>
+      </fieldset>
+    </div>
   )
 }
 
-function KeyBand() {
-  const items: [string, string, string][] = [["Call", PHONE, TEL], ["Or call", PHONE2, TEL2], ["Showroom", "#46 Mackey Street, top of the hill", "#visit"], ["Open", "Mon to Fri 9 to 4:30 · Sat 9 to 1", "#visit"]]
+function Chapter({ p, at, step, title, children }: { p: MotionValue<number>; at: [number, number]; step: string; title: string; children: React.ReactNode }) {
+  const f = band(at[0], at[1])
+  const opacity = useTransform(p, v => f(v))
+  const y = useTransform(p, v => (1 - f(v)) * 18)
   return (
-    <section className="bg-ink text-paper" aria-label="Key information">
-      <ul className="mx-auto grid max-w-[1440px] grid-cols-2 lg:grid-cols-4">
-        {items.map(([k, v, href], i) => (
-          <li key={k} className={`border-b border-paper/15 lg:border-b-0 lg:border-l lg:first:border-l-0 ${i > 1 ? "col-span-2 lg:col-span-1" : ""}`}>
-            <a href={href} className="group block px-5 py-6 transition hover:bg-steel md:px-8 md:py-8">
-              <span className="text-[11px] font-bold tracking-[0.18em] text-edge uppercase">{k}</span>
-              <span className={`mt-2 block font-display leading-tight ${i < 2 ? "text-[clamp(1.6rem,2.2vw,2.1rem)] tnum" : "text-[1.3rem]"}`}>{v}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <motion.div className="chapter" style={{ opacity, y }}>
+      <p className="step num">{step}</p>
+      <h2>{title}</h2>
+      {children}
+    </motion.div>
   )
 }
 
-function Measure() {
-  const [item, setItem] = useState<string>(ITEMS[0])
-  const [w, setW] = useState("")
-  const [h, setH] = useState("")
-  const [qty, setQty] = useState("1")
-  const [where, setWhere] = useState("")
-  const W = parseFloat(w) || 0, H = parseFloat(h) || 0, Q = Math.max(1, parseInt(qty) || 1)
-  const sqft = (W * H * Q) / 144
-  const ratio = W && H ? W / H : 0.8
-  const pw = ratio >= 1 ? 220 : 220 * ratio, ph = ratio >= 1 ? 220 / ratio : 220
-  const summary = [`${item}`, W && H ? `${W} in wide by ${H} in high` : null, Q > 1 ? `${Q} pieces` : null, sqft ? `about ${sqft.toFixed(1)} sq ft` : null, where ? `for ${where}` : null].filter(Boolean).join(", ")
+function Study({ pick, setPick }: { pick: Pick; setPick: (p: Pick) => void }) {
+  const ref = useRef<HTMLElement>(null)
+  const phone = usePhone()
+  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] })
+  const [phase, setPhase] = useState(0)
+  const [active, setActive] = useState(true)
+  const [ready, setReady] = useState(false)
+  const [show3d, setShow3d] = useState(false)
+  useMotionValueEvent(p, "change", v => { const n = v < 0.1 ? 0 : v < 0.62 ? 1 : 2; if (n !== phase) setPhase(n) })
+  useEffect(() => {
+    setShow3d(true)
+    const io = new IntersectionObserver(([e]) => setActive(e.isIntersecting), { threshold: 0 })
+    if (ref.current) io.observe(ref.current)
+    return () => io.disconnect()
+  }, [])
+  const heroOpacity = useTransform(p, v => 1 - ss(0.03, 0.12, v))
+  const heroY = useTransform(p, v => -ss(0.03, 0.12, v) * 28)
+  const lam = () => { setPick({ kind: "laminated", thick: "", tint: "clear" }); go("quote") }
   return (
-    <section id="measure" className="mx-auto max-w-[1440px] scroll-mt-24 px-5 py-24 md:px-10 md:py-32" aria-labelledby="measure-title">
-      <Reveal className="grid gap-6 md:grid-cols-12 md:items-end">
-        <div className="md:col-span-7"><Label>01 · Get a quote</Label><h2 id="measure-title" className="mt-5 font-display text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[0.98]">Measure it once, here.</h2></div>
-        <p className="text-[17px] leading-relaxed text-muted md:col-span-4 md:col-start-9">Choose what you need and enter the size in inches. We draw it to proportion and give you one line to read out when you call.</p>
-      </Reveal>
-      <div className="mt-14 grid gap-10 lg:grid-cols-12">
-        <div className="space-y-8 lg:col-span-6">
-          <div className="flex flex-wrap gap-1" role="radiogroup" aria-label="What you need">
-            {ITEMS.map(x => <button key={x} type="button" role="radio" aria-checked={item === x} onClick={() => setItem(x)} className={`min-h-11 border px-4 text-[15px] transition hover:-translate-y-px ${item === x ? "border-ink bg-ink text-paper" : "border-line hover:border-ink"}`}>{x}</button>)}
+    <section ref={ref} className="study" data-stage id="top" aria-label="Glass in stock, and how laminated safety glass is built">
+      <div className="study-pin">
+        <Toolbar home />
+        <div className="pane-wrap">
+          <div className="poster" style={{ backgroundImage: `url(${phone ? "pane-phone.png" : "pane.png"})`, opacity: ready ? 0 : 1 }} />
+          <div style={{ position: "absolute", inset: 0 }}>
+            {show3d && <Suspense fallback={null}><Pane pick={pick} progress={p} active={active} phone={phone} onReady={() => setReady(true)} /></Suspense>}
           </div>
-          <p className="text-[14px] text-muted">{item === "Shower enclosure" ? "Shower enclosures are manufactured at Nassau Glass." : item === "Window pane replacement" ? "The service department handles replacements and repairs, start to finish." : item === "Picture frame glass" ? "Framing is done in house, in the custom framing department." : "Cut to size for homes and businesses."}</p>
-          <div className="grid grid-cols-3 gap-5">
-            {([["Width (in)", w, setW], ["Height (in)", h, setH], ["How many", qty, setQty]] as const).map(([l, v, set]) => (
-              <label key={l} className="block"><span className="text-[12px] font-bold tracking-[0.14em] text-muted uppercase">{l}</span><input type="number" min={0} value={v} onChange={e => set(e.target.value)} className="mt-1 block min-h-12 w-full border-b-2 border-ink/20 bg-transparent font-display text-2xl outline-none focus:border-steel" /></label>
-            ))}
-          </div>
-          <label className="block"><span className="text-[12px] font-bold tracking-[0.14em] text-muted uppercase">Where it goes</span><input value={where} onChange={e => setWhere(e.target.value)} placeholder="Bathroom, storefront, dining table..." className="mt-1 block min-h-12 w-full border-b-2 border-ink/20 bg-transparent text-lg outline-none focus:border-steel" /></label>
         </div>
-        <div className="lg:col-span-5 lg:col-start-8">
-          <div className="relative flex aspect-square items-center justify-center bg-edge/60">
-            <motion.div className="pane relative" animate={{ width: pw, height: ph }} transition={{ duration: 0.6, ease }} aria-hidden>
-              <span className="absolute -top-6 left-0 right-0 text-center text-[13px] text-muted tnum">{W ? `${W}″` : "width"}</span>
-              <span className="absolute top-0 bottom-0 -right-12 flex items-center text-[13px] text-muted tnum">{H ? `${H}″` : "height"}</span>
-              <span className="absolute inset-y-4 left-[22%] w-px rotate-12 bg-white/90" />
-            </motion.div>
+        <motion.div className="hero" style={{ opacity: heroOpacity, y: heroY, pointerEvents: phase === 0 ? "auto" : "none" }} inert={phase !== 0}>
+          <div>
+            <h1>Glass from <span className="frac num">1/16</span> to <span className="frac num">3/4</span> of an inch, cut to any shape on Mackey Street.</h1>
+            <p className="sub">The Bahamas' first fabricating glass company, at #46 since 1959. Choose a sheet and see what is on the rack.</p>
           </div>
-          <div className="mt-6 bg-ink p-6 text-paper md:p-7" aria-live="polite">
-            <p className="text-[11px] font-bold tracking-[0.18em] text-edge uppercase">Read this out on the call</p>
-            <p className="mt-2 font-display text-[1.45rem] leading-snug">{summary}.</p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <a href={TEL} className="inline-flex min-h-12 items-center gap-2 bg-paper px-5 text-ink transition hover:-translate-y-px hover:bg-edge"><Phone className="size-4" aria-hidden /> {PHONE}</a>
-              <a href={TEL2} className="inline-flex min-h-12 items-center gap-2 border border-paper/30 px-5 tnum transition hover:border-paper">{PHONE2}</a>
+          <div>
+            <Picker pick={pick} setPick={setPick} />
+            <div className="hero-cta">
+              <button type="button" className="btn btn-glass" onClick={() => go("quote")}>Quote this glass</button>
+              <span className="shown" aria-live="polite">Shown: {describe(pick)}</span>
             </div>
           </div>
+        </motion.div>
+        <motion.p className="pane-note small" style={{ opacity: heroOpacity }}>A rendered sample. The real sheet is at the counter.</motion.p>
+        <div className="chapters">
+          <Chapter p={p} at={[0.2, 0.41]} step="Laminated safety glass, 1 of 3" title="It starts as two sheets of glass.">
+            <p>This is what goes into a hurricane impact window, or a replacement boat windshield.</p>
+          </Chapter>
+          <Chapter p={p} at={[0.41, 0.62]} step="2 of 3" title="An interlayer is bonded between them.">
+            <p>If the glass breaks, the pieces hold to the interlayer instead of falling out of the frame.</p>
+          </Chapter>
+          <Chapter p={p} at={[0.62, 1.2]} step="3 of 3" title="Stocked in clear, bronze, gray and green.">
+            <p>In a large selection of thicknesses, at #46 Mackey Street.</p>
+            <button type="button" className="link" style={{ pointerEvents: phase === 2 ? "auto" : "none" }} tabIndex={phase === 2 ? 0 : -1} onClick={lam}>Quote laminated glass</button>
+          </Chapter>
         </div>
       </div>
     </section>
   )
 }
 
-function Depts() {
-  const groups = ["Glass and metal", "Light and air", "Art and home"] as const
+function Showers({ onQuote }: { onQuote: (s: string) => void }) {
+  const [frame, setFrame] = useState("Frameless")
+  const [door, setDoor] = useState("Swing door")
+  const label = `${frame.toLowerCase()}, ${door.toLowerCase()}`
   return (
-    <section className="bg-edge/50" aria-labelledby="depts-title">
-      <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32">
-        <Reveal className="grid gap-6 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-7"><Label>02 · Under one roof</Label><h2 id="depts-title" className="mt-5 font-display text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[0.98]">We do glass, and a whole lot more.</h2></div>
-          <a href="services.html" className="group inline-flex min-h-11 items-center gap-2 font-medium md:col-span-4 md:col-start-9 md:justify-self-end">Every department <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden /></a>
-        </Reveal>
-        <div className="mt-14 grid gap-0 border-t border-ink md:grid-cols-3">
-          {groups.map((g, gi) => (
-            <Reveal key={g} delay={gi * 0.08} className="border-b border-line py-8 md:border-r md:border-b-0 md:px-8 md:first:pl-0 md:last:border-r-0">
-              <p className="text-[12px] font-bold tracking-[0.18em] text-steel uppercase">{g}</p>
-              <ul className="mt-5 space-y-4">{DEPTS.filter(d => d.group === g).map(d => <li key={d.id}><a href={`services.html#${d.id}`} className="group block"><span className="font-display text-[1.45rem] transition group-hover:translate-x-1 inline-block">{d.name}</span><span className="block text-[15px] text-muted">{d.line}</span></a></li>)}</ul>
-            </Reveal>
+    <section className="sec showers" id="showers" aria-labelledby="showers-h">
+      <div className="wrap sec-head">
+        <h2 id="showers-h">Shower enclosures are made here, not shipped in.</h2>
+        <p>Nassau Glass manufactures its own enclosures: frameless and semi-frameless systems, with swing or sliding doors, in a choice of finishes and glass.</p>
+      </div>
+      <div className="strip" tabIndex={0} role="group" aria-label="Six shower enclosures by Nassau Glass">
+        {SHOWERS.map((s, i) => (
+          <figure key={s.n}>
+            <img src={s.src} alt={SHOWER_ALT[i]} width={750} height={1000} loading="lazy" decoding="async" />
+          </figure>
+        ))}
+      </div>
+      <div className="wrap build">
+        <div className="rows">
+          <div className="row"><span>Frame</span><div className="seg">{["Frameless", "Semi-frameless"].map(v => <button key={v} type="button" aria-pressed={frame === v} onClick={() => setFrame(v)}>{v}</button>)}</div></div>
+          <div className="row"><span>Door</span><div className="seg">{["Swing door", "Sliding door"].map(v => <button key={v} type="button" aria-pressed={door === v} onClick={() => setDoor(v)}>{v}</button>)}</div></div>
+        </div>
+        <button type="button" className="btn btn-ink" onClick={() => onQuote(label)}>Quote a {label} enclosure</button>
+      </div>
+    </section>
+  )
+}
+
+function Rack({ onQuote }: { onQuote: (k: Kind) => void }) {
+  return (
+    <section className="sec" id="rack" aria-labelledby="rack-h">
+      <div className="wrap">
+        <div className="sec-head">
+          <h2 id="rack-h">What is on the rack today.</h2>
+          <p>The sheet goods the Glass Division keeps in stock, cut to size by factory-trained staff.</p>
+        </div>
+        <div className="rack">
+          {RACK.map(r => (
+            <div className="rack-row" key={r.name}>
+              <h3>{r.name}</h3>
+              <span className="num">{r.thick}</span>
+              <span className="tints">{r.tints.map(t => <span key={t}>{SWATCH[t] && <i style={{ background: SWATCH[t] }} aria-hidden />}{t}</span>)}</span>
+              <span className="use">{r.use}</span>
+              {r.kind ? <button type="button" className="link" onClick={() => onQuote(r.kind as Kind)} aria-label={`Quote ${r.name.toLowerCase()}`}>Quote it</button> : <a className="link num" href={TEL} aria-label={`Call about ${r.name.toLowerCase()}`}>Call</a>}
+            </div>
           ))}
         </div>
       </div>
@@ -125,64 +153,182 @@ function Depts() {
   )
 }
 
-function Story() {
+function Metals({ onQuote }: { onQuote: () => void }) {
   return (
-    <section id="story" className="mx-auto grid max-w-[1440px] gap-12 px-5 py-28 md:px-10 md:py-40 lg:grid-cols-12 lg:items-end" aria-labelledby="story-title">
-      <Reveal className="lg:col-span-7">
-        <Label>03 · Since 1959</Label>
-        <h2 id="story-title" className="mt-6 font-display text-[clamp(2.8rem,6vw,6rem)] leading-[0.95]">Same hill. Same trade. Sixty-plus years.</h2>
-      </Reveal>
-      <Reveal delay={0.1} className="lg:col-span-4 lg:col-start-9">
-        <p className="text-[17px] leading-relaxed text-muted">Nassau Glass was founded in 1959 as the Bahamas' first fabricating glass company, and it has never left its original home at #46 Mackey Street. Its sister company, Bahamas Aluminum Manufacturing, was the country's first local maker of aluminum windows, doors and railings.</p>
-        <a href="http://www.bahamasaluminum.com/" className="group mt-6 inline-flex min-h-11 items-center gap-2 font-medium">Windows, doors and shutters <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden /></a>
-      </Reveal>
-    </section>
-  )
-}
-
-const FAQ = [
-  ["Do you install the glass as well?", "Yes. The service department does the entire job from start to finish, including replacements and repairs."],
-  ["Where exactly are you?", "At #46 Mackey Street, at the top of the hill, about half a mile south of the Paradise Island Bridge."],
-  ["Do you sell ceiling fans and bulbs?", "Yes. Nassau Glass is an authorized Hunter ceiling fan dealer and has a Lightbulb Center, plus lamps and replacement shades."],
-  ["Can I call from outside The Bahamas?", `Yes, on ${PHONE_INTL}.`],
-]
-
-function Questions() {
-  return (
-    <section className="border-t border-line bg-edge/40" aria-labelledby="faq-title">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-12">
-        <Reveal className="lg:col-span-4"><Label>04 · Questions</Label><h2 id="faq-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4rem)] leading-[1]">Before you visit.</h2></Reveal>
-        <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
-          <Accordion type="single" collapsible defaultValue="q0" className="border-t border-ink">
-            {FAQ.map(([q, a], i) => (
-              <AccordionItem key={q} value={`q${i}`} className="border-line">
-                <AccordionTrigger className="py-6 text-left font-display text-[1.4rem] font-normal hover:no-underline">{q}</AccordionTrigger>
-                <AccordionContent className="pb-6 text-[16px] leading-relaxed text-muted">{a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </Reveal>
+    <section className="sec metals" aria-labelledby="metals-h">
+      <div className="wrap">
+        <h2 id="metals-h">A single storefront entrance, or a six-story curtain wall.</h2>
+        <div className="cols">
+          <div>
+            <h3>Architectural Metals</h3>
+            <p>Residential and commercial. The division can help design a system or write a scope of work. No job is considered too small or too large.</p>
+            <button type="button" className="link" onClick={onQuote} style={{ marginTop: 16 }}>Quote a storefront</button>
+          </div>
+          <div>
+            <h3>Service Department</h3>
+            <p>Installation, repairs and replacements for glass, windows and doors, in homes and in office buildings. The same shop does the whole job, start to finish.</p>
+          </div>
+        </div>
       </div>
     </section>
   )
 }
 
-function Visit() {
+function Hill() {
   return (
-    <section id="visit" className="mx-auto grid max-w-[1440px] gap-10 px-5 py-24 md:px-10 md:py-28 lg:grid-cols-12" aria-labelledby="visit-title">
-      <Reveal className="lg:col-span-5">
-        <Label>05 · Visit</Label>
-        <h2 id="visit-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.6rem)] leading-[1]">Top of the hill, Mackey Street.</h2>
-        <dl className="mt-10 divide-y divide-line border-y border-ink text-[16px]">
-          {[["Address", ADDRESS], ["Monday to Friday", "9:00 am to 4:30 pm"], ["Saturday", "9:00 am to 1:00 pm"], ["International", PHONE_INTL]].map(([k, v]) => <div key={k} className="grid grid-cols-[1fr_1.4fr] gap-4 py-4"><dt className="text-muted">{k}</dt><dd>{v}</dd></div>)}
-        </dl>
-        <a href={TEL} className="mt-8 flex min-h-16 items-center gap-3 bg-ink px-7 font-display text-[1.8rem] text-paper transition hover:-translate-y-0.5 hover:bg-steel"><Phone className="size-5" aria-hidden /> <span className="tnum">{PHONE}</span></a>
-      </Reveal>
-      <Reveal delay={0.1} className="overflow-hidden border border-line lg:col-span-7">
-        <iframe title="Map of Nassau Glass, Mackey Street, Nassau" loading="lazy" className="h-[420px] w-full lg:h-full lg:min-h-[480px]" src="https://www.google.com/maps?q=Nassau+Glass,+Mackey+Street,+Nassau,+Bahamas&output=embed" />
-      </Reveal>
+    <section className="sec" aria-labelledby="hill-h">
+      <div className="wrap">
+        <div className="sec-head">
+          <h2 id="hill-h">Glass, and a whole lot more, added one department at a time.</h2>
+          <p>Five dates from the same address at the top of the hill. <a className="link" href="departments.html">See all nine departments</a></p>
+        </div>
+        <div className="hill">
+          {YEARS.map(y => (
+            <article key={y.y}>
+              <div className="y num">{y.y}</div>
+              <h3>{y.t}</h3>
+              <p>{y.d}</p>
+            </article>
+          ))}
+        </div>
+      </div>
     </section>
   )
 }
 
-mount(<Page current="Home"><Hero /><KeyBand /><Measure /><Depts /><Story /><Questions /><Visit /></Page>)
+type Order = { job: string; w: string; h: string; qty: string; name: string; enclosure: string }
+function Quote({ pick, setPick, order, setOrder }: { pick: Pick; setPick: (p: Pick) => void; order: Order; setOrder: (o: Order) => void }) {
+  const [copied, setCopied] = useState(false)
+  const s = STOCK[pick.kind]
+  const w = parseFloat(order.w), h = parseFloat(order.h), q = Math.max(1, parseInt(order.qty) || 1)
+  const sized = w > 0 && h > 0
+  const area = sized ? ((w * h) / 144) * q : 0
+  const set = (k: keyof Order) => (e: React.ChangeEvent<HTMLInputElement>) => setOrder({ ...order, [k]: e.target.value })
+  const lines: [string, string][] = [
+    ["Job", order.job],
+    ["Glass", describe(pick)],
+    ...(order.job === "Shower enclosure" && order.enclosure ? [["Enclosure", order.enclosure] as [string, string]] : []),
+    ["Size", sized ? `${order.w} x ${order.h} in, ${q} ${q === 1 ? "piece" : "pieces"}` : "To be measured"],
+    ...(sized ? [["Area", `${area.toFixed(1)} sq ft`] as [string, string]] : []),
+    ...(order.name ? [["For", order.name] as [string, string]] : []),
+  ]
+  const copy = async () => {
+    const text = `Quote request for Nassau Glass\n${lines.map(l => `${l[0]}: ${l[1]}`).join("\n")}`
+    try { await navigator.clipboard.writeText(text) } catch { /* clipboard blocked: the summary stays on screen to read out */ }
+    setCopied(true); setTimeout(() => setCopied(false), 1800)
+  }
+  const kind = (k: Kind) => { const n = STOCK[k]; setPick({ kind: k, thick: n.thick.includes(pick.thick) ? pick.thick : n.thick[Math.min(1, n.thick.length - 1)] ?? "", tint: n.tints.some(t => t.id === pick.tint) ? pick.tint : n.tints[0].id }) }
+  return (
+    <section className="sec" id="quote" data-quiet aria-labelledby="quote-h">
+      <div className="wrap">
+        <div className="sec-head">
+          <h2 id="quote-h">Tell the shop what you need before you call.</h2>
+          <p>Four answers make a summary the counter can price. Not sure of the size? Leave it blank and ask for a measure.</p>
+        </div>
+        <div className="order">
+          <form onSubmit={e => e.preventDefault()} aria-label="Quote request">
+            <div className="field">
+              <span className="lab" id="job-l">What is it for</span>
+              <div className="chips" role="group" aria-labelledby="job-l">{JOBS.map(j => <button key={j} type="button" className="chip" aria-pressed={order.job === j} onClick={() => setOrder({ ...order, job: j })}>{j}</button>)}</div>
+            </div>
+            <div className="field">
+              <span className="lab" id="kind-l">Sheet</span>
+              <div className="chips" role="group" aria-labelledby="kind-l">
+                {(Object.keys(STOCK) as Kind[]).map(k => <button key={k} type="button" className="chip" aria-pressed={pick.kind === k} onClick={() => kind(k)}>{STOCK[k].label}</button>)}
+              </div>
+              {s.thick.length > 0 && <div className="chips" role="group" aria-label="Thickness">
+                {s.thick.map(t => <button key={t} type="button" className="chip num" aria-pressed={pick.thick === t} aria-label={`${t} of an inch`} onClick={() => setPick({ ...pick, thick: t })}>{t} in</button>)}
+              </div>}
+              <div className="chips" role="group" aria-label="Tint">
+                {s.tints.map(t => <button key={t.id} type="button" className="chip" aria-pressed={pick.tint === t.id} onClick={() => setPick({ ...pick, tint: t.id })}>{t.name}</button>)}
+              </div>
+            </div>
+            <div className="size">
+              <div className="field"><label htmlFor="q-w">Width, inches</label><input id="q-w" className="inp" inputMode="decimal" value={order.w} onChange={set("w")} placeholder="24" /></div>
+              <span className="x" aria-hidden>x</span>
+              <div className="field"><label htmlFor="q-h">Height, inches</label><input id="q-h" className="inp" inputMode="decimal" value={order.h} onChange={set("h")} placeholder="36" /></div>
+              <div className="field"><label htmlFor="q-q">Pieces</label><input id="q-q" className="inp" inputMode="numeric" value={order.qty} onChange={set("qty")} /></div>
+            </div>
+            <div className="field"><label htmlFor="q-n">Your name</label><input id="q-n" className="inp" autoComplete="name" value={order.name} onChange={set("name")} /></div>
+          </form>
+          <aside className="ticket" aria-live="polite" aria-label="Your summary">
+            <h3>Read this to the counter</h3>
+            <dl className="num">{lines.map(l => <div key={l[0]} style={{ display: "contents" }}><dt>{l[0]}</dt><dd>{l[1]}</dd></div>)}</dl>
+            <div className="acts">
+              <a className="btn btn-glass num" href={TEL}>Call {PHONE}</a>
+              <button type="button" className="link" onClick={copy}>{copied ? "Copied" : "Copy the summary"}</button>
+            </div>
+            <p className="small">Prices come from the shop, not from this page.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function OpenNow() {
+  const [state, setState] = useState<{ open: boolean; text: string } | null>(null)
+  useEffect(() => {
+    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Nassau", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date())
+    const get = (t: string) => parts.find(x => x.type === t)?.value ?? ""
+    const day = get("weekday"), mins = (parseInt(get("hour")) % 24) * 60 + parseInt(get("minute"))
+    const close = day === "Sun" ? 0 : day === "Sat" ? 13 * 60 : 16 * 60 + 30
+    const open = close > 0 && mins >= 9 * 60 && mins < close
+    setState({ open, text: open ? `Open now, until ${day === "Sat" ? "1:00 pm" : "4:30 pm"}` : "Closed now, opens 9:00 am" + (day === "Sat" && mins >= close || day === "Sun" ? " Monday" : "") })
+  }, [])
+  return <p className="open-now" data-open={state?.open ?? true}>{state && <><i aria-hidden />{state.text}</>}</p>
+}
+
+function Visit() {
+  return (
+    <section className="sec visit" id="visit" data-quiet aria-labelledby="visit-h">
+      <div className="wrap visit-grid">
+        <div>
+          <h2 id="visit-h">The green building at the top of the hill.</h2>
+          <p className="way">#46 Mackey Street, Nassau, half a mile south of the Paradise Island Bridge. The same address since 1959.</p>
+          <div className="phones num">
+            <a href={TEL}>{PHONE}</a>
+            <a href={TEL2}>{PHONE2}</a>
+          </div>
+        </div>
+        <div>
+          <OpenNow />
+          <table className="num">
+            <tbody>
+              <tr><td>Monday to Friday</td><td>9:00 am to 4:30 pm</td></tr>
+              <tr><td>Saturday</td><td>9:00 am to 1:00 pm</td></tr>
+              <tr><td>Calling from abroad</td><td><a href={TEL_INTL}>{PHONE_INTL}</a></td></tr>
+              <tr><td>Fax</td><td>{FAX}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <img src={`${IMG}2020/05/ng_gallery.jpg`} alt="The Nassau Glass building on Mackey Street, painted green with white trim" width={400} height={234} loading="lazy" decoding="async" />
+      </div>
+    </section>
+  )
+}
+
+function Home() {
+  useWheelSmoothing()
+  const [pick, setPick] = useState<Pick>({ kind: "glass", thick: "1/4", tint: "clear" })
+  const [order, setOrder] = useState<Order>({ job: "Tabletop", w: "", h: "", qty: "1", name: "", enclosure: "" })
+  const quoteKind = (k: Kind) => { const n = STOCK[k]; setPick({ kind: k, thick: n.thick[Math.min(1, n.thick.length - 1)] ?? "", tint: n.tints[0].id }); if (k === "mirror") setOrder({ ...order, job: "Mirror" }); go("quote") }
+  return (
+    <>
+      <a className="skip" href="#main">Skip to content</a>
+      <main id="main">
+        <Study pick={pick} setPick={setPick} />
+        <Showers onQuote={s => { setOrder({ ...order, job: "Shower enclosure", enclosure: s }); go("quote") }} />
+        <Rack onQuote={quoteKind} />
+        <Metals onQuote={() => { setOrder({ ...order, job: "Storefront" }); go("quote") }} />
+        <Hill />
+        <Quote pick={pick} setPick={setPick} order={order} setOrder={setOrder} />
+        <Visit />
+      </main>
+      <Footer />
+      <Bars after="#top" home />
+    </>
+  )
+}
+
+mount(<Home />)

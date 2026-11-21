@@ -6,5 +6,33 @@
  "url": "nassauglass.com",
  "url_source": "brief",
  "old_check": "NO OWN SITE LISTED: (none listed)",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 13,
+  "platform": "WordPress (ThemeGrill Spacious, Elementor)",
+  "latest_year": 2026,
+  "modernity": 2,
+  "concept_type": "brochure: departments + stock picker + quote summary",
+  "must_keep": [
+   "all nine departments",
+   "both phone numbers, international line and fax",
+   "hours and the Mackey Street directions",
+   "a way to send or prepare an enquiry (their contact form)",
+   "link to sister company Bahamas Aluminum"
+  ],
+  "weaknesses": [
+   "'SASTIFIED CLIENTS' misspelled on the homepage",
+   "stock photos, real shower work and the building shown small",
+   "stock list buried in one paragraph",
+   "no meta description, generic title",
+   "carousel repeats departments",
+   "for-sale notice beside the phone numbers"
+  ],
+  "priority": "A",
+  "note": "Record said no site; nassauglass.com is live but dated. Informative brochure, no shop."
+ }
 }

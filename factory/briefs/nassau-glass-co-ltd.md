@@ -53,3 +53,36 @@ The Bahamas' first glass fabricator, on the same hill since 1959. Feel: clear, p
 ## Showcase scorecard
 First screen 5, typography 4, layout 4, context 4, motion 4, depth 5, detailing 4, mobile 4, references 4, owner proud 4, whole page 4.
 Uniqueness: only site with a real-time glass transmission scene; Libre Caslon + Karla, float-glass greens and lamp amber.
+
+
+---
+# Generation 2 rebuild (session 2026-11-20)
+
+## Added facts (nassauglass.com/glass/, /shower-enclosures/, /architectural-metals/, /service/, /about/)
+- Stock: glass 1/16 to 3/4 in (clear, gray, bronze); mirror 1/8 and 1/4 in (clear, bronze, gray, flesh tone, blue); laminated safety glass, large selection of thicknesses (clear, bronze, gray, green), for hurricane impact windows and boat windshields; pattern glass; acrylic Plexiglas 1/8 to 1/2 in; polycarbonate.
+- Showers: they manufacture; frameless and semi-frameless; swing and sliding doors. Six real install photos (750x1000).
+- 1966 first custom framing department; 1982 Lighting Center; 1994 Architectural Metals (single storefront to six-story curtain wall); 2002 Art Gallery and Home Decorating Center, 7,000 sq ft.
+- Their building is green with white trim (own photo, 400x234).
+
+## Audit
+Brochure, WordPress, about 13 pages, no cart. Concept type: brochure with departments, stock picker and quote summary. Priority A.
+
+## Big idea
+The first screen is a sheet of Nassau Glass's own stock: pick glass, mirror or laminated, any thickness and tint they list, and scrolling pulls laminated safety glass apart into its two sheets and interlayer.
+
+## Direction
+A06 Object study + P01 Limestone + T03 Swiss grotesk. A glass panel is the archetype's own example, and the sea glass green is the colour of a cut edge and of their building. One family (Instrument Sans), two weights.
+Tier: premium 3D, because thickness, tint and a laminated build-up cannot be shown by a photograph.
+
+## Storyboard (1440x900)
+1. Green field. Left: "Glass from 1/16 to 3/4 of an inch, cut to any shape on Mackey Street." and the picker (sheet, thickness, tint), "Quote this glass". Right: the sheet, turning in strip light.
+2. Pinned: the sheet turns edge-on and separates. "It starts as two sheets of glass."
+3. Pinned: the interlayer lights up. "An interlayer is bonded between them."
+4. Pinned: plies close, tint runs bronze, gray, green. "Stocked in clear, bronze, gray and green." Quote laminated glass.
+5. Stone ground: "Shower enclosures are made here, not shipped in." Six real photos in a sideways strip; frame and door choice feeds the quote.
+6. Light ground: "What is on the rack today." The stock table (their real tabular data).
+7. Green field: "A single storefront entrance, or a six-story curtain wall." Architectural Metals and Service.
+8. Light: five dates stepping up the hill, 1959 to 2002; link to all nine departments.
+9. Quote: four answers and a summary to read to the counter; Call.
+10. Stone: "The green building at the top of the hill." Hours, live open line, phones, their building photo.
+Phone (390x844): 1. toolbar with phone, sheet, headline, picker, Quote this glass. 2-4. sheet grows above the chapter text. 5. shower strip swipes.
