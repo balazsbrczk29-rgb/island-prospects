@@ -148,6 +148,7 @@ function Chooser({ stay, open }: { stay: Stay; open: (id: string) => void }) {
   const n = nightsBetween(stay.arrive, stay.leave)
   const list = useMemo(() => [...COTTAGES].sort((a, b) => (Number(b.sleeps >= stay.guests) - Number(a.sleeps >= stay.guests)) || a.rate - b.rate), [stay.guests])
   const fitCount = list.filter(c => c.sleeps >= stay.guests).length
+  const best = list.find(c => c.sleeps >= stay.guests)!
   const rail = useRef<HTMLUListElement>(null)
   const [edge, setEdge] = useState({ l: true, r: false })
   const onScroll = () => { const el = rail.current; if (!el) return; setEdge({ l: el.scrollLeft < 8, r: el.scrollLeft + el.clientWidth > el.scrollWidth - 8 }) }
@@ -156,9 +157,10 @@ function Chooser({ stay, open }: { stay: Stay; open: (id: string) => void }) {
   return (
     <div className="chooser" aria-labelledby="ch-h">
       <div className="chooser-head wrap">
-        <p id="ch-h" className="chooser-say" aria-live="polite">
-          <b className="num">{fitCount} of 8 cottages</b> sleep {stay.guests}<span className="say-d">, {short(stay.arrive)} to {short(stay.leave)}</span>, <span className="num">{n}</span> {n === 1 ? "night" : "nights"}. Tap one for photos.
-        </p>
+        <div className="chooser-say" aria-live="polite">
+          <p id="ch-h" className="say-big"><span className="num">{fitCount}</span> of 8 cottages sleep {stay.guests}. From <b className="say-tot"><Ticker value={lodging(best, n)} from={0} /></b> for <span className="num">{n}</span> {n === 1 ? "night" : "nights"}, taxes&nbsp;in.</p>
+          <p className="say-small"><span className="say-d">{short(stay.arrive)} to {short(stay.leave)}. </span>Tap a cottage for its photos. Due today: $0.</p>
+        </div>
         <div className="rail-ctl">
           <button type="button" aria-label="Scroll cottages left" disabled={edge.l} onClick={() => nudge(-1)}><ArrowLeft aria-hidden /></button>
           <button type="button" aria-label="Scroll cottages right" disabled={edge.r} onClick={() => nudge(1)}><ArrowRight aria-hidden /></button>
@@ -413,17 +415,14 @@ function Way() {
         </div>
         <ol className="route">
           <li>
-            <span className="route-n num">1</span>
             <h3>From Florida, direct</h3>
             <p><b>Makers Air</b> flies from Fort Lauderdale Executive (FXE) to New Bight, and since May 2026 to Arthur's Town (ATC) in the north.</p>
           </li>
           <li>
-            <span className="route-n num">2</span>
             <h3>Or through Nassau</h3>
             <p>Most guests connect in Nassau. <b>Bahamasair</b> flies twice a week to Arthur's Town, <b>Western Air</b> to New Bight, and <b>Marlin Air</b> charters from Nassau, <a className="num" href="tel:+12423423014">242-342-3014</a>.</p>
           </li>
           <li>
-            <span className="route-n num">3</span>
             <h3>Taxi to your cottage</h3>
             <p className="num"><b>$60 one way, $120 round trip.</b> A rental car is only worth it if you want to explore.</p>
           </li>
