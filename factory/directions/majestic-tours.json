@@ -1,13 +1,14 @@
 {
  "slug": "majestic-tours",
  "niche": "hospitality-stay",
- "archetype": "A14",
- "archetype_name": "Quiet luxury",
- "lane": "P02",
- "lane_name": "Shallow flats",
- "type": "T02",
- "type_name": "Text-led editorial",
- "nav": "N3",
- "motion": "M7",
- "dealt_at": "2026-11-08T15:22:55.732Z"
+ "archetype": "A11",
+ "archetype_name": "Horizontal journey",
+ "lane": "P08",
+ "lane_name": "Bay Street pastel",
+ "type": "T01",
+ "type_name": "Monumental serif",
+ "nav": "N9",
+ "motion": "M2",
+ "dealt_at": "2026-11-21T18:22:01.487Z",
+ "chosen": true
 }

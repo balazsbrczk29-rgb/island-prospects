@@ -6,5 +6,33 @@
  "url": "majestictoursbahamas.com",
  "url_source": "prospects",
  "old_check": "LOADED: (c) 2012-2021, no phone/email on homepage",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "none (itinerary enquiry form, phone, email)",
+  "products_or_listings": 37,
+  "pages": 8,
+  "platform": "custom PHP (HTML5/CSS3 responsive, 2012 build)",
+  "latest_year": 2021,
+  "modernity": 2,
+  "concept_type": "brochure + enquiry: excursion catalogue with filters, transfers explainer, prefilled enquiry",
+  "must_keep": [
+   "all 37 excursions linked to their tour pages",
+   "airport transfers (shared, private, accessible)",
+   "hotel lobby tour desks",
+   "phone (242) 677-2600 and email",
+   "multilingual reps",
+   "group bookings"
+  ],
+  "weaknesses": [
+   "footer says 2012-2021, homepage shows no phone or email",
+   "tour pages send email to a misspelled address (info@majestictourbahamas.com)",
+   "37 tours in one unfiltered list",
+   "1959 founding and awards hidden on About",
+   "two pages list different hotel desks"
+  ],
+  "priority": "A",
+  "note": "Family tour and transfer company since 1959; dated brochure with an unfiltered catalogue, no direct booking."
+ }
 }

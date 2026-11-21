@@ -1,12 +1,32 @@
-import { IMG } from "./site"
+export const PHONE = "(242) 677-2600"
+export const TEL = "tel:+12426772600"
+export const OFFICE = "(242) 322-2606"
+export const OFFICE_TEL = "tel:+12423222606"
+export const EMAIL = "transport@majesticholidays.com"
+export const IMG = "https://www.majestictoursbahamas.com/data/tours/images/"
+export const FLEET = "https://majestictoursbahamas.com/transportation/images/fleet.jpg"
+export const tourUrl = (id: string) => `https://www.majestictoursbahamas.com/tours/?id=${id}`
 
-export type Place = "harbour" | "rose" | "lagoon" | "exuma" | "harbourisland" | "reefs" | "land"
+export type Place = "harbour" | "lagoon" | "rose" | "reefs" | "exuma" | "harbourisland" | "land"
 export type Kind = "Sea and islands" | "Sail and evening" | "Dive and snorkel" | "Culture and family" | "Fishing"
-
 export type Tour = { id: string; name: string; line: string; place: Place; kind: Kind; img: string; alt: string; detail?: string }
 
-const T = (id: string) => `https://www.majestictoursbahamas.com/tours/?id=${id}`
-export const tourUrl = T
+/** A photo with its true source size, so it is never shown larger than it is. */
+export type Pic = { src: string; w: number; h: number; alt: string }
+export const PIC = {
+  flyingCloud: { src: IMG + "flying-cloud/evening/flying-cloud-sunset-picture-1.jpg", w: 965, h: 675, alt: "The Flying Cloud catamaran under sail at sunset off Nassau, Atlantis on the horizon" },
+  seahorse: { src: IMG + "seahorse-sailing/sunset-01.jpg", w: 800, h: 600, alt: "A catamaran silhouetted against an orange Nassau sunset" },
+  lagoon: { src: IMG + "blue-lagoon/BLI12.jpg", w: 1024, h: 683, alt: "The pier and welcome arch at Blue Lagoon Island" },
+  dolphin: { src: IMG + "dolphin-encounters/swim-05.jpg", w: 500, h: 335, alt: "A girl kissed on the cheek by a dolphin at Blue Lagoon Island" },
+  rosePano: { src: IMG + "rose-half-day/1.webp", w: 1903, h: 463, alt: "The beach and turquoise shallows of Rose Island" },
+  perfectDay: { src: IMG + "perfect-day/1.jpg", w: 1600, h: 1200, alt: "Guests on the Rose Island beach on the Perfect Day tour" },
+  wall: { src: IMG + "stuart-coves/wall-01.jpg", w: 350, h: 233, alt: "A diver beside sponges on a reef wall off New Providence" },
+  powerboat: { src: IMG + "powerboat/powerboat.jpg", w: 800, h: 533, alt: "An offshore powerboat running across turquoise water toward the Exuma Cays" },
+  pig: { src: IMG + "born-free-charters/20210104_173005000_iOS.jpg", w: 1200, h: 1600, alt: "A swimming pig in clear water in the Exuma Cays" },
+  pinkSand: { src: IMG + "born-free-charters/pink_sand_walk.png", w: 285, h: 381, alt: "Two people walking the pink sand beach of Harbour Island" },
+  fleet: { src: FLEET, w: 640, h: 321, alt: "Majestic Tours vans, a bus, a town car and an SUV parked by the water in Nassau" },
+  culture: { src: IMG + "culture-tour/displaycase.jpg", w: 1000, h: 667, alt: "A family looking into a display case of Bahamian heritage on the Local Culture Tour" },
+} satisfies Record<string, Pic>
 
 export const TOURS: Tour[] = [
   { id: "09", name: "Flying Cloud, Evening Dinner", line: "Sail Nassau Harbour as the city lights come on, with a Bahamian barbecue buffet.", place: "harbour", kind: "Sail and evening", img: IMG + "flying-cloud/evening/flying-cloud-sunset-picture-1.jpg", alt: "The Flying Cloud catamaran under sail at sunset", detail: "Pickups 5:00 to 5:30PM" },
@@ -48,12 +68,25 @@ export const TOURS: Tour[] = [
   { id: "41", name: "Seahorse Sailing, Half Day Sail and Snorkel", line: "A half day sail and snorkel by catamaran.", place: "rose", kind: "Sail and evening", img: IMG + "seahorse-sailing/boats-01.jpg", alt: "The Seahorse catamarans" },
 ]
 
-export const PLACES: Record<Place, { name: string; note: string }> = {
-  harbour: { name: "Nassau Harbour", note: "Sunset sails, the dinner cruises and the fishing charters leave from the harbour." },
-  rose: { name: "Rose Island", note: "An uninhabited island off Nassau and Paradise Island: pigs, beach clubs, sail and snorkel." },
-  lagoon: { name: "Blue Lagoon Island", note: "Dolphins, sea lions and a quiet beach, a short boat ride away." },
-  exuma: { name: "Exuma Cays", note: "38 nautical miles by offshore powerboat: Allan's Cay iguanas and Ship Channel Cay." },
-  harbourisland: { name: "Harbour Island, Eleuthera", note: "A full powerboat day to the Pink Sands Beach." },
-  reefs: { name: "Southwest reefs", note: "Stuart Cove's walls, wrecks and shark dives off New Providence." },
-  land: { name: "On the island", note: "Forts, rum, Junkanoo, pirates, gardens and food in and around Nassau." },
-}
+
+export const MODES = {
+  shared: {
+    label: "Shared bus",
+    intro: "A shuttle bus that stops at three or four hotels on the way, on arrival and on departure.",
+    arrive: ["Print your vouchers and travel documents before you fly.", "After Bahamas Customs, go out of the main doors toward Ground Transportation. A Majestic representative holds a Majestic Tours sign.", "Take the main crosswalk, turn left to the Majestic buses and show your voucher."],
+    depart: ["Confirm your return time with the head office or the Majestic desk in your hotel lobby.", "Be at the front driveway of your hotel or tower at your pickup time. The bus may stop at other hotels.", "You are picked up well before your flight, allowing for US Immigration and Customs in Nassau."],
+  },
+  private: {
+    label: "Private car",
+    intro: "Stretch limousines, town cars and SUVs for guests who want a private transfer, plus private vans and buses for pre-arranged groups.",
+    arrive: ["Print your private transfer documents or voucher.", "After Customs, go straight out of the main door. Look for your name on a sign held by a Majestic representative.", "They greet you, help with luggage and walk you to your car."],
+    depart: ["Confirm your return time with the head office or your hotel's Majestic desk.", "Be at the front driveway at your pickup time and show your departure voucher to the driver.", "At Atlantis Cove or Reef, tell the bellman you travel with Majestic Tours: your car waits in the lot until called."],
+  },
+  accessible: {
+    label: "Accessible van",
+    intro: "Majestic is the only transportation provider on the island offering private transport for disabled guests. Arrange it at least 48 hours ahead.",
+    arrive: ["Print your documents for the accessible van transfer.", "After Customs, go straight out of the main door and look for your name on a Majestic sign.", "The representative helps with luggage and takes you to the van."],
+    depart: ["Confirm your return time with the head office or the Majestic desk.", "Be at the front driveway at your pickup time; the driver will be there.", "Pickup allows for US Immigration and Customs in Nassau."],
+  },
+} as const
+

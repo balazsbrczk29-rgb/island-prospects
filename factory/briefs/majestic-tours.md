@@ -45,14 +45,49 @@ Brand truth: a Bahamian family company that has met guests at the airport and ta
 ## Positioning
 For visitors staying in Nassau and Paradise Island who want the right day out without risk, Majestic Tours is the Bahamian-owned tour and transfer company that has run since 1959 with desks in the hotel lobbies.
 
-## Design spec
-Reference study: belmond.com (full-bleed editorial imagery per destination, quiet serif, destinations as an index), stuartcove.com (local benchmark: activity-led, booking up front but templated Elementor). Our take: map-led hero.
-- Hero: map-led typographic. Huge Yeseva One headline left on limestone paper; right, an SVG chart of New Providence and the routes Majestic runs (Rose Island, Blue Lagoon Island, Exuma Cays 38 nm, Harbour Island, the southwest reefs) drawing in as dashed lines. "Illustration, not to scale". Glass card with call + plan CTA.
-- Fonts: Yeseva One 400 (display), Albert Sans 400/500/600 (body).
-- Palette: paper #f3eee4, paper-2 #e9e1d2, ink #1b2724, shutter green #2e6a55 (accent), green deep #1f4c3d, shallows #a9d8cf, sand #d9b98a, muted #5a645f, line #d8cebd.
-- Signature: interactive route map ("Where the day goes"): tap a destination, the route lights and the panel lists Majestic's real trips there with a real photo. Second interaction: filterable excursion index (excursions.html) and arrival stepper with Tabs (transfers.html). Enquiry Tabs compose an email.
-- Components: BlurText avoided; motion line-split headline, shadcn Tabs, Accordion, Sheet; Magic UI Marquee for the languages band.
-- This shows the routes from Nassau because the brief lists trips to Rose Island, Blue Lagoon, Exuma Cays and Harbour Island.
+## Design plan (generation 2, Nov 21)
+**Big idea:** the page is a boat leaving Nassau Harbour: vertical scroll carries you sideways, stop by stop, from the Flying Cloud's sunset sail in the harbour out to Blue Lagoon Island, Rose Island, the southwest reefs, the Exuma Cays 38 nautical miles out and Harbour Island, with Majestic's real trips at every stop, ending at the desk where you book it.
+
+**Direction:** A11 Horizontal journey + P08 Bay Street pastel + T01 Monumental serif (N9 bottom progress timeline, M2 pinned horizontal track). Why: the business literally sells "where the day goes" from Nassau, so a sideways journey with a stop-by-stop timeline is the product; Bay Street pastel is Cumberland Street itself (Hillside Manor, colonial shutters), a 1959 Nassau family firm, gracious not loud.
+
+**Fonts:** Playfair Display Variable (display, opsz-ish high contrast, tight -0.035em, set huge: "Out of Nassau"), Newsreader Variable (body 18-19px, italic for captions only). Self-hosted woff2.
+
+**Palette:** ground #FBF7EC (yellow tint), field Bay Street yellow #F6E3A6 (hero band + booking frame), ink #2A2420, shutter green #2F6B55 (accent: CTA, active stop, progress), salmon #E9A7A0 (one rule line, the 38 nm label), trim #FFFFFF, muted #6B6259, line #E5DCC6.
+
+**Photo set (all their own, hotlinked from majestictoursbahamas.com; never shown larger than source in CSS px):**
+- Flying Cloud sunset (Atlantis on the horizon) 965x675: hero frame, shown at max 640x448.
+- Powerboat run 800x533: Exuma frame, max 600 wide.
+- Perfect Day beach 1600x1200 / Rose Island panorama 1903x463: Rose Island frame (panorama up to 1100 wide).
+- Blue Lagoon pier 1024x683 + dolphin kiss 500x335 (inset at 300 wide): Blue Lagoon frame.
+- Stuart Cove's wall dive (size from sheet): reefs frame. Seahorse sunset: harbour frame. Pink sand walk (portrait): Harbour Island frame. Swimming pig (square-ish): Exuma inset.
+- Fleet 640x321: transfers band, shown at 560 wide max.
+One grade: slight warm lift via CSS filter none (keep their colour; frames on paper, thin white trim mat).
+
+**Storyboard, desktop 1440x900:**
+1. Title frame (frame 0 of the pinned track) on the yellow field: small header (wordmark, Excursions, Transfers, Our story, (242) 677-2600, "Plan my excursion"). Monumental "Out of Nassau." across the left two-thirds; one line under it: "Sails, islands, reefs and airport transfers from the Bahamian family company that has met Nassau's guests since 1959." Flying Cloud sunset photo framed at right. Bottom: the N9 timeline (Harbour, Blue Lagoon Island, Rose Island, Southwest reefs, Exuma Cays 38 nm, Harbour Island, Book) with a green progress line; cue "Scroll, and the boat leaves the harbour".
+2. Frame 1 Nassau Harbour: Seahorse sunset photo, place name huge, Flying Cloud Evening Dinner pickups 5:00 Cable Beach, 5:15 Downtown, 5:30 Paradise Island, $137.50 adult; other sails and the fishing charters listed; "Ask about an evening sail".
+3. Frame 2 Blue Lagoon Island: pier photo + dolphin inset, trips (dolphin swim, encounter, sea lions, beach day).
+4. Frame 3 Rose Island: wide panorama, trips (Sandy Toes, Perfect Day, Half Day, full-day sails).
+5. Frame 4 Southwest reefs: wall dive photo, Stuart Cove's dives and snorkel.
+6. Frame 5 Exuma Cays: "38 nautical miles, 55 minutes" set large in salmon/green, powerboat photo + pig inset, Exuma trips, from $328.90 adult with hotel transfer.
+7. Frame 6 Harbour Island: pink sand walk, the Pink Sands day.
+8. Frame 7 Book (yellow field): "Where to?" the enquiry: stop chosen from the frame you came from, date, guests, hotel, name; sends email; call line large.
+9. Vertical, shutter green field: "Since June 1959": Bill and Iris Saunders, "Service is our Profession", the five awards as one quiet typographic list, ASTA/CHA/IATA, six languages.
+10. Arrival (paper): fleet photo + the arrival in four lines (after Customs, Ground Transportation, shared stops, private and accessible), link to transfers page.
+11. Lobby desks: the hotels as a large typographic list, "find us in the lobby", FAQ accordion beside? (no: FAQ full width below), footer with address and phones.
+
+**Phone 390x844, first three screens:**
+1. Header (wordmark + call icon), "Out of Nassau." at ~68px, one line, "Plan my excursion" (green) and "Call (242) 677-2600"; the Flying Cloud photo starts at the bottom edge.
+2. Timeline chips (stops) above a native swipe track of the stop frames (photo on top at 86vw, place, fact, trips).
+3. Continuing swipe/stop list ends with the Book frame; then the story.
+
+**Conversion:** "Plan my excursion" primary (header, title frame, every stop frame as "Ask about <stop>", the Book frame), call (242) 677-2600 secondary everywhere, email transport@majesticholidays.com (the working address). No WhatsApp found.
+
+**Tier:** standard (photography, type, pinned horizontal journey). No 3D: their product is a day out, and the track explains it.
+
+**Different from competitors in this repo:** no Ocean scene, no map chart (the old version's SVG chart is dropped), no cinematic crossfade; the only Bay Street pastel + monumental serif + sideways journey site. Other tour/marina sites are aqua or dark-water led.
+
+**Inner pages:** excursions.html (all 37 trips, filter by stop and by kind of day, each links to its tour page), transfers.html (shared, private, accessible; the arrival steps; quote enquiry).
 
 ## Assumptions to confirm with the owner
 - Which hotel desks are current; current prices for the two listed rates; whether tours can be booked by email to transport@majesticholidays.com.
