@@ -13,9 +13,15 @@ const status = s => fs.existsSync(stFile(s)) ? JSON.parse(fs.readFileSync(stFile
 const mode = process.argv[2] || '';
 const auditDir = path.join(root, 'factory/audit');   // one file per business, so parallel sessions never collide
 const audit = fs.existsSync(auditDir) ? Object.fromEntries(fs.readdirSync(auditDir).filter(f => f.endsWith('.json')).map(f => { try { const r = JSON.parse(fs.readFileSync(path.join(auditDir, f), 'utf8')); return [r.slug, r.audit]; } catch { return [f, null]; } })) : {};
+const size = r => ({ Small: 0, Medium: 1, Large: 2 })[r.size] ?? 1;   // easy (small) businesses first within a priority
 const prio = slug => ({ A: 0, B: 1, C: 2, D: 3 })[audit[slug]?.priority] ?? 1.5;   // unaudited sits between B and C
 const GEN = 2;   // generation 2 = rebuilt with the art-director pipeline; generation-1 'built' sites are pending again
 const needsWork = s => !s || (s.state === 'built' && (s.generation || 1) < GEN);
+if (mode === 'review') {   // sites published as needs-review that still wait for the independent critic
+  const dir = path.join(root, 'factory/status');
+  const rows = fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))).filter(s => s.state === 'needs-review' && (s.generation || 1) >= GEN && !s.review_claimed_at);
+  console.log(rows.map(s => s.slug).join('\n') || '(none)'); process.exit(0);
+}
 if (mode === 'claim') {
   const slug = process.argv[3]; const r = all.find(x => x.slug === slug); if (!r) { console.error('unknown slug'); process.exit(1); }
   try { execSync('git pull -q --rebase --autostash origin main', { cwd: root, stdio: 'inherit' }); } catch {}
@@ -32,7 +38,7 @@ let rows;
 if (mode === 'pending') {
   const n = parseInt(process.argv[3] || '5', 10);
   const stale = ms => Date.now() - new Date(ms).getTime() > 2.5 * 3600 * 1000;   // a "building" claim older than 2.5h = crashed session
-  rows = all.filter(r => { const s = status(r.slug); return needsWork(s) || (s.state === 'building' && stale(s.claimed_at)); }).sort((a, b) => ((status(b.slug)?.reroll ? 1 : 0) - (status(a.slug)?.reroll ? 1 : 0)) || (prio(a.slug) - prio(b.slug))).slice(0, n); // rerolls first, then prospects.json priority order
+  rows = all.filter(r => { const s = status(r.slug); return needsWork(s) || (s.state === 'building' && stale(s.claimed_at)); }).sort((a, b) => ((status(b.slug)?.reroll ? 1 : 0) - (status(a.slug)?.reroll ? 1 : 0)) || (prio(a.slug) - prio(b.slug)) || (size(a) - size(b))).slice(0, n); // rerolls first, then prospects.json priority order
   console.log(`PENDING (top ${n} by priority). For EACH: run "node factory/tools/batch.mjs claim <slug>" immediately before you start it, then build and publish it.`);
 } else {
   const b = mode.padStart(2, '0');
