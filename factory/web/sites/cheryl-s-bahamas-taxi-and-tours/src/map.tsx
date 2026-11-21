@@ -19,7 +19,7 @@ const PLACES: { t: string; at: [number, number]; big?: boolean; it?: boolean }[]
 function fit(pts: [number, number][], aspect: number, min = 150): VB {
   let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
   pts.forEach(([x, y]) => { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y) })
-  let w = Math.max(min, x1 - x0) * 1.3, h = Math.max(min / aspect, y1 - y0) * 1.45
+  let w = Math.max(min, x1 - x0) * (aspect < 1.2 ? 1.28 : 1.3), h = Math.max(min / aspect, y1 - y0) * 1.45
   if (w / h > aspect) h = w / aspect; else w = h * aspect
   const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2 + h * 0.02
   return { x: cx - w / 2, y: cy - h / 2, w, h }
@@ -49,7 +49,7 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
     }
     const pts: [number, number][] = [s, ...stops.map(x => project(x.at[0], x.at[1]))]
     if (stops.some(x => x.sea)) pts.push(project(DOCK[0], DOCK[1]))
-    return fit(pts, aspect, aspect < 1.2 ? 110 : 170)
+    return fit(pts, aspect, aspect < 1.2 ? 80 : 170)
   }, [start, stops, aspect])
 
   useEffect(() => {
@@ -67,6 +67,7 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
   const sp = project(start.at[0], start.at[1])
   /* place labels so they do not sit on top of each other */
   const labels = new Map<string, [number, number, "start" | "end"]>()
+  const placeOk = new Set<string>()
   {
     const boxes: [number, number, number, number][] = []
     const want: { id: string; t: string; x: number; y: number }[] = [{ id: "__start", t: start.label, x: sp[0], y: sp[1] }]
@@ -86,6 +87,12 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
       boxes.push([x0, y1 - th, x0 + tw, y1 + 2 * k])
       labels.set(w.id, pick)
     }
+    /* place names only where they do not collide with the day */
+    PLACES.forEach(p => {
+      const [x, y] = project(p.at[0], p.at[1]); const tw = p.t.length * (p.big ? 11 : 7) * k, th = 12 * k
+      const b: [number, number, number, number] = [x - tw / 2, y - th, x + tw / 2, y + 2 * k]
+      if (p.big || !hit(b)) { placeOk.add(p.t); boxes.push(b) }
+    })
   }
   const full = legs.map(l => arc(l.a, l.b)).join(" ").replace(/ M[^Q]+/g, m => " L" + m.slice(2))
   const roadKm = legs.reduce((a, l) => a + l.km, 0)
@@ -103,7 +110,7 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
         <path d={LAND} fill="var(--color-shallow)" stroke="var(--color-shallow-2)" strokeWidth={5} strokeLinejoin="round" />
         <path d={LAND} fill="var(--color-sand)" stroke="var(--color-coast)" strokeWidth={0.8 * k} strokeLinejoin="round" />
 
-        {PLACES.filter(p => p.t !== start.label).map(p => { const [x, y] = project(p.at[0], p.at[1]); return (
+        {PLACES.filter(p => p.t !== start.label && placeOk.has(p.t)).map(p => { const [x, y] = project(p.at[0], p.at[1]); return (
           <text key={p.t} x={x} y={y} textAnchor="middle" fontSize={(p.big ? 14 : 12) * k} letterSpacing={p.big ? 5 * k : 0}
             className={p.big ? "map-big" : p.it ? "map-sea" : "map-label"}>{p.big ? p.t.toUpperCase() : p.t}</text>
         ) })}
@@ -113,7 +120,7 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
           <g key={l.key}>
             {l.mode === "road" && <motion.path d={arc(l.a, l.b)} fill="none" stroke="var(--color-yellow)" strokeWidth={8 * k} strokeLinecap="round"
               initial={{ pathLength: reduce ? 1 : 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.8, ease: "easeInOut" }} />}
-            <motion.path d={arc(l.a, l.b)} fill="none" stroke="var(--color-navy)" strokeWidth={(l.mode === "road" ? 3 : 2) * k} strokeLinecap="round"
+            <motion.path d={arc(l.a, l.b)} fill="none" stroke={l.mode === "road" ? "var(--color-navy)" : "#2f6f8f"} strokeWidth={(l.mode === "road" ? 3 : 2) * k} strokeLinecap="round"
               strokeDasharray={l.mode === "sea" ? `${5 * k} ${4 * k}` : undefined}
               initial={{ pathLength: reduce ? 1 : 0, opacity: 0.4 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, ease: "easeInOut" }} />
           </g>

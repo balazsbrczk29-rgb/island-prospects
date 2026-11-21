@@ -14,12 +14,12 @@ const money = (n: number) => `$${n.toLocaleString("en-US")}`
 function NameCard({ name, small = false }: { name: string; small?: boolean }) {
   const t = name.trim()
   const shown = t || "Your name"
-  const size = small ? Math.max(24, Math.min(44, 520 / Math.max(6, shown.length))) : Math.max(30, Math.min(64, 760 / Math.max(6, shown.length)))
+  const size = small ? Math.max(22, Math.min(40, 440 / Math.max(6, shown.length))) : Math.max(30, Math.min(64, 760 / Math.max(6, shown.length)))
   return (
     <div className="relative rounded-[6px] bg-white px-5 pb-5 pt-4 text-navy shadow-[0_1px_0_rgba(0,0,0,.04),0_18px_40px_-18px_rgba(13,26,54,.45)]">
       <div className="flex items-center justify-between border-b-2 border-yellow pb-2 text-[12px] font-bold">
         <span className="font-display text-[15px] font-extrabold tracking-[-0.03em]">cheryl's</span>
-        <span className="tnum text-ink/60">Nassau arrivals</span>
+        <span className={`tnum text-ink/60 ${small ? "hidden sm:inline" : ""}`}>Nassau arrivals</span>
       </div>
       <p className={`display mt-4 break-words leading-[1] ${t ? "" : "text-navy/30"}`} style={{ fontSize: size }}>
         {shown}
@@ -39,14 +39,18 @@ function Hero({ name, setName, flight, setFlight, startId, setStartId, loadDay }
       <Masthead />
       <div className="mx-auto grid max-w-[1360px] gap-10 px-4 pb-24 pt-8 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:pb-16 lg:pt-10">
         <div className="lg:col-span-7">
-          <p className="tnum text-[15px] font-bold text-yellow">Registered Taxi Service #1080 · over 25 years · English or Spanish</p>
+          <p className="tnum text-[15px] font-bold text-yellow">Taxi Service #1080 · 25+ years<span className="hidden sm:inline"> · English or Spanish</span></p>
           <motion.h1 id="hero-title" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, delay: 0.05 }}
             className="poster mt-4 text-[clamp(3rem,13.4vw,4.4rem)] lg:text-[clamp(3.6rem,4.7vw,4.75rem)]">
             met at arrivals.<br /><span className="text-yellow">shown the island.</span>
           </motion.h1>
 
+          <div className="relative mt-6 lg:hidden">
+            <Photo src={R("cheryl-taxi.jpeg")} eager alt="Two Cheryl's drivers in navy and yellow uniforms beside the company's white passenger van" ratio="16 / 9" pos="44% 55%" className="rounded-[var(--radius-m)]" />
+            <div className="absolute -bottom-4 right-2 w-[58%] rotate-[-2deg]"><NameCard name={name} small /></div>
+          </div>
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, delay: 0.18 }}
-            className="on-light mt-8 overflow-hidden rounded-[var(--radius-l)] bg-card text-ink lg:mt-10">
+            className="on-light mt-10 overflow-hidden rounded-[var(--radius-l)] bg-card text-ink lg:mt-10">
             <div className="grid grid-cols-2" role="tablist" aria-label="What would you like to book?">
               {([["pickup", "Airport pickup", "Your name on a card at arrivals", PlaneLanding], ["tour", "Private tour", "Build your day on the map", MapPinned]] as const).map(([k, t, d, Icon]) => (
                 <button key={k} role="tab" aria-selected={path === k} aria-controls={`path-${k}`} id={`tab-${k}`} onClick={() => setPath(k)}
@@ -87,7 +91,7 @@ function Hero({ name, setName, flight, setFlight, startId, setStartId, loadDay }
           <p className="mt-5 text-[15px] text-white/80">Rather talk? <a href={TEL} className="tnum font-bold text-white underline decoration-yellow decoration-2 underline-offset-4">{PHONE}</a>, day or night.</p>
         </div>
 
-        <motion.figure initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, stiffness: 150, delay: 0.3 }} className="lg:col-span-5 lg:pt-4">
+        <motion.figure initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ ...spring, stiffness: 150, delay: 0.3 }} className="hidden lg:col-span-5 lg:block lg:pt-4">
           <div className="relative mx-auto max-w-[460px]">
             <Photo src={R("cheryl-taxi.jpeg")} eager alt="Two Cheryl's drivers in navy and yellow uniforms beside the company's white passenger van" ratio="4 / 5" pos="44% 60%" className="rounded-[var(--radius-l)]" />
             <div className="absolute -bottom-6 -left-4 w-[64%] rotate-[-2.5deg] sm:-left-8"><NameCard name={name} small /></div>
@@ -356,7 +360,7 @@ function Tour({ ids, setIds, startId, setStartId, name }: { ids: string[]; setId
   const route = useMemo(() => order(start.at, ids), [start, ids])
   const lg = useMemo(() => makeLegs(start.at, route), [start, route])
   const km = lg.reduce((a, l) => a + l.km, 0)
-  const mins = Math.round((km / KMH) * 60 / 5) * 5
+  const mins = Math.max(0, Math.round((km / KMH) * 60 / 5) * 5)
   const fees = route.reduce((a, s) => { const f = feeFor(s.id, adults, kids); return f ? { lo: a.lo + f.lo, hi: a.hi + f.hi } : a }, { lo: 0, hi: 0 })
   const quoted = route.filter(s => !feeFor(s.id, adults, kids)).length
   const toggle = (id: string) => setIds(v => v.includes(id) ? v.filter(x => x !== id) : [...v, id])
@@ -448,7 +452,7 @@ function DaySummary({ className = "", bar = false, route, km, mins, fees, quoted
     <motion.div initial={false} animate={{ y: inView ? 0 : 140 }} transition={spring} aria-hidden={!inView} className={`${className} px-3 pb-[calc(10px+env(safe-area-inset-bottom))]`}>
       <div className="flex items-center gap-3 rounded-[18px] bg-navy p-2 pl-4 text-white shadow-[0_14px_40px_-12px_rgba(13,26,54,.6)]">
         <p className="tnum min-w-0 flex-1 text-[14px] leading-tight">
-          {route.length ? <><b className="text-yellow">{route.length} stop{route.length > 1 ? "s" : ""}</b> · {Math.round(km)} km · ~{mins} min</> : <>Tap stops to draw your day</>}
+          {route.length ? <><b className="text-yellow">{route.length} stop{route.length > 1 ? "s" : ""}</b> · {Math.round(km)} km · about {mins} min</> : <>Tap stops to draw your day</>}
         </p>
         <button type="button" disabled={!route.length} tabIndex={inView ? undefined : -1} onClick={onSend} className="min-h-12 shrink-0 rounded-[12px] bg-yellow px-4 font-bold text-ink disabled:opacity-50">Send my day</button>
       </div>
@@ -457,7 +461,7 @@ function DaySummary({ className = "", bar = false, route, km, mins, fees, quoted
   return (
     <div className={`${className} items-center gap-6 border-t border-line bg-white px-6 py-4`}>
       <dl className="tnum grid flex-1 grid-cols-4 gap-4">
-        {[["Stops", String(route.length)], ["By road", `${Math.round(km)} km`], ["Driving", `~${mins} min`], [`Entry fees, ${ppl}`, feeText]].map(([t, v]) => (
+        {[["Stops", String(route.length)], ["By road", `${Math.round(km)} km`], ["Driving, estimate", `${mins} min`], [`Entry fees, ${ppl}`, feeText]].map(([t, v]) => (
           <div key={t}><dt className="text-[13px] text-muted">{t}</dt><dd className="display text-[26px]">{v}</dd></div>
         ))}
       </dl>
@@ -526,8 +530,8 @@ function Why() {
         <ol className="lg:col-span-7 lg:pt-2">
           {WHY.map(([big, t, d], i) => (
             <motion.li key={t} initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ ...spring, delay: i * 0.05 }}
-              className="grid grid-cols-[minmax(96px,34%)_1fr] gap-5 border-t-2 border-ink/80 py-6 first:border-t-0 first:pt-0 sm:gap-8">
-              <span className="poster tnum text-[clamp(2.1rem,4.6vw,4.4rem)] leading-[.85] text-navy">{big}</span>
+              className="grid grid-cols-[104px_1fr] gap-6 border-t-2 sm:grid-cols-[250px_1fr] sm:gap-10 border-ink/80 py-6 first:border-t-0 first:pt-0 sm:gap-8">
+              <span className="poster tnum text-[clamp(1.75rem,3.4vw,3rem)] leading-[.9] text-navy">{big}</span>
               <div><p className="display text-[length:var(--t-3)]">{t}</p><p className="mt-1 max-w-[46ch] text-[17px] leading-snug text-ink/85">{d}</p></div>
             </motion.li>
           ))}
@@ -553,7 +557,7 @@ function Home() {
         <Why />
       </main>
       <Contact />
-      <Dock action={{ href: "#pickup", label: "Book pickup" }} hideWhile={["hero", "pickup", "tour"]} />
+      <Dock action={{ href: "#pickup", label: "Book pickup" }} hideWhile={["hero", "pickup", "tour", "builder"]} />
     </Page>
   )
 }

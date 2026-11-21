@@ -4,8 +4,205 @@
  "name": "Cheryl's Bahamas Taxi and Tours",
  "batch": "10",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T19:53:33.231Z"
+ "claimed_at": "2026-11-21T19:53:33.231Z",
+ "pages": [
+  "index.html",
+  "tours.html"
+ ],
+ "primary_cta": "Book my pickup / Send my day",
+ "brand_truth": "Cheryl's driver is the one in navy and yellow holding a card with your name at Nassau arrivals.",
+ "buyer": "Cruise passengers and resort guests (US, families, Spanish speakers) booking a Nassau airport ride or a private tour on a phone, afraid of being left at the airport or overpaying.",
+ "direction": {
+  "archetype": "A09 Colour poster",
+  "lane": "P14 Blue hole",
+  "type": "T06 Wide grotesk (Syne variable 600-800 lowercase + Atkinson Hyperlegible 400/700)",
+  "nav": "N4 floating dock",
+  "motion": "M6 spring",
+  "why": "P14 deep blue and yellow are Cheryl's own uniform colours; a poster with a sign you put your name on is the brand truth; the ticket block is their real JotForm transfer booking; the dock keeps Pickup, Tours, Call under the thumb."
+ },
+ "tier_visual": "standard",
+ "tier_why": "A taxi and private tour operator: the product is a person holding your name and a day on the island, best shown with their own photos and an interaction, not real-time 3D.",
+ "concept_type": "booking: two paths on screen 1 (airport pickup with live name card, private tour); 3-step pickup ticket with every JotForm field; tour builder on a real New Providence coastline map with all 22 sourced stops, auto-ordered route drawing, driving estimate and stated entry fees, sending a prefilled email",
+ "images": [
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/cheryl-taxi.jpeg",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/fleet.jpeg",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/shopping.jpeg",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/desertedbeaches.jpeg",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/the-forts.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/cloisters.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/bat-cave.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/clifton-heritage-park.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/conch.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/fish-fry.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/rum-cake-factory.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/run-distillary.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/candy-store.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/junkanoo.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/hand-craft.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/ardastra-gardens-zoo.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/time-at-the-beach.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/atv-adventure.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/parasailing-jetski.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/glass-bottom-boat.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/blue-lagoon-beach.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/dolphin-swim.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/fishing-and-snorkeling.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/snorkeling.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/pieces-of-eight-2.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "https://www.cherylbahamastaxiandtours.com/Resources/swim-with-pigs.png",
+   "source": "own",
+   "credit": "Cheryl's Bahamas Taxi and Tours website"
+  },
+  {
+   "src": "src/island.ts",
+   "source": "data",
+   "credit": "Coastline: geoBoundaries BHS ADM1 (Caribbean GeoPortal), CC BY 4.0"
+  }
+ ],
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion_clarity": 4,
+  "phone": 4,
+  "by": "fresh critic subagent, GUIDE.md section 4, side by side with previous version",
+  "date": "2026-11-21"
+ },
+ "current_site_findings": [
+  "Covid 19 banner still at the top",
+  "2022 footer, repeated Conch Demonstration heading",
+  "five phone numbers, no clear one",
+  "zoomed-out mobile viewport (minimum-scale 0.25)",
+  "off-brand JotForm booking with 200-country list and timezone picker",
+  "22 tours in one long scroll"
+ ],
+ "pitch_line": "Your guests already remember one thing about you: their name on your card at arrivals. This site starts there, books the ride in one ticket and lets them build a tour from your 22 stops.",
+ "assumptions": [
+  "Tour presets (3-hour: forts, straw market, Cloisters; full day: forts, Love Beach, conch) are suggestions based on the two sample tours on their site",
+  "Forms send by email (no WhatsApp number was found)",
+  "Atkinson Hyperlegible draws a slashed zero by design",
+  "Map pin positions are approximate (placed by us); Exuma trips are shown leaving the map",
+  "Driving km and minutes are a planning estimate (straight line x 1.35 at 32 km/h), labelled as such",
+  "Entry fee totals use only prices stated on their site (forts $3-5 pp, conch $10 a bowl sharing 4, Ardastra $18 pp, Pieces of 8 $400/$365); other stops are quoted by Cheryl's",
+  "tours.html now redirects to index.html#tour"
+ ],
+ "sources": [
+  "https://www.cherylbahamastaxiandtours.com/",
+  "https://www.cherylbahamastaxiandtours.com/bahamas-tours.html",
+  "https://www.cherylbahamastaxiandtours.com/book-online/index.html"
+ ],
+ "notes": "2026-11-21 job-spec rebuild (approved spec). Screen 1: two paths (pickup with name-card field and flight; private tour with start area and presets) beside their own team photo and a live arrivals name card; generated arrivals photo removed. Kept and elevated: 3-step pickup ticket with all JotForm fields, both sample days, 22 stops, one number day or night. New: tour builder on a real geoBoundaries coastline, auto-ordered route drawing with dashed sea legs, looping van, camera fit, stop card, km, driving estimate, stated fees, Send my day drawer; phone sticky map + bottom bar. Palette moved from teal to their navy #14254a + yellow. BLIND: outside photos could not load in the sandbox; critic judged placement. qa 0 blockers; interact 0 JS errors; distinct: closest unexso 61. Critic pass 1 composition 3; after fix pass 2 all lines 4. Follow-ups: phone map labels crowd in the downtown cluster and the Blue Lagoon label can clip at the right edge; Atkinson Hyperlegible draws slashed zeros by design.",
+ "built_at": "2026-11-21T20:20:20.567Z",
+ "fix_pass": 2,
+ "jobspec_built": true
 }
