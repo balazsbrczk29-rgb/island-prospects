@@ -1,113 +1,114 @@
 {
- "slug": "nassau-glass-co-ltd",
- "id": 85,
- "name": "Nassau Glass Co Ltd",
- "batch": "06",
- "tier": "A",
- "state": "needs-review",
- "generation": 2,
- "tier_visual": "premium-3d",
- "tier_visual_why": "Thickness and tint are the two choices a glass customer cannot picture from a photo, and a laminated build-up is invisible in one. A single lightweight real-time sheet (no transmission pass, two box plies and an interlayer) shows both, and feeds the quote.",
- "pages": [
-  "index.html",
-  "departments.html"
- ],
- "primary_cta": "Quote this glass (builds a summary, then Call (242) 603-5521)",
- "brand_truth": "The Bahamas' first fabricating glass company, still cutting glass from 1/16 to 3/4 of an inch at #46 Mackey Street, where it started in 1959.",
- "buyer": "Nassau homeowners and landlords replacing or fitting glass, mirrors and showers; contractors and facility managers needing storefronts, laminated safety glass and repairs. Phone first, then the counter.",
- "direction": {
-  "archetype": "A06 Object study",
-  "lane": "P01 Limestone (sea glass field, the green of their own building)",
-  "type": "T03 Swiss grotesk (Instrument Sans only, 400 and 600)",
-  "why": "A glass panel is the archetype's own example; the object is their stock, and the green field makes glass readable and matches their building."
- },
- "concept_type": "brochure: departments + stock picker + quote summary",
- "big_idea": "The first screen is a sheet of Nassau Glass's own stock: pick glass, mirror or laminated, any thickness and tint they list, and scrolling pulls laminated safety glass apart into its two sheets and interlayer.",
- "images": [
-  {
-   "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-01.jpg",
-   "source": "own",
-   "credit": "Nassau Glass, shower enclosures gallery"
+  "slug": "nassau-glass-co-ltd",
+  "id": 85,
+  "name": "Nassau Glass Co Ltd",
+  "batch": "06",
+  "tier": "A",
+  "state": "needs-review",
+  "generation": 2,
+  "tier_visual": "premium-3d",
+  "tier_visual_why": "Thickness and tint are the two choices a glass customer cannot picture from a photo, and a laminated build-up is invisible in one. A single lightweight real-time sheet (no transmission pass, two box plies and an interlayer) shows both, and feeds the quote.",
+  "pages": [
+    "index.html",
+    "departments.html"
+  ],
+  "primary_cta": "Quote this glass (builds a summary, then Call (242) 603-5521)",
+  "brand_truth": "The Bahamas' first fabricating glass company, still cutting glass from 1/16 to 3/4 of an inch at #46 Mackey Street, where it started in 1959.",
+  "buyer": "Nassau homeowners and landlords replacing or fitting glass, mirrors and showers; contractors and facility managers needing storefronts, laminated safety glass and repairs. Phone first, then the counter.",
+  "direction": {
+    "archetype": "A06 Object study",
+    "lane": "P01 Limestone (sea glass field, the green of their own building)",
+    "type": "T03 Swiss grotesk (Instrument Sans only, 400 and 600)",
+    "why": "A glass panel is the archetype's own example; the object is their stock, and the green field makes glass readable and matches their building."
   },
-  {
-   "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-02.jpg",
-   "source": "own",
-   "credit": "Nassau Glass, shower enclosures gallery"
+  "concept_type": "brochure: departments + stock picker + quote summary",
+  "big_idea": "The first screen is a sheet of Nassau Glass's own stock: pick glass, mirror or laminated, any thickness and tint they list, and scrolling pulls laminated safety glass apart into its two sheets and interlayer.",
+  "images": [
+    {
+      "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-01.jpg",
+      "source": "own",
+      "credit": "Nassau Glass, shower enclosures gallery"
+    },
+    {
+      "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-02.jpg",
+      "source": "own",
+      "credit": "Nassau Glass, shower enclosures gallery"
+    },
+    {
+      "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-03.jpg",
+      "source": "own",
+      "credit": "Nassau Glass, shower enclosures gallery"
+    },
+    {
+      "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-04.jpg",
+      "source": "own",
+      "credit": "Nassau Glass, shower enclosures gallery"
+    },
+    {
+      "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-05.jpg",
+      "source": "own",
+      "credit": "Nassau Glass, shower enclosures gallery"
+    },
+    {
+      "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-06.jpg",
+      "source": "own",
+      "credit": "Nassau Glass, shower enclosures gallery"
+    },
+    {
+      "src": "https://www.nassauglass.com/wp-content/uploads/2020/05/ng_gallery.jpg",
+      "source": "own",
+      "credit": "Nassau Glass, the building on Mackey Street (400x234 source, shown at or under native size)"
+    },
+    {
+      "src": "pane.png / pane-phone.png",
+      "source": "generated",
+      "credit": "Still rendered from this site's own 3D sheet of glass, used as the canvas poster"
+    }
+  ],
+  "critic": {
+    "photography": 4,
+    "typography": 4,
+    "composition": 4,
+    "colour": 4,
+    "fit": 5,
+    "distinct": 4,
+    "references": 4
   },
-  {
-   "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-03.jpg",
-   "source": "own",
-   "credit": "Nassau Glass, shower enclosures gallery"
+  "critic_note": "Self-scores only; awaiting independent critic.",
+  "current_site_findings": [
+    "'SASTIFIED CLIENTS' is misspelled in large letters on the homepage.",
+    "The real stock list is buried in one paragraph on an inner page.",
+    "Most photos are stock; the six real shower enclosures and the green building are small or absent.",
+    "No homepage meta description; the title is only 'Nassau Glass Company'.",
+    "The services carousel shows the same six departments twice.",
+    "A 'business for sale' notice sits beside the phone numbers on every page."
+  ],
+  "pitch_line": "Your customers call to ask what thickness and tint you have. This concept lets them see it, pick it and read you a ready summary, on a phone, in a minute.",
+  "assumptions": [
+    "Thickness steps between 1/16 and 3/4 in (1/8, 1/4, 3/8, 1/2) are standard fractions inside their stated range; confirm the exact stocked list.",
+    "Mirror colour 'flesh tone' and all tint swatches are rendered approximations; confirm against real samples.",
+    "The laminated explanation (two sheets, a bonded interlayer that holds broken pieces) is the general definition of laminated glass, not their wording; confirm.",
+    "The 3D sheet is drawn as a small sample, labelled 'a rendered sample'.",
+    "No email or WhatsApp is published, so the quote ends in a call and a copyable summary; in production it would post to their existing contact form.",
+    "The for-sale notice on their site is left out of the concept on purpose.",
+    "Shower photo alt texts describe what is visible (frameless, sliding); the frame type of each install is not captioned by them."
+  ],
+  "sources": [
+    "https://www.nassauglass.com/",
+    "https://www.nassauglass.com/about/",
+    "https://www.nassauglass.com/glass/",
+    "https://www.nassauglass.com/shower-enclosures/",
+    "https://www.nassauglass.com/architectural-metals/",
+    "https://www.nassauglass.com/service/",
+    "https://www.nassauglass.com/contact/",
+    "https://www.facebook.com/NassauGlass/"
+  ],
+  "qa": {
+    "blockers": 0,
+    "warnings": 3,
+    "note": "1 tap target under 40 px per page (not located; all own controls are 44 px), 5 pressed/filled control styles counted by the craft metric (one filled primary per screen; the rest are pressed states). distinct.mjs: distinct (closest 65). interact.mjs timed out under software WebGL in the sandbox, not completed."
   },
-  {
-   "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-04.jpg",
-   "source": "own",
-   "credit": "Nassau Glass, shower enclosures gallery"
-  },
-  {
-   "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-05.jpg",
-   "source": "own",
-   "credit": "Nassau Glass, shower enclosures gallery"
-  },
-  {
-   "src": "https://www.nassauglass.com/wp-content/uploads/2021/04/ng-shower-06.jpg",
-   "source": "own",
-   "credit": "Nassau Glass, shower enclosures gallery"
-  },
-  {
-   "src": "https://www.nassauglass.com/wp-content/uploads/2020/05/ng_gallery.jpg",
-   "source": "own",
-   "credit": "Nassau Glass, the building on Mackey Street (400x234 source, shown at or under native size)"
-  },
-  {
-   "src": "pane.png / pane-phone.png",
-   "source": "generated",
-   "credit": "Still rendered from this site's own 3D sheet of glass, used as the canvas poster"
-  }
- ],
- "critic": {
-  "photography": 4,
-  "typography": 4,
-  "composition": 4,
-  "colour": 4,
-  "fit": 5,
-  "distinct": 4,
-  "references": 4
- },
- "critic_note": "Self-scores only; awaiting independent critic.",
- "current_site_findings": [
-  "'SASTIFIED CLIENTS' is misspelled in large letters on the homepage.",
-  "The real stock list is buried in one paragraph on an inner page.",
-  "Most photos are stock; the six real shower enclosures and the green building are small or absent.",
-  "No homepage meta description; the title is only 'Nassau Glass Company'.",
-  "The services carousel shows the same six departments twice.",
-  "A 'business for sale' notice sits beside the phone numbers on every page."
- ],
- "pitch_line": "Your customers call to ask what thickness and tint you have. This concept lets them see it, pick it and read you a ready summary, on a phone, in a minute.",
- "assumptions": [
-  "Thickness steps between 1/16 and 3/4 in (1/8, 1/4, 3/8, 1/2) are standard fractions inside their stated range; confirm the exact stocked list.",
-  "Mirror colour 'flesh tone' and all tint swatches are rendered approximations; confirm against real samples.",
-  "The laminated explanation (two sheets, a bonded interlayer that holds broken pieces) is the general definition of laminated glass, not their wording; confirm.",
-  "The 3D sheet is drawn as a small sample, labelled 'a rendered sample'.",
-  "No email or WhatsApp is published, so the quote ends in a call and a copyable summary; in production it would post to their existing contact form.",
-  "The for-sale notice on their site is left out of the concept on purpose.",
-  "Shower photo alt texts describe what is visible (frameless, sliding); the frame type of each install is not captioned by them."
- ],
- "sources": [
-  "https://www.nassauglass.com/",
-  "https://www.nassauglass.com/about/",
-  "https://www.nassauglass.com/glass/",
-  "https://www.nassauglass.com/shower-enclosures/",
-  "https://www.nassauglass.com/architectural-metals/",
-  "https://www.nassauglass.com/service/",
-  "https://www.nassauglass.com/contact/",
-  "https://www.facebook.com/NassauGlass/"
- ],
- "qa": {
-  "blockers": 0,
-  "warnings": 3,
-  "note": "1 tap target under 40 px per page (not located; all own controls are 44 px), 5 pressed/filled control styles counted by the craft metric (one filled primary per screen; the rest are pressed states). distinct.mjs: distinct (closest 65). interact.mjs timed out under software WebGL in the sandbox, not completed."
- },
- "notes": "BLIND: look.mjs, outside fonts and images do not load in the sandbox. Their photos were seen through a Lovable gallery (project 10bb2ab9, two rounds, 'Nassau Glass Gallery') and cropped thumbnails were routed into Playwright for screenshots. Font self-hosted (Instrument Sans variable, npm). References judged from knowledge: apple.com product pages, teenage.engineering. Awaiting independent critic. Record said no site; nassauglass.com is live. Business is advertised for sale (contact Andrew Rogers): pitch on sale value. Performance: one canvas, no transmission or shadow pass, dpr 1.25 on phones, paused offscreen, scroll read through a motion value in the frame loop, three.js lazy-loaded behind a rendered poster.",
- "built_at": "2026-11-21T12:27:00Z"
+  "notes": "BLIND: look.mjs, outside fonts and images do not load in the sandbox. Their photos were seen through a Lovable gallery (project 10bb2ab9, two rounds, 'Nassau Glass Gallery') and cropped thumbnails were routed into Playwright for screenshots. Font self-hosted (Instrument Sans variable, npm). References judged from knowledge: apple.com product pages, teenage.engineering. Awaiting independent critic. Record said no site; nassauglass.com is live. Business is advertised for sale (contact Andrew Rogers): pitch on sale value. Performance: one canvas, no transmission or shadow pass, dpr 1.25 on phones, paused offscreen, scroll read through a motion value in the frame loop, three.js lazy-loaded behind a rendered poster.",
+  "built_at": "2026-11-21T12:27:00Z",
+  "review_claimed_at": "2026-11-21T13:25:04.449Z"
 }
