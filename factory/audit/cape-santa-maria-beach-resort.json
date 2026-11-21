@@ -6,5 +6,32 @@
  "url": "capesantamaria.com",
  "url_source": "prospects",
  "old_check": "LOADED: no contact info visible",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": true,
+  "booking_engine": "bookonthenet.net (eresmain)",
+  "products_or_listings": 3,
+  "pages": 12,
+  "platform": "Tambourine",
+  "latest_year": 2026,
+  "modernity": 3,
+  "concept_type": "booking: room picker (3 beachfront types) handing off to bookonthenet, gateway route finder (Fort Lauderdale, Nassau, Exuma, own plane, seaplane), Beach House restaurant, activities, weddings",
+  "must_keep": [
+   "bookonthenet reservations",
+   "three room types with sizes",
+   "getting here routes",
+   "private pilot information",
+   "current offer"
+  ],
+  "weaknesses": [
+   "Getting Here page is noindex",
+   "placeholder 'Subheadline' on homepage",
+   "FareHarbor widget fails to load",
+   "conflicting taxi times and airport codes",
+   "machine-generated image descriptions"
+  ],
+  "priority": "B",
+  "note": "Tambourine-built booking site with bookonthenet engine; audited 2026-11-21."
+ }
 }

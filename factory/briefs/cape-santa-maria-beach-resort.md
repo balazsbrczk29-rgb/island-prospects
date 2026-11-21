@@ -31,3 +31,16 @@ US and Canadian couples, families and private pilots seeking a remote, quiet bea
 
 ## Assumptions
 - Activities list from gallery captions on their homepage; Beach House details not scraped (named only).
+
+---
+# Generation 2 design plan (2026-11-21)
+Audit: booking site on Tambourine with bookonthenet engine (priority B). Own photos viewed in Lovable viewer ip-assets-cape-santa-maria: aerial of bungalows on the beach (1920x1080, hero), beach curve 1413, Beach House bar 1920, salad 1920, paddleboard 1920, fishing 1920, villa living 1920, bungalow bedroom 1920, scuba 1062, Long Island coast 1413. The $500 air-credit offer (booking window Oct 12 to Nov 9, 2026) has expired and is not shown.
+
+**Big idea:** for a resort at the far tip of Long Island, getting here is the question and the romance, so the first screen is a travel-magazine opening whose standfirst is a live sentence: choose where you start (Fort Lauderdale, Nassau, George Town, your own plane, Nassau by seaplane) and the sentence tells you exactly how you arrive.
+
+**Direction:** A01 Magazine feature + P02 Shallow flats + T09 Didone fashion (N1 masthead, M1 quiet). Why: a remote, barefoot, aviation-flavoured resort reads best as a travel feature; sand ground with the flats aqua as the facts box and a channel-teal Beach House field; Bodoni Moda with Jost like a glossy travel magazine.
+
+**Storyboard:** 1) masthead (title, dateline, links) + full-width aerial 3:1 + H1 "Getting here is half the story." + route sentence with gateway select + Check availability; 2) drop-cap two-column opening + "At a glance" facts box (aqua); 3) rooms spread: three room types as a selectable list with sizes and beds, photo swaps; 4) photo essay of four with real captions; 5) The Beach House on channel teal with bar and dish photos; 6) colophon contact. getting-here.html: all five routes as three-leg itineraries plus the private pilot note.
+**Phone:** masthead, aerial 4:3, H1, route sentence; tear-off strip with Check availability and Call.
+**Conversion:** Check availability (bookonthenet) everywhere; call toll free; email.
+**Tier:** standard.

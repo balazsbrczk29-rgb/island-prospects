@@ -1,122 +1,177 @@
-import { useEffect, useState, type ReactNode } from "react"
-import { createRoot } from "react-dom/client"
-import Lenis from "lenis"
-import { motion, useScroll, useSpring } from "motion/react"
-import { Menu, Phone } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
-import "./styles.css"
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
+import { M, BOOK, P, contact, rooms, ROUTES } from './data'
 
-export const PHONE_US = "+1 800-926-9704"
-export const TEL_US = "tel:+18009269704"
-export const PHONE_LOCAL = "+1 242-338-5273"
-export const TEL_LOCAL = "tel:+12423385273"
-export const EMAIL = "resort@capesantamaria.com"
-export const BOOK = "https://www.bookonthenet.net/west/premium/eresmain.aspx?&id=tUUp8oO%2bGEBnwXEl4XQtEH67d%2f2EHxOV8ZmT3V4U8tI%3d"
-export const M = (f: string) => `https://symphony.cdn.tambourine.com/_fusion/cape-santa-maria-resort/media/${f}`
-export const ease = [0.16, 1, 0.3, 1] as const
-export const reveal = [0.77, 0, 0.175, 1] as const
+const ease = [0.22, 1, 0.36, 1] as const
+type K = keyof typeof P
+export const Img = ({ k, className, eager, sizes }: { k: K; className?: string; eager?: boolean; sizes?: string }) => (
+  <img className={className} src={M + P[k].src} alt={P[k].alt} loading={eager ? 'eager' : 'lazy'} fetchPriority={eager ? 'high' : undefined} sizes={sizes} />
+)
 
-const NAV = [
-  { href: "index.html#rooms", label: "Rooms" },
-  { href: "getting-here.html", label: "Getting here" },
-  { href: "index.html#days", label: "Days here" },
-  { href: "index.html#enquire", label: "Contact" },
-]
-
-function useLenis() {
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const lenis = new Lenis({ duration: 1.1, smoothWheel: true })
-    let id = 0
-    const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
-    id = requestAnimationFrame(raf)
-    return () => { cancelAnimationFrame(id); lenis.destroy() }
-  }, [])
-}
-
-function Header({ current }: { current: string }) {
-  const [open, setOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
+export function Masthead({ home = true }: { home?: boolean }) {
+  const b = home ? '' : './'
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-3 md:px-10">
-        <a href="index.html" className="leading-none" aria-label="Cape Santa Maria Beach Resort, home">
-          <span className="font-display text-[1.45rem]">Cape Santa Maria</span>
-          <span className="label mt-1 block !text-[10px] text-muted">Beach Resort · Long Island, Bahamas</span>
-        </a>
-        <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
-          {NAV.map(n => <a key={n.href} href={n.href} aria-current={current === n.label ? "page" : undefined} className={`ulink text-[15px] ${current === n.label ? "!bg-[length:100%_1px]" : ""}`}>{n.label}</a>)}
-          <a href={BOOK} className="inline-flex min-h-11 items-center rounded-none bg-sea px-5 text-[15px] text-paper transition duration-200 hover:-translate-y-px hover:bg-sea-deep active:translate-y-0">Check availability</a>
-        </nav>
-        <div className="flex items-center gap-2 lg:hidden">
-          <a href={TEL_LOCAL} aria-label={`Call ${PHONE_LOCAL}`} className="inline-flex size-11 items-center justify-center rounded-none border border-line"><Phone className="size-[18px]" /></a>
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger className="inline-flex size-11 items-center justify-center rounded-none border border-line" aria-label="Open menu"><Menu className="size-5" /></SheetTrigger>
-            <SheetContent side="right" className="w-full border-l-0 bg-paper sm:max-w-sm">
-              <SheetTitle className="sr-only">Menu</SheetTitle>
-              <nav className="mt-16 flex flex-col px-6" aria-label="Mobile">
-                {NAV.map((n, i) => <motion.a key={n.href} href={n.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i, duration: 0.5, ease }} className="border-b border-line py-4 font-display text-[2rem]">{n.label}</motion.a>)}
-                <a href={BOOK} className="mt-8 rounded-none bg-sea py-4 text-center text-paper">Check availability</a>
-                <a href="index.html#enquire" onClick={() => setOpen(false)} className="mt-3 rounded-none border border-ink/20 py-4 text-center">Email the resort</a>
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
+    <header className="mast">
+      <div className="mast__row">
+        <a className="mast__title" href="./">Cape Santa Maria</a>
+        <p className="mast__date">Seymour's, Long Island, The Bahamas</p>
       </div>
-      <motion.div style={{ scaleX: progress }} className="h-[2px] origin-left bg-sea" aria-hidden />
+      <nav className="mast__nav" aria-label="Site">
+        <a href={b + '#rooms'}>Rooms</a><a href={b + '#beach-house'}>The Beach House</a><a href={b + '#days'}>Days here</a><a href="getting-here.html">Getting here</a><a href={b + '#contact'}>Contact</a>
+        <a className="mast__book" href={BOOK}>Check availability</a>
+      </nav>
     </header>
   )
 }
 
-function Footer() {
+export function Lead() {
+  const [i, setI] = useState(0)
+  const r = ROUTES[i]
   return (
-    <footer className="bg-ink text-paper">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:px-10 md:py-20">
-        <div><p className="font-display text-[2.2rem]">Cape Santa Maria</p><p className="mt-3 max-w-sm text-paper/70">Beach Resort. PO Box L.I. 30-117, Seymour's, Long Island, The Bahamas.</p></div>
-        <div className="text-[15px]"><p className="label text-blush">Reservations</p><a href={`mailto:${EMAIL}`} className="ulink mt-3 inline-block">{EMAIL}</a><br /><a href={TEL_US} className="ulink mt-2 inline-block">Toll free {PHONE_US}</a><br /><a href={TEL_LOCAL} className="ulink mt-2 inline-block">Local {PHONE_LOCAL}</a></div>
-        <div className="text-[15px]"><p className="label text-blush">Follow</p><a href="https://www.instagram.com/capesantamaria/" className="ulink mt-3 block w-fit">Instagram</a><a href="https://www.facebook.com/capesantamaria" className="ulink mt-2 block w-fit">Facebook</a><a href="https://www.youtube.com/user/CapeSantaMaria1" className="ulink mt-2 block w-fit">YouTube</a></div>
-        <div className="text-[15px]"><p className="label text-blush">Pages</p>{NAV.map(n => <a key={n.href} href={n.href} className="ulink mt-2 block w-fit">{n.label}</a>)}</div>
+    <section className="lead" aria-labelledby="h1">
+      <figure className="lead__pic"><Img k="aerial" eager /></figure>
+      <div className="lead__text">
+        <h1 id="h1">Getting here is half the&nbsp;story.</h1>
+        <p className="stand">
+          <span>From </span>
+          <label className="gate">
+            <span className="sr-only">Where are you starting from?</span>
+            <select value={i} onChange={e => setI(+e.target.value)}>
+              {ROUTES.map((x, k) => <option key={x.k} value={k}>{x.label}</option>)}
+            </select>
+          </label>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span key={r.k} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>, {r.line}</motion.span>
+          </AnimatePresence>
+        </p>
+        <div className="lead__acts"><a className="btn" href={BOOK}>Check availability</a><a className="ul" href="getting-here.html">Every route, step by step</a></div>
       </div>
-      <p className="mx-auto max-w-[1440px] border-t border-paper/15 px-5 py-6 text-xs text-paper/55 md:px-10">Concept by ESTATIQ AI Solutions. Photos from capesantamaria.com.</p>
+    </section>
+  )
+}
+
+export function Opening() {
+  return (
+    <section className="open" aria-label="The place">
+      <div className="open__cols">
+        <p className="dropcap">Cape Santa Maria sits at the far northern tip of Long Island, where the beach runs long and white and the water turns every shade of turquoise. The beachfront bungalows line the sand beside the Beach House, so the walk from your door to the sea is a few barefoot steps.</p>
+        <p>Days here are as busy or as empty as you make them: scuba diving, snorkelling and a nature cruise, fishing, kayaking and paddleboarding from the beach, or nothing at all. The resort hosts weddings too. In the evening the villas' west-facing windows and the bungalow verandas look straight into the sunset.</p>
+      </div>
+      <aside className="facts" aria-label="At a glance">
+        <h2>At a glance</h2>
+        <dl>
+          <div><dt>Where</dt><dd>Seymour's, Long Island</dd></div>
+          <div><dt>Nearest airport</dt><dd>Stella Maris (SML)</dd></div>
+          <div><dt>Reservations</dt><dd><a href={`tel:${contact.tollfree.tel}`} className="tnum">{contact.tollfree.label}</a></dd></div>
+          <div><dt>Email</dt><dd><a href={`mailto:${contact.email}`}>{contact.email}</a></dd></div>
+        </dl>
+        <a className="btn wide" href={BOOK}>Check availability</a>
+      </aside>
+    </section>
+  )
+}
+
+export function Rooms() {
+  const [i, setI] = useState(0)
+  const r = rooms[i]
+  return (
+    <section className="rooms" id="rooms" aria-labelledby="rooms-h">
+      <figure className="rooms__pic">
+        <AnimatePresence initial={false} mode="popLayout">
+          <motion.div key={r.pic} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, ease }}><Img k={r.pic} /></motion.div>
+        </AnimatePresence>
+        <figcaption>{r.pic === 'villa' ? 'A Beachfront Villa living room.' : 'A Beachfront Bungalow bedroom.'}</figcaption>
+      </figure>
+      <div className="rooms__text">
+        <h2 id="rooms-h">Three ways to sleep on the beach.</h2>
+        <ul className="roomlist" role="tablist" aria-label="Rooms">
+          {rooms.map((x, k) => (
+            <li key={x.name}><button type="button" role="tab" aria-selected={k === i} onClick={() => setI(k)}><b>{x.name}</b><span className="tnum">{x.size}</span></button></li>
+          ))}
+        </ul>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div key={r.name} role="tabpanel" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} className="roomdetail">
+            <p><b>{r.sleeps}.</b> {r.beds}. {r.notes}</p>
+            <p className="small">Every room: air conditioning, coffee and tea, safe, fridge and daily housekeeping.</p>
+          </motion.div>
+        </AnimatePresence>
+        <a className="btn" href={BOOK}>Check availability</a>
+      </div>
+    </section>
+  )
+}
+
+export function Essay() {
+  const items: { k: K; c: string }[] = [
+    { k: 'paddle', c: 'Paddleboarding off the beach.' },
+    { k: 'scuba', c: 'Scuba diving on Long Island reefs.' },
+    { k: 'fishing', c: 'Fishing the flats.' },
+    { k: 'coast', c: 'The Long Island coast.' },
+  ]
+  return (
+    <section className="essay" id="days" aria-labelledby="days-h">
+      <h2 id="days-h">Days here.</h2>
+      <div className="essay__grid">
+        {items.map((x, n) => (
+          <figure key={x.k} className={'ess ess--' + n}><Img k={x.k} /><figcaption>{x.c}</figcaption></figure>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+export function BeachHouse() {
+  return (
+    <section className="bh" id="beach-house" aria-labelledby="bh-h">
+      <figure className="bh__pic"><Img k="bar" /></figure>
+      <div className="bh__text">
+        <h2 id="bh-h">The Beach House.</h2>
+        <p>The resort's restaurant and bar sits on the sand, with the bungalows on either side. Ask about the menu and dinner times when you book.</p>
+        <figure className="bh__small"><Img k="salad" /></figure>
+      </div>
+    </section>
+  )
+}
+
+export function Routes() {
+  const [i, setI] = useState(0)
+  const r = ROUTES[i]
+  return (
+    <div className="routes">
+      <div className="routes__tabs" role="tablist" aria-label="Where are you starting from?">
+        {ROUTES.map((x, k) => <button key={x.k} type="button" role="tab" aria-selected={k === i} onClick={() => setI(k)}>From {x.label}</button>)}
+      </div>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.ol key={r.k} className="legs" role="tabpanel" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+          {r.steps.map(([t, d], k) => (
+            <motion.li key={t} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: k * 0.08, duration: 0.45, ease }}><b>{t}</b><span>{d}</span></motion.li>
+          ))}
+        </motion.ol>
+      </AnimatePresence>
+    </div>
+  )
+}
+
+export function Colophon() {
+  return (
+    <footer className="colophon" id="contact">
+      <h2>Write, call, or check your dates.</h2>
+      <div className="colophon__grid">
+        <p><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+        <p className="tnum"><a href={`tel:${contact.tollfree.tel}`}>{contact.tollfree.label}</a> toll free<br /><a href={`tel:${contact.local.tel}`}>{contact.local.label}</a> on the island</p>
+        <p>{contact.address}</p>
+      </div>
+      <a className="btn" href={BOOK}>Check availability</a>
+      <p className="credit">Photography: Cape Santa Maria Beach Resort.</p>
     </footer>
   )
 }
 
-function ActionBar() {
+export function Strip() {
   return (
-    <nav aria-label="Quick actions" className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1fr_1.4fr] border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">
-      <a href={TEL_LOCAL} className="flex min-h-14 items-center justify-center gap-1.5 text-[15px]"><Phone className="size-4" aria-hidden />Call</a>
-      <a href="index.html#enquire" className="flex min-h-14 items-center justify-center border-l border-line text-[15px]">Email</a>
-      <a href={BOOK} className="flex min-h-14 items-center justify-center bg-sea text-[15px] text-paper">Check availability</a>
-    </nav>
-  )
-}
-
-export function Page({ current, children }: { current: string; children: ReactNode }) {
-  useLenis()
-  return (<><a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-paper focus:p-3">Skip to content</a><Header current={current} /><main id="main">{children}</main><Footer /><ActionBar /></>)
-}
-
-export function mount(node: ReactNode) {
-  document.documentElement.classList.add("js-anim")
-  createRoot(document.getElementById("root")!).render(node)
-}
-
-export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
-  return <motion.div className={className} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8% 0px" }} transition={{ duration: 0.9, delay, ease }}>{children}</motion.div>
-}
-
-export function Mask({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
-  return <motion.div className={className} initial={{ clipPath: "inset(0 0 100% 0)" }} whileInView={{ clipPath: "inset(0 0 0% 0)" }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ duration: 1.2, delay, ease: reveal }}>{children}</motion.div>
-}
-
-export function Head({ index, label, title, id, children, dark = false }: { index: string; label: string; title: ReactNode; id: string; children?: ReactNode; dark?: boolean }) {
-  return (
-    <Reveal>
-      <p className={`label flex items-center gap-3 ${dark ? "text-blush" : "text-sea"}`}><span>{index}</span><span className={`h-px w-10 ${dark ? "bg-blush/50" : "bg-sea/40"}`} aria-hidden /><span>{label}</span></p>
-      <h2 id={id} className="mt-5 font-display text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[1.04] tracking-[-0.01em]">{title}</h2>
-      {children}
-    </Reveal>
+    <div className="strip" aria-label="Book">
+      <a className="btn" href={BOOK}>Check availability</a>
+      <a className="strip__call" href={`tel:${contact.tollfree.tel}`}>Call</a>
+    </div>
   )
 }
