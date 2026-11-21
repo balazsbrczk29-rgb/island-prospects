@@ -1,5 +1,12 @@
 export const IMG = "https://www.annasweddingbahamas.com/wp-content/uploads/"
 export type Pkg = { id: string; group: "beach" | "cruise"; name: string; price: number; guests: number; items: string[]; img: string }
+export const HERO = { src: IMG + "2025/09/jennifer-ashby-scaled.jpg", w: 2560, h: 1709 }
+export const PKG_W = 556, PKG_H = 331
+export const TOLL = "877-524-9127", TOLL_TEL = "tel:+18775249127"
+export const CONTACT_URL = "https://www.annasweddingbahamas.com/contact/"
+/** "Feel" is read from what each package includes, nothing invented. */
+export const hasMusic = (p: Pkg) => p.items.some(i => /violin|saxophone|DJ|drummer/i.test(i))
+export const hasReception = (p: Pkg) => p.items.some(i => /reception/i.test(i))
 export const PACKAGES: Pkg[] = [
   { id: "basic", group: "beach", name: "Basic", price: 950, guests: 2, img: IMG + "2015/11/COUPLE-CANADA_2-1.jpg", items: ["Minister", "Tropical bridal bouquet", "Groom's boutonniere", "Wedding documents plus one certified copy of the marriage certificate", "Coordinator for the marriage application, who hosts the ceremony", "White sandy beach"] },
   { id: "classic", group: "beach", name: "Classic", price: 1750, guests: 6, img: IMG + "2015/11/Classi_1.jpg", items: ["Beach ceremony on a public beach", "Minister", "Wedding documents plus one certified copy", "Bridal bouquet and groom's boutonniere", "Photographer for 1 hour, high resolution images in an online gallery", "Round trip limousine or SUV for up to 6", "Champagne toast for 4 to 6", "Coordinator for the marriage application, who hosts the ceremony"] },

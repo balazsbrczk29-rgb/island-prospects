@@ -1,104 +1,127 @@
-import { useMemo, useState } from "react"
+import type React from "react"
+import { useEffect, useMemo, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { ArrowUpRight, Phone, Check, Ship, Palmtree } from "lucide-react"
+import { ArrowUpRight, Phone, Check, Ship, Palmtree, Copy, CalendarHeart } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Page, mount, Reveal, Mark, ease, usd, PHONE, TEL, US_PHONE, US_TEL } from "./site"
-import { PACKAGES, LICENCE, SERVICES, GALLERY, IMG } from "./data"
+import { PACKAGES, LICENCE, SERVICES, GALLERY, IMG, HERO, PKG_W, PKG_H, TOLL, TOLL_TEL, CONTACT_URL, hasMusic, hasReception, type Pkg } from "./data"
+
+type Mode = "beach" | "cruise"
+type Feel = "simple" | "music" | "party"
+export type Req = { mode: Mode; guests: number; feel: Feel; date: string; pkg: string }
 
 function Hero() {
   return (
     <section className="relative overflow-hidden" aria-labelledby="hero-title">
-      <div className="mx-auto grid max-w-[1440px] lg:min-h-[calc(100svh-120px)] lg:grid-cols-12">
-        <div className="relative z-10 flex flex-col justify-center px-5 pt-12 pb-10 md:px-10 lg:col-span-6 lg:py-16">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="text-[14px] text-muted">Destination weddings in Nassau, The Bahamas</motion.p>
-          <h1 id="hero-title" className="mt-6 font-display text-[clamp(3.2rem,7vw,7.6rem)] leading-[0.92] tracking-[-0.02em] text-ink lg:mr-[-18%]">
+      <div className="mx-auto grid max-w-[1320px] lg:min-h-[calc(100svh-150px)] lg:grid-cols-12">
+        <div className="relative z-10 flex flex-col justify-center px-5 pt-8 pb-8 md:px-12 lg:col-span-6 lg:py-14">
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="text-[15px] text-muted">Beach and cruise-day weddings in Nassau, since 1995</motion.p>
+          <h1 id="hero-title" className="mt-5 font-display text-[clamp(2.9rem,6.2vw,6.4rem)] leading-[0.95] tracking-[-0.015em] text-ink lg:mr-[-14%]">
             {["Married in Nassau,", "with Anna", "beside you."].map((l, i) => (
-              <span key={l} className="block overflow-hidden pb-[0.08em]">
+              <span key={l} className="block overflow-hidden pb-[0.1em]">
                 <motion.span className={`block ${i === 2 ? "text-rose" : ""}`} initial={{ y: "108%" }} animate={{ y: 0 }} transition={{ delay: 0.2 + i * 0.1, duration: 1.2, ease: [0.77, 0, 0.175, 1] }}>{l}</motion.span>
               </span>
             ))}
           </h1>
-          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 1, ease }} className="mt-8 max-w-md text-[18px] leading-relaxed text-muted">Anna's Wedding Planning has planned beach and cruise-day weddings in Nassau for more than two decades, for couples from Australia to Sweden. Packages from USD 950, licence paperwork included.</motion.p>
-          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 1, ease }} className="mt-9 flex flex-wrap gap-3">
-            <a href="#plan" className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-rose px-6 text-[16px] text-white transition hover:-translate-y-0.5 hover:bg-ink active:translate-y-0">Check your wedding date <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden /></a>
-            <a href="#finder" className="inline-flex min-h-12 items-center rounded-full border border-ink/20 px-6 text-[16px] transition hover:-translate-y-0.5 hover:border-ink">Find your package</a>
+          <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 1, ease }} className="mt-6 max-w-[30rem] text-[18px] leading-[1.6] text-muted">Annamae Fox plans every detail and handles your marriage licence. Beach packages from <b className="font-medium text-ink tnum">USD 950</b>, cruise-day packages from <b className="font-medium text-ink tnum">USD 3,495</b>.</motion.p>
+          <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.75, duration: 1, ease }} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a href="#finder" className="group inline-flex min-h-13 items-center gap-2 rounded-full bg-rose px-7 text-[17px] text-white transition hover:-translate-y-0.5 hover:bg-ink active:translate-y-0">Find your package <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden /></a>
+            <a href={TEL} className="inline-flex min-h-11 items-center gap-2 text-[16px] text-ink underline decoration-rose/40 underline-offset-[6px] transition hover:decoration-rose tnum"><Phone className="size-4 text-rose" aria-hidden />{PHONE}</a>
           </motion.div>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.95, duration: 1 }} className="mt-5 text-[14px] text-muted tnum">From the US <a className="text-ink hover:text-rose" href={US_TEL}>{US_PHONE}</a> or toll free <a className="text-ink hover:text-rose" href={TOLL_TEL}>{TOLL}</a></motion.p>
         </div>
-        <motion.div initial={{ clipPath: "inset(0 0 0 100%)" }} animate={{ clipPath: "inset(0 0 0 0%)" }} transition={{ delay: 0.15, duration: 1.4, ease: [0.77, 0, 0.175, 1] }} className="relative h-[62svh] lg:col-span-6 lg:h-auto">
-          <img src={IMG + "2024/04/Real-Love-Hero-Banner.webp"} alt="A couple at their beach wedding in Nassau, planned by Anna's Wedding Planning" fetchPriority="high" width={1600} height={1000} className="absolute inset-0 size-full rounded-bl-[120px] object-cover lg:rounded-bl-[200px]" />
-        </motion.div>
+        <motion.figure initial={{ clipPath: "inset(0 0 0 100%)" }} animate={{ clipPath: "inset(0 0 0 0%)" }} transition={{ delay: 0.15, duration: 1.4, ease: [0.77, 0, 0.175, 1] }} className="relative mx-5 h-[44svh] min-h-[300px] md:mx-12 lg:col-span-6 lg:mx-0 lg:h-auto">
+          <img src={HERO.src} alt="Jennifer and Ashby on their wedding day at Fort Charlotte, Nassau, planned by Anna" fetchPriority="high" width={HERO.w} height={HERO.h} className="absolute inset-0 size-full rounded-t-[999px] object-cover object-[46%_40%] lg:rounded-t-none lg:rounded-bl-[220px]" />
+          <figcaption className="absolute bottom-4 left-4 rounded-full bg-paper/92 px-4 py-2 text-[13px] text-ink lg:bottom-8 lg:left-auto lg:right-8">Jennifer and Ashby, Fort Charlotte</figcaption>
+        </motion.figure>
       </div>
     </section>
   )
 }
 
-function KeyInfo() {
-  const items: [string, string, string][] = [
-    ["Call Anna in Nassau", PHONE, TEL],
-    ["From the United States", US_PHONE, US_TEL],
-    ["Packages", "From USD 950", "packages.html"],
-    ["Licence", "24 hours on island, then apply", "#licence"],
-  ]
-  return (
-    <section className="bg-ink text-paper" aria-label="Key information">
-      <ul className="mx-auto grid max-w-[1440px] sm:grid-cols-2 lg:grid-cols-4">
-        {items.map(([k, v, href], i) => (
-          <li key={k} className="border-paper/15 not-first:border-t sm:not-first:border-t-0 sm:[&:nth-child(n+3)]:border-t lg:[&:nth-child(n+3)]:border-t-0 lg:not-first:border-l">
-            <a href={href} className="group block px-5 py-7 transition hover:bg-white/5 md:px-10 md:py-9">
-              <span className="text-[13px] text-blush">{k}</span>
-              <span className={`mt-1 block font-display leading-tight ${i < 2 ? "text-[clamp(1.7rem,2.3vw,2.3rem)] whitespace-nowrap" : "text-[clamp(1.25rem,1.6vw,1.6rem)]"}`}>{v}</span>
-              <span className="mt-3 block h-px w-0 bg-blush transition-all duration-500 group-hover:w-14" aria-hidden />
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )
-}
+const FEELS: { k: Feel; label: string; note: string }[] = [
+  { k: "simple", label: "Simple and barefoot", note: "Ceremony, flowers, photos" },
+  { k: "music", label: "With live music", note: "Violin, saxophone or a DJ" },
+  { k: "party", label: "With a reception", note: "Drinks, food, dancing" },
+]
+const feelOk = (p: Pkg, f: Feel) => f === "simple" ? true : f === "music" ? hasMusic(p) : hasReception(p)
 
-function Finder() {
-  const [mode, setMode] = useState<"beach" | "cruise">("beach")
-  const [guests, setGuests] = useState(6)
-  const list = useMemo(() => PACKAGES.filter(p => p.group === mode).sort((a, b) => a.price - b.price), [mode])
-  const best = list.find(p => p.guests >= guests) ?? list[list.length - 1]
+function Finder({ req, setReq, onRequest }: { req: Req; setReq: React.Dispatch<React.SetStateAction<Req>>; onRequest: () => void }) {
+  const list = useMemo(() => PACKAGES.filter(p => p.group === req.mode).sort((a, b) => a.price - b.price), [req.mode])
+  const fits = list.filter(p => p.guests >= req.guests && feelOk(p, req.feel))
+  const best = fits[0] ?? list.filter(p => feelOk(p, req.feel)).at(-1) ?? list[list.length - 1]
+  const exact = fits.length > 0
+  useEffect(() => { setReq(r => r.pkg === best.id ? r : { ...r, pkg: best.id }) }, [best.id])
+  const set = (patch: Partial<Req>) => setReq(r => ({ ...r, ...patch }))
+  const max = req.mode === "cruise" ? 40 : 50
   return (
-    <section id="finder" className="mx-auto max-w-[1440px] scroll-mt-24 px-5 py-24 md:px-10 md:py-36" aria-labelledby="finder-title">
-      <div className="grid gap-12 lg:grid-cols-12">
-        <Reveal className="lg:col-span-4">
+    <section id="finder" className="scroll-mt-6 bg-blush/60" aria-labelledby="finder-title">
+      <div className="mx-auto grid max-w-[1320px] gap-10 px-5 py-16 md:px-12 md:py-24 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-5">
           <Mark n="i.">Find your package</Mark>
-          <h2 id="finder-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] tracking-[-0.015em]">Tell us how you arrive and who comes with you.</h2>
-          <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-muted">Every package can be adjusted to your number of guests and your wishes. These are Anna's published starting points.</p>
-          <div className="mt-10 grid grid-cols-2 gap-2 rounded-full bg-blush p-1.5" role="group" aria-label="How you arrive">
-            {([["beach", "Staying on island", Palmtree], ["cruise", "Arriving by cruise", Ship]] as const).map(([k, l, Icon]) => (
-              <button key={k} type="button" aria-pressed={mode === k} onClick={() => setMode(k)} className={`flex min-h-12 items-center justify-center gap-2 rounded-full px-3 text-[15px] transition ${mode === k ? "bg-ink text-paper" : "text-ink hover:bg-white/70"}`}><Icon className="size-4" aria-hidden />{l}</button>
+          <h2 id="finder-title" className="mt-4 font-display text-[clamp(2.2rem,3.8vw,3.6rem)] leading-[1.02]">How you arrive, who comes, and how it should feel.</h2>
+          <div className="mt-8 grid grid-cols-2 gap-1.5 rounded-full bg-paper p-1.5" role="group" aria-label="How you arrive">
+            {([["beach", "Staying in Nassau", Palmtree], ["cruise", "A cruise port day", Ship]] as const).map(([k, l, Icon]) => (
+              <button key={k} type="button" aria-pressed={req.mode === k} onClick={() => setReq(r => ({ ...r, mode: k, guests: Math.min(r.guests, k === "cruise" ? 40 : 50) }))} className={`flex min-h-12 items-center justify-center gap-2 rounded-full px-3 text-[15px] transition ${req.mode === k ? "bg-ink text-paper" : "text-ink hover:bg-blush"}`}><Icon className="size-4" aria-hidden />{l}</button>
             ))}
           </div>
-          <label className="mt-10 block">
-            <span className="flex items-baseline justify-between text-[14px] text-muted">Guests, including the two of you <b className="font-display text-3xl font-normal text-ink">{guests}</b></span>
-            <input type="range" min={2} max={50} value={guests} onChange={e => setGuests(+e.target.value)} className="range mt-4 w-full" />
+          <label className="mt-8 block">
+            <span className="flex items-baseline justify-between text-[15px] text-muted">Guests, including the two of you <b className="font-display text-[2.2rem] font-normal text-ink tnum">{req.guests}</b></span>
+            <input type="range" min={2} max={max} value={req.guests} onChange={e => set({ guests: +e.target.value })} className="range mt-3 w-full" aria-label="Number of guests" />
           </label>
-        </Reveal>
-        <div className="lg:col-span-7 lg:col-start-6">
+          <div className="mt-8" role="group" aria-label="How it should feel">
+            <p className="text-[15px] text-muted">The feel</p>
+            <div className="mt-3 grid grid-cols-3 gap-2">
+              {FEELS.map(f => (
+                <button key={f.k} type="button" aria-pressed={req.feel === f.k} onClick={() => set({ feel: f.k })} className={`flex min-h-[76px] flex-col justify-center rounded-2xl border px-3 py-2.5 text-left transition ${req.feel === f.k ? "border-rose bg-paper" : "border-ink/10 hover:border-ink/40"}`}>
+                  <span className="text-[15px] leading-tight text-ink">{f.label}</span>
+                  <span className="mt-1 text-[12.5px] leading-tight text-muted">{f.note}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+          <a href="#licence" className="group mt-8 flex items-center gap-4 rounded-2xl border border-ink/10 bg-paper px-5 py-4 transition hover:border-rose">
+            <span className="grid size-10 shrink-0 place-items-center rounded-full bg-blush text-rose"><Check className="size-5" aria-hidden /></span>
+            <span className="text-[15px] leading-snug"><b className="font-medium">Your licence is handled.</b> <span className="text-muted">{req.mode === "cruise" ? "Cruise couples need a purser's letter: the ship in Bahamian waters 24 hours." : "Be on island 24 hours, bring passports. Fee $100."}</span> <span className="text-rose underline-offset-4 group-hover:underline">The checklist</span></span>
+          </a>
+        </div>
+        <div className="lg:col-span-7">
           <AnimatePresence mode="wait">
-            <motion.article key={best.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.55, ease }} className="grid overflow-hidden rounded-[28px] bg-white shadow-[0_30px_60px_-40px_rgba(31,42,46,.5)] md:grid-cols-[1fr_1.1fr]">
-              <div className="relative min-h-[260px] bg-blush"><img src={best.img} alt={`${best.name} package wedding by Anna's Wedding Planning`} width={600} height={600} loading="lazy" className="absolute inset-0 size-full object-cover" /></div>
-              <div className="p-7 md:p-9">
-                <p className="text-[13px] text-rose">Closest match for {guests} guests</p>
-                <h3 className="mt-2 font-display text-4xl">{best.name}</h3>
-                <p className="mt-1 text-[15px] text-muted">{usd(best.price)} · {best.id === "basic" ? "no guest seating listed" : `set up for up to ${best.guests}`}, adjustable</p>
-                <ul className="mt-5 space-y-2 text-[15px]">
-                  {best.items.slice(0, 7).map(it => <li key={it} className="flex gap-2.5"><Check className="mt-0.5 size-4 shrink-0 text-rose" aria-hidden />{it}</li>)}
+            <motion.article key={best.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.5, ease }} className="overflow-hidden rounded-[28px] bg-paper shadow-[0_30px_60px_-44px_rgba(31,42,46,.55)]">
+              <div className="grid md:grid-cols-2">
+                <div className="relative aspect-[556/331] bg-blush md:aspect-auto md:h-[300px] md:max-h-[331px]">
+                  <img src={best.img} alt={`A wedding from Anna's ${best.name} package`} width={PKG_W} height={PKG_H} loading="lazy" className="absolute inset-0 size-full object-cover" />
+                </div>
+                <div className="flex flex-col justify-center p-6 md:p-10">
+                  <p className="text-[14px] text-rose">{exact ? `Best fit for ${req.guests} guests` : `Closest package; Anna adjusts it for ${req.guests}`}</p>
+                  <h3 className="mt-1 font-display text-[2.6rem] leading-none">{best.name}</h3>
+                  <p className="mt-3 font-display text-[2rem] leading-none tnum">USD {best.price.toLocaleString("en-US")}</p>
+                  <p className="mt-2 text-[14px] text-muted">{best.id === "basic" ? "For the two of you" : `Set up for up to ${best.guests}`}, adjustable</p>
+                </div>
+              </div>
+              <div className="grid gap-6 border-t border-line p-6 md:p-8">
+                <ul className="grid gap-x-6 gap-y-2 text-[15px] sm:grid-cols-2">
+                  {best.items.slice(0, 8).map(it => <li key={it} className="flex gap-2.5"><Check className="mt-1 size-4 shrink-0 text-rose" aria-hidden />{it}</li>)}
+                  {best.items.length > 8 && <li className="text-muted"><a className="underline underline-offset-4 hover:text-rose" href={`packages.html#${best.id}`}>and {best.items.length - 8} more</a></li>}
                 </ul>
-                {best.items.length > 7 && <p className="mt-3 text-[14px] text-muted">and {best.items.length - 7} more on the packages page</p>}
+                <div className="flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-end">
+                  <label className="block sm:w-[15rem]"><span className="text-[14px] text-muted">{req.mode === "cruise" ? "Your day in port" : "Your wedding date"}</span>
+                    <input type="date" value={req.date} onChange={e => set({ date: e.target.value })} className="mt-1 block min-h-12 w-full rounded-xl border border-ink/15 bg-white px-3 text-[16px] outline-none focus:border-rose tnum" />
+                  </label>
+                  <button type="button" onClick={onRequest} className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-rose px-6 text-[16px] text-white transition hover:-translate-y-0.5 hover:bg-ink"><CalendarHeart className="size-4" aria-hidden /> Request this date</button>
+                </div>
               </div>
             </motion.article>
           </AnimatePresence>
-          <ul className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-            {list.map(p => (
-              <li key={p.id}><a href={`packages.html#${p.id}`} className={`group flex min-h-16 flex-col justify-center rounded-2xl border px-4 py-3 transition hover:-translate-y-0.5 ${p.id === best.id ? "border-rose bg-blush" : "border-line hover:border-ink"}`}>
-                <span className="font-display text-xl">{p.name}</span><span className="text-[13px] text-muted">{usd(p.price)}</span></a></li>
-            ))}
+          <ul className="mt-5 grid grid-cols-2 gap-2 lg:grid-cols-4" aria-label="All packages for this arrival">
+            {list.map(p => {
+              const ok = p.guests >= req.guests && feelOk(p, req.feel)
+              return (
+                <li key={p.id}><a href={`packages.html#${p.id}`} className={`flex min-h-16 flex-col justify-center rounded-2xl border px-4 py-3 transition hover:-translate-y-0.5 ${p.id === best.id ? "border-rose bg-paper" : ok ? "border-ink/15 bg-paper/60 hover:border-ink" : "border-transparent opacity-55 hover:opacity-100"}`}>
+                  <span className="font-display text-[1.3rem]">{p.name}</span><span className="text-[13px] text-muted tnum">USD {p.price.toLocaleString("en-US")} · up to {p.guests}</span></a></li>
+              )
+            })}
           </ul>
         </div>
       </div>
@@ -110,8 +133,8 @@ function Licence() {
   const [done, setDone] = useState<number[]>([])
   const pct = Math.round((done.length / LICENCE.length) * 100)
   return (
-    <section id="licence" className="scroll-mt-24 bg-blush" aria-labelledby="lic-title">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-12">
+    <section id="licence" className="scroll-mt-6 border-t border-line bg-paper" aria-labelledby="lic-title">
+      <div className="mx-auto grid max-w-[1320px] gap-12 px-5 py-24 md:px-12 md:py-32 lg:grid-cols-12">
         <Reveal className="lg:col-span-4">
           <Mark n="ii.">Marriage licence</Mark>
           <h2 id="lic-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] tracking-[-0.015em]">Your paperwork, ticked off.</h2>
@@ -146,18 +169,21 @@ const COUNTRIES = ["Australia", "Egypt", "Ethiopia", "North and South Africa", "
 
 function Anna() {
   return (
-    <section id="anna" className="mx-auto max-w-[1440px] scroll-mt-24 px-5 py-24 md:px-10 md:py-36" aria-labelledby="anna-title">
+    <section id="anna" className="mx-auto max-w-[1320px] scroll-mt-24 px-5 py-24 md:px-12 md:py-36" aria-labelledby="anna-title">
       <div className="grid gap-12 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-t-full bg-blush">
-            <img src={GALLERY[2]} alt="A wedding planned by Anna's Wedding Planning in Nassau" width={800} height={1000} loading="lazy" className="absolute inset-0 size-full object-cover transition duration-700 hover:scale-[1.03]" />
+          <div className="relative mx-auto aspect-[556/331] w-full max-w-[556px] overflow-hidden rounded-t-[240px] bg-blush">
+            <img src={IMG + "2015/11/COUPLE-CANADA_2-1.jpg"} alt="A beach ceremony in Nassau led by a minister, planned by Anna's Wedding Planning" width={556} height={331} loading="lazy" className="absolute inset-0 size-full object-cover" />
+          </div>
+          <div className="mx-auto mt-4 grid max-w-[556px] grid-cols-3 gap-3">
+            {GALLERY.slice(0, 3).map(src => <img key={src} src={src} alt="A wedding in Nassau planned by Anna" width={300} height={300} loading="lazy" className="aspect-square w-full max-w-[300px] rounded-[14px] object-cover" />)}
           </div>
         </Reveal>
         <Reveal delay={0.1} className="self-center lg:col-span-6 lg:col-start-7">
           <Mark n="iii.">About Anna</Mark>
-          <h2 id="anna-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] tracking-[-0.015em]">Two decades of weddings, one planner who answers.</h2>
+          <h2 id="anna-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] tracking-[-0.015em]">Since 1995, one planner who answers.</h2>
           <div className="mt-7 max-w-xl space-y-4 text-[18px] leading-relaxed text-muted">
-            <p>Annamae Fox has planned destination weddings in The Bahamas for more than twenty years, with a network of trusted professionals around her.</p>
+            <p>Annamae Fox has planned destination weddings in The Bahamas since 1995, with a network of trusted professionals around her.</p>
             <p>Her mission is simple: you enjoy the day without worry, and it feels like nobody else's. Experience, resourcefulness, time management and attention to detail are how she gets there.</p>
           </div>
           <p className="mt-10 text-[14px] text-muted">Couples have come to her from</p>
@@ -172,16 +198,14 @@ function Anna() {
 
 function Gallery() {
   return (
-    <section className="overflow-hidden pb-24 md:pb-36" aria-label="Weddings by Anna">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-6 md:gap-5">
-          {GALLERY.map((src, i) => (
-            <motion.div key={src} initial={{ clipPath: "inset(15% 0 15% 0)", opacity: 0 }} whileInView={{ clipPath: "inset(0% 0 0% 0)", opacity: 1 }} viewport={{ once: true, margin: "-8% 0px" }} transition={{ duration: 1.2, delay: (i % 3) * 0.08, ease: [0.77, 0, 0.175, 1] }} className={`group overflow-hidden rounded-[20px] bg-blush ${["md:col-span-2 md:row-span-2", "md:col-span-2", "md:col-span-2", "md:col-span-2", "md:col-span-2", "col-span-2 md:col-span-6"][i]}`}>
-              <img src={src} alt="A wedding in Nassau planned by Anna's Wedding Planning" width={800} height={600} loading="lazy" className={`size-full object-cover transition duration-700 group-hover:scale-[1.03] ${i === 0 ? "aspect-[3/4] md:aspect-auto" : i === 5 ? "aspect-[16/8] md:aspect-[16/5]" : "aspect-[4/3]"}`} />
-            </motion.div>
-          ))}
-        </div>
-      </div>
+    <section className="mx-auto max-w-[1320px] px-5 pb-20 md:px-12 md:pb-28" aria-label="Weddings by Anna">
+      <ul className="grid grid-cols-3 gap-3 md:grid-cols-6 md:gap-4">
+        {GALLERY.slice(3).concat(GALLERY.slice(0, 3)).map((src, i) => (
+          <motion.li key={src} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8% 0px" }} transition={{ duration: 0.9, delay: i * 0.05, ease }} className="overflow-hidden rounded-[16px] bg-blush">
+            <img src={src} alt="A wedding in Nassau planned by Anna's Wedding Planning" width={300} height={300} loading="lazy" className="aspect-square w-full max-w-[300px] object-cover" />
+          </motion.li>
+        ))}
+      </ul>
     </section>
   )
 }
@@ -189,7 +213,7 @@ function Gallery() {
 function Services() {
   return (
     <section className="bg-ink text-paper" aria-labelledby="svc-title">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-12">
+      <div className="mx-auto grid max-w-[1320px] gap-12 px-5 py-24 md:px-12 md:py-32 lg:grid-cols-12">
         <Reveal className="lg:col-span-4">
           <p className="flex items-baseline gap-3 text-[14px] text-paper/70"><span className="font-display text-[1.4rem] text-blush">iv.</span>What Anna does</p>
           <h2 id="svc-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98]">From first call to the last toast.</h2>
@@ -214,16 +238,25 @@ const KINDS = {
 } as const
 type K = keyof typeof KINDS
 
-function Plan() {
-  const [tab, setTab] = useState<K>("beach")
+function Plan({ req }: { req: Req }) {
+  const [tab, setTab] = useState<K>(req.mode === "cruise" ? "cruise" : "beach")
   const [vals, setVals] = useState<Record<string, string>>({})
+  const [copied, setCopied] = useState(false)
+  const pkg = PACKAGES.find(p => p.id === req.pkg)
+  useEffect(() => {
+    const k: K = req.mode === "cruise" ? "cruise" : "beach"
+    setTab(k)
+    setVals(v => ({ ...v, [`${k}:${k === "cruise" ? "Date in Nassau" : "Wedding date"}`]: req.date || v[`${k}:${k === "cruise" ? "Date in Nassau" : "Wedding date"}`] || "", [`${k}:Guests`]: String(req.guests), [`${k}:Package you like`]: pkg ? `${pkg.name}, USD ${pkg.price.toLocaleString("en-US")}` : "" }))
+  }, [req.mode, req.guests, req.date, req.pkg])
   const summary = KINDS[tab].fields.map(([f]) => vals[`${tab}:${f}`] ? `${f}: ${vals[`${tab}:${f}`]}` : null).filter(Boolean).join(" · ")
+  const line = `${KINDS[tab].label} · ${summary}`
+  const copy = async () => { try { await navigator.clipboard.writeText(line); setCopied(true); setTimeout(() => setCopied(false), 2200) } catch { /* clipboard blocked */ } }
   return (
-    <section id="plan" className="mx-auto grid max-w-[1440px] scroll-mt-24 gap-12 px-5 py-24 md:px-10 md:py-36 lg:grid-cols-12" aria-labelledby="plan-title">
+    <section id="plan" className="mx-auto grid max-w-[1320px] scroll-mt-6 gap-12 px-5 py-20 md:px-12 md:py-28 lg:grid-cols-12" aria-labelledby="plan-title">
       <Reveal className="lg:col-span-4">
-        <Mark n="v.">Check your wedding date</Mark>
-        <h2 id="plan-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] tracking-[-0.015em]">Have your details ready for Anna.</h2>
-        <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-muted">Choose your kind of wedding and fill in what you know. We put it in one line you can read out when you call, from The Bahamas or the US line.</p>
+        <Mark n="v.">Request your date</Mark>
+        <h2 id="plan-title" className="mt-5 font-display text-[clamp(2.2rem,3.8vw,3.6rem)] leading-[1.02]">Your request, ready for Anna.</h2>
+        <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-muted">What you chose in the finder is already filled in. Add what you know, then call, or copy it into Anna's contact form.</p>
       </Reveal>
       <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
         <Tabs value={tab} onValueChange={v => setTab(v as K)}>
@@ -235,7 +268,7 @@ function Plan() {
               <div className="grid gap-6 sm:grid-cols-2">
                 {KINDS[k].fields.map(([f, type]) => (
                   <label key={f} className="block"><span className="text-[14px] text-muted">{f}</span>
-                    <input type={type} value={vals[`${k}:${f}`] ?? ""} onChange={e => setVals(s => ({ ...s, [`${k}:${f}`]: e.target.value }))} className="mt-2 block min-h-12 w-full border-b border-ink/25 bg-transparent font-display text-xl outline-none transition focus:border-rose" />
+                    <input type={type} value={vals[`${k}:${f}`] ?? ""} onChange={e => setVals(s => ({ ...s, [`${k}:${f}`]: e.target.value }))} className="mt-2 block min-h-12 w-full border-b border-ink/25 bg-transparent font-display text-xl outline-none transition focus:border-rose tnum" />
                   </label>
                 ))}
               </div>
@@ -243,11 +276,14 @@ function Plan() {
           ))}
         </Tabs>
         <div className="mt-10 rounded-[28px] bg-ink p-7 text-paper md:p-9">
-          <p className="text-[15px] text-paper/80">{summary ? <>Read out: <span className="text-paper">{KINDS[tab].label} · {summary}</span></> : "Your details will appear here as one line."}</p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a href={TEL} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-rose px-6 text-white transition hover:-translate-y-0.5"><Phone className="size-4" aria-hidden /> Call Nassau {PHONE}</a>
-            <a href={US_TEL} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/25 px-6 transition hover:-translate-y-0.5 hover:border-paper">US line {US_PHONE}</a>
+          <p className="text-[13px] text-paper/60">Your request</p>
+          <p className="mt-2 font-display text-[1.35rem] leading-snug tnum">{summary ? line : "Your details will appear here as one line."}</p>
+          <div className="mt-6 flex flex-col flex-wrap gap-3 sm:flex-row">
+            <a href={TEL} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-rose px-6 text-white transition hover:-translate-y-0.5 tnum"><Phone className="size-4" aria-hidden /> Call Nassau {PHONE}</a>
+            <button type="button" onClick={copy} disabled={!summary} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/25 px-6 transition hover:-translate-y-0.5 hover:border-paper disabled:opacity-40"><Copy className="size-4" aria-hidden /> {copied ? "Copied" : "Copy request"}</button>
+            <a href={CONTACT_URL} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/25 px-6 transition hover:-translate-y-0.5 hover:border-paper">Anna's contact form <ArrowUpRight className="size-4" aria-hidden /></a>
           </div>
+          <p className="mt-5 text-[14px] text-paper/65 tnum">From the US {US_PHONE} or toll free {TOLL}.</p>
         </div>
       </Reveal>
     </section>
@@ -264,7 +300,7 @@ const FAQ = [
 function Questions() {
   return (
     <section className="border-t border-line" aria-labelledby="faq-title">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-12">
+      <div className="mx-auto grid max-w-[1320px] gap-12 px-5 py-24 md:px-12 md:py-32 lg:grid-cols-12">
         <Reveal className="lg:col-span-4"><Mark n="vi.">Questions</Mark>
           <h2 id="faq-title" className="mt-5 font-display text-[clamp(2.2rem,3.8vw,3.6rem)] leading-[0.98]">What couples ask first.</h2></Reveal>
         <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
@@ -282,4 +318,10 @@ function Questions() {
   )
 }
 
-mount(<Page current=""><Hero /><KeyInfo /><Finder /><Licence /><Anna /><Gallery /><Services /><Plan /><Questions /></Page>)
+function Home() {
+  const [req, setReq] = useState<Req>({ mode: "beach", guests: 6, feel: "simple", date: "", pkg: "classic" })
+  const onRequest = () => document.getElementById("plan")?.scrollIntoView({ behavior: "smooth" })
+  return <Page current=""><Hero /><Finder req={req} setReq={setReq} onRequest={onRequest} /><Licence /><Anna /><Gallery /><Services /><Plan req={req} /><Questions /></Page>
+}
+
+mount(<Home />)
