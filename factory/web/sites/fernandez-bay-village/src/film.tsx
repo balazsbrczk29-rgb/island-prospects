@@ -28,16 +28,13 @@ export function Film() {
     const top = el.getBoundingClientRect().top + scrollY
     window.scrollTo({ top: top + (i / (N - 1)) * (el.offsetHeight - innerHeight) + 1, behavior: reduce ? 'auto' : 'smooth' })
   }
-  useEffect(() => {
-    const el = ref.current; if (!el) return
-    const root = document.documentElement
-    const io = new IntersectionObserver(([e]) => { root.style.setProperty('--concept-offset', e.isIntersecting ? 'calc(var(--bar-bottom) + 4px)' : '0px') }, { rootMargin: '0px 0px -40% 0px' })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
+  const pinned = useRef(true)
+  const setOffset = (on: boolean) => { if (on === pinned.current) return; pinned.current = on; document.documentElement.style.setProperty('--concept-offset', on ? 'calc(var(--bar-bottom) + 4px)' : '0px') }
+  useEffect(() => { pinned.current = false; setOffset(true) }, [])
+  useMotionValueEvent(scrollYProgress, 'change', v => setOffset(v < 0.999))
   const f = FILM[k]
   return (
-    <section ref={ref} className="film" data-stage aria-label="A day at Fernandez Bay Village" style={{ height: `${N * 72}svh` }}>
+    <section ref={ref} className="film" data-stage aria-label="A day at Fernandez Bay Village" style={{ height: `${N * 75}svh` }}>
       <div className="film-pin">
         <header className="bar-top">
           <a className="name" href="./">Fernandez Bay Village</a>
@@ -58,13 +55,13 @@ export function Film() {
             <AnimatePresence mode="wait" initial={false}>
               <motion.div key={f.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.45, ease: [0.22, 0.61, 0.24, 1] }}>
                 {k > 0 && <p className="sub-k"><span className="num">{k}</span> {f.chapter}</p>}
-                <p className="sub-line">{k === 0 ? 'On a mile of white sand in Fernandez Bay, Cat Island. Five minutes from New Bight airport.' : f.line}</p>
+                <p className="sub-line">{k === 0 ? 'On a mile of white sand in Fernandez Bay, Cat Island. Five minutes from New Bight airport.' : f.line}{f.id === 'porch' && <> <a href="stay.html">See the cottages</a></>}</p>
               </motion.div>
             </AnimatePresence>
           </div>
           <div className="bar-acts">
             <a className="btn" href={BIZ.booking}>Check availability</a>
-            <a className="wa" href={`https://wa.me/${BIZ.wa}`}>WhatsApp<span className="wa-us"> us</span></a>
+            <a className="wa" href={`https://wa.me/${BIZ.wa}`}>WhatsApp<span className="wa-us">{'\u00a0'}us</span></a>
           </div>
         </div>
       </div>
