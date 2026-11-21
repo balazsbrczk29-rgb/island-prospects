@@ -1,3 +1,7 @@
+# Critic brief: follow factory/GUIDE.md section 4 (gate 1 purpose, then gate 2 craft). Give the critic the job spec, PREVIOUS and NEW screenshots and how the core tool behaves.
+
+The older material below is reference only; where it conflicts with GUIDE.md, the guide wins.
+
 # Independent critic brief (run by the orchestrator as a fresh general-purpose subagent per site)
 
 ## Mode 1: plan gate (the default, before the full build)

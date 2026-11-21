@@ -18,7 +18,7 @@ const audit = fs.existsSync(auditDir) ? Object.fromEntries(fs.readdirSync(auditD
 const size = r => ({ Small: 0, Medium: 1, Large: 2 })[r.size] ?? 1;   // easy (small) businesses first within a priority
 const prio = slug => ({ A: 0, B: 1, C: 2, D: 3 })[audit[slug]?.priority] ?? 1.5;   // unaudited sits between B and C
 const GEN = 2;   // generation 2 = rebuilt with the art-director pipeline; generation-1 'built' sites are pending again
-const needsWork = s => !s || (s.state === 'built' && (s.generation || 1) < GEN);
+const needsWork = s => !s || !s.jobspec_built;   // GUIDE.md: anything not yet built to an approved job spec
 if (mode === 'active') {   // number of live building claims (each worker session holds one); used to cap parallel workers
   const dir = path.join(root, 'factory/status');
   const n = fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')))
@@ -46,7 +46,9 @@ let rows;
 if (mode === 'pending') {
   const n = parseInt(process.argv[3] || '5', 10);
   const stale = ms => Date.now() - new Date(ms).getTime() > 1.5 * 3600 * 1000;   // a "building" claim older than 2.5h = crashed session
-  rows = all.filter(r => { const s = status(r.slug); return needsWork(s) || (s.state === 'building' && stale(s.claimed_at)); }).sort((a, b) => ((status(b.slug)?.reroll ? 1 : 0) - (status(a.slug)?.reroll ? 1 : 0)) || (prio(a.slug) - prio(b.slug)) || (size(a) - size(b))).slice(0, n); // rerolls first, then prospects.json priority order
+  const approved = slug => { try { return /^Status:\s*approved/i.test(fs.readFileSync(path.join(root, 'factory/jobspecs', slug + '.md'), 'utf8')); } catch { return false; } };
+  // GUIDE.md: only businesses with a job spec approved by Balazs are built; built-to-spec sites carry status.jobspec_built
+  rows = all.filter(r => { const s = status(r.slug); if (!approved(r.slug)) return false; if (s && s.state === 'building' && !stale(s.claimed_at)) return false; return !(s && s.jobspec_built); }).sort((a, b) => ((status(b.slug)?.reroll ? 1 : 0) - (status(a.slug)?.reroll ? 1 : 0)) || (prio(a.slug) - prio(b.slug)) || (size(a) - size(b))).slice(0, n); // rerolls first, then prospects.json priority order
   console.log(`PENDING (top ${n} by priority). For EACH: run "node factory/tools/batch.mjs claim <slug>" immediately before you start it, then build and publish it.`);
 } else {
   const b = mode.padStart(2, '0');

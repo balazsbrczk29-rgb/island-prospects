@@ -4,6 +4,9 @@ This repo produces **concept preview websites** for 100 Bahamian businesses (lis
 Each site is a sales asset: Balazs shows it to the owner to win a $500-$1,000+ rebuild contract.
 GitHub Pages serves the repo root, so `/<slug>/index.html` becomes `https://<owner>.github.io/<repo>/<slug>/`.
 
+## The authority (Nov 21)
+**`factory/GUIDE.md` decides how every site is built: purpose first (an approved job spec in `factory/jobspecs/<slug>.md`), the core tool as the hero, keep what worked, a side-by-side critic.** Where the skills, playbooks or archetype dealing disagree, GUIDE.md wins. Only approved specs are built.
+
 ## Your job in a session
 Work the shared queue (`node factory/tools/batch.mjs pending N`), one business at a time. **Immediately before starting each business, run `node factory/tools/batch.mjs claim <slug>`. If it prints SKIP, another session has it: move on.** The full unattended brief is `factory/PROMPT.md`.
 Read `.claude/skills/site-factory/SKILL.md` (order of work), `.claude/skills/site-playbooks/SKILL.md` plus your one playbook (the creative brief and tested immersive recipes), and `.claude/skills/art-director/SKILL.md` (design judgment and verification) before your first business. Nothing else needs reading up front.

@@ -1,5 +1,13 @@
 # Master prompt: Bahamas website concept factory, generation 2
 
+## FIRST: factory/GUIDE.md is the authority (Nov 21)
+Build only businesses whose job spec (`factory/jobspecs/<slug>.md`) says `Status: approved`; `batch.mjs pending` lists only those.
+Follow GUIDE.md sections 2 to 4 instead of the plan gate below:
+- Build to the spec: the core tool is the hero, and everything under "Keep" is kept and elevated.
+- Screenshot the previous version before you change anything, then run the side-by-side critic (gate 1 purpose, gate 2 craft).
+- Publish only if gate 1 passes. On publish, set `"jobspec_built": true` in the status.
+- factory/PAUSE stops all claims.
+
 ## Parallel workers (the scheduled "Site worker 1/2/3/4" tasks run THIS section)
 Each scheduled worker is its own chat. It builds one business at a time, start to finish, and goes straight to the next with no gap, until the queue is empty or the account usage limit stops it. Four workers fire on staggered schedules. A worker that finds 4 or more live claims exits immediately, so at most four build at once and a crashed or limited worker is replaced at the next firing.
 1. Run `bash factory/tools/setup.sh` and `git pull --rebase origin main`. If `node factory/tools/batch.mjs active` prints 4 or more, end the run at once with no notification.
