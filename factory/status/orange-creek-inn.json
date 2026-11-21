@@ -4,7 +4,69 @@
  "name": "Orange Creek Inn",
  "batch": "12",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
- "claimed_at": "2026-11-21T19:55:43.243Z"
+ "claimed_at": "2026-11-21T19:55:43.243Z",
+ "jobspec_built": true,
+ "pages": [
+  "index.html",
+  "getting-here.html"
+ ],
+ "primary_cta": "Check availability (BahamaGo), with email-these-dates as the alternative",
+ "brand_truth": "A small family-run inn at the top of Cat Island where the only thing between your door and the beach is the road, with its own grocery store, laundry and cars.",
+ "buyer": "Couples, anglers and divers planning a quiet Cat Island week on a phone, from the US (often Florida) or Nassau, comparing the Out Island specials.",
+ "direction": {
+  "archetype": "job spec: dates bar as hero",
+  "lane": "sea glass ground, bougainvillea accent",
+  "type": "Newsreader (opsz) + Instrument Sans",
+  "why": "Spec: warm, family-run, sunny; the beach and the studio lead; no stationery metaphor."
+ },
+ "tier_visual": "standard",
+ "concept_type": "booking handoff (BahamaGo) + dates enquiry",
+ "images": [
+  {
+   "src": "orangecreekinn.com/wp-content/uploads (13 own photos, 900x520, room 1046x786, creek 569x337)",
+   "source": "own",
+   "credit": "Orange Creek Inn"
+  },
+  {
+   "src": "Natural Earth 1:10m land via world-atlas npm, projected to inline SVG",
+   "source": "public domain map data",
+   "credit": "Natural Earth"
+  }
+ ],
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion_clarity": 5,
+  "phone": 4
+ },
+ "current_site_findings": [
+  "One-page WordPress of #!/ links",
+  "Welcome headline; beach across the road buried in FAQ 20",
+  "Specials in a slider",
+  "Flight, taxi and car prices at the bottom of 27 FAQs",
+  "Photos as small square crops"
+ ],
+ "pitch_line": "Guests pick their dates on the first screen and instantly see which Out Island offers fit, which flight lands that day and how they get to your door, then book on your BahamaGo page.",
+ "assumptions": [
+  "Offers, blackout dates and flight times as published on orangecreekinn.com (Nov 2026); they change",
+  "Western Air days not published; shown as twice a day",
+  "Studio count, bed types and rates not published: Rates on request",
+  "Orange Creek coordinates from OpenStreetMap node 9569242499"
+ ],
+ "sources": [
+  "https://www.orangecreekinn.com/",
+  "https://www.bahamago.com/hotels/22-Orange-Creek-Inn?ref=oipb",
+  "https://mapcarta.com/19489148"
+ ],
+ "notes": "Jobspec rebuild Nov 21 (site worker). Previous letter concept replaced per approved spec; kept and elevated: BahamaGo link, six specials with booking/travel/blackout dates, the specials matcher (now in the hero, shared state with the map and offers list, with a reason per miss and a via-Nassau note for Florida), flight and airport facts, phone/email, their gallery (13 photos, strip of 8 with captions). Core tool: hero dates bar (arrival, nights, guests, origin) -> lit offers, arrival-day flight, last 3.5 miles, route inset on the hero photo that redraws per origin. Real map from Natural Earth (no tiles). Sandbox blind to outside images: screenshots used crops of the Lovable gallery 3eb88dcd routed in. Critic (fresh subagent, side by side with before shots): pass 0 wow 3 -> two fix passes -> gate 1 yes x3, gate 2 wow 4, photo 4, type 4, composition 4, conversion 5, phone 4. qa 0 blockers (2 warnings = shared concept tag button), interact 0 dead 0 js errors, distinct: distinct (ground tinted to sea glass after cream warning).",
+ "built_at": "2026-11-21T20:20:16.743Z"
 }

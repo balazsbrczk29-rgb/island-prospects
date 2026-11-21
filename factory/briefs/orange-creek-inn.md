@@ -65,3 +65,6 @@ Specials and flight schedules change; Western Air days not listed; studio count 
 
 ## Build note (2026-11-21)
 Built as storyboarded, with one change: every print stays at 548 px or less (the aerial is not shown at 880), laid down the right-hand margin of the sheet, because the sources are 900 px wide.
+
+## Jobspec rebuild (2026-11-21)
+Rebuilt to the approved job spec (factory/jobspecs/orange-creek-inn.md): the letter metaphor is gone. Screen 1 is the road-and-beach photo with a live route inset and the dates bar (arrival, nights, guests, flying from, Check availability on BahamaGo); under it the offers that fit light up, with the arrival-day flight and the last 3.5 miles. Then the studio, the island around you (aerial plus a drag strip of 8 photos), getting here (Natural Earth map, origin switch, costs), all six offers checked against the dates, and contact. Travel guide page keeps day picker, both routes and guest questions. Fonts Newsreader + Instrument Sans; sea glass ground, bougainvillea accent.
