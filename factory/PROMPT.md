@@ -1,22 +1,25 @@
 # Master prompt: Bahamas website concept factory, generation 2
 
 ## Continuous orchestrator (the scheduled "Site factory worker" runs THIS section)
-Goal: constant building with no gaps, highest quality, easy businesses first, same kind of site as each business has.
-Every run is an orchestrator session. It builds through builder subagents and judges through critic subagents.
+Goal: a mass remodel of nearly every site in the repo to the generation-2 standard. Building is constant with no gaps. Easy businesses come first, and every site stays the same kind of site the business already has. Quality is **guaranteed up front by a plan gate, not repaired at the end.**
+Every run is an orchestrator session: builders do the work, and critics judge it.
 1. Run `bash factory/tools/setup.sh` and `git pull --rebase origin main`. Note the start time (`date +%s`).
-2. **Review first.** For each slug from `node factory/tools/batch.mjs review`, in order:
-   - Generate screenshots of the live build yourself. Build it with `node factory/tools/build-site.mjs <slug>` if needed. Capture desktop 1440x900 and phone 390x844, hero plus stitched full page. Fulfil the business's Lovable image requests from crops of the `mcp__Lovable__get_project` gallery screenshot where possible.
-   - Spawn a fresh general-purpose critic with `factory/CRITIC.md` and the paths.
-   - All scores 4 or more: set state "built" with the scores. Below 4: apply up to two fix passes yourself, or through a builder subagent, re-scoring each time. After that, leave "needs-review" with the reason.
-   - Set `review_claimed_at` in its status before starting, so parallel runs skip it.
-3. **Build loop.** Keep exactly TWO builder subagents running at all times. Use `Agent` with `isolation: "worktree"` and `run_in_background: true`, and keep the briefs short:
-   - "Read factory/BUILDER.md and follow it exactly. Business: <slug>. Playbook: <type>. Direction note: <one paragraph: what kind of site they have now (audit), the buyer, the tier (standard unless 3D truly explains the product), and which sites in this repo it must not resemble (direct competitors)>."
-   - Take businesses from `node factory/tools/batch.mjs pending 6`. That order is rerolls, then audit priority, then small before large.
-   - When a builder reports, immediately start the next builder, then run the independent critic on the finished one (step 2 procedure). Send fix passes back to the same builder with SendMessage.
+2. **Waiting sites first.** For each slug from `node factory/tools/batch.mjs review`:
+   - Set `review_claimed_at` in its status.
+   - Capture desktop and phone screenshots of its build (hero plus stitched page, with photo crops routed in).
+   - Run ONE critic in `factory/CRITIC.md` mode 2.
+   - All lines 4 or higher: set state to "built". Otherwise apply one fix pass, either yourself or through a builder subagent, then re-score once. Still below 4: leave "needs-review" with the reason.
+   - Push to main.
+3. **Build loop with a plan gate.** Keep THREE builder subagents running at all times (`Agent`, `isolation: "worktree"`, `run_in_background: true`).
+   - Brief each builder: "Read factory/BUILDER.md and follow it exactly. Business: <slug>. Playbook: <type>. Direction note: <one paragraph: what kind of site they have now (audit), the buyer, the tier (standard unless 3D truly explains the product), and which sites in this repo it must not resemble>."
+   - Take businesses from `node factory/tools/batch.mjs pending 6`.
+   - When a builder reports its **plan** (phase 1): run a fresh critic in CRITIC.md mode 1 on the plan and the first-screen screenshots. Send the verdict back to the same builder with SendMessage: "approved" plus the predicted scores, or "revise: ..." (one revision, then approve or skip).
+   - When a builder reports **done** (phase 2): it has already published as "built". Start the next builder immediately.
+   - A full-site critic runs only if QA reported problems.
    - Never leave a slot idle while the queue has work.
-4. **Time box.** Start no new builder after 40 minutes. Finish critics and fix passes for the builders already running, then end with a short table (slug, state, scores, URL). The hourly schedule starts the next run, so building never stops.
-5. **Usage limit.** If you hit an account usage limit (HTTP 429), stop cleanly. Everything published is saved, and interrupted builders' claims expire after 2.5 h. The next run resumes, and the queue picks up stale claims.
-6. **Skip.** Huge webshops (audit priority C with large catalogues), enterprises and government (D), and businesses whose audit shows a strong modern site come last, or are skipped with a reason. Focus first on businesses with no site, a lost domain, or a weak site.
+4. **Time box.** Start no new builder after 40 minutes. Finish the plan gates and builds already running, then end with a short table (slug, state, scores, URL). The hourly schedule starts the next run.
+5. **Usage limit.** On an account usage limit (HTTP 429), stop cleanly. Published work is saved. Unfinished claims expire after 2.5 h and return to the queue.
+6. **Skip.** Huge webshops (audit priority C with large catalogues), enterprises and government (D), and businesses whose audit shows a strong modern site come last, or are skipped with a reason. Businesses with no site, a lost domain or a weak site come first.
 
 
 Paste everything below the line into a Claude Code cloud session on **balazsbrczk29-rgb/island-prospects**,

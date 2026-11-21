@@ -36,13 +36,29 @@ Real-time 3D is the premium tier. Use it only if it truly explains this business
 - Speed: run distinct.mjs once at the end with a 10 minute timeout; do not chain shell commands (the worktree guard refuses them; use script files).
 - Same kind of site as they have now (webshop stays a shop, informative stays informative, a landing page stays one page). Conversion first: the route to enquire, book or buy is obvious on every screen.
 
-## Steps
+## Steps (two phases: the design is approved BEFORE the full build)
+**Phase 1: plan and hero (then stop and report)**
 1. `node factory/tools/batch.mjs claim <slug>`. If it prints SKIP, stop and report.
-2. Audit, then research gaps and photos (at most about 8 calls).
-3. Write the big idea in one sentence in the brief. Run `direction.mjs <slug> --options`, then `--set`. Fit comes first, and the direction must differ from direct competitors. Storyboard the page screen by screen in the brief.
-4. Rebuild: `rm -rf factory/web/sites/<slug>/src`, then write new. Build the hero first. Screenshot desktop 1440x900 and phone 390x844 with real photo crops, and iterate up to 3 times. Then build the rest with `node factory/tools/build-site.mjs <slug>`.
-5. Verify with `qa.mjs`, `interact.mjs` and `distinct.mjs`, then the checklist pass.
-6. Write the status JSON (site-factory step 8, plus `"tier_visual"`) with state "needs-review" and the note "awaiting independent critic". Then publish to main explicitly: commit only this business's paths (read `factory/tools/publish.sh` for which), then `git pull --rebase origin main && git push origin HEAD:main`, retrying on conflicts.
+2. Audit, then research gaps and photos (at most about 8 calls). See every photo you will use (Lovable gallery screenshot).
+3. In `factory/briefs/<slug>.md`, write the **design plan**:
+   - the big idea in one sentence;
+   - the direction (`direction.mjs --options`, then `--set`) and why;
+   - fonts;
+   - the photo set, with source sizes, so no photo is shown larger than its source;
+   - the storyboard: one line per screen, plus the first 3 phone screens;
+   - the conversion path;
+   - the tier;
+   - how it differs from competitors in this repo.
+4. Build ONLY the header and first screen to finished quality. Screenshot it at desktop 1440x900 and phone 390x844 with real photo crops, under /tmp/shots/<slug>/plan-*.png.
+5. **Report the plan.** Send the brief path, the two screenshot paths and a 150-word summary. Then wait for the orchestrator's verdict. It replies "approved" or "revise: ...". Revise once if asked.
+
+**Phase 2: build to the approved plan (only after "approved")**
+6. Build the rest exactly as the approved storyboard. No new ideas mid-build.
+7. Verify:
+   - `qa.mjs` and `interact.mjs`, then `distinct.mjs` once with a 10 minute timeout;
+   - the craft checklist A and B, item by item.
+   Fix every blocker. Then take a stitched desktop and phone capture and look at every screen yourself against the storyboard.
+8. Write the status JSON (site-factory step 8, plus `"tier_visual"` and `"plan_gate": {scores}` from the verdict). Use state "built". Then publish to main: commit only this business's paths, `git pull --rebase origin main && git push origin HEAD:main`, retrying on conflicts. The site's URL then serves the new version.
 
 ## Report back (under 250 words)
 - Big idea, direction and fonts.
