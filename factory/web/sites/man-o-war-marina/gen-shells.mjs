@@ -52,7 +52,7 @@ for (const p of pages) {
 <link rel="canonical" href="${url}">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(p.title)}"><meta property="og:description" content="${esc(p.desc)}"><meta property="og:url" content="${url}"><meta property="og:image" content="${og}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#f4efe4">
+<meta name="theme-color" content="#edf2ee">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://static.wixstatic.com">
 <link rel="stylesheet" href="../assets/concept.css">

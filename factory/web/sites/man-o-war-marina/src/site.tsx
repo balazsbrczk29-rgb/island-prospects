@@ -47,7 +47,7 @@ export function Masthead({ current, home }: { current?: string; home?: boolean }
         <nav className="mast-nav" aria-label="Main">
           {NAV.filter(n => n.label !== 'Services' && n.label !== 'Request a slip').map(n => <a key={n.href} href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a>)}
         </nav>
-        <button className="contents-btn" type="button" aria-expanded={open} aria-controls="toc" onClick={() => setOpen(true)}>Contents</button>
+        <button className="contents-btn" type="button" aria-haspopup="dialog" aria-expanded={open} aria-controls="toc" onClick={() => setOpen(true)}>Contents</button>
       </div>
       {open && (
         <div className="toc" id="toc" role="dialog" aria-modal="true" aria-label="Contents">
@@ -60,6 +60,54 @@ export function Masthead({ current, home }: { current?: string; home?: boolean }
         </div>
       )}
     </header>
+  )
+}
+
+export function Colophon() {
+  return (
+    <footer className="colophon" id="contact" data-colophon>
+      <div className="wrap colo-grid">
+        <div>
+          <p className="colo-big">Call ahead, or raise the dock on channel 16 as you come in.</p>
+          <a className="btn btn-light" href="index.html#request">Request a slip</a>
+        </div>
+        <dl className="colo-list">
+          <div><dt>Office</dt><dd className="tab"><a className="lnk" href={`tel:${BIZ.tel}`}>{BIZ.phone}</a></dd></div>
+          <div><dt>Email</dt><dd><a className="lnk" href={`mailto:${BIZ.email}`}>{BIZ.email}</a></dd></div>
+          <div><dt>Radio</dt><dd>VHF channel 16</dd></div>
+          <div><dt>Hours</dt><dd className="tab">Monday to Saturday, 8 to 12 and 1 to 4</dd></div>
+          <div><dt>Dock N&rsquo; Dine</dt><dd className="tab"><a className="lnk" href={`tel:${BIZ.restaurantTel}`}>{BIZ.restaurantPhone}</a></dd></div>
+          <div><dt>Where</dt><dd>Man&#8209;O&#8209;War Cay, Abaco, Bahamas</dd></div>
+        </dl>
+      </div>
+      <div className="wrap colo-foot">
+        <span>Man&#8209;O&#8209;War Marina, full service since 1976.</span>
+        <span><a className="lnk" href={BIZ.rates} target="_blank" rel="noopener">Dockage rates</a> <a className="lnk" href={BIZ.instagram} target="_blank" rel="noopener">Instagram</a> <a className="lnk" href={BIZ.facebook} target="_blank" rel="noopener">Facebook</a></span>
+        <span>Photographs: Man-O-War Marina.</span>
+      </div>
+    </footer>
+  )
+}
+
+export function MobileStrip() {
+  useEffect(() => {
+    const root = document.documentElement
+    const hero = document.querySelector('[data-hero], .page-head')
+    const colo = document.querySelector('[data-colophon]')
+    const seen = new Map<Element, boolean>()
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => seen.set(e.target, e.isIntersecting))
+      const show = ![...seen.values()].some(Boolean)
+      root.classList.toggle('strip-on', show)
+    }, { threshold: 0 })
+    if (hero) io.observe(hero); if (colo) io.observe(colo)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <nav className="strip" aria-label="Request a slip or call">
+      <a href="index.html#request">Request a slip</a>
+      <a className="tab" href={`tel:${BIZ.tel}`}>Call the office</a>
+    </nav>
   )
 }
 
