@@ -1,123 +1,73 @@
 import { useState } from "react"
-import { motion, AnimatePresence } from "motion/react"
-import { Phone, ArrowRight } from "lucide-react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Page, mount, ease, wipe } from "./site"
-import { KINDS, PACKAGES, usd, PHONE, TEL, type KindId } from "./data"
-
-const reduce = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+import { motion } from "motion/react"
+import { Check, Phone } from "lucide-react"
+import { Page, mount, Reveal, Mark, ease, usd, PHONE, TEL } from "./site"
+import { PACKAGES, OTHER } from "./data"
 
 function Hero() {
   return (
-    <section data-index="hero" aria-labelledby="pk-title" className="wrap pt-[clamp(40px,9vh,112px)] pb-[clamp(56px,8vw,112px)]">
-      <h1 id="pk-title" className="display max-w-[14ch] text-[clamp(3.25rem,7vw,7.5rem)] leading-[0.92] tracking-[-0.045em]">
-        {["Fifteen ways", "to say yes", "in Nassau."].map((l, i) => (
-          <span key={l} className="block overflow-hidden pb-[0.07em]"><motion.span className="block" initial={reduce ? false : { y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.1 + i * 0.09, duration: 1.1, ease: wipe }}>{l}</motion.span></span>
+    <section className="mx-auto max-w-[1440px] px-5 pt-16 pb-16 md:px-10 md:pt-24" aria-labelledby="pk-title">
+      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[14px] text-muted">Packages, Anna's Wedding Planning, Nassau</motion.p>
+      <h1 id="pk-title" className="mt-6 max-w-[15ch] font-display text-[clamp(3rem,7vw,7.2rem)] leading-[0.92] tracking-[-0.02em]">
+        {["Seven ways to say", "yes on the beach."].map((l, i) => (
+          <span key={l} className="block overflow-hidden pb-[0.08em]"><motion.span className="block" initial={{ y: "108%" }} animate={{ y: 0 }} transition={{ delay: 0.15 + i * 0.1, duration: 1.2, ease: [0.77, 0, 0.175, 1] }}>{l}</motion.span></span>
         ))}
       </h1>
-      <p className="mt-9 max-w-xl text-lg leading-relaxed text-muted">Published prices in US dollars, from USD 875. Every package can be adjusted to your number of guests and to your wishes; Anna confirms the details when you call.</p>
+      <p className="mt-8 max-w-xl text-[18px] leading-relaxed text-muted">Published prices in US dollars. Every package can be adjusted to your number of guests and customised to your wishes.</p>
     </section>
   )
 }
 
-function Detailed({ kind }: { kind: "beach" | "cruise" }) {
-  const k = KINDS.find(x => x.id === kind)!
-  const list = PACKAGES.filter(p => p.kind === kind).sort((a, b) => a.price - b.price)
+function Group({ group, title, n }: { group: "beach" | "cruise"; title: string; n: string }) {
+  const list = PACKAGES.filter(p => p.group === group).sort((a, b) => a.price - b.price)
   const [sel, setSel] = useState(list[0].id)
   const p = list.find(x => x.id === sel)!
   return (
-    <section id={kind} data-index={kind} aria-labelledby={`h-${kind}`} className="scroll-mt-12 border-t border-line">
-      <div className="wrap grid gap-x-[clamp(32px,4vw,72px)] gap-y-12 py-[clamp(80px,10vw,144px)] lg:grid-cols-[minmax(0,60fr)_minmax(0,40fr)]">
-        <div>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div key={p.id} className="img-slot aspect-[4/3] overflow-hidden lg:aspect-[4/5]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease }}>
-              <img src={p.img} alt={`${p.name} package, a wedding planned by Anna's in Nassau`} referrerPolicy="no-referrer" width={1000} height={1200} loading="lazy" />
-            </motion.div>
-          </AnimatePresence>
-        </div>
-        <div>
-          <h2 id={`h-${kind}`} className="display text-[clamp(2.6rem,4vw,4rem)] leading-[0.98] tracking-[-0.04em]">{k.name}</h2>
-          <p className="mt-3 text-base text-muted">{kind === "beach" ? "For couples staying on the island." : "For couples arriving by cruise ship for the day."}</p>
-          <div role="tablist" aria-label={`${k.name} packages`} className="mt-8 border-t border-ink/20">
+    <section className={`${group === "cruise" ? "bg-blush" : ""}`} aria-labelledby={`g-${group}`}>
+      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <Mark n={n}>{group === "beach" ? "Staying on island" : "Arriving by cruise ship"}</Mark>
+          <h2 id={`g-${group}`} className="mt-5 font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-[0.98]">{title}</h2>
+          <ul className="mt-8 border-t border-ink/15" role="tablist">
             {list.map(x => (
-              <button key={x.id} role="tab" aria-selected={sel === x.id} onClick={() => setSel(x.id)} className="group grid min-h-16 w-full grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4 border-b border-line py-4 text-left">
-                <span className={`display text-[1.75rem] tracking-[-0.03em] transition-colors ${sel === x.id ? "text-channel" : "group-hover:text-channel"}`}>{x.name}</span>
-                <span className={`display num text-[1.75rem] tracking-[-0.02em] ${sel === x.id ? "text-channel" : ""}`}>{usd(x.price)}</span>
-              </button>
-            ))}
-          </div>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div key={p.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
-              <p className="display mt-10 text-lg italic text-muted">The {p.name} package, {p.guests === 2 ? "for the two of you" : `set up for up to ${p.guests} guests`}</p>
-              <ul className="incl mt-4 text-[0.9375rem] leading-snug">{p.items!.map(it => <li key={it}>{it}</li>)}</ul>
-              <a href={TEL} className="mt-8 inline-flex min-h-12 items-center gap-2.5 rounded-full bg-channel px-6 font-medium text-ground transition-colors hover:bg-ink"><Phone className="size-4" strokeWidth={1.5} aria-hidden /> Ask Anna about {p.name}</a>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function PriceOnly({ kind, flip }: { kind: KindId; flip?: boolean }) {
-  const k = KINDS.find(x => x.id === kind)!
-  const list = PACKAGES.filter(p => p.kind === kind)
-  return (
-    <section id={kind} data-index={kind} aria-labelledby={`h-${kind}`} className="scroll-mt-12 border-t border-line">
-      <div className={`wrap grid items-end gap-x-[clamp(32px,4vw,72px)] gap-y-10 py-[clamp(72px,9vw,128px)] ${flip ? "lg:grid-cols-[minmax(0,40fr)_minmax(0,60fr)] lg:[&>*:first-child]:order-2" : "lg:grid-cols-[minmax(0,60fr)_minmax(0,40fr)]"}`}>
-        <div className="img-slot aspect-[4/3] overflow-hidden lg:aspect-[6/5]"><img src={k.img} alt={k.alt} referrerPolicy="no-referrer" width={1200} height={1000} loading="lazy" style={{ objectPosition: k.pos }} /></div>
-        <div>
-          <h2 id={`h-${kind}`} className="display text-[clamp(2.6rem,4vw,4rem)] leading-[0.98] tracking-[-0.04em]">{k.name}</h2>
-          <ul className="mt-8 border-t border-ink/20">
-            {list.map(p => (
-              <li key={p.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4 border-b border-line py-4">
-                <span className="display text-[1.7rem] tracking-[-0.03em]">{p.name}</span>
-                <span className="display num text-[1.7rem] tracking-[-0.02em]">{usd(p.price)}</span>
+              <li key={x.id} id={x.id} className="scroll-mt-28 border-b border-ink/15">
+                <button type="button" role="tab" aria-selected={sel === x.id} onClick={() => setSel(x.id)} className="group flex min-h-14 w-full items-baseline justify-between gap-4 py-4 text-left">
+                  <span className={`font-display text-2xl transition group-hover:translate-x-1 ${sel === x.id ? "text-rose" : ""}`}>{x.name}</span>
+                  <span className="text-[15px] text-muted tabular-nums">{usd(x.price)}</span>
+                </button>
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-sm text-muted">Prices as listed on Anna's booking form. Inclusions on request.</p>
-          <a href={TEL} className="mt-6 inline-flex min-h-11 items-center gap-2 border-b border-ink/30 text-base transition-colors hover:border-channel hover:text-channel"><Phone className="size-4" strokeWidth={1.5} aria-hidden /> Call <span className="num">{PHONE}</span></a>
         </div>
+        <motion.article key={p.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }} className="grid overflow-hidden rounded-[28px] bg-white lg:col-span-7 lg:col-start-6 md:grid-cols-[1fr_1.2fr]">
+          <div className="relative min-h-[280px] bg-blush"><img src={p.img} alt={`${p.name} package, a wedding by Anna's Wedding Planning`} width={600} height={700} loading="lazy" className="absolute inset-0 size-full object-cover" /></div>
+          <div className="p-7 md:p-9">
+            <p className="font-display text-5xl">{usd(p.price)}</p>
+            <p className="mt-1 text-[15px] text-muted">{p.name} package{p.id === "basic" ? "" : `, set up for up to ${p.guests}`}</p>
+            <ul className="mt-6 space-y-2.5 text-[15px]">{p.items.map(it => <li key={it} className="flex gap-2.5"><Check className="mt-0.5 size-4 shrink-0 text-rose" aria-hidden />{it}</li>)}</ul>
+            <a href={TEL} className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-rose px-6 text-white transition hover:-translate-y-0.5 hover:bg-ink"><Phone className="size-4" aria-hidden /> Ask Anna about {p.name}</a>
+          </div>
+        </motion.article>
       </div>
     </section>
   )
 }
 
-const FAQ = [
-  ["Can we marry on a cruise ship day in Nassau?", "Yes. Anna's cruise packages are built for it. The licence needs a letter from the ship's purser confirming the ship has been in Bahamian waters for 24 hours."],
-  ["How long must we be in The Bahamas before applying for the licence?", "Both of you must be in The Bahamas, and have been for 24 hours, before the date you apply."],
-  ["What does a package cost?", "Published packages start at USD 950 for the Basic beach package, and vow renewals at USD 875. Cruise packages start at USD 3,495 for 25 guests. Every package can be adjusted to your guest count and wishes."],
-  ["What is the marriage licence fee?", "The licence fee is $100. Anna prepares your documents and schedules the Registrar's appointment."],
-]
-
-function Questions() {
+function More() {
   return (
-    <section aria-labelledby="faq-title" className="border-t border-line">
-      <div className="wrap grid gap-x-[clamp(32px,4vw,72px)] gap-y-10 py-[clamp(72px,9vw,128px)] xl:grid-cols-[minmax(0,40fr)_minmax(0,60fr)]">
-        <h2 id="faq-title" className="display text-[clamp(2.2rem,3.2vw,3.2rem)] leading-[1] tracking-[-0.04em]">What couples ask first.</h2>
-        <Accordion type="single" collapsible defaultValue="q0" className="border-t border-line">
-          {FAQ.map(([q, a], i) => (
-            <AccordionItem key={q} value={`q${i}`} className="border-line">
-              <AccordionTrigger className="min-h-16 py-5 text-left font-[family-name:var(--font-display)] text-[1.35rem] font-normal leading-snug tracking-[-0.02em] hover:no-underline">{q}</AccordionTrigger>
-              <AccordionContent className="max-w-[38rem] pb-6 text-base leading-relaxed text-muted">{a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
+    <section id="more" className="mx-auto max-w-[1440px] scroll-mt-24 px-5 py-24 md:px-10" aria-labelledby="more-title">
+      <Reveal><Mark n="iii.">Also from Anna</Mark><h2 id="more-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-[0.98]">For blended families, grand days and anniversaries.</h2></Reveal>
+      <ul className="mt-12 border-t border-line">
+        {OTHER.map(o => (
+          <li key={o.name} className="group flex flex-wrap items-baseline justify-between gap-4 border-b border-line py-7">
+            <span className="font-display text-[clamp(1.6rem,2.6vw,2.4rem)] transition group-hover:translate-x-1">{o.name}</span>
+            <span className="text-muted">{o.note}</span>
+          </li>
+        ))}
+      </ul>
+      <a href={TEL} className="mt-10 inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 text-paper transition hover:-translate-y-0.5 hover:bg-rose"><Phone className="size-4" aria-hidden /> Call {PHONE}</a>
     </section>
   )
 }
 
-function Close() {
-  return (
-    <section aria-label="Next step" className="wrap border-t border-line py-[clamp(72px,9vw,128px)]">
-      <a href="index.html#date" className="group inline-flex min-h-11 items-baseline gap-4">
-        <span className="display text-[clamp(2.4rem,4.4vw,4.4rem)] leading-none tracking-[-0.045em] transition-colors group-hover:text-channel">Request your wedding date</span>
-        <ArrowRight className="size-6 transition-transform group-hover:translate-x-1" strokeWidth={1.25} aria-hidden />
-      </a>
-    </section>
-  )
-}
-
-mount(<Page><Hero /><Detailed kind="beach" /><Detailed kind="cruise" /><PriceOnly kind="cultural" flip /><PriceOnly kind="deluxe" /><PriceOnly kind="renewal" flip /><Questions /><Close /></Page>)
+mount(<Page current="Packages"><Hero /><Group group="beach" n="i." title="Beach packages" /><Group group="cruise" n="ii." title="Cruise packages" /><More /></Page>)

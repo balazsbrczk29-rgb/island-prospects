@@ -1,28 +1,28 @@
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 import { createRoot } from "react-dom/client"
 import Lenis from "lenis"
-import { motion, AnimatePresence } from "motion/react"
-import { Phone } from "lucide-react"
-import { KINDS, usd, PHONE, TEL, US_PHONE, US_TEL, type KindId } from "./data"
+import { motion, useScroll, useSpring } from "motion/react"
+import { Menu, Phone } from "lucide-react"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import "./styles.css"
 
-export const ease = [0.22, 1, 0.36, 1] as const
-export const wipe = [0.77, 0, 0.175, 1] as const
-export const PICK_EVENT = "anna:pick"
+export const PHONE = "(242) 324-2559"
+export const TEL = "tel:+12423242559"
+export const US_PHONE = "(954) 246-3108"
+export const US_TEL = "tel:+19542463108"
+export const ease = [0.16, 1, 0.3, 1] as const
 
-/* Shared state of the index system.
-   heroKind: the photograph shown in the hero (hover in the index).
-   mode: beach or cruise in the package finder.
-   section: which [data-index] section is in view (set by an IntersectionObserver, discrete changes only). */
-type Ctx = { heroKind: KindId; setHeroKind: (k: KindId) => void; mode: "beach" | "cruise"; setMode: (m: "beach" | "cruise") => void; section: string; go: (target: string) => void }
-const IndexCtx = createContext<Ctx>({ heroKind: "beach", setHeroKind: () => {}, mode: "beach", setMode: () => {}, section: "hero", go: () => {} })
-export const useIndex = () => useContext(IndexCtx)
+const NAV = [
+  { href: "packages.html", label: "Packages" },
+  { href: "index.html#licence", label: "Marriage licence" },
+  { href: "index.html#anna", label: "About Anna" },
+  { href: "index.html#plan", label: "Check your date" },
+]
 
 function useLenis() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    if (window.matchMedia("(pointer: coarse)").matches) return // native touch scrolling on phones
-    const lenis = new Lenis({ duration: 1.1, smoothWheel: true })
+    const lenis = new Lenis({ duration: 1.15, smoothWheel: true })
     let id = 0
     const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
     id = requestAnimationFrame(raf)
@@ -30,210 +30,98 @@ function useLenis() {
   }, [])
 }
 
-function useSection(setSection: (s: string) => void) {
-  useEffect(() => {
-    const els = [...document.querySelectorAll<HTMLElement>("[data-index]")]
-    if (!els.length) return
-    const io = new IntersectionObserver(entries => {
-      for (const e of entries) if (e.isIntersecting) setSection((e.target as HTMLElement).dataset.index!)
-    }, { rootMargin: "-42% 0px -56% 0px" })
-    els.forEach(el => io.observe(el))
-    return () => io.disconnect()
-  }, [setSection])
-}
-
-const PLAN = [
-  { id: "licence", label: "Marriage licence" },
-  { id: "gallery", label: "Her weddings" },
-  { id: "date", label: "Request a date" },
-]
-
-/* which index entry is lit for a given section */
-function isOn(id: string, section: string, mode: string, heroKind: string) {
-  if (section === "hero") return id === heroKind
-  if (section === "weddings") return id === mode
-  return id === section
-}
-
-export const ON_HOME = ["beach", "cruise", "licence", "gallery", "date"]
-export const hrefFor = (id: string, home: boolean) => {
-  if (!ON_HOME.includes(id)) return `packages.html#${id}`
-  const anchor = id === "beach" || id === "cruise" ? "weddings" : id
-  return home ? `#${anchor}` : (["licence", "gallery", "date"].includes(id) ? `index.html#${anchor}` : `packages.html#${id}`)
-}
-
-function IndexColumn({ home }: { home: boolean }) {
-  const { heroKind, mode, section, go } = useIndex()
-  const href = (id: string) => hrefFor(id, home)
-  const hidden = home && section === "hero"
-  const Item = ({ id, children, big }: { id: string; children: ReactNode; big?: boolean }) => {
-    const on = isOn(id, section, mode, heroKind)
-    return (
-      <li className="relative">
-        {on && <motion.span layoutId="idx" className="absolute top-2.5 bottom-2.5 -left-4 w-px bg-channel" transition={{ duration: 0.45, ease }} aria-hidden />}
-        <a
-          href={href(id)}
-          aria-current={on ? "true" : undefined}
-          onClick={e => { if (home && ON_HOME.includes(id)) { e.preventDefault(); go(id) } }}
-          className={`grid min-h-11 grid-cols-[minmax(0,1fr)_auto] items-baseline gap-4 py-1.5 transition-colors duration-300 ${on ? "text-channel" : "text-ink hover:text-channel"} ${big ? "" : "text-sm"}`}
-        >{children}</a>
-      </li>
-    )
-  }
+function Header({ current }: { current: string }) {
+  const [open, setOpen] = useState(false)
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30 })
   return (
-    <aside className={`fixed inset-y-0 left-0 z-30 hidden w-[var(--index-w)] flex-col border-r border-line bg-ground px-9 pt-8 pb-8 transition-[transform,opacity] duration-500 ease-[cubic-bezier(.22,1,.36,1)] lg:flex ${hidden ? "pointer-events-none -translate-x-full opacity-0" : "translate-x-0 opacity-100"}`} aria-label="Anna's index" aria-hidden={hidden || undefined}>
-      <a href="index.html" className="block leading-none" aria-label="Anna's Wedding Planning, home">
-        <span className="display block text-[2.6rem] tracking-[-0.04em]">Anna's</span>
-        <span className="mt-2 block text-xs text-muted">Wedding Planning &amp; Consulting, Nassau</span>
-      </a>
-      <nav aria-label="Weddings and planning" className="mt-[clamp(28px,7vh,72px)]">
-        <p className="display text-sm italic text-muted">The weddings</p>
-        <ul className="mt-2">
-          {KINDS.map(k => (
-            <Item key={k.id} id={k.id} big>
-              <span className="display truncate text-[1.45rem] leading-tight tracking-[-0.02em]">{k.short}</span>
-              <span className="num text-right text-xs text-muted">{usd(k.from)}</span>
-            </Item>
-          ))}
-        </ul>
-        <p className="display mt-8 text-sm italic text-muted">Planning</p>
-        <ul className="mt-2">
-          {PLAN.map(n => <Item key={n.id} id={n.id}><span>{n.label}</span><span /></Item>)}
-          <li><a href="packages.html" className="flex min-h-11 items-center text-sm transition-colors hover:text-channel">Every package, every inclusion</a></li>
-        </ul>
-      </nav>
-      <div className="num mt-auto pb-16 text-sm">
-        <a href={TEL} className="flex min-h-10 items-center justify-between gap-2 hover:text-channel"><span className="text-muted">Nassau</span>{PHONE}</a>
-        <a href={US_TEL} className="flex min-h-10 items-center justify-between gap-2 hover:text-channel"><span className="text-muted">US line</span>{US_PHONE}</a>
-      </div>
-    </aside>
-  )
-}
-
-function MobileBar({ home }: { home: boolean }) {
-  const { section, mode, go } = useIndex()
-  const links = [
-    { id: "beach", label: "Beach" }, { id: "cruise", label: "Cruise day" }, { id: "cultural", label: "Cultural" }, { id: "deluxe", label: "Deluxe" },
-    { id: "renewal", label: "Renewals" }, { id: "licence", label: "Licence" }, { id: "gallery", label: "Her weddings" }, { id: "date", label: "Your date" },
-  ]
-  const nav = useRef<HTMLDivElement>(null)
-  useEffect(() => { // keep the lit chip in view (discrete change only)
-    const el = nav.current?.querySelector<HTMLElement>('[aria-current="true"]')
-    if (el && nav.current) nav.current.scrollTo({ left: el.offsetLeft - 20, behavior: "smooth" })
-  }, [section, mode])
-  return (
-    <>
-      <div className="flex items-center justify-between px-5 pt-3 lg:hidden">
-        <a href="index.html" className="inline-flex min-h-11 items-baseline leading-none" aria-label="Anna's Wedding Planning, home">
-          <span className="display text-[1.9rem] tracking-[-0.04em]">Anna's</span>
-          <span className="ml-2 text-xs text-muted">Nassau</span>
+    <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-3.5 md:px-10">
+        <a href="index.html" className="leading-none" aria-label="Anna's Wedding Planning, home">
+          <span className="font-display text-[1.6rem] text-ink">Anna's</span>
+          <span className="ml-2 text-[13px] text-muted">Wedding Planning, Nassau</span>
         </a>
-        <a href={TEL} className="inline-flex min-h-11 items-center gap-2 text-sm text-channel" aria-label={`Call Anna in Nassau, ${PHONE}`}><Phone className="size-4" strokeWidth={1.5} aria-hidden /> {PHONE}</a>
+        <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
+          {NAV.map(n => (
+            <a key={n.href} href={n.href} className={`relative py-1 text-[15px] text-ink after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-full after:origin-left after:bg-rose after:transition-transform after:duration-500 after:ease-[cubic-bezier(.16,1,.3,1)] ${current === n.label ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100"}`}>{n.label}</a>
+          ))}
+          <a href={TEL} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-rose px-5 text-[15px] text-white transition duration-200 hover:-translate-y-px hover:bg-ink active:translate-y-0">
+            <Phone className="size-4" aria-hidden /> Call Anna
+          </a>
+        </nav>
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger className="inline-flex size-11 items-center justify-center rounded-full border border-line lg:hidden" aria-label="Open menu"><Menu className="size-5" /></SheetTrigger>
+          <SheetContent side="right" className="w-full border-l-0 bg-paper sm:max-w-sm">
+            <SheetTitle className="sr-only">Menu</SheetTitle>
+            <nav className="mt-16 flex flex-col px-6" aria-label="Mobile">
+              {NAV.map((n, i) => (
+                <motion.a key={n.href} href={n.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i, duration: 0.5, ease }} className="border-b border-line py-4 font-display text-3xl text-ink">{n.label}</motion.a>
+              ))}
+              <a href={TEL} className="mt-8 rounded-full bg-rose py-4 text-center text-white">Call {PHONE}</a>
+              <a href={US_TEL} className="mt-3 rounded-full border border-line py-4 text-center">US line {US_PHONE}</a>
+            </nav>
+          </SheetContent>
+        </Sheet>
       </div>
-      <nav aria-label="Sections" className="sticky top-0 z-30 border-b border-line bg-ground lg:hidden">
-        <div ref={nav} className="no-scrollbar fade-right flex gap-6 overflow-x-auto px-5 pr-14">
-          {links.map(l => {
-            const on = home && isOn(l.id, section, mode, "")
-            return (
-              <a key={l.id} href={hrefFor(l.id, home)}
-                aria-current={on ? "true" : undefined}
-                onClick={e => { if (home && ON_HOME.includes(l.id)) { e.preventDefault(); go(l.id) } }}
-                className={`relative flex min-h-11 shrink-0 items-center text-sm transition-colors ${on ? "text-channel" : "text-ink"}`}>
-                {l.label}
-                {on && <motion.span layoutId="chip" className="absolute inset-x-0 bottom-0 h-0.5 bg-channel" transition={{ duration: 0.35, ease }} />}
-              </a>
-            )
-          })}
-        </div>
-        <span className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-base text-muted" aria-hidden>›</span>
-      </nav>
-    </>
-  )
-}
-
-function DateButton() {
-  const [show, setShow] = useState(false)
-  useEffect(() => {
-    const onScroll = () => {
-      const r = document.getElementById("date")?.getBoundingClientRect()
-      const inDate = r ? r.top < innerHeight && r.bottom > 0 : false
-      setShow(scrollY > innerHeight * 0.9 && !inDate)
-    }
-    onScroll()
-    addEventListener("scroll", onScroll, { passive: true })
-    return () => removeEventListener("scroll", onScroll)
-  }, [])
-  useEffect(() => { document.documentElement.style.setProperty("--concept-offset", show && innerWidth < 1024 ? "64px" : "0px") }, [show])
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.a
-          href="index.html#date"
-          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }} transition={{ duration: 0.3, ease }}
-          className="fixed right-4 bottom-[calc(12px+env(safe-area-inset-bottom))] z-40 inline-flex min-h-12 items-center rounded-full bg-channel px-6 text-sm font-medium text-ground shadow-[0_10px_30px_-12px_rgb(13_43_46/0.6)] lg:hidden"
-        >Request your date</motion.a>
-      )}
-    </AnimatePresence>
+      <motion.div style={{ scaleX: progress }} className="h-px origin-left bg-rose" aria-hidden />
+    </header>
   )
 }
 
 function Footer() {
   return (
-    <footer className="with-index border-t border-line">
-      <div className="wrap grid gap-12 pt-20 pb-12 md:grid-cols-[1.4fr_1fr_1fr]">
+    <footer className="bg-blush pb-28 lg:pb-0">
+      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 md:grid-cols-[1.5fr_1fr_1fr] md:px-10">
         <div>
-          <p className="display max-w-[16ch] text-[clamp(2rem,3vw,2.75rem)] leading-[1.02] tracking-[-0.03em]">Anna's Wedding Planning &amp; Consulting</p>
+          <p className="font-display text-4xl leading-none">Anna's Wedding Planning</p>
           <p className="mt-4 max-w-sm text-muted">Destination weddings in Nassau, The Bahamas, for more than two decades. P.O. Box N-8611, Nassau.</p>
         </div>
-        <div className="num text-sm">
-          <p className="display italic text-muted">Call</p>
-          <a href={TEL} className="mt-2 flex min-h-11 items-center hover:text-channel">Nassau {PHONE}</a>
-          <a href={US_TEL} className="flex min-h-11 items-center hover:text-channel">US line {US_PHONE}</a>
+        <div className="text-[15px]">
+          <p className="text-[13px] text-rose">Call</p>
+          <a href={TEL} className="mt-2 block hover:text-rose">Nassau {PHONE}</a>
+          <a href={US_TEL} className="block hover:text-rose">US line {US_PHONE}</a>
         </div>
-        <div className="text-sm">
-          <p className="display italic text-muted">Follow</p>
-          <a href="https://www.instagram.com/annasweddingbahamas/" className="mt-2 flex min-h-11 items-center hover:text-channel">Instagram</a>
-          <a href="https://www.facebook.com/AnnasWeddingPlanningService/" className="flex min-h-11 items-center hover:text-channel">Facebook</a>
-          <a href="https://www.weddingwire.com/biz/annas-wedding-planning/8cdc9996dc501900.html" className="flex min-h-11 items-center hover:text-channel">WeddingWire</a>
+        <div className="text-[15px]">
+          <p className="text-[13px] text-rose">Follow</p>
+          <a href="https://www.instagram.com/annasweddingbahamas/" className="mt-2 block hover:text-rose">Instagram</a>
+          <a href="https://www.facebook.com/AnnasWeddingPlanningService/" className="block hover:text-rose">Facebook</a>
+          <a href="https://www.weddingwire.com/biz/annas-wedding-planning/8cdc9996dc501900.html" className="block hover:text-rose">WeddingWire</a>
         </div>
       </div>
-      <p className="wrap box-content max-w-[28rem] pb-28 text-xs text-muted lg:pb-24">Concept by ESTATIQ AI Solutions. Packages, prices and photographs from annasweddingbahamas.com, to be confirmed with Anna's Wedding Planning.</p>
+      <p className="mx-auto max-w-[1440px] px-5 pb-8 text-xs text-muted md:px-10">Concept by ESTATIQ AI Solutions. Packages, prices and photographs from annasweddingbahamas.com, to be confirmed with Anna's Wedding Planning.</p>
     </footer>
   )
 }
 
-export function Page({ home = false, hero, children }: { home?: boolean; hero?: ReactNode; children: ReactNode }) {
-  useLenis()
-  const [heroKind, setHeroKind] = useState<KindId>("renewal")
-  const [mode, setMode] = useState<"beach" | "cruise">("beach")
-  const [section, setSection] = useState("hero")
-  useSection(setSection)
-  const go = (id: string) => {
-    if (id === "beach" || id === "cruise") { setMode(id); window.dispatchEvent(new CustomEvent(PICK_EVENT, { detail: id })) }
-    const target = id === "beach" || id === "cruise" ? "weddings" : id
-    document.getElementById(target)?.scrollIntoView({ behavior: "smooth", block: "start" })
-  }
+function ActionBar() {
   return (
-    <IndexCtx.Provider value={{ heroKind, setHeroKind, mode, setMode, section, go }}>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:p-3 focus:text-ground">Skip to content</a>
-      <IndexColumn home={home} />
-      <MobileBar home={home} />
-      <main id="main">{hero}<div className="with-index">{children}</div></main>
-      <Footer />
-      <DateButton />
-    </IndexCtx.Provider>
+    <nav aria-label="Quick actions" className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1.5fr] border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
+      <a href={TEL} className="flex min-h-14 items-center justify-center gap-2 text-[15px]"><Phone className="size-4" aria-hidden /> Call Anna</a>
+      <a href="index.html#plan" className="flex min-h-14 items-center justify-center bg-rose text-[15px] text-white">Check your wedding date</a>
+    </nav>
   )
 }
 
-export function mount(node: ReactNode) {
-  document.documentElement.classList.add("js")
-  const mark = (img: HTMLImageElement) => img.classList.add("is-loaded")
-  document.addEventListener("load", e => { if (e.target instanceof HTMLImageElement) mark(e.target) }, true)
-  document.addEventListener("error", e => { if (e.target instanceof HTMLImageElement) mark(e.target) }, true)
-  createRoot(document.getElementById("root")!).render(node)
-  const sweep = () => document.querySelectorAll<HTMLImageElement>(".img-slot img").forEach(i => { if (i.complete) mark(i) })
-  new MutationObserver(sweep).observe(document.getElementById("root")!, { childList: true, subtree: true })
-  setTimeout(sweep, 50)
+export function Page({ current, children }: { current: string; children: ReactNode }) {
+  useLenis()
+  return (<><a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:p-3 focus:text-paper">Skip to content</a><Header current={current} /><main id="main">{children}</main><Footer /><ActionBar /></>)
 }
 
-export { usd }
+export function mount(node: ReactNode) {
+  document.documentElement.classList.add("js-anim")
+  createRoot(document.getElementById("root")!).render(node)
+}
+
+export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
+  return (
+    <motion.div className={className} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ duration: 1, delay, ease }}>
+      {children}
+    </motion.div>
+  )
+}
+
+export function Mark({ n, children }: { n: string; children: ReactNode }) {
+  return <p className="flex items-baseline gap-3 text-[14px] text-muted"><span className="font-display text-[1.4rem] text-rose">{n}</span>{children}</p>
+}
+
+export const usd = (n: number) => `USD ${n.toLocaleString("en-US")}`

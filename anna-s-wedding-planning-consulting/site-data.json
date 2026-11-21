@@ -1,7 +1,7 @@
 {
  "schema": "island-previews/site-data@1",
  "slug": "anna-s-wedding-planning-consulting",
- "name": "Anna's Wedding Planning & Consulting",
+ "name": "Anna's Wedding Planning",
  "niche": "food-events",
  "contact": {
   "phone": "+1-242-324-2559",
@@ -20,109 +20,53 @@
  ],
  "offer": [
   {
-   "name": "Basic beach package",
+   "name": "Basic package",
    "kind": "service",
-   "summary": "Wedding package, USD",
+   "summary": "Wedding package",
    "price": 950,
    "source": "https://www.annasweddingbahamas.com/beach-package/"
   },
   {
-   "name": "Classic beach package",
+   "name": "Classic package",
    "kind": "service",
-   "summary": "Wedding package, USD",
+   "summary": "Wedding package",
    "price": 1750,
    "source": "https://www.annasweddingbahamas.com/beach-package/"
   },
   {
-   "name": "Beach package (50 guests)",
+   "name": "Beach package",
    "kind": "service",
-   "summary": "Wedding package, USD",
+   "summary": "Wedding package",
    "price": 2990,
    "source": "https://www.annasweddingbahamas.com/beach-package/"
   },
   {
-   "name": "Romantic beach package",
+   "name": "Romantic package",
    "kind": "service",
-   "summary": "Wedding package, USD",
+   "summary": "Wedding package",
    "price": 3995,
    "source": "https://www.annasweddingbahamas.com/beach-package/"
   },
   {
    "name": "Cruise package",
    "kind": "service",
-   "summary": "Wedding package, USD",
+   "summary": "Wedding package",
    "price": 3495,
    "source": "https://www.annasweddingbahamas.com/cruise-package/"
   },
   {
-   "name": "Blue Ocean cruise package",
+   "name": "Blue Ocean package",
    "kind": "service",
-   "summary": "Wedding package, USD",
+   "summary": "Wedding package",
    "price": 7645,
    "source": "https://www.annasweddingbahamas.com/cruise-package/"
   },
   {
-   "name": "Tropical cruise package",
+   "name": "Tropical package",
    "kind": "service",
-   "summary": "Wedding package, USD",
+   "summary": "Wedding package",
    "price": 13895,
    "source": "https://www.annasweddingbahamas.com/cruise-package/"
-  },
-  {
-   "name": "Indian ceremony package",
-   "kind": "service",
-   "summary": "Wedding package, USD",
-   "price": 3680,
-   "source": "https://www.annasweddingbahamas.com/book-now/"
-  },
-  {
-   "name": "Jewish ceremony package",
-   "kind": "service",
-   "summary": "Wedding package, USD",
-   "price": 3850,
-   "source": "https://www.annasweddingbahamas.com/book-now/"
-  },
-  {
-   "name": "Garden deluxe package",
-   "kind": "service",
-   "summary": "Wedding package, USD",
-   "price": 11950,
-   "source": "https://www.annasweddingbahamas.com/book-now/"
-  },
-  {
-   "name": "Bahamas Sunset deluxe package",
-   "kind": "service",
-   "summary": "Wedding package, USD",
-   "price": 12986,
-   "source": "https://www.annasweddingbahamas.com/book-now/"
-  },
-  {
-   "name": "Royal deluxe package",
-   "kind": "service",
-   "summary": "Wedding package, USD",
-   "price": 15675,
-   "source": "https://www.annasweddingbahamas.com/book-now/"
-  },
-  {
-   "name": "Basic vow renewal",
-   "kind": "service",
-   "summary": "Wedding package, USD",
-   "price": 875,
-   "source": "https://www.annasweddingbahamas.com/book-now/"
-  },
-  {
-   "name": "Romantic Dinner vow renewal",
-   "kind": "service",
-   "summary": "Wedding package, USD",
-   "price": 1595,
-   "source": "https://www.annasweddingbahamas.com/book-now/"
-  },
-  {
-   "name": "Silver vow renewal",
-   "kind": "service",
-   "summary": "Wedding package, USD",
-   "price": 2250,
-   "source": "https://www.annasweddingbahamas.com/book-now/"
   }
  ],
  "platform": {
@@ -137,11 +81,10 @@
   "https://www.annasweddingbahamas.com/",
   "https://www.annasweddingbahamas.com/about/",
   "https://www.annasweddingbahamas.com/beach-package/",
-  "https://www.annasweddingbahamas.com/book-now/",
   "https://www.annasweddingbahamas.com/cruise-package/",
   "https://www.annasweddingbahamas.com/requirements/",
   "https://www.annasweddingbahamas.com/services-2/",
-  "https://www.instagram.com/annasweddingbahamas/",
-  "https://www.weddingwire.com/biz/annas-wedding-planning/8cdc9996dc501900.html"
+  "https://www.weddingwire.com/biz/annas-wedding-planning/8cdc9996dc501900.html",
+  "https://www.instagram.com/annasweddingbahamas/"
  ]
 }
