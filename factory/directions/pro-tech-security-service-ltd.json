@@ -1,13 +1,14 @@
 {
  "slug": "pro-tech-security-service-ltd",
  "niche": "industrial-b2b",
- "archetype": "A12",
- "archetype_name": "Service desk",
- "lane": "P07",
- "lane_name": "Abaco pine",
- "type": "T04",
- "type_name": "Technical mono",
- "nav": "N10",
- "motion": "M10",
- "dealt_at": "2026-11-08T15:22:55.713Z"
+ "archetype": "A03",
+ "archetype_name": "Cinematic chapters",
+ "lane": "P05",
+ "lane_name": "Night harbour",
+ "type": "T03",
+ "type_name": "Swiss grotesk",
+ "nav": "N3",
+ "motion": "M7",
+ "dealt_at": "2026-11-21T15:40:25.830Z",
+ "chosen": true
 }

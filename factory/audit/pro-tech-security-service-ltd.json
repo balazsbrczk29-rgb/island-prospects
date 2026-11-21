@@ -6,5 +6,28 @@
  "url": null,
  "url_source": "prospects",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "none",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 0,
+  "platform": "",
+  "latest_year": null,
+  "modernity": 1,
+  "concept_type": "brochure: security services explained + call / survey request",
+  "must_keep": [
+   "phone numbers",
+   "address and office hours",
+   "service divisions (guards, CCTV/alarm sales and service, 24/7 central station monitoring, supplies, consulting and investigations, collections)"
+  ],
+  "weaknesses": [
+   "no website; directory listings only, with two different addresses and three phone numbers",
+   "name spelled four ways across directories (Pro Tech, Pro-Tech, Protech, Security & Alarms)",
+   "no photos of the work, no way to request a survey online"
+  ],
+  "priority": "A",
+  "note": "No own site found (search 2026-11-21); BahamasLocal premium listing with own description, YouTube channel."
+ }
 }

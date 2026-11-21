@@ -1,16 +1,24 @@
-import { motion } from "motion/react"
-import { Page, mount, Label, ease } from "./site"
+import { Page, mount } from "./site"
 import { Planner } from "./planner"
 
-mount(
-  <Page current="Plan your system">
-    <section className="mx-auto max-w-[1360px] px-5 pt-16 pb-24 md:px-10 md:pt-20" aria-labelledby="hero-title">
-      <Label>Plan your system</Label>
-      <h1 id="hero-title" className="mt-6 max-w-4xl font-display text-[clamp(2.6rem,5.4vw,5.2rem)] leading-[1] font-semibold tracking-[-0.035em]">
-        {["Sketch your alarm system", "in one minute."].map((l, i) => <span key={l} className="block overflow-hidden pb-[0.05em]"><motion.span className={`block ${i ? "text-signal" : ""}`} initial={{ y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.1 + i * 0.09, duration: 1, ease: [0.77, 0, 0.175, 1] }}>{l}</motion.span></span>)}
-      </h1>
-      <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8, ease }} className="mt-6 max-w-2xl text-[18px] text-muted">Pick your property, tap the points you want covered, then call with the list in front of you.</motion.p>
-      <div className="mt-12"><Planner /></div>
-    </section>
-  </Page>
-)
+const FAQ: [string, string][] = [["Where is Pro-Tech Security?", "At #2 Farrington Road & Gregory Street, Nassau (P.O. Box CB-13083). The office is open Monday to Friday, 9 am to 5 pm."], ["Is the alarm monitored at night?", "Pro-Tech runs 24/7 central station monitoring, so a monitored alarm is watched around the clock, including weekends."], ["Is Pro-Tech licensed?", "Yes. Pro-Tech is licensed and regulated by the Ministry of National Security as a security service contractor, and holds a Bahamas business licence."], ["How do I get a quote?", "Call (242) 328-0653 during office hours. The planner on this site prepares a short list of what you need so the call is quick."]]
+
+function Plan() {
+  return (
+    <Page solid>
+      <section className="ptop" data-hero>
+        <p className="crumbs"><a href="index.html">Home</a> / Plan your call</p>
+        <h1>Tell us what to protect. Call with the list.</h1>
+        <p>Choose the property and what you need. The page writes a one-line request you can read out or copy, so the call to the Farrington Road office takes a minute.</p>
+        <Planner />
+      </section>
+      <section className="sec" aria-labelledby="faq-h">
+        <span className="n num">FAQ</span>
+        <h2 id="faq-h">Before you call.</h2>
+        <div className="faq">{FAQ.map(([q, a]) => <details key={q}><summary>{q}</summary><p className="num">{a}</p></details>)}</div>
+      </section>
+    </Page>
+  )
+}
+
+mount(<Plan />)
