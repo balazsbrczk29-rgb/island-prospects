@@ -36,9 +36,35 @@ Ten gem-named rooms on a ridge 70 ft up, between Lake Killarney and the Atlantic
 ## Positioning
 For travellers who want a quiet, personal base in Nassau close to the airport, Ocean West is the ten-room hotel on the ridge above West Bay Street with views of both lake and ocean.
 
-## Design spec
-References: aman.com (sparse, horizon-led, few words), rosewoodhotels.com (editorial type, room as story). Hero: "section-led" split. Prata display + Hanken Grotesk. Palette paper #f5f1ea, ink #1d2126, lake #45705f, lake-deep #2c4d41, ocean #2b5d78, blush #ecc9b4, muted #5b6068, line #ddd4c5.
-Signature: north-south section drawing (lake, ridge with 3-floor hotel, ocean, 70 ft marker); the 10 room windows are clickable gems: selecting one shows bed, view, floor, balcony and the real photo. This shows lake and ocean either side because the brief says 70 ft above sea level between Lake Killarney and the Atlantic. Second: rooms filter (balcony / king / ocean-and-pool). Third: enquiry tabs; direct booking link.
+## Design plan (generation 2, Nov 21)
+**Big idea:** the room register is the front door: ten rooms named for stones (Diamond, Sapphire, Ruby, Topaz, Emerald, Tanzanite, Onyx, Ivory, Pearl, Coral) stand in a fixed index column like a jeweller's tray; touch a name and that room appears beside it with its floor, bed and view, and "Check dates" opens their innRoad engine, on a pink ridge seventy feet above the sea.
+
+**Direction:** A02 Catalogue index + P03 Conch pink + T09 Didone fashion (N2, M8 hover image swap + layout animation). Why: the product is ten distinct rooms, so the inventory is the hero; the hotel itself is pink colonial stucco with white balustrades (their photos), so Conch pink is literal; a Didone (Prata) reads as a jeweller's engraving for gem names.
+
+**Fonts:** Prata 400 (display, gem names, headlines), Jost variable (body 17-18px, spaced small caps for the T09 micro-labels only). Self-hosted.
+
+**Palette:** shell white #FDF3EE (ground), conch pink #F2C9C0 (field: photo stage and one band), ink #3A1E1F, deep pink #B4586A (accent: active gem, Check dates), shutter green #2E5E5A (secondary: links), line #EBD3C9, muted #7A5A57.
+
+**Photo set (own, oceanwestbahamas.com; never above source size):** slider 1200x535 x5 (terrace through columns to pool and sea; view down over pool and orange roofs to the sea; pink facade; room; pool terrace at sunset): shown max 920 wide. Ten room photos 800x600 each (one per gem): shown max 800 wide. Facade with pool 520x516: small frame. Fountain 222x393: not used.
+
+**Storyboard, desktop 1440x900** (left index column fixed, 34% / 490px, full height, sticky; right column scrolls):
+1. Left: wordmark OCEAN WEST, micro-label TEN ROOMS ON WEST BAY STREET, NASSAU; h1 "Ten rooms on a ridge, seventy feet above the sea."; the register of ten gem names (Prata 28px) each with floor and view in small Jost; footer line: (242) 698-6744 and "Check dates" (deep pink). Right: the stage on conch pink: the terrace panorama by default; hovering or tapping a gem swaps to that room photo (800x600) with a caption line: bed, floor, view, balcony.
+2. Right: "Lake to the south, the Atlantic to the north." the view-down panorama 1200x535 at 920, two lines on the ridge and five minutes to the airport.
+3. Right: the rooms compared: filter (Balcony, King bed, Ocean view) and a typographic list of the ten rooms with bed, floor, view; tapping a row sets the stage photo (on desktop scrolls the stage back) ; link to rooms.html.
+4. Right: Days here: pool terrace at sunset photo (1200x535), then a plain list: outdoor pool, rooftop gym with ocean view, massage suite by appointment, indoor and outdoor bars, breakfast a la carte (traditional or Bahamian), Sapodilla restaurant on the eastern side, free Wi-Fi and parking.
+5. Right: Rates and the house rules: $215 to $600 a night, single or double; children under 12 free; check-in 3 PM, check-out 11 AM, late check-out to 2 PM $30; no pets; non-smoking. Check dates.
+6. Right: Getting here: 5 minutes from Lynden Pindling International: Windsor Field Road, Blake Road, right onto West Bay Street, the hotel on the right; coordinates; calling card (phones, email, address). Footer.
+Left column stays complete for the whole page: the register on top, section links (The ridge, Rooms, Days here, Rates, Getting here) and the footer line, so it never ends early.
+
+**Phone 390x844:** 1) logo + Check dates; h1; the stage photo (selected room); a horizontal chip row of the ten gems under it (the index collapsed); 2) room caption + specs and Check dates; 3) the ridge panorama and lines.
+
+**Conversion:** "Check dates" to innRoad (oceanwestbahamas.client.innroad.com) is primary everywhere; secondary call (242) 698-6744 and email info@oceanwestbahamas.com with the room name prefilled.
+
+**Tier:** standard. Hover image swap with layout animation and a slow crossfade; no 3D.
+
+**Pages:** index.html (all of the above), rooms.html (all ten rooms, one after another, photo at 800 wide and specs, each with Check dates).
+
+**Different from competitors in this repo:** the only catalogue-index hotel; pink Didone register; no hero film, no ocean scene, no horizontal track.
 
 ## Assumptions to confirm
 Current rates; that Sapodilla is still operating; badge years; room photos match current decor.

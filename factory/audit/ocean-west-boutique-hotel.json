@@ -6,5 +6,32 @@
  "url": "oceanwestbahamas.com",
  "url_source": "prospects",
  "old_check": "LOADED: dated keyword-stuffed title, no contact shown",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": true,
+  "booking_engine": "innRoad (external, oceanwestbahamas.client.innroad.com)",
+  "products_or_listings": 10,
+  "pages": 9,
+  "platform": "static HTML image tables",
+  "latest_year": 2023,
+  "modernity": 1,
+  "concept_type": "booking: ten-room picker with views, rates range, Check dates handing off to innRoad",
+  "must_keep": [
+   "innRoad booking link (Check dates)",
+   "all ten gem-named rooms with bed, floor, view, balcony",
+   "rates from $215 to $600 and policies",
+   "getting here from the airport",
+   "phone (242) 698-6744 and info@oceanwestbahamas.com"
+  ],
+  "weaknesses": [
+   "keyword-stuffed title",
+   "headings are images, unreadable by Google and phones",
+   "no phone or address on the homepage",
+   "rooms as tiny thumbnails",
+   "the 70 ft ridge between lake and ocean is one sentence"
+  ],
+  "priority": "A",
+  "note": "Ten-room hotel with a real booking engine behind a 2000s image-table site."
+ }
 }

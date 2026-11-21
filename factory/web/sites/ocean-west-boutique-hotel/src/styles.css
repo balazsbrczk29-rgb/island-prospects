@@ -1,26 +1,53 @@
 @import "tailwindcss" source(none);
 @source "./";
-@source "../../../src/components/ui/accordion.tsx";
-@source "../../../src/components/ui/sheet.tsx";
-@source "../../../src/components/ui/tabs.tsx";
+
+@font-face { font-family: "Prata"; src: url("./fonts/prata.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("./fonts/jost.woff2") format("woff2"); font-weight: 300 700; font-display: swap; }
+@font-face { font-family: "Prata Fallback"; src: local("Didot"), local("Bodoni 72"), local("Georgia"); size-adjust: 112%; }
+@font-face { font-family: "Jost Fallback"; src: local("Helvetica Neue"), local("Arial"); size-adjust: 96%; }
 
 @theme {
-  --color-paper: #f5f1ea;
-  --color-paper-2: #ebe4d8;
-  --color-ink: #1d2126;
-  --color-muted: #5b6068;
-  --color-lake: #45705f;
-  --color-lake-deep: #2c4d41;
-  --color-ocean: #2b5d78;
-  --color-blush: #ecc9b4;
-  --color-line: #ddd4c5;
-  --font-display: "Prata", Georgia, serif;
-  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --color-shell: #fdf3ee;
+  --color-conch: #f2c9c0;
+  --color-conch-2: #f7ddd6;
+  --color-ink: #3a1e1f;
+  --color-muted: #765553;
+  --color-line: #ebd3c9;
+  --color-rose: #a84d60;
+  --color-rose-deep: #8c3a4d;
+  --color-shutter: #2e5e5a;
+  --font-display: "Prata", "Prata Fallback", Georgia, serif;
+  --font-body: "Jost", "Jost Fallback", Arial, sans-serif;
+  --text-label: 0.75rem;
+  --text-cap: 0.875rem;
+  --text-small: 1rem;
+  --text-body: 1.125rem;
+  --text-lead: 1.375rem;
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
-html { background: var(--color-paper); color: var(--color-ink); }
-body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-::selection { background: var(--color-blush); color: var(--color-ink); }
-:focus-visible { outline: 2px solid var(--color-lake); outline-offset: 3px; }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+:root { --idx: clamp(360px, 34vw, 500px); --pad: clamp(20px, 3.3vw, 48px); }
+
+@layer base {
+  html { background: var(--color-shell); color: var(--color-ink); -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font-family: var(--font-body); font-size: var(--text-body); line-height: 1.55; font-weight: 400; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  p { margin: 0; text-wrap: pretty; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--color-rose); outline-offset: 3px; }
+}
+
+@layer components {
+  .label { font-family: var(--font-body); font-size: var(--text-label); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; }
+  .tnum { font-variant-numeric: tabular-nums lining-nums; }
+  .book { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 48px; padding: 0 1.5rem; background: var(--color-rose); color: #fff; font: 500 .8125rem/1 var(--font-body); letter-spacing: .16em; text-transform: uppercase; text-decoration: none; border-radius: 0; transition: background-color .25s var(--ease-soft); }
+  .book:hover { background: var(--color-rose-deep); }
+  .book:active { transform: scale(.985); }
+  .tlink { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; text-decoration-color: color-mix(in oklch, currentColor 40%, transparent); }
+  .tlink:hover { text-decoration-color: currentColor; }
+  .pic { position: relative; overflow: hidden; background: var(--color-conch-2); }
+  .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .skip { position: absolute; left: -9999px; top: 8px; z-index: 100; background: var(--color-ink); color: var(--color-shell); padding: 10px 16px; }
+  .skip:focus { left: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
