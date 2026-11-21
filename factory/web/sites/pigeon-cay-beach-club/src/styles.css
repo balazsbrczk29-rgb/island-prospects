@@ -8,7 +8,7 @@
 
 :root {
   /* colour: sunlit sand, sea glass and the deep water off the beach */
-  --ground: #f7f2e7; --shell: #fffcf6; --sand: #ece3d0; --line: #ddd2bc; --tint: #e3dac6;
+  --ground: #fbf8f1; --shell: #ffffff; --sand: #ece3d0; --line: #ddd2bc; --tint: #e3dac6;
   --ink: #1e1c17; --muted: #5a5346; --soft: #8a8170;
   --sea: #0d5b58; --sea-deep: #083f3d; --glass: #d4e8e2; --on-sea: #f4f1e8; --on-sea-muted: #bcd5cf;
   /* type scale */
@@ -139,9 +139,13 @@ p, dd, li { text-wrap: pretty; }
 .g-title { font-family: var(--serif); font-weight: 400; font-size: var(--t-lg); letter-spacing: -0.015em; }
 .g-x { width: 48px; height: 48px; border-radius: 999px; display: grid; place-items: center; border: 1px solid var(--line); background: var(--shell); }
 .g-x svg { width: 20px; height: 20px; }
-.g-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 400px); gap: var(--s8); padding: var(--s7) var(--gutter); width: min(100%, 76rem); margin-inline: auto; flex: 1; }
+.g-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 400px); gap: var(--s8); padding: var(--s7) var(--gutter); width: min(100%, 76rem); margin-inline: auto; flex: 1; align-content: center; }
 .g-stage { display: flex; flex-direction: column; align-items: center; }
 .g-stage > img { width: 100%; height: auto; max-height: 62vh; object-fit: contain; border-radius: var(--r-photo); background: var(--tint); box-shadow: 0 24px 50px -30px rgba(30, 28, 23, 0.55); }
+.g-nav { display: flex; align-items: center; gap: var(--s4); margin-top: var(--s4); font-size: var(--t-sm); color: var(--muted); }
+.g-nav button { width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--line); background: var(--shell); display: grid; place-items: center; }
+.g-nav button:hover { background: var(--glass); }
+.g-nav svg { width: 18px; height: 18px; }
 .g-cap { font-family: var(--serif); font-style: italic; color: var(--muted); margin-top: var(--s3); text-align: center; min-height: 3em; }
 .g-thumbs { display: flex; gap: var(--s2); flex-wrap: wrap; justify-content: center; margin-top: var(--s3); }
 .g-thumbs button { width: 72px; height: 54px; border-radius: 4px; overflow: hidden; opacity: 0.55; outline: 2px solid transparent; outline-offset: 2px; transition: opacity var(--d-fast), outline-color var(--d-fast); }
@@ -179,7 +183,7 @@ p, dd, li { text-wrap: pretty; }
 .row-facts dd { font-weight: 500; }
 .row-price { text-align: right; font-size: var(--t-sm); }
 .row-price b { font-family: var(--serif); font-weight: 500; font-size: var(--t-lg); }
-.row-price .link { min-height: 36px; }
+.row-price .link { min-height: 44px; }
 
 .place-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s6); row-gap: var(--s8); align-items: start; }
 .place-a { grid-column: 1 / span 7; }
@@ -218,7 +222,7 @@ p, dd, li { text-wrap: pretty; }
 .route a { color: var(--sea); }
 .offer { margin-top: var(--s8); display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 8fr); gap: var(--s6); padding: var(--s6); background: var(--glass); border-radius: var(--r-panel); }
 .offer h3 { font-family: var(--serif); font-weight: 500; font-size: var(--t-lg); line-height: 1.15; }
-.offer p { color: var(--ink); font-size: var(--t-sm); }
+.offer p { color: var(--ink); font-size: var(--t-sm); max-width: 68ch; }
 
 .on-deep { background: var(--sea-deep); color: var(--on-sea); }
 .on-deep .lede, .on-deep .muted { color: var(--on-sea-muted); }

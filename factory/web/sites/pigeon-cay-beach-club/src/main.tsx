@@ -206,7 +206,7 @@ function Gallery({ id, close, stay }: { id: string | null; close: () => void; st
               <motion.div className="g-veil" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} />
             </Dialog.Overlay>
             <Dialog.Content asChild forceMount aria-describedby={undefined}>
-              <motion.div className="g" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }} transition={{ duration: 0.45, ease }}>
+              <motion.div className="g" onKeyDown={e => { if (e.key === "ArrowRight") setK((k + 1) % c.shots.length); if (e.key === "ArrowLeft") setK((k - 1 + c.shots.length) % c.shots.length) }} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }} transition={{ duration: 0.45, ease }}>
                 <div className="g-bar">
                   <Dialog.Title className="g-title">{c.name}</Dialog.Title>
                   <Dialog.Close className="g-x" aria-label="Close"><X aria-hidden /></Dialog.Close>
@@ -218,6 +218,13 @@ function Gallery({ id, close, stay }: { id: string | null; close: () => void; st
                         style={{ maxWidth: c.shots[k].w, aspectRatio: `${c.shots[k].w} / ${c.shots[k].h}` }}
                         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} />
                     </AnimatePresence>
+                    {c.shots.length > 1 && (
+                      <div className="g-nav">
+                        <button type="button" aria-label="Previous photo" onClick={() => setK((k - 1 + c.shots.length) % c.shots.length)}><ArrowLeft aria-hidden /></button>
+                        <span className="num">{k + 1} / {c.shots.length}</span>
+                        <button type="button" aria-label="Next photo" onClick={() => setK((k + 1) % c.shots.length)}><ArrowRight aria-hidden /></button>
+                      </div>
+                    )}
                     <p className="g-cap">{c.shots[k].alt}</p>
                     <div className="g-thumbs" role="tablist" aria-label={`${c.name} photos`}>
                       {c.shots.map((s, i) => (
