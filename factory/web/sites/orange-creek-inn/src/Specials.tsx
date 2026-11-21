@@ -12,7 +12,12 @@ export default function Specials() {
     const hit = offers.filter(o => ids.includes(o.id))
     if (hit.some(o => o.status === "ok")) return { on: true, note: "Fits your dates." }
     if (hit.length) return { on: false, note: hit[0].note }
-    return { on: false, note: "Not for this length of stay or starting point." }
+    const why: Record<string, string> = {
+      fee300: "Needs four nights or longer.", fee150: nights >= 4 ? "For two and three nights. At four, the $300 credit applies." : "Needs at least two nights.",
+      fly1: "Needs at least two nights.", air: "Needs four nights or longer.", fl250: origin === "florida" ? "Needs four nights or longer." : "For guests travelling from Florida.",
+      eu: origin === "europe" ? "Needs four nights or longer." : "For residents of Europe and Latin America.",
+    }
+    return { on: false, note: why[ids[0]] ?? "Not for this stay." }
   }
   const count = SPECIALS.filter(s => state(s.ids).on).length
   return (
