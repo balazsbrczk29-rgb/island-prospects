@@ -13,7 +13,7 @@ const PLACES: { t: string; at: [number, number]; big?: boolean; it?: boolean }[]
   { t: "Cable Beach", at: [25.068, -77.414] },
   { t: "Rose Island", at: [25.106, -77.2] },
   { t: "airport", at: [25.033, -77.466] },
-  { t: "Atlantic", at: [25.13, -77.52], it: true },
+  { t: "Atlantic Ocean", at: [25.128, -77.47], it: true },
 ]
 
 function fit(pts: [number, number][], aspect: number, min = 150): VB {
@@ -30,13 +30,14 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
 }) {
   const box = useRef<HTMLDivElement>(null)
   const [aspect, setAspect] = useState(2)
+  const [px, setPx] = useState(900)
   const [vb, setVb] = useState<VB>({ x: 40, y: 40, w: 920, h: 460 })
   const cur = useRef(vb)
   const reduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
 
   useEffect(() => {
     const el = box.current; if (!el) return
-    const ro = new ResizeObserver(([e]) => { const r = e.contentRect; if (r.width && r.height) setAspect(r.width / r.height) })
+    const ro = new ResizeObserver(([e]) => { const r = e.contentRect; if (r.width && r.height) { setAspect(r.width / r.height); setPx(r.width) } })
     ro.observe(el); return () => ro.disconnect()
   }, [])
 
@@ -48,7 +49,7 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
     }
     const pts: [number, number][] = [s, ...stops.map(x => project(x.at[0], x.at[1]))]
     if (stops.some(x => x.sea)) pts.push(project(DOCK[0], DOCK[1]))
-    return fit(pts, aspect, aspect < 1.2 ? 120 : 170)
+    return fit(pts, aspect, aspect < 1.2 ? 110 : 170)
   }, [start, stops, aspect])
 
   useEffect(() => {
@@ -61,9 +62,31 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
     return () => c.stop()
   }, [target, reduce])
 
-  const k = vb.w / 1000 // screen-constant sizing
+  const k = vb.w / px // map units per screen pixel: marks keep their size at any zoom
   const sel = new Map(stops.map((s, i) => [s.id, i + 1]))
   const sp = project(start.at[0], start.at[1])
+  /* place labels so they do not sit on top of each other */
+  const labels = new Map<string, [number, number, "start" | "end"]>()
+  {
+    const boxes: [number, number, number, number][] = []
+    const want: { id: string; t: string; x: number; y: number }[] = [{ id: "__start", t: start.label, x: sp[0], y: sp[1] }]
+    STOPS.forEach(s => { if (sel.has(s.id) || focus === s.id || hover === s.id) { const [x, y] = project(s.at[0], s.at[1]); want.push({ id: s.id, t: s.short, x, y }) } })
+    STOPS.forEach(s => { const [x, y] = project(s.at[0], s.at[1]); boxes.push([x - 6 * k, y - 6 * k, x + 6 * k, y + 6 * k]) })
+    const hit = (b: [number, number, number, number]) => boxes.some(o => !(b[2] < o[0] || b[0] > o[2] || b[3] < o[1] || b[1] > o[3]))
+    for (const w of want) {
+      const tw = w.t.length * 7.4 * k, th = 13 * k
+      const cands: [number, number, "start" | "end"][] = [[13 * k, -9 * k, "start"], [13 * k, 15 * k, "start"], [-13 * k, -9 * k, "end"], [-13 * k, 15 * k, "end"], [-tw / 2, -16 * k, "start"], [-tw / 2, 26 * k, "start"]]
+      let pick = cands[0]
+      for (const c of cands) {
+        const x0 = c[2] === "end" ? w.x + c[0] - tw : w.x + c[0], y1 = w.y + c[1]
+        const b: [number, number, number, number] = [x0, y1 - th, x0 + tw, y1 + 2 * k]
+        if (!hit(b)) { pick = c; break }
+      }
+      const x0 = pick[2] === "end" ? w.x + pick[0] - tw : w.x + pick[0], y1 = w.y + pick[1]
+      boxes.push([x0, y1 - th, x0 + tw, y1 + 2 * k])
+      labels.set(w.id, pick)
+    }
+  }
   const full = legs.map(l => arc(l.a, l.b)).join(" ").replace(/ M[^Q]+/g, m => " L" + m.slice(2))
   const roadKm = legs.reduce((a, l) => a + l.km, 0)
 
@@ -80,17 +103,17 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
         <path d={LAND} fill="var(--color-shallow)" stroke="var(--color-shallow-2)" strokeWidth={5} strokeLinejoin="round" />
         <path d={LAND} fill="var(--color-sand)" stroke="var(--color-coast)" strokeWidth={0.8 * k} strokeLinejoin="round" />
 
-        {PLACES.map(p => { const [x, y] = project(p.at[0], p.at[1]); return (
-          <text key={p.t} x={x} y={y} textAnchor="middle" fontSize={(p.big ? 15 : 10.5) * k} letterSpacing={p.big ? 4 * k : 0}
+        {PLACES.filter(p => p.t !== start.label).map(p => { const [x, y] = project(p.at[0], p.at[1]); return (
+          <text key={p.t} x={x} y={y} textAnchor="middle" fontSize={(p.big ? 14 : 12) * k} letterSpacing={p.big ? 5 * k : 0}
             className={p.big ? "map-big" : p.it ? "map-sea" : "map-label"}>{p.big ? p.t.toUpperCase() : p.t}</text>
         ) })}
 
         {/* the route */}
         {legs.map(l => (
           <g key={l.key}>
-            {l.mode === "road" && <motion.path d={arc(l.a, l.b)} fill="none" stroke="var(--color-yellow)" strokeWidth={7 * k} strokeLinecap="round"
+            {l.mode === "road" && <motion.path d={arc(l.a, l.b)} fill="none" stroke="var(--color-yellow)" strokeWidth={8 * k} strokeLinecap="round"
               initial={{ pathLength: reduce ? 1 : 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.8, ease: "easeInOut" }} />}
-            <motion.path d={arc(l.a, l.b)} fill="none" stroke="var(--color-navy)" strokeWidth={(l.mode === "road" ? 2.6 : 1.8) * k} strokeLinecap="round"
+            <motion.path d={arc(l.a, l.b)} fill="none" stroke="var(--color-navy)" strokeWidth={(l.mode === "road" ? 3 : 2) * k} strokeLinecap="round"
               strokeDasharray={l.mode === "sea" ? `${5 * k} ${4 * k}` : undefined}
               initial={{ pathLength: reduce ? 1 : 0, opacity: 0.4 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, ease: "easeInOut" }} />
           </g>
@@ -109,13 +132,13 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
           return (
             <g key={s.id} transform={`translate(${x} ${y})`} className="cursor-pointer" onClick={() => onPick(s.id)}>
               <title>{s.name}</title>
-              <circle r={14 * k} fill="transparent" />
+              <circle r={16 * k} fill="transparent" />
               {f && <circle r={(n ? 15 : 10) * k} fill="none" stroke="var(--color-navy)" strokeWidth={1.4 * k} className="pin-pulse" />}
               {n ? <>
-                <circle r={9.5 * k} fill="var(--color-navy)" stroke="#fff" strokeWidth={1.6 * k} />
-                <text y={3.6 * k} textAnchor="middle" fontSize={10 * k} className="map-num">{n}</text>
+                <circle r={11 * k} fill="var(--color-navy)" stroke="#fff" strokeWidth={1.6 * k} />
+                <text y={3.9 * k} textAnchor="middle" fontSize={11 * k} className="map-num">{n}</text>
               </> : <circle r={(f ? 5.5 : 4) * k} fill="#fff" stroke="var(--color-navy)" strokeWidth={1.6 * k} />}
-              {(n || f) && <text x={13 * k} y={-10 * k} fontSize={10.5 * k} className="map-stop" paintOrder="stroke">{s.short}</text>}
+              {labels.has(s.id) && <text x={labels.get(s.id)![0]} y={labels.get(s.id)![1]} textAnchor={labels.get(s.id)![2]} fontSize={13 * k} className="map-stop" paintOrder="stroke">{s.short}</text>}
             </g>
           )
         })}
@@ -123,7 +146,7 @@ export function TourMap({ start, stops, legs, focus, onPick, hover }: {
         {/* start and finish */}
         <g transform={`translate(${sp[0]} ${sp[1]})`}>
           <rect x={-7 * k} y={-7 * k} width={14 * k} height={14 * k} rx={3 * k} transform="rotate(45)" fill="var(--color-yellow)" stroke="var(--color-navy)" strokeWidth={1.8 * k} />
-          <text x={12 * k} y={14 * k} fontSize={10.5 * k} className="map-stop" paintOrder="stroke">{start.label}</text>
+          <text x={labels.get("__start")![0]} y={labels.get("__start")![1]} textAnchor={labels.get("__start")![2]} fontSize={13 * k} className="map-stop" paintOrder="stroke">{start.label}</text>
         </g>
       </svg>
 
