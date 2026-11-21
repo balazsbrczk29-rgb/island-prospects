@@ -13,18 +13,18 @@ export const biz = {
   town: 'Nassau, New Providence',
 }
 
-export type Chapter = { t: string; when: string; img: string; alt: string; h: string; p: string }
+export type Chapter = { t: string; when: string; img: string; alt: string; h: string; p: string; fact: string; pos: string }
 export const chapters: Chapter[] = [
   { t: '06:00', when: 'First light', img: 'h06-post.jpg', alt: 'A security officer seen from behind at the glass doors of a pastel office building in Nassau at dawn (illustrative photograph)',
-    h: 'Someone on post from first light to the hours nobody sees.', p: 'Trained security officers for businesses, institutions and private clients across New Providence, from one office on Carib Road.' },
+    h: 'Someone on post from first light to the hours nobody sees.', p: 'Trained security officers for businesses, institutions and private clients across New Providence, from one office on Carib Road.' , fact: 'Security officers on post', pos: '60% 55%' },
   { t: '12:00', when: 'Noon', img: 'h12-door.jpg', alt: 'An officer at the entrance of a white colonial shop building with green shutters in bright noon sun (illustrative photograph)',
-    h: 'At the bank door and on the shop floor.', p: 'Officers for the business and financial community, the government and retail sectors, and private and public clients.' },
+    h: 'At the bank door and on the shop floor.', p: 'Officers for the business and financial community, the government and retail sectors, and private and public clients.' , fact: 'For banks, offices, retail and government', pos: '62% 22%' },
   { t: '18:00', when: 'Dusk', img: 'h18-patrol.jpg', alt: 'An unmarked patrol truck beside a pink colonial building at dusk, an officer walking the wall with a torch (illustrative photograph)',
-    h: 'When the street empties, the patrol starts.', p: 'Patrol services that check doors, gates and perimeters after the staff go home.' },
+    h: 'When the street empties, the patrol starts.', p: 'Patrol services that check doors, gates and perimeters after the staff go home.' , fact: 'Patrols after closing', pos: '62% 50%' },
   { t: '22:00', when: 'Night', img: 'h22-gate.jpg', alt: 'An officer at a steel yard gate under a single warm street light at night (illustrative photograph)',
-    h: 'Special applications, special responses.', p: 'Customised services for sites that may need a special response to an adverse situation.' },
+    h: 'Special applications, special responses.', p: 'Customised services for sites that may need a special response to an adverse situation.' , fact: 'Customised services, special responses', pos: '42% 62%' },
   { t: '03:00', when: 'The quiet hours', img: 'h03-watch.jpg', alt: 'An alarm monitoring desk lit only by screens in a dark room (illustrative photograph)',
-    h: 'Alarm monitoring while the building sleeps.', p: 'Your alarm is watched from our side, so a signal at 3 am reaches a person, not an empty office.' },
+    h: 'Alarm monitoring while the building sleeps.', p: 'Your alarm is watched from our side, so a signal at 3 am reaches a person, not an empty office.' , fact: 'Alarm monitoring', pos: '55% 42%' },
 ]
 
 export const services = [

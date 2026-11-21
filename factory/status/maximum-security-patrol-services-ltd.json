@@ -4,8 +4,100 @@
  "name": "Maximum Security & Patrol Services Ltd",
  "batch": "06",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T15:39:25.616Z"
+ "claimed_at": "2026-11-21T15:39:25.616Z",
+ "pages": [
+  "index.html",
+  "services.html"
+ ],
+ "primary_cta": "Call 242-394-5425 (second line 242-393-7206); proposal builder writes the sentence to read out (no email published)",
+ "brand_truth": "A Nassau firm founded in 1993 by Byron C. Rodgers with not more than a dozen fully trained officers, supplying officers, patrols, alarm monitoring, investigations and consultancy from one office on Carib Road.",
+ "buyer": "Facilities, operations and procurement managers at banks, retailers, offices and government in Nassau, plus property managers and private clients, comparing 2-4 security firms and fearing no-shows, turnover and slow response.",
+ "direction": {
+  "archetype": "A03 Cinematic chapters",
+  "lane": "P05 Night harbour",
+  "type": "T03 Swiss grotesk (Schibsted Grotesk only)",
+  "why": "Security is bought by people who fear the hours they cannot see; a day-into-night film shows coverage instead of listing it, and the night-blue ground with brass light is the job itself. The 1993 story and services sit on the bone light section."
+ },
+ "big_idea": "One Nassau day of protection, 06:00 to 03:00: a pinned film where the photograph and the light change hour by hour, each hour carrying one real service.",
+ "concept_type": "brochure: services + request a security proposal (call)",
+ "tier_visual": "standard",
+ "tier_why": "Photography film with opacity crossfades and slow push-in; no WebGL needed.",
+ "images": [
+  {
+   "src": "https://ip-assets-maximum-security.lovable.app/assets/h06-post.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-maximum-security, illustrative, replace with own photos"
+  },
+  {
+   "src": "https://ip-assets-maximum-security.lovable.app/assets/h12-door.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-maximum-security, illustrative, replace with own photos"
+  },
+  {
+   "src": "https://ip-assets-maximum-security.lovable.app/assets/h18-patrol.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-maximum-security, illustrative, replace with own photos"
+  },
+  {
+   "src": "https://ip-assets-maximum-security.lovable.app/assets/h22-gate.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-maximum-security, illustrative, replace with own photos"
+  },
+  {
+   "src": "https://ip-assets-maximum-security.lovable.app/assets/h03-watch.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-maximum-security, illustrative, replace with own photos"
+  },
+  {
+   "src": "https://ip-assets-maximum-security.lovable.app/assets/notes.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-maximum-security, illustrative, replace with own photos"
+  }
+ ],
+ "plan_gate": {
+  "verdict": "revise x5, applied (fact line under the clock fills the empty column, per-chapter object-position and calmer 03:00 screens, solid night top bar with plain name and hairline Menu instead of pills, persistent CTA pair kept outside the chapter fade, tighter clock colon)",
+  "predicted": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 5,
+   "distinct": 5,
+   "references": 4
+  }
+ },
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 5,
+  "references": 4
+ },
+ "current_site_findings": [
+  "maximumsecurityservice.com no longer resolves (domain lost)",
+  "Only directory listings with phone and fax remain",
+  "No page explains the five services or the 1993 story"
+ ],
+ "pitch_line": "Your domain is gone and buyers find a fax number; this shows a procurement manager, hour by hour, what your officers do, and gets them to call Carib Road.",
+ "assumptions": [
+  "Patrols as a service line (from the company name; former staff list patrol dispatch)",
+  "Alarm monitoring wording ('a signal at 3 am reaches a person') is category-standard",
+  "Hours of service and 24-hour coverage not published: the film shows hours as a story, confirm with owner",
+  "Premises options in the proposal builder are category-standard",
+  "All photographs are illustrative (generated), officers seen from behind with no insignia",
+  "A new domain (canonical uses maximumsecuritybahamas.com as a placeholder) to be chosen with the owner"
+ ],
+ "sources": [
+  "https://www.bahamaslocal.com/showlisting/13385/Maximum_Security_and_Patrol_Services_Ltd.html",
+  "https://www.bahamasindex.com/company/9631/Maximum_Security_Patrol_Services_Ltd",
+  "https://bahamas.yabsta.com/listing/view/94705/maximum-security-patrol-services-ltd",
+  "https://urcabahamas.bs/wp-content/uploads/2024/05/Public-Register-of-Individual-and-Registered-Class-Licensees-8-May-2024.pdf"
+ ],
+ "notes": "Gen-2 rebuild by scheduled site worker 2026-11-21. Audit filled (site_kind none, priority A). BLIND: qa.mjs cannot load outside images; screenshots used crops of the Lovable gallery screenshot. Plan-gate critic (fresh subagent) asked for 5 revisions, applied; scores are its predicted post-fix scores. qa: 0 blockers; the remaining 'tap target under 40px' warning is the shared concept-label button. interact.mjs 'dead' items are radio/checkbox chips it tries to type into and the Menu dialog trigger; both work. distinct.mjs: distinct (closest 40).",
+ "built_at": "2026-11-21T15:50:41Z"
 }

@@ -90,3 +90,5 @@ Services page: one section per service, ends with the proposal call.
 **Tier:** standard (photography film, no WebGL).
 
 **Different from competitors:** pro-tech-security uses its own direction (not opened); this is the only cinematic day-night film in the repo and the only P05 security site.
+
+**Plan gate (2026-11-21):** revise x5, applied (see status). Treated as approved after the one revision.

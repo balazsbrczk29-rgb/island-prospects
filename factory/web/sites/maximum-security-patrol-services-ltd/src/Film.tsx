@@ -12,7 +12,7 @@ function Frame({ i, p }: { i: number; p: MotionValue<number> }) {
   const s = useTransform(p, v => 1.07 - 0.07 * clamp((v * (N - 1) - (i - 0.6)) / 1.6))
   return (
     <motion.div className="film__img" style={{ opacity: o, scale: s, zIndex: i }}>
-      <img src={IMG + c.img} alt={c.alt} data-source="generated" loading={i === 0 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : undefined} width={1920} height={1080} />
+      <img src={IMG + c.img} style={{ objectPosition: c.pos, filter: c.t === '03:00' ? 'saturate(.55) brightness(1.15)' : undefined }} alt={c.alt} data-source="generated" loading={i === 0 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : undefined} width={1920} height={1080} />
     </motion.div>
   )
 }
@@ -37,13 +37,13 @@ export default function Film() {
         <div className="band">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div key={c.t} className="clock" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
-              {c.t.slice(0, 2)}<span className="c">:</span>{c.t.slice(3)}<small>{c.when}</small>
+              {c.t.slice(0, 2)}<span className="c">:</span>{c.t.slice(3)}<small>{c.when}<span className="of"> &middot; {ch + 1} of {N}</span></small><em className="fact">{c.fact}</em>
             </motion.div>
           </AnimatePresence>
           <div className="sub" aria-live="polite">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div key={c.t} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }}>
-                {ch === 0 ? <h1>{c.h}</h1> : <h2>{c.h}</h2>}
+                <h1>{c.h}</h1>
                 <p>{c.p}</p>
               </motion.div>
             </AnimatePresence>
