@@ -18,9 +18,9 @@ const lodging = (c: Cottage, n: number) => c.rate * n * (1 + TAX.vat + TAX.levy)
 const dinnerNights = (a: string, n: number) => { let k = 0; for (let i = 0; i < n; i++) { const d = new Date(a + "T12:00:00"); d.setDate(d.getDate() + i); const w = d.getDay(); if (w >= 3 && w <= 6) k++ } return k }
 const ease = [0.22, 1, 0.36, 1] as const
 
-function Ticker({ value }: { value: number }) {
+function Ticker({ value, from }: { value: number; from?: number }) {
   const ref = useRef<HTMLSpanElement>(null)
-  const prev = useRef(value)
+  const prev = useRef(from ?? value)
   useEffect(() => {
     const el = ref.current; if (!el) return
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = usd(value); prev.current = value; return }
@@ -124,7 +124,7 @@ function Strip({ stay, setStay, today }: { stay: Stay; setStay: (s: Stay) => voi
 function Card({ c, n, fits, guests, open, i }: { c: Cottage; n: number; fits: boolean; guests: number; open: (id: string) => void; i: number }) {
   const s = c.shots[0]
   return (
-    <motion.li layout="position" transition={{ layout: { duration: 0.6, ease } }} className="card" data-fits={fits}>
+    <motion.li layout="position" initial={{ opacity: 0, y: 48 }} animate={{ opacity: 1, y: 0 }} transition={{ layout: { duration: 0.6, ease }, default: { duration: 0.9, ease, delay: 0.25 + i * 0.07 } }} className="card" data-fits={fits}>
       <button type="button" className="card-hit" onClick={() => open(c.id)} aria-label={`${c.name}: see photos and details`}>
         <motion.div layoutId={`ph-${c.id}`} className="card-ph" animate={{ y: fits ? 0 : 10, opacity: fits ? 1 : 0.42 }} transition={{ duration: 0.5, ease }}>
           <img src={I + s.f} alt={s.alt} width={s.w} height={s.h} loading={i < 5 ? "eager" : "lazy"} decoding="async" />
@@ -134,7 +134,7 @@ function Card({ c, n, fits, guests, open, i }: { c: Cottage; n: number; fits: bo
           <h3>{c.name}</h3>
           <p className="card-meta">Sleeps {c.sleeps} <span aria-hidden>·</span> {c.beds}</p>
           {fits ? (
-            <p className="card-price"><span className="num">{usd(c.rate)}</span> a night <span className="card-total">{n} {n === 1 ? "night" : "nights"} <Ticker value={lodging(c, n)} /> with taxes</span></p>
+            <p className="card-price"><span className="num">{usd(c.rate)}</span> a night <span className="card-total">{n} {n === 1 ? "night" : "nights"} <Ticker value={lodging(c, n)} from={0} /> with taxes</span></p>
           ) : (
             <p className="card-price card-price--no">Sleeps {c.sleeps}, not {guests}</p>
           )}
@@ -274,33 +274,47 @@ function Compare({ open, stay }: { open: (id: string) => void; stay: Stay }) {
       <div className="wrap">
         <div className="sec-head">
           <h2 id="cmp-h" className="h2">Every cottage, side by&nbsp;side</h2>
-          <p className="lede">Each was built by hand and is different from the next. All are steps from the sand, with housekeeping, air conditioning and ceiling fans. Totals are for your <span className="num">{n}</span> nights with taxes.</p>
+          <p className="lede">Each was built by hand and is different from the next. All are steps from the sand, with housekeeping, air conditioning and ceiling fans. Totals follow your dates; cottages too small for <span className="num">{stay.guests}</span> {stay.guests === 1 ? "guest" : "guests"} are dimmed.</p>
         </div>
-        {tiers.map(t => (
-          <div className="tier" key={t.key}>
-            <div className="tier-head"><h3>{t.title}</h3><p className="num">{t.sub}</p></div>
-            <ol className="rows">
-              {COTTAGES.filter(c => c.tier === t.key).map(c => (
-                <li key={c.id} className="row">
-                  <button type="button" className="row-ph" onClick={() => open(c.id)} aria-label={`${c.name}: open the photos`}>
-                    <img src={I + c.shots[0].f} alt={c.shots[0].alt} width={c.shots[0].w} height={c.shots[0].h} loading="lazy" decoding="async" />
-                  </button>
-                  <div className="row-name"><h4>{c.name}</h4><p>{c.note}</p></div>
-                  <dl className="row-facts">
-                    <div><dt>Sleeps</dt><dd className="num">{c.sleeps}</dd></div>
-                    <div><dt>Beds</dt><dd>{c.beds}</dd></div>
-                    <div><dt>Kitchen</dt><dd>{c.kitchen}</dd></div>
-                  </dl>
-                  <div className="row-price">
-                    <p className="num"><b>{usd(c.rate)}</b> a night</p>
-                    <p className="num muted">{usd(lodging(c, n))} for {n} nights</p>
-                    <button type="button" className="link" onClick={() => open(c.id)}>{c.shots.length} photos</button>
+        {tiers.map(t => {
+          const cs = COTTAGES.filter(c => c.tier === t.key)
+          return (
+            <div className="tier" key={t.key}>
+              <div className="tier-head"><h3>{t.title}</h3><p className="num">{t.sub}</p></div>
+              <div className="cmp" role="table" aria-label={t.title} style={{ ["--cols" as string]: cs.length }}>
+                <div className="cmp-row cmp-row--ph" role="row">
+                  <span className="cmp-lab" role="rowheader"><span className="sr-only">Photo</span></span>
+                  {cs.map(c => (
+                    <span role="cell" key={c.id} data-fits={c.sleeps >= stay.guests}>
+                      <button type="button" className="cmp-ph" onClick={() => open(c.id)} aria-label={`${c.name}: open the photos`}>
+                        <img src={I + c.shots[0].f} alt={c.shots[0].alt} width={c.shots[0].w} height={c.shots[0].h} loading="lazy" decoding="async" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+                <div className="cmp-row cmp-row--name" role="row">
+                  <span className="cmp-lab" role="rowheader">Cottage</span>
+                  {cs.map(c => <span role="cell" key={c.id} data-fits={c.sleeps >= stay.guests}><b>{c.name}</b><small>{c.note}</small></span>)}
+                </div>
+                {([["Sleeps", (c: Cottage) => String(c.sleeps)], ["Beds", (c: Cottage) => c.beds], ["Kitchen", (c: Cottage) => c.kitchen], ["A night", (c: Cottage) => usd(c.rate)]] as const).map(([lab, f]) => (
+                  <div className="cmp-row" role="row" key={lab}>
+                    <span className="cmp-lab" role="rowheader">{lab}</span>
+                    {cs.map(c => <span role="cell" className="num" key={c.id} data-fits={c.sleeps >= stay.guests}>{f(c)}</span>)}
                   </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        ))}
+                ))}
+                <div className="cmp-row cmp-row--total" role="row">
+                  <span className="cmp-lab" role="rowheader"><span className="num">{n}</span> nights, taxes in</span>
+                  {cs.map(c => (
+                    <span role="cell" key={c.id} data-fits={c.sleeps >= stay.guests}>
+                      {c.sleeps >= stay.guests ? <b className="num">{usd(lodging(c, n))}</b> : <em>Sleeps {c.sleeps}</em>}
+                      <button type="button" className="link" onClick={() => open(c.id)}>{c.shots.length} photos</button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )
+        })}
         <p className="fine">The club also manages private homes near Pigeon Cay. <a href={`mailto:${EMAIL}?subject=Private%20homes%20near%20Pigeon%20Cay`}>Ask about them</a>.</p>
       </div>
     </section>
@@ -390,6 +404,13 @@ function Way() {
           <h2 id="way-h" className="h2">Two airports on Cat Island, then a short taxi&nbsp;ride</h2>
           <p className="lede">The club is on the north of the island, three miles south of Bennett's Harbour. Tell them your flight and they will arrange the transfer.</p>
         </div>
+        <div className="line" aria-hidden>
+          <span className="stop"><b>Fort Lauderdale</b> or <b>Nassau</b></span>
+          <span className="leg">Makers Air, Bahamasair, Western Air</span>
+          <span className="stop"><b>Arthur's Town</b> or <b>New Bight</b></span>
+          <span className="leg num">Taxi $60</span>
+          <span className="stop stop--end"><b>Pigeon Cay</b></span>
+        </div>
         <ol className="route">
           <li>
             <span className="route-n num">1</span>
@@ -423,7 +444,7 @@ function Weddings() {
   return (
     <section className="sec wed on-deep" id="weddings" aria-labelledby="wed-h">
       <div className="wrap wed-grid">
-        <Photo s={{ f: "weddings-3.jpg", w: 640, h: 480, alt: "A bride and groom walking hand in hand along the empty beach" }} />
+        <Photo className="wed-ph" s={{ f: "weddings-3.jpg", w: 640, h: 480, alt: "A bride and groom walking hand in hand along the empty beach" }} />
         <div>
           <h2 id="wed-h" className="h2">Married on the sand, in a 100-year-old church, or at the&nbsp;Hermitage</h2>
           <p className="lede">For two, or for up to 40 guests. The club plans it before, during and after.</p>
@@ -505,8 +526,8 @@ function StayBar({ stay, extras, pick, open }: { stay: Stay; extras: Extras; pic
       {show && (
         <motion.aside className="bar" aria-label="Your stay" initial={{ y: "110%" }} animate={{ y: 0 }} exit={{ y: "110%" }} transition={{ duration: 0.45, ease }}>
           <button type="button" className="bar-what" onClick={() => open(c.id)}>
-            <b>{pick ? c.name : `From ${c.name}`}</b>
-            <span className="num bar-dates">{short(stay.arrive)} to {short(stay.leave)}, {stay.guests} {stay.guests === 1 ? "guest" : "guests"}</span>
+            <b>{c.name}</b>
+            <span className="num bar-dates">{pick && pick.sleeps >= stay.guests ? "" : "Lowest rate that fits. "}{short(stay.arrive)} to {short(stay.leave)}, {stay.guests} {stay.guests === 1 ? "guest" : "guests"}</span>
             <span className="num bar-mtot">{usd(lodging(c, n) + ext)} with taxes, $0 today</span>
           </button>
           <p className="bar-sum"><Ticker value={lodging(c, n) + ext} /><small>estimate with taxes{ext ? " and extras" : ""}. Due today $0</small></p>
