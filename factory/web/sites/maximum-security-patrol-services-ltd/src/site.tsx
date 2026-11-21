@@ -1,136 +1,142 @@
-import { useEffect, useState, type ReactNode } from "react"
-import { createRoot } from "react-dom/client"
-import Lenis from "lenis"
-import { motion, useScroll, useSpring } from "motion/react"
-import { Menu, Phone } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
-import "./styles.css"
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
+import { IMG, biz, chapters, services } from './data'
 
-export const PHONE = "242-394-5425"
-export const TEL = "tel:+12423945425"
-export const PHONE2 = "242-393-7206"
-export const TEL2 = "tel:+12423937206"
-export const ease = [0.16, 1, 0.3, 1] as const
-export const reveal = [0.77, 0, 0.175, 1] as const
-
-const NAV = [
-  { href: "index.html#services", label: "Services" },
-  { href: "services.html", label: "Service detail" },
-  { href: "index.html#since-1993", label: "Since 1993" },
-  { href: "index.html#proposal", label: "Proposal" },
-  { href: "index.html#contact", label: "Contact" },
-]
-
-function useLenis() {
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const lenis = new Lenis({ duration: 1.1, smoothWheel: true })
-    let id = 0
-    const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
-    id = requestAnimationFrame(raf)
-    return () => { cancelAnimationFrame(id); lenis.destroy() }
-  }, [])
-}
-
-function Wordmark() {
-  return (
-    <a href="index.html" className="flex items-center gap-3 leading-none" aria-label="Maximum Security and Patrol Services, home">
-      <span className="flex size-10 items-center justify-center rounded-[3px] bg-ink font-display text-[15px] font-bold tracking-tight text-paper">MS</span>
-      <span>
-        <span className="block font-display text-[1.05rem] font-bold tracking-[-0.01em] text-ink">Maximum Security</span>
-        <span className="label mt-1 block !text-[10px] text-muted">&amp; Patrol Services · Nassau</span>
-      </span>
-    </a>
-  )
-}
-
-function Header({ current }: { current: string }) {
+export function Top({ home = true }: { home?: boolean }) {
   const [open, setOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
+  const closeRef = useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    if (!open) return
+    closeRef.current?.focus()
+    const k = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    document.addEventListener('keydown', k); document.body.style.overflow = 'hidden'
+    return () => { document.removeEventListener('keydown', k); document.body.style.overflow = '' }
+  }, [open])
+  const base = home ? '' : './'
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-3 md:px-10">
-        <Wordmark />
-        <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
-          {NAV.map(n => <a key={n.href} href={n.href} aria-current={current === n.label ? "page" : undefined} className={`ulink text-[15px] ${current === n.label ? "!bg-[length:100%_1px]" : ""}`}>{n.label}</a>)}
-          <a href={TEL} className="inline-flex min-h-11 items-center gap-2 rounded-[3px] bg-ink px-5 text-[15px] font-medium text-paper transition duration-200 hover:-translate-y-px hover:bg-olive-deep active:translate-y-0"><Phone className="size-4" aria-hidden />{PHONE}</a>
-        </nav>
-        <div className="flex items-center gap-2 lg:hidden">
-          <a href={TEL} aria-label={`Call ${PHONE}`} className="inline-flex size-11 items-center justify-center rounded-[3px] border border-line"><Phone className="size-[18px]" /></a>
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger className="inline-flex size-11 items-center justify-center rounded-[3px] border border-line" aria-label="Open menu"><Menu className="size-5" /></SheetTrigger>
-            <SheetContent side="right" className="w-full border-l-0 bg-paper sm:max-w-sm">
-              <SheetTitle className="sr-only">Menu</SheetTitle>
-              <nav className="mt-16 flex flex-col px-6" aria-label="Mobile">
-                {NAV.map((n, i) => <motion.a key={n.href} href={n.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i, duration: 0.5, ease }} className="border-b border-line py-4 font-display text-[1.9rem] font-semibold tracking-tight">{n.label}</motion.a>)}
-                <a href={TEL} className="mt-8 rounded-[3px] bg-ink py-4 text-center text-paper">Call {PHONE}</a>
-                <a href={TEL2} className="mt-3 rounded-[3px] border border-ink/25 py-4 text-center">Call {PHONE2}</a>
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </div>
-      <motion.div style={{ scaleX: progress }} className="h-[2px] origin-left bg-olive" aria-hidden />
-    </header>
+    <>
+      <header className="top">
+        <a className="name" href="./">Maximum Security &amp; Patrol Services</a>
+        <button type="button" className="menu-btn" aria-expanded={open} aria-controls="menu" onClick={() => setOpen(true)}>Menu</button>
+      </header>
+      <AnimatePresence>
+        {open && (
+          <motion.div id="menu" className="overlay" role="dialog" aria-modal="true" aria-label="Menu"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+            <button ref={closeRef} type="button" className="menu-btn close" onClick={() => setOpen(false)}>Close</button>
+            <nav aria-label="Chapters and pages">
+              <ol>
+                {chapters.map(c => <li key={c.t}><a href={base + '#top'} onClick={() => setOpen(false)}><span>{c.t}</span>{c.h.replace(/\.$/, '')}</a></li>)}
+                <li><a href={base + '#since'} onClick={() => setOpen(false)}><span>1993</span>Who we are</a></li>
+                <li><a href="services.html" onClick={() => setOpen(false)}><span>Services</span>All five services</a></li>
+                <li><a href={base + '#proposal'} onClick={() => setOpen(false)}><span>Proposal</span>Request a security proposal</a></li>
+              </ol>
+            </nav>
+            <aside>
+              <p>{biz.address}, {biz.town}</p>
+              {biz.phones.map(ph => <a key={ph.tel} className="btn btn-brass" href={`tel:${ph.tel}`}>Call {ph.label}</a>)}
+            </aside>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
-function Footer() {
+export function Origin() {
   return (
-    <footer className="bg-ink text-paper">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-16 md:grid-cols-[1.6fr_1fr_1fr] md:px-10 md:py-20">
-        <div>
-          <p className="font-display text-[1.7rem] font-bold tracking-tight">Maximum Security &amp; Patrol Services Ltd.</p>
-          <p className="mt-4 max-w-sm text-paper/70">Carib House, #15 Carib Road, P.O. Box N-9425, Nassau, New Providence, The Bahamas. Founded 1993.</p>
+    <section className="light" id="since" aria-labelledby="since-h">
+      <div className="wrap origin">
+        <p className="origin__k" aria-hidden="true">1993</p>
+        <h2 id="since-h">Started with not more than a dozen fully trained officers.</h2>
+        <div className="origin__body">
+          <p>Byron C. Rodgers, Chairman and CEO, founded Maximum Security &amp; Patrol Services in 1993. The aim from the first day: to change an industry known for turnover and low standards.</p>
+          <p>Today the company supplies trained officers, patrols, alarm monitoring, investigations and consultancy from one office on Carib Road.</p>
         </div>
-        <div className="text-[15px]">
-          <p className="label text-olive-light">Office</p>
-          <a href={TEL} className="ulink mt-3 inline-block">Tel {PHONE}</a><br />
-          <a href={TEL2} className="ulink mt-2 inline-block">Tel {PHONE2}</a>
-          <p className="mt-2 text-paper/60">Fax 242-394-5428</p>
-        </div>
-        <div className="text-[15px]">
-          <p className="label text-olive-light">Pages</p>
-          {NAV.map(n => <a key={n.href} href={n.href} className="ulink mt-2 block w-fit">{n.label}</a>)}
-        </div>
+        <figure>
+          <img src={IMG + 'notes.jpg'} alt="A closed notebook, pen and folder on a desk in striped light from louvred shutters (illustrative photograph)" loading="lazy" width={720} height={480} data-source="generated" />
+          <figcaption>Investigations and consultancy start at a desk like this one.</figcaption>
+        </figure>
       </div>
-      <p className="mx-auto max-w-[1440px] border-t border-paper/15 px-5 py-6 text-xs text-paper/55 md:px-10">Concept by ESTATIQ AI Solutions. Details from public directory listings, to be confirmed with the company.</p>
+      <div className="wrap svcs" id="services">
+        <h2>Five services, one office that answers.</h2>
+        <ol>
+          {services.map(s => (
+            <li key={s.id}><span>{s.n}</span><div><h3>{s.name}</h3><p style={{ marginTop: '.35rem', fontSize: 'var(--t-1)' }}>{s.who}</p></div><p>{s.body}</p></li>
+          ))}
+        </ol>
+        <p style={{ marginTop: '2rem' }}><a className="link" href="services.html">The services in detail</a></p>
+      </div>
+    </section>
+  )
+}
+
+const SVC = ['Security officers', 'Patrols', 'Alarm monitoring', 'Investigations', 'Consultancy']
+const SITE = ['Bank or office', 'Retail store', 'Government building', 'Residence', 'Yard or warehouse']
+const HRS = ['Business hours', 'Nights', 'Around the clock', 'Not sure yet']
+
+export function Proposal() {
+  const [svc, setSvc] = useState<string[]>(['Security officers'])
+  const [site, setSite] = useState('Bank or office')
+  const [hrs, setHrs] = useState('Nights')
+  const [posts, setPosts] = useState(1)
+  const t = (x: string) => setSvc(a => (a.includes(x) ? a.filter(y => y !== x) : [...a, x]))
+  const say = useMemo(() => `Good day. I would like a security proposal for a ${site.toLowerCase()} in New Providence: ${svc.length ? svc.join(', ').toLowerCase() : 'advice on what we need'}, ${hrs.toLowerCase()}, ${posts} ${posts === 1 ? 'post' : 'posts'}.`, [svc, site, hrs, posts])
+  return (
+    <section className="wrap prop" id="proposal" aria-labelledby="prop-h">
+      <div>
+        <h2 id="prop-h">Request a security proposal.</h2>
+        <p className="prop__intro">Choose what you need and we will write the sentence for you. Then call the office on Carib Road and read it out.</p>
+        <fieldset><legend>What you need</legend><div className="opts">{SVC.map(x => <label className="opt" key={x}><input type="checkbox" checked={svc.includes(x)} onChange={() => t(x)} /><span>{x}</span></label>)}</div></fieldset>
+        <fieldset><legend>The premises</legend><div className="opts">{SITE.map(x => <label className="opt" key={x}><input type="radio" name="site" checked={site === x} onChange={() => setSite(x)} /><span>{x}</span></label>)}</div></fieldset>
+        <fieldset><legend>When</legend><div className="opts">{HRS.map(x => <label className="opt" key={x}><input type="radio" name="hrs" checked={hrs === x} onChange={() => setHrs(x)} /><span>{x}</span></label>)}</div></fieldset>
+        <fieldset><legend>Officers on post at once</legend>
+          <div className="count"><button type="button" aria-label="Fewer posts" onClick={() => setPosts(n => Math.max(1, n - 1))}>&minus;</button><output aria-live="polite">{posts}</output><button type="button" aria-label="More posts" onClick={() => setPosts(n => Math.min(30, n + 1))}>+</button></div>
+        </fieldset>
+      </div>
+      <aside className="say" aria-label="What to say when you call">
+        <h3>What to say</h3>
+        <p className="lead">Read this out when the office answers.</p>
+        <blockquote>{say}</blockquote>
+        <div className="calls">
+          <a className="btn btn-brass" href={`tel:${biz.phones[0].tel}`}>Call {biz.phones[0].label}</a>
+          <a className="btn btn-ghost" href={`tel:${biz.phones[1].tel}`}>Or {biz.phones[1].label}</a>
+        </div>
+      </aside>
+    </section>
+  )
+}
+
+export function Credits() {
+  return (
+    <footer className="wrap credits" id="contact">
+      <h2>Maximum Security &amp; Patrol Services Ltd.</h2>
+      <dl>
+        <div><dt>Office</dt><dd>{biz.address}<br />{biz.town}</dd></div>
+        <div><dt>Telephone</dt><dd>{biz.phones.map(p => <a key={p.tel} href={`tel:${p.tel}`} style={{ display: 'block' }}>{p.label}</a>)}</dd></div>
+        <div><dt>Fax</dt><dd>{biz.fax}</dd></div>
+        <div><dt>Mail</dt><dd>{biz.box}, Nassau</dd></div>
+        <div><dt>Founded</dt><dd>1993, by Byron C. Rodgers</dd></div>
+      </dl>
+      <div className="foot">
+        <span>Photography: illustrative images generated for this concept, to be replaced with your own.</span>
+        <a href="services.html">Services</a>
+      </div>
     </footer>
   )
 }
 
-function ActionBar() {
-  return (
-    <nav aria-label="Quick actions" className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1.4fr] border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">
-      <a href="index.html#proposal" className="flex min-h-14 items-center justify-center text-[15px] font-medium">Proposal</a>
-      <a href={TEL} className="flex min-h-14 items-center justify-center gap-2 bg-ink text-[15px] font-medium text-paper"><Phone className="size-4" aria-hidden /> Call {PHONE}</a>
-    </nav>
-  )
-}
-
-export function Page({ current, children }: { current: string; children: ReactNode }) {
-  useLenis()
-  return (<><a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-paper focus:p-3">Skip to content</a><Header current={current} /><main id="main">{children}</main><Footer /><ActionBar /></>)
-}
-
-export function mount(node: ReactNode) {
-  document.documentElement.classList.add("js-anim")
-  createRoot(document.getElementById("root")!).render(node)
-}
-
-export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
-  return (
-    <motion.div className={className} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8% 0px" }} transition={{ duration: 0.8, delay, ease }}>{children}</motion.div>
-  )
-}
-
-export function Head({ index, label, title, id, children, dark = false }: { index: string; label: string; title: ReactNode; id: string; children?: ReactNode; dark?: boolean }) {
-  return (
-    <Reveal>
-      <p className={`label flex items-center gap-3 ${dark ? "text-olive-light" : "text-olive"}`}><span className="tabular-nums">{index}</span><span className={`h-px w-10 ${dark ? "bg-olive-light/50" : "bg-olive/40"}`} aria-hidden /><span>{label}</span></p>
-      <h2 id={id} className="mt-5 font-display text-[clamp(2.3rem,4.6vw,4.4rem)] leading-[0.98] font-bold tracking-[-0.035em]">{title}</h2>
-      {children}
-    </Reveal>
-  )
+export function CallPill() {
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const film = document.querySelector('[data-stage]'); const prop = document.getElementById('proposal'); const ct = document.getElementById('contact')
+    let past = !film, a = false, b = false
+    const upd = () => setShow(past && !a && !b)
+    const os: IntersectionObserver[] = []
+    if (film) { const o = new IntersectionObserver(([e]) => { past = !e.isIntersecting && e.boundingClientRect.top < 0; upd() }); o.observe(film); os.push(o) }
+    if (prop) { const o = new IntersectionObserver(([e]) => { a = e.isIntersecting; upd() }, { threshold: 0.2 }); o.observe(prop); os.push(o) }
+    if (ct) { const o = new IntersectionObserver(([e]) => { b = e.isIntersecting; upd() }); o.observe(ct); os.push(o) }
+    upd(); return () => os.forEach(o => o.disconnect())
+  }, [])
+  return <a className="callpill" data-hidden={!show} href={`tel:${biz.phones[0].tel}`}>Call {biz.phones[0].label}</a>
 }

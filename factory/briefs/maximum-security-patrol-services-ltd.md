@@ -58,3 +58,35 @@ Primary query: "security company Nassau Bahamas". Secondary: "security guards Na
 
 ## Unknowns
 Email, hours, officer numbers today, licences, client names, photos. Designed around.
+
+---
+# Generation 2 design plan (2026-11-21)
+Re-check: one search confirms no website (directories only); LinkedIn shows a former supervisor's duties "guard patrol dispatch and static post diary writing". Previous plan-drawing hero is replaced.
+
+**Big idea:** the page is one Nassau day of protection, 06:00 to 03:00: a pinned film where the photograph and the light change hour by hour (dawn post at an office door, noon at a shop entrance, dusk patrol, a yard gate at 22:00, the alarm-monitoring desk at 03:00), each hour carrying one real service of the Carib Road firm.
+
+**Direction:** A03 Cinematic chapters + P05 Night harbour + T03 Swiss grotesk (N3 "Menu" word + full overlay, M7 stillness: opacity crossfades and a slow push-in only). Why: security is bought by people who fear the hours they cannot see; a day-into-night film shows coverage instead of listing it, and night harbour's dark ground with brass light is literally the job (lights on after dark). The light section is the origin and services block on the bone ground.
+
+**Fonts:** Schibsted Grotesk variable only, 5 sizes (14/18/28/56/120), weights 400 and 600; times set in tabular figures at 120px.
+
+**Photo set** (Lovable asset project ip-assets-maximum-security, illustrative, officers from behind, no faces, no weapons, no insignia): h06-post, h12-door, h18-patrol, h22-gate, h03-watch (16:9, 1920 wide, full-bleed on desktop 1440 is within source), notes (3:2, shown at max 720 px).
+
+**Storyboard (desktop 1440x900):**
+1. 06:00 (hero, pinned film starts): dawn photo full bleed; name small top-left, "Menu" top-right; huge "06:00"; H1 subtitle low: "Someone on post from first light to the hours nobody sees."; Call 242-394-5425 primary + "Request a proposal".
+2. 12:00 noon door: "At the bank door and on the shop floor." Clients in their words: business and financial community, government, retail, private clients.
+3. 18:00 dusk patrol: "Patrols when the street empties." (mobile patrol: assumption to confirm).
+4. 22:00 gate: "Officers for special applications." customised services that may require special responses to adverse situations.
+5. 03:00 monitoring: "Alarm monitoring while you sleep."
+6. Light section (bone ground): 1993 origin: "Founded in 1993 by Byron C. Rodgers with not more than a dozen fully trained officers"; aim: transforming an industry known for turnover and low standards. notes.jpg beside (investigations and consultancy).
+7. Services index on the light ground: five services, each one line + who it is for (plain rows, no cards).
+8. Proposal builder (dark): service, premises, hours, number of posts, island -> summary to read out, two large Call buttons (no email published).
+9. Credits: address, P.O. Box, phones, fax rolling like end credits; footer line.
+Services page: one section per service, ends with the proposal call.
+
+**Phone (390x844):** 1) dawn photo cropped on the officer (object-position 72%), 06:00 large top, H1 + Call low above the concept label zone; 2) same film, 12:00, subtitle two lines; 3) 03:00 monitoring with chapter progress ticks.
+
+**Conversion:** Call (two numbers) is primary everywhere; proposal builder composes what to say. "Menu" overlay holds chapters + Call.
+
+**Tier:** standard (photography film, no WebGL).
+
+**Different from competitors:** pro-tech-security uses its own direction (not opened); this is the only cinematic day-night film in the repo and the only P05 security site.
