@@ -5,15 +5,16 @@ import { IMG, RATES, DOCKWA, contact, stays, marina, pics, type Pic } from './da
 // Fixed half: shows the photo of whichever section is in view (or a hovered row's photo).
 export function useActivePic(ids: string[], initial: string) {
   const [pic, setPic] = useState(initial)
+  const [sec, setSec] = useState(ids[0])
   useEffect(() => {
     const obs = new IntersectionObserver(es => {
       const vis = es.filter(e => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-      if (vis) setPic((vis.target as HTMLElement).dataset.pic || initial)
+      if (vis) { setPic((vis.target as HTMLElement).dataset.pic || initial); setSec(vis.target.id) }
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 })
     ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el) })
     return () => obs.disconnect()
   }, [])
-  return [pic, setPic] as const
+  return [pic, sec] as const
 }
 
 export function Fixed({ pic, hover }: { pic: string; hover?: string | null }) {
@@ -51,7 +52,7 @@ export function Nav({ base = '' }: { base?: string }) {
 }
 
 export function StayFinder({ onHover }: { onHover?: (k: string | null) => void }) {
-  const [n, setN] = useState(2)
+  const [n, setN] = useState(4)
   const fit = useMemo(() => stays.filter(s => s.guests >= n), [n])
   const hov = (s: typeof stays[number]) => onHover?.(s.kind === 'Villa' ? (s.guests >= 8 ? 'porch' : 'living') : 'kitchen')
   return (
@@ -119,11 +120,14 @@ export function Contact() {
   )
 }
 
-export function Strip() {
+export function Strip({ mode = 'both' }: { mode?: 'both' | 'room' | 'slip' }) {
   return (
     <div className="strip">
       <span className="small">Hope Town, Elbow Cay, Abaco</span>
-      <a className="btn btn-ink" href={RATES}>Check room rates</a>
+      <span className="strip__acts">
+        {mode !== 'room' && <a className={'btn ' + (mode === 'slip' ? 'btn-ink' : 'btn-line')} href={DOCKWA}>Book a slip</a>}
+        {mode !== 'slip' && <a className="btn btn-ink" href={RATES}>Check room rates</a>}
+      </span>
     </div>
   )
 }

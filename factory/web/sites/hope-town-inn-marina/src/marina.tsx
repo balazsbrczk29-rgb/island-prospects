@@ -11,7 +11,7 @@ function Marina() {
         <Fixed pic={pic} />
         <div className="col">
           <main id="main">
-            <section className="sec sec--hero field" id="top" data-pic="docks" aria-labelledby="h">
+            <section className="sec sec--hero" id="top" data-pic="docks" aria-labelledby="h">
               <SecPic k="docks" eager />
               <p className="brand"><a href="./" style={{ textDecoration: 'none' }}>Hope Town Inn &amp; Marina</a> &middot; Marina</p>
               <div className="hide-sm"><Nav base="./" /></div>

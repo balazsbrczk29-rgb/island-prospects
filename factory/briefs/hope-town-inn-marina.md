@@ -64,3 +64,5 @@ Inner pages: stay.html (all 9 stays with sizes, finder) and marina.html (full sp
 **Tier:** standard (own photography in a fixed split, crossfades). Not 3D: their own aerial says more than an Ocean scene.
 
 **Distinct:** not A08+P02 (Swain's Cay Lodge); Fraunces + flamingo accent on salt white.
+
+**Plan gate (2026-11-21):** revise x5, applied (see status). Treated as approved after the one revision.

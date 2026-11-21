@@ -4,8 +4,114 @@
  "name": "Hope Town Inn & Marina",
  "batch": "05",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T15:50:52.841Z"
+ "claimed_at": "2026-11-21T15:50:52.841Z",
+ "pages": [
+  "index.html",
+  "stay.html",
+  "marina.html"
+ ],
+ "primary_cta": "Check room rates (Vertical Booking hand-off); Book a slip (Dockwa hand-off) for boaters; sticky strip switches with the section",
+ "brand_truth": "The harbourside estate beside the Elbow Reef Lighthouse, where boats and guests arrive at the same dock.",
+ "buyer": "US East Coast couples and families planning an Abaco trip months ahead on a phone; yacht and sportfish owners and captains crossing from Florida checking slip limits and power.",
+ "direction": {
+  "archetype": "A08 Fixed split",
+  "lane": "P12 Inagua salt",
+  "type": "T01 Monumental serif (Fraunces + Newsreader)",
+  "why": "Two arrivals, one harbour: the split makes the brand truth literal and keeps their own photography full height; salt white with slate ink and a flamingo accent echoes Hope Town's pastel cottages and striped lighthouse."
+ },
+ "big_idea": "Guests and boats arrive at the same dock, so the page is split for good: the harbour stays fixed on one half while the other asks by ferry or by boat and answers with the right booking.",
+ "concept_type": "booking: stay finder by party size handing off to Vertical Booking, slip check handing off to Dockwa, bar, Johnny's Cay, getting here",
+ "tier_visual": "standard",
+ "tier_why": "Their own aerial of the harbour says more than a 3D ocean; fixed split with crossfades.",
+ "images": [
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/a.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/b.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/c.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/e.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/f.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/g.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/i.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/j.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  }
+ ],
+ "plan_gate": {
+  "verdict": "revise x5, applied (strip switches to Book a slip in the marina sections and shows both on the hero, flamingo accent on the two choices, selected party size and the rule; grey-blue marina panel removed; harbour photo used twice only; arrows and hover on the two choices; finder opens at 4 guests)",
+  "predicted": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 5,
+   "distinct": 4,
+   "references": 4
+  }
+ },
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 4,
+  "references": 4
+ },
+ "current_site_findings": [
+  "Out-of-service 242.366.0003 listed first",
+  "30+ menu links",
+  "No party-size filter across 9 stays",
+  "120 vs 125 ft conflict",
+  "2021/2022 Covid badges",
+  "Generic copy (Welcome to, Nestled, paradise)"
+ ],
+ "pitch_line": "Your booking engines are good; your site makes guests and captains dig for them. This one asks 'by ferry or by boat?' and gets each to the right booking in two taps.",
+ "assumptions": [
+  "125 ft dockage used (marina page) over 120 ft (homepage)",
+  "US +1 850 588 4855 and BS 242 803 4401 lead because 242.366.0003 is flagged out of service",
+  "'Three room types and six villas' counts types, not inventory",
+  "Bar photo (G) assumed to be Bridget's Rum Bar / restaurant area; Johnny's Cay dock photo (I) as labelled on their site",
+  "Elbow Reef Classic described as hosted by the inn"
+ ],
+ "sources": [
+  "https://www.hopetownmarina.com/",
+  "https://www.hopetownmarina.com/marina-abacos-bahamas",
+  "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-hotel-rooms",
+  "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-villas",
+  "https://www.hopetownmarina.com/the-abacos-bahamas/getting-here"
+ ],
+ "notes": "Gen-2 rebuild by scheduled site worker 2026-11-21 (claimed after another worker released it out of budget; reused its audit and the own-photo gallery). No new research calls. BLIND: screenshots used crops of the Lovable gallery screenshot. qa.mjs 'dead space' blocker on the left 720 px is a false positive: the left half is a sticky full-height photograph (A08 fixed split) that a single full-page screenshot only paints once; stitched viewport captures show it on every screen. Remaining tap-target warning is the shared concept-label button. Plan-gate critic asked for 5 revisions, all applied; scores are its predicted post-fix scores. distinct.mjs: distinct; ground tinted to salt grey after its cream warning.",
+ "built_at": "2026-11-21T15:59:51Z"
 }

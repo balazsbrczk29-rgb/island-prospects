@@ -1,12 +1,14 @@
 import { createRoot } from 'react-dom/client'
 import './styles.css'
+import { ArrowDown } from 'lucide-react'
 import { IMG, RATES, DOCKWA, pics } from './data'
 import { useActivePic, Fixed, SecPic, Nav, StayFinder, SlipCheck, Specs, Contact, Strip, Foot } from './site'
 
 const IDS = ['top', 'ferry', 'boat', 'bar', 'cay', 'here', 'contact']
 
 function Home() {
-  const [pic] = useActivePic(IDS, 'harbour')
+  const [pic, sec] = useActivePic(IDS, 'harbour')
+  const mode = sec === 'top' ? 'both' : sec === 'boat' || sec === 'here' ? 'slip' : 'room'
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
@@ -21,8 +23,8 @@ function Home() {
               <h1 id="h" className="big">Two ways in.</h1>
               <p className="lede">A 15-acre estate beside the Elbow Reef Lighthouse, on the west side of Hope Town Harbour. Guests and boats arrive at the same dock.</p>
               <div className="ways">
-                <a className="way" href="#ferry"><b>By ferry</b><span>Three room types and six villas, for one to eight</span></a>
-                <a className="way" href="#boat"><b>By boat</b><span>Fifty surge-free slips, boats to 125 ft</span></a>
+                <a className="way" href="#ferry"><b>By ferry <ArrowDown aria-hidden="true" size={20} strokeWidth={1.25} /></b><span>Three room types and six villas, for one to eight</span></a>
+                <a className="way" href="#boat"><b>By boat <ArrowDown aria-hidden="true" size={20} strokeWidth={1.25} /></b><span>Fifty surge-free slips, boats to 125 ft</span></a>
               </div>
             </section>
 
@@ -34,7 +36,7 @@ function Home() {
               <div style={{ marginTop: 'var(--s-4)' }}><StayFinder /></div>
             </section>
 
-            <section className="sec field" id="boat" data-pic="docks" aria-labelledby="boat-h">
+            <section className="sec" id="boat" data-pic="docks" aria-labelledby="boat-h">
               <SecPic k="docks" />
               <p className="kicker">The marina</p>
               <h2 id="boat-h" className="big">By boat.</h2>
@@ -54,20 +56,20 @@ function Home() {
             <section className="sec" id="cay" data-pic="cay" aria-labelledby="cay-h">
               <SecPic k="cay" />
               <p className="kicker">For the whole party</p>
-              <h2 id="cay-h" className="big">Johnny's Cay.</h2>
+              <h2 id="cay-h" className="big">Johnny's&nbsp;Cay.</h2>
               <p className="body">A private island available to rent through the inn. Ask the office for dates and what is included.</p>
               <div className="acts"><a className="ul" href="#contact">Ask about Johnny's Cay</a></div>
             </section>
 
-            <section className="sec" id="here" data-pic="harbour" aria-labelledby="here-h">
-              <SecPic k="harbour" />
+            <section className="sec" id="here" data-pic="cottage" aria-labelledby="here-h">
+              <SecPic k="porch" />
               <p className="kicker">Getting here</p>
               <h2 id="here-h" className="mid">Fly to Marsh Harbour, then the ferry to Hope Town.</h2>
               <p className="body">GNL Ferry and The Ferry Limited run from Marsh Harbour to Hope Town. You can also fly into Treasure Cay and come over by boat. Arriving on your own boat, book the slip ahead on Dockwa.</p>
               <div className="acts"><a className="btn btn-line" href={DOCKWA}>Book a slip</a><a className="ul" href={RATES}>Check room rates</a></div>
             </section>
 
-            <section className="sec" id="contact" data-pic="cottage" aria-labelledby="c-h">
+            <section className="sec" id="contact" data-pic="porch" aria-labelledby="c-h">
               <p className="kicker">The office</p>
               <h2 id="c-h" className="mid">Write or call before you cross.</h2>
               <Contact />
@@ -75,7 +77,7 @@ function Home() {
             </section>
           </main>
           <Foot />
-          <Strip />
+          <Strip mode={mode} />
         </div>
       </div>
     </>
