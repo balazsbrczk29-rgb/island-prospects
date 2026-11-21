@@ -9,7 +9,7 @@ function Hero() {
     <section className="mx-auto max-w-[1320px] px-5 pt-16 pb-16 md:px-12 md:pt-24" aria-labelledby="pk-title">
       <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[14px] text-muted">Packages, Anna's Wedding Planning, Nassau</motion.p>
       <h1 id="pk-title" className="mt-6 max-w-[15ch] font-display text-[clamp(3rem,7vw,7.2rem)] leading-[0.92] tracking-[-0.02em]">
-        {["Seven ways to say", "yes on the beach."].map((l, i) => (
+        {["Seven packages,", "every price published."].map((l, i) => (
           <span key={l} className="block overflow-hidden pb-[0.08em]"><motion.span className="block" initial={{ y: "108%" }} animate={{ y: 0 }} transition={{ delay: 0.15 + i * 0.1, duration: 1.2, ease: [0.77, 0, 0.175, 1] }}>{l}</motion.span></span>
         ))}
       </h1>

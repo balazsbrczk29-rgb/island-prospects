@@ -92,6 +92,18 @@ function Footer() {
 }
 
 function PhoneDock() {
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const onScroll = () => {
+      const f = document.getElementById("finder"), pl = document.getElementById("plan")
+      const past = f ? f.getBoundingClientRect().bottom < 0 : window.scrollY > 900
+      const r = pl?.getBoundingClientRect(); const overPlan = !!r && r.top < innerHeight && r.bottom > 0
+      setShow(past && !overPlan)
+    }
+    onScroll(); addEventListener("scroll", onScroll, { passive: true }); return () => removeEventListener("scroll", onScroll)
+  }, [])
+  useEffect(() => { document.documentElement.style.setProperty("--concept-offset", show && innerWidth < 1024 ? "64px" : "0px") }, [show])
+  if (!show) return null
   return (
     <div className="fixed right-3 bottom-[calc(10px+env(safe-area-inset-bottom))] z-40 flex items-center gap-2 lg:hidden" role="group" aria-label="Plan or call">
       <a href={TEL} aria-label={`Call Anna, ${PHONE}`} className="grid size-13 place-items-center rounded-full border border-line bg-paper text-rose shadow-[0_10px_24px_-14px_rgba(31,42,46,.6)]"><Phone className="size-5" aria-hidden /></a>

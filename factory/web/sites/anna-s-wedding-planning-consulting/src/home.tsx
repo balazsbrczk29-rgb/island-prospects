@@ -1,6 +1,6 @@
 import type React from "react"
-import { useEffect, useMemo, useState } from "react"
-import { motion, AnimatePresence } from "motion/react"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { motion, AnimatePresence, animate } from "motion/react"
 import { ArrowUpRight, Phone, Check, Ship, Palmtree, Copy, CalendarHeart } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -15,7 +15,7 @@ function Hero() {
   return (
     <section className="relative overflow-hidden" aria-labelledby="hero-title">
       <div className="mx-auto grid max-w-[1320px] lg:min-h-[calc(100svh-150px)] lg:grid-cols-12">
-        <div className="relative z-10 flex flex-col justify-center px-5 pt-8 pb-8 md:px-12 lg:col-span-6 lg:py-14">
+        <div className="relative z-10 flex flex-col justify-center px-5 pt-6 pb-6 md:px-12 lg:col-span-6 lg:py-14">
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className="text-[15px] text-muted">Beach and cruise-day weddings in Nassau, since 1995</motion.p>
           <h1 id="hero-title" className="mt-5 font-display text-[clamp(2.9rem,6.2vw,6.4rem)] leading-[0.95] tracking-[-0.015em] text-ink lg:mr-[-14%]">
             {["Married in Nassau,", "with Anna", "beside you."].map((l, i) => (
@@ -29,7 +29,7 @@ function Hero() {
             <a href="#finder" className="group inline-flex min-h-13 items-center gap-2 rounded-full bg-rose px-7 text-[17px] text-white transition hover:-translate-y-0.5 hover:bg-ink active:translate-y-0">Find your package <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden /></a>
             <a href={TEL} className="inline-flex min-h-11 items-center gap-2 text-[16px] text-ink underline decoration-rose/40 underline-offset-[6px] transition hover:decoration-rose tnum"><Phone className="size-4 text-rose" aria-hidden />{PHONE}</a>
           </motion.div>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.95, duration: 1 }} className="mt-5 text-[14px] text-muted tnum">From the US <a className="text-ink hover:text-rose" href={US_TEL}>{US_PHONE}</a> or toll free <a className="text-ink hover:text-rose" href={TOLL_TEL}>{TOLL}</a></motion.p>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.95, duration: 1 }} className="mt-5 hidden text-[14px] text-muted tnum sm:block">From the US <a className="text-ink hover:text-rose" href={US_TEL}>{US_PHONE}</a> or toll free <a className="text-ink hover:text-rose" href={TOLL_TEL}>{TOLL}</a></motion.p>
         </div>
         <motion.figure initial={{ clipPath: "inset(0 0 0 100%)" }} animate={{ clipPath: "inset(0 0 0 0%)" }} transition={{ delay: 0.15, duration: 1.4, ease: [0.77, 0, 0.175, 1] }} className="relative mx-5 h-[44svh] min-h-[300px] md:mx-12 lg:col-span-6 lg:mx-0 lg:h-auto">
           <img src={HERO.src} alt="Jennifer and Ashby on their wedding day at Fort Charlotte, Nassau, planned by Anna" fetchPriority="high" width={HERO.w} height={HERO.h} className="absolute inset-0 size-full rounded-t-[999px] object-cover object-[46%_40%] lg:rounded-t-none lg:rounded-bl-[220px]" />
@@ -38,6 +38,18 @@ function Hero() {
       </div>
     </section>
   )
+}
+
+function Count({ to }: { to: number }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const last = useRef(0)
+  useEffect(() => {
+    const el = ref.current; if (!el) return
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = to.toLocaleString("en-US"); last.current = to; return }
+    const c = animate(last.current, to, { duration: 0.7, ease, onUpdate: v => { el.textContent = Math.round(v).toLocaleString("en-US") } })
+    last.current = to; return () => c.stop()
+  }, [to])
+  return <span ref={ref}>{to.toLocaleString("en-US")}</span>
 }
 
 const FEELS: { k: Feel; label: string; note: string }[] = [
@@ -72,11 +84,11 @@ function Finder({ req, setReq, onRequest }: { req: Req; setReq: React.Dispatch<R
           </label>
           <div className="mt-8" role="group" aria-label="How it should feel">
             <p className="text-[15px] text-muted">The feel</p>
-            <div className="mt-3 grid grid-cols-3 gap-2">
+            <div className="mt-3 grid gap-2 sm:grid-cols-3">
               {FEELS.map(f => (
-                <button key={f.k} type="button" aria-pressed={req.feel === f.k} onClick={() => set({ feel: f.k })} className={`flex min-h-[76px] flex-col justify-center rounded-2xl border px-3 py-2.5 text-left transition ${req.feel === f.k ? "border-rose bg-paper" : "border-ink/10 hover:border-ink/40"}`}>
+                <button key={f.k} type="button" aria-pressed={req.feel === f.k} onClick={() => set({ feel: f.k })} className={`flex min-h-[56px] flex-row items-baseline justify-between gap-3 rounded-2xl border px-4 py-2.5 text-left transition sm:min-h-[76px] sm:flex-col sm:items-start sm:justify-center sm:gap-0 sm:px-3 ${req.feel === f.k ? "border-rose bg-paper" : "border-ink/10 hover:border-ink/40"}`}>
                   <span className="text-[15px] leading-tight text-ink">{f.label}</span>
-                  <span className="mt-1 text-[12.5px] leading-tight text-muted">{f.note}</span>
+                  <span className="text-[13px] leading-tight text-muted sm:mt-1 sm:text-[12.5px]">{f.note}</span>
                 </button>
               ))}
             </div>
@@ -96,13 +108,13 @@ function Finder({ req, setReq, onRequest }: { req: Req; setReq: React.Dispatch<R
                 <div className="flex flex-col justify-center p-6 md:p-10">
                   <p className="text-[14px] text-rose">{exact ? `Best fit for ${req.guests} guests` : `Closest package; Anna adjusts it for ${req.guests}`}</p>
                   <h3 className="mt-1 font-display text-[2.6rem] leading-none">{best.name}</h3>
-                  <p className="mt-3 font-display text-[2rem] leading-none tnum">USD {best.price.toLocaleString("en-US")}</p>
+                  <p className="mt-3 font-display text-[2rem] leading-none tnum">USD <Count to={best.price} /></p>
                   <p className="mt-2 text-[14px] text-muted">{best.id === "basic" ? "For the two of you" : `Set up for up to ${best.guests}`}, adjustable</p>
                 </div>
               </div>
               <div className="grid gap-6 border-t border-line p-6 md:p-8">
                 <ul className="grid gap-x-6 gap-y-2 text-[15px] sm:grid-cols-2">
-                  {best.items.slice(0, 8).map(it => <li key={it} className="flex gap-2.5"><Check className="mt-1 size-4 shrink-0 text-rose" aria-hidden />{it}</li>)}
+                  {best.items.slice(0, 8).map((it, i) => <motion.li key={it} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.25 + i * 0.04, duration: 0.45, ease }} className="flex gap-2.5"><Check className="mt-1 size-4 shrink-0 text-rose" aria-hidden />{it}</motion.li>)}
                   {best.items.length > 8 && <li className="text-muted"><a className="underline underline-offset-4 hover:text-rose" href={`packages.html#${best.id}`}>and {best.items.length - 8} more</a></li>}
                 </ul>
                 <div className="flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-end">
@@ -118,7 +130,7 @@ function Finder({ req, setReq, onRequest }: { req: Req; setReq: React.Dispatch<R
             {list.map(p => {
               const ok = p.guests >= req.guests && feelOk(p, req.feel)
               return (
-                <li key={p.id}><a href={`packages.html#${p.id}`} className={`flex min-h-16 flex-col justify-center rounded-2xl border px-4 py-3 transition hover:-translate-y-0.5 ${p.id === best.id ? "border-rose bg-paper" : ok ? "border-ink/15 bg-paper/60 hover:border-ink" : "border-transparent opacity-55 hover:opacity-100"}`}>
+                <li key={p.id}><a href={`packages.html#${p.id}`} className={`flex min-h-16 flex-col justify-center rounded-2xl border px-4 py-3 transition hover:-translate-y-0.5 ${p.id === best.id ? "border-rose bg-paper" : ok ? "border-ink/15 bg-paper/60 hover:border-ink" : "border-transparent opacity-75 hover:opacity-100"}`}>
                   <span className="font-display text-[1.3rem]">{p.name}</span><span className="text-[13px] text-muted tnum">USD {p.price.toLocaleString("en-US")} · up to {p.guests}</span></a></li>
               )
             })}
@@ -140,8 +152,8 @@ function Licence() {
           <h2 id="lic-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] tracking-[-0.015em]">Your paperwork, ticked off.</h2>
           <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-muted">Anna schedules your appointment with the Registrar's office and prepares the documents for the interview. Tick what you already have.</p>
           <div className="mt-10 flex items-center gap-5">
-            <svg viewBox="0 0 44 44" className="size-24 -rotate-90" aria-hidden><circle cx="22" cy="22" r="19" fill="none" stroke="#eadfd8" strokeWidth="3" /><motion.circle cx="22" cy="22" r="19" fill="none" stroke="#b44c6e" strokeWidth="3" strokeLinecap="round" pathLength={1} strokeDasharray="1 1" animate={{ strokeDashoffset: 1 - done.length / LICENCE.length }} transition={{ duration: 0.6, ease }} /></svg>
-            <p className="font-display text-4xl">{pct}%<span className="mt-1 block font-sans text-[14px] text-muted">ready for the Registrar</span></p>
+            <svg viewBox="0 0 44 44" className="size-24 -rotate-90" aria-hidden><circle cx="22" cy="22" r="19" fill="none" stroke="#eadfd8" strokeWidth="3" /><motion.circle cx="22" cy="22" r="19" fill="none" stroke="#b44c6e" strokeWidth="3" strokeLinecap={done.length ? "round" : "butt"} pathLength={1} strokeDasharray="1 1" animate={{ strokeDashoffset: 1 - done.length / LICENCE.length }} transition={{ duration: 0.6, ease }} /></svg>
+            <p className="font-display text-4xl tnum">{done.length} of {LICENCE.length}<span className="mt-1 block font-sans text-[14px] text-muted">ready for the Registrar ({pct}%)</span></p>
           </div>
         </Unveil>
         <Unveil delay={0.1} className="lg:col-span-7 lg:col-start-6">
@@ -199,8 +211,8 @@ function Anna() {
 function Gallery() {
   return (
     <section className="mx-auto max-w-[1320px] px-5 pb-20 md:px-12 md:pb-28" aria-label="Weddings by Anna">
-      <ul className="grid grid-cols-3 gap-3 md:grid-cols-6 md:gap-4">
-        {GALLERY.slice(3).concat(GALLERY.slice(0, 3)).map((src, i) => (
+      <ul className="mx-auto grid max-w-[940px] grid-cols-3 gap-3 md:gap-5">
+        {GALLERY.slice(3).map((src, i) => (
           <motion.li key={src} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8% 0px" }} transition={{ duration: 0.9, delay: i * 0.05, ease }} className="overflow-hidden rounded-[16px] bg-blush">
             <img src={src} alt="A wedding in Nassau planned by Anna's Wedding Planning" width={300} height={300} loading="lazy" className="aspect-square w-full max-w-[300px] object-cover" />
           </motion.li>

@@ -4,8 +4,87 @@
  "name": "Anna's Wedding Planning & Consulting",
  "batch": "03",
  "tier": "A",
- "state": "building",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "packages.html"
+ ],
+ "primary_cta": "Find your package, then Request this date (call Nassau, copy the request, or her contact form)",
+ "brand_truth": "One experienced planner in Nassau with published prices and the licence paperwork handled.",
+ "buyer": "US, Canadian and international couples planning a Nassau beach or cruise-day wedding on a phone.",
+ "design": {
+  "display_font": "Gloock 400",
+  "body_font": "Figtree 400-600",
+  "palette": [
+   "#fbf8f5",
+   "#1f2a2e",
+   "#b44c6e",
+   "#f5e6e1",
+   "#8cc9c2",
+   "#625b58",
+   "#eadfd8"
+  ],
+  "hero_pattern": "split-screen-editorial-arched",
+  "signature": "Package finder with arrival mode and guest slider; licence checklist with progress ring"
+ },
+ "current_site_findings": [
+  "2015 photos over insecure http",
+  "Repetitive homepage slider with no clear next step",
+  "Prices hidden inside package pages",
+  "No email or WhatsApp, only a form",
+  "Cruise purser rule buried on licence page",
+  "20+ years and international couples hidden on About"
+ ],
+ "pitch_line": "Couples should see your prices and pick a package in one minute. Here they say how they arrive, how many come and how it should feel, and the right package comes up with its price and a request ready to send to you.",
+ "sources": [
+  "https://www.annasweddingbahamas.com/",
+  "https://www.annasweddingbahamas.com/about/",
+  "https://www.annasweddingbahamas.com/beach-package/",
+  "https://www.annasweddingbahamas.com/cruise-package/",
+  "https://www.annasweddingbahamas.com/requirements/",
+  "https://www.annasweddingbahamas.com/services-2/",
+  "https://www.weddingwire.com/biz/annas-wedding-planning/8cdc9996dc501900.html",
+  "https://www.instagram.com/annasweddingbahamas/"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Published package prices still current",
+  "Annamae Fox is the owner named Anna",
+  "Both phones current; WhatsApp number unknown",
+  "Licence rules current",
+  "The 'feel' filter is derived only from package inclusions: live music = violin, saxophone, DJ or drummer; reception = a reception item.",
+  "No email or WhatsApp is published, so the request is called in, copied, or pasted into her contact form; add WhatsApp and email at launch.",
+  "Toll-free 877-524-9127 and 'since 1995' are from her homepage (scraped 2026-11-21)."
+ ],
+ "notes": "Gen 2 rebuild to the approved job spec (2026-11-21), refining the restored gen-1 composition. Removed for factory rules: key-information band, sticky blurred header with pill CTA, shared Reveal, mobile ActionBar (replaced by a dock shown after the finder). New hero photo jennifer-ashby-scaled.jpg (2560x1709, her own site); package photos framed at or below 556x331, gallery at or below 300x300. Photos hotlinked; for QA, 17 thumbnails were fetched through the Lovable gallery project ip-assets-anna-wedding (0.6 credits) and routed in. QA 0 blockers; interact: 0 JS errors (the range input cannot be filled with text by the tool, reported as dead); distinct: distinct.",
+ "built_at": "2026-11-21T20:37:07.204626Z",
+ "claimed_at": "2026-11-21T20:17:58.253Z",
  "generation": 2,
- "rebuild_of": 1,
- "claimed_at": "2026-11-21T20:17:58.253Z"
+ "jobspec_built": true,
+ "tier_visual": "standard",
+ "tier_visual_why": "A wedding planner sells trust, packages and prices; photography, type and the finder carry it. No 3D.",
+ "direction": {
+  "type": "Libre Caslon Display 400 + Jost 300-600",
+  "why": "Spec: refined serif display with a graceful text face, replacing Gloock and Figtree; previous composition kept (split hero with arched photo)."
+ },
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 4,
+  "phone": 4,
+  "by": "fresh side-by-side critic subagent (GUIDE.md section 4), after one fix pass",
+  "date": "2026-11-21"
+ },
+ "critic_note": "First score: wow 3, phone 3. Fix 1: tighter phone hero, phone dock only after the finder, stacked feel options, no repeated photos, price count-up and staggered inclusions in the finder, clearer licence ring. Optional later: caption the three-photo strip under About."
 }
