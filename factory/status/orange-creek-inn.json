@@ -1,52 +1,133 @@
 {
- "slug": "orange-creek-inn", "id": 88, "name": "Orange Creek Inn", "batch": "12", "tier": "A",
- "state": "needs-review", "generation": 2,
- "pages": ["index.html", "getting-here.html"],
- "primary_cta": "Check dates",
- "brand_truth": "A small family-run inn at the top of Cat Island where the only thing between your door and the beach is the road, with its own grocery store, laundry and cars.",
- "buyer": "Value-minded couples, families and anglers from Florida and the US East Coast, and Bahamians visiting the north of Cat Island, planning on a phone and afraid of complicated flights and hidden costs.",
- "direction": {"archetype": "A07 Letter and stationery", "lane": "P12 Inagua salt", "type": "T08 Warm humanist (Gloock + Nunito Sans, self-hosted)", "why": "A family inn with 900 px photographs should not pretend to be a cinematic resort. Prints at print size on a letter turn the small photos into a virtue, and no other Cat Island site in the repo is a letter (Greenwood and Pigeon Cay are cinematic chapters, Fernandez Bay a horizontal journey). Flamingo pink picks up the bougainvillea in front of the inn."},
- "big_idea": "The site is a letter from Orange Creek on the inn's own notepaper: it opens on a pile of their photographs you deal through like prints from a drawer, prints are laid down the right-hand margin as you read, and it ends in a reply card that works out which published offer fits your dates.",
- "tier_visual": "standard",
- "tier_visual_why": "A small inn reached by road from the airport; 3D would explain nothing. The wow is the dealt pile of real prints, type and the working reply card.",
- "concept_type": "brochure + enquiry: studios, what is on site, getting here, the published specials matched to your dates, a dates enquiry by email and the real BahamaGo booking link",
- "images": [
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-4.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-1.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-2.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-7.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-6.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/accomodations-img.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-5.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-3.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/welcome-img.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2016/02/gallery-img5.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2016/02/gallery-img7.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2016/02/gallery-img4.jpg", "source": "own", "credit": "Orange Creek Inn"},
-  {"src": "https://www.orangecreekinn.com/wp-content/uploads/2016/02/gallery-img1.jpg", "source": "own", "credit": "Orange Creek Inn"}
- ],
- "critic": {"photography": 4, "typography": 4, "composition": 4, "colour": 4, "fit": 5, "distinct": 4, "references": 3},
- "critic_note": "Self-scores only (builder cannot spawn a critic). Awaiting independent critic.",
- "current_site_findings": [
-  "One long page of #!/ links: Google sees a single page and nobody can link to the rooms or the flights.",
-  "Headline is 'Welcome to Orange Creek Inn'; the beach across the road first appears in FAQ 20.",
-  "Six specials rotate in a slider of small print; a guest cannot tell which fit their dates.",
-  "Flight times, taxi fare and rental prices sit at the bottom of 27 FAQs.",
-  "Photos shown as small square crops; studios described only by icons; no rates.",
-  "Book Now leaves for BahamaGo with no way to simply ask about dates."
- ],
- "pitch_line": "Your site says welcome. This one says the beach is across the road, lets a guest leaf through your own photographs, and tells them in two taps which of the six published offers their dates qualify for, then writes the email to you.",
- "assumptions": [
-  "Specials, booking windows and blackout dates as published on orangecreekinn.com on 2026-11-20; they change.",
-  "Western Air days are not listed in the FAQ; BahamaGo lists flights every day of the week.",
-  "Which Cat Island airport each airline uses is not stated; copy says the nearest airport is Arthur's Town, 3.5 miles.",
-  "The $150 and one-free-ticket offers are published for a two-night stay; the card also shows them for three nights.",
-  "Studio count, bed types and rates are not published: Rates on request.",
-  "The aerial photograph is from their gallery and assumed to show Orange Creek.",
-  "Two guest lines are quoted from reviews displayed on their own site (Google, June 2024; Tripadvisor, March 2022), with no ratings. Hosts' names (the Cleares) appear only in reviews and are not used."
- ],
- "sources": ["https://www.orangecreekinn.com/", "https://www.bahamago.com/hotels/22-Orange-Creek-Inn?ref=oipb"],
- "qa": {"blockers": 0, "warnings": 2, "distinct": "distinct (closest 66)"},
- "notes": "awaiting independent critic. BLIND: the sandbox cannot load outside images or reference sites; look.mjs not run, references (aman.com, habitas.com, papier.com) judged from knowledge. Photos were seen in the Lovable gallery project 3eb88dcd-7fe3-49c8-8637-2c233d526099 (two rounds, 1.2 credits, no generation) and QA screenshots use 404 px crops of that gallery, so photos look softer in screenshots than live (sources are 900x520, room 1046x786, creek 569x337; no print is shown wider than 548 CSS px). Rebuilt from scratch: old stay.html and island.html replaced by getting-here.html. Lenis only on fine pointers; no scroll-linked React state; prints animate transform only; prefers-reduced-motion gives settled prints. QA warnings are the shared concept-label button (32 px). interact.mjs reports 4 dead inputs: Playwright cannot fill radio inputs; they work. Commons search done (Cat Island) but no Commons photo used. Fonts self-hosted from @fontsource.",
- "built_at": "2026-11-21T00:00:00Z"
+  "slug": "orange-creek-inn",
+  "id": 88,
+  "name": "Orange Creek Inn",
+  "batch": "12",
+  "tier": "A",
+  "state": "needs-review",
+  "generation": 2,
+  "pages": [
+    "index.html",
+    "getting-here.html"
+  ],
+  "primary_cta": "Check dates",
+  "brand_truth": "A small family-run inn at the top of Cat Island where the only thing between your door and the beach is the road, with its own grocery store, laundry and cars.",
+  "buyer": "Value-minded couples, families and anglers from Florida and the US East Coast, and Bahamians visiting the north of Cat Island, planning on a phone and afraid of complicated flights and hidden costs.",
+  "direction": {
+    "archetype": "A07 Letter and stationery",
+    "lane": "P12 Inagua salt",
+    "type": "T08 Warm humanist (Gloock + Nunito Sans, self-hosted)",
+    "why": "A family inn with 900 px photographs should not pretend to be a cinematic resort. Prints at print size on a letter turn the small photos into a virtue, and no other Cat Island site in the repo is a letter (Greenwood and Pigeon Cay are cinematic chapters, Fernandez Bay a horizontal journey). Flamingo pink picks up the bougainvillea in front of the inn."
+  },
+  "big_idea": "The site is a letter from Orange Creek on the inn's own notepaper: it opens on a pile of their photographs you deal through like prints from a drawer, prints are laid down the right-hand margin as you read, and it ends in a reply card that works out which published offer fits your dates.",
+  "tier_visual": "standard",
+  "tier_visual_why": "A small inn reached by road from the airport; 3D would explain nothing. The wow is the dealt pile of real prints, type and the working reply card.",
+  "concept_type": "brochure + enquiry: studios, what is on site, getting here, the published specials matched to your dates, a dates enquiry by email and the real BahamaGo booking link",
+  "images": [
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-4.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-1.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-2.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-7.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-6.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/accomodations-img.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-5.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/gallery-img-3.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2019/08/welcome-img.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2016/02/gallery-img5.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2016/02/gallery-img7.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2016/02/gallery-img4.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    },
+    {
+      "src": "https://www.orangecreekinn.com/wp-content/uploads/2016/02/gallery-img1.jpg",
+      "source": "own",
+      "credit": "Orange Creek Inn"
+    }
+  ],
+  "critic": {
+    "photography": 4,
+    "typography": 4,
+    "composition": 4,
+    "colour": 4,
+    "fit": 5,
+    "distinct": 4,
+    "references": 3
+  },
+  "critic_note": "Self-scores only (builder cannot spawn a critic). Awaiting independent critic.",
+  "current_site_findings": [
+    "One long page of #!/ links: Google sees a single page and nobody can link to the rooms or the flights.",
+    "Headline is 'Welcome to Orange Creek Inn'; the beach across the road first appears in FAQ 20.",
+    "Six specials rotate in a slider of small print; a guest cannot tell which fit their dates.",
+    "Flight times, taxi fare and rental prices sit at the bottom of 27 FAQs.",
+    "Photos shown as small square crops; studios described only by icons; no rates.",
+    "Book Now leaves for BahamaGo with no way to simply ask about dates."
+  ],
+  "pitch_line": "Your site says welcome. This one says the beach is across the road, lets a guest leaf through your own photographs, and tells them in two taps which of the six published offers their dates qualify for, then writes the email to you.",
+  "assumptions": [
+    "Specials, booking windows and blackout dates as published on orangecreekinn.com on 2026-11-20; they change.",
+    "Western Air days are not listed in the FAQ; BahamaGo lists flights every day of the week.",
+    "Which Cat Island airport each airline uses is not stated; copy says the nearest airport is Arthur's Town, 3.5 miles.",
+    "The $150 and one-free-ticket offers are published for a two-night stay; the card also shows them for three nights.",
+    "Studio count, bed types and rates are not published: Rates on request.",
+    "The aerial photograph is from their gallery and assumed to show Orange Creek.",
+    "Two guest lines are quoted from reviews displayed on their own site (Google, June 2024; Tripadvisor, March 2022), with no ratings. Hosts' names (the Cleares) appear only in reviews and are not used."
+  ],
+  "sources": [
+    "https://www.orangecreekinn.com/",
+    "https://www.bahamago.com/hotels/22-Orange-Creek-Inn?ref=oipb"
+  ],
+  "qa": {
+    "blockers": 0,
+    "warnings": 2,
+    "distinct": "distinct (closest 66)"
+  },
+  "notes": "awaiting independent critic. BLIND: the sandbox cannot load outside images or reference sites; look.mjs not run, references (aman.com, habitas.com, papier.com) judged from knowledge. Photos were seen in the Lovable gallery project 3eb88dcd-7fe3-49c8-8637-2c233d526099 (two rounds, 1.2 credits, no generation) and QA screenshots use 404 px crops of that gallery, so photos look softer in screenshots than live (sources are 900x520, room 1046x786, creek 569x337; no print is shown wider than 548 CSS px). Rebuilt from scratch: old stay.html and island.html replaced by getting-here.html. Lenis only on fine pointers; no scroll-linked React state; prints animate transform only; prefers-reduced-motion gives settled prints. QA warnings are the shared concept-label button (32 px). interact.mjs reports 4 dead inputs: Playwright cannot fill radio inputs; they work. Commons search done (Cat Island) but no Commons photo used. Fonts self-hosted from @fontsource.",
+  "built_at": "2026-11-21T00:00:00Z",
+  "review_claimed_at": "2026-11-21T13:28:38.644Z"
 }
