@@ -4,7 +4,180 @@
  "name": "Pigeon Cay Beach Club",
  "batch": "06",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
- "claimed_at": "2026-11-21T19:51:12.889Z"
+ "rebuild_of": 1,
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "Check availability (their direct-book engine, with dates and adults filled in)",
+ "brand_truth": "Eight handmade cottages on a private north Cat Island beach that runs on the honor system: a palapa honor bar, free kayaks and bikes, a card held but no deposit, and you pay on departure.",
+ "buyer": "US and Canadian couples, families and anglers planning months ahead on a phone, many of them repeat guests, who fear hidden costs and remote logistics.",
+ "big_idea": "The booking tool is the hero: set your dates and guests and the cottages that fit rise to the front with their own photos, nightly rate and the total with taxes, then hand off to direct-book with the dates filled in.",
+ "direction": {
+  "archetype": "Job spec (GUIDE.md): booking-first",
+  "lane": "Sunlit sand, sea glass and deep sea teal",
+  "type": "Newsreader (opsz) 400-500 + Figtree 400-700",
+  "why": "Spec asks for one calm serif and a clean sans, barefoot and sunlit; their own photos framed at or below native size."
+ },
+ "tier_visual": "standard",
+ "tier_visual_why": "A cottage stay is sold by the place, the cottage and the total. No 3D. Motion: slow crossfading beach band, cards rising on load and re-sorting by fit, totals counting up, a shared stay bar.",
+ "concept_type": "booking: one-page cottage site, booking strip and cottage chooser as the first screen, hands off to their direct-book engine with dates",
+ "images": [
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/header-6.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/header-3.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/gallery-img-36.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/gallery-img-34.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/special-bg.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/30.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/34.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/31.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/garden-view1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/garden-view3.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/hibicus1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/hibicus2.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/sea-studio1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/sea-studio2.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/little-house2.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/little-house1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/winston-cottage1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/oleander-img4.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/causarina3.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/causarina1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/big-house-img5.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/big-house-img2.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  }
+ ],
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 5,
+  "phone": 4,
+  "by": "fresh side-by-side critic subagent (GUIDE.md section 4), after two fix passes",
+  "date": "2026-11-21"
+ },
+ "critic_note": "First score: wow 3, photography 3, composition 3. Fix 1: true comparison table, route line, cards rise on load, stay bar names the cheapest cottage that fits. Fix 2: taller hero photo with a sheet rising over it, live serif total above the rail. Remaining non-blocking notes: slight seam where the desktop photo shows past the sheet edges, stay bar can cover headings mid-scroll, wedding photo sky.",
+ "current_site_findings": [
+  "No deposit and pay on departure is the last line of the page",
+  "Rotating slider of generic lines instead of the honor bar and free kayaks",
+  "Eight galleries, 18 wedding photos, 34 gallery photos and 20 FAQs in one scroll",
+  "Taxes, meal prices and cancellation terms hidden in pop-ups",
+  "Getting here quotes 2016 and 2017 flights and shows a broken FareHarbor widget",
+  "Photographs are 380 to 800 px wide"
+ ],
+ "pitch_line": "Today a guest has to scroll your whole page and open pop-ups to learn what a week costs. Here they set their dates on the first screen and see every cottage that fits, with the real total and $0 due today.",
+ "assumptions": [
+  "Totals apply VAT 10% and resort levy 6% to lodging only; 15% gratuity to meals only.",
+  "Dinner estimate counts Wednesday to Saturday evenings inside the stay.",
+  "Taxi fare ($60 / $120 round trip) is stated on their site without naming the airport; shown as the airport taxi.",
+  "direct-book handoff uses direct-book.com's public URL format (checkInDate, checkOutDate, items[0][adults]); confirm it opens their property correctly.",
+  "Flights: Makers Air FLL to Arthur's Town since May 2026 (bahamas.com press release) and Bahamasair Nassau to Arthur's Town twice weekly (Carib Journal, June 2026) are from news, not their site.",
+  "Fly Free offer dates (book by June 30, 2027, travel by October 31, 2027) from their site; blackout dates apply.",
+  "Cottage one-line descriptions are written from the club's own photos.",
+  "The 5 to 6 guest cap on the stepper follows the Big House (sleeps 6)."
+ ],
+ "sources": [
+  "https://pigeoncaybahamas.com/",
+  "https://direct-book.com/properties/pigeoncaydirect",
+  "https://www.bahamas.com/pressroom/makers-air-announces-new-scheduled-service-to-arthurs-town-cat-island-beginning-may-12-2026",
+  "https://www.caribjournal.com/2026/06/27/caribbean-flights-to-cat-island/"
+ ],
+ "notes": "Gen 2 rebuild to the approved job spec (2026-11-21). Kept from previous: honest total with taxes, all eight cottages with rates and galleries, fees, terms, weddings, getting here, contact; dropped the honor-system tab metaphor per GUIDE section 1. Photos: hotlinked from their site (sandbox cannot reach it). For QA, 17 key photos were fetched as 280 to 560 px WebP thumbnails through the Lovable gallery project ip-assets-pigeon-cay-beach-club (1.2 credits) and routed into Playwright, so screenshots show real photos at low resolution; other gallery photos were judged from that project's written photo report. QA: 0 blockers; interact: 0 dead, 0 JS errors; distinct: distinct (closest 67). Before/after screenshots in /tmp/shots/pigeon-cay-beach-club (session only).",
+ "built_at": "2026-11-21T20:17:44.065046Z",
+ "claimed_at": "2026-11-21T19:51:12.889Z",
+ "jobspec_built": true
 }
