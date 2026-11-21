@@ -4,8 +4,93 @@
  "name": "Digitech Bahamas",
  "batch": "04",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T15:22:38.400Z"
+ "claimed_at": "2026-11-21T15:22:38.400Z",
+ "pages": [
+  "index.html",
+  "services.html"
+ ],
+ "primary_cta": "Request a site visit (work order: business type, needs, tills, location; sends a prefilled email to sales@digitechbahamas.com); secondary: call (242) 676-2033 / 676-3022",
+ "brand_truth": "A local Nassau team that installs Razor POS and builds the network, Wi-Fi and cloud backup behind it, then supports it after installation.",
+ "buyer": "Owners and managers of Nassau restaurants, bars, shops and small offices who fear the till or Wi-Fi going down on a busy night, data loss, and an installer who disappears.",
+ "direction": {
+  "archetype": "A06 Object study",
+  "lane": "P01 Limestone",
+  "type": "T04 Technical mono (Sora + IBM Plex Sans + Plex Mono for callout labels and numbers)",
+  "why": "Digitech sells physical systems, so the object (one counter with a POS terminal) is explained part by part; limestone ground with one sea-glass accent reads Bahamian and calm instead of a dark 'tech' template."
+ },
+ "big_idea": "Scrolling X-rays one Nassau counter: the Razor POS till, then the cabling, the multi-VLAN Wi-Fi with firewall and VPN, and the cloud backup behind it, drawn onto the photograph as leader lines.",
+ "concept_type": "brochure / sales site with enquiry (same kind as their WordPress brochure)",
+ "tier_visual": "standard",
+ "tier_why": "Photography plus a scroll-driven X-ray wipe and line drawing (transform and stroke only, no WebGL); 3D would add weight without explaining more.",
+ "images": [
+  {
+   "src": "https://ip-assets-digitech-bahamas.lovable.app/assets/counter-hero.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-digitech-bahamas, illustrative, replace with own install photos"
+  },
+  {
+   "src": "https://ip-assets-digitech-bahamas.lovable.app/assets/hands-till.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-digitech-bahamas, illustrative, replace with own install photos"
+  },
+  {
+   "src": "https://ip-assets-digitech-bahamas.lovable.app/assets/ceiling-ap.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-digitech-bahamas, illustrative, replace with own install photos"
+  },
+  {
+   "src": "https://ip-assets-digitech-bahamas.lovable.app/assets/rack.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-digitech-bahamas, illustrative, replace with own install photos"
+  },
+  {
+   "src": "https://ip-assets-digitech-bahamas.lovable.app/assets/after-close.jpg",
+   "source": "generated",
+   "credit": "Lovable asset project ip-assets-digitech-bahamas, illustrative, replace with own install photos"
+  }
+ ],
+ "plan_gate": {
+  "verdict": "revise, then applied (5 changes: no stretched frame, labelled backup callout, phone cabling callout raised above the concept label, larger chapter index, client names section cut)",
+  "predicted": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 5,
+   "fit": 5,
+   "distinct": 5,
+   "references": 4
+  }
+ },
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 5,
+  "fit": 5,
+  "distinct": 5,
+  "references": 4
+ },
+ "current_site_findings": [
+  "All Get Started / Learn More / Read more buttons link to '#'",
+  "Theme stock photos, nothing shows their installs",
+  "Theme counters ('1426+ Developer Hours') read like a software agency",
+  "Directory address/phone (Soldier Road, 393-1249) conflicts with the site (East Avenue, Centreville, 676-2033/3022)",
+  "Letter-split animated headings; typo 'gound'"
+ ],
+ "pitch_line": "Your site shows stock photos and dead buttons; this one shows a Nassau owner, in ten seconds, everything you build behind their till, and books the site visit.",
+ "assumptions": [
+  "#33 East Avenue, Centreville is the current address (directories still list Soldier Road)",
+  "A site visit / survey is how a job starts (category-standard step, not stated on their site)",
+  "Design and written quote step is category-standard",
+  "All photographs are illustrative (generated); replace with Digitech's own install photos",
+  "Client names (Hana, Naughty Johnny's, Blu Sail, Beauty Shack, Little Caesars) appear only as logos on their site, so they were left off; can be added with permission"
+ ],
+ "sources": [
+  "https://digitechbahamas.com/ (redirects to /bs/), scraped 2026-11-21"
+ ],
+ "notes": "Gen-2 rebuild by scheduled site worker. Picked over the two queue-top institutions (association, government agency) as an easier SME per the worker brief. BLIND: qa.mjs could not load outside images; screenshots were made with crops of the Lovable gallery screenshot routed in (16:9 crops slightly stretched from the 1.93 gallery tiles). look.mjs not run (network blocked; references stripe.com, linear.app, verkada.com judged from knowledge). Plan-gate critic (fresh subagent) asked for 5 revisions, all applied; scores above are its predicted post-fix scores, not a fresh full-site critic run (QA had 0 blockers, so no full-site critic per PROMPT). interact.mjs reports 'dead' inputs only because it types text into radio/checkbox chips; they work. Their own two uploads (POS-Shot.png with posed staff faces, cloud-backup cliché graphic) were not used. distinct.mjs: distinct (closest nassau-paper-company-ltd 68).",
+ "built_at": "2026-11-21T15:39:03Z"
 }

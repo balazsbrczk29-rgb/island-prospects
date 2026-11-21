@@ -4,12 +4,12 @@ import { IMG, biz } from './data'
 
 // Geometry in fractions of the photo frame (16:9 desktop photo, 4:5 phone photo).
 type Pt = [number, number]
-type Callout = { pts: Pt[]; tag: Pt; anchor: 'left' | 'bottom' | 'right'; label: string; short: string; px?: number }
+type Callout = { pts: Pt[]; tag: Pt; anchor: 'left' | 'bottom' | 'right'; label: string; short: string; px?: number; phonePts?: Pt[]; phoneTag?: Pt }
 const DESK: Callout[] = [
   { pts: [[0.70, 0.42], [0.70, 0.20], [0.735, 0.20]], tag: [0.74, 0.20], anchor: 'left', label: 'Razor POS terminal', short: 'Razor POS' },
-  { pts: [[0.655, 0.83], [0.655, 0.935], [0.70, 0.935]], tag: [0.705, 0.935], anchor: 'left', label: 'Structured cabling, certified', short: 'Cabling' },
+  { pts: [[0.655, 0.83], [0.655, 0.935], [0.70, 0.935]], tag: [0.705, 0.935], anchor: 'left', label: 'Structured cabling, certified', short: 'Cabling', phonePts: [[0.70, 0.74], [0.80, 0.74]], phoneTag: [0.805, 0.74] },
   { pts: [[0.565, 0.30], [0.565, 0.085], [0.575, 0.085]], tag: [0.58, 0.085], anchor: 'left', label: 'Wi-Fi, VLANs, firewall, VPN', short: 'Wi-Fi + VLANs' },
-  { pts: [[0.85, 0.46], [0.895, 0.46], [0.895, 0.36]], tag: [0.94, 0.355], anchor: 'right', label: 'Cloud backup', short: 'Backup', px: 0.905 },
+  { pts: [[0.85, 0.46], [0.895, 0.46], [0.895, 0.36]], tag: [0.94, 0.355], anchor: 'right', label: 'Cloud backup, data and endpoints', short: 'Backup', px: 0.905 },
 ]
 const CHAPTERS = [
   { k: 'Point of sale', h: 'Razor POS, set up for your counter.', p: 'Advanced dealers for Razor POS Systems, built for retail and food and beverage: hardware, software, staff training and support after installation.' },
@@ -32,8 +32,8 @@ function useIsPhone() {
   return phone
 }
 
-function Line({ c, i, p }: { c: Callout; i: number; p: MotionValue<number> }) {
-  const d = 'M' + c.pts.map(([x, y]) => `${x * 1000} ${y * 1000}`).join(' L')
+function Line({ c, i, p, phone }: { c: Callout; i: number; p: MotionValue<number>; phone: boolean }) {
+  const d = 'M' + (phone && c.phonePts ? c.phonePts : c.pts).map(([x, y]) => `${x * 1000} ${y * 1000}`).join(' L')
   const off = useTransform(p, v => (i === 0 ? 0 : 1 - clamp((v - DRAW[i]) / 0.11)))
   const vis = useTransform(p, v => (i === 0 ? 1 : clamp((v - DRAW[i] + 0.01) / 0.03)))
   return (
@@ -43,15 +43,16 @@ function Line({ c, i, p }: { c: Callout; i: number; p: MotionValue<number> }) {
 }
 
 function Tag({ c, i, p, phone }: { c: Callout; i: number; p: MotionValue<number>; phone: boolean }) {
-  const o = useTransform(p, v => (i === 0 ? 1 : clamp((v - DRAW[i] - 0.08) / 0.04)))
-  const y = useTransform(p, v => (i === 0 ? 0 : (1 - clamp((v - DRAW[i] - 0.08) / 0.04)) * 6))
+  const o = useTransform(p, v => (i === 0 ? 1 : clamp((v - DRAW[i] - 0.05) / 0.04)))
+  const y = useTransform(p, v => (i === 0 ? 0 : (1 - clamp((v - DRAW[i] - 0.05) / 0.04)) * 6))
   const tf = c.anchor === 'left' ? 'translate(0,-50%)' : c.anchor === 'right' ? 'translate(-100%,-100%)' : 'translate(-50%,-100%)'
-  const [x0, y0] = c.pts[0]
+  const [x0, y0] = (phone && c.phonePts ? c.phonePts : c.pts)[0]
+  const [tx, ty] = phone && c.phoneTag ? c.phoneTag : [phone && c.px ? c.px : c.tag[0], c.tag[1]]
   const dotO = useTransform(p, v => (i === 0 ? 1 : clamp((v - DRAW[i]) / 0.02)))
   return (
     <>
       <motion.span aria-hidden="true" className={'dot' + (i === 0 ? ' dot--pos' : '')} style={{ left: `${x0 * 100}%`, top: `${y0 * 100}%`, opacity: dotO }} />
-      <motion.span className="tagpos" style={{ left: `${(phone && c.px ? c.px : c.tag[0]) * 100}%`, top: `${c.tag[1] * 100}%`, opacity: o, y }}>
+      <motion.span className="tagpos" style={{ left: `${tx * 100}%`, top: `${ty * 100}%`, opacity: o, y }}>
         <span className={'tag' + (i === 0 ? ' tag--light' : '') + (phone ? ' tag--phone' : '')} style={{ transform: tf }}>{phone ? c.short : c.label}</span>
       </motion.span>
     </>
@@ -92,7 +93,7 @@ export default function XrayStage() {
             <div className="xr__edge" />
           </motion.div>
           <svg className="lines" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
-            {set.map((co, i) => <Line key={(phone ? 'p' : 'd') + i} c={co} i={i} p={p} />)}
+            {set.map((co, i) => <Line key={(phone ? 'p' : 'd') + i} c={co} i={i} p={p} phone={phone} />)}
           </svg>
           {set.map((co, i) => <Tag key={(phone ? 'p' : 'd') + i} c={co} i={i} p={p} phone={phone} />)}
         </div>

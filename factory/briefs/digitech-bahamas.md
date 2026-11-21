@@ -68,3 +68,5 @@ Services page: one screen per service with its facts and the photo, ends in the 
 **Tier:** standard (photography + scroll-drawn overlay, no WebGL). The product is explained by the drawing on the real-looking photo; 3D would add weight without explaining more.
 
 **Different from competitors in repo:** not dark, no 3D network globe, no card grid; the only object study of a counter; limestone + sea glass + Sora/Plex used nowhere else in the tech set.
+
+**Plan gate (fresh critic, 2026-11-21):** revise x5, all applied (frame locked to 16:9, backup callout labelled, phone cabling callout raised above the concept label, chapter index 14px at 62% min opacity, client-name section cut because names appear only as logos). Treated as approved after the one revision.

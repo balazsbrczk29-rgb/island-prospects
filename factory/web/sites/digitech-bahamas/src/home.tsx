@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import XrayStage from './XrayStage'
+import { Parts, Night, WorkOrder, Contact, Dock } from './site'
 
 function Home() {
   return (
@@ -8,7 +9,12 @@ function Home() {
       <a className="skip" href="#main">Skip to content</a>
       <main id="main">
         <XrayStage />
+        <Parts />
+        <Night />
+        <WorkOrder />
       </main>
+      <Contact />
+      <Dock />
     </>
   )
 }
