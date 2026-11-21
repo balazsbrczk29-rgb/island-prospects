@@ -7,7 +7,7 @@ Follow GUIDE.md sections 2 to 4 instead of the plan gate below:
 - Screenshot the previous version before you change anything, then run the side-by-side critic (gate 1 purpose, gate 2 craft).
 - Publish only if gate 1 passes. On publish, set `"jobspec_built": true` in the status.
 - factory/PAUSE stops all claims.
-- **When no approved spec is pending:** draft job specs (`Status: draft`, using `factory/jobspecs/_template.md`) for the next 5 businesses in priority order (small and easy first; skip huge webshops and enterprises).
+- **When no approved spec is pending:** if 10 or more drafts already await review (`grep -l '^Status: draft' factory/jobspecs/*.md | wc -l`), end the run immediately with no notification. Otherwise draft job specs (`Status: draft`, using `factory/jobspecs/_template.md`) for the next 5 businesses in priority order (small and easy first; skip huge webshops and enterprises).
   - Use their audit, brief and current site (at most ~3 research calls each).
   - Push the drafts, notify Balazs to review them, then end the run.
   - Never build a draft.
