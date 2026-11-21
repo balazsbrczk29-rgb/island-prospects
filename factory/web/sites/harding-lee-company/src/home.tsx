@@ -6,18 +6,18 @@ import { Rest } from "./sections"
 
 function Answer({ m }: { m: Matter }) {
   const lead = ATTORNEYS[m.who[0]]
-  const names = m.who.map(k => ATTORNEYS[k].name).join(" and ")
+  const also = m.who.slice(1).map(k => ATTORNEYS[k].name)
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div key={m.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }} aria-live="polite">
         <div className="who">
-          <div className="faces">{m.who.map(k => <span className="pf" key={k}><img src={ATTORNEYS[k].portrait} alt={ATTORNEYS[k].name} width={962} height={1142} /></span>)}</div>
+          <span className="pf"><img src={lead.portrait} alt={lead.name} width={962} height={1142} /></span>
           <div>
-            <p className="names">{names}</p>
-            <p className="role">{m.who.map(k => ATTORNEYS[k].role).join(" and ")}</p>
+            <p className="names">{lead.name}</p>
+            <p className="role">{lead.role}{also.length ? `, with ${also.join(", ")}` : ""}</p>
+            <p className="why">{m.why}</p>
           </div>
         </div>
-        <p className="why">{m.why}</p>
         <div className="acts">
           <a className="btn" href={letter(m, m.who[0])}>Write to {lead.short}</a>
           <a className="link num" href={`tel:${TEL}`}>Call Nassau chambers, {PHONE}</a>

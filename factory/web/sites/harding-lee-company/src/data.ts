@@ -39,26 +39,23 @@ export const ATTORNEYS: Record<AKey, {
 export type Matter = { id: string; label: string; who: AKey[]; why: string; plain: string }
 
 export const MATTERS: Matter[] = [
-  { id: "property", label: "Buying or selling property", who: ["dhl", "nhj"],
-    why: "Conveyancing and real property are in both attorneys' practice, in Nassau and on Long Island.",
-    plain: "Title, conveyancing and the transfer of land and homes, for buyers and sellers in Nassau, on Long Island and across the Family Islands." },
-  { id: "development", label: "Land or resort development in the Family Islands", who: ["dhl"],
-    why: "Resort development, with a particular focus on the Family Islands, is one of Mrs. Harding-Lee's areas.",
-    plain: "The legal side of developing land and resorts outside Nassau, from acquisition to the transactions that follow." },
+  { id: "property", label: "Property, land or resort development", who: ["dhl", "nhj"],
+    why: "Conveyancing and real property are at the centre of her practice, with resort development in the Family Islands.",
+    plain: "Title, conveyancing and the transfer of land and homes in Nassau, on Long Island and across the Family Islands, and the legal side of developing land and resorts outside Nassau." },
   { id: "company", label: "Forming or running a company", who: ["dhl"],
-    why: "Company incorporation and commercial law are at the core of the firm's practice and of Mrs. Harding-Lee's.",
+    why: "Company incorporation and corporate and commercial law are at the core of her practice and the firm's.",
     plain: "Company incorporation, corporate and commercial law, and international and domestic transactions." },
   { id: "finance", label: "A banking, insurance or gaming matter", who: ["dhl"],
-    why: "Banking and gaming law are among Mrs. Harding-Lee's areas; insurance and banking are a focus of the firm.",
+    why: "Banking and gaming law are among her areas; insurance and banking are a focus of the firm.",
     plain: "Banking, insurance and gaming law, for institutional and individual clients, locally and worldwide." },
   { id: "estate", label: "Planning an estate", who: ["dhl"],
-    why: "Estate planning is one of Mrs. Harding-Lee's areas.",
+    why: "Estate planning is one of her areas, for families with property in The Bahamas.",
     plain: "Estate planning for families with property and interests in The Bahamas." },
   { id: "employment", label: "An employment question", who: ["dhl", "nhj"],
-    why: "Employment law is in both attorneys' practice.",
+    why: "Employment law is part of her practice, for employers and employees.",
     plain: "Employment law for employers and employees." },
   { id: "family", label: "Family law or an adoption", who: ["nhj"],
-    why: "Family law is one of Mrs. Johnson's areas, and she is an adoption advocate.",
+    why: "Family law is one of her areas, and she is an adoption advocate, passionate about children's rights.",
     plain: "Family law and adoption, handled with care for the children involved." },
 ]
 
@@ -66,7 +63,7 @@ export const OFFICES = {
   nassau: {
     name: "Nassau chambers",
     island: "New Providence",
-    lines: ["Mecam House", "Dowdeswell & Deveaux Streets", "P.O. Box N-877, Nassau"],
+    lines: ["Mecam House", "Dowdeswell & Deveaux Streets", "P.O. Box N\u2011877, Nassau"],
     phones: [["(242) 326-4065", "+12423264065"], ["(242) 326-4066", "+12423264066"], ["(242) 328-7712", "+12423287712"]],
     fax: "(242) 326-4067",
     map: "https://www.google.com/maps/search/?api=1&query=Dowdeswell+Street+and+Deveaux+Street+Nassau+Bahamas",
@@ -74,7 +71,7 @@ export const OFFICES = {
   longisland: {
     name: "Long Island office",
     island: "Long Island",
-    lines: ["Salt Pond, Long Island", "P.O. Box LI 30-129"],
+    lines: ["Salt Pond, Long Island", "P.O. Box LI 30\u2011129"],
     phones: [["(242) 338-0009", "+12423380009"], ["(242) 338-0042", "+12423380042"]],
     fax: "(242) 338-0092",
     map: "https://www.google.com/maps/search/?api=1&query=Salt+Pond+Long+Island+Bahamas",
