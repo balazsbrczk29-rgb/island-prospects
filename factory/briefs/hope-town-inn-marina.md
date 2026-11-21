@@ -34,3 +34,33 @@ References (vocabulary): aman.com / belmond.com (editorial serif, photo-led, qui
 
 ## Scorecard
 1:5 2:4 3:4 4:5 5:4 6:4 7:4 8:4 9:4 10:5 11:5
+
+---
+# Generation 2 design plan (2026-11-21)
+Own photos (rehosted from hopetownmarina.com in Lovable project ip-assets-hope-town-inn-marina, /assets/a..l.jpg): A aerial of Hope Town Harbour with the lighthouse 1921x1082; B villa porch, C villa living room, D bathroom, E kitchen, F cocktails, J pink cottage villa, I Johnny's Cay dock (all 1920x1080); G bar 2250x3000 (portrait). K and L carry baked-in text: not used. H (6000x4000, 12 MB) not used.
+
+**Big idea:** guests and boats arrive at the same dock on Hope Town Harbour, so the page is split in two for good: the harbour photograph stays fixed on one half while the other half asks one question, by ferry or by boat, and answers each with the right booking (a room or villa that fits your party, or a slip that fits your hull).
+
+**Direction:** A08 Fixed split + P12 Inagua salt + T01 Monumental serif (N7 vertical list in the scrolling column, M3). Why: the split is the brand truth made literal (two arrivals, one harbour), the fixed photo lets their best own photography stay on screen at full height; salt-white ground with slate ink and one flamingo-pink accent echoes Hope Town's pastel cottages and the candy-striped lighthouse without a mid-tone page.
+
+**Fonts:** Fraunces variable (display, opsz high, soft, -0.04em, one or two words per screen: "By ferry." "By boat.") + Newsreader (text 19px).
+
+**Photo set and sizes:** fixed half is 720x900 at 1440: A, J, G, I, B, C all >= 1080 px tall, shown no larger than source. Phones: each section shows its photo inline at 390 wide.
+
+**Storyboard (desktop):**
+1. Left fixed: A (harbour, lighthouse). Right: vertical nav list; "Hope Town Inn & Marina, Elbow Cay, Abaco"; display "Two ways in."; one sentence of truth (15-acre estate beside the Elbow Reef Lighthouse, west side of Hope Town Harbour); two large choices: "By ferry: rooms and villas" / "By boat: slips to 125 ft"; "Check room rates" primary (Vertical Booking). Phone numbers line.
+2. "By ferry." Left: J. Stay finder: party size 2 to 8 -> list of the 9 stays that fit with guests and size; hover swaps the left photo to B/C/E (labelled as villa interiors); "Check rates" to Vertical Booking.
+3. "By boat." Left: A (cropped to the docks). Slip check: LOA input -> fits the 50 surge-free slips (to 125 ft) or moorings to 45 ft; power 30/50/100 amp; RO water, ice, laundry, showers, wifi, pool -> "Book a slip on Dockwa".
+4. "Bridget's." Left: G bar. Rum bar with one of the most extensive rum selections in The Bahamas; restaurant by local chefs, breakfast lunch dinner; F cocktails inline small.
+5. "Johnny's Cay." Left: I dock. Private island rental, ask the office.
+6. "Getting here." Left: A. Fly to Marsh Harbour then ferry (GNL Ferry, The Ferry Limited) to Hope Town, or Treasure Cay plus boat; boats: Dockwa.
+7. Contact: office@hopetownmarina.com, US +1 850 588 4855, BS 242 803 4401; Elbow Reef Classic (annual, four days, proceeds to the lighthouse); Marinalife 2024 Readers' Choice, Dockwa Elite Fleet 2024 as one quiet line.
+Inner pages: stay.html (all 9 stays with sizes, finder) and marina.html (full specs, slip check).
+
+**Phone:** 1) A photo top 46%, name, "Two ways in.", the two choices + rates button; 2) "By ferry." with party-size segmented control and results; 3) "By boat." slip check.
+
+**Conversion:** Check room rates (Vertical Booking) primary; Book a slip (Dockwa) for boaters; email and phones.
+
+**Tier:** standard (own photography in a fixed split, crossfades). Not 3D: their own aerial says more than an Ocean scene.
+
+**Distinct:** not A08+P02 (Swain's Cay Lodge); Fraunces + flamingo accent on salt white.

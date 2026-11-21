@@ -1,13 +1,14 @@
 {
  "slug": "hope-town-inn-marina",
  "niche": "hospitality-stay",
- "archetype": "A01",
- "archetype_name": "Magazine feature",
- "lane": "P02",
- "lane_name": "Shallow flats",
+ "archetype": "A08",
+ "archetype_name": "Fixed split",
+ "lane": "P12",
+ "lane_name": "Inagua salt",
  "type": "T01",
  "type_name": "Monumental serif",
- "nav": "N1",
- "motion": "M1",
- "dealt_at": "2026-11-08T15:22:55.708Z"
+ "nav": "N7",
+ "motion": "M3",
+ "dealt_at": "2026-11-21T15:51:58.942Z",
+ "chosen": true
 }
