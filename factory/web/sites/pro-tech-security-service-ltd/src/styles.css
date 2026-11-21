@@ -62,18 +62,15 @@ img { display: block; max-width: 100%; }
 
 /* hero */
 .hero { position: relative; height: 100svh; min-height: 640px; display: grid; grid-template-rows: 1fr auto; background: var(--night); }
+.status { position: absolute; z-index: 2; left: var(--pad); top: clamp(96px, 15svh, 150px); max-width: min(38vw, 560px); transition: color var(--d-scene) var(--ease); }
+.status .now { font-size: var(--t3); line-height: 1.22; font-weight: 500; letter-spacing: -0.012em; text-wrap: balance; }
+.status .clock { display: block; font-size: var(--t4); line-height: 1.02; font-weight: 600; letter-spacing: -0.03em; margin-bottom: var(--s2); }
+.status .sub { margin-top: var(--s3); font-size: var(--t2); font-weight: 500; letter-spacing: 0; max-width: 34ch; line-height: 1.45; }
 .frames { position: relative; overflow: hidden; }
 .frames img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; transition: opacity var(--d-scene) var(--ease); }
-.strip { background: var(--night); color: var(--on-night); padding: var(--s2) var(--pad) 84px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s2) var(--s5); align-items: end; }
-.strip > div:first-child { grid-row: 2; }
-.strip > .btn { grid-row: 2; }
-.track { grid-row: 1; }
-.nowbtn { grid-row: 1; }
-.strip .now { font-size: var(--t3); line-height: 1.2; font-weight: 500; letter-spacing: -0.01em; max-width: 36ch; text-wrap: balance; }
-.strip .now .clock { color: var(--brass); }
-.strip .sub { margin-top: 6px; color: var(--on-night-muted); font-size: var(--t2); font-weight: 400; letter-spacing: 0; }
-.track { grid-column: 1 / 2; position: relative; padding-bottom: 50px; }
-.nowbtn { align-self: start; justify-self: end; font: inherit; font-weight: 600; color: var(--on-night-muted); background: none; border: 0; min-height: 44px; padding: 0; cursor: pointer; }
+.strip { background: var(--night); color: var(--on-night); padding: var(--s3) var(--pad) 76px; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: var(--s2) var(--s4); align-items: start; }
+.track { position: relative; padding-bottom: 50px; }
+.nowbtn { align-self: start; font: inherit; font-weight: 600; color: var(--on-night-muted); background: none; border: 0; min-height: 44px; padding: 0; cursor: pointer; }
 .nowbtn[aria-pressed="true"] { color: var(--brass); }
 .track input[type="range"] { width: 100%; margin: 0; height: 44px; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; }
 .track input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: var(--line-night); }
@@ -89,12 +86,14 @@ img { display: block; max-width: 100%; }
   .hero { min-height: 0; }
   .frames img { object-position: 68% 50%; }
   .strip { grid-template-columns: 1fr; padding-top: var(--s3); padding-bottom: var(--s3); }
-  .strip .now { font-size: 1.375rem; }
-  .strip .btn { width: 100%; }
-  .strip { grid-template-columns: minmax(0, 1fr) auto; }
-  .strip > div:first-child { grid-column: 1 / -1; grid-row: 2; }
-  .strip > .btn { grid-column: 1 / -1; grid-row: 3; }
-  .strip { padding-bottom: 76px; }
+  .hero { height: auto; min-height: 100svh; grid-template-rows: 46svh auto auto; }
+  .status { position: static; grid-row: 2; max-width: none; padding: var(--s3) var(--pad) 0; color: var(--on-night) !important; }
+  .status .now { font-size: 1.25rem; }
+  .status .clock { font-size: 2rem; margin-bottom: var(--s1); }
+  .status .clock { color: var(--brass); }
+  .status .sub { color: var(--on-night-muted); margin-top: var(--s1); font-size: 1rem; }
+  .strip { grid-template-columns: minmax(0, 1fr) auto; padding-top: var(--s2); padding-bottom: 76px; }
+  .strip > .btn { grid-column: 1 / -1; width: 100%; }
   .track { padding-bottom: 40px; }
   .stops button span { display: none; }
   .stops button b { font-size: 0.9375rem; }
@@ -116,15 +115,23 @@ img { display: block; max-width: 100%; }
 .stage .imgs { position: relative; overflow: hidden; }
 .stage .imgs img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; will-change: opacity, transform; }
 .stage .imgs img.portrait { object-position: 50% 35%; }
-.cap { padding: var(--s4) var(--pad) var(--s5); display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: var(--s4); align-items: start; min-height: 230px; }
-.cap .time { font-size: var(--t4); line-height: 1; font-weight: 600; letter-spacing: -0.03em; color: var(--brass); }
+.stage .pin { grid-template-rows: 1fr; }
+.cap { position: absolute; z-index: 10; left: var(--pad); top: clamp(88px, 14svh, 150px); max-width: min(44vw, 640px); }
+.cap .time { display: block; font-size: var(--t5); line-height: 0.9; font-weight: 600; letter-spacing: -0.045em; }
+.cap .n { display: block; margin: var(--s3) 0 6px; font-size: var(--t1); font-weight: 600; opacity: 0.75; }
 .cap h2 { font-size: var(--t3); line-height: 1.2; }
-.cap p { color: var(--on-night-muted); margin-top: 6px; max-width: 60ch; }
-.cap .n { color: var(--on-night-muted); font-size: var(--t1); font-weight: 600; display: block; margin-bottom: 8px; }
-@media (max-width: 760px) { .cap { grid-template-columns: 1fr; gap: var(--s1); min-height: 260px; padding-top: var(--s3); } .cap .time { font-size: 2.5rem; } .cap h2 { font-size: 1.375rem; } }
-
+.cap p { margin-top: 6px; max-width: 46ch; opacity: 0.86; }
+.stage .imgs img.portrait { object-position: 50% 78%; }
+@media (max-width: 760px) {
+  .stage .pin { grid-template-rows: 58svh auto; background: var(--night); }
+  .cap { position: static; max-width: none; padding: var(--s3) var(--pad) var(--s5); color: var(--on-night) !important; }
+  .cap .time { font-size: 3.5rem; color: var(--brass); }
+  .cap h2 { font-size: 1.375rem; }
+  .stage .imgs img.portrait { object-position: 50% 70%; }
+}
 /* light sections */
 .sec { padding: var(--s8) var(--pad) 0; }
+.sec .lead { margin-top: var(--s3); color: var(--muted); max-width: 60ch; }
 .sec h2 { margin-top: var(--s2); font-size: clamp(2rem, 4.4vw, var(--t4)); line-height: 1.05; max-width: 20ch; }
 .also { margin-top: var(--s6); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); }
 .also div { padding: var(--s4) var(--s4) var(--s4) 0; border-bottom: 1px solid var(--line); }

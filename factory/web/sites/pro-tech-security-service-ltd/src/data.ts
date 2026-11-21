@@ -42,13 +42,13 @@ export const STOPS = [
 ]
 
 export const CHAPTERS = [
-  { n: "2.0", time: "9:00", img: "street-day.jpg", alt: "A pale green Nassau shop on a street corner in late-morning sun, a small camera high on the wall (illustrative)", title: "The office opens on Farrington Road.",
+  { n: "2.0", time: "9:00", ink: "#101a24", img: "cctv-closeup.jpg", alt: "A white CCTV camera on a bracket against a pale green wall in morning sun (illustrative)", title: "The office opens on Farrington Road.",
     lines: ["Alarm systems and CCTV cameras, sold, installed and serviced.", "Security supplies too, from the office, Monday to Friday, 9 to 5."] },
-  { n: "3.0", time: "14:00", img: "guard-gate.jpg", alt: "A security officer in a navy uniform at a white gate, seen from behind (illustrative)", title: "Officers on post.",
+  { n: "3.0", time: "14:00", ink: "#101a24", img: "guard-gate.jpg", alt: "A security officer in a navy uniform at a white gate, seen from behind (illustrative)", title: "Officers on post.",
     lines: ["Security guard services for businesses and sites in Nassau.", "Pro-Tech runs its own training programme for its officers."] },
-  { n: "4.0", time: "18:30", img: "street-dusk.jpg", alt: "The same Nassau shop at dusk, shutter down and the wall light on (illustrative)", title: "The shutter comes down. The alarm is set.",
+  { n: "4.0", time: "18:30", ink: "#fbf6ec", img: "street-dusk.jpg", alt: "The same Nassau shop at dusk, shutter down and the wall light on (illustrative)", title: "The shutter comes down. The alarm is set.",
     lines: ["From here a monitored alarm reports to Pro-Tech's central station.", "Set it as you leave, and it is watched until you open up."] },
-  { n: "5.0", time: "3:00", img: "control-room.jpg", alt: "A quiet monitoring desk at night with two screens (illustrative)", title: "At 3 am, the central station is watching.",
+  { n: "5.0", time: "3:00", ink: "#e9e4d8", img: "control-room.jpg", alt: "A quiet monitoring desk at night with two screens (illustrative)", title: "At 3 am, the central station is watching.",
     lines: ["24/7 central station monitoring, weekends and holidays included.", "The one thing a camera on its own cannot do: notice."] },
 ]
 

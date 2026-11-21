@@ -5,7 +5,7 @@ import { Page, mount } from "./site"
 import { Planner } from "./planner"
 
 const SCENES: Scene[] = ["day", "dusk", "night"]
-const INK: Record<Scene, string> = { day: "#101a24", dusk: "#f4efe4", night: "#e9e4d8" }
+const INK: Record<Scene, string> = { day: "#101a24", dusk: "#fbf6ec", night: "#e9e4d8" }
 
 function Hero({ hour, setHour, live, weekday }: { hour: number; setHour: (h: number, live?: boolean) => void; live: boolean; weekday: number }) {
   const scene = sceneFor(hour)
@@ -16,12 +16,11 @@ function Hero({ hour, setHour, live, weekday }: { hour: number; setHour: (h: num
           <img key={s} src={`${IMG}street-${s}.jpg`} alt={s === scene ? `A Nassau shop corner with a camera on the wall, at ${s === "day" ? "late morning" : s === "dusk" ? "dusk" : "night"} (illustrative)` : ""} aria-hidden={s !== scene} width={1920} height={1080} style={{ opacity: s === scene ? 1 : 0 }} fetchPriority={s === "day" ? "high" : "auto"} />
         ))}
       </div>
+      <div className="status" style={{ color: INK[scene] }}>
+        <p className="now" aria-live="polite"><span className="clock num">{live ? "It is " : "At "}{fmt(hour)}{live ? " in Nassau." : ","}</span> {live ? officeLine(hour, weekday) : hour >= 9 && hour < 17 ? "our office on Farrington Road is open." : "our office is closed."} The central station is watching.</p>
+        <h1 id="h1" className="sub">Pro-Tech Security: guards, CCTV and alarms, and 24/7 monitoring, from Nassau since 2004.</h1>
+      </div>
       <div className="strip">
-        <div>
-          <p className="now" aria-live="polite"><span className="clock num">{live ? "It is " : "At "}{fmt(hour)}{live ? " in Nassau." : ","}</span> {live ? officeLine(hour, weekday) : hour >= 9 && hour < 17 ? "our office on Farrington Road is open." : "our office is closed."} The central station is watching.</p>
-          <h1 id="h1" className="sub">Pro-Tech Security: guards, CCTV and alarms, and 24/7 monitoring, from Nassau since 2004.</h1>
-        </div>
-        <a className="btn num" href={`tel:${TEL}`}>Call {PHONE}</a>
         <div className="track">
           <label className="sr" htmlFor="hour" style={{ position: "absolute", left: -9999 }}>Time of day in Nassau</label>
           <input id="hour" type="range" min={0} max={23.5} step={0.25} value={hour} aria-valuetext={fmt(hour)} onChange={e => setHour(Number(e.target.value))} />
@@ -30,6 +29,7 @@ function Hero({ hour, setHour, live, weekday }: { hour: number; setHour: (h: num
           </div>
         </div>
         <button type="button" className="nowbtn" aria-pressed={live} onClick={() => setHour(nassauNow().hour, true)}>Now</button>
+        <a className="btn num" href={`tel:${TEL}`}>Call {PHONE}</a>
       </div>
     </section>
   )
@@ -76,7 +76,7 @@ function Stage() {
         <div className="imgs">
           {CHAPTERS.map((ch, i) => <Frame key={ch.img} i={i} n={CHAPTERS.length} p={scrollYProgress} src={ch.img} alt={ch.alt} portrait={ch.img === "guard-gate.jpg"} />)}
         </div>
-        <motion.div className="cap" key={c.n} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.div className="cap" key={c.n} style={{ color: c.ink }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
           <span className="time num">{c.time}</span>
           <div>
             <span className="n num">{c.n}</span>
@@ -91,26 +91,12 @@ function Stage() {
   )
 }
 
-function Also() {
-  return (
-    <section className="sec" id="also" aria-labelledby="also-h">
-      <span className="n num">6.0</span>
-      <h2 id="also-h">And when something has already happened.</h2>
-      <div className="also">
-        <div><h3>Consulting and investigations</h3><p>Security consulting for homes and businesses, and investigations, handled by the same licensed company.</p></div>
-        <div><h3>Collections</h3><p>A collections service, from the same Nassau office.</p></div>
-        <div><h3>Security supplies</h3><p>Equipment and supplies for homes and businesses, from the Farrington Road office.</p></div>
-        <div><h3>Alarm and CCTV service</h3><p>Alarm and CCTV systems sold and serviced by Pro-Tech, so there is one number to call.</p></div>
-      </div>
-    </section>
-  )
-}
-
 function PlanSection() {
   return (
     <section className="sec" id="plan" aria-labelledby="plan-h">
-      <span className="n num">7.0</span>
+      <span className="n num">6.0</span>
       <h2 id="plan-h">Plan the call in a minute.</h2>
+      <p className="lead">Guards, cameras, alarms and monitoring, and also security supplies, consulting and investigations, and collections. Pick what fits and call with the list.</p>
       <Planner />
     </section>
   )
@@ -132,7 +118,6 @@ function Home() {
       <Hero hour={hour} setHour={setHour} live={live} weekday={first.weekday} />
       <Card0 />
       <Stage />
-      <Also />
       <PlanSection />
     </Page>
   )
