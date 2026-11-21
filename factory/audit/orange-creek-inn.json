@@ -6,5 +6,34 @@
  "url": "orangecreekinn.com",
  "url_source": "prospects",
  "old_check": "LOADED",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "bahamago.com (external link, Book Now)",
+  "products_or_listings": 0,
+  "pages": 1,
+  "platform": "WordPress (WPBakery, Slider Revolution, hoteltrafficbuilders theme)",
+  "latest_year": 2026,
+  "modernity": 3,
+  "concept_type": "brochure + enquiry: the studios, what is on site, getting here, the published specials matched to your dates, a dates enquiry by email and the real BahamaGo booking link",
+  "must_keep": [
+   "Book Now link to the BahamaGo engine",
+   "the published Out Islands specials with their booking and blackout dates",
+   "flight and airport facts from the FAQ",
+   "phone and email",
+   "their own photo gallery"
+  ],
+  "weaknesses": [
+   "One long page of #!/ anchors: Google sees one page and nobody can link to the rooms or the flights",
+   "Headline is Welcome to Orange Creek Inn; the beach across the road is buried in FAQ 20",
+   "Six specials rotate in a slider of small print; a guest cannot tell which fit their dates",
+   "Flight times, taxi fare and car rental prices sit at the bottom of 27 FAQs",
+   "No rates and no room description beyond an amenity icon list",
+   "Photos are 900 px wide and shown as 520 px square crops"
+  ],
+  "priority": "A",
+  "note": "Refreshed in 2026 by a hotel marketing vendor but still a template one-pager; small family inn (the Cleares per guest reviews on their own site)."
+ },
+ "audited_at": "2026-11-20"
 }

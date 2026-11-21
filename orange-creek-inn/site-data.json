@@ -7,12 +7,14 @@
   "phone": "+1-242-354-4110",
   "whatsapp": null,
   "email": "info@orangecreekinn.com",
-  "address": "Orange Creek, north of Arthur's Town",
+  "address": "Orange Creek, immediately north of Arthur's Town",
   "settlement": "Orange Creek",
   "island": "Cat Island",
   "booking": "https://www.bahamago.com/hotels/22-Orange-Creek-Inn?ref=oipb"
  },
  "hours": null,
+ "checkin": "14:00",
+ "checkout": "12:00",
  "socials": [
   "https://www.facebook.com/Orange-Creek-Inn-698462783509770/"
  ],
@@ -20,41 +22,39 @@
   {
    "name": "Studio",
    "kind": "room",
-   "summary": "Spacious studio with stove-top kitchenette, AC, TV and internet; beach across the road; store on site.",
+   "summary": "Spacious studio with stove-top kitchenette, dining table, air conditioning, television and internet. Beach across the road, grocery store on site.",
    "price": null,
    "source": "https://www.orangecreekinn.com/"
   },
   {
    "name": "Car rental",
    "kind": "service",
-   "summary": "Average $80/day, can meet you at the airport.",
-   "price": "$80/day avg",
+   "summary": "About $80 a day; can be waiting at the airport.",
+   "price": 80,
    "source": "https://www.orangecreekinn.com/"
   },
   {
    "name": "Bicycle rental",
    "kind": "service",
-   "summary": "$10/day.",
-   "price": "$10/day",
+   "summary": "$10 a day.",
+   "price": 10,
    "source": "https://www.orangecreekinn.com/"
   },
   {
-   "name": "On-site convenience store",
-   "kind": "product",
-   "summary": "Groceries and essentials.",
+   "name": "Airport pick-up",
+   "kind": "service",
+   "summary": "From Arthur's Town Airport, 3.5 miles.",
    "price": null,
    "source": "https://www.orangecreekinn.com/"
   }
  ],
  "platform": {
-  "candidate": true,
+  "candidate": false,
   "orderable": false,
-  "categories": [
-   "grocery",
-   "lodging"
-  ]
+  "categories": []
  },
  "sources": [
-  "https://www.orangecreekinn.com/"
+  "https://www.orangecreekinn.com/",
+  "https://www.bahamago.com/hotels/22-Orange-Creek-Inn?ref=oipb"
  ]
 }
