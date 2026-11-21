@@ -8,7 +8,7 @@ const nightsBetween = (a: string, d: string) => (a && d ? Math.round((new Date(d
 export function Letterhead({ base = '' }: { base?: string }) {
   return (
     <header className="lh">
-      <a className="lh-name" href={base || './'}>The Conch Inn{' '}<span className="amp">&amp;</span>{' '}Marina</a>
+      <a className="lh-name" href={base || './'}>The Conch Inn{'\u00a0'}<span className="amp">&amp;</span>{'\u00a0'}Marina</a>
       <nav aria-label="Main">
         <a href={base + '#rates'}>Rates</a>
         <a href={base + '#ashore'}>Ashore</a>
@@ -18,6 +18,16 @@ export function Letterhead({ base = '' }: { base?: string }) {
       </nav>
       <p className="lh-line num">Bay Street, Marsh Harbour, Abaco <span aria-hidden="true">·</span> <a href={`tel:${BIZ.tel}`}>{BIZ.phone}</a> <span aria-hidden="true">·</span> {BIZ.vhf} <span aria-hidden="true">·</span> <a href={`mailto:${BIZ.email}`}>{BIZ.email}</a></p>
     </header>
+  )
+}
+
+const short = (iso: string) => iso ? new Date(iso + 'T12:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''
+function DateBlank({ label, value, min, onChange }: { label: string; value: string; min: string; onChange: (v: string) => void }) {
+  return (
+    <span className="dateblank">
+      <span className={`blank ${value ? '' : 'empty'}`} aria-hidden="true">{value ? short(value) : 'pick a day'}</span>
+      <input type="date" aria-label={label} min={min} value={value} onChange={e => onChange(e.target.value)} onClick={e => { try { (e.currentTarget as any).showPicker?.() } catch {} }} />
+    </span>
   )
 }
 
@@ -56,8 +66,8 @@ export function Letter() {
             </select>
             {' '}with a <Blank label="Beam in feet" w={Math.max(2.4, beam.length + 0.6)} inputMode="decimal" value={beam} onChange={e => setBeam(e.target.value.replace(/[^\d.]/g, ''))} /> ft beam and a{' '}
             <Blank label="Draft in feet" w={Math.max(2, draft.length + 0.6)} inputMode="decimal" value={draft} onChange={e => setDraft(e.target.value.replace(/[^\d.]/g, ''))} /> ft draft.
-            {' '}We arrive <Blank label="Arrival date" w={12.5} type="date" min={today} value={arrive} onChange={e => { setArrive(e.target.value); if (leave && e.target.value >= leave) setLeave('') }} />
-            {' '}and leave <Blank label="Departure date" w={12.5} type="date" min={arrive || today} value={leave} onChange={e => setLeave(e.target.value)} />.
+            {' '}We arrive <DateBlank label="Arrival date" min={today} value={arrive} onChange={v => { setArrive(v); if (leave && v >= leave) setLeave('') }} />
+            {' '}and leave <DateBlank label="Departure date" min={arrive || today} value={leave} onChange={setLeave} />.
           </motion.p>
           <motion.div className="reply" aria-live="polite" {...appear(2)}>
             <p className="reply-k">From our published rates</p>
@@ -70,6 +80,7 @@ export function Letter() {
           <motion.div className="acts" {...appear(3)}>
             <button className="btn" type="submit">Send to the dock office</button>
             <p className="acts-alt num">or call <a href={`tel:${BIZ.tel}`}>{BIZ.phone}</a>, {BIZ.vhf}</p>
+            <p className="acts-ashore">Staying ashore? <a href={BIZ.bookRooms}>Book a room online</a></p>
           </motion.div>
         </form>
       </div>
