@@ -3,8 +3,37 @@
  "id": 76,
  "size": "Small",
  "niche": "hospitality-stay",
- "url": "hopetownmarina.com",
+ "url": "https://www.hopetownmarina.com/",
  "url_source": "brief",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": true,
+  "booking_engine": "Vertical Booking (rooms) + Dockwa (slips)",
+  "products_or_listings": 10,
+  "pages": 30,
+  "platform": "Wix",
+  "latest_year": 2026,
+  "modernity": 3,
+  "concept_type": "booking: stay finder by party size with room and villa details handing off to Vertical Booking, slip check handing off to Dockwa, restaurant and rum bar, getting here",
+  "must_keep": [
+   "Vertical Booking room reservations",
+   "Dockwa slip reservations",
+   "rooms and villas with sizes and guests",
+   "marina specs",
+   "Bridget's Rum Bar",
+   "getting here (fly + ferry)"
+  ],
+  "weaknesses": [
+   "out-of-service 242.366.0003 listed first",
+   "30+ menu links",
+   "no party-size filter across 9 stays",
+   "120 vs 125 ft conflict",
+   "2021/2022 Covid badges",
+   "generic copy (Welcome to, Nestled, paradise)"
+  ],
+  "priority": "B",
+  "note": "Wix resort and marina with real booking engines; concept must keep both hand-offs. Nov 21: own photos (12 originals, Wix media IDs in this audit run) rehosted in Lovable project ip-assets-hope-town-inn-marina /assets/a.jpg..l.jpg (h.jpg 12 MB on CDN); hero a.jpg 1921x1082 harbour with lighthouse. Plain static.wixstatic.com/media/<id>~mv2.jpg works; /v1/fit/w_N without a filename fails."
+ }
 }
