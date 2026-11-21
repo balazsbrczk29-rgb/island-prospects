@@ -66,3 +66,33 @@ Email, WhatsApp, hours, fabric brands, prices, lead times.
 ## Showcase scorecard
 First screen 4, typography 4, layout 4, context visuals 5 (their own photos), motion 4, depth 4, detailing 4, mobile 4, references 4, owner proud 5, whole page 4.
 Uniqueness: serif split-screen with real photo, navy/canvas blue, awning designer; unlike CBS (grotesk monument, green) and the marina reference.
+
+## Generation 2 rebuild, round 2 (2026-11-21): verified facts and design plan
+### New facts (read 2026-11-21)
+- Contact (coverupbahamas.com/contact-us): Raphia Close, Suite 13/14, Airport Industrial Park, P.O. Box SP 62402, Nassau. Phone (242) 359-0179. Email rickynix@gmail.com. "For an immediate response WhatsApp: (242) 359-0179". Replaces the 2012 directory number.
+- Products (coverupbahamas.com/our-latest-projects): awning frames are schedule 40 aluminium, MIG welded, sanded and painted with three coats; products 100% made in the Bahamas; boat tops (Bimini, T-tops, overlay tops) in marine grade canvas and vinyl, hundreds of colours, thread that lasts 8 years; marine upholstery in marine grade vinyl, plain, quilted or diamond pleat; weather curtains in outdoor vinyl with 30 gauge clear, hand or crank-up; bow rails custom made in 1 in stainless steel; sun shades.
+- Current site: WordPress on Bluehost; Bluehost login box and maths captcha show on the homepage; videos only offered as downloads.
+
+### Big idea
+The catalogue is the workshop: every cover Cover Up makes sits in one index, home on one side and boats on the other, and each one opens on their own photograph of the real job, ending in "WhatsApp us a photo and we come to measure".
+
+### Direction
+A02 Catalogue index + P09 Shipyard steel (as a field only, light ground #F2F2EF, ink #111417, navy #2D4A63 accent from their blue truck and canopies, safety yellow only as a 2 px active marker) + T11 Neo-grotesk display (Bricolage Grotesque + Figtree). Why: a family workshop with nine real products and good real photos sells best like Aesop sells: the inventory, honestly photographed, is the hero. Steel and navy come from the Airport Industrial Park workshop and their truck.
+
+### Photos (own, coverupbahamas.com, viewed in Lovable gallery 331a8583)
+Old-Fortbay-11 1280x960 (teal awning with curtains), PHOTO-2022-11-01-14-05-00-3 1024x768 (owner at the workshop under the Cover-Up awning, truck), PHOTO-...-30-53-1 768x1024 (sewing), PHOTO-...-19-49-21-1 768x1024 (cutting patterns), PHOTO-...-30-49-1 1024x768 (upholstery cushions), PHOTO-...-30-50-3 768x1024 (white helm seat), Covers 1632x916 (clear enclosure), Ferry-Enclosures 1632x916, Ferry-Seats 1632x916, Small-Boat-Cover 1278x720, Boat-Cover 1632x918, Heat-Shields 1632x918. No photo is shown wider than its source (index stage max 820 px wide; portraits in 4:5 frames at 600 px or less).
+
+### Storyboard (desktop 1440x900)
+1. Index hero: thin top bar (Cover Up, Island Marine Covering Ltd, WhatsApp number). Left column, full height and sticky through the catalogue: H1 "Shade and shelter, cut and sewn in Nassau." then the index as a typographic list in two departments, "For the house" (Awnings, Weather curtains, Hurricane shutters, Sun shades) and "For the boat" (Bimini and T-tops, Enclosures, Marine upholstery, Boat covers, Bow rails). Right: the stage, one large real photograph that swaps as you hover or tap an item, with its sourced facts beneath. Default: the teal awning. Primary CTA "WhatsApp a photo for a measure".
+2. Still in the catalogue (left index stays): items scroll as plain rows with photo + spec text, no cards; items without a photo (shutters, sun shades, bow rails) are type-only rows.
+3. The workshop: a wide band with four real process photos in a row strip (cut, sew, finished cushions, the workshop door) and one line: "Every job is made at Raphia Close, Suite 13/14, Airport Industrial Park."
+4. Family: 1992, one sewing machine and one roll of canvas in a cottage in Montagu village; Henry and Viola Nixon's upholstery for The Montagu, The British Colonial and The Royal Victoria; brother Kirk in Abaco. Steel field section.
+5. Get a measure: choose what you need, home or boat, area; prefilled WhatsApp message; call; email; visit address with map link.
+6. Footer.
+Phone: 1) bar, H1, CTA, the index as a horizontal chip row pinned under the bar, stage photo; 2) item facts and next photo; 3) item rows.
+
+### Conversion
+WhatsApp (242) 359-0179 prefilled ("I'd like a measure for: ..."), call the same number, email rickynix@gmail.com.
+
+### Tier
+standard (photos are the proof; no 3D).

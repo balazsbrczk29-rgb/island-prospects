@@ -1,11 +1,74 @@
 {
- "slug": "island-marine-covering-ltd",
- "id": 77,
- "name": "Island Marine Covering Ltd (IMC)",
- "batch": "01",
- "tier": "A",
- "state": "building",
- "generation": 2,
- "rebuild_of": 1,
- "claimed_at": "2026-11-21T13:47:43.992Z"
+  "slug": "island-marine-covering-ltd",
+  "id": 77,
+  "name": "Island Marine Covering Ltd (IMC)",
+  "batch": "01",
+  "tier": "A",
+  "claimed_at": "2026-11-21T13:47:43.992Z",
+  "state": "built",
+  "generation": 2,
+  "pages": [
+    "index.html"
+  ],
+  "primary_cta": "WhatsApp a photo for a measure, (242) 359-0179 (prefilled message); secondary: call, email rickynix@gmail.com",
+  "brand_truth": "One sewing machine and one roll of canvas in a Montagu village cottage in 1992, from a family upholstery trade that once dressed Nassau's grand hotels; today every awning, top and cushion is cut and sewn at Raphia Close.",
+  "buyer": "Nassau homeowners with terraces, restaurant and hotel managers, boat owners and captains; they fear fabric that fails in a season and waiting months, and compare with ordering from Florida.",
+  "direction": {
+    "archetype": "A02 Catalogue index",
+    "lane": "P09 Shipyard steel (light ground, navy field, sun-yellow marker)",
+    "type": "T11 Neo-grotesk display (Bricolage Grotesque + Figtree)",
+    "why": "A family workshop with nine real products and good real photos sells best like Aesop: the inventory, honestly photographed, is the hero, with a pinned index as navigation. Navy from their truck and canopies."
+  },
+  "concept_type": "brochure: product catalogue by department (house, boat) + get-a-measure WhatsApp enquiry",
+  "tier_visual": "standard",
+  "images": [
+    {
+      "src": "https://coverupbahamas.com/wp-content/uploads/ (Old-Fortbay-11, Ferry-Enclosures, Covers, Small-Boat-Cover, Ferry-Seats, four 2022 workshop photos)",
+      "source": "own",
+      "credit": "Cover Up / coverupbahamas.com"
+    }
+  ],
+  "plan_gate": {
+    "verdict": "approved after one revision",
+    "photography": 4,
+    "typography": 4,
+    "composition": 4,
+    "colour": 4,
+    "fit": 5,
+    "distinct": 4,
+    "references": 4
+  },
+  "critic": {
+    "photography": 4,
+    "typography": 4,
+    "composition": 4,
+    "colour": 4,
+    "fit": 5,
+    "distinct": 4,
+    "references": 4,
+    "note": "plan-gate predicted scores after revision"
+  },
+  "current_site_findings": [
+    "Bluehost login box and maths captcha on the homepage",
+    "'View Our Products' opens the WordPress sample page",
+    "Template text visible",
+    "No phone or address on the homepage",
+    "Product videos only as downloads",
+    "Social icons link to placeholder pages"
+  ],
+  "pitch_line": "Everything you make, house and boat, in one catalogue of your own photographs, with WhatsApp for a measure on every screen, instead of a Bluehost login box.",
+  "assumptions": [
+    "Cover Up is the current trading name of Island Marine Covering Ltd (their Facebook says so)",
+    "The Ferry-Enclosures photo is presented as weather curtains on a ferry deck (clear roll-down curtains); confirm",
+    "Ferry seating described from the photo filename",
+    "Their four product films (mp4 on their site) are not used because they could not be viewed in this sandbox"
+  ],
+  "sources": [
+    "https://coverupbahamas.com/",
+    "https://coverupbahamas.com/our-latest-projects/",
+    "https://coverupbahamas.com/contact-us/",
+    "https://coverupbahamas.com/about-us/"
+  ],
+  "notes": "Generation 2 rebuild round 2, 2026-11-21 (site worker). Audit done this session (broken WordPress brochure, priority A). Contact updated from the live contact page: Raphia Close Suite 13/14, (242) 359-0179, rickynix@gmail.com (replaces the 2012 directory details). BLIND: sandbox blocks their image host; photos viewed through Lovable gallery 331a8583 (made earlier today by another session, reused, no new credits) and QA uses crops of it. Plan gate (CRITIC mode 1): revise (index overflow, stage photo too tall, type-only rows, dull 1992 band, strip alignment), all applied, then approved 4/4/4/4/5/4/4. services.html dropped: one page carries the catalogue. qa.mjs 0 blockers (1 warning: shared concept button); interact.mjs 0 dead, 0 JS errors; distinct.mjs distinct (closest donny-s 67).",
+  "built_at": "2026-11-21T14:03:12.094202+00:00"
 }

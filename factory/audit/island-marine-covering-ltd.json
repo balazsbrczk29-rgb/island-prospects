@@ -3,8 +3,35 @@
  "id": 77,
  "size": "Small",
  "niche": "industrial-b2b",
- "url": null,
+ "url": "coverupbahamas.com",
  "url_source": "prospects",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 10,
+  "platform": "WordPress (Bluehost, Productive Business theme)",
+  "latest_year": 2023,
+  "modernity": 2,
+  "concept_type": "brochure: product catalogue by department (home, boat) + get-a-measure enquiry by WhatsApp",
+  "must_keep": [
+   "products: awnings, weather curtains, hurricane shutters, sun shades, boat tops, enclosures, marine upholstery, bow rails",
+   "their project photos",
+   "visit the workshop at the Airport Industrial Park",
+   "WhatsApp (242) 359-0179 for an immediate response"
+  ],
+  "weaknesses": [
+   "Bluehost login box and a maths puzzle visible on the homepage",
+   "'View Our Products' opens the WordPress sample page",
+   "Template text 'Leave heading fields empty to hide the heading' is visible",
+   "Social links point to placeholder brand pages",
+   "No phone or address on the homepage",
+   "Product videos only as downloads ('your browser doesn't support embedded videos')"
+  ],
+  "priority": "A",
+  "note": "Cover Up (Island Marine Covering Ltd): broken WordPress brochure with real product facts and good workshop photos."
+ }
 }
