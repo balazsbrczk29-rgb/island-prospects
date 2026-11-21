@@ -26,3 +26,5 @@ Current site: none (bellchannelclub.com now serves a gambling site; only an uncl
 8. **Look and feel:** quiet, private, between two waters, sun-faded nautical. No own photographs exist: carry the page with a real map of the inlet (MapLibre or a chart drawn from real coastline) and Commons photographs of Port Lucaya and Bell Channel if excellent ones exist; never realtor photos. The wow: the inlet drawn so you see the club sitting exactly where the channel meets the sea.
 
 Notes from Balazs:
+
+Worker note (parallel draft, Nov 21): an older Bahamasnet directory entry describes an 18-slip marina, 82 units, a private beach, an oceanside pool and clubhouse on Taino Beach and tennis courts, on Jolly Roger Drive. Usable only as "to confirm with the office". Holiday rentals of owners' units appear on VRBO and Sarles Realty, so renters are a real visitor type for the router.

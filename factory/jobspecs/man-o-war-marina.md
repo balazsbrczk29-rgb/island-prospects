@@ -28,3 +28,5 @@ Current site: manowarmarinavillage.com (Wix, every title "My Site 1"; the listed
 8. **Look and feel:** steady, crafted, neighbourly, precise: a family harbour since 1976, not a resort. Their own dock and sign photographs used large. One serif with optical sizes plus tabular figures for every number. Sand ground with one Sea-of-Abaco aqua field. The wow: the open-now line ticking in Bahamas time and the fit answer arriving as a sentence a captain trusts.
 
 Notes from Balazs:
+
+Worker note (parallel draft, Nov 21): the rates PDF linked on /services publishes dockage: day stop $40 (first hour free), $2.50/ft/night to 14 nights, $2.00 for 15 to 30, $1.50 for 30+, $1.00 for 60+, free dockage while dining; power $0.75/kW, water $0.50/gal, laundry $20/load. Its hours differ from the website (office and fuel to 5 pm; lunch Tue to Sat 11 to 2:30, dinner Thu to Sat 5:30 to 8). Worth adding a dockage estimate to the fit tool and the hours conflict to Fix.
