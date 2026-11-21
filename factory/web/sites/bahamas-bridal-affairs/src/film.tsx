@@ -50,6 +50,7 @@ export default function Film() {
         </div>
         <div className="film__frame">
           {SCENES.map((s, i) => <Frame key={s.img} scene={s} i={i} p={scrollYProgress} phone={phone} />)}
+          <span className="film__tag">{SCENES[on]?.generated ? "Illustrative photography, not the couple's own" : "Photograph: Wikimedia Commons"}</span>
         </div>
         <div className="film__foot">
           <motion.span className="film__progress" style={{ scaleX: bar }} aria-hidden />

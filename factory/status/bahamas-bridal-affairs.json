@@ -4,7 +4,7 @@
   "name": "Bahamas Bridal Affairs",
   "batch": "03",
   "tier": "A",
-  "state": "needs-review",
+  "state": "built",
   "generation": 2,
   "pages": [
     "index.html",
@@ -69,10 +69,9 @@
     "typography": 4,
     "composition": 4,
     "colour": 4,
-    "fit": 5,
+    "fit": 4,
     "distinct": 4,
-    "references": 4,
-    "note": "SELF-SCORES only, awaiting independent critic"
+    "references": 4
   },
   "current_site_findings": [
     "bahamasbridalaffairs.com no longer resolves; BahamasLocal, Bahamas Index, Weddingbells and Style Me Pretty still link to it.",
@@ -102,7 +101,19 @@
     "blockers": 0,
     "warnings": 2
   },
-  "notes": "awaiting independent critic. BLIND: look.mjs, Wikimedia and lovable.app images do not load in the sandbox; photos were judged from the Lovable gallery screenshot (project 25002f7e-e105-4fce-9f7a-228067374a10, published as ip-assets-bahamas-bridal-affairs, one round, 1.5 credits) and QA screenshots use upscaled crops of that screenshot, so they look softer than the 2048 px originals. References judged from knowledge, not seen. Seven generated stand-in photographs plus one Commons photo of the French Cloisters (2400 px wide, 2012, warmed with a static CSS filter to sit with the set); no own photos exist online and press photos belong to Mango Studios and Karen Hill. No email or WhatsApp found, so the enquiry composes a sentence to read out or copy and offers two call buttons. Film: sticky stage, opacity and transform only via function transforms, scene index is the only React state. Lenis on fine pointers only. The 2 QA warnings are the shared concept tag button (under 40 px). Critic scores are self-scores. Proposed domain: bahamasbridalaffairs.com if it can be re-registered (unverified).",
+  "notes": "awaiting independent critic. BLIND: look.mjs, Wikimedia and lovable.app images do not load in the sandbox; photos were judged from the Lovable gallery screenshot (project 25002f7e-e105-4fce-9f7a-228067374a10, published as ip-assets-bahamas-bridal-affairs, one round, 1.5 credits) and QA screenshots use upscaled crops of that screenshot, so they look softer than the 2048 px originals. References judged from knowledge, not seen. Seven generated stand-in photographs plus one Commons photo of the French Cloisters (2400 px wide, 2012, warmed with a static CSS filter to sit with the set); no own photos exist online and press photos belong to Mango Studios and Karen Hill. No email or WhatsApp found, so the enquiry composes a sentence to read out or copy and offers two call buttons. Film: sticky stage, opacity and transform only via function transforms, scene index is the only React state. Lenis on fine pointers only. The 2 QA warnings are the shared concept tag button (under 40 px). Critic scores are self-scores. Proposed domain: bahamasbridalaffairs.com if it can be re-registered (unverified). | Final critic (mode 2) 2026-11-21: first pass 3/4/3/4/4/4/3; one fix pass (illustrative tag on the film frame, magazine names at display size, italic help toggles, footer contrast), re-score 4 on every line. Open idea for later: a sourced portrait or book cover of Dr. Burrows would beat the flowers photo.",
   "built_at": "2026-11-21T12:47:21Z",
-  "review_claimed_at": "2026-11-21T13:19:35.327733Z"
+  "final_critic": {
+    "mode": 2,
+    "scores": {
+      "photography": 4,
+      "typography": 4,
+      "composition": 4,
+      "colour": 4,
+      "fit": 4,
+      "distinct": 4,
+      "references": 4
+    },
+    "at": "2026-11-21T13:22:07.799458+00:00"
+  }
 }
