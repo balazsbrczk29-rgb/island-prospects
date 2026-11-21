@@ -32,10 +32,11 @@ export function Hero({ onPick }: { onPick: (side: 'ocean' | 'hill') => void }) {
           <motion.span className="word display" aria-hidden="true" {...rise(0)}>sand</motion.span>
           <motion.span className="cap" {...rise(1)}><span>Ocean Side cottages and villas</span><span>5 room types</span></motion.span>
           <motion.div className="frame" {...frame(0)}>
-            <img src={PHOTOS.sand} alt="A turquoise cottage beside the boardwalk at Hideaways, under sea grape and palms" width={1280} height={850} fetchPriority="high" />
+            <img src={PHOTOS.sand} alt="Clear shallow water over white sand, a swing standing in the sea" width={1200} height={900} fetchPriority="high" />
           </motion.div>
         </a>
         <motion.span className="or" aria-hidden="true" {...rise(1)}>or</motion.span>
+        <motion.p className="phone-q display" aria-hidden="true" {...rise(0)}>sand <i>or</i> hill</motion.p>
         <a className="half hill" href="#rooms-hill" onClick={e => { e.preventDefault(); onPick('hill') }} aria-label="Hill: see the three Island Time hillside room types">
           <motion.span className="word display" aria-hidden="true" {...rise(0.5)}>hill</motion.span>
           <motion.span className="cap" {...rise(1.5)}><span>Island Time Villas, on the hillside</span><span>3 room types</span></motion.span>

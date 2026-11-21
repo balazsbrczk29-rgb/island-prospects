@@ -2,16 +2,27 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import { Hero } from './hero'
+import { Rooms, goToSide } from './rooms'
+import { Harbour, Offers, Splash, Around, GettingHere, Contact, Footer, Persistent } from './sections'
 import { useSmooth } from './smooth'
 
 function Home() {
   useSmooth()
-  const pick = (side: 'ocean' | 'hill') => { document.getElementById(side === 'ocean' ? 'rooms-ocean' : 'rooms-hill')?.scrollIntoView({ behavior: 'smooth' }) }
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <Hero onPick={pick} />
-      <main id="main" />
+      <Hero onPick={goToSide} />
+      <main id="main">
+        <Harbour />
+        <Rooms />
+        <Offers />
+        <Splash />
+        <Around />
+        <GettingHere />
+        <Contact />
+      </main>
+      <Footer />
+      <Persistent />
     </>
   )
 }

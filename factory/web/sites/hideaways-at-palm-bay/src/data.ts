@@ -83,7 +83,8 @@ export const GATEWAYS = ['Nassau', 'Miami', 'Fort Lauderdale', 'Atlanta', 'Toron
 export const AIRLINES = 'Bahamasair, Western Air, American, Delta and Air Canada'
 
 export const PHOTOS = {
-  sand: img('2020/01/gallery4.jpg'),
+  sand: img('2020/01/gallery3.jpg'),
+  boardwalk: img('2020/01/gallery4.jpg'),
   hill: img('2023/11/hillside-2-bedroom-oceanview-img2.jpg'),
   harbour: img('2020/01/getting-here-bg.jpg'),
   stocking: img('2020/01/gallery5.jpg'),
