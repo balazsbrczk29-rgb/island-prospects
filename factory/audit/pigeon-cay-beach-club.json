@@ -6,5 +6,36 @@
  "url": "pigeoncaybahamas.com",
  "url_source": "brief",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "direct-book.com/properties/pigeoncaydirect (date and guest strip on the home page hands off to it; card held, no deposit)",
+  "products_or_listings": 8,
+  "pages": 1,
+  "platform": "WordPress 7.1 (WPBakery, Slider Revolution, WP Rocket), built by Hotel Traffic Builders",
+  "latest_year": 2026,
+  "modernity": 2,
+  "concept_type": "booking: one-page cottage site with a dates and cottage strip that hands off to their direct-book engine, eight cottages with nightly rates and galleries, getting here, weddings",
+  "must_keep": [
+   "dates and guests strip handing off to direct-book.com",
+   "all eight cottages with nightly rate, sleeps and beds",
+   "published taxes and fees (VAT 10%, resort levy 6%, taxi $60 one way, breakfast $18, dinner $35)",
+   "no deposit, pay on departure policy",
+   "weddings up to 40 guests",
+   "flights and getting here",
+   "phone (242) 354-5084 and email"
+  ],
+  "weaknesses": [
+   "one endless page: eight cottage galleries, 18 wedding photos, 34 gallery photos and 20 FAQs in a single scroll",
+   "headline is a rotating slider of generic lines (A Taste of Paradise, Welcome to Pigeon Cay)",
+   "no deposit and pay on departure, the strongest promise, is the last line of the page",
+   "taxes, meal prices and cancellation terms hidden in pop-ups",
+   "Special Packages is a wall of promotion board terms and blackout dates",
+   "getting-here section still quotes 2016 and 2017 flight schedules and fares and shows a broken FareHarbor widget",
+   "the same guest reviews repeat, Google and TripAdvisor copies of one text"
+  ],
+  "priority": "A",
+  "note": "Live WordPress one-pager with a real booking engine; record said no site. Concept keeps the booking handoff and leads with the honor system (honor bar, no deposit)."
+ }
 }

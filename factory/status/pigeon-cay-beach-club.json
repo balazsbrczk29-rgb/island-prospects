@@ -4,8 +4,171 @@
  "name": "Pigeon Cay Beach Club",
  "batch": "06",
  "tier": "A",
- "state": "building",
+ "state": "needs-review",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-20T22:02:08.925Z"
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "Check dates (their direct-book engine)",
+ "brand_truth": "Eight handmade cottages on a private north Cat Island beach that runs on the honor system: a palapa honor bar, free kayaks and bikes, a card held but no deposit, and you pay on departure.",
+ "buyer": "US and Canadian couples, families and anglers planning months ahead on a phone, many of them repeat guests, who fear hidden costs and remote logistics.",
+ "big_idea": "A beach club run on the honor system: the first screen says pour your own drink, take a kayak, pay when you leave, and the page lets you work out your own tab with Due today: $0.",
+ "direction": {
+  "archetype": "A09 Colour poster",
+  "lane": "P11 Straw market",
+  "type": "T11 Neo-grotesk display (Bricolage Grotesque 560-640 + Figtree 400-700)",
+  "why": "Their photographs are 380 to 800 px wide (headers 1920x532), so the page is carried by type and colour fields from the palapa thatch and the deep water, with photographs as prints and wide bands at or below real size. A grotesk poster on straw is the opposite of Greenwood's letterboxed film in Noto Serif Display on limestone, and of Fernandez Bay's horizontal journey."
+ },
+ "tier_visual": "standard",
+ "tier_visual_why": "A cottage stay is sold by the place and the price, not by an object or an arrival by sea. No 3D. Motion is a two-photo crossfading, slowly drifting band, a spring count on the tab total, and an origin-aware dock.",
+ "concept_type": "booking: one-page cottage site with a tab planner that hands off to their direct-book engine",
+ "images": [
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/header-6.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/header-3.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/gallery-img-36.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/gallery-img-34.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/special-bg.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/30.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/34.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/31.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/garden-view1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/garden-view3.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/hibicus1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/hibicus2.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/sea-studio1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/sea-studio2.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/little-house2.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/little-house1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/winston-cottage1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/oleander-img4.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/causarina3.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/causarina1.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/big-house-img5.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  },
+  {
+   "src": "https://pigeoncaybahamas.com/wp-content/uploads/2018/03/big-house-img2.jpg",
+   "source": "own",
+   "credit": "Pigeon Cay Beach Club"
+  }
+ ],
+ "critic": {
+  "photography": 3,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 4,
+  "distinct": 4,
+  "references": 3
+ },
+ "critic_note": "Self-scores only, awaiting independent critic. Photography is scored 3 because the club's own files are small and uneven and I never saw their pixels.",
+ "current_site_findings": [
+  "No deposit and pay on departure is the last line of the page",
+  "Rotating slider of generic lines instead of the honor bar and free kayaks",
+  "Eight galleries, 18 wedding photos, 34 gallery photos and 20 FAQs in one scroll",
+  "Taxes, meal prices and cancellation terms hidden in pop-ups",
+  "Getting here quotes 2016 and 2017 flights and shows a broken FareHarbor widget",
+  "Photographs are 380 to 800 px wide"
+ ],
+ "pitch_line": "Your best promise, pour your own drink and pay when you leave, is the last line of your site. We made it the first.",
+ "assumptions": [
+  "Taxes (VAT 10%, levy 6%) are applied to lodging only in the tab estimate",
+  "15% gratuity applied to meals only; taxi fare treated as per trip, not per person",
+  "The $5 per person per day ferry surcharge on the fee sheet is left out of the tab because its meaning is unclear",
+  "Honor bar wording (it runs on the honor system) is inferred from the name Palapa Beach Honor Bar",
+  "Hosts' names Ned and Leslie appear only inside the quoted guest review published on their own site",
+  "Cottage one-line descriptions are written from a photo editor's description of the club's own photographs, not from seeing them",
+  "Western Air's origin is not stated on their site, so the copy says only that it flies into New Bight",
+  "Dates entered in the tab are not passed to direct-book; in production they would be"
+ ],
+ "sources": [
+  "https://pigeoncaybahamas.com/",
+  "https://direct-book.com/properties/pigeoncaydirect",
+  "https://www.tripadvisor.com/ShowUserReviews-g147427-d151487-r1008992098-Pigeon_Cay_Beach_Club-Cat_Island_Out_Islands_Bahamas.html (guest quote as republished on the club's site)"
+ ],
+ "notes": "awaiting independent critic. BLIND: look.mjs, outside fonts and photos do not load in the sandbox; references (aman.com, palmheights.com for tone) judged from knowledge. Photos were never seen as pixels: the Lovable screenshot fetch timed out three times, so selection, crops and alt text come from a written photo-editor report produced in the Lovable gallery project ip-assets-pigeon-cay-beach-club (3 short rounds, about 9 credits). QA screenshots show colour swatches built from each photo's dominant colours, not the photographs. Audit: live WordPress one-pager with a direct-book engine (record said no site). Old 3-page concept replaced by one page, matching their one-page site. interact.mjs reports 2 dead buttons: these are stepper buttons correctly disabled at their limit. Their YouTube film is linked, not embedded. Weddings section has no photograph because their wedding photos are low quality and show recognisable guests.",
+ "built_at": "2026-11-21T12:21:07.758668Z"
 }
