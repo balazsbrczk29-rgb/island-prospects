@@ -39,9 +39,10 @@ function Hero({ plan }: { plan: Plan }) {
             <span className="text-[15px] leading-snug text-muted"><b className="font-semibold text-ink">A 24 ft Key West</b> from Man-O-War Cay, seats 8, from $303 a day.</span>
           </a>
         </div>}
+        {!wide && <div className="pb-3"><PlacePicker plan={plan} row /></div>}
         <div className="relative h-[54svh] min-h-[380px] lg:absolute lg:inset-0 lg:h-auto">
-          <Chart plan={plan} inset={wide ? 528 : 0} insetRight={wide ? 290 : 0} insetBottom={wide ? 0 : 92} focus={wide ? undefined : PHONE_FOCUS} className="size-full" label="Chart of the Sea of Abaco. Tap a delivery point to price your boat. Illustration, not for navigation." />
-          {wide && <BoatChip className="absolute top-24 right-6 w-[250px] xl:w-[270px]" />}
+          <Chart plan={plan} inset={wide ? 528 : 0} insetRight={wide ? 330 : 0} insetBottom={wide ? 0 : 92} focus={wide ? undefined : PHONE_FOCUS} className="size-full" label="Chart of the Sea of Abaco. Tap a delivery point to price your boat. Illustration, not for navigation." />
+          {wide && <BoatChip className="absolute top-24 right-6 w-[260px] xl:w-[300px]" />}
           {/* phone: live total strip on the chart */}
           <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-3 rounded-md bg-paper/95 py-2 pr-2 pl-4 shadow-[0_14px_34px_-20px_rgba(14,40,30,.8)] lg:hidden">
             <span className="min-w-0 text-[13px] leading-tight"><span className="block truncate text-muted">{plan.place.short} · {plan.days} {plan.days === 1 ? "day" : "days"}</span><Money value={plan.total} className="font-display text-[1.45rem] leading-none font-semibold" /></span>
@@ -53,10 +54,10 @@ function Hero({ plan }: { plan: Plan }) {
       <motion.div id="plan" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}
         className="relative z-10 scroll-mt-4 bg-paper px-4 pt-6 pb-8 lg:absolute lg:top-5 lg:bottom-[84px] lg:left-5 lg:flex lg:w-[480px] lg:flex-col lg:overflow-hidden lg:rounded-lg lg:px-7 lg:pt-6 lg:pb-6 lg:shadow-[0_30px_70px_-40px_rgba(14,40,30,.75)]">
         <a href="#top" className="hidden font-display text-[1.2rem] leading-none font-semibold tracking-tight lg:block">Abaco Boat Rental</a>
-        {wide && <h1 id="hero-title" className="hidden lg:mt-4 lg:block lg:text-[2.55rem] lg:leading-[0.98] lg:font-semibold lg:tracking-[-0.04em]">Tap your cay. The boat comes to you.</h1>}
+        {wide && <h1 id="hero-title" className="hidden lg:mt-4 lg:block lg:text-[2.55rem] lg:leading-[0.98] lg:font-semibold lg:tracking-[-0.032em]">Tap your cay. The boat comes to you.</h1>}
         <p className="hidden text-[15.5px] leading-snug text-muted lg:mt-3 lg:block">One 24 ft Key West, free at Man-O-War Cay or delivered to your dock. Pick your cay and days: this is the real price.</p>
         <div className="space-y-5 lg:mt-4 lg:flex lg:min-h-0 lg:flex-1 lg:flex-col lg:space-y-3.5">
-          <div><PlacePicker plan={plan} /><p className="mt-2 text-[13px] text-muted num" aria-live="polite">{plan.place.id === "mow" ? "Our home dock: pickup is free." : `${plan.place.name} is about ${nm(PLACES[0], plan.place).toFixed(0)} nm from our Man-O-War dock.`}</p></div>
+          <div>{wide && <PlacePicker plan={plan} />}<p className="mt-2 text-[13px] text-muted num" aria-live="polite">{plan.place.id === "mow" ? "Our home dock: pickup is free." : `${plan.place.name} is about ${nm(PLACES[0], plan.place).toFixed(0)} nm from our Man-O-War dock.`}</p></div>
           <DayPicker plan={plan} />
           <Extras plan={plan} />
           <div className="lg:mt-auto"><Receipt plan={plan} /></div>
@@ -85,9 +86,9 @@ const SPEC: [string, string][] = [
 function Boat() {
   return (
     <section id="boat" className="scroll-mt-6 bg-paper" aria-labelledby="boat-title">
-      <div className="mx-auto grid max-w-[1320px] gap-10 px-4 py-20 md:px-8 md:py-28 lg:grid-cols-[minmax(0,560px)_1fr] lg:gap-20">
+      <div className="mx-auto grid max-w-[1320px] gap-10 px-4 py-20 md:px-8 md:py-28 lg:grid-cols-[minmax(0,640px)_1fr] lg:gap-16">
         <motion.figure initial={{ opacity: 0, scale: 0.98 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.9, ease }} className="lg:sticky lg:top-8 lg:self-start">
-          <img src={PHOTO.boat} alt="The white 24 ft Key West center console underway in the Sea of Abaco, a channel marker behind" width={844} height={844} loading="lazy" className="aspect-square w-full max-w-[560px] rounded-lg bg-slate/30 object-cover" />
+          <img src={PHOTO.boat} alt="The white 24 ft Key West center console underway in the Sea of Abaco, a channel marker behind" width={844} height={844} loading="lazy" className="aspect-square w-full max-w-[640px] rounded-lg bg-slate/30 object-cover" />
           <figcaption className="mt-3 text-[13px] text-muted">Every rental is this boat. Photo: Abaco Boat Rental.</figcaption>
         </motion.figure>
         <div>
@@ -175,10 +176,10 @@ function Rates({ plan }: { plan: Plan }) {
 }
 
 const SHOTS = [
-  { src: PHOTO.turtle, w: 2500, h: 1667, alt: "A sea turtle gliding over rippled white sand in clear water", cap: "A turtle over the sand", cls: "md:col-span-7 md:row-span-2", ratio: "aspect-[3/2]" },
-  { src: PHOTO.dock, w: 2000, h: 2666, alt: "Looking straight down at a narrow dock over turquoise water", cap: "Turquoise water off a dock", cls: "md:col-span-5 md:row-span-3", ratio: "aspect-[3/4]" },
-  { src: PHOTO.conch, w: 2500, h: 1656, alt: "A pink conch shell on rippled sand under clear shallow water", cap: "A conch in the shallows", cls: "md:col-span-4", ratio: "aspect-[3/2]" },
-  { src: PHOTO.pig, w: 2500, h: 1529, alt: "A pig swimming in clear turquoise water", cap: "Swimming pigs", cls: "md:col-span-3", ratio: "aspect-[4/3]" },
+  { src: PHOTO.turtle, w: 2500, h: 1667, alt: "A sea turtle gliding over rippled white sand in clear water", cap: "A turtle over the sand", cls: "col-span-2 md:col-span-7", ratio: "aspect-[3/2]" },
+  { src: PHOTO.dock, w: 2000, h: 2666, alt: "Looking straight down at a narrow dock over turquoise water", cap: "Turquoise water off a dock", cls: "col-span-2 md:col-span-5", ratio: "aspect-square md:aspect-auto" },
+  { src: PHOTO.conch, w: 2500, h: 1656, alt: "A pink conch shell on rippled sand under clear shallow water", cap: "A conch in the shallows", cls: "md:col-span-6", ratio: "aspect-[3/2]" },
+  { src: PHOTO.pig, w: 2500, h: 1529, alt: "A pig swimming in clear turquoise water", cap: "Swimming pigs", cls: "md:col-span-6", ratio: "aspect-[3/2]" },
 ]
 function DayOut() {
   return (
@@ -191,11 +192,11 @@ function DayOut() {
             <footer className="mt-2 text-[13px] text-muted">A guest review, as published on abacoboatrental.com. Every one of those stops is on the chart above.</footer>
           </blockquote>
         </div>
-        <div className="mt-12 grid gap-3 md:grid-cols-12 md:gap-4">
+        <div className="mt-12 grid grid-cols-2 gap-2.5 md:grid-cols-12 md:gap-4">
           {SHOTS.map((s, i) => (
             <motion.figure key={s.src} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-8%" }} transition={{ duration: 0.8, delay: (i % 2) * 0.08, ease }} className={`group relative overflow-hidden rounded-md bg-slate/30 ${s.cls}`}>
-              <img src={`${s.src}?format=1500w`} alt={s.alt} width={s.w} height={s.h} loading="lazy" className={`${s.ratio} size-full object-cover transition duration-[1.2s] ease-out group-hover:scale-[1.03] md:aspect-auto md:min-h-full`} />
-              <figcaption className="absolute bottom-3 left-3 rounded-full bg-paper/90 px-3 py-1 text-[13px] font-medium">{s.cap}</figcaption>
+              <img src={`${s.src}?format=1500w`} alt={s.alt} width={s.w} height={s.h} loading="lazy" className={`${s.ratio} size-full object-cover transition duration-[1.2s] ease-out group-hover:scale-[1.03]`} />
+              <figcaption className="absolute bottom-2 left-2 rounded-full bg-paper/90 px-2.5 py-1 text-[12px] font-medium md:bottom-3 md:left-3 md:px-3 md:text-[13px]">{s.cap}</figcaption>
             </motion.figure>
           ))}
         </div>
@@ -229,7 +230,7 @@ function Questions() {
             ))}
           </Accordion>
         </div>
-        <figure className="lg:sticky lg:top-8 lg:self-start">
+        <figure className="hidden md:block lg:sticky lg:top-8 lg:self-start">
           <Chart className="aspect-[4/5] w-full rounded-lg md:aspect-square" interactive={false} showTrips={false} label="The rental area: the Sea of Abaco inside the outer cays, from Green Turtle Cay to Little Harbour. The Atlantic beyond the cays is outside it." />
           <figcaption className="mt-3 text-[13.5px] leading-snug text-muted"><b className="font-semibold text-ink">The rental area.</b> Turquoise is in, from Green Turtle Cay to Little Harbour; the deep-blue Atlantic beyond the cays is out. Drawn from the map in the rental agreement; ask to confirm a route.</figcaption>
         </figure>

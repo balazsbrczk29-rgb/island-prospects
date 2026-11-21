@@ -3,6 +3,7 @@ import { animate, motion, AnimatePresence } from "motion/react"
 import { ArrowUpRight, MessageCircle, Minus, Plus, ChevronDown, Check } from "lucide-react"
 import { LAND, ATLANTIC, W, H, proj } from "./map-data"
 import { BOOK, PHOTO, wa, ease } from "./site"
+import caustics from "./caustics.png"
 
 /* ---------- facts (abacoboatrental.com, Nov 2026) ---------- */
 export const TIERS = [
@@ -90,7 +91,7 @@ const bboxOf = (ps: [number, number][], pad: number, minW: number): Box => {
   const w = Math.max(x1 - x0 + pad * 2, minW), h = Math.max(y1 - y0 + pad * 2, minW)
   return { x: cx - w / 2, y: cy - h / 2, w, h }
 }
-export const PHONE_FOCUS = bboxOf([proj(26.70, -77.15), proj(26.325, -76.93)], 10, 200)
+export const PHONE_FOCUS = bboxOf([proj(26.69, -77.19), proj(26.33, -76.92)], 6, 200)
 const ALL = bboxOf([...PLACES.map(pt), proj(26.77, -77.32)], 40, 300)
 
 let uid = 0
@@ -101,6 +102,7 @@ export function Chart({ plan, inset = 0, insetBottom = 0, insetRight = 0, focus,
   const route = useRef<SVGPathElement>(null)
   const cam = useRef<Box>({ ...ALL })
   const touched = useRef(false)
+  const [small, setSmall] = useState(false)
   const firstSel = useRef(plan?.sel)
   const sel = plan?.sel
   const place = PLACES.find(p => p.id === sel)
@@ -120,10 +122,10 @@ export function Chart({ plan, inset = 0, insetBottom = 0, insetRight = 0, focus,
   }
   const target = (): Box => {
     if (!place || !touched.current || place.id === "mow") return focus ?? ALL
-    return bboxOf([pt(BASE), pt(place), ...(place.ctrl ? [proj(place.ctrl[0], place.ctrl[1])] : [])], 70, 330)
+    return bboxOf([pt(BASE), pt(place), ...(place.ctrl ? [proj(place.ctrl[0], place.ctrl[1])] : [])], (wrap.current?.clientWidth ?? 999) < 640 ? 115 : 70, 330)
   }
   useLayoutEffect(() => {
-    const go = () => { const b = fit(target()); cam.current = b; apply(b) }
+    const go = () => { const b = fit(target()); cam.current = b; apply(b); setSmall((wrap.current?.clientWidth ?? 999) < 640) }
     go()
     const ro = new ResizeObserver(go); if (wrap.current) ro.observe(wrap.current)
     return () => ro.disconnect()
@@ -142,8 +144,8 @@ export function Chart({ plan, inset = 0, insetBottom = 0, insetRight = 0, focus,
     const p = route.current, g = boat.current; if (!p || !g) return
     const L = p.getTotalLength()
     const put = (t: number) => { const a = p.getPointAtLength(L * t), b2 = p.getPointAtLength(Math.min(L, L * t + 1)); const ang = Math.atan2(b2.y - a.y, b2.x - a.x) * 180 / Math.PI; g.style.transform = `translate(${a.x}px, ${a.y}px) rotate(${L ? ang : 0}deg) scale(var(--u))` }
-    if (!L || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { put(1); return }
-    const c = animate(0, 1, { duration: 1.6, delay: 0.25, ease: [0.45, 0, 0.2, 1], onUpdate: put })
+    if (!L || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { put(L ? 0.86 : 1); return }
+    const c = animate(0, 0.86, { duration: 1.5, delay: 0.25, ease: [0.45, 0, 0.2, 1], onUpdate: put })
     return () => c.stop()
   }, [sel])
 
@@ -154,20 +156,23 @@ export function Chart({ plan, inset = 0, insetBottom = 0, insetRight = 0, focus,
     <div ref={wrap} className={`relative overflow-hidden bg-shallow ${className}`}>
       <svg ref={svg} viewBox={`${ALL.x} ${ALL.y} ${ALL.w} ${ALL.h}`} preserveAspectRatio="xMidYMid slice" className="absolute inset-0 size-full select-none" role="group" aria-label={label} style={{ ["--u" as string]: 1 }}>
         <defs>
-          <radialGradient id="sea" cx="55%" cy="45%" r="75%"><stop offset="0" stopColor="#b5e6da" /><stop offset=".6" stopColor="#9fd8cb" /><stop offset="1" stopColor="#7fc6bd" /></radialGradient>
+          <radialGradient id="sea" cx="62%" cy="48%" r="70%"><stop offset="0" stopColor="#8ccfc4" /><stop offset=".55" stopColor="#9bd6ca" /><stop offset="1" stopColor="#7cc1b8" /></radialGradient>
+          <pattern id={`${id}c`} patternUnits="userSpaceOnUse" width="150" height="150"><image href={caustics} width="150" height="150" /></pattern>
+          <linearGradient id="landg" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stopColor="#cfd8ad" /><stop offset="1" stopColor="#a9bb88" /></linearGradient>
           <linearGradient id="atl" x1="0" y1="0" x2="1" y2=".4"><stop offset="0" stopColor="#2a7c93" /><stop offset=".35" stopColor="#1f5d78" /><stop offset="1" stopColor="#173f57" /></linearGradient>
           <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="5" /></filter>
           <path id={id} d={LAND} />
           <filter id="lift" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="2.5" stdDeviation="2.5" floodColor="#0e3b33" floodOpacity=".28" /></filter>
         </defs>
         <rect x="-2000" y="-2000" width="5000" height="5000" fill="url(#sea)" />
+        <rect x="-2000" y="-2000" width="5000" height="5000" fill={`url(#${id}c)`} opacity=".3" />
         {/* the reef edge: Atlantic beyond the cays, outside the rental area */}
         <path d={ATLANTIC} fill="#5fb0b4" filter="url(#soft)" transform="translate(-6 0)" />
         <path d={ATLANTIC} fill="url(#atl)" />
         {/* sand banks around every cay */}
-        <use href={`#${id}`} fill="none" stroke="#e3f6ee" strokeWidth="16" strokeLinejoin="round" opacity=".75" filter="url(#soft)" />
-        <use href={`#${id}`} fill="none" stroke="#c7ecdf" strokeWidth="7" strokeLinejoin="round" />
-        <use href={`#${id}`} fill="#bccb9b" stroke="#f2e9cc" strokeWidth="1.6" strokeLinejoin="round" vectorEffect="non-scaling-stroke" filter="url(#lift)" />
+        <use href={`#${id}`} fill="none" stroke="#e8f8f1" strokeWidth="22" strokeLinejoin="round" opacity=".75" filter="url(#soft)" />
+        <use href={`#${id}`} fill="none" stroke="#d4f2e7" strokeWidth="8" strokeLinejoin="round" />
+        <use href={`#${id}`} fill="url(#landg)" stroke="#f2e9cc" strokeWidth="1.6" strokeLinejoin="round" vectorEffect="non-scaling-stroke" filter="url(#lift)" />
         {/* chart graticule, every 5 minutes */}
         <g stroke="#15261c" strokeOpacity=".12" strokeWidth="1" vectorEffect="non-scaling-stroke">
           {[26.33333, 26.41667, 26.5, 26.58333, 26.66667, 26.75].map(la => { const [, y] = proj(la, -77.4); return <line key={la} x1="-600" x2="1600" y1={y} y2={y} vectorEffect="non-scaling-stroke" /> })}
@@ -177,11 +182,11 @@ export function Chart({ plan, inset = 0, insetBottom = 0, insetRight = 0, focus,
           {[26.41667, 26.5, 26.58333, 26.66667].map(la => { const [, y] = proj(la, -77.4); const m = Math.round((la % 1) * 60); return <text key={la} x={proj(la, -76.885)[0]} y={y - 4}>26°{m}′N</text> })}
         </g>
         {/* boundary note on the Atlantic */}
-        <g style={{ transform: `translate(${proj(26.43, -76.905)[0]}px, ${proj(26.43, -76.905)[1]}px) scale(var(--u))` }} fill="#eaf6f3" fontFamily="Figtree, sans-serif">
+        {!small && <g style={{ transform: `translate(${proj(26.43, -76.905)[0]}px, ${proj(26.43, -76.905)[1]}px) scale(var(--u))` }} fill="#eaf6f3" fontFamily="Figtree, sans-serif">
           <text fontSize="11" letterSpacing="2.2" fontWeight="600">ATLANTIC</text>
           <text y="15" fontSize="11" fillOpacity=".8">outside the rental area</text>
-        </g>
-        <g style={{ transform: `translate(${proj(26.615, -77.235)[0]}px, ${proj(26.615, -77.235)[1]}px) scale(var(--u))` }} fill="#15261c" fillOpacity=".5" fontFamily="Bricolage, sans-serif"><text fontSize="13" letterSpacing="5" fontWeight="600">SEA OF ABACO</text></g>
+        </g>}
+        {!small && <g style={{ transform: `translate(${proj(26.615, -77.235)[0]}px, ${proj(26.615, -77.235)[1]}px) scale(var(--u))` }} fill="#15261c" fillOpacity=".5" fontFamily="Bricolage, sans-serif"><text fontSize="13" letterSpacing="5" fontWeight="600">SEA OF ABACO</text></g>}
 
         <g style={{ transform: `translate(${proj(26.762, -77.315)[0]}px, ${proj(26.762, -77.315)[1]}px) scale(var(--u))` }} fill="#15261c" fontFamily="Figtree, sans-serif" aria-hidden>
           <text fontSize="12" fontWeight="600" paintOrder="stroke" stroke="#e8f5ef" strokeWidth="3.5">Green Turtle Cay</text>
@@ -214,8 +219,8 @@ export function Chart({ plan, inset = 0, insetBottom = 0, insetRight = 0, focus,
               {on && <circle r="15" fill={FEE_COLOR[p.fee]} opacity=".25"><animate attributeName="r" values="10;20;10" dur="2.4s" repeatCount="indefinite" /></circle>}
               <circle r={base ? 9 : on ? 8 : 6} fill={base ? "#15261c" : FEE_COLOR[p.fee]} stroke="#f4f1e6" strokeWidth="2.5" />
               {base && <circle r="3" fill="#f4f1e6" />}
-              <text x={tx} y={ty} textAnchor={anchor} fontFamily="Figtree, sans-serif" fontSize={on || base ? 15 : 13.5} fontWeight={on || base ? 700 : 600} fill="#15261c" paintOrder="stroke" stroke="#e8f5ef" strokeWidth="4" strokeLinejoin="round">{p.short}{base ? " · our dock" : ""}</text>
-              <text x={tx} y={ty + 15} textAnchor={anchor} fontFamily="Figtree, sans-serif" fontSize="11.5" fontWeight="600" fill="#15261c" fillOpacity=".72" paintOrder="stroke" stroke="#e8f5ef" strokeWidth="3.5" className="num">{p.fee === 0 ? "free pickup" : `$${p.fee} each way · ${nm(BASE, p).toFixed(0)} nm`}</text>
+              {!(small && p.id === "tc" && !on) && <text x={tx} y={ty} textAnchor={anchor} fontFamily="Figtree, sans-serif" fontSize={on || base ? 15 : 13.5} fontWeight={on || base ? 700 : 600} fill="#15261c" paintOrder="stroke" stroke="#e8f5ef" strokeWidth="4" strokeLinejoin="round">{p.short}{base ? " · our dock" : ""}</text>}
+              {(!small || on || base) && <text x={tx} y={ty + 15} textAnchor={anchor} fontFamily="Figtree, sans-serif" fontSize="12.5" fontWeight="600" fill="#15261c" fillOpacity=".9" paintOrder="stroke" stroke="#e8f5ef" strokeWidth="4" className="num">{p.fee === 0 ? "free pickup" : `$${p.fee} each way · ${nm(BASE, p).toFixed(0)} nm`}</text>}
             </g>
           )
         })}
@@ -226,7 +231,7 @@ export function Chart({ plan, inset = 0, insetBottom = 0, insetRight = 0, focus,
         </g>
       </svg>
       <div className="glint water-shimmer pointer-events-none absolute -inset-6" aria-hidden />
-      <p className="pointer-events-none absolute right-3 bottom-2 text-[11px] tracking-wide text-ink/60 md:right-5 md:bottom-3">Illustration from Natural Earth data, not for navigation</p>
+      <p className="pointer-events-none absolute right-3 bottom-2 hidden md:block text-[11px] tracking-wide text-ink/60 md:right-5 md:bottom-3">Illustration from Natural Earth data, not for navigation</p>
     </div>
   )
 }
@@ -266,17 +271,17 @@ export function DayPicker({ plan, compact = false }: { plan: Plan; compact?: boo
   )
 }
 
-export function PlacePicker({ plan, onPick }: { plan: Plan; onPick?: () => void }) {
+export function PlacePicker({ plan, onPick, row = false }: { plan: Plan; onPick?: () => void; row?: boolean }) {
   return (
     <div>
-      <p className="text-sm font-semibold">Where are you staying?</p>
-      <div className="mt-2.5 flex flex-wrap gap-1.5">
+      <p className={`text-sm font-semibold ${row ? "px-4" : ""}`}>Where are you staying?</p>
+      <div className={row ? "mt-2 flex gap-1.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none]" : "mt-2.5 flex flex-wrap gap-1.5"}>
         {PLACES.map(p => {
           const on = plan.sel === p.id
           return (
             <button key={p.id} type="button" aria-pressed={on} onClick={() => { plan.setSel(p.id); onPick?.() }}
-              className={`inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3 text-[14px] font-medium transition duration-200 active:scale-[.97] ${on ? "border-ink bg-ink text-paper" : "border-ink/15 bg-paper hover:border-ink/50"}`}>
-              <span className="size-2 rounded-full" style={{ background: p.id === "mow" ? (on ? "#f4f1e6" : "#15261c") : FEE_COLOR[p.fee] }} aria-hidden />{p.short}
+              className={`inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-full border px-3 text-[14px] font-medium transition duration-200 active:scale-[.97] ${on ? "border-ink bg-ink text-paper" : "border-ink/15 bg-paper hover:border-ink/50"}`}>
+              <span className="size-2 rounded-full" style={{ background: p.id === "mow" ? (on ? "#f4f1e6" : "#15261c") : FEE_COLOR[p.fee] }} aria-hidden />{p.short}{row && <span className={`text-[12px] num ${on ? "text-paper/70" : "text-muted"}`}>{p.fee === 0 ? "free" : `$${p.fee}`}</span>}
             </button>
           )
         })}

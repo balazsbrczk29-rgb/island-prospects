@@ -4,8 +4,65 @@
  "name": "Abaco Boat Rental",
  "batch": "09",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T19:57:16.013Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-21T20:57:35Z",
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "Book these dates (Booqable) / WhatsApp this plan (prefilled)",
+ "direction": "A05 Chart and map + P07 Abaco pine + T11 (Bricolage Grotesque + Figtree, self-hosted)",
+ "core_tool": "Screen-1 Sea of Abaco chart (Natural Earth coastline, smoothed): tap a cay or chip, camera flies, route draws from Man-O-War with a moving boat, fee and nm shown; days stepper + 4-tier rate ladder; add-ons incl. free-if-you-run-our-team-member-back; itemised receipt with counting total; Booqable and prefilled WhatsApp.",
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "scores": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion": 4,
+   "phone": 4
+  },
+  "history": "Critic 1: gate1 pass, wow3 photo3 type4 comp3 conv5 phone3. Fix pass 1 (smoothed coastline, depth, labels, larger boat). Critic 2: wow4 photo3 type4 comp4 conv5 phone3. Fix pass 2 (caustic light, phone chip row with fees, photo grid crops, FAQ chart desktop only). Critic 3 (final): all 4."
+ },
+ "images": [
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/b401ff69-86a6-489f-8c4c-714b9b292c18/Abaco-Boat-Rental-17.jpg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/c0d4c408-6d5e-4e99-acf9-957f8e218cae/Abaco-Boat-Rental-5.jpg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/d528242a-93ae-4ef9-abe7-5e95516dcac0/Abaco-Boat-Rental-15.jpg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/6df890b0-9e6c-471c-b4ab-88b77621febc/Abaco-Boat-Rental-19.jpg",
+   "source": "own"
+  },
+  {
+   "src": "https://images.squarespace-cdn.com/content/v1/6a42c8b390db18539a8801a5/a4cdf487-4f63-48dd-a065-5b9aad70790c/Abaco-Boat-Rental-8.jpg",
+   "source": "own"
+  }
+ ],
+ "sources": [
+  "https://www.abacoboatrental.com/",
+  "https://www.abacoboatrental.com/our-fleet-rates",
+  "https://www.abacoboatrental.com/faqs"
+ ],
+ "pitch_line": "Your rates and delivery fees are hidden a click away and your hero video fails; this opens on a chart of the Sea of Abaco where a family taps their cay, watches your boat's route draw from Man-O-War, and gets the full price with your Booqable booking or a prefilled WhatsApp one tap away.",
+ "assumptions": [
+  "Delivery-point and day-trip coordinates placed by hand on Natural Earth data; distances are straight-line nm, approximate.",
+  "Rental-area boundary drawn from the rental agreement map image (Green Turtle Cay to Little Harbour, inside the outer cays); confirm with owner.",
+  "Tilloo beach and Fowl Cay shown because guest reviews on their site name them."
+ ],
+ "notes": "Gen-2 jobspec rebuild 2026-11-21 by scheduled site worker. BLIND sandbox: outside images blocked; photos rehosted in Lovable project 43a9f106 (ip asset gallery) and routed as 400px crops into screenshots; boundary.png described by Lovable vision. Rates page removed: rates, delivery and add-ons now live on the single page (#rates). Kept from previous: chart linked to cost builder (now the hero), free-if-return toggle, spec sheet, guest quotes as published. interact.mjs: 0 JS errors; 2 'dead' are disabled steppers at their limits (by design). qa 0 blockers (warnings: h1 2.4x body inside the planner panel; concept-label tap target). distinct: closest bahamas-rum-cake-factory 48. Map land: Natural Earth 10m (public domain) via @geo-maps/earth-lands-10m."
 }
