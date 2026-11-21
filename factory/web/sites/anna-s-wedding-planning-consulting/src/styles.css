@@ -69,3 +69,5 @@ select.field { appearance: none; background-image: linear-gradient(45deg, transp
 .no-scrollbar::-webkit-scrollbar { display: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 @media (max-width: 1023px) { .fade-right-m { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 80px), transparent calc(100% - 28px)); mask-image: linear-gradient(to right, #000 calc(100% - 80px), transparent calc(100% - 28px)); } }
+
+@media (max-width: 1023px) { #main, main { padding-bottom: calc(84px + env(safe-area-inset-bottom)); } }

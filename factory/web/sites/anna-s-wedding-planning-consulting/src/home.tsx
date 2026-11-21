@@ -11,77 +11,80 @@ const SECTION_Y = "py-[clamp(88px,11vw,160px)]"
 function HeroPhoto() {
   const { heroKind } = useIndex()
   const k = KINDS.find(x => x.id === heroKind)!
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
-  const scale = useTransform(scrollYProgress, v => 1.05 - v * 0.05)
   useEffect(() => { // warm the cache so a hover swap is instant
     const id = setTimeout(() => KINDS.slice(1).forEach(x => { const i = new Image(); i.referrerPolicy = "no-referrer"; i.src = x.img }), 1200)
     return () => clearTimeout(id)
   }, [])
   return (
-    <div ref={ref} className="img-slot relative h-full overflow-hidden">
-      <motion.div className="absolute inset-0" style={{ scale: reduce ? 1 : scale }}>
+    <figure className="mx-auto w-full max-w-[480px]">
+      <div className="img-slot relative aspect-[16/9] overflow-hidden bg-line/40 shadow-[0_30px_60px_-40px_rgb(13_43_46/0.45)] lg:aspect-[4/5]">
         <AnimatePresence initial={false}>
           <motion.img
-            key={k.id} src={k.img} alt={k.alt} referrerPolicy="no-referrer" width={1600} height={1200}
-            fetchPriority={k.id === "beach" ? "high" : "auto"}
+            key={k.id} src={k.img} alt={k.alt} referrerPolicy="no-referrer" width={1200} height={1500}
+            fetchPriority={k.id === "renewal" ? "high" : "auto"}
             style={{ objectPosition: k.pos, zIndex: 2 }}
             className="absolute inset-0 size-full object-cover"
             initial={{ clipPath: "inset(100% 0 0 0)" }} animate={{ clipPath: "inset(0% 0 0 0)", zIndex: 2 }}
             exit={{ zIndex: 1, transition: { duration: 0.9 } }} transition={{ duration: 0.9, ease: wipe }}
           />
         </AnimatePresence>
-      </motion.div>
-    </div>
+      </div>
+      <figcaption className="mt-2 lg:mt-3 flex items-baseline justify-between gap-4 text-sm text-muted">
+        <span className="display text-base text-ink">{k.one}</span>
+        <span className="hidden sm:inline">A wedding planned by Anna, Nassau</span>
+      </figcaption>
+    </figure>
   )
 }
 
-function KindRow() {
+function KindIndex() {
   const { heroKind, setHeroKind } = useIndex()
   return (
-    <div role="group" aria-label="Show a kind of wedding" className="no-scrollbar fade-right-m -mx-5 flex gap-x-5 overflow-x-auto px-5 pr-12 lg:mx-0 lg:overflow-visible lg:px-0 lg:[mask-image:none]">
+    <ol aria-label="The five kinds of wedding Anna plans, with published starting prices" className="border-t border-line">
       {KINDS.map(k => (
-        <button key={k.id} aria-pressed={heroKind === k.id} onMouseEnter={() => setHeroKind(k.id)} onFocus={() => setHeroKind(k.id)} onClick={() => setHeroKind(k.id)}
-          className={`relative flex min-h-11 shrink-0 items-baseline gap-2 text-sm transition-colors ${heroKind === k.id ? "text-ink" : "text-muted hover:text-ink"}`}>
-          <span className="display text-[1.1rem] tracking-[-0.02em]">{k.short}</span>
-          {heroKind === k.id && <motion.span layoutId="tab" className="absolute inset-x-0 bottom-1 h-px bg-channel" transition={{ duration: 0.4, ease }} />}
-        </button>
+        <li key={k.id} className="border-b border-line">
+          <a href={`packages.html#${k.id}`} aria-current={heroKind === k.id || undefined}
+            onMouseEnter={() => setHeroKind(k.id)} onFocus={() => setHeroKind(k.id)} onTouchStart={() => setHeroKind(k.id)}
+            className={`group flex min-h-12 items-baseline justify-between gap-4 py-2.5 transition-colors ${heroKind === k.id ? "text-ink" : "text-ink/75 hover:text-ink"}`}>
+            <span className="display text-[1.3rem] leading-tight tracking-[-0.02em]">{k.name}</span>
+            <span className="num shrink-0 text-sm">from USD&nbsp;{k.from.toLocaleString("en-US")}</span>
+          </a>
+        </li>
       ))}
-    </div>
+    </ol>
   )
 }
 
 function Hero() {
   return (
-    <section data-index="hero" aria-labelledby="hero-title" className="relative lg:grid lg:h-[100svh] lg:min-h-[700px] lg:grid-cols-[minmax(0,38fr)_minmax(0,62fr)]">
-      <div className="flex flex-col px-5 pt-7 pb-9 lg:px-[clamp(40px,4.4vw,72px)] lg:pt-9 lg:pb-20">
+    <section data-index="hero" aria-labelledby="hero-title" className="relative flex flex-col lg:grid lg:min-h-[100svh] lg:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
+      <div className="order-2 flex flex-col px-5 pt-4 pb-10 lg:order-1 lg:px-[clamp(40px,4.4vw,72px)] lg:pt-9 lg:pb-14">
         <a href="index.html" className="hidden leading-none lg:block" aria-label="Anna's Wedding Planning, home">
           <span className="display block text-[2.6rem] tracking-[-0.04em]">Anna's</span>
           <span className="mt-2 block text-xs text-muted">Wedding Planning &amp; Consulting, Nassau</span>
         </a>
-        <div className="lg:my-auto">
-          <h1 id="hero-title" className="display text-[clamp(3.25rem,5.6vw,6.25rem)] leading-[0.92] tracking-[-0.045em]">
+        <div className="lg:my-auto lg:pt-8">
+          <h1 id="hero-title" className="display text-[clamp(2.75rem,5vw,5.5rem)] leading-[0.92] tracking-[-0.045em]">
             {["Married", "barefoot", "in Nassau."].map((l, i) => (
               <span key={l} className="block overflow-hidden pb-[0.07em]">
                 <motion.span className="block" initial={reduce ? false : { y: "105%" }} animate={{ y: 0 }} transition={{ delay: 0.15 + i * 0.09, duration: 1.1, ease: wipe }}>{l}</motion.span>
               </span>
             ))}
           </h1>
-          <motion.p initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.9 }} className="mt-6 max-w-[30rem] text-lg leading-relaxed text-muted lg:mt-8">
-            Annamae Fox has planned beach and cruise-day weddings in Nassau for more than twenty years, for couples from Australia to Sweden. Fifteen published packages from USD&nbsp;875, and your marriage licence handled.
+          <motion.p initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.9 }} className="mt-4 max-w-[30rem] text-base leading-relaxed text-muted lg:mt-5 lg:text-lg">
+            Annamae Fox has planned Nassau weddings for more than twenty years. Fifteen published packages, and your marriage licence handled.
           </motion.p>
-          <motion.div initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.85, duration: 0.9 }} className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-2 lg:mt-9">
+          <motion.div initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.85, duration: 0.9 }} className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-2">
             <a href="#date" className="group inline-flex min-h-13 items-center gap-3 rounded-full bg-channel px-7 text-base font-medium text-ground transition-[background-color,transform] duration-200 hover:bg-ink active:scale-[0.98]">
               Request your wedding date <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" strokeWidth={1.5} aria-hidden />
             </a>
             <a href={TEL} className="inline-flex min-h-12 items-center gap-2 text-base transition-colors hover:text-channel"><Phone className="size-4" strokeWidth={1.5} aria-hidden /> Call Anna <span className="num text-muted">{PHONE}</span></a>
           </motion.div>
+          <div className="mt-8 max-w-[34rem] lg:mt-10"><KindIndex /></div>
         </div>
-        <div className="hidden lg:block"><KindRow /></div>
       </div>
-      <div>
-        <div className="h-[78svh] min-h-[440px] lg:h-full"><HeroPhoto /></div>
-        <div className="px-5 pt-2 lg:hidden"><KindRow /></div>
+      <div className="order-1 bg-sand/60 px-5 pt-5 lg:order-2 lg:flex lg:items-center lg:px-[clamp(32px,4vw,72px)] lg:py-12">
+        <HeroPhoto />
       </div>
     </section>
   )
@@ -101,7 +104,7 @@ function Finder() {
       <div className="grid gap-x-[clamp(32px,4vw,72px)] gap-y-12 lg:grid-cols-[minmax(0,60fr)_minmax(0,40fr)]">
         <div>
           <AnimatePresence mode="wait" initial={false}>
-            <motion.div key={best.id} className="img-slot aspect-[4/3] overflow-hidden lg:aspect-[4/5]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease }}>
+            <motion.div key={best.id} className="img-slot aspect-[16/9] overflow-hidden lg:aspect-[4/5]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35, ease }}>
               <motion.img src={best.img} alt={`${best.name} package, a wedding planned by Anna's in Nassau`} referrerPolicy="no-referrer" width={1200} height={1440} loading="lazy" initial={{ scale: 1.04 }} animate={{ scale: 1 }} transition={{ duration: 1.2, ease }} />
             </motion.div>
           </AnimatePresence>

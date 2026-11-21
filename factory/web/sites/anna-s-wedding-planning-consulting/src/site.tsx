@@ -204,7 +204,7 @@ function Footer() {
 
 export function Page({ home = false, hero, children }: { home?: boolean; hero?: ReactNode; children: ReactNode }) {
   useLenis()
-  const [heroKind, setHeroKind] = useState<KindId>("beach")
+  const [heroKind, setHeroKind] = useState<KindId>("renewal")
   const [mode, setMode] = useState<"beach" | "cruise">("beach")
   const [section, setSection] = useState("hero")
   useSection(setSection)
