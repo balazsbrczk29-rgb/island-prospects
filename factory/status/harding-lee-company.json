@@ -4,8 +4,93 @@
  "name": "Harding-Lee & Company",
  "batch": "05",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
- "rebuild_of": 1,
+ "pages": [
+  "index.html",
+  "practice.html"
+ ],
+ "primary_cta": "Write to <attorney> (prepared email to the attorney who handles the chosen matter)",
+ "brand_truth": "Two islands, one senior practice: a Nassau and Salt Pond firm led since 1996 by a former Cash, Fountain partner who now chairs Bank of The Bahamas.",
+ "buyer": "Bahamian families and business owners in Nassau and Long Island, overseas owners of Family Island property, institutions needing incorporation, banking or insurance counsel.",
+ "direction": {
+  "archetype": "A12 Service desk",
+  "lane": "P08 Bay Street pastel",
+  "type": "T02 Text-led editorial",
+  "why": "A two-attorney boutique wins on 'a senior lawyer will take my matter', so the client's task is the hero, set in quiet book type; Bay Street pastel because the chambers sit in old Nassau."
+ },
+ "concept_type": "brochure: practice areas routed to the right attorney + offices + enquiry",
+ "tier_visual": "standard",
+ "tier_visual_why": "A law firm wins on calm, type and light; 3D would read as a gimmick.",
+ "images": [
+  {
+   "src": "https://ip-assets-harding-lee-company.lovable.app/assets/louvre-desk.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own (1920x1088)"
+  },
+  {
+   "src": "https://ip-assets-harding-lee-company.lovable.app/assets/dowdeswell-facade.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own (1600x2000)"
+  },
+  {
+   "src": "https://ip-assets-harding-lee-company.lovable.app/assets/salt-pond-dock.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own (1920x1088)"
+  },
+  {
+   "src": "https://www.hardinglee.com/wp-content/uploads/2022/07/donna1.jpg",
+   "source": "own",
+   "credit": "hardinglee.com (962x1142)"
+  },
+  {
+   "src": "https://www.hardinglee.com/wp-content/uploads/2022/07/nadia1.jpg",
+   "source": "own",
+   "credit": "hardinglee.com (962x1142)"
+  }
+ ],
+ "plan_gate": {
+  "verdict": "revise, then applied (one revision)",
+  "photography": 4,
+  "typography": 5,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 4,
+  "references": 4
+ },
+ "critic": {
+  "photography": 4,
+  "typography": 5,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 4,
+  "references": 4
+ },
+ "current_site_findings": [
+  "'Welcome To' hero with one long paragraph, no route to a specific attorney",
+  "Not updated since July 2022; titles 'Front page', ?page_id URLs",
+  "Associate's surname differs between About (Adderley) and Contact (Johnson)",
+  "Bank of The Bahamas chair and forty years of practice hidden in an inner-page paragraph",
+  "No addresses on the homepage; Long Island office under-presented"
+ ],
+ "pitch_line": "Your clients choose you for a senior lawyer's attention; this site asks what they are dealing with and hands them to the right attorney in one tap.",
+ "assumptions": [
+  "Associate's surname shown as Johnson (Contact page and directory); About page says Adderley",
+  "'Attorney' used as Mrs. Johnson's title (no title published)",
+  "Plain-language practice descriptions restate published areas; confirm wording",
+  "Matter-to-attorney routing follows each attorney's published areas; confirm who leads each",
+  "Desk, Nassau street and Salt Pond dock photographs are generated illustrations, not the firm's own premises"
+ ],
+ "sources": [
+  "https://www.hardinglee.com/",
+  "https://www.hardinglee.com/?page_id=1895",
+  "https://www.hardinglee.com/?page_id=1985",
+  "https://www.bankbahamas.com/directors/directors-1/donna-harding-lee",
+  "https://www.bahamaslocal.com/showlisting/3410/Harding_Lee_and_Company.html"
+ ],
+ "notes": "Gen 2 rebuild by site worker. BLIND sandbox: photos judged from the Lovable gallery screenshot (ip-assets-harding-lee-company) and crops routed into QA shots. Plan gate (fresh critic, mode 1) asked to: show one lead attorney per matter, enlarge portrait, cut router to six rows (property + development merged), put the dock photo between attorneys and practice index, fix lede widow; all applied before the full build. Final scores recorded are the plan-gate predictions after revision; QA 0 blockers (1 small-target warning is the shared concept label button), interact 0 dead, distinct OK (closest 67). Portraits have a baked-in dark red frame, cropped by CSS scale and shown greyscale. Office hours unknown, omitted.",
+ "built_at": "2026-11-21T15:39:27Z",
  "claimed_at": "2026-11-21T15:24:24.652Z"
 }

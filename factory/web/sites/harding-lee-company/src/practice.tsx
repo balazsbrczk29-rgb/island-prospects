@@ -1,4 +1,4 @@
-import { ATTORNEYS, MATTERS, letter } from "./data"
+import { ATTORNEYS, MATTERS, IMG, letter } from "./data"
 import { Page, mount, PHONE, TEL } from "./site"
 
 const FAQ = [
@@ -15,8 +15,11 @@ function Practice() {
       <div className="wrap">
         <p className="crumbs"><a href="index.html">Home</a> / Practice</p>
         <section className="ptitle" data-hero>
-          <h1>Seven kinds of matter, and the attorney for each.</h1>
-          <p>A general practice since 1996, focused on commercial law, conveyancing, company incorporation, international and domestic transactions, insurance and banking. In plain words, this is what we do and who does it.</p>
+          <div>
+            <h1>Six kinds of matter, and the attorney for each.</h1>
+            <p>A general practice since 1996, focused on commercial law, conveyancing, company incorporation, international and domestic transactions, insurance and banking. In plain words, this is what we do and who does it.</p>
+          </div>
+          <figure className="pphoto"><img src={`${IMG}louvre-desk.jpg`} alt="Morning light through louvred shutters across a desk and a ribboned deed (illustrative)" width={1920} height={1088} /></figure>
         </section>
         <div className="sec" style={{ paddingTop: "var(--s6)" }}>
           {MATTERS.map(m => (

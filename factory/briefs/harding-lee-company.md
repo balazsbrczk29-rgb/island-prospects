@@ -74,3 +74,5 @@ Office hours, year of Bank of The Bahamas appointment, social links.
 **Conversion:** router -> answer card -> "Write to <attorney>" (prepared email) on screen 1; call Nassau or Long Island as text links on every screen; full enquiry at the end.
 **Tier:** standard (no 3D: a law firm wins on calm, type and light).
 **Different from competitors in this repo:** no full-bleed hero, no scroll film, no dark ground; the client's task leads, set as a service desk in book type on Bay Street pastel.
+
+**Plan gate verdict (applied):** one lead attorney per matter with a quiet 'with' line; one larger portrait; router cut to six matters (property and development merged); screen order now record, attorneys, offices (dock photo), practice index, write; lede widow fixed.
