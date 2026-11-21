@@ -4,8 +4,124 @@
  "name": "Bluff House Beach Resort & Marina",
  "batch": "09",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
- "rebuild_of": 1,
- "claimed_at": "2026-11-21T16:11:42.074Z"
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "Check dates and book",
+ "brand_truth": "The Out Islands' first resort, still a home for boaters on a bluff above White Sound and the Sea of Abaco.",
+ "buyer": "US couples and families planning months ahead, returning guests, boaters crossing to the Abacos, wedding couples.",
+ "direction": {
+  "archetype": "A01 Magazine feature",
+  "lane": "P03 Conch pink (shell-white ground, conch only on the pull-quote band, shutter-green CTAs, ink colophon)",
+  "type": "T08 Warm humanist (Young Serif + Nunito Sans)",
+  "nav": "N1",
+  "motion": "quiet",
+  "why": "A storied resort reads best as a magazine feature; the suite chooser lets the reader book the balcony they just read about."
+ },
+ "concept_type": "booking-site (Cloudbeds rooms, Dockwa slips)",
+ "tier_visual": "standard",
+ "big_idea": "Bluff House as a magazine feature about the Out Islands' first resort, with a suite chooser (upper or lower, arrival date, season rate, that suite's photos and 3D tour) that hands off to Cloudbeds.",
+ "images": [
+  {
+   "src": "https://static.wixstatic.com/media/5c5976_17ae16c3cdb94ff08128144740eb6b00f000.jpg",
+   "source": "own",
+   "credit": "bluffhouse.com"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/5c5976_4d430b71b1694947902404f615c7b9f8~mv2.jpg",
+   "source": "own",
+   "credit": "bluffhouse.com"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/5c5976_6b9dd005f8f243c8af937a9b727d5914~mv2.jpg",
+   "source": "own",
+   "credit": "bluffhouse.com"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/5c5976_77c8eb03fd5a483e8052b2b833d2edff~mv2.jpg",
+   "source": "own",
+   "credit": "bluffhouse.com"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/5c5976_ebd836a292384a7193593c0c11727400~mv2.jpg",
+   "source": "own",
+   "credit": "bluffhouse.com"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/5c5976_0a65c2bd573346e78cf9d2b617f7ba83~mv2.jpg",
+   "source": "own",
+   "credit": "bluffhouse.com"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/5c5976_8fdda870133a479eb566d3b5331ea44f~mv2.png",
+   "source": "own",
+   "credit": "bluffhouse.com"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/5c5976_89c8828c6a3443d9a742a1cd5670bab8~mv2.jpg",
+   "source": "own",
+   "credit": "bluffhouse.com"
+  }
+ ],
+ "plan_gate": {
+  "first": {
+   "photography": 3,
+   "typography": 4,
+   "composition": 3,
+   "colour": 4,
+   "fit": 4,
+   "distinct": 4,
+   "references": 3,
+   "verdict": "revise (5 changes)"
+  },
+  "after_revision": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 4,
+   "distinct": 4,
+   "references": 4,
+   "verdict": "approved"
+  }
+ },
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 4,
+  "distinct": 4,
+  "references": 4
+ },
+ "current_site_findings": [
+  "Marina rates page still headed '2022 Marina Rates'",
+  "Empty testimonial carousel and 'undefined' image alts",
+  "Fall season listed from 26 October while closed to 31 October",
+  "The first-and-oldest Out Island resort story buried on an inner page",
+  "Room views, rates and 3D tours on separate pages"
+ ],
+ "pitch_line": "Your story is the best thing you own: this concept tells it like a magazine and lets the reader book the balcony on the same page.",
+ "assumptions": [
+  "Wix original-size image URLs used (the base of the scaled URLs seen on the site)",
+  "Season boundaries as published; dates 26 to 31 October treated as closed",
+  "Marina rates not shown (published table is dated 2022); Dockwa booking instead"
+ ],
+ "sources": [
+  "https://www.bluffhouse.com/",
+  "https://www.bluffhouse.com/room-type-and-rates",
+  "https://www.bluffhouse.com/marina",
+  "https://www.bluffhouse.com/a-little-history",
+  "https://www.caribjournal.com/2024/01/04/best-beach-bars-in-the-caribbean-2024/6/"
+ ],
+ "notes": "Gen-2 rebuild 2026-11-21 by scheduled site worker. BLIND: sandbox blocks outside images and look.mjs; photos seen via Lovable gallery ip-assets-bluff-house-beach-resort-marina. Single page (gen-1 history.html and marina.html folded in). Stock-looking images on their site not used. Critic note not applied: the lead photo is 1920x1080 and fills the width, so the crop can only move vertically. Mobile tap-target warning is the shared concept label. Plan gate revise then approved.",
+ "history": [
+  {
+   "generation": 1,
+   "built_at": null
+  }
+ ],
+ "built_at": "2026-11-21T16:23:45Z"
 }

@@ -6,5 +6,34 @@
  "url": "bluffhouse.com",
  "url_source": "prospects",
  "old_check": "LOADED: built by Faro Enterprise",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": true,
+  "booking_engine": "Cloudbeds (rooms), Dockwa (slips)",
+  "products_or_listings": 11,
+  "pages": 30,
+  "platform": "Wix",
+  "latest_year": 2026,
+  "modernity": 2,
+  "concept_type": "booking: suite and cottage chooser with seasonal rates handing off to Cloudbeds; marina with Dockwa reservation; dining, beach bar, weddings",
+  "must_keep": [
+   "Book Now (Cloudbeds)",
+   "Upper and lower suite rates by season",
+   "9 private cottages and villas",
+   "marina reservations (Dockwa) and rates",
+   "Boathouse restaurant and Tranquil Turtle beach bar",
+   "weddings",
+   "history"
+  ],
+  "weaknesses": [
+   "Wix template with slicebox carousels and 'Use tab to navigate' artefacts",
+   "marina rates page headed 2022",
+   "empty testimonial carousel",
+   "image alts 'undefined'",
+   "season dates overlap (closed 09/03 to 10/31 vs fall season from 10/26)"
+  ],
+  "priority": "B",
+  "note": "Wix site with Cloudbeds booking and Dockwa slips; concept keeps both hand-offs."
+ }
 }

@@ -1,13 +1,14 @@
 {
  "slug": "bluff-house-beach-resort-marina",
  "niche": "hospitality-stay",
- "archetype": "A11",
- "archetype_name": "Horizontal journey",
+ "archetype": "A01",
+ "archetype_name": "Magazine feature",
  "lane": "P03",
  "lane_name": "Conch pink",
- "type": "T01",
- "type_name": "Monumental serif",
- "nav": "N9",
- "motion": "M2",
- "dealt_at": "2026-11-08T15:22:55.723Z"
+ "type": "T08",
+ "type_name": "Warm humanist",
+ "nav": "N1",
+ "motion": "M3",
+ "dealt_at": "2026-11-21T16:14:52.334Z",
+ "chosen": true
 }
