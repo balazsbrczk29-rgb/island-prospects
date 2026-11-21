@@ -38,18 +38,18 @@ function Home() {
         <section id="studio" className="studio" aria-labelledby="studio-h">
           <div className="studio__photos">
             <figure className="studio__a"><Img photo={PHOTOS.studioA} sizes="(min-width: 1100px) 640px, 100vw" /><figcaption>{PHOTOS.studioA.caption}</figcaption></figure>
-            <figure className="studio__b"><Img photo={PHOTOS.studioB} sizes="(min-width: 1100px) 380px, 100vw" /><figcaption>{PHOTOS.studioB.caption}</figcaption></figure>
+            <figure className="studio__b"><Img photo={PHOTOS.studioB} sizes="(min-width: 1100px) 720px, 100vw" /><figcaption>{PHOTOS.studioB.caption}</figcaption></figure>
+          </div>
+          <div className="studio__text">
+            <h2 id="studio-h">Your studio: room to cook, eat and spread out.</h2>
+            <p className="lead">Every studio is spacious, with its own kitchenette and a table to eat at. Swim before breakfast, then cook what you caught for dinner.</p>
+            <ul className="ticks">{IN_STUDIO.map(t => <li key={t}>{t}</li>)}</ul>
             <dl className="facts">
               <div><dt>Check-in</dt><dd className="num">2:00 pm</dd></div>
               <div><dt>Check-out</dt><dd className="num">12:00 noon</dd></div>
               <div><dt>Rates</dt><dd>On request, or live on <a className="link" href={BOOK} target="_blank" rel="noopener">BahamaGo</a></dd></div>
               <div><dt>Payment</dt><dd>Visa, MasterCard, or cash on arrival</dd></div>
             </dl>
-          </div>
-          <div className="studio__text">
-            <h2 id="studio-h">Your studio: room to cook, eat and spread out.</h2>
-            <p className="lead">Every studio is spacious, with its own kitchenette and a table to eat at. Swim before breakfast, then cook what you caught for dinner.</p>
-            <ul className="ticks">{IN_STUDIO.map(t => <li key={t}>{t}</li>)}</ul>
             <div className="onsite">
               <h3>On site</h3>
               <p>A grocery store, laundry and an ice machine. Cars for about <span className="num">$80</span> a day, waiting at the airport if you like, and bicycles for <span className="num">$10</span>.</p>

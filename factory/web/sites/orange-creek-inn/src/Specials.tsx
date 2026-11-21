@@ -10,7 +10,8 @@ export default function Specials() {
   const offers = useMemo(() => offersFor(nights, origin, arrive), [nights, origin, arrive])
   const state = (ids: readonly string[]) => {
     const hit = offers.filter(o => ids.includes(o.id))
-    if (hit.some(o => o.status === "ok")) return { on: true, note: "Fits your dates." }
+    const ok = hit.find(o => o.status === "ok")
+    if (ok) return { on: true, note: ok.via ? ok.note : "Fits your dates." }
     if (hit.length) return { on: false, note: hit[0].note }
     const why: Record<string, string> = {
       fee300: "Needs four nights or longer.", fee150: nights >= 4 ? "For two and three nights. At four, the $300 credit applies." : "Needs at least two nights.",
@@ -23,7 +24,7 @@ export default function Specials() {
   return (
     <div className="offers">
       <div className="offers__head">
-        <p className="offers__sum"><span className="num">{count}</span> of 6 fit a <span className="num">{nights}</span>-night stay from <span className="num">{shortDate(arrive)}</span>.</p>
+        <p className="offers__sum"><span className="num">{count}</span> of 6 fit a <span className="num">{nights}</span>‑night stay from <span className="num">{shortDate(arrive)}</span>.</p>
         <a className="link" href="#top">Change dates</a>
       </div>
       <ol className="olist">

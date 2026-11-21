@@ -1,7 +1,8 @@
 import { useMemo } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { ArrowUpRight, Minus, Plane, Plus, Car } from "lucide-react"
-import { BOOK, EMAIL, NAME, ORIGINS, longDate, offersFor, shortDate, wayFor, type Origin } from "./facts"
+import { BOOK, EMAIL, NAME, ORIGINS, longDate, offersFor, shortDate, specialTitle, wayFor, type Origin } from "./facts"
+import { MiniRoute } from "./RouteMap"
 import { usePlan } from "./site"
 
 function Stepper({ id, label, value, set, min, max, unit }: { id: string; label: string; value: number; set: (n: number) => void; min: number; max: number; unit: [string, string] }) {
@@ -54,7 +55,7 @@ export default function DatesBar() {
         <div className="out out--stay">
           <p className="out__k">Your stay</p>
           <p className="out__v num"><span>{shortDate(arrive)}</span> <span className="out__to">to {shortDate(arrive, nights)}</span></p>
-          <p className="out__n">Check-in 2:00 pm, check-out noon. Rates on request, or <a className="link" href={mailFor(arrive, nights, guests, origin, fits.map(o => o.title))}>email these dates</a>.</p>
+          <p className="out__n">Check-in 2:00 pm, check-out noon. Rates on request, or <a className="link" href={mailFor(arrive, nights, guests, origin, fits.map(o => specialTitle(o.id)))}>email these dates</a>.</p>
         </div>
         <div className="out out--offers">
           <p className="out__k"><span className="num">{fits.length}</span> published {fits.length === 1 ? "offer fits" : "offers fit"} these dates</p>
@@ -63,7 +64,7 @@ export default function DatesBar() {
               {offers.map(o => (
                 <motion.li key={o.id} layout="position" data-on={o.status === "ok"} title={o.note}
                   initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.94 }} transition={{ type: "spring", stiffness: 420, damping: 32 }}>
-                  {o.title}
+                  {specialTitle(o.id)}{o.via && o.status === "ok" && <small> if you connect</small>}
                 </motion.li>
               ))}
             </AnimatePresence>
@@ -72,7 +73,10 @@ export default function DatesBar() {
           {offers.some(o => o.status !== "ok") && <a className="out__n link" href="#offers">Why some do not fit</a>}
         </div>
         <div className="out out--way">
-          <p className="out__k">Your way here</p>
+          <div className="out__way">
+            <p className="out__k">Your way here</p>
+            <MiniRoute />
+          </div>
           <p className="out__v"><Plane aria-hidden /> <span>{way.air}, <span className="num" data-warn={!way.ok}>{way.times}</span></span></p>
           <p className="out__v"><Car aria-hidden /> <span>Then 3.5 miles: we collect you, or a taxi is about $15.</span></p>
           <p className="out__n">{way.note}</p>
