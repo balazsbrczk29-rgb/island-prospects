@@ -65,21 +65,22 @@ function StopBody({ s, i, onAsk, phone = false }: { s: Stop; i: number; onAsk: (
     )
   }
 
+  const H = (pic: { h: number }, cap = 9999) => ({ height: `min(var(--fh), ${Math.min(pic.h, cap)}px)`, width: "auto" })
   switch (s.place) {
     case "harbour":
       return (
-        <article className="grid h-full grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] items-center gap-[4vw]">
-          <Img pic={PIC.seahorse} className="w-full justify-self-end" maxW={600} />
+        <article className="grid h-full grid-cols-[auto_minmax(0,1fr)] items-center gap-[4vw]">
+          <Img pic={PIC.seahorse} style={H(PIC.seahorse, 540)} />
           <div>{head}{fact}<div className="mt-6 max-w-[34rem]"><TripList place="harbour" /></div>{ask}</div>
         </article>
       )
     case "lagoon":
       return (
-        <article className="grid h-full grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-center gap-[4vw]">
-          <div>{head}{fact}<div className="mt-6 max-w-[34rem]"><TripList place="lagoon" /></div>{ask}</div>
+        <article className="grid h-full grid-cols-[minmax(0,24rem)_auto] items-center gap-[3.5vw]">
+          <div><p className="text-small text-muted italic">{s.kicker}</p><h2 className="display mt-2 text-[clamp(3rem,4.6vw,4.6rem)]">{s.name}</h2>{fact}<div className="mt-6"><TripList place="lagoon" /></div>{ask}</div>
           <div className="relative">
-            <Img pic={PIC.lagoon} className="w-full" maxW={640} />
-            <figure className="absolute -bottom-10 -left-12 w-[min(17vw,250px)] border-[6px] border-trim shadow-[0_18px_40px_-20px_rgba(42,36,32,.45)]">
+            <Img pic={PIC.lagoon} style={H(PIC.lagoon)} />
+            <figure className="absolute bottom-8 -left-[5.5rem] w-[min(16vw,240px)] border-[6px] border-trim">
               <Img pic={PIC.dolphin} className="w-full" />
             </figure>
           </div>
@@ -97,39 +98,63 @@ function StopBody({ s, i, onAsk, phone = false }: { s: Stop; i: number; onAsk: (
       )
     case "reefs":
       return (
-        <article className="grid h-full grid-cols-[minmax(0,1fr)_auto] items-center gap-[5vw]">
-          <div>{head}{fact}<div className="mt-6 max-w-[34rem]"><TripList place="reefs" /></div>{ask}</div>
-          <figure>
-            <Img pic={PIC.wall} className="w-[350px]" />
-            <figcaption className="mt-3 max-w-[350px] text-cap text-muted italic">A wall dive with Stuart Cove's, booked through Majestic.</figcaption>
-          </figure>
+        <article className="flex h-full flex-col justify-center">
+          <p className="text-small text-muted italic">{s.kicker}</p>
+          <h2 className="display mt-2 text-[clamp(4.5rem,8.4vw,8.6rem)] leading-[0.86]">The southwest<br />reefs</h2>
+          <div className="mt-10 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] items-start gap-[3.5vw]">
+            <div>{fact}{ask}</div>
+            <TripList place="reefs" max={4} />
+            <figure>
+              <Img pic={PIC.wall} className="w-[min(350px,22vw)]" />
+              <figcaption className="mt-3 max-w-[min(350px,22vw)] text-cap text-muted italic">A wall dive with Stuart Cove's, booked through Majestic.</figcaption>
+            </figure>
+          </div>
         </article>
       )
     case "exuma":
       return (
-        <article className="grid h-full grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] items-center gap-[4vw]">
+        <article className="grid h-full grid-cols-[minmax(0,1fr)_auto] items-center gap-[4vw]">
           <div>
-            <p className="text-small text-muted italic">{s.kicker}</p>
-            <p className="display tnum mt-1 text-[clamp(7rem,13vw,12.5rem)] leading-[0.8] text-green" aria-hidden>38<span className="text-[0.32em] tracking-[-0.01em]"> nm</span></p>
-            <h2 className="display mt-4 text-[clamp(3rem,4.6vw,4.6rem)]">{s.name}</h2>
+            <p className="display tnum text-[clamp(7rem,13vw,12.5rem)] leading-[0.8] text-green" aria-hidden>38<span className="text-[0.32em] tracking-[-0.01em]"> nm</span></p>
+            <h2 className="display mt-5 text-[clamp(3rem,4.6vw,4.6rem)]">{s.name}</h2>
             {fact}{ask}
           </div>
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-5">
-            <div><Img pic={PIC.powerboat} className="w-full" maxW={560} /><div className="mt-6"><TripList place="exuma" max={3} /></div></div>
-            <Img pic={PIC.pig} className="mb-[4.6rem] w-[min(13vw,190px)]" />
+          <div className="grid grid-cols-[auto_auto] items-end gap-5">
+            <div className="flex flex-col"><Img pic={PIC.powerboat} style={H(PIC.powerboat, 400)} /><div className="mt-5 w-0 min-w-full"><TripList place="exuma" max={3} /></div></div>
+            <Img pic={PIC.pig} style={{ height: "min(calc(var(--fh) * 0.62), 440px)", width: "auto" }} className="mb-[3.2rem]" />
           </div>
         </article>
       )
     case "harbourisland":
       return (
         <article className="grid h-full grid-cols-[auto_minmax(0,1fr)] items-center gap-[5vw]">
-          <Img pic={PIC.pinkSand} className="w-[285px]" />
-          <div>{head}{fact}<div className="mt-6 max-w-[34rem]"><TripList place="harbourisland" /></div>{ask}</div>
+          <Img pic={PIC.pinkSand} className="w-[min(285px,18vw)]" />
+          <div><p className="text-small text-muted italic">{s.kicker}</p><h2 className="display mt-2 text-[clamp(4.5rem,8vw,8.2rem)] leading-[0.86]">Harbour<br />Island</h2>{fact}<div className="mt-6 max-w-[34rem]"><TripList place="harbourisland" /></div>{ask}</div>
         </article>
       )
     default:
       return null
   }
+}
+
+/** The passage line at the top of each stop: how the boat gets there, sourced or plainly true. */
+const PASSAGE: Partial<Record<Place, string>> = {
+  harbour: "Pickups from 5:00 PM on Cable Beach, 5:15 downtown, 5:30 on Paradise Island",
+  lagoon: "Out past Paradise Island, to the cay with the dolphins",
+  rose: "Off the shores of Nassau and Paradise Island, uninhabited",
+  reefs: "Southwest New Providence, with Stuart Cove's",
+  exuma: "38 nautical miles, 55 minutes by offshore powerboat",
+  harbourisland: "A full powerboat day, across to Eleuthera",
+}
+function Passage({ place }: { place: Place }) {
+  const strong = place === "exuma"
+  return (
+    <div className="flex items-center gap-4" aria-hidden={false}>
+      <span className={`h-px w-16 ${strong ? "bg-green" : "bg-ink/40"}`} />
+      <p className={`tnum text-small italic ${strong ? "text-green" : "text-muted"}`}>{PASSAGE[place]}</p>
+      <span className="h-px flex-1 border-t border-dashed border-ink/25" />
+    </div>
+  )
 }
 
 /** The title frame: the first screen of the journey. */
@@ -176,7 +201,7 @@ function Book({ where, setWhere }: { where: string; setWhere: (v: string) => voi
         <a href={TEL} className="tnum mt-8 block font-display text-[2.6rem] leading-none tracking-[-0.02em] no-underline hover:text-green">{PHONE}</a>
         <p className="mt-2 text-cap text-muted italic">The tour line, or the Majestic desk in your hotel lobby.</p>
       </div>
-      <div className="max-w-[40rem] bg-ground p-8 shadow-[0_30px_60px_-40px_rgba(42,36,32,.5)]">
+      <div className="max-w-[40rem] border border-ink/15 bg-ground p-8">
         <EnquiryForm where={where} onWhere={setWhere} idp="d" />
       </div>
     </div>
@@ -184,10 +209,10 @@ function Book({ where, setWhere }: { where: string; setWhere: (v: string) => voi
 }
 
 /** Desktop: pinned, vertical scroll moves the row sideways. Widths in vw. */
-const W = [100, 86, 88, 86, 80, 92, 78, 100]
+const W = [100, 96, 108, 92, 96, 104, 80, 100]
 
 function Timeline({ p, marks, active, go }: { p: MotionValue<number>; marks: number[]; active: number; go: (i: number) => void }) {
-  const labels = ["Nassau", ...STOPS.map(s => s.tab), "Book"]
+  const labels = ["Depart", ...STOPS.map(s => s.tab), "Book"]
   return (
     <nav aria-label="The journey" className="absolute inset-x-0 bottom-0 z-10 h-[var(--tl)] border-t border-line bg-ground px-[var(--pad)]">
       <div className="relative mx-auto h-full">
@@ -238,8 +263,9 @@ export function JourneyDesktop({ where, setWhere }: { where: string; setWhere: (
         <motion.div className="flex h-[calc(100svh-var(--tl))] will-change-transform" style={{ x, width: `${total}vw` }}>
           <div style={{ width: "100vw" }} className="h-full shrink-0"><Title onPlan={() => go(W.length - 1)} /></div>
           {STOPS.map((s, i) => (
-            <div key={s.place} style={{ width: `${W[i + 1]}vw` }} className="h-full shrink-0 py-[min(9vh,84px)] pr-[6vw] pl-[var(--pad)]">
-              <StopBody s={s} i={i} onAsk={ask} />
+            <div key={s.place} style={{ width: `${W[i + 1]}vw` }} className="flex h-full shrink-0 flex-col pt-[min(5vh,44px)] pb-[min(4.5vh,40px)] pl-[var(--pad)]">
+              <Passage place={s.place} />
+              <div className="min-h-0 flex-1 pt-[min(4vh,36px)] pr-[5vw]"><StopBody s={s} i={i} onAsk={ask} /></div>
             </div>
           ))}
           <div style={{ width: "100vw" }} className="h-full shrink-0"><Book where={where} setWhere={setWhere} /></div>
@@ -262,6 +288,7 @@ export function JourneyPhone({ where, setWhere }: { where: string; setWhere: (v:
   }
   const goTo = (i: number) => { const el = track.current; if (el) el.scrollTo({ left: i * (el.firstElementChild as HTMLElement).offsetWidth, behavior: "smooth" }) }
   const ask = (s: Stop) => { setWhere(s.form); document.getElementById("book-phone")?.scrollIntoView({ behavior: "smooth" }) }
+  useEffect(() => { const h = (e: Event) => goTo((e as CustomEvent<number>).detail); window.addEventListener("mt-stop", h); return () => window.removeEventListener("mt-stop", h) })
   return (
     <div className="md:hidden">
       <section className="bg-field pb-10">
@@ -277,12 +304,23 @@ export function JourneyPhone({ where, setWhere }: { where: string; setWhere: (v:
             <a href={TEL} className="link tnum text-small"><Phone className="size-4" strokeWidth={1.5} aria-hidden />Call {PHONE}</a>
           </div>
         </div>
-        <figure className="mt-7 px-5">
+        <nav aria-label="Where the day goes" className="mt-5 border-t border-ink/15 pt-4">
+          <p className="px-5 text-cap text-muted italic">Where the boat goes</p>
+          <ol className="mt-1 flex gap-1 overflow-x-auto px-3 [scrollbar-width:none]">
+            {STOPS.map((s, i) => (
+              <li key={s.place} className="flex shrink-0 items-center">
+                <a href="#stops" onClick={() => setTimeout(() => window.dispatchEvent(new CustomEvent("mt-stop", { detail: i })), 0)} className="flex min-h-11 items-center px-2 text-small whitespace-nowrap no-underline">{s.tab}{s.place === "exuma" ? <span className="tnum ml-1 text-green">38 nm</span> : null}</a>
+                {i < STOPS.length - 1 && <span className="h-px w-4 bg-ink/30" aria-hidden />}
+              </li>
+            ))}
+          </ol>
+        </nav>
+        <figure className="mt-5 px-5">
           <Img pic={PIC.flyingCloud} className="w-full" eager />
           <figcaption className="mt-2 text-cap text-muted italic">The Flying Cloud leaving Nassau Harbour at sunset.</figcaption>
         </figure>
       </section>
-      <section aria-label="Where the day goes" className="pt-10 pb-6">
+      <section id="stops" aria-label="Where the day goes" className="scroll-mt-4 pt-10 pb-6">
         <p className="px-5 text-small text-muted italic">Swipe, and the boat leaves the harbour</p>
         <div ref={rail} className="mt-3 flex gap-1 overflow-x-auto px-4 [scrollbar-width:none]" role="tablist" aria-label="Stops">
           {STOPS.map((s, i) => (

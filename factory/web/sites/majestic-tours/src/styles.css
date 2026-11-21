@@ -32,7 +32,7 @@
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-:root { --pad: clamp(20px, 3.9vw, 56px); --tl: 76px; }
+:root { --pad: clamp(20px, 3.9vw, 56px); --tl: 76px; --fh: calc(100svh - var(--tl) - min(5vh,44px) - min(4.5vh,40px) - min(4vh,36px) - 30px); }
 @media (min-width: 768px) { :root { --concept-offset: 76px; } }
 @layer base {
 html { background: var(--color-ground); color: var(--color-ink); -webkit-text-size-adjust: 100%; }
