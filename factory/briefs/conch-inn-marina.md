@@ -86,3 +86,38 @@ Room rates (Rates on request), max LOA and draft (not published: ask the office)
 
 ## Uniqueness check
 1. No other site uses a typographic wordmark over a panorama with a rate calculator. 2. Yes: name, Marsh Harbour, 73 slips in the first screen. 3. Yes. 4. Fix weakest after QA. 5. Their own photos, their rates, their 1972 story.
+
+---
+# Generation 2 design plan (2026-11-21)
+
+**Big idea.** Their office asks every boater to write an email listing boat type, name, LOA, beam, draft and dates. The first screen IS that letter, already written: "Dear Conch Inn, please hold a slip for ___, a __ ft ___ with a __ ft beam..." Fill the blanks inline and the reply appears under it in their own published rates ("2 nights at $3.25 a foot: $273.00, plus power at $0.75 a kWh"), then one button sends it to the dock office. Beside it, their own photograph of the docks at sunset.
+
+**Direction.** A07 Letter and stationery + P13 Hull and brass + T02 Text-led editorial (Newsreader only, opsz variable). Why: the conversion the business really runs is correspondence, so the page is correspondence; no tape, no script, no gimmicks: clean paper, a letterhead line, and the letter. P13 because the buyer is a yacht owner: navy field for the published rates, brass as the one accent (amount and CTA), teak only in the photographs. Nav N8 (ribbon tab for the reply card), motion M6 (quiet paper lift).
+
+**Fonts.** Newsreader variable (opsz 6-72), display max 72px (T02), body 19px. Inputs set in the same face, italic, on a hairline, like handwriting space on a form but typeset.
+
+**Photo set (own, static.wixstatic.com, seen in Lovable gallery ip-assets-conch-inn-marina, originals measured):**
+- B marina docks at sunset, 1566x1535: hero right column (max 700x860 desktop, under source).
+- A balcony view over the marina, 1600x1067: full-bleed harbour screen at 1440x960 (under source).
+- C Snappas deck over the marina, 2134x2134: Ashore section, 640x640.
+- Room photos 1579x1053 to 8256x5504 (E queen, F king, G suite, H suite 206, I apartment, J presidential, D presidential living): rooms selector, max 900 wide.
+- Not used: Wix stock rope, sailboat-from-above, generic marina; logos.
+
+**Storyboard (desktop 1440x900).**
+1. Letter hero: letterhead line (name, Bay Street, Marsh Harbour, 242-367-4000, VHF 16). The letter sentence at 44-56px with inline fields (boat name, LOA, type, beam, draft, arrive, leave). Under it the reply in brass: nights, tier, total, plus power; beam check against the 30 ft catamaran note. Primary: "Send to the dock office" (mailto with every field). Secondary: call, VHF 16, and "Staying ashore? Book a room". Right column: photo B, full height.
+2. The harbour: photo A full-bleed, one line: "On Bay Street since 1972. Rebuilt after Dorian, open again since March 2021." plus the 73 slips and 3 miles to the airport (bahamasmarinas.com).
+3. The published bill, navy field: dockage tiers, short-term, moorings, power, water, free WiFi and showers, laundry, fuel and ice, security, pool. Set as a ledger with tabular figures (they truly publish rates). The free Union Jack public dock, 1/3 mile west, noted honestly.
+4. Ashore: Snappas deck photo C large, "Tie up and walk to town": restaurants, groceries, liquor and shops within walking distance; Renu Day Spa and Trade Winds on site; Navigare and Dream Yacht Charters on the dock; airport 3 miles.
+5. Rooms: "Or sleep ashore, over the marina." Six room names as a list on the left; the selected room's photo large on the right with its features; primary "Book online" (RezExpert).
+6. House rules a captain wants (check-in/out noon, LOA measured bow pulpit to swim platform, 48h cancellation, no wake, insurance) as a short two-column text, then the reply card: office hours 8:00 to 5:30 daily, phones, email, address, VHF 16.
+Inner page rooms.html: the six rooms in full with photos and features, Book online.
+
+**Phone first three screens.** 1. Letterhead, the letter at 26px with fields wrapping naturally, reply total, "Send to the dock office" full width, inside 844. 2. Photo B 4:5 with a caption, then the harbour line. 3. The ledger on navy.
+
+**Conversion.** Slips: the letter (mailto info@conchinn.com, prefilled) and call 242-367-4000 / VHF 16. Rooms: Book online (RezExpert, their real engine).
+
+**Tier.** Standard. The photographs are excellent; the wow is the living letter and its live reply.
+
+**Differs.** Not a panorama-under-monument (gen 1, and man-o-war-marina), not spec-led (lighthouse-marina), not an arrival scene. No other site in the repo opens with a fill-in letter.
+
+BLIND: outside images blocked in the sandbox; photos verified via the Lovable gallery screenshot.

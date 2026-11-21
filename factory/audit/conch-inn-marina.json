@@ -6,5 +6,33 @@
  "url": "conchinn.com",
  "url_source": "prospects",
  "old_check": "LOADED",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": true,
+  "booking_engine": "RezExpert for rooms (online.rezexpert.com/book?business_code=303844); slips by phone or email only",
+  "products_or_listings": 6,
+  "pages": 10,
+  "platform": "Wix",
+  "latest_year": 2025,
+  "modernity": 2,
+  "concept_type": "booking: room booking hand-off to RezExpert plus a slip request that builds the email their office asks for, with published dockage rates",
+  "must_keep": [
+   "Book Online (RezExpert) for rooms",
+   "published dockage, mooring, power and water rates",
+   "slip request with boat type, name, LOA, beam, draft and dates",
+   "six room types",
+   "Snappas Bar & Grill",
+   "phones 242-367-4000 / 242-577-7000, VHF 16"
+  ],
+  "weaknesses": [
+   "robots meta nofollow, noimageindex, nosnippet on the homepage",
+   "Wix stock images (rope, sailboat from above) where their own docks should be",
+   "slip requests must be typed by hand into an email",
+   "two phone numbers on different pages",
+   "no history, slip count or airport distance on their own site"
+  ],
+  "priority": "A",
+  "note": "Family-run Marsh Harbour marina and inn on Wix; rooms book online, slips by hand-written email."
+ }
 }
