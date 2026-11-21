@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Orange Creek Inn: job spec
 Current site: orangecreekinn.com (WordPress one-pager, Book Now goes to BahamaGo) · Kind of site: small inn brochure + booking handoff
@@ -30,4 +30,4 @@ Current site: orangecreekinn.com (WordPress one-pager, Book Now goes to BahamaGo
    6. Contact.
 8. **Look and feel:** warm, family-run, sunny, unpretentious. No stationery metaphor: the beach and the studio lead. Their photos are 900 px, so use generous framed images rather than full-bleed. One serif and one sans.
 
-Notes from Balazs:
+Notes from Balazs: approved 2026-11-21. "Go absolutely all out: showcase portfolio-level, high-converting, well-crafted sites."

@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Pigeon Cay Beach Club: job spec
 Current site: pigeoncaybahamas.com (WordPress one-pager, booking engine direct-book.com/properties/pigeoncaydirect) · Kind of site: booking
@@ -31,4 +31,4 @@ Current site: pigeoncaybahamas.com (WordPress one-pager, booking engine direct-b
    7. Policies in plain words, contact, then book.
 8. **Look and feel:** barefoot, honest, sunlit, generous. Their photography is the star, shown big but never past its native size (many files are 800 px, so use framed galleries rather than full-bleed blow-ups). One calm serif and a clean sans. The wow is the cottage chooser: you set your dates and the right cottages rise up with their real photos and totals.
 
-Notes from Balazs:
+Notes from Balazs: approved 2026-11-21. "Go absolutely all out: showcase portfolio-level, high-converting, well-crafted sites."

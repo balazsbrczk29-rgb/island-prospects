@@ -7,6 +7,10 @@ Follow GUIDE.md sections 2 to 4 instead of the plan gate below:
 - Screenshot the previous version before you change anything, then run the side-by-side critic (gate 1 purpose, gate 2 craft).
 - Publish only if gate 1 passes. On publish, set `"jobspec_built": true` in the status.
 - factory/PAUSE stops all claims.
+- **When no approved spec is pending:** draft job specs (`Status: draft`, using `factory/jobspecs/_template.md`) for the next 5 businesses in priority order (small and easy first; skip huge webshops and enterprises).
+  - Use their audit, brief and current site (at most ~3 research calls each).
+  - Push the drafts, notify Balazs to review them, then end the run.
+  - Never build a draft.
 
 ## Parallel workers (the scheduled "Site worker 1/2/3/4" tasks run THIS section)
 Each scheduled worker is its own chat. It builds one business at a time, start to finish, and goes straight to the next with no gap, until the queue is empty or the account usage limit stops it. Four workers fire on staggered schedules. A worker that finds 4 or more live claims exits immediately, so at most four build at once and a crashed or limited worker is replaced at the next firing.

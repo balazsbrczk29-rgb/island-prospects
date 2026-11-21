@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Anna's Wedding Planning & Consulting: job spec
 Current site: annasweddingbahamas.com (WordPress, packages with a booking form) · Previous concept: the gen-1 version (restored, live now; Balazs likes its composition) · Kind of site: packages + date request
@@ -28,4 +28,4 @@ Current site: annasweddingbahamas.com (WordPress, packages with a booking form) 
 7. **Screens:** keep the previous version's order, with the finder moved up so it is within the first two screens on a phone.
 8. **Look and feel:** warm, romantic, assured. Balazs asked for new fonts: a refined serif display with a graceful text face, not Gloock and Figtree. Better rhythm and spacing. Her photos stay within native size, framed rather than blown up.
 
-Notes from Balazs:
+Notes from Balazs: approved 2026-11-21. "Go absolutely all out: showcase portfolio-level, high-converting, well-crafted sites."

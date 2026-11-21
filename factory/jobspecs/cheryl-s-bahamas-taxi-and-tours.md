@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Cheryl's Bahamas Taxi and Tours: job spec
 Current site: cherylbahamastaxiandtours.com (static HTML + JotForm transfer booking) · Kind of site: booking (airport transfer + private tours)
@@ -29,4 +29,4 @@ Current site: cherylbahamastaxiandtours.com (static HTML + JotForm transfer book
    6. Contact by phone, with day and night numbers.
 8. **Look and feel:** warm, bright, local, trustworthy. Their navy and yellow brand colours used with taste. The wow is the route drawing across the island map as you add stops. Their own photos only, at native size.
 
-Notes from Balazs:
+Notes from Balazs: approved 2026-11-21. "Go absolutely all out: showcase portfolio-level, high-converting, well-crafted sites."

@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Abaco Boat Rental: job spec
 Current site: abacoboatrental.com (Squarespace + Booqable live booking) · Previous concept: the gen-1 version with the Sea of Abaco delivery chart (restored, live now) · Kind of site: booking
@@ -31,4 +31,4 @@ Current site: abacoboatrental.com (Squarespace + Booqable live booking) · Previ
    6. Contact.
 8. **Look and feel:** sunny, capable, salty, clear. The map is the wow: water you can almost touch, routes that draw, the money counting down as days go up. Use their real boat photo at native size. Pick one bold display face and one clean text face.
 
-Notes from Balazs:
+Notes from Balazs: approved 2026-11-21. "Go absolutely all out: showcase portfolio-level, high-converting, well-crafted sites."
