@@ -6,5 +6,31 @@
  "url": "nassaupaperco.com",
  "url_source": "brief",
  "old_check": "NO OWN SITE LISTED: (none listed)",
- "audit": null
+ "audit": {
+  "site_kind": "webshop",
+  "cart": true,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 600,
+  "pages": 0,
+  "platform": "WordPress / WooCommerce (openresty; blocks automated tools with 403)",
+  "latest_year": 2025,
+  "modernity": 2,
+  "concept_type": "webshop: department catalogue with filters, product pages, a quote-list cart drawer, checkout preview handing off to their store or emailing the quote",
+  "must_keep": [
+   "departments with counts (Disposables 176, Gift Wrap 200, Eco-Friendly 89, Cleaning & Janitorial, Office & School, Hotel Restaurant & Bar, Candy & Gum, Warehouse & Shipping)",
+   "product pages, many priced 'contact us for a quote'",
+   "request a quote",
+   "commercial printing (Napco)"
+  ],
+  "weaknesses": [
+   "site refuses automated previews and link tools (403)",
+   "most products have no price, only 'contact us for a quote'",
+   "category spelled 'Catagory' and 'Air Refresheners'",
+   "hours and address only in directories",
+   "printing lives on a separate Facebook page"
+  ],
+  "priority": "C",
+  "note": "Large WooCommerce catalogue (hundreds of SKUs, many quote-only); site blocks Firecrawl even with stealth proxy, so product data is limited to search snippets. Build after A and B."
+ }
 }
