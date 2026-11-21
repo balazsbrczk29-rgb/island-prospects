@@ -6,6 +6,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
+// Global pause: while factory/PAUSE exists, nothing can be claimed and the queue is empty, so running workers finish their current site and stop.
+if (fs.existsSync(path.join(root, 'factory/PAUSE')) && ['claim', 'pending', 'review'].includes(process.argv[2])) { console.log('PAUSED: factory/PAUSE exists (' + fs.readFileSync(path.join(root, 'factory/PAUSE'), 'utf8').trim() + '). Do not start any new business or review. Finish and publish the site you are on (or push its WIP), then end the run.'); process.exit(3); }
 const all = JSON.parse(fs.readFileSync(path.join(root, 'factory/data/prospects.json'), 'utf8'));
 const cfg = JSON.parse(fs.readFileSync(path.join(root, 'factory/config.json'), 'utf8'));
 const stFile = s => path.join(root, 'factory/status', s + '.json');
