@@ -4,7 +4,7 @@
  "name": "Greenwood Beach Resort",
  "batch": "05",
  "tier": "A",
- "state": "built",
+ "state": "needs-review",
  "generation": 2,
  "rebuild_of": 1,
  "claimed_at": "2026-11-20T19:55:53.812Z",
@@ -118,7 +118,7 @@
   "https://direct-book.com/properties/greenwoodbeachresort/contact",
   "https://www.epicdiving.com/greenwood-beach-resort/"
  ],
- "notes": "Generation 2 rebuild, 2026-11-20. fix passes 1 and 2 applied. BLIND: sandbox blocks their image host, Google Fonts and look.mjs; photos were viewed through the Lovable gallery project ip-assets-greenwood-beach-resort (2 rounds) and QA screenshots use crops of that gallery routed in with Playwright (so they look softer than the real 1024 px files). References (aman.com, belmond.com) judged from known patterns, not captured. Fonts self-hosted from fontsource. Interactions: room picker + dates composer to direct-book; whitetip package form writing their own email template; route toggle (USA / Nassau) on getting-here; full-screen Menu overlay. qa: 0 blockers (one sub-40px target is the shared concept tag button); interact: the two 'dead' buttons are stepper +/- at their limits (disabled by design); distinct: distinct.",
+ "notes": "Generation 2 rebuild, 2026-11-20. fix passes 1 and 2 applied. BLIND: sandbox blocks their image host, Google Fonts and look.mjs; photos were viewed through the Lovable gallery project ip-assets-greenwood-beach-resort (2 rounds) and QA screenshots use crops of that gallery routed in with Playwright (so they look softer than the real 1024 px files). References (aman.com, belmond.com) judged from known patterns, not captured. Fonts self-hosted from fontsource. Interactions: room picker + dates composer to direct-book; whitetip package form writing their own email template; route toggle (USA / Nassau) on getting-here; full-screen Menu overlay. qa: 0 blockers (one sub-40px target is the shared concept tag button); interact: the two 'dead' buttons are stepper +/- at their limits (disabled by design); distinct: distinct. | Final critic re-score pending after fix pass 2 (queued for the worker review).",
  "built_at": "2026-11-20T21:58:02.729Z",
  "fix_pass_1": [
   "Real film: fixed limestone bars (top 12svh with 01 / 05 counter and progress rule, bottom 16svh with word and copy); each photo scales and pans with scroll via function transforms; stage 640svh",

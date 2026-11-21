@@ -4,7 +4,7 @@
  "name": "Cheryl's Bahamas Taxi and Tours",
  "batch": "10",
  "tier": "A",
- "state": "built",
+ "state": "needs-review",
  "generation": 2,
  "rebuild_of": 1,
  "claimed_at": "2026-11-20T19:55:53.017Z",
@@ -98,7 +98,7 @@
   "https://www.cherylbahamastaxiandtours.com/bahamas-tours.html",
   "https://www.cherylbahamastaxiandtours.com/book-online/index.html"
  ],
- "notes": "Independent critic after pass 1: photography 4, type 4, composition 3, colour 4, fit 4, distinct 5, references 4. Fix pass 2 (last): tours 'your day' panel collapsed to the arrivals card, stop count and 'Send my day', with the full form in a Radix Dialog drawer sliding in from the right (motion spring, Escape and focus return verified); home arrival section drops the fleet photo, team photo cropped 4:3 and vertically centred against the three steps, the New Providence line runs full width below; phone hero gets more bottom padding so 'Plan a private tour' clears the concept label. Composition pending the coordinator's final check. Earlier: hero is a generated arrivals photo (illustrative, labelled) with the typed name written live in Permanent Marker on the card; staged three-step pickup ticket; editorial tour list. BLIND: sandbox blocks outside images; QA screenshots route crops of their own photos. qa: 0 blockers (mobile tap-target warning is the shared concept label button); distinct: closest unexso 61.",
+ "notes": "Independent critic after pass 1: photography 4, type 4, composition 3, colour 4, fit 4, distinct 5, references 4. Fix pass 2 (last): tours 'your day' panel collapsed to the arrivals card, stop count and 'Send my day', with the full form in a Radix Dialog drawer sliding in from the right (motion spring, Escape and focus return verified); home arrival section drops the fleet photo, team photo cropped 4:3 and vertically centred against the three steps, the New Providence line runs full width below; phone hero gets more bottom padding so 'Plan a private tour' clears the concept label. Composition pending the coordinator's final check. Earlier: hero is a generated arrivals photo (illustrative, labelled) with the typed name written live in Permanent Marker on the card; staged three-step pickup ticket; editorial tour list. BLIND: sandbox blocks outside images; QA screenshots route crops of their own photos. qa: 0 blockers (mobile tap-target warning is the shared concept label button); distinct: closest unexso 61. | Final critic re-score pending after fix pass 2 (queued for the worker review).",
  "built_at": "2026-11-20T21:33:42.366Z",
  "fix_pass": 2
 }
