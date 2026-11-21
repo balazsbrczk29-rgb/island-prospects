@@ -20,7 +20,7 @@ const needsWork = s => !s || (s.state === 'built' && (s.generation || 1) < GEN);
 if (mode === 'active') {   // number of live building claims (each worker session holds one); used to cap parallel workers
   const dir = path.join(root, 'factory/status');
   const n = fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')))
-    .filter(s => (s.state === 'building' && Date.now() - new Date(s.claimed_at).getTime() < 2.5 * 3600 * 1000) || (s.review_claimed_at && s.state === 'needs-review' && Date.now() - new Date(s.review_claimed_at).getTime() < 1.5 * 3600 * 1000)).length;
+    .filter(s => (s.state === 'building' && Date.now() - new Date(s.claimed_at).getTime() < 1.5 * 3600 * 1000) || (s.review_claimed_at && s.state === 'needs-review' && Date.now() - new Date(s.review_claimed_at).getTime() < 1.5 * 3600 * 1000)).length;
   console.log(n); process.exit(0);
 }
 if (mode === 'review') {   // sites published as needs-review that still wait for the independent critic
@@ -32,7 +32,7 @@ if (mode === 'claim') {
   const slug = process.argv[3]; const r = all.find(x => x.slug === slug); if (!r) { console.error('unknown slug'); process.exit(1); }
   try { execSync('git pull -q --rebase --autostash origin main', { cwd: root, stdio: 'inherit' }); } catch {}
   const cur = status(slug);
-  if (cur && !needsWork(cur) && !(cur.state === 'building' && Date.now() - new Date(cur.claimed_at).getTime() > 2.5 * 3600 * 1000)) { console.log(`SKIP ${slug}: already ${cur.state} by another session. Move to the next business.`); process.exit(3); }
+  if (cur && !needsWork(cur) && !(cur.state === 'building' && Date.now() - new Date(cur.claimed_at).getTime() > 1.5 * 3600 * 1000)) { console.log(`SKIP ${slug}: already ${cur.state} by another session. Move to the next business.`); process.exit(3); }
   fs.writeFileSync(stFile(slug), JSON.stringify({ slug, id: r.id, name: r.name, batch: r.batch, tier: r.tier, state: 'building', generation: GEN, history: cur && cur.history, rebuild_of: cur && cur.state === 'built' ? 1 : undefined, claimed_at: new Date().toISOString() }, null, 1));
   execSync(`git add factory/status/${slug}.json && git commit -q -m "claim: ${slug}"`, { cwd: root, stdio: 'inherit', shell: '/bin/bash' });
   let ok = false;   // parallel sessions push at the same moment: retry instead of crashing
@@ -43,7 +43,7 @@ if (mode === 'claim') {
 let rows;
 if (mode === 'pending') {
   const n = parseInt(process.argv[3] || '5', 10);
-  const stale = ms => Date.now() - new Date(ms).getTime() > 2.5 * 3600 * 1000;   // a "building" claim older than 2.5h = crashed session
+  const stale = ms => Date.now() - new Date(ms).getTime() > 1.5 * 3600 * 1000;   // a "building" claim older than 2.5h = crashed session
   rows = all.filter(r => { const s = status(r.slug); return needsWork(s) || (s.state === 'building' && stale(s.claimed_at)); }).sort((a, b) => ((status(b.slug)?.reroll ? 1 : 0) - (status(a.slug)?.reroll ? 1 : 0)) || (prio(a.slug) - prio(b.slug)) || (size(a) - size(b))).slice(0, n); // rerolls first, then prospects.json priority order
   console.log(`PENDING (top ${n} by priority). For EACH: run "node factory/tools/batch.mjs claim <slug>" immediately before you start it, then build and publish it.`);
 } else {

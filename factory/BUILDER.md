@@ -36,6 +36,8 @@ Real-time 3D is the premium tier. Use it only if it truly explains this business
 - Speed: run distinct.mjs once at the end with a 10 minute timeout; do not chain shell commands (the worktree guard refuses them; use script files).
 - Same kind of site as they have now (webshop stays a shop, informative stays informative, a landing page stays one page). Conversion first: the route to enquire, book or buy is obvious on every screen.
 
+**Checkpoints:** after the plan, after the verdict, after the first screen and every ~15 minutes, commit this business's paths and `git push -f origin HEAD:wip/<slug>` (never main until publish). If a `wip/<slug>` branch exists when you start, resume from it (factory/PROMPT.md, Parallel workers step 4).
+
 ## Steps (two phases: the design is approved BEFORE the full build)
 **Phase 1: plan and hero (then stop and report)**
 1. `node factory/tools/batch.mjs claim <slug>`. If it prints SKIP, stop and report.

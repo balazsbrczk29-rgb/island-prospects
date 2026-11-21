@@ -10,7 +10,18 @@ Each scheduled worker is its own chat. It builds one business at a time, start t
      - Pull before each claim and push after each site, so the live link is replaced immediately.
    - Repeat at once with the next business. Never stop between sites.
 3. Keep context lean so the loop can run many sites in one chat: don't re-read the skills for every site (read them once), keep tool outputs short, and look only at the screenshots you need.
-4. If you hit a usage limit (HTTP 429), stop cleanly. Everything published is saved, and your claim expires and returns to the queue.
+4. **Nothing is ever lost (checkpoints).** Work in progress is pushed to a branch named `wip/<slug>`, never to main, so the live site is untouched until the site is finished. Push it at each of these points:
+   - right after the design plan is written;
+   - right after the plan gate verdict;
+   - after the first screen is built;
+   - every ~15 minutes of building.
+
+   Each checkpoint commits only this business's paths, then runs `git push -f origin HEAD:wip/<slug>`. Doing it at least every 15 minutes means a usage limit costs at most 15 minutes of work.
+
+   **Before claiming,** check `git ls-remote origin "refs/heads/wip/*"`. If a WIP branch exists for a business whose claim is stale (or about to be yours), claim it and resume from it: `git fetch origin wip/<slug>` and `git checkout origin/wip/<slug> -- factory/web/sites/<slug> factory/briefs/<slug>.md factory/status/<slug>.json factory/directions/<slug>.json factory/audit/<slug>.json`. Read the brief and the plan-gate verdict in the status notes, then continue from the last finished step instead of starting over. Resuming WIP comes before any new business.
+
+   After publishing to main, delete the branch with `git push origin --delete wip/<slug>`.
+5. If you hit a usage limit (HTTP 429), stop cleanly. Push a WIP checkpoint first if you can. Everything published is saved, your WIP is on its branch, and your claim expires and returns to the queue with its WIP.
 
 ## Continuous orchestrator (the scheduled "Site factory worker" runs THIS section)
 Goal: a mass remodel of nearly every site in the repo to the generation-2 standard. Building is constant with no gaps. Easy businesses come first, and every site stays the same kind of site the business already has. Quality is **guaranteed up front by a plan gate, not repaired at the end.**
