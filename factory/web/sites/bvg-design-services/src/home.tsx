@@ -1,225 +1,265 @@
-import { useState } from 'react';
-import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react';
-import { Layout, mount } from './layout';
-import { CAPS, OFFICES, PAY, ISLANDS, PHOTOS, CREDIT, EMAIL, PHONE, TEL } from './data';
+import { StrictMode, useEffect, useMemo, useRef, useState } from "react"
+import { createRoot } from "react-dom/client"
+import { AnimatePresence, motion } from "motion/react"
+import Lenis from "lenis"
+import EraBrowser from "./browser"
+import { EMAIL, IMG, ISLANDS, NEEDS, PAY, PHONE, SERVICES, SIZES, STEPS, TEL, US_PHONE, US_TEL } from "./data"
+import "./styles.css"
 
-const ease = [0.2, 0.75, 0.2, 1] as const;
+const ease = [0.22, 1, 0.36, 1] as const
 
-function Swap({ src, alt, credit, gen }: { src: string; alt: string; credit: string; gen?: boolean }) {
-  const reduce = useReducedMotion();
+function Nav() {
   return (
-    <div className="swap">
-      <AnimatePresence initial={false} mode="popLayout">
-        <motion.img key={src} src={src} alt={alt} width={1600} height={1067} loading="lazy" data-source={gen ? 'generated' : 'commons'}
-          initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
-          transition={{ duration: reduce ? 0.2 : 0.55, ease }} />
-      </AnimatePresence>
-      <p className="swap-cap">{credit}</p>
+    <header className="nav grid12">
+      <a href="#top" className="nav__name">BVG Design Services</a>
+      <nav aria-label="Sections" className="nav__links">
+        <a href="#services">Services</a>
+        <a href="#story">Since 1996</a>
+        <a href="#offices">Offices</a>
+        <a href="#request">Request</a>
+      </nav>
+      <a href={TEL} className="nav__tel num">{PHONE}</a>
+    </header>
+  )
+}
+
+function Hero() {
+  return (
+    <section className="hero grid12" id="top" aria-labelledby="hero-title">
+      <div className="hero__say">
+        <h1 id="hero-title" className="t-56">Bahamian websites, built and found since&nbsp;1996.</h1>
+        <p className="hero__lede t-18">Web design, hosting, search and advertising from Freeport, Grand Bahama, for businesses on every island. We started with our own: the Bahamas Vacation Guide.</p>
+        <div className="hero__act">
+          <a className="btn" href="#request">Start a website request</a>
+          <a className="quiet num" href={TEL}>Call Freeport {PHONE}</a>
+        </div>
+        <p className="hero__proof">Offices in Freeport, Nassau and Abaco. Simple pages are usually ready within 24 hours.</p>
+      </div>
+      <div className="hero__demo"><EraBrowser /></div>
+    </section>
+  )
+}
+
+function Services() {
+  const [on, setOn] = useState(SERVICES[0].id)
+  return (
+    <section className="svc grid12" id="services" aria-labelledby="svc-title">
+      <h2 id="svc-title" className="svc__title t-56">Everything a Bahamian business needs to be online, from one Freeport studio.</h2>
+      <div className="svc__list">
+        {SERVICES.map(s => (
+          <article key={s.id} className="svc__row" data-on={on === s.id} onMouseEnter={() => setOn(s.id)}>
+            <h3>
+              <button type="button" aria-expanded={on === s.id} aria-controls={`svc-${s.id}`} onClick={() => setOn(s.id)} className="t-28">{s.name}</button>
+            </h3>
+            <p className="svc__line">{s.line}</p>
+            <AnimatePresence initial={false}>
+              {on === s.id && (
+                <motion.div id={`svc-${s.id}`} className="svc__more" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.32, ease }}>
+                  <ul>{s.facts.map(f => <li key={f}>{f}</li>)}</ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+const STRIP: [string, string, string][] = [
+  [IMG.hopeTown, "Hope Town, Elbow Cay, Abaco", "Hope Town harbour with its red and white lighthouse behind the docks"],
+  [IMG.treasureCay, "Treasure Cay, Abaco", "A thatched shade on the beach at Treasure Cay, pale green water beyond"],
+  [IMG.nassauLight, "The lighthouse, Nassau", "The white lighthouse on its rocky point at the mouth of Nassau harbour"],
+  [IMG.deadmans, "Dead Man's Reef, Grand Bahama", "Sunset rays over the water seen from the beach at Dead Man's Reef"],
+]
+
+function Story() {
+  return (
+    <section className="story" id="story" aria-labelledby="story-title">
+      <div className="grid12">
+        <p className="story__year t-120 num" aria-hidden="true">1996</p>
+        <div className="story__text">
+          <h2 id="story-title" className="t-28">Two entrepreneurs, one afternoon in mid 1996.</h2>
+          <p>One took the graphics, the other the code. A month later their multi-page Bahamas Vacation Guide went straight to the top of the search engines, ahead of the established Bahamas guides.</p>
+          <p>Businesses started asking to be included and for pages of their own. The guide gave the studio its name: BVG stands for Bahamas Vacation Guide. It is still online, still designed and maintained by BVG.</p>
+          <a className="quiet" href="http://www.bahamasvacationguide.com/" rel="noopener">Visit the Bahamas Vacation Guide</a>
+        </div>
+      </div>
+      <ul className="strip" aria-label="Photographs from the Bahamas Vacation Guide">
+        {STRIP.map(([src, cap, alt]) => (
+          <li key={cap}>
+            <img src={src} alt={alt} width={900} height={398} loading="lazy" decoding="async" />
+            <span className="t-14">{cap}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+function Offices() {
+  return (
+    <section className="offices" id="offices" aria-labelledby="off-title">
+      <figure className="offices__photo">
+        <img src={IMG.harbour} alt="Lucayan Harbour, Freeport, from above: palms, green roofs of the market and the harbour beyond" width={2400} height={1600} loading="lazy" decoding="async" />
+        <figcaption className="t-14">Lucayan Harbour, Freeport. Photo: Jon Worth, Wikimedia Commons, CC BY-SA 2.0.</figcaption>
+      </figure>
+      <div className="grid12 offices__grid">
+        <h2 id="off-title" className="t-56 offices__title">Bahamian owned, with offices in Freeport, Nassau and Abaco.</h2>
+        <div className="off off--hq">
+          <h3 className="t-18">Freeport, headquarters</h3>
+          <p className="muted">Smith's Point, P.O. Box F-43652<br />Freeport, Grand Bahama</p>
+          <a className="num" href={TEL}>{PHONE}</a>
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        </div>
+        <div className="off">
+          <h3 className="t-18">Nassau and Abaco</h3>
+          <p className="muted">Local offices. Start with Freeport and we connect you.</p>
+        </div>
+        <div className="off">
+          <h3 className="t-18">From the United States</h3>
+          <a className="num" href={US_TEL}>{US_PHONE}</a>
+          <p className="muted">5115 NW 17th Terrace, Hangar 39a<br />Fort Lauderdale, FL 33309</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Steps() {
+  return (
+    <section className="steps grid12" aria-labelledby="steps-title">
+      <h2 id="steps-title" className="t-28 steps__title">How a site with BVG goes.</h2>
+      <ol className="steps__list">
+        {STEPS.map(([h, p], i) => (
+          <li key={h}><span className="num t-14 muted">{i + 1}</span><h3 className="t-18">{h}</h3><p>{p}</p></li>
+        ))}
+      </ol>
+      <p className="steps__pay muted">{PAY} No account is too small or too large.</p>
+    </section>
+  )
+}
+
+function Request() {
+  const [needs, setNeeds] = useState<string[]>([NEEDS[0]])
+  const [biz, setBiz] = useState("")
+  const [island, setIsland] = useState(ISLANDS[0])
+  const [size, setSize] = useState(SIZES[1])
+  const [note, setNote] = useState("")
+  const toggle = (n: string) => setNeeds(s => (s.includes(n) ? s.filter(x => x !== n) : [...s, n]))
+  const body = useMemo(() => [
+    `Hello BVG Design,`,
+    ``,
+    `Business: ${biz.trim() || "(your business name)"}`,
+    `Island: ${island}`,
+    `What we need: ${needs.length ? needs.join(", ") : "(choose above)"}`,
+    `Size: ${size}`,
+    note.trim() ? `Notes: ${note.trim()}` : "",
+    ``,
+    `Please call or email me back.`,
+  ].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n"), [needs, biz, island, size, note])
+  const subject = `Website request: ${biz.trim() || "new client"}`
+  const href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  return (
+    <section className="req grid12" id="request" aria-labelledby="req-title">
+      <div className="req__form">
+        <h2 id="req-title" className="t-56">Tell us what you need.</h2>
+        <p className="t-18 muted req__lede">Four quick choices write the email for you. We answer from Freeport.</p>
+        <fieldset>
+          <legend className="t-14">What do you need?</legend>
+          <div className="chips">
+            {NEEDS.map(n => <button key={n} type="button" aria-pressed={needs.includes(n)} onClick={() => toggle(n)}>{n}</button>)}
+          </div>
+        </fieldset>
+        <div className="req__row">
+          <label><span className="t-14">Business name</span><input value={biz} onChange={e => setBiz(e.target.value)} placeholder="e.g. your guesthouse in Lucaya" autoComplete="organization" /></label>
+          <label><span className="t-14">Island</span><select value={island} onChange={e => setIsland(e.target.value)}>{ISLANDS.map(i => <option key={i}>{i}</option>)}</select></label>
+        </div>
+        <fieldset>
+          <legend className="t-14">How big?</legend>
+          <div className="chips chips--one">
+            {SIZES.map(s => <button key={s} type="button" aria-pressed={size === s} onClick={() => setSize(s)}>{s}</button>)}
+          </div>
+        </fieldset>
+        <label className="req__note"><span className="t-14">Anything else (optional)</span><textarea rows={2} value={note} onChange={e => setNote(e.target.value)} placeholder="Your current website, a deadline, what is not working" /></label>
+      </div>
+      <div className="req__out">
+        <div className="mail">
+          <p className="mail__to t-14">To {EMAIL}</p>
+          <p className="mail__sub">{subject}</p>
+          <pre className="mail__body">{body}</pre>
+        </div>
+        <a className="btn btn--light" href={href}>Email the request</a>
+        <a className="quiet quiet--light num" href={TEL}>Or call Freeport {PHONE}</a>
+      </div>
+    </section>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="foot grid12">
+      <p className="foot__name t-28">BVG Design Services</p>
+      <div className="foot__c">
+        <a className="num" href={TEL}>{PHONE}</a>
+        <a className="num" href={US_TEL}>US {US_PHONE}</a>
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <p className="muted">P.O. Box F-43652, Freeport, Grand Bahama</p>
+      </div>
+      <p className="foot__fine t-14 muted">Island photographs from the Bahamas Vacation Guide. Lucayan Harbour: Jon Worth, Wikimedia Commons, CC BY-SA 2.0.</p>
+    </footer>
+  )
+}
+
+function Dock() {
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const hero = document.getElementById("top"), req = document.getElementById("request")
+    if (!hero || !req) return
+    let past = false, atReq = false
+    const io = new IntersectionObserver(es => {
+      for (const e of es) { if (e.target === hero) past = !e.isIntersecting; if (e.target === req) atReq = e.isIntersecting }
+      setShow(past && !atReq)
+      document.documentElement.dataset.dock = String(past && !atReq)
+    }, { threshold: 0 })
+    io.observe(hero); io.observe(req)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <div className="dock" data-show={show} aria-hidden={!show}>
+      <a href="#request" className="btn" tabIndex={show ? 0 : -1}>Start a website request</a>
+      <a href={TEL} className="dock__tel" aria-label={`Call Freeport ${PHONE}`} tabIndex={show ? 0 : -1}>Call</a>
     </div>
-  );
+  )
 }
 
 function Home() {
-  const [cap, setCap] = useState(0);
-  const [openCap, setOpenCap] = useState<number | null>(0);
-  const [office, setOffice] = useState(0);
-  const [era, setEra] = useState(50);
-  const [need, setNeed] = useState<string[]>(['Simple web pages']);
-  const [status, setStatus] = useState('');
-  const c = CAPS[cap];
-  const o = OFFICES[office];
-
-  function send(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    const lines = ['Hello BVG Design,', '', 'Website request (form BVG-1)'];
-    f.forEach((v, k) => { const s = String(v).trim(); if (s && k !== 'need') lines.push(`${k}: ${s}`); });
-    if (need.length) lines.push(`I need: ${need.join(', ')}`);
-    lines.push('', '(sent from the website)');
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent('Website request')}&body=${encodeURIComponent(lines.join('\n'))}`;
-    setStatus(`Your email app opened with the request addressed to ${EMAIL}.`);
-  }
-
+  const started = useRef(false)
+  useEffect(() => {
+    if (started.current || matchMedia("(pointer: coarse)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    started.current = true
+    const lenis = new Lenis({ duration: 1.05 })
+    let id = 0
+    const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
+    id = requestAnimationFrame(raf)
+    return () => { cancelAnimationFrame(id); lenis.destroy() }
+  }, [])
   return (
-    <Layout page="home">
-      {/* A10 hero: the real place with a technical overlay */}
-      <section className="hero" aria-labelledby="h1">
-        <figure className="hero-fig">
-          <img src={PHOTOS.harbour} alt="Lucayan Harbour, Freeport, Grand Bahama, with boats at their moorings" width={2000} height={1333} fetchPriority="high" data-source="commons" />
-          <div className="overlay" aria-hidden="true">
-            <span className="dim dim-h"><i /></span>
-            <span className="dim dim-v"><i /></span>
-            <span className="dim dim-h2"><i /></span>
-            <span className="coord">26°32′N 78°42′W · Freeport</span>
-          </div>
-          <figcaption>{CREDIT.harbour}</figcaption>
-        </figure>
-        <div className="hero-type">
-          <h1 id="h1"><span className="h1-small">Getting Bahamian businesses</span> <span className="h1-big">found<span className="measure" aria-hidden="true"><i /><em>17vw · fraunces 144</em></span></span> <span className="h1-small">online since 1996, from Freeport.</span></h1>
-          <dl className="datablock">
-            <div><dt>established</dt><dd>mid-1996</dd></div>
-            <div><dt>headquarters</dt><dd>Freeport, Grand Bahama</dd></div>
-            <div><dt>offices</dt><dd>Nassau · Abaco</dd></div>
-            <div><dt>us line</dt><dd>Fort Lauderdale</dd></div>
-            <div><dt>ownership</dt><dd>Bahamian</dd></div>
-            <div><dt>work</dt><dd>design · hosting · domains · search · advertising</dd></div>
-          </dl>
-          <div className="hero-act">
-            <a className="btn" href="#request">Start a website request</a>
-            <a className="link" href={TEL}>Call Freeport {PHONE}</a>
-          </div>
-        </div>
-      </section>
-
-      {/* 1.0 capability matrix: hover swaps the photograph, click expands (M8) */}
-      <section className="caps" id="capabilities" aria-labelledby="h-caps">
-        <div className="caps-head">
-          <p className="label">1.0 · capabilities</p>
-          <h2 id="h-caps">What the studio does, and on what terms.</h2>
-          <p className="lede">No account too small or too large. Every line below is how BVG describes its own work; rates not listed are quoted per project.</p>
-        </div>
-        <div className="caps-body">
-          <LayoutGroup>
-            <div className="matrix" role="table" aria-label="Capabilities">
-              <div className="mx-row mx-head" role="row">
-                <span role="columnheader">code</span><span role="columnheader">capability</span><span role="columnheader">what it is</span><span role="columnheader">time or terms</span>
-              </div>
-              {CAPS.map((k, i) => (
-                <motion.div layout key={k.code} className={`mx-row${cap === i ? ' is-on' : ''}`} role="row" onMouseEnter={() => setCap(i)} onClick={() => setOpenCap(i)} transition={{ duration: 0.4, ease }}>
-                  <span role="cell" className="mx-code">{k.code}</span>
-                  <span role="cell" className="mx-name">
-                    <button type="button" aria-expanded={openCap === i} onClick={() => { setCap(i); setOpenCap(openCap === i ? null : i); }} onFocus={() => setCap(i)}>{k.name}</button>
-                  </span>
-                  <span role="cell" className="mx-what">{k.what}</span>
-                  <span role="cell" className="mx-terms">{k.terms}</span>
-                  <AnimatePresence initial={false}>
-                    {openCap === i && (
-                      <motion.div key="more" className="mx-more" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.4, ease }}>
-                        <p>{k.more}</p>
-                        <figure><img src={k.img} alt={k.alt} width={1600} height={1067} loading="lazy" data-source="generated" /><figcaption>{k.code} · illustrative photograph</figcaption></figure>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-            </div>
-          </LayoutGroup>
-        </div>
-      </section>
-
-      <section className="still" aria-label="Port Lucaya">
-        <img src={PHOTOS.marina} alt="Port Lucaya Marina, Freeport, Grand Bahama" width={2000} height={1000} loading="lazy" data-source="commons" />
-        <p>In mid-1996 two Freeport partners built a guide to The Bahamas. It climbed the search engines, and businesses asked to be in it.<span>{CREDIT.marina}</span></p>
-      </section>
-
-      {/* 2.0 the guide: project ledger + era slider */}
-      <section className="guide" id="guide" aria-labelledby="h-guide">
-        <div className="guide-text">
-          <p className="label">2.0 · the guide</p>
-          <h2 id="h-guide">The first client was their own.</h2>
-          <p>One partner took the graphics, the other the code. Their first multi-page site was the Bahamas Vacation Guide, and it reached the top of the search engines. The requests that followed became BVG Design: the letters stand for Bahamas Vacation Guide.</p>
-          <table className="ledger">
-            <caption>Project ledger · sourced entries only</caption>
-            <thead><tr><th scope="col">project</th><th scope="col">address</th><th scope="col">since</th><th scope="col">status</th></tr></thead>
-            <tbody>
-              <tr><td>Bahamas Vacation Guide</td><td><a href="http://www.bahamasvacationguide.com/">bahamasvacationguide.com</a></td><td>1996</td><td>online, maintained 2023</td></tr>
-              <tr><td>BVG Design Services</td><td><a href="https://www.bvgdesign.com/">bvgdesign.com</a></td><td>1996</td><td>last updated 2014</td></tr>
-            </tbody>
-          </table>
-          <p className="small">Client sites are not listed here because none were confirmed for this concept. BVG would add its own portfolio.</p>
-        </div>
-        <div className="era">
-          <p className="era-h"><span>drag to compare</span> a 1996 page and a page built today</p>
-          <div className="era-frame" style={{ ['--cut' as string]: `${era}%` }}>
-            <div className="era-new" aria-hidden="true">
-              <img src={PHOTOS.beach} alt="" width={1600} height={1200} loading="lazy" data-source="commons" />
-              <div className="era-new-copy"><b>Port Lucaya, tonight</b><span>Rooms, tables and charters, on a phone</span><i>Ask about dates</i></div>
-            </div>
-            <div className="era-old" aria-hidden="true">
-              <div className="old-bar">Welcome!!! Best of the Bahamas</div>
-              <div className="old-body">
-                <p className="old-h">BAHAMAS VACATION INFO</p>
-                <p><u>Hotels</u> | <u>Restaurants</u> | <u>Fishing</u> | <u>Diving</u></p>
-                <p className="old-blink">NEW! Click for specials</p>
-                <p className="old-small">Best viewed in 800 x 600</p>
-              </div>
-            </div>
-            <span className="era-rule" aria-hidden="true" />
-          </div>
-          <label className="era-range"><span className="sr">Compare 1996 and today</span>
-            <input type="range" min={0} max={100} value={era} onChange={(e) => setEra(Number(e.target.value))} />
-          </label>
-          <p className="small">An illustration of web styles in 1996 and today, not a screenshot of the guide. {CREDIT.beach}</p>
-        </div>
-      </section>
-
-      {/* 3.0 office register: hover swaps the place */}
-      <section className="offices" id="offices" aria-labelledby="h-off">
-        <div className="off-photo"><Swap src={o.img} alt={o.alt} credit={o.credit} /></div>
-        <div className="off-list">
-          <p className="label">3.0 · offices</p>
-          <h2 id="h-off">Bahamian owned. Freeport first.</h2>
-          <ul>
-            {OFFICES.map((x, i) => (
-              <li key={x.code}>
-                <button type="button" className={office === i ? 'is-on' : ''} onMouseEnter={() => setOffice(i)} onFocus={() => setOffice(i)} onClick={() => setOffice(i)} aria-pressed={office === i}>
-                  <span className="code">{x.code}</span>
-                  <span className="off-place">{x.place}</span>
-                  <span className="off-role">{x.role}</span>
-                </button>
-                {office === i && <motion.div layout className="off-lines" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{x.lines.map((l) => <span key={l}>{l}</span>)}</motion.div>}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* 4.0 terms, short */}
-      <section className="terms" aria-labelledby="h-terms">
-        <p className="label">4.0 · terms</p>
-        <h2 id="h-terms">How to pay.</h2>
-        <ul>{PAY.map((p) => <li key={p}>{p}</li>)}</ul>
-        <a className="link" href="services.html#terms">Full terms and questions</a>
-      </section>
-
-      {/* 5.0 request: the light section, a numbered form */}
-      <section className="request" id="request" aria-labelledby="h-req">
-        <div className="req-head">
-          <p className="label">5.0 · request</p>
-          <h2 id="h-req">Website request, form BVG-1.</h2>
-          <p>Fill in what you know. It opens your email to {EMAIL} with everything written out. BVG replies by email.</p>
-          <p><a className="link" href={TEL}>Or call {PHONE}</a></p>
-        </div>
-        <form className="form" onSubmit={send}>
-          <label className="f"><span className="fn">1</span><span className="fl">Business name</span><input name="Business" required autoComplete="organization" /></label>
-          <label className="f"><span className="fn">2</span><span className="fl">Island</span>
-            <select name="Island" defaultValue="Grand Bahama">{ISLANDS.map((i) => <option key={i}>{i}</option>)}</select>
-          </label>
-          <fieldset className="f f-wide"><legend><span className="fn">3</span><span className="fl">What you need</span></legend>
-            <div className="needs">
-              {CAPS.map((k) => (
-                <label key={k.code} className={need.includes(k.name) ? 'need is-on' : 'need'}>
-                  <input type="checkbox" name="need" value={k.name} checked={need.includes(k.name)} onChange={(e) => setNeed(e.target.checked ? [...need, k.name] : need.filter((n) => n !== k.name))} />
-                  {k.name}
-                </label>
-              ))}
-            </div>
-          </fieldset>
-          <label className="f"><span className="fn">4</span><span className="fl">Current website, if any</span><input name="Current site" type="url" placeholder="https://" /></label>
-          <label className="f"><span className="fn">5</span><span className="fl">Roughly how many pages</span>
-            <select name="Pages" defaultValue="Not sure"><option>Not sure</option><option>One page</option><option>2 to 10 pages</option><option>More than 10 pages</option></select>
-          </label>
-          <label className="f f-wide"><span className="fn">6</span><span className="fl">Tell us about the business</span><textarea name="Message" rows={4} /></label>
-          <label className="f"><span className="fn">7</span><span className="fl">Your name</span><input name="Name" required autoComplete="name" /></label>
-          <label className="f"><span className="fn">8</span><span className="fl">Phone or WhatsApp</span><input name="Phone" type="tel" autoComplete="tel" /></label>
-          <div className="f-wide f-send">
-            <button type="submit" className="btn btn-ink">Start a website request</button>
-            <p className="small" role="status">{status || 'Opens your email app. Nothing is sent until you press send there.'}</p>
-          </div>
-        </form>
-      </section>
-    </Layout>
-  );
+    <>
+      <a className="skip" href="#request">Skip to the website request</a>
+      <Nav />
+      <main>
+        <Hero />
+        <Services />
+        <Story />
+        <Offices />
+        <Steps />
+        <Request />
+      </main>
+      <Footer />
+      <Dock />
+    </>
+  )
 }
 
-mount(<Home />);
+createRoot(document.getElementById("root")!).render(<StrictMode><Home /></StrictMode>)

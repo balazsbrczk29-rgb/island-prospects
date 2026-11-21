@@ -63,3 +63,33 @@ Rule conflict noted: T01 says "numbering: no" but N5 asks for section codes. Cod
 - Imagery: Commons Lucayan Harbour (Jon Worth, CC BY-SA 2.0), Port Lucaya Marina (qwesy, CC BY 3.0), Port Lucaya Marketplace and Beach (Pietro Valocchi, CC BY 3.0), Hope Town 1989 (Ruediger Stehn, CC BY-SA 2.0), Potter's Cay (Ruediger Stehn, CC BY-SA 2.0); Lovable illustrative trade images (studio desk, porch laptop, dock phone, wireframe sketch, server detail, print proofs, camera on beach, Freeport shopfront).
 - Not doing: no typing "browser" hero (gen 1), no flag-colour palette on paper, no line-split headline fade.
 - Study: arup.com and maersk.com not scraped this run (budget kept for imagery); known patterns used: Arup's project data blocks and plain tables, Maersk's sectioned toolbar.
+
+## Generation 2 rebuild, round 2 (2026-11-21): design plan
+The A10 spec-sheet version read as paperwork (section codes, form BVG-1, ledgers). Rebuilt from scratch.
+
+**Big idea:** BVG's own first site, the Bahamas Vacation Guide, rebuilds itself live on the first screen, from a 1996 table page to a 2026 phone-first site, because thirty years of getting Bahamian businesses found is the whole pitch.
+
+**Direction:** A04 Swiss information grid + P01 Limestone + T03 Swiss grotesk (Instrument Sans, one family, 400/600, sizes 14/18/28/56/120). Why: a web studio is judged on precision; a visible 12-column grid with hairlines on limestone, one grotesk and the real product (a working page) is the most direct proof of craft, and the opposite of their bold-text GIF site. No section numbers (art-director: no paperwork); hairlines and size carry the order. Accent: sea glass #2F6F73 for the one primary action and the active year.
+
+**Fonts:** Instrument Sans variable, self-hosted (fontsource). Inside the browser demo, era fonts are system stacks on purpose (Times for 1996, Verdana for 2006, Helvetica for 2016) because that is what those pages used.
+
+**Photo set (all viewed in Lovable gallery d03b708e, ip-assets-bvg-design-services):**
+- Bahamas Vacation Guide's own photos (their site, re-hosted in the gallery), 900x398: Hope Town, Treasure Cay, Nassau lighthouse, Dead Man's Reef, Williams Town, Exumas. Shown at 900 px wide or less (inside the browser demo about 700 px; in the story strip 420 px).
+- Lucayan Harbour, Freeport: Wikimedia Commons, Jon Worth, CC BY-SA 2.0, 2400x1600: full-bleed office band (1440 px, below source).
+- Illustrative (generated, labelled): studio-desk, server-detail, wireframe-sketch, print-proofs, 1808x1200, shown at 560 px or less in the services section.
+
+**Storyboard (desktop 1440x900):**
+1. Hero: plain text nav row on a 12-col hairline grid. Left 5 cols: H1 "Bahamian websites, built and found since 1996." one line of offer, filled "Start a website request", phone. Right 7 cols: a browser window (largest element) playing the Bahamas Vacation Guide through 1996, 2006, 2016 and 2026 (autoplays once, then the year rail under it is clickable). Real guide text and photos.
+2. Services: "Everything a Bahamian business needs to be online." Four large rows (websites, hosting and domains, getting found, advertising), sourced detail and timing per row; a sticky illustrative photo on the right swaps with the hovered or tapped row.
+3. The story: "1996" at 120 px, the founding story in four plain sentences, a strip of four guide photos with island captions, link to bahamasvacationguide.com.
+4. Freeport: full-bleed Lucayan Harbour band, then offices row (Freeport HQ with P.O. box, tel/fax, Nassau, Abaco, US line Fort Lauderdale) set as a grid, tabular figures.
+5. How it works: four steps in one row on hairlines (free search consultation, simple pages within 24 hours, hosting with your own control panel, redesign or takeover hourly), plus how to pay.
+6. Request: "Tell us what you need." chips for the need, business name, island, size; a live email preview on a sea-glass field; "Email the request" opens info@bvgdesign.com; call Freeport as the alternative.
+7. Footer: contact once, credits line, concept label.
+Phone (390x844): 1) nav, H1, offer line, CTA, phone, top of the browser demo; 2) the browser demo full width with the year rail; 3) services rows stacked, photo inline per open row.
+
+**Conversion:** "Start a website request" (scrolls to the builder) on the hero and nav; the builder writes a prefilled email; call (242) 602-0658 everywhere secondary. A small fixed "Start a request" bar on phones after the hero, hidden over the request section.
+
+**Tier:** standard (no 3D: the product is a website, so the live page is the wow).
+
+**Differs from competitors:** no other web or IT studio site in this repo uses a live, self-rebuilding site as the hero; limestone Swiss grid and one grotesk, unlike the previous navy brass spec sheet.
