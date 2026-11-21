@@ -31,17 +31,41 @@ Positioning: For Bahamian consumers who were treated unfairly by a business, the
 ## Brand truth / feel
 The public's referee when a business will not put things right. Feel: calm, fair, plain, warm, official.
 
-## Design spec
-Reference: gov.uk (task-first clarity, plain language, big tap targets). Fonts Fraunces 600 + Atkinson Hyperlegible 400/700. Palette paper #f7f6f1, card #ffffff, ink #14181b, muted #50585c, line #d8d4c8, aqua #00707a (from the national aquamarine, darkened for 5.6:1 contrast), aqua-soft #d9ecea, gold #ffc72c (national gold, highlight and WhatsApp button only).
-Hero: task-first split, headline with gold marker, aqua panel with the signature receipt.
-Signature: "This shows a shop receipt stamped LOGGED, REVIEWED, BUSINESS CONTACTED, UPDATE SENT because the Commission's own post says 'we log it, review it, reach out to the business, and update you along the way'". Sticky scrollytelling re-stamps the receipt as each stage scrolls past.
-Interactions: 4-step complaint builder → WhatsApp/email prefilled; sticky receipt scrollytelling; FAQ accordion; mobile action bar.
+## Research update (Nov 21)
+- Still no own website (search Nov 21): only Facebook (cpc242) and Instagram. Not to be confused with the Consumer Affairs Department (consumeraffairs.gov.bs, a different body).
+
+# DESIGN PLAN (gen 2 rebuild)
+
+**Big idea:** The Commission's front desk, open on your phone: the first screen asks "What went wrong?" and each answer opens the complaint at once, while a rail shows the Commission's own four promises (we log it, review it, reach out to the business, update you) lighting up as the complaint takes shape.
+
+**Direction:** A12 Service desk + P01 Limestone + T08 Warm humanist (N10, M7). Why: the visitor arrives upset with a task; gov.uk-style task-first clarity with a warm serif and limestone ground feels official but human. Ground #EFEAE0, ink #1B1A17, accent sea glass #2F6F73 (deepened to #245A5E for AA), one sea-glass field for the "what happens next" band, sand #B89B6A for hairlines only.
+
+**Fonts:** Young Serif 400 (display, 48-88 px), Nunito Sans variable (text 18 px, large x-height for older phones). Self-hosted.
+
+**Photos:** illustrative only, generated in the Lovable asset project ip-assets-consumer-protection-commission (1920x1088 and 1920x1440): receipt-hands (hero), car-part, appliance, counter-talk. Labelled "illustrative photography" in notes; never presented as the Commission's office or staff. Shown at or below 1920.
+
+**Storyboard (desktop):**
+1. Hero: left 6 cols on limestone: H1 "A business won't put it right? We'll take it to them." + four large answers to "What went wrong?" (Something I bought / A repair or service / A price, bill or refund / Something else) + WhatsApp 357-7898 and call 604-9020. Right 6 cols: receipt-hands photo, full height. Choosing an answer scrolls to the desk with it chosen.
+2. Sea-glass field: "What happens after you file", the four promises in their words along one line that fills as you scroll, with their quote "You don't have to guess or worry."
+3. Before you file: three things in their words (contact the business first; take clear photos; lost the receipt, a bank record still counts) beside the car-part photo; no cards.
+4. The desk (#file), the largest thing on its screen: what went wrong, the business, what happened, what you'd like, evidence checklist, your name and number; live summary as a complaint slip; send by WhatsApp (12423577898) or email complaints@bahamas.gov.bs; call fallback.
+5. Not for us: phone, internet and TV complaints go to URCA (sourced link); the Consumer Affairs Department is a separate office.
+6. Visit and contact: Tonique Williams-Darling Highway, west of Sunburst Paint; numbers; counter-talk photo.
+7. Footer.
+
+**Phone:** 1) H1 + the four answers + WhatsApp, photo below. 2) Promises as a vertical line. 3) Before you file.
+
+**Pages:** one page (a gov.uk "start page"), the desk embedded; a second page would only repeat it.
+
+**Conversion:** "File a complaint" / the four answers; WhatsApp first (their own channel), call, email.
+
+**Tier:** standard. No 3D: the task is the product.
+
+**Distinct:** warm serif on limestone, task buttons as hero, no hero photo full bleed; unlike any institution in the repo (A12+P01 untaken).
 
 ## Assumptions to confirm
 - Opening hours unknown (omitted).
 - "Bank record of the payment" as proof (from a truncated post).
-- Complaint categories in the builder (bought item, service/repair, price/bill/refund, other) and the "What you want" checklist line are generic.
+- Complaint categories and "what you'd like" options (refund, repair, replacement, other) are generic.
 - Proposed domain www.cpcbahamas.gov.bs (email domain).
-
-## Scorecard
-1:4 2:4 3:4 4:4 5:5 6:4 7:4 8:5 9:4 10:4 11:5
+- Photos are illustrative, to be replaced with their own.

@@ -4,8 +4,89 @@
  "name": "Consumer Protection Commission",
  "batch": "04",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T15:36:52.530Z"
+ "claimed_at": "2026-11-21T15:36:52.530Z",
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "File a complaint: four task answers in the hero open the complaint desk, which sends a written-out complaint by WhatsApp (242) 357-7898 or email complaints@bahamas.gov.bs; call (242) 604-9020",
+ "brand_truth": "The public referee when a business will not put things right: it logs, reviews, contacts the business and keeps you updated.",
+ "buyer": "Commission leadership; audience is Bahamian consumers, often upset, many on older phones.",
+ "direction": {
+  "archetype": "A12 Service desk",
+  "lane": "P01 Limestone",
+  "type": "T08 Warm humanist (Young Serif + Nunito Sans)",
+  "why": "Task-first gov.uk clarity for upset visitors, warmed by a humanist serif on limestone; sea glass accent from the national aquamarine, deepened for AA. A12+P02 and A12+P10 were taken by competitors."
+ },
+ "concept_type": "service desk: task-first hero with live promise rail, what happens next, before you file, complaint builder (WhatsApp/email), URCA routing, visit",
+ "tier_visual": "standard",
+ "images": [
+  {
+   "src": "https://ip-assets-consumer-protection-commission.lovable.app/assets/receipt-hands.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography generated in the Lovable asset project, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-consumer-protection-commission.lovable.app/assets/car-part.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography generated in the Lovable asset project, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-consumer-protection-commission.lovable.app/assets/counter-talk.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography generated in the Lovable asset project, replace with your own"
+  }
+ ],
+ "plan_gate": {
+  "verdict": "revise, applied once",
+  "predicted": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 5,
+   "distinct": 5,
+   "references": 4
+  },
+  "changes": [
+   "promise rail on the first screen, lights when an answer is chosen",
+   "answers as full-width hairline rows, not a 2x2 card grid",
+   "filled File a complaint button in header; WhatsApp and call right after the subhead",
+   "promises band: H2 on top, short quote only, typographic quotes",
+   "muted text darkened for AA"
+  ]
+ },
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 5,
+  "references": 4
+ },
+ "current_site_findings": [
+  "No website: cpcbahamas.gov.bs does not resolve",
+  "Old directory numbers still listed",
+  "Advice scattered across Facebook posts",
+  "No structured way to file a complaint"
+ ],
+ "pitch_line": "People who search how to complain in The Bahamas find other offices first; this gives the Commission a front desk that collects a complete complaint and sends it to your WhatsApp, written out.",
+ "assumptions": [
+  "Opening hours unknown (omitted)",
+  "Bank record as proof is from a truncated post",
+  "Complaint categories and what-would-put-it-right options are generic",
+  "Proposed domain www.cpcbahamas.gov.bs (email domain)",
+  "Photos are illustrative, generated; replace with their own"
+ ],
+ "sources": [
+  "https://www.facebook.com/cpc242/",
+  "https://www.instagram.com/consumerprotectioncommission/",
+  "https://urcabahamas.bs/consumer/",
+  "https://www.bahamaslocal.com/showlisting/20675/Consumer_Protection_Commission.html"
+ ],
+ "notes": "Gen-2 rebuild Nov 21. BLIND sandbox: generated photos viewed via the Lovable gallery screenshot and routed as crops into QA screenshots. One page by decision (a gov.uk style start page; a second page would repeat the desk). Plan gate (fresh critic, mode 1) said revise with 5 changes, all applied; recorded scores are the gate predictions, not a full-site re-score. qa 0 blockers; interact: the 4 dead inputs are checkboxes the tool tries to fill (false positive); distinct: distinct. No WIP branch delete possible from this sandbox (remote rejects deletes).",
+ "built_at": "2026-11-21T15:45:36.025Z"
 }

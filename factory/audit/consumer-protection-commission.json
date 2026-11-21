@@ -3,8 +3,33 @@
  "id": 66,
  "size": "Small",
  "niche": "institution",
- "url": null,
- "url_source": "prospects",
+ "url": "https://www.facebook.com/cpc242/",
+ "url_source": "research",
  "old_check": "NO OWN SITE LISTED: (Facebook only)",
- "audit": null
+ "audit": {
+  "site_kind": "social-only",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 0,
+  "platform": "Facebook, Instagram",
+  "latest_year": 2026,
+  "modernity": 1,
+  "concept_type": "service desk: file a complaint task-first, process, before-you-file advice, contact",
+  "must_keep": [
+   "complaint channels: WhatsApp 357-7898, phone 604-9020, complaints email",
+   "their four-step promise (log, review, contact business, update)",
+   "office location"
+  ],
+  "weaknesses": [
+   "no website; cpcbahamas.gov.bs does not resolve",
+   "old directory numbers still listed online",
+   "guidance scattered across Facebook posts",
+   "no structured way to file a complete complaint",
+   "easily confused with the Consumer Affairs Department"
+  ],
+  "priority": "A",
+  "note": "Statutory body (Consumer Protection Act 2023) with only Facebook and Instagram."
+ }
 }
