@@ -182,11 +182,12 @@ export function Footer() {
 export function Persistent() {
   const [on, setOn] = useState(false)
   useEffect(() => {
-    const hero = document.querySelector('.hero'), contact = document.getElementById('contact')
-    let heroVis = true, contactVis = false
-    const upd = () => setOn(!heroVis && !contactVis)
-    const io = new IntersectionObserver(es => { es.forEach(e => { if (e.target === hero) heroVis = e.isIntersecting; else contactVis = e.isIntersecting }); upd() }, { threshold: 0 })
-    if (hero) io.observe(hero); if (contact) io.observe(contact)
+    const hero = document.querySelector('.hero')
+    const quiet = [document.getElementById('contact'), ...Array.from(document.querySelectorAll('.book'))].filter(Boolean) as Element[]
+    let heroVis = true; const vis = new Set<Element>()
+    const upd = () => setOn(!heroVis && vis.size === 0)
+    const io = new IntersectionObserver(es => { es.forEach(e => { if (e.target === hero) heroVis = e.isIntersecting; else if (e.isIntersecting) vis.add(e.target); else vis.delete(e.target) }); upd() }, { threshold: 0 })
+    if (hero) io.observe(hero); quiet.forEach(q => io.observe(q))
     return () => io.disconnect()
   }, [])
   useEffect(() => { document.documentElement.style.setProperty('--concept-offset', on && matchMedia('(max-width: 767px)').matches ? '72px' : '0px') }, [on])

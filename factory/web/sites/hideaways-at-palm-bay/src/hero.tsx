@@ -1,15 +1,15 @@
 import { motion, useReducedMotion } from 'motion/react'
 import { BIZ, PHOTOS } from './data'
 
-export function Top() {
+export function Top({ base = '' }: { base?: string }) {
   return (
     <header className="top">
       <a className="wordmark" href="./">Hideaways at Palm Bay</a>
       <nav aria-label="Main">
-        <a className="navlink" href="#rooms">Rooms</a>
-        <a className="navlink" href="#offers">Offers</a>
-        <a className="navlink" href="#splash">Splash</a>
-        <a className="navlink" href="#here">Getting here</a>
+        <a className="navlink" href={base + "#rooms"}>Rooms</a>
+        <a className="navlink" href={base + "#offers"}>Offers</a>
+        <a className="navlink" href={base + "#splash"}>Splash</a>
+        <a className="navlink" href={base + "#here"}>Getting here</a>
         <a className="navlink num" href={`tel:${BIZ.tel}`}>{BIZ.phone}</a>
         <a className="link book" href={BIZ.booking}><span className="long">Check availability</span><span className="short">Book</span></a>
       </nav>
@@ -27,18 +27,19 @@ export function Hero({ onPick }: { onPick: (side: 'ocean' | 'hill') => void }) {
     <section className="hero" aria-labelledby="h1">
       <Top />
       <div className="choice">
-        <h1 id="h1" className="sr-only">Hideaways at Palm Bay: beach cottages and hillside villas on Elizabeth Harbour, George Town, Exuma</h1>
+        <h1 id="h1" className="words display">
+          <motion.span className="w-sand" {...rise(0)}>sand</motion.span>
+          <motion.i className="w-or" {...rise(1)}>or</motion.i>
+          <motion.span className="w-hill" {...rise(0.5)}>hill</motion.span>
+          <span className="sr-only">: Hideaways at Palm Bay, beach cottages and hillside villas on Elizabeth Harbour, George Town, Exuma</span>
+        </h1>
         <a className="half sand" href="#rooms-ocean" onClick={e => { e.preventDefault(); onPick('ocean') }} aria-label="Sand: see the five ocean-side room types">
-          <motion.span className="word display" aria-hidden="true" {...rise(0)}>sand</motion.span>
           <motion.span className="cap" {...rise(1)}><span>Ocean Side cottages and villas</span><span>5 room types</span></motion.span>
           <motion.div className="frame" {...frame(0)}>
             <img src={PHOTOS.sand} alt="Clear shallow water over white sand, a swing standing in the sea" width={1200} height={900} fetchPriority="high" />
           </motion.div>
         </a>
-        <motion.span className="or" aria-hidden="true" {...rise(1)}>or</motion.span>
-        <motion.p className="phone-q display" aria-hidden="true" {...rise(0)}>sand <i>or</i> hill</motion.p>
         <a className="half hill" href="#rooms-hill" onClick={e => { e.preventDefault(); onPick('hill') }} aria-label="Hill: see the three Island Time hillside room types">
-          <motion.span className="word display" aria-hidden="true" {...rise(0.5)}>hill</motion.span>
           <motion.span className="cap" {...rise(1.5)}><span>Island Time Villas, on the hillside</span><span>3 room types</span></motion.span>
           <motion.div className="frame" {...frame(1)}>
             <img src={PHOTOS.hill} alt="Two-storey turquoise Island Time villas with balconies on the hill" width={1024} height={768} fetchPriority="high" />

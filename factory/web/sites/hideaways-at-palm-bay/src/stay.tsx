@@ -21,7 +21,7 @@ function Stay() {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <Top />
+      <Top base="./" />
       <main id="main" className="stay">
         <header className="wrap stay-head">
           <h1 className="h2">All eight rooms, side by side.</h1>
