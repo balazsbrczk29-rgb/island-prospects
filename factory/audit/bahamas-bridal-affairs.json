@@ -6,5 +6,28 @@
  "url": null,
  "url_source": "prospects",
  "old_check": "NO OWN SITE LISTED: (search)",
- "audit": null
+ "audit": {
+  "site_kind": "none",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 0,
+  "platform": "",
+  "latest_year": 2013,
+  "modernity": 0,
+  "concept_type": "brochure: one published wedding told as a scroll film + published weddings page + date enquiry by phone",
+  "must_keep": [
+   "both phone numbers",
+   "the Ocean Club and Atlantis record",
+   "links to the two magazine features"
+  ],
+  "weaknesses": [
+   "bahamasbridalaffairs.com no longer resolves but directories and both magazines still link to it",
+   "no site, no social page found",
+   "track record only visible in a directory blurb"
+  ],
+  "priority": "A",
+  "note": "No own site (search 2026-11-20 found only directories, Weddingbells and Style Me Pretty). Dead domain still linked everywhere."
+ }
 }

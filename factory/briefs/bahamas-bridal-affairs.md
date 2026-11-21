@@ -59,3 +59,30 @@ Email, WhatsApp, prices, packages, Instagram.
 ## Showcase scorecard
 First screen 5, typography 5, layout 4, context 4, motion 4, depth 4, detailing 4, mobile 4, references 4, owner proud 5, whole page 4.
 Uniqueness: Bodoni + invitation card object hero, porcelain/blush/sea palette; unlike every other site in the repo.
+
+
+---
+# Generation 2 rebuild (2026-11-20)
+
+## Audit
+No own site (dead domain). site_kind none, priority A. Concept: brochure with a published-weddings page and a phone enquiry.
+
+## New facts (sourced this session)
+- Weddingbells: Rose and Marcel, 21 May 2011, 120 guests; welcome kits and itinerary; every guest collected by limousine; chilled champagne and lemonade; vows among arches and a Versailles-inspired garden at the One and Only Ocean Club; reception in a white draped tent with a massive chandelier at Atlantis; white roses, orchids, calla lilies; jazz band; the couple jumped in the pool. Credit: Bahamas Bridal Affairs and Wildflowers Bahamas.
+- Style Me Pretty: Lyford Cay Club as Hurricane Sandy settled; steel pan, Junkanoo, Royal Bahamas Police Band fanfare; coordination Bernadette Burrows of Bahamas Bridal Affairs.
+
+## Big idea
+Scrolling plays one real wedding she planned, Rose and Marcel's on Paradise Island on 21 May 2011, as a film in six scenes built from what Weddingbells wrote, and then asks for your date in one sentence.
+
+## Direction
+A03 Cinematic chapters + P03 Conch pink + T10 Old-style book (Cormorant Garamond, EB Garamond). The only rich true material is a day with a sequence, so the page is a film. Nothing shared with Anna's (A02, P02, Didone, left index).
+
+## Storyboard (1440x900)
+1. Title card: top line, headline "One wedding day on Paradise Island, played scene by scene.", CTA, full-bleed letterboxed frame (the aisle before guests arrive), caption with the real facts, scene ticks I to VI.
+2. to 7. The same pinned stage; the frame dissolves through the limousines, champagne and lemonade, the vows (the real French Cloisters), the white tent, the jazz band, the pool; title and caption change per scene; a progress hairline grows.
+8. Conch field: "Dr. Bernadette Burrows, wedding planner for more than twenty-six years.", four sourced facts, a tall photo of white flowers.
+9. In print: Weddingbells and Style Me Pretty as two wide rows, with links to the story page and the magazines.
+10. Your date: one large sentence with inline fields (names, venue, date, guests) and help chips; Call Nassau, US number, copy.
+11. End credits on dark: owner, phones, postal address, photo note.
+Phone (390x844): 1. top line, headline, 390 px frame, caption, full-width CTA. 2. same stage, scenes dissolve. 3. planner statement on pink.
+Inner page: both published weddings as tabs, each with the story and the full credit roll.
