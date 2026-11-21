@@ -1,414 +1,524 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { createRoot } from "react-dom/client"
 import Lenis from "lenis"
-import { animate } from "motion/react"
-import { ArrowUpRight, Minus, Play, Plus } from "lucide-react"
-import { BOOK, COTTAGES, EMAIL, FAQ, FB, FEES, FILM, I, NAME, PHONE, TEL, type Cottage, type Shot } from "./data"
+import { AnimatePresence, LayoutGroup, animate, motion } from "motion/react"
+import * as Dialog from "@radix-ui/react-dialog"
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Minus, Phone, Play, Plus, X } from "lucide-react"
+import { COTTAGES, EMAIL, EXTRAS, FAQ, FB, FILM, I, NAME, PHONE, TAX, TEL, bookUrl, type Cottage, type Shot } from "./data"
 import "./styles.css"
 
-const usd = (n: number) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 })
+/* ---------- helpers ---------- */
+const usd = (n: number) => "$" + Math.round(n).toLocaleString("en-US")
+const iso = (d: Date) => d.toISOString().slice(0, 10)
+const addDays = (s: string, n: number) => { const d = new Date(s + "T12:00:00"); d.setDate(d.getDate() + n); return iso(d) }
+const nightsBetween = (a: string, b: string) => Math.max(0, Math.round((+new Date(b + "T12:00:00") - +new Date(a + "T12:00:00")) / 864e5))
+const short = (s: string) => new Date(s + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })
+const lodging = (c: Cottage, n: number) => c.rate * n * (1 + TAX.vat + TAX.levy)
+/** Dinner is offered Wednesday to Saturday: count those evenings inside the stay. */
+const dinnerNights = (a: string, n: number) => { let k = 0; for (let i = 0; i < n; i++) { const d = new Date(a + "T12:00:00"); d.setDate(d.getDate() + i); const w = d.getDay(); if (w >= 3 && w <= 6) k++ } return k }
+const ease = [0.22, 1, 0.36, 1] as const
 
-function Photo({ s, className = "", eager = false }: { s: Shot; className?: string; eager?: boolean }) {
-  return (
-    <div className={`photo ${className}`} style={{ maxWidth: s.w }}>
-      <img src={I + s.f} alt={s.alt} width={s.w} height={s.h} loading={eager ? "eager" : "lazy"} decoding="async" />
-    </div>
-  )
-}
-
-/* ---------- 1. first screen ---------- */
-const REEL: Shot[] = [
-  { f: "header-6.jpg", w: 1920, h: 532, alt: "Turquoise sea and a breaking wave seen between the stone gateposts and palms at Pigeon Cay" },
-  { f: "header-3.jpg", w: 1920, h: 532, alt: "A rope hammock strung between casuarina trees beside a white cottage at Pigeon Cay" },
-]
-
-function Hero() {
-  const [on, setOn] = useState(0)
-  const auto = useRef(true)
-  const ref = useRef<HTMLElement>(null)
-  useEffect(() => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    let visible = true
-    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting })
-    if (ref.current) io.observe(ref.current)
-    const id = setInterval(() => { if (auto.current && visible) setOn(v => (v + 1) % REEL.length) }, 6500)
-    return () => { clearInterval(id); io.disconnect() }
-  }, [])
-  return (
-    <header ref={ref} className="hero" id="top">
-      <div className="wrap top">
-        <a className="wordmark" href="#top">{NAME}</a>
-        <nav aria-label="Sections">
-          <a href="#cottages">Cottages</a>
-          <a href="#tab">Your tab</a>
-          <a href="#getting-here">Getting here</a>
-          <a href="#weddings">Weddings</a>
-          <a className="tel num" href={TEL}>{PHONE}</a>
-        </nav>
-      </div>
-      <div className="wrap hero-grid">
-        <h1 className="display rise">
-          <span>Pour your own&nbsp;drink.</span>
-          <span>Take a&nbsp;kayak.</span>
-          <span>Pay when you&nbsp;leave.</span>
-        </h1>
-        <div className="hero-side rise" style={{ animationDelay: "120ms" }}>
-          <p>Eight cottages on a private Cat Island beach, run on the honor system: an honor bar under the palapa, and no deposit to book.</p>
-          <div className="hero-cta">
-            <a className="btn" href={BOOK}>Check dates <ArrowUpRight aria-hidden /></a>
-            <a className="link" href="#tab">Work out your tab</a>
-          </div>
-          <p className="hero-fact num">From $215 a night. Due today: $0.</p>
-        </div>
-        <div className="reel rise" style={{ animationDelay: "220ms" }}>
-          {REEL.map((s, i) => (
-            <img key={s.f} src={I + s.f} alt={s.alt} width={s.w} height={s.h} data-on={i === on} fetchPriority={i === 0 ? "high" : "low"} decoding="async" />
-          ))}
-          <div className="reel-ctl">
-            {REEL.map((s, i) => (
-              <button key={s.f} type="button" aria-pressed={i === on} aria-label={i === 0 ? "Show the sea through the gate" : "Show the hammock"} onClick={() => { auto.current = false; setOn(i) }}><i /></button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </header>
-  )
-}
-
-/* ---------- 2. on the house ---------- */
-function House() {
-  return (
-    <section className="house on-teal" aria-labelledby="house-h">
-      <div className="wrap house-grid">
-        <div>
-          <h2 id="house-h" className="big">
-            The bar is a thatched palapa on the sand, and it runs on the honor system. <em>Kayaks, canoes, paddle boards, bicycles and snorkel gear</em> are yours to take. Morning coffee and tea wait at the beach bar. You settle up on your last day.
-          </h2>
-          <div className="house-foot">
-            <p>Pigeon Cay is a 200-acre private property on the north of Cat Island, three miles south of Bennett's Harbour.</p>
-            <a className="link" href={FILM}><Play aria-hidden style={{ width: 16, height: 16, marginRight: 8 }} />Watch the Pigeon Cay film</a>
-          </div>
-        </div>
-        <div className="prints">
-          <Photo s={{ f: "gallery-img-36.jpg", w: 800, h: 600, alt: "Inside the palapa honor bar: a tiled bar and wooden stools looking out at the sea" }} />
-          <Photo s={{ f: "gallery-img-34.jpg", w: 800, h: 600, alt: "A hammock between casuarinas with kayaks and paddles stacked on the beach" }} />
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ---------- 3. cottages ---------- */
-function CottageDetail({ c, onPick }: { c: Cottage; onPick: () => void }) {
-  return (
-    <div className="cot-detail swap" key={c.id}>
-      <div className="cot-shots" data-n={c.shots.length}>
-        {c.shots.map(s => <Photo key={s.f} s={s} />)}
-      </div>
-      <p>{c.note} {c.kitchen}, air conditioning, ceiling fans and an outdoor seat with an ocean view.</p>
-      <a className="btn" href="#tab" onClick={onPick}>Put {c.name} on your tab</a>
-    </div>
-  )
-}
-
-function Cottages({ pick, setPick }: { pick: string; setPick: (id: string) => void }) {
-  const c = COTTAGES.find(x => x.id === pick)!
-  return (
-    <section className="sec" id="cottages" aria-labelledby="cot-h">
-      <div className="wrap">
-        <div className="sec-head">
-          <h2 id="cot-h" className="h2">Eight cottages, $215 to $425 a&nbsp;night</h2>
-          <p className="muted">Each one was built by hand and is different from the next. All are steps from the beach, with housekeeping included.</p>
-        </div>
-        <div className="cots">
-          <ul>
-            {COTTAGES.map(x => (
-              <li key={x.id}>
-                <div className="cot">
-                  <button type="button" className="cot-row" aria-expanded={x.id === pick} onClick={() => setPick(x.id)}>
-                    <span className="cot-name">{x.name}</span>
-                    <span className="cot-meta">Sleeps {x.sleeps === 2 ? "1 to 2" : `1 to ${x.sleeps}`}. {x.beds}. {x.kitchen}.</span>
-                    <span className="cot-rate num">{usd(x.rate)}<small>a night</small></span>
-                  </button>
-                  {x.id === pick && <div className="cot-inline"><CottageDetail c={x} onPick={() => setPick(x.id)} /></div>}
-                </div>
-              </li>
-            ))}
-          </ul>
-          <aside className="cot-panel" aria-live="polite" aria-label={`${c.name} photographs`}>
-            <CottageDetail c={c} onPick={() => setPick(c.id)} />
-          </aside>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ---------- 4. the tab ---------- */
-function Money({ value }: { value: number }) {
-  const ref = useRef<HTMLElement>(null)
+function Ticker({ value }: { value: number }) {
+  const ref = useRef<HTMLSpanElement>(null)
   const prev = useRef(value)
   useEffect(() => {
     const el = ref.current; if (!el) return
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = usd(value); prev.current = value; return }
-    const ctl = animate(prev.current, value, { duration: 0.45, ease: [0.22, 1, 0.36, 1], onUpdate: v => { el.textContent = usd(Math.round(v)) }, onComplete: () => { el.textContent = usd(value) } })
+    const c = animate(prev.current, value, { duration: 0.55, ease, onUpdate: v => { el.textContent = usd(v) } })
     prev.current = value
-    return () => ctl.stop()
+    return () => c.stop()
   }, [value])
-  return <b ref={ref} className="num">{usd(value)}</b>
+  return <span ref={ref} className="num">{usd(value)}</span>
 }
 
-function Stepper({ label, value, set, min, max }: { label: string; value: number; set: (n: number) => void; min: number; max: number }) {
+function Photo({ s, className = "", eager = false, sizes }: { s: Shot; className?: string; eager?: boolean; sizes?: string }) {
   return (
-    <div className="step" role="group" aria-label={label}>
-      <button type="button" aria-label={`Fewer: ${label}`} aria-disabled={value <= min} onClick={() => set(Math.max(min, value - 1))}><Minus aria-hidden /></button>
-      <output className="num" aria-live="polite">{value}</output>
-      <button type="button" aria-label={`More: ${label}`} aria-disabled={value >= max} onClick={() => set(Math.min(max, value + 1))}><Plus aria-hidden /></button>
+    <figure className={`photo ${className}`} style={{ maxWidth: s.w, aspectRatio: `${s.w} / ${s.h}` }}>
+      <img src={I + s.f} alt={s.alt} width={s.w} height={s.h} loading={eager ? "eager" : "lazy"} decoding="async" sizes={sizes} />
+    </figure>
+  )
+}
+
+type Stay = { arrive: string; leave: string; guests: number }
+type Extras = { breakfast: boolean; dinner: boolean; taxi: boolean }
+
+/* ---------- top bar ---------- */
+function Top() {
+  return (
+    <div className="top wrap">
+      <a className="wordmark" href="#top" aria-label={`${NAME}, top of page`}>Pigeon Cay <i>Beach Club</i></a>
+      <nav aria-label="Sections">
+        <a href="#cottages">Cottages</a>
+        <a href="#place">The 200 acres</a>
+        <a href="#meals">Meals</a>
+        <a href="#getting-here">Getting here</a>
+        <a href="#weddings">Weddings</a>
+      </nav>
+      <a className="top-tel num" href={TEL}><Phone aria-hidden /> <span>{PHONE}</span></a>
     </div>
   )
 }
 
-function Tab({ pick, setPick }: { pick: string; setPick: (id: string) => void }) {
-  const c = COTTAGES.find(x => x.id === pick)!
-  const [nights, setNights] = useState(7)
-  const [guests, setGuests] = useState(2)
-  const [bfast, setBfast] = useState(0)
-  const [dinner, setDinner] = useState(0)
-  const [taxi, setTaxi] = useState<"none" | "one" | "return">("return")
-  const [arrive, setArrive] = useState("")
-  const g = Math.min(guests, c.sleeps), b = Math.min(bfast, nights), d = Math.min(dinner, nights)
-  const t = useMemo(() => {
-    const lodging = c.rate * nights
-    const tax = Math.round(lodging * (FEES.vat + FEES.levy) * 100) / 100
-    const meals = b * g * FEES.breakfast + d * g * FEES.dinner
-    const grat = Math.round(meals * FEES.gratuity * 100) / 100
-    const cab = taxi === "return" ? FEES.taxiReturn : taxi === "one" ? FEES.taxiOneWay : 0
-    return { lodging, tax, meals, grat, cab, total: Math.round((lodging + tax + meals + grat + cab) * 100) / 100 }
-  }, [c, nights, g, b, d, taxi])
-  const mail = `mailto:${EMAIL}?subject=${encodeURIComponent(`Dates for ${c.name}, ${nights} nights`)}&body=${encodeURIComponent(
-    `Hello,\n\nWe would like to stay at Pigeon Cay Beach Club.\n\nCottage: ${c.name} (${usd(c.rate)} a night)\nArriving: ${arrive || "flexible"}\nNights: ${nights}\nGuests: ${g}\nBreakfasts: ${b} mornings\nDinners: ${d} evenings\nTaxi: ${taxi === "return" ? "both ways" : taxi === "one" ? "one way" : "not needed"}\nEstimated tab: ${usd(t.total)}\n\nIs the cottage free for these dates?\n\nThank you`)}`
+/* ---------- 1. the beach, the strip and the chooser ---------- */
+const BAND: Shot[] = [
+  { f: "header-6.jpg", w: 1920, h: 532, alt: "Turquoise water and a breaking wave between the stone gateposts and palms at Pigeon Cay" },
+  { f: "header-3.jpg", w: 1920, h: 532, alt: "A rope hammock between casuarina trees beside a white cottage at Pigeon Cay" },
+]
+
+function Band() {
+  const [on, setOn] = useState(0)
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    let vis = true
+    const io = new IntersectionObserver(([e]) => { vis = e.isIntersecting }); if (ref.current) io.observe(ref.current)
+    const id = setInterval(() => { if (vis && !document.hidden) setOn(v => (v + 1) % BAND.length) }, 7000)
+    return () => { clearInterval(id); io.disconnect() }
+  }, [])
   return (
-    <section className="tab" id="tab" aria-labelledby="tab-h">
+    <div className="band" ref={ref}>
+      {BAND.map((s, i) => (
+        <img key={s.f} src={I + s.f} alt={i === on ? s.alt : ""} aria-hidden={i !== on} width={s.w} height={s.h} data-on={i === on} fetchPriority={i === 0 ? "high" : "low"} decoding="async" />
+      ))}
+    </div>
+  )
+}
+
+function Stepper({ value, set, min, max, label }: { value: number; set: (n: number) => void; min: number; max: number; label: string }) {
+  return (
+    <div className="stepper" role="group" aria-label={label}>
+      <button type="button" aria-label={`Fewer ${label.toLowerCase()}`} disabled={value <= min} onClick={() => set(Math.max(min, value - 1))}><Minus aria-hidden /></button>
+      <output className="num" aria-live="polite">{value}</output>
+      <button type="button" aria-label={`More ${label.toLowerCase()}`} disabled={value >= max} onClick={() => set(Math.min(max, value + 1))}><Plus aria-hidden /></button>
+    </div>
+  )
+}
+
+function Strip({ stay, setStay, today }: { stay: Stay; setStay: (s: Stay) => void; today: string }) {
+  const n = nightsBetween(stay.arrive, stay.leave)
+  return (
+    <form className="strip" onSubmit={e => { e.preventDefault(); location.href = bookUrl(stay.arrive, stay.leave, stay.guests) }} aria-label="Your dates">
+      <label className="field">
+        <span>Arrive</span>
+        <input className="num" type="date" min={today} value={stay.arrive} required
+          onChange={e => { const a = e.target.value; if (!a) return; setStay({ ...stay, arrive: a, leave: nightsBetween(a, stay.leave) > 0 ? stay.leave : addDays(a, 7) }) }} />
+      </label>
+      <label className="field">
+        <span>Leave</span>
+        <input className="num" type="date" min={addDays(stay.arrive, 1)} value={stay.leave} required
+          onChange={e => { const l = e.target.value; if (l && nightsBetween(stay.arrive, l) > 0) setStay({ ...stay, leave: l }) }} />
+      </label>
+      <div className="field field--guests">
+        <span id="g-l">Guests</span>
+        <Stepper label="Guests" value={stay.guests} min={1} max={6} set={g => setStay({ ...stay, guests: g })} />
+      </div>
+      <div className="strip-go">
+        <button className="btn" type="submit">Check availability <ArrowUpRight aria-hidden /></button>
+        <p className="promise"><b>No deposit.</b> Pay when you leave.</p>
+      </div>
+      <p className="sr-only" aria-live="polite">{n} nights selected</p>
+    </form>
+  )
+}
+
+function Card({ c, n, fits, guests, open, i }: { c: Cottage; n: number; fits: boolean; guests: number; open: (id: string) => void; i: number }) {
+  const s = c.shots[0]
+  return (
+    <motion.li layout="position" transition={{ layout: { duration: 0.6, ease } }} className="card" data-fits={fits}>
+      <button type="button" className="card-hit" onClick={() => open(c.id)} aria-label={`${c.name}: see photos and details`}>
+        <motion.div layoutId={`ph-${c.id}`} className="card-ph" animate={{ y: fits ? 0 : 10, opacity: fits ? 1 : 0.42 }} transition={{ duration: 0.5, ease }}>
+          <img src={I + s.f} alt={s.alt} width={s.w} height={s.h} loading={i < 5 ? "eager" : "lazy"} decoding="async" />
+          <span className="card-count num">{c.shots.length} photos</span>
+        </motion.div>
+        <div className="card-tx">
+          <h3>{c.name}</h3>
+          <p className="card-meta">Sleeps {c.sleeps} <span aria-hidden>·</span> {c.beds}</p>
+          {fits ? (
+            <p className="card-price"><span className="num">{usd(c.rate)}</span> a night <span className="card-total">{n} {n === 1 ? "night" : "nights"} <Ticker value={lodging(c, n)} /> with taxes</span></p>
+          ) : (
+            <p className="card-price card-price--no">Sleeps {c.sleeps}, not {guests}</p>
+          )}
+        </div>
+      </button>
+    </motion.li>
+  )
+}
+
+function Chooser({ stay, open }: { stay: Stay; open: (id: string) => void }) {
+  const n = nightsBetween(stay.arrive, stay.leave)
+  const list = useMemo(() => [...COTTAGES].sort((a, b) => (Number(b.sleeps >= stay.guests) - Number(a.sleeps >= stay.guests)) || a.rate - b.rate), [stay.guests])
+  const fitCount = list.filter(c => c.sleeps >= stay.guests).length
+  const rail = useRef<HTMLUListElement>(null)
+  const [edge, setEdge] = useState({ l: true, r: false })
+  const onScroll = () => { const el = rail.current; if (!el) return; setEdge({ l: el.scrollLeft < 8, r: el.scrollLeft + el.clientWidth > el.scrollWidth - 8 }) }
+  useEffect(() => { onScroll(); rail.current?.scrollTo({ left: 0, behavior: "smooth" }) }, [stay.guests])
+  const nudge = (d: number) => { const el = rail.current; if (el) el.scrollBy({ left: d * el.clientWidth * 0.8, behavior: "smooth" }) }
+  return (
+    <div className="chooser" aria-labelledby="ch-h">
+      <div className="chooser-head wrap">
+        <p id="ch-h" className="chooser-say" aria-live="polite">
+          <b className="num">{fitCount} of 8 cottages</b> sleep {stay.guests}<span className="say-d">, {short(stay.arrive)} to {short(stay.leave)}</span>, <span className="num">{n}</span> {n === 1 ? "night" : "nights"}. Tap one for photos.
+        </p>
+        <div className="rail-ctl">
+          <button type="button" aria-label="Scroll cottages left" disabled={edge.l} onClick={() => nudge(-1)}><ArrowLeft aria-hidden /></button>
+          <button type="button" aria-label="Scroll cottages right" disabled={edge.r} onClick={() => nudge(1)}><ArrowRight aria-hidden /></button>
+        </div>
+      </div>
+      <LayoutGroup>
+        <ul className="rail" ref={rail} onScroll={onScroll}>
+          {list.map((c, i) => <Card key={c.id} c={c} n={n} i={i} fits={c.sleeps >= stay.guests} guests={stay.guests} open={open} />)}
+        </ul>
+      </LayoutGroup>
+    </div>
+  )
+}
+
+function Hero({ stay, setStay, today, open }: { stay: Stay; setStay: (s: Stay) => void; today: string; open: (id: string) => void }) {
+  return (
+    <header className="hero" id="top">
+      <Top />
+      <Band />
+      <div className="wrap hero-row">
+        <div className="hero-say">
+          <h1>Eight cottages on a private beach in north Cat&nbsp;Island</h1>
+          <p className="hero-sub">From $215 a night, on 200 acres at Roker's, with an honor bar on the&nbsp;sand.</p>
+        </div>
+        <Strip stay={stay} setStay={setStay} today={today} />
+      </div>
+      <Chooser stay={stay} open={open} />
+    </header>
+  )
+}
+
+/* ---------- gallery (tap a cottage) ---------- */
+function Gallery({ id, close, stay }: { id: string | null; close: () => void; stay: Stay }) {
+  const c = COTTAGES.find(x => x.id === id)
+  const n = nightsBetween(stay.arrive, stay.leave)
+  const [k, setK] = useState(0)
+  useEffect(() => setK(0), [id])
+  const fits = c ? c.sleeps >= stay.guests : true
+  return (
+    <Dialog.Root open={!!c} onOpenChange={o => { if (!o) close() }}>
+      <AnimatePresence>
+        {c && (
+          <Dialog.Portal forceMount>
+            <Dialog.Overlay asChild forceMount>
+              <motion.div className="g-veil" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} />
+            </Dialog.Overlay>
+            <Dialog.Content asChild forceMount aria-describedby={undefined}>
+              <motion.div className="g" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }} transition={{ duration: 0.45, ease }}>
+                <div className="g-bar">
+                  <Dialog.Title className="g-title">{c.name}</Dialog.Title>
+                  <Dialog.Close className="g-x" aria-label="Close"><X aria-hidden /></Dialog.Close>
+                </div>
+                <div className="g-body">
+                  <div className="g-stage">
+                    <AnimatePresence mode="popLayout" initial={false}>
+                      <motion.img key={c.shots[k].f} src={I + c.shots[k].f} alt={c.shots[k].alt} width={c.shots[k].w} height={c.shots[k].h}
+                        style={{ maxWidth: c.shots[k].w, aspectRatio: `${c.shots[k].w} / ${c.shots[k].h}` }}
+                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} />
+                    </AnimatePresence>
+                    <p className="g-cap">{c.shots[k].alt}</p>
+                    <div className="g-thumbs" role="tablist" aria-label={`${c.name} photos`}>
+                      {c.shots.map((s, i) => (
+                        <button key={s.f} type="button" role="tab" aria-selected={i === k} aria-label={`Photo ${i + 1} of ${c.shots.length}`} onClick={() => setK(i)}>
+                          <img src={I + s.f} alt="" width={s.w} height={s.h} loading="lazy" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="g-info">
+                    <p className="g-note">{c.note}</p>
+                    <dl className="g-facts">
+                      <div><dt>Sleeps</dt><dd className="num">{c.sleeps}</dd></div>
+                      <div><dt>Beds</dt><dd>{c.beds}</dd></div>
+                      <div><dt>Kitchen</dt><dd>{c.kitchen}</dd></div>
+                      <div><dt>Nightly rate</dt><dd className="num">{usd(c.rate)}</dd></div>
+                    </dl>
+                    <div className="g-sum">
+                      <p><span className="num">{n}</span> nights, {short(stay.arrive)} to {short(stay.leave)}</p>
+                      <p className="g-total"><Ticker value={lodging(c, n)} /> <small>with 10% VAT and 6% levy</small></p>
+                      <p className="g-due">Due today <b className="num">$0</b></p>
+                    </div>
+                    {fits
+                      ? <a className="btn btn--wide" href={bookUrl(stay.arrive, stay.leave, stay.guests)}>Check {c.name} for these dates <ArrowUpRight aria-hidden /></a>
+                      : <p className="g-warn">{c.name} sleeps {c.sleeps}. For {stay.guests} guests, look at the family cottages.</p>}
+                    <p className="g-fine">Opens the club's own booking page with your dates filled in. A card number holds the cottage. No deposit.</p>
+                  </div>
+                </div>
+              </motion.div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        )}
+      </AnimatePresence>
+    </Dialog.Root>
+  )
+}
+
+/* ---------- 2. compare the tiers ---------- */
+function Compare({ open, stay }: { open: (id: string) => void; stay: Stay }) {
+  const n = nightsBetween(stay.arrive, stay.leave)
+  const tiers: { key: Cottage["tier"]; title: string; sub: string }[] = [
+    { key: "two", title: "For two", sub: "Five cottages, $215 to $250 a night" },
+    { key: "family", title: "For families and friends", sub: "Three cottages for four to six, $315 to $425 a night" },
+  ]
+  return (
+    <section className="sec compare" id="cottages" aria-labelledby="cmp-h">
       <div className="wrap">
         <div className="sec-head">
-          <h2 id="tab-h" className="h2">Work out your tab before you&nbsp;come</h2>
-          <p>Every rate, tax and fee the club publishes, added up. Nothing is charged until the day you leave.</p>
+          <h2 id="cmp-h" className="h2">Every cottage, side by&nbsp;side</h2>
+          <p className="lede">Each was built by hand and is different from the next. All are steps from the sand, with housekeeping, air conditioning and ceiling fans. Totals are for your <span className="num">{n}</span> nights with taxes.</p>
         </div>
-        <div className="tab-grid">
-          <div>
-            <div className="field">
-              <span className="lab" id="f-cot">Cottage</span>
-              <div className="chips" role="group" aria-labelledby="f-cot">
-                {COTTAGES.map(x => <button key={x.id} type="button" className="chip" aria-pressed={x.id === pick} onClick={() => setPick(x.id)}>{x.name} <span className="num">{usd(x.rate)}</span></button>)}
-              </div>
-            </div>
-            <div className="field">
-              <label htmlFor="f-arr">Arriving</label>
-              <input id="f-arr" className="date num" type="date" value={arrive} onChange={e => setArrive(e.target.value)} />
-            </div>
-            <div className="field">
-              <span className="lab">Nights</span>
-              <Stepper label="nights" value={nights} set={setNights} min={1} max={28} />
-            </div>
-            <div className="field">
-              <span className="lab">Guests</span>
-              <Stepper label="guests" value={g} set={setGuests} min={1} max={c.sleeps} />
-              <p className="hint">{c.name} sleeps up to {c.sleeps}. {c.beds}.</p>
-            </div>
-            <div className="field">
-              <span className="lab">Breakfasts</span>
-              <Stepper label="breakfast mornings" value={b} set={setBfast} min={0} max={nights} />
-              <p className="hint num">$18 a person, offered every morning. Every cottage has its own kitchen too.</p>
-            </div>
-            <div className="field">
-              <span className="lab">Dinners</span>
-              <Stepper label="dinner evenings" value={d} set={setDinner} min={0} max={nights} />
-              <p className="hint num">$35 a person, Wednesday to Saturday.</p>
-            </div>
-            <div className="field">
-              <span className="lab" id="f-taxi">Airport taxi</span>
-              <div className="chips" role="group" aria-labelledby="f-taxi">
-                {([["return", "Both ways $120"], ["one", "One way $60"], ["none", "Not needed"]] as const).map(([k, l]) => <button key={k} type="button" className="chip num" aria-pressed={taxi === k} onClick={() => setTaxi(k)}>{l}</button>)}
-              </div>
-            </div>
+        {tiers.map(t => (
+          <div className="tier" key={t.key}>
+            <div className="tier-head"><h3>{t.title}</h3><p className="num">{t.sub}</p></div>
+            <ol className="rows">
+              {COTTAGES.filter(c => c.tier === t.key).map(c => (
+                <li key={c.id} className="row">
+                  <button type="button" className="row-ph" onClick={() => open(c.id)} aria-label={`${c.name}: open the photos`}>
+                    <img src={I + c.shots[0].f} alt={c.shots[0].alt} width={c.shots[0].w} height={c.shots[0].h} loading="lazy" decoding="async" />
+                  </button>
+                  <div className="row-name"><h4>{c.name}</h4><p>{c.note}</p></div>
+                  <dl className="row-facts">
+                    <div><dt>Sleeps</dt><dd className="num">{c.sleeps}</dd></div>
+                    <div><dt>Beds</dt><dd>{c.beds}</dd></div>
+                    <div><dt>Kitchen</dt><dd>{c.kitchen}</dd></div>
+                  </dl>
+                  <div className="row-price">
+                    <p className="num"><b>{usd(c.rate)}</b> a night</p>
+                    <p className="num muted">{usd(lodging(c, n))} for {n} nights</p>
+                    <button type="button" className="link" onClick={() => open(c.id)}>{c.shots.length} photos</button>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
-          <aside className="bill" aria-label="Your estimated tab">
-            <h3>{c.name}, {nights} {nights === 1 ? "night" : "nights"}, {g} {g === 1 ? "guest" : "guests"}</h3>
-            <dl>
-              <div><dt>{nights} × {usd(c.rate)}</dt><dd className="num">{usd(t.lodging)}</dd></div>
-              <div><dt>VAT 10% and resort levy 6%</dt><dd className="num">{usd(t.tax)}</dd></div>
-              {t.meals > 0 && <div><dt>Meals, with 15% gratuity</dt><dd className="num">{usd(t.meals + t.grat)}</dd></div>}
-              {t.cab > 0 && <div><dt>Taxi</dt><dd className="num">{usd(t.cab)}</dd></div>}
-            </dl>
-            <div className="sum"><span>Due when you leave</span><Money value={t.total} /></div>
-            <div className="today"><span>Due today</span><b className="num">$0</b></div>
-            <a className="btn" href={BOOK}>Check these dates <ArrowUpRight aria-hidden /></a>
-            <a className="link" href={mail}>Email this tab to the club</a>
-            <small>An estimate from the club's published rates, with taxes applied to lodging. The club holds a card number to reserve, takes no deposit, and confirms the final amount.</small>
-          </aside>
-        </div>
+        ))}
+        <p className="fine">The club also manages private homes near Pigeon Cay. <a href={`mailto:${EMAIL}?subject=Private%20homes%20near%20Pigeon%20Cay`}>Ask about them</a>.</p>
       </div>
     </section>
   )
 }
 
-/* ---------- 5. table and evenings ---------- */
-function Evenings() {
+/* ---------- 3. the 200 acres ---------- */
+const INCLUDED = [
+  "The palapa honor bar on the beach",
+  "Morning coffee and tea at the beach bar",
+  "Kayaks, canoes and paddle boards",
+  "Bicycles for the property's trails",
+  "Snorkel gear",
+  "Wi-Fi in the public areas",
+]
+
+function Place() {
   return (
-    <section className="sec" aria-labelledby="eat-h">
-      <div className="wrap">
-        <Photo className="band" s={{ f: "special-bg.jpg", w: 1920, h: 647, alt: "Chairs around the stone fire ring on the beach at Pigeon Cay, late in the day" }} />
-        <div className="eat">
-          <div>
-            <h2 id="eat-h" className="h2">Cook in your own kitchen, or let the club bring&nbsp;dinner</h2>
-            <p className="lede" style={{ marginTop: "var(--s5)", maxWidth: "36rem" }}>Breakfast is offered every morning and dinner from Wednesday to Saturday, served at your cottage or outdoors beside the beach.</p>
+    <section className="sec place" id="place" aria-labelledby="pl-h">
+      <div className="wrap place-grid">
+        <div className="place-a">
+          <Photo s={{ f: "gallery-img-36.jpg", w: 800, h: 600, alt: "Inside the palapa honor bar: a tiled bar and wooden stools looking out at the sea" }} />
+          <p className="cap">The palapa honor bar, open to the beach and the breeze.</p>
+        </div>
+        <div className="place-b">
+          <h2 id="pl-h" className="h2">200 private acres, one beach, and everything to play&nbsp;with</h2>
+          <p className="lede">Pigeon Cay sits three miles south of Bennett's Harbour on the north of Cat Island. Behind the beach are soft sandy flats for bonefishing and trails to walk or cycle.</p>
+          <h3 className="h3">Included in every stay</h3>
+          <ul className="ticks">
+            {INCLUDED.map(t => <li key={t}><Check aria-hidden /> {t}</li>)}
+          </ul>
+          <a className="link" href={FILM}><Play aria-hidden /> Watch the Pigeon Cay film</a>
+        </div>
+        <div className="place-c">
+          <Photo s={{ f: "31.jpg", w: 380, h: 580, alt: "A vine-covered archway and flagstone path leading to the beach" }} />
+          <Photo s={{ f: "30.jpg", w: 380, h: 580, alt: "A red umbrella and two loungers on the sand, framed by palm fronds" }} />
+          <div className="place-c3">
+            <Photo s={{ f: "gallery-img-34.jpg", w: 800, h: 600, alt: "A rope hammock between casuarinas, with kayaks and paddles on the beach" }} />
+            <p className="cap">Kayaks wait on the sand. Take one out whenever the water is calm.</p>
           </div>
-          <dl className="prices num">
-            <div><dt>Breakfast<span>each morning, per person</span></dt><dd>$18</dd></div>
-            <div><dt>Dinner<span>Wednesday to Saturday, per person</span></dt><dd>$35</dd></div>
-            <div><dt>Massage<span>per hour</span></dt><dd>$95</dd></div>
-            <div><dt>Babysitting<span>per hour</span></dt><dd>$10</dd></div>
-            <div><dt>Car rental<span>depending on the vehicle</span></dt><dd>from $75</dd></div>
-          </dl>
         </div>
       </div>
     </section>
   )
 }
 
-/* ---------- 6. getting here ---------- */
+/* ---------- 4. meals and extras ---------- */
+function Meals({ extras, setExtras, stay }: { extras: Extras; setExtras: (e: Extras) => void; stay: Stay }) {
+  const n = nightsBetween(stay.arrive, stay.leave)
+  const dn = dinnerNights(stay.arrive, n)
+  const rows: { key: keyof Extras; name: string; detail: string; price: string; sum: number }[] = [
+    { key: "breakfast", name: "Breakfast", detail: "Offered every morning, per person", price: "$18", sum: EXTRAS.breakfast * stay.guests * n * (1 + EXTRAS.gratuity) },
+    { key: "dinner", name: "Dinner", detail: "Wednesday to Saturday, per person", price: "$35", sum: EXTRAS.dinner * stay.guests * dn * (1 + EXTRAS.gratuity) },
+    { key: "taxi", name: "Taxi from the airport", detail: "$60 one way", price: "$120 round trip", sum: EXTRAS.taxiReturn },
+  ]
+  return (
+    <section className="sec meals" id="meals" aria-labelledby="ml-h">
+      <div className="wrap meals-grid">
+        <div>
+          <h2 id="ml-h" className="h2">Cook in your own kitchen, or let the club bring&nbsp;dinner</h2>
+          <p className="lede">Every cottage has a kitchen. Breakfast is offered each morning and dinner from Wednesday to Saturday. A 15% gratuity is added to meals.</p>
+          <p className="fine">Car rentals start at $75, depending on the vehicle. Cribs are available, and the club lists child care. Flats fishing and boat excursions can be arranged.</p>
+        </div>
+        <div className="menu" role="group" aria-label="Add extras to your estimate">
+          <p className="menu-say">Tap to add them to your estimate for <span className="num">{stay.guests}</span> {stay.guests === 1 ? "guest" : "guests"} and <span className="num">{n}</span> nights.</p>
+          {rows.map(r => (
+            <button key={r.key} type="button" className="menu-row" aria-pressed={extras[r.key]} onClick={() => setExtras({ ...extras, [r.key]: !extras[r.key] })}>
+              <span className="menu-box" aria-hidden>{extras[r.key] && <Check />}</span>
+              <span className="menu-name">{r.name}<small>{r.detail}</small></span>
+              <span className="menu-price num">{r.price}</span>
+              <span className="menu-sum num">{extras[r.key] ? `+${usd(r.sum)}` : ""}</span>
+            </button>
+          ))}
+          <p className="fine">Dinner counts the <span className="num">{dn}</span> Wednesday to Saturday evenings in your dates. Meal sums include the 15% gratuity.</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ---------- 5. getting here ---------- */
 function Way() {
   return (
-    <section className="way on-teal" id="getting-here" aria-labelledby="way-h">
+    <section className="sec way" id="getting-here" aria-labelledby="way-h">
       <div className="wrap">
-        <h2 id="way-h" className="h2" style={{ maxWidth: "46rem" }}>One flight to New Bight, then a taxi up the&nbsp;island</h2>
-        <ol className="steps">
+        <div className="sec-head">
+          <h2 id="way-h" className="h2">Two airports on Cat Island, then a short taxi&nbsp;ride</h2>
+          <p className="lede">The club is on the north of the island, three miles south of Bennett's Harbour. Tell them your flight and they will arrange the transfer.</p>
+        </div>
+        <ol className="route">
           <li>
-            <h3>Fly to New Bight, Cat Island (TBI)</h3>
-            <p><b>Makers Air</b> flies seven days a week from Fort Lauderdale Executive (FXE). <b>Western Air</b> also flies into New Bight, and most other guests connect through Nassau. <b>Marlin Air</b> charters from Nassau: <a className="num" href="tel:+12423423014">242-342-3014</a>.</p>
+            <span className="route-n num">1</span>
+            <h3>From Florida, direct</h3>
+            <p><b>Makers Air</b> flies from Fort Lauderdale Executive (FXE) to New Bight, and since May 2026 to Arthur's Town (ATC) in the north.</p>
           </li>
           <li>
-            <h3>Take the taxi</h3>
-            <p className="num">It is <b>$60 one way, $120 for both ways</b>. Tell the club your flight and they will help arrange the transfer.</p>
+            <span className="route-n num">2</span>
+            <h3>Or through Nassau</h3>
+            <p>Most guests connect in Nassau. <b>Bahamasair</b> flies twice a week to Arthur's Town, <b>Western Air</b> to New Bight, and <b>Marlin Air</b> charters from Nassau, <a className="num" href="tel:+12423423014">242-342-3014</a>.</p>
           </li>
           <li>
-            <h3>Arrive near The Bluff</h3>
-            <p>The club is on the north of Cat Island, three miles south of Bennett's Harbour. A rental car is worth having only if you want to explore.</p>
-          </li>
-          <li className="offer">
-            <h3>Fly free from Nassau</h3>
-            <p className="num">Pre-book an air-inclusive stay of 4 to 6 nights and one airline ticket from Nassau is free. Stay 7 nights and two are, at double occupancy. Book by June 30, 2027 and travel by October 31, 2027. The offer runs through the Bahama Out Islands Promotion Board and its terms apply.</p>
+            <span className="route-n num">3</span>
+            <h3>Taxi to your cottage</h3>
+            <p className="num"><b>$60 one way, $120 round trip.</b> A rental car is only worth it if you want to explore.</p>
           </li>
         </ol>
+        <div className="offer">
+          <h3>Fly free from Nassau</h3>
+          <p className="num">Pre-book an air-inclusive stay of 4 to 6 nights and one round-trip ticket from Nassau is free; stay 7 nights and two are, at double occupancy. Book by June 30, 2027 and travel by October 31, 2027. A Bahama Out Islands Promotion Board offer: book at least 14 days ahead, blackout dates and its terms apply.</p>
+        </div>
       </div>
     </section>
   )
 }
 
-/* ---------- 7. weddings, a guest, questions ---------- */
+/* ---------- 6. weddings ---------- */
+const PLAN = ["The marriage licence and the officiant", "Flowers and a photographer", "Rehearsal and reception dinner at the club or a local restaurant", "A locally made cake", "Charter flights from Fort Lauderdale for your guests"]
+
 function Weddings() {
   return (
-    <section className="sec" id="weddings" aria-labelledby="wed-h">
-      <div className="wrap wed">
+    <section className="sec wed on-deep" id="weddings" aria-labelledby="wed-h">
+      <div className="wrap wed-grid">
+        <Photo s={{ f: "weddings-3.jpg", w: 640, h: 480, alt: "A bride and groom walking hand in hand along the empty beach" }} />
         <div>
-          <h2 id="wed-h" className="h2">Married barefoot on the sand, or in a 100-year-old&nbsp;church</h2>
-          <p className="lede" style={{ marginTop: "var(--s5)", maxWidth: "34rem" }}>For two, or for up to 40 guests. Ceremonies are held on the beach, in the old church near the cottages, or at the Hermitage.</p>
-          <a className="btn" href={`mailto:${EMAIL}?subject=${encodeURIComponent("A wedding at Pigeon Cay")}`}>Ask about a wedding date</a>
-        </div>
-        <p className="flow muted">The club plans the whole of it, before, during and after: the marriage licence and the officiant, flowers and a photographer, the rehearsal and reception dinner at the beach club or a local restaurant, a locally made cake, a DJ or a rake and scrape band, transport on the island, and charter flights from Fort Lauderdale for your guests.</p>
-      </div>
-    </section>
-  )
-}
-
-function Said() {
-  return (
-    <section className="said" aria-label="A returning guest">
-      <div className="wrap said-grid">
-        <blockquote>
-          <p>“We love the laid back home feel of PCBC. Ned &amp; Leslie treat us as family and are warm and friendly.”</p>
-          <footer>Dan M. has spent more than 300 days on Cat Island over 11 years of visits. From his <a href="https://www.tripadvisor.com/ShowUserReviews-g147427-d151487-r1008992098-Pigeon_Cay_Beach_Club-Cat_Island_Out_Islands_Bahamas.html">TripAdvisor review</a>, May 2025.</footer>
-        </blockquote>
-        <div className="trio">
-          <Photo s={{ f: "30.jpg", w: 380, h: 580, alt: "Two loungers and an umbrella on the sand, framed by palm fronds, late afternoon" }} />
-          <Photo s={{ f: "34.jpg", w: 380, h: 580, alt: "White sand and glassy turquoise water at Pigeon Cay" }} />
-          <Photo s={{ f: "31.jpg", w: 380, h: 580, alt: "A vine-covered archway and flagstone path leading to the beach" }} />
+          <h2 id="wed-h" className="h2">Married on the sand, in a 100-year-old church, or at the&nbsp;Hermitage</h2>
+          <p className="lede">For two, or for up to 40 guests. The club plans it before, during and after.</p>
+          <ul className="ticks">{PLAN.map(t => <li key={t}><Check aria-hidden /> {t}</li>)}</ul>
+          <a className="btn btn--light" href={`mailto:${EMAIL}?subject=Wedding%20at%20Pigeon%20Cay`}>Ask about your date</a>
         </div>
       </div>
     </section>
   )
 }
 
-function Questions() {
+/* ---------- 7. policies, contact, book ---------- */
+function Policies({ stay, pick }: { stay: Stay; pick: Cottage | null }) {
   return (
-    <section className="sec" aria-labelledby="faq-h">
-      <div className="wrap faq">
-        <h2 id="faq-h" className="h2">Before you ask</h2>
+    <section className="sec pol" id="policies" aria-labelledby="pol-h">
+      <div className="wrap pol-grid">
         <div>
-          {FAQ.map(f => (
-            <details key={f.q}>
-              <summary>{f.q}<Plus aria-hidden /></summary>
-              <p>{f.a}</p>
-            </details>
+          <h2 id="pol-h" className="h2">The terms, in plain&nbsp;words</h2>
+          <dl className="terms">
+            <div><dt>To book</dt><dd>A card number holds your cottage. No deposit.</dd></div>
+            <div><dt>To pay</dt><dd>On departure.</dd></div>
+            <div><dt>To cancel</dt><dd>Free up to 30 days before arrival. Inside 30 days, one night is charged, and can be credited or used within a year.</dd></div>
+            <div><dt>Taxes</dt><dd className="num">VAT 10% and resort levy 6% on lodging. 15% gratuity on meals.</dd></div>
+          </dl>
+        </div>
+        <div className="faq">
+          {FAQ.slice(3).map(f => (
+            <details key={f.q}><summary>{f.q}<Plus aria-hidden /></summary><p>{f.a}</p></details>
           ))}
         </div>
       </div>
+      <div className="wrap close" id="contact">
+        <h2 className="close-h">{pick ? `Hold ${pick.name} today.` : "Hold a cottage today."} Pay nothing until the day you&nbsp;leave.</h2>
+        <div className="close-act">
+          <a className="btn" href={bookUrl(stay.arrive, stay.leave, stay.guests)}>Check availability <ArrowUpRight aria-hidden /></a>
+          <a className="link num" href={TEL}>{PHONE}</a>
+          <a className="link" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        </div>
+      </div>
     </section>
   )
 }
 
-/* ---------- 8. contact ---------- */
 function Foot() {
   return (
-    <footer className="foot" id="contact">
-      <div className="wrap">
-        <div className="foot-grid">
-          <div>
-            <a className="tel num" href={TEL}>{PHONE}</a>
-            <a className="mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          </div>
-          <div className="side">
-            <p>The club holds a card number to reserve your cottage. No deposit. You pay on departure.</p>
-            <a className="btn btn--straw" href={BOOK}>Check dates <ArrowUpRight aria-hidden /></a>
-          </div>
-        </div>
-        <div className="fine">
-          <span>{NAME}, near The Bluff, north Cat Island, The Bahamas</span>
-          <a href={FB}>Facebook</a>
-          <span>Photography: Pigeon Cay Beach Club</span>
-        </div>
+    <footer className="foot">
+      <div className="wrap foot-in">
+        <p className="wordmark">Pigeon Cay <i>Beach Club</i></p>
+        <p>Roker's, north Cat Island, The Bahamas. Three miles south of Bennett's Harbour.</p>
+        <p><a href={FB}>Facebook</a></p>
+        <p className="muted">Photography: Pigeon Cay Beach Club.</p>
       </div>
     </footer>
   )
 }
 
-function Dock() {
+/* ---------- the stay bar (after the first screen, hidden over the closing block) ---------- */
+function StayBar({ stay, extras, pick, open }: { stay: Stay; extras: Extras; pick: Cottage | null; open: (id: string) => void }) {
   const [show, setShow] = useState(false)
   useEffect(() => {
-    const hero = document.getElementById("top"), foot = document.getElementById("contact")
-    if (!hero || !foot) return
-    const seen = { hero: true, foot: false }
-    const apply = () => {
-      const s = !seen.hero && !seen.foot
-      setShow(s)
-      document.documentElement.style.setProperty("--concept-offset", s && innerWidth < 861 ? "64px" : "0px")
-    }
-    const io = new IntersectionObserver(es => { for (const e of es) { if (e.target === hero) seen.hero = e.isIntersecting; else seen.foot = e.isIntersecting } apply() }, { threshold: 0.05 })
-    io.observe(hero); io.observe(foot)
-    return () => io.disconnect()
+    const hero = document.getElementById("top"), close = document.getElementById("contact")
+    let hv = true, cv = false
+    const upd = () => setShow(!hv && !cv)
+    const io1 = new IntersectionObserver(([e]) => { hv = e.isIntersecting; upd() }, { threshold: 0.05 })
+    const io2 = new IntersectionObserver(([e]) => { cv = e.isIntersecting; upd() })
+    if (hero) io1.observe(hero); if (close) io2.observe(close)
+    return () => { io1.disconnect(); io2.disconnect() }
   }, [])
+  useEffect(() => {
+    document.documentElement.style.setProperty("--concept-offset", show ? (innerWidth < 700 ? "76px" : "84px") : "0px")
+  }, [show])
+  const n = nightsBetween(stay.arrive, stay.leave)
+  const c = pick && pick.sleeps >= stay.guests ? pick : COTTAGES.find(x => x.sleeps >= stay.guests)!
+  const ext = (extras.breakfast ? EXTRAS.breakfast * stay.guests * n : 0) * (1 + EXTRAS.gratuity)
+    + (extras.dinner ? EXTRAS.dinner * stay.guests * dinnerNights(stay.arrive, n) : 0) * (1 + EXTRAS.gratuity)
+    + (extras.taxi ? EXTRAS.taxiReturn : 0)
   return (
-    <nav className="dock" data-show={show} aria-label="Quick links" inert={!show}>
-      <a href="#cottages">Cottages</a>
-      <a href="#tab">Your tab</a>
-      <a className="opt" href="#getting-here">Getting here</a>
-      <a className="btn" href={BOOK}>Check dates</a>
-    </nav>
+    <AnimatePresence>
+      {show && (
+        <motion.aside className="bar" aria-label="Your stay" initial={{ y: "110%" }} animate={{ y: 0 }} exit={{ y: "110%" }} transition={{ duration: 0.45, ease }}>
+          <button type="button" className="bar-what" onClick={() => open(c.id)}>
+            <b>{pick ? c.name : `From ${c.name}`}</b>
+            <span className="num bar-dates">{short(stay.arrive)} to {short(stay.leave)}, {stay.guests} {stay.guests === 1 ? "guest" : "guests"}</span>
+            <span className="num bar-mtot">{usd(lodging(c, n) + ext)} with taxes, $0 today</span>
+          </button>
+          <p className="bar-sum"><Ticker value={lodging(c, n) + ext} /><small>estimate with taxes{ext ? " and extras" : ""}. Due today $0</small></p>
+          <a className="btn" href={bookUrl(stay.arrive, stay.leave, stay.guests)}>Check availability</a>
+        </motion.aside>
+      )}
+    </AnimatePresence>
   )
 }
 
+/* ---------- app ---------- */
 function App() {
-  const [pick, setPick] = useState("sea-studio")
+  const today = useMemo(() => iso(new Date()), [])
+  const [stay, setStay] = useState<Stay>(() => { const a = addDays(today, 60); return { arrive: a, leave: addDays(a, 7), guests: 2 } })
+  const [extras, setExtras] = useState<Extras>({ breakfast: false, dinner: false, taxi: false })
+  const [gal, setGal] = useState<string | null>(null)
+  const [pickId, setPickId] = useState<string | null>(null)
+  const open = (id: string) => { setGal(id); setPickId(id) }
+  const pick = COTTAGES.find(c => c.id === pickId) || null
   useEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches || matchMedia("(pointer: coarse)").matches) return
     const lenis = new Lenis({ duration: 1.05, smoothWheel: true, anchors: true })
@@ -418,19 +528,18 @@ function App() {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <Hero />
+      <Hero stay={stay} setStay={setStay} today={today} open={open} />
       <main id="main">
-        <House />
-        <Cottages pick={pick} setPick={setPick} />
-        <Tab pick={pick} setPick={setPick} />
-        <Evenings />
+        <Compare open={open} stay={stay} />
+        <Place />
+        <Meals extras={extras} setExtras={setExtras} stay={stay} />
         <Way />
         <Weddings />
-        <Said />
-        <Questions />
+        <Policies stay={stay} pick={pick} />
       </main>
       <Foot />
-      <Dock />
+      <StayBar stay={stay} extras={extras} pick={pick} open={open} />
+      <Gallery id={gal} close={() => setGal(null)} stay={stay} />
     </>
   )
 }
