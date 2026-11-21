@@ -55,3 +55,47 @@ Feel: easygoing, sunny, sociable, family, blue.
 
 ## Unknowns
 Rates (in Cloudbeds), check-in times, which cottages are beachfront by number.
+
+---
+# Generation 2 design plan (2026-11-21)
+
+**Big idea.** Hideaways is really two places on one bay: cottages on the sand of Jolly Hall Bay and the Island Time villas on the hill above it. The first screen asks the one question a guest actually has, "sand or hill?", with a real photograph of each half; choosing one slides you into that half of a pinned, sideways room journey that ends at the Cloudbeds booking frame.
+
+**Direction.** A11 Horizontal journey + P02 Shallow flats + T01 Monumental serif (direction.mjs option 2 lane swapped to P02: Elizabeth Harbour is literally Exuma shallow-flats water; ground is a pale sand tint, the aqua #BFE3DC is a field for the specials section only, deep #0D2B2E for the Splash evening section). Why: the rooms ARE the product and there are eight of them; a sideways journey through real rooms, grouped sand then hill, is the clearest way to compare them, and the monumental two-word type makes the choice unforgettable.
+Nav N9 (bottom progress timeline in the track, doubling as Sand / Hill navigation), motion M2 (pinned horizontal track) plus a quiet PhotoDepth breathing on the harbour panorama.
+
+**Fonts.** Fraunces variable (display, opsz high, soft) + Source Serif 4 variable (text and UI). Self-hosted from @fontsource-variable.
+
+**Photo set (all from hideawayspalmbay.com, seen in Lovable gallery ip-assets-hideaways-at-palm-bay):**
+- G4 boardwalk cottage, 1280x850: hero "sand" frame, shown at max 620 px wide.
+- S2 hillside villas (og image), 1024x768: hero "hill" frame, max 560 px wide.
+- S3 getting-here harbour panorama, 1920x674: harbour band full-bleed at 1440x505 (under source).
+- R1-R8 room photos, 580x440 each: track frames at max 540 px wide.
+- S4 Splash bar, 846x476 at max 760; S1 Splash door, 370x420 at max 300.
+- G5 Stocking Island beach (Chat 'N' Chill), 1280x853 at max 640, captioned as Stocking Island, not as the resort.
+- Not used: bird, iguana and shark gallery shots (generic nature), G2 (red flag, unclear place).
+Never shown larger than the source; small room photos sit in intentional frames, never full-bleed.
+
+**Storyboard (desktop 1440x900).**
+1. Hero: wordmark left, phone + "Check availability" right. Two halves: giant lowercase "sand" over the boardwalk cottage photo, "hill" over the hillside villas photo, a small italic "or" between. Pointer on a half lifts it and quiets the other; click jumps to that half of the room track. One line below: Jolly Hall Bay, Elizabeth Harbour, George Town, Exuma, 15 minutes from the airport. Primary CTA Check availability, secondary Call.
+2. Harbour: the panorama breathing (PhotoDepth), with two sentences about the bay: private white sand, calm water, free water toys, sunset from the patios, pool, Splash.
+3-5. Rooms track, pinned: "Five on the sand. Three on the hill." Each frame one real room photo, the room's name, view, beds, baths, kitchen, patio, and "Check dates for this room". Bottom timeline Sand | Hill. Last frame: the booking frame (arrive, depart, adults) handing off to Cloudbeds.
+6. Specials finder on the aqua field: "Which offer is yours?" Choose Bahamas resident, private pilot, Europe, Latin America, U.S. or Canada; only offers open today appear, with code (copy), book-by, travel window, blackouts, minimum nights. U.S./Canada honestly shows none open today.
+7. Splash! Bar & Grill on the deep evening field: bar photo large, door photo small, meal hours in tabular figures, the cocktails by name, reservation numbers.
+8. Around the harbour: distances as a typographic list (Jolly Hall 0.29 mi ... Mystery Cave 2.03 mi), Stocking Island photo, the activities we arrange.
+9. Getting here: "Fifteen minutes from Exuma International." Gateways and airlines, pre-arranged taxi, car rental, pilots link to specials.
+10. Credits and contact: address, phone, email, Check availability, a short email enquiry (dates, guests, sand or hill), footer.
+Inner page `stay.html`: all eight rooms in one comparison table, amenities in grouped text, house policies.
+
+**Phone (390x844) first three screens.**
+1. Wordmark + Book; "sand / or hill" stacked at 21vw; the two photos side by side (4:5 crops); one line + Check availability. All inside 844.
+2. The harbour panorama cropped 4:3, two sentences.
+3. Room track as native swipe (86vw cards), Sand/Hill toggle above it. A bottom "Check availability" dock appears after the hero, hidden over contact.
+
+**Conversion.** Primary: Check availability (their real Cloudbeds engine, dates passed when chosen). Secondary: call +1 242-336-2787, email enquiry. Present on every screen via header and phone dock.
+
+**Tier.** Standard (photography, monumental type, pinned track, PhotoDepth). 3D would not explain anything a photo of the room does not.
+
+**Differs from competitors in this repo.** No other site opens with a binary choice built from the property's two halves; no sideways room journey with a Sand/Hill timeline; P02 aqua only as a field; Fraunces monumental lowercase. Gen-1 version (Instrument Serif + Figtree postcard collage) is discarded entirely.
+
+Network: BLIND (look.mjs and outside images blocked in the sandbox); photos verified through the Lovable gallery screenshot; references judged from knowledge (aman.com, habitas.com).

@@ -6,5 +6,34 @@
  "url": "hideawayspalmbay.com",
  "url_source": "prospects",
  "old_check": "LOADED: no booking path, no rates, no contact",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": true,
+  "booking_engine": "Cloudbeds (hotels.cloudbeds.com/reservation/QVagP2)",
+  "products_or_listings": 8,
+  "pages": 20,
+  "platform": "WordPress 7 + WPBakery + Slider Revolution + MasterSlider",
+  "latest_year": 2026,
+  "modernity": 2,
+  "concept_type": "booking: room-type picker with dates handing off to their Cloudbeds engine",
+  "must_keep": [
+   "Check availability button to Cloudbeds",
+   "all 8 room types with specs",
+   "current specials with codes",
+   "Splash bar and grill",
+   "getting here (airport 15 min)",
+   "contact phone and email"
+  ],
+  "weaknesses": [
+   "COVID-19 banner still on every page in 2026",
+   "expired offers listed beside current ones",
+   "rooms and activity tiles repeated 2-3 times on the homepage",
+   "no rates or side-by-side room comparison",
+   "three different resort names, title says GeorgeTown",
+   "slider-heavy WordPress page builder look"
+  ],
+  "priority": "A",
+  "note": "Small beach resort with a working Cloudbeds engine buried in a dated builder site; concept keeps booking and makes rooms and offers clear."
+ }
 }

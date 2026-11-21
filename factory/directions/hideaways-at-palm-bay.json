@@ -1,13 +1,14 @@
 {
  "slug": "hideaways-at-palm-bay",
  "niche": "hospitality-stay",
- "archetype": "A07",
- "archetype_name": "Letter and stationery",
+ "archetype": "A11",
+ "archetype_name": "Horizontal journey",
  "lane": "P02",
  "lane_name": "Shallow flats",
- "type": "T08",
- "type_name": "Warm humanist",
- "nav": "N8",
- "motion": "M6",
- "dealt_at": "2026-11-08T15:22:55.730Z"
+ "type": "T01",
+ "type_name": "Monumental serif",
+ "nav": "N9",
+ "motion": "M2",
+ "dealt_at": "2026-11-21T17:20:07.026Z",
+ "chosen": true
 }
