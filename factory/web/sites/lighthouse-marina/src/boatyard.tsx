@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createRoot, hydrateRoot } from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import './styles.css'
 import { Header, Contact, Footer } from './ui'
 import { rates, biz } from './data'
@@ -55,7 +55,7 @@ function Estimator() {
         </ul>
         <div>
           <p className="t14 muted">Estimated total</p>
-          <p className="t120 num" style={{ fontWeight: 600, letterSpacing: '-0.04em', lineHeight: 1 }}>{money(sub + vat)}</p>
+          <p className="est__total">{money(sub + vat)}</p>
           <p className="t14 muted" style={{ marginTop: 'var(--s-2)' }}>From the published November 2024 rates. The yard confirms the final price.</p>
         </div>
         <button className="btn" type="button" onClick={request} style={{ justifySelf: 'start' }}>Request this haul-out</button>
@@ -95,4 +95,4 @@ function Boatyard() {
   )
 }
 const el = document.getElementById('root')!
-if (el.hasChildNodes()) hydrateRoot(el, <Boatyard />); else createRoot(el).render(<Boatyard />)
+createRoot(el).render(<Boatyard />)

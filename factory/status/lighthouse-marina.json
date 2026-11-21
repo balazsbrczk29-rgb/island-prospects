@@ -4,8 +4,103 @@
  "name": "Lighthouse Marina",
  "batch": "11",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T18:18:51.013Z"
+ "claimed_at": "2026-11-21T18:18:51.013Z",
+ "pages": [
+  "index.html",
+  "boatyard.html"
+ ],
+ "primary_cta": "Request a slip or service",
+ "brand_truth": "Since 1980, the fuel dock, boatyard and ship’s store at the foot of the Elbow Reef Lighthouse, with the only marine fuel on Elbow Cay.",
+ "buyer": "Boaters in Hope Town (renters and owners of centre consoles, cruisers to 60 ft), second-home owners and captains needing fuel, a slip, a haul-out or a mechanic.",
+ "direction": {
+  "archetype": "A11 Horizontal journey",
+  "lane": "P13 Hull and brass (light hull-paper ground, navy fields, brass accent)",
+  "type": "T03 Swiss grotesk (Schibsted Grotesk)",
+  "why": "The marina’s one true asset is a place seen sideways: from the lighthouse gallery and along the dock. A precise grotesk suits a working fuel dock and boatyard; the same-harbour neighbour Hope Town Inn uses a split serif layout."
+ },
+ "concept_type": "brochure: harbour services + boatyard rates + slip/service request",
+ "tier_visual": "standard",
+ "tier_reason": "No WebGL: the arrival is a real panorama shot from the lighthouse gallery, scrubbed sideways by scroll; 3D would add nothing a real photo from the tower does not already prove.",
+ "images": [
+  {
+   "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Hope_Town_Panorama-Roman_Tokman.jpg/3840px-Hope_Town_Panorama-Roman_Tokman.jpg",
+   "source": "commons",
+   "credit": "Roman Tokman, CC BY-SA 4.0"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/4f78a7_7a9d9a27904546f6b150ed5e5f41a2a4~mv2.jpg",
+   "source": "own",
+   "credit": "Lighthouse Marina"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/4f78a7_63b5cedb8baa4f4ea0dda23aaaa359ea~mv2.jpg",
+   "source": "own",
+   "credit": "Lighthouse Marina"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/fb296f_9365786308b04dd19feb9c42800c1a71~mv2.jpeg",
+   "source": "own",
+   "credit": "Lighthouse Marina"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/4f78a7_fae427062b064332a63a6ddbe362a87f~mv2.jpg",
+   "source": "own",
+   "credit": "Lighthouse Marina"
+  },
+  {
+   "src": "https://static.wixstatic.com/media/4f78a7_29dfe727a735421c9de8277e9aefeb23~mv2.jpg",
+   "source": "own",
+   "credit": "Lighthouse Marina"
+  }
+ ],
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 4,
+  "references": 4
+ },
+ "plan_gate": {
+  "verdict": "revise, applied once",
+  "scores": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 5,
+   "distinct": 5,
+   "references": 4
+  }
+ },
+ "current_site_findings": [
+  "(c) 2023 footer, Gmail contact, default Wix favicon and title",
+  "No dockage rates; the Dockage button leads to boatyard rates",
+  "DIY yard rate $50/day on rates page, $40/day on facilities page",
+  "Liquor store reopening soon on homepage but listed in menu",
+  "Small blurred homepage thumbnails; key facts never reach the Google snippet"
+ ],
+ "pitch_line": "Your marina finally opens on the view only you have: the harbour from the top of your lighthouse, then straight down to the only fuel dock on Elbow Cay, with slip check, yard estimator and VHF 16 one tap away.",
+ "assumptions": [
+  "Dockage (slip) rates are not published: the site routes to a request instead",
+  "DIY rate shown as $50/day from the newer rates page; facilities page says $40",
+  "Liquor store left out (reopening status unclear)",
+  "Rental cottages shown as currently on long-term rental (their own page)",
+  "Lighthouse facts (built 1862, red and white, first-order Fresnel lens) from Wikimedia Commons categories",
+  "Fuel dock hours are not published, so none are shown"
+ ],
+ "sources": [
+  "https://www.htlighthousemarina.com/",
+  "https://www.htlighthousemarina.com/facilities-services",
+  "https://www.htlighthousemarina.com/ships-store",
+  "https://www.htlighthousemarina.com/rates",
+  "https://www.htlighthousemarina.com/rental-cottages",
+  "https://commons.wikimedia.org/wiki/Category:Elbow_Cay_lighthouse"
+ ],
+ "notes": "BLIND sandbox (Wix and Wikimedia blocked): photos were seen in the Lovable gallery ip-assets-lighthouse-marina and QA used crops of it routed into Playwright. Wikimedia thumbs must use standard widths (1920px, 3840px); 1200px returns 400. Plan gate (one critic, mode 1) asked: headline off the photo, phone once, pan to end on the fuel dock, bigger phone band with caption strip, fold mechanic into boatyard; all applied. Self-critique after build: hero and slip check strong; yard section uses a sticky left column; tabular figures switched off in rate tables because Schibsted tabular period reads as a gap. Store hours Mon-Sat 8-4 sourced from ships-store page. React hydration replaced by client render over prerendered HTML (418 mismatch).",
+ "built_at": "2026-11-21T18:46:50.745Z"
 }

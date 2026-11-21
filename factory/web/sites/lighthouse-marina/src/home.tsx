@@ -1,4 +1,4 @@
-import { createRoot, hydrateRoot } from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import './styles.css'
 import Hero from './hero'
 import { Contact, Corner, Footer } from './ui'
@@ -19,4 +19,4 @@ function Home() {
   )
 }
 const el = document.getElementById('root')!
-if (el.hasChildNodes()) hydrateRoot(el, <Home />); else createRoot(el).render(<Home />)
+createRoot(el).render(<Home />)
