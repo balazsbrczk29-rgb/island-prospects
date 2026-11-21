@@ -68,3 +68,22 @@ aman.com Amanyara (studied this session), sixsenses vocabulary: editorial lists,
 
 ## Unknowns
 Exact street address beyond Centre Line Rd, check-in times, holiday rates, slip rates, reopening date.
+
+---
+# Generation 2 design plan (2026-11-21)
+
+Update from their villas page (2026-11-21): six homes now (Irvin House, 3B/2.5B, the original owners' residence, added; no published rate), each with a Guesty "Request to book" link; email booking still stated.
+
+**Big idea.** The resort is named for the sunset and every villa faces it, so the first screen tells you, live, when the sun sets over the Sea of Abaco tonight (computed for Hope Town, counting down), over their own photograph of the plunge pool at sunset. The rest of the site is quiet: one photograph and one sentence per screen, until the one working screen, the villa and price check with VAT, which hands off to their own request-to-book page.
+
+**Direction.** A14 Quiet luxury + P03 Conch pink + T08 Warm humanist (Gloock + Nunito Sans). Why: superb 1920 px professional photographs need almost no interface; conch pink is literally the sunset colour on their deck; shutter green is the one action colour. Nav N3, motion M1 (slow opacity only).
+
+**Photos (own, le-de.cdn-website.com, Lovable gallery ip-assets-firefly-sunset-resort, all 1920 wide):** 189 plunge pool at sunset (hero), 099 pool and sailboats, 114 the resort from the water, 123 dining deck at dusk, 125 restaurant inside, 183 dock steps into the sea, 128 hammock, 029 the resort at night. Full-bleed at 1440 is under source.
+
+**Storyboard.** 1 Hero: photo full-bleed, name small top-centre, a small paper card low-centre: "Tonight the sun sets over the Sea of Abaco at 5:24 pm" (live) and Request a villa. 2 Photo 099 + "Six villas on the Sea of Abaco, Hope Town, Elbow Cay." 3 The villa check on conch pink: six villas listed (beds, baths, sentence), choose one and dates: season, nights, minimum, total with 10% VAT, then Request to book (their Guesty page for that villa) or email. 4 Photo 114 + "Rebuilt after Dorian: the dock, the outside bar and the dining deck." 5 Photo 123 + Firefly Bar & Grill hours, Reserve dinner (Tablein). 6 Photo 183 + reef, kayaks, beach, pools, dock slips. 7 Getting here by ferry, in one paragraph. 8 Calling card: email, Tablein phone, address.
+Phone: same screens stacked; the word "Request a villa" fixed small top-right.
+Inner page villas.html: rate table (in/off season, daily/weekly, whole resort) and the six villas.
+
+**Conversion.** Request to book (Guesty, per villa) and email; Reserve dinner. **Tier.** Standard.
+**Differs.** Live sunset hero and quiet single-image screens; no other site in the repo does either.
+BLIND: images verified via the Lovable gallery screenshot.

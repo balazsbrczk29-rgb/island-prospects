@@ -1,13 +1,14 @@
 {
  "slug": "firefly-sunset-resort",
  "niche": "hospitality-stay",
- "archetype": "A08",
- "archetype_name": "Fixed split",
+ "archetype": "A14",
+ "archetype_name": "Quiet luxury",
  "lane": "P03",
  "lane_name": "Conch pink",
  "type": "T08",
  "type_name": "Warm humanist",
- "nav": "N7",
- "motion": "M3",
- "dealt_at": "2026-11-08T15:22:55.729Z"
+ "nav": "N3",
+ "motion": "M1",
+ "dealt_at": "2026-11-21T18:19:58.444Z",
+ "chosen": true
 }

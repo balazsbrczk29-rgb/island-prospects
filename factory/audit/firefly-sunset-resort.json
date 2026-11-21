@@ -6,5 +6,33 @@
  "url": "fireflysunsetresort.com",
  "url_source": "prospects",
  "old_check": "LOADED: no phone shown",
- "audit": null
+ "audit": {
+  "site_kind": "booking-site",
+  "cart": false,
+  "online_payments": true,
+  "booking_engine": "Guesty request-to-book per villa (fireflysunsetresort.guestybookings.com) plus email; dinner via Tablein",
+  "products_or_listings": 6,
+  "pages": 14,
+  "platform": "Duda",
+  "latest_year": 2026,
+  "modernity": 2,
+  "concept_type": "booking: six villas with published seasonal rates and VAT, request-to-book handing off to Guesty per villa, dinner reservations to Tablein",
+  "must_keep": [
+   "Request to book per villa (Guesty links)",
+   "published in-season and off-season rates, weekly rates, 10% VAT, 3-night minimum",
+   "whole-resort rate",
+   "Firefly Bar & Grill hours and Tablein reservations",
+   "getting here by ferry",
+   "weddings and events"
+  ],
+  "weaknesses": [
+   "page titles read <title> Villas in Google and tabs",
+   "homepage slider shows Slide title / Button placeholders over Pexels stock",
+   "no phone number on the site",
+   "rates and booking rule buried at the bottom of the villas page",
+   "menu page lives at /empty-page"
+  ],
+  "priority": "A",
+  "note": "Six-villa Hope Town resort on Duda with Guesty request-to-book; strong rates data, weak presentation."
+ }
 }
