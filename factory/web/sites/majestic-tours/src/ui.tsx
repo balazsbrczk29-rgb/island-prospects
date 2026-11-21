@@ -94,6 +94,7 @@ export function EnquiryForm({ where, onWhere, compact = false, idp = "q" }: { wh
       <label><span className="field-label">Guests</span><input name="Guests" inputMode="numeric" placeholder="2 adults, 1 child" className="field-input" /></label>
       <label><span className="field-label">Staying at</span><input name="Hotel" autoComplete="off" placeholder="Your hotel or ship" className="field-input" /></label>
       <label><span className="field-label">Your name</span><input name="Name" required autoComplete="name" className="field-input" /></label>
+      <label className="sm:col-span-2"><span className="field-label">Anything else (flight, pickup, questions)</span><textarea name="Note" rows={2} className="field-input resize-y" /></label>
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 sm:col-span-2">
         <button type="submit" className="btn">Send my plan</button>
         <p className="text-cap text-muted italic" aria-live="polite">{sent ? "Your email app opened with your plan filled in." : `Opens your email app, addressed to ${EMAIL}.`}</p>
@@ -104,7 +105,7 @@ export function EnquiryForm({ where, onWhere, compact = false, idp = "q" }: { wh
 
 export function Footer() {
   return (
-    <footer className="bg-ink px-[var(--pad)] pt-20 pb-28 text-ground md:pb-16">
+    <footer id="site-footer" className="bg-ink px-[var(--pad)] pt-20 pb-28 text-ground md:pb-16">
       <div className="grid gap-12 md:grid-cols-12">
         <div className="md:col-span-5">
           <p className="font-display text-[2.6rem] leading-none tracking-[-0.03em]">Majestic Tours</p>

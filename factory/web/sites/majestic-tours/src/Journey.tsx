@@ -129,7 +129,7 @@ function StopBody({ s, i, onAsk, phone = false }: { s: Stop; i: number; onAsk: (
       return (
         <article className="grid h-full grid-cols-[auto_minmax(0,1fr)] items-center gap-[5vw]">
           <Img pic={PIC.pinkSand} className="w-[min(285px,18vw)]" />
-          <div><p className="text-small text-muted italic">{s.kicker}</p><h2 className="display mt-2 text-[clamp(4.5rem,8vw,8.2rem)] leading-[0.86]">Harbour<br />Island</h2>{fact}<div className="mt-6 max-w-[34rem]"><TripList place="harbourisland" /></div>{ask}</div>
+          <div><p className="text-small text-muted italic">{s.kicker}</p><h2 className="display mt-2 text-[clamp(5rem,10.5vw,10.5rem)] leading-[0.84]">Harbour<br />Island</h2>{fact}<div className="mt-6 max-w-[34rem]"><TripList place="harbourisland" /></div>{ask}</div>
         </article>
       )
     default:
@@ -333,7 +333,7 @@ export function JourneyPhone({ where, setWhere }: { where: string; setWhere: (v:
           ))}
         </ul>
       </section>
-      <section id="book-phone" className="bg-field px-5 pt-12 pb-14">
+      <section id="book-phone" className="bg-field px-5 pt-12 pb-14"><span id="book" className="block" />
         <h2 className="display text-[3.4rem]">Where to?</h2>
         <p className="mt-4 text-body leading-snug">Tell us the day and where you are staying. A Majestic agent writes back with times and the pickup.</p>
         <div className="mt-7"><EnquiryForm where={where} onWhere={setWhere} compact idp="m" /></div>

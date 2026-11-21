@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { mount, useLenis, Footer } from "./ui"
+import { mount, useLenis, Footer, STOPS_FOR_FORM } from "./ui"
 import { JourneyDesktop, JourneyPhone } from "./Journey"
-import { STOPS_FOR_FORM } from "./ui"
+import { Story, Arrival, Desks, Faq, FloatingActions } from "./sections"
 
 function Home() {
   useLenis()
@@ -12,8 +12,13 @@ function Home() {
       <main id="main">
         <JourneyDesktop where={where} setWhere={setWhere} />
         <JourneyPhone where={where} setWhere={setWhere} />
+        <Story />
+        <Arrival />
+        <Desks />
+        <Faq />
       </main>
       <Footer />
+      <FloatingActions />
     </>
   )
 }
