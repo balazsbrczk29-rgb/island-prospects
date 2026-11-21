@@ -1,13 +1,14 @@
 {
  "slug": "man-o-war-marina",
  "niche": "marina",
- "archetype": "A05",
- "archetype_name": "Chart and map",
- "lane": "P01",
- "lane_name": "Limestone",
- "type": "T09",
- "type_name": "Didone fashion",
- "nav": "N6",
- "motion": "M5",
- "dealt_at": "2026-11-08T15:22:55.733Z"
+ "archetype": "A01",
+ "archetype_name": "Magazine feature",
+ "lane": "P02",
+ "lane_name": "Shallow flats",
+ "type": "T02",
+ "type_name": "Text-led editorial",
+ "nav": "N1",
+ "motion": "M1",
+ "dealt_at": "2026-11-21T18:23:39.967Z",
+ "chosen": true
 }

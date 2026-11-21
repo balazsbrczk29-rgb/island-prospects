@@ -41,9 +41,26 @@ The only fuel dock on Abaco's small boatbuilding cay, running a full-service mar
 ## Positioning
 For cruising owners in the Sea of Abaco who need a sure slip and fuel, Man-O-War Marina is the full-service harbour marina on Man-O-War Cay, fuelling boats and carts since 1976.
 
-## Design spec
-Reference study: feadship.nl (vast whitespace, a single panoramic image, technical numerals), riva-yacht.com (heritage serif, precise specs). Hero: video-free panorama: monumental EB Garamond name on clapboard white, then their own panorama of the harbour mask-revealed full width with a hairline caption bar of specs. Fonts EB Garamond 500/italic + Public Sans 400/500/600. Palette paper #f6f3ec, ink #20242a, teak #8a5a2b, harbour #2f6f76, harbour-deep #1d4a50, sand #e7dcc8, muted #5d6166, line #dcd4c5.
-Signature interaction: "Will she fit?" checker (LOA, beam, draft vs 120/20/7) with an SVG slip cross-section where the hull sinks to its draft against the 7 ft low-tide line. This shows the slip and low-water line because the brief says drafts to 7 ft at low tide. Second: "Open now" board computing office/fuel/restaurant status in Bahamas time from published hours. Third: Tabs enquiry.
+## Design plan (generation 2 rebuild, 2026-11-21)
+**Big idea.** The front page is a harbour broadsheet with a live dateline: under their own photograph of the dock running out to the sun (the "NOW OPEN" flag they raised after Dorian), one large sentence reads Bahamas time and tells a captain what is open on Man-O-War Cay right now (fuel dock, office, Dock N' Dine) and when it next opens, computed from the hours they publish.
+**Direction.** A01 Magazine feature + P02 Shallow flats + T02 Text-led editorial. Why: a small family marina since 1976 on the boatbuilding cay reads best as a quiet, well-made feature, not a resort brochure; the aqua of the Sea of Abaco becomes one field section (the docks), the page ground is sand paper. Competing marinas in this repo use arrivals over water, drone splits and maps; this one is print.
+**Fonts.** Newsreader (variable, opsz) only, self-hosted. Display 56-72 px max, text 19 px, labels in the text face's small caps, tabular lining figures for every number.
+**Colour.** ground #F4EFE4 sand, ink #0D2B2E, field #BFE3DC aqua (one section), channel #1E6B72 accent (primary CTA, live dot, key numbers), muted #4A5D5E, line #D9CFBD.
+**Photos (own, manowarmarinavillage.com, Wix originals).** A sunset dock 3024x4032 (hero band, crop 3024x~1100, shown 1440x520); F marina sign and sailboats 2048x1536 (shown at most 720 wide); B boardwalk to Dock N' Dine 3024x4032; E restaurant porch, blue table 3024x4032; D gift shop 3024x4032. All shown far below source size. One grade: warm, slightly lifted shadows via the same CSS treatment (none on pixels, natural).
+**Storyboard, desktop 1440x900.**
+1. Masthead row (nameplate "Man-O-War Marina" set as a magazine title, h1; links The docks, The cay, Request a slip; phone at right). Full-bleed dock band A 1440x520, slow push-in on scroll. Below: live dateline sentence 64 px ("Saturday, 2:14 pm on Man-O-War Cay. The fuel dock is open until four."), standfirst, one filled CTA "Request a slip", text links Call (242) 554-9500 and VHF 16.
+2. The docks (aqua field): two-column feature, drop-cap story (since 1976, rebuilt after Dorian) left; magazine facts box right with the captain's numbers set large: 23 slips, 120 ft LOA, 20 ft beam, 7 ft at low tide, 30/50 amp + water at every slip, assisted docking on 16. Photo F inset in the column.
+3. Will she fit (largest thing on screen): LOA, beam, draft steppers; answer in one sentence ("She fits: 64 ft of 120, 2 ft under the low-tide limit"); three proportion rules (hull vs limit). Flows straight into the slip request.
+4. Slip request: Enquiry styled as a typed letter to the dockmaster (dates, boat name, LOA, beam, draft carried over, power 30/50, note) to prefilled email mowmv@hotmail.com; Call as secondary.
+5. A day at the marina: one column timeline of the published hours (8 fuel dock and office, 9 roadside pump, 11 Dock N' Dine, 12-1 break, 3 lunch ends, 4 close, evening for guests: showers, laundry, grill, pool) with a live "now" rule; beside it photo E sticky, full column height.
+6. Ashore photo essay: B large left with caption (Dock N' Dine, lunch Mon-Sat 11-3, (242) 554-9134), D smaller right (office and gift shop), staggered, real captions.
+7. The cay: text-led feature on Man-O-War Cay (2 miles by half a mile, grocery, Heritage Museum and coffee shop, bakeries, boatbuilding shops, ferry, beaches), link to island.html.
+8. Colophon: contact (phone, email, VHF 16, office hours Mon-Sat 8-12, 1-4), dockage rates PDF, Request a slip.
+**Phone 390x844.** P1: masthead (name + menu), photo band 390x300, live sentence 34 px, CTA "Request a slip" + call/VHF line, all inside 844. P2: docks numbers as a stacked facts list on aqua. P3: Will she fit with steppers and the answer. Mobile action: tear-off strip "Request a slip / Call" hidden on first screen and over the colophon.
+**Conversion.** Primary: Request a slip (prefilled email). Secondary: call (242) 554-9500, VHF 16 on arrival. Phone in masthead and first screen.
+**Tier.** standard (photography + live data + type), no WebGL: their own photos carry it and the live sentence is the wow; 3D arrival is already used by other marinas here.
+**Distinct from repo competitors.** No ocean scene, no map, no split hero, no drone arrival switch: a print nameplate, a horizontal dock band and a live sentence.
+**Inner pages.** marina.html (services, fuel, facilities, FAQ facts, rates PDF), island.html (the cay).
 
 ## Assumptions to confirm
 Saturday night dinner hours (Facebook), whether pool is current, rate PDF current.

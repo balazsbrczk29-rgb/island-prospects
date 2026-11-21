@@ -6,5 +6,35 @@
  "url": "manowarmarina.com",
  "url_source": "prospects",
  "old_check": "LOADED: reads like a boating guide, not a marina sales site",
- "audit": null
+ "audit": {
+  "site_kind": "brochure",
+  "cart": false,
+  "online_payments": false,
+  "booking_engine": "",
+  "products_or_listings": 0,
+  "pages": 4,
+  "platform": "Wix",
+  "latest_year": 2024,
+  "modernity": 2,
+  "concept_type": "brochure: marina sales site with slip request (prefilled email), specs for captains, fuel, restaurant, island guide",
+  "must_keep": [
+   "Reserve a slip by email",
+   "phone (242) 554-9500",
+   "dockage specs and VHF 16",
+   "fuel dock hours",
+   "Dock N Dine restaurant",
+   "MOW Life island page",
+   "FAQ facts",
+   "dockage rates PDF link"
+  ],
+  "weaknesses": [
+   "listed domain manowarmarina.com shows an unrelated article",
+   "page titles read My Site 1",
+   "specs buried in a paragraph on Services",
+   "rates only as PDF, booking only a bare mailto",
+   "no mention of only fuel dock on the homepage"
+  ],
+  "priority": "A",
+  "note": "Wix 4-page brochure on manowarmarinavillage.com; old domain lost"
+ }
 }
