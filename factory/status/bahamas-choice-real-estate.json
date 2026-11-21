@@ -4,8 +4,153 @@
  "name": "Bahamas Choice Real Estate",
  "batch": "03",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
- "rebuild_of": 1,
- "claimed_at": "2026-11-21T15:19:10.221Z"
+ "pages": [
+  "index.html",
+  "property-68204.html",
+  "property-66392.html",
+  "property-68126.html",
+  "property-67126.html"
+ ],
+ "primary_cta": "Send your brief",
+ "brand_truth": "A small Nassau family brokerage, since 2013, that listens first and handles a property move end to end on whichever island it leads.",
+ "buyer": "Overseas buyers and investors researching for months, and Bahamian families selling family property from abroad.",
+ "direction": {
+  "archetype": "A08 Fixed split",
+  "lane": "P01 Limestone",
+  "type": "T02 Text-led editorial",
+  "nav": "N7",
+  "motion": "M3 + synchronised crossfade",
+  "why": "Their listing photos are portrait 800x1066, which fill a fixed half-screen window at native size; the fixed window turns a real listing into a room-by-room walk-through for buyers abroad. A calm serif suits a family firm that sells by listening."
+ },
+ "concept_type": "listings-site",
+ "tier_visual": "standard",
+ "big_idea": "A fixed window on the left walks an overseas buyer through 5 Bayview Drive room by room as the right column scrolls, then every live listing, island and agent.",
+ "images": [
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/0/68204_0.jpg",
+   "source": "own",
+   "credit": "Bahamas MLS listing #68204"
+  },
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/1/68204_1.jpg",
+   "source": "own",
+   "credit": "Bahamas MLS listing #68204"
+  },
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/6/68204_6.jpg",
+   "source": "own",
+   "credit": "Bahamas MLS listing #68204"
+  },
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/9/68204_9.jpg",
+   "source": "own",
+   "credit": "Bahamas MLS listing #68204"
+  },
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/5/68204_15.jpg",
+   "source": "own",
+   "credit": "Bahamas MLS listing #68204"
+  },
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/0/68126_0.jpg",
+   "source": "own",
+   "credit": "MLS #68126"
+  },
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/1/68126_1.jpg",
+   "source": "own",
+   "credit": "MLS #68126"
+  },
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/0/67126_0.jpg",
+   "source": "own",
+   "credit": "MLS #67126"
+  },
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/1/67126_1.jpg",
+   "source": "own",
+   "credit": "MLS #67126"
+  },
+  {
+   "src": "https://pix.idxre.com/pix/BSBREA/main/0/66392_0.jpg",
+   "source": "own",
+   "credit": "MLS #66392"
+  },
+  {
+   "src": "https://bahamaschoicerealestate.com/wp-content/uploads/2023/09/IMG_0143.jpg",
+   "source": "own",
+   "credit": "bahamaschoicerealestate.com"
+  },
+  {
+   "src": "https://bahamaschoicerealestate.com/wp-content/uploads/2024/05/Sunset.jpg",
+   "source": "own",
+   "credit": "bahamaschoicerealestate.com"
+  },
+  {
+   "src": "https://bahamaschoicerealestate.com/wp-content/uploads/2024/05/Home-Page-Imgae-Harbour-Island.jpeg",
+   "source": "own",
+   "credit": "bahamaschoicerealestate.com"
+  },
+  {
+   "src": "https://bahamaschoicerealestate.com/wp-content/uploads/2026/06/welcome-photo.jpg",
+   "source": "own",
+   "credit": "bahamaschoicerealestate.com"
+  }
+ ],
+ "plan_gate": {
+  "first": {
+   "photography": 3,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 3,
+   "distinct": 4,
+   "references": 3,
+   "verdict": "revise (5 changes)"
+  },
+  "after_revision": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 4,
+   "distinct": 5,
+   "references": 4,
+   "verdict": "approved"
+  }
+ },
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 4,
+  "distinct": 5,
+  "references": 4
+ },
+ "current_site_findings": [],
+ "pitch_line": "Your own client says you sold her mother's house from abroad in four months; this site lets the next overseas buyer stand inside your listing before they ever call.",
+ "assumptions": [
+  "Film chapter lines describe what the listing photos show; amenities from MLS #68204.",
+  "Sherry Morris and Erica Pinder shown without titles (none published).",
+  "66392 (rental) and 68204 (sale) share address and size on the MLS; shown as two listings as published."
+ ],
+ "sources": [
+  "https://bahamaschoicerealestate.com/",
+  "https://bahamaschoicerealestate.com/active/",
+  "https://bahamaschoicerealestate.com/sold/",
+  "https://bahamaschoicerealestate.com/homes-for-sale-details/5-BAYVIEW-DR-PARADISE-EST-5-NEW-PROVIDENCE/68204/516/",
+  "https://bahamaschoicerealestate.com/meet-the-team/",
+  "https://www.breabahamas.com/realtor.php?cmd=view&id=96"
+ ],
+ "notes": "Gen-2 rebuild 2026-11-21 by scheduled site worker. BLIND: sandbox blocks outside images and look.mjs (no reference screenshots); photos seen through Lovable gallery ip-assets-bahamas-choice-real-estate and routed as crops into QA shots. qa.mjs 'dead space' blocker on the left strip is a false positive of the Fixed split: the sticky window does not repeat in a full-page screenshot; viewport-stitched captures show it filled on every screen. Mobile tap-target warning is the shared concept-label button. buying.html from gen 1 removed (its process steps were paraphrase); replaced by 4 property pages, the real listings site the audit asked for. Plan gate: revise (villa misread as the listing, weak film frames, land photo upscale, finder clipped), all applied, re-scored approved.",
+ "history": [
+  {
+   "generation": 1,
+   "built_at": null
+  }
+ ],
+ "built_at": "2026-11-21T15:36:13Z"
 }

@@ -69,5 +69,51 @@ Primary query: "real estate agent Nassau Bahamas". Secondary: "buy property in t
 ## Unknowns
 Office hours, street number, years-in-business figures beyond 2013, sales volumes. Designed around.
 
+## Generation 2 design plan (2026-11-21)
+Research this session: own homepage, /active/ (4 listings), listing #68204 detail, /sold/ (1). Listings verified Nov 21 2026 (IDX "data last updated November 21, 2026"):
+- #68204 5 Bayview Dr., Paradise Island Estates #5, New Providence (MLS area Paradise Island). Condo, $690,000, 2 bed, 2 bath, 1,226 sq ft, fully furnished, enclosed private patio, small garden, pool, fully walled, split A/C, HOA $417 (management, caretaker, recreation facility, maintenance, landscaping, garbage). 16 photos.
+- #66392 Bayview Drive Unit #5, New Providence. Rental, $3,800/mo, 2 bed, 2 bath, 1,226 sq ft.
+- #68126 Lot 30 Davis Street and Hawthorn, Block 1, New Providence. Land, $602,000, 0.909 acres. 7 photos.
+- #67126 Lot 6 Block 2 Stella Maris, Long Island. Land, $130,000, 0.689 acres. 8 photos.
+- Sold: #51845 76 Lumumba Road, New Providence. House, listed $315,000, 3 bed, 2 bath.
+
+**Big idea.** A fixed window: the left half of the screen is one photograph that never scrolls away; as the right column walks through a real Bahamas Choice listing (gate, patio, living room, kitchen, bath at 5 Bayview Drive), the window changes room by room, so an overseas buyer stands inside the property for a minute before asking for a viewing.
+
+**Direction.** A08 Fixed split + P01 Limestone + T02 Text-led editorial, nav N7 (vertical list inside the scrolling column), motion M3 (clip mask reveal on images) plus the split's synchronised crossfade. Why: the playbook's "fixed split" and "live there for a minute" ideas fuse into one, and their listing photos are portrait 800x1066, which fill a half-screen window at native size. A text-led serif suits a small family brokerage that sells by listening, not by spectacle; limestone/whitewash is the colour of the houses in their photos.
+
+**Fonts.** Newsreader variable (opsz, wght, italic) self-hosted, display 56-72 px (T02: nothing above 72), text 19 px, labels in small caps of the same face. One family.
+
+**Photos (all own, verbatim or the IDX pattern of their own listing, seen in the Lovable gallery ip-assets-bahamas-choice-real-estate):**
+| use | source | size | shown at most |
+|---|---|---|---|
+| hero window | 2023/09/IMG_0143.jpg (pool courtyard villa, homepage slider) | 2048x1324 | 720x900 cover (0.68x) |
+| film | pix.idxre 68204_0..9, _15 (gate, patio, generator, courtyard, living, dining, kitchen, bath) | 800x1066 | 720x900 cover (0.9x) |
+| land rows | 68126_0, _1 (800x1066); 67126_0, _1 (800x533) | | 67126 framed at 800 wide max |
+| rental row | 66392_0 | 800x1066 | |
+| islands | 2024/05/Sunset.jpg | 1600x1200 | 720x900 cover |
+| selling story | Home-Page-Imgae-Harbour-Island.jpeg | 960x720 | framed 600x450 inside the window, not cover |
+| team | 2026/06/welcome-photo.jpg (Lana + team) | 960x541 | framed 640x360 |
+Development photos are 380 px: not used.
+
+**Storyboard, desktop 1440x900 (left window | right column):**
+1. IMG_0143 villa courtyard | wordmark, vertical nav list, H1 "Sixteen island groups. One family office on Yamacraw Hill Road.", one line (buying, selling, leasing since 2013, Principal Broker Lana Munnings-Basalyga), primary "Send your brief", phone 242 677 3868, a one-line search (Buy, Rent or Land, island) showing "4 listings today".
+2-4. The film, 5 Bayview Drive: the window crossfades gate, patio, courtyard, living room, dining, kitchen, bath as five short chapters scroll by on the right (each one fact from the listing); a sticky price/facts line and "Ask for a viewing".
+5. Every listing: the four active listings and the recent sale as typographic rows with a filter (All, For sale, To rent, Land); hovering a row swaps the window to its photo; each opens its own property page.
+6. Islands: Sunset in the window; the 16 island groups they serve as a two-column index, tap one to see its settlements and start a brief for that island.
+7. Selling from abroad: Harbour Island framed in the window; the Jennifer Brice letter (sold her mother's property in four months, mother abroad, during the pandemic) set large, plus how they keep sellers informed (their own testimonial's words), CTA "Value my property".
+8. The team: welcome photo framed; Lana (Principal Broker, BREA #480), Greg Munnings (Estate Agent), Sherry Morris, Erica Pinder, each a tel: line.
+9. The brief: Buy, Sell, Rent, Invest tabs; island, budget band, timing, name, contact; live summary; opens an email to sales@. Window shows the villa again (a different crop).
+10. Footer column: address, phone, email, socials, BREA line, concept credit.
+
+**Phone 390x844:** 1) window photo 44vh at top, H1, line, "Send your brief" and tap-to-call within 844. 2) the film becomes a swipeable strip of the eight 4:5 photos with the chapter line under each, price and "Ask for a viewing" below. 3) listing rows with thumbnails and the filter chips.
+
+**Conversion.** Primary: "Send your brief" (email to sales@ with a composed summary). Per listing: "Ask for a viewing" (prefilled email with listing number). Secondary: call the office or an agent directly.
+
+**Tier.** Standard (photography, layout, scroll-synchronised crossfade). No 3D: the product is the listing photos.
+
+**Distinct from competitors in this repo.** No other site uses the fixed split; no dark ground, no full-bleed hero with overlay, no island map, no card grid. Serif-only text-led typography on limestone.
+
+**Property pages:** property-68204.html, property-66392.html, property-68126.html, property-67126.html: the window holds the listing's photos (click through), the column holds facts, description, viewing request.
+
 ## Scorecard (after QA)
 See status notes.
