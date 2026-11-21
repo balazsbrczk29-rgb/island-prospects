@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useMemo, useRef, useState } from "react"
+import { StrictMode, useEffect, useRef, useState } from "react"
 import { createRoot } from "react-dom/client"
 import { AnimatePresence, motion } from "motion/react"
 import Lenis from "lenis"
@@ -19,35 +19,45 @@ function Photo({ pic, className = "", eager = false, maxW }: { pic: Pic; classNa
 const SECTIONS = [["ridge", "The ridge"], ["rooms", "The rooms"], ["days", "Days here"], ["rates", "Rates"], ["arrive", "Getting here"]] as const
 const short = (r: Room) => `${["", "1st", "2nd", "3rd"][r.floor]} · ${r.ocean ? (r.view.startsWith("Lake") ? "Lake and sea" : "Sea") : "Garden"}`
 
-/** The fixed index column: the ten rooms as a register, then the sections, then the footer line. */
+/** The fixed index column: the ten rooms as a register (with a filter), then the sections, then the footer line. */
+const FILTERS = [["all", "All ten"], ["ocean", "Ocean view"], ["balcony", "Balcony"], ["king", "King bed"]] as const
+type F = typeof FILTERS[number][0]
+const fits = (r: Room, f: F) => f === "all" || (f === "balcony" ? r.balcony : f === "king" ? r.king : r.view.startsWith("Ocean"))
+
 function Index({ sel, setSel }: { sel: number; setSel: (i: number) => void }) {
+  const [f, setF] = useState<F>("all")
   const pick = (i: number) => { setSel(i); const s = document.getElementById("stage"); if (s && s.getBoundingClientRect().top < -40) s.scrollIntoView({ behavior: "smooth" }) }
   return (
-    <aside className="sticky top-0 hidden h-svh flex-col border-r border-line px-[var(--pad)] pt-8 pb-[84px] lg:flex" aria-label="Ocean West">
-      <a href="index.html" className="inline-flex min-h-11 items-center gap-3 self-start no-underline">
-        <span className="font-display text-[1.55rem] leading-none">Ocean West</span>
+    <aside className="sticky top-0 hidden h-svh flex-col border-r border-line px-[var(--pad)] pt-7 pb-[84px] lg:flex" aria-label="Ocean West">
+      <a href="index.html" className="inline-flex min-h-11 items-center self-start no-underline">
+        <span className="font-display text-[1.5rem] leading-none">Ocean West</span>
       </a>
-      <p className="label mt-1 text-muted">Ten rooms on West Bay Street, Nassau</p>
-      <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, ease }} className="mt-[min(4vh,36px)] max-w-[14ch] text-[clamp(1.9rem,2.5vw,2.5rem)] leading-[1.08]">Ten rooms on a ridge, seventy feet above the sea.</motion.h1>
-      <nav aria-label="The rooms" className="mt-[min(4vh,36px)]">
+      <p className="label text-muted">Ten rooms on West Bay Street, Nassau</p>
+      <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, ease }} className="mt-[min(3.6vh,32px)] max-w-[15ch] text-[clamp(1.8rem,2.3vw,2.3rem)] leading-[1.08]">Ten rooms on a ridge, seventy feet above the sea.</motion.h1>
+      <div className="mt-[min(3vh,26px)] flex gap-4" role="group" aria-label="Filter rooms">
+        {FILTERS.map(([k, l]) => <button key={k} type="button" aria-pressed={f === k} onClick={() => setF(k)} className={`min-h-9 text-cap transition-colors ${f === k ? "text-ink underline underline-offset-4" : "text-muted hover:text-ink"}`}>{l}</button>)}
+      </div>
+      <nav aria-label="The rooms" className="mt-1">
         <ol className="border-t border-line">
-          {ROOMS.map((r, i) => (
-            <li key={r.key}>
-              <button type="button" onMouseEnter={() => setSel(i)} onFocus={() => setSel(i)} onClick={() => pick(i)} aria-pressed={sel === i}
-                className="group flex h-[clamp(30px,3.9vh,38px)] w-full items-baseline justify-between gap-4 border-b border-line text-left">
-                <span className={`font-display text-[clamp(1.2rem,1.65vw,1.6rem)] leading-none transition-colors duration-300 ${sel === i ? "text-rose" : "group-hover:text-rose"}`}>
-                  <span className={`mr-2 inline-block size-1.5 rounded-full bg-rose align-middle transition-opacity duration-300 ${sel === i ? "opacity-100" : "opacity-0"}`} aria-hidden />{r.name}
-                </span>
-                <span className="tnum shrink-0 text-cap text-muted">{short(r)}</span>
-              </button>
-            </li>
-          ))}
+          {ROOMS.map((r, i) => {
+            const on = fits(r, f)
+            return (
+              <li key={r.key} className="relative">
+                <span className={`absolute top-1/2 -left-[calc(var(--pad)-6px)] h-px w-[calc(var(--pad)-14px)] bg-rose transition-transform duration-300 origin-left ${sel === i ? "scale-x-100" : "scale-x-0"}`} aria-hidden />
+                <button type="button" onMouseEnter={() => setSel(i)} onFocus={() => setSel(i)} onClick={() => pick(i)} aria-pressed={sel === i}
+                  className={`group flex h-[clamp(32px,4.1vh,42px)] w-full items-center justify-between gap-4 border-b border-line text-left transition-opacity duration-300 ${on ? "opacity-100" : "opacity-30"}`}>
+                  <span className={`font-display text-[clamp(1.35rem,1.95vw,1.85rem)] leading-none transition-colors duration-300 ${sel === i ? "text-rose" : "group-hover:text-rose"}`}>{r.name}</span>
+                  <span className="tnum shrink-0 text-cap text-muted">{short(r)}</span>
+                </button>
+              </li>
+            )
+          })}
         </ol>
       </nav>
-      <nav aria-label="Sections" className="mt-auto flex flex-wrap gap-x-4 pt-4">
+      <nav aria-label="Sections" className="mt-auto flex flex-wrap gap-x-4 pt-3">
         {SECTIONS.map(([id, l]) => <a key={id} href={`#${id}`} className="tlink text-small">{l}</a>)}
       </nav>
-      <div className="mt-4 flex items-center justify-between gap-4 border-t border-line pt-5">
+      <div className="mt-3 flex items-center justify-between gap-4 border-t border-line pt-4">
         <a href={TEL} className="tnum text-small no-underline hover:text-rose">{PHONE}</a>
         <a href={BOOK} target="_blank" rel="noopener" className="book">Check dates</a>
       </div>
@@ -60,9 +70,9 @@ function Stage({ sel, setSel }: { sel: number; setSel: (i: number) => void }) {
   const r = sel >= 0 ? ROOMS[sel] : null
   const pic = r ? r.pic : PIC.terrace
   const rail = useRef<HTMLDivElement>(null)
-  useEffect(() => { if (sel >= 0) (rail.current?.children[sel] as HTMLElement | undefined)?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" }) }, [sel])
+  useEffect(() => { if (sel >= 0) (rail.current?.children[sel + 1] as HTMLElement | undefined)?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" }) }, [sel])
   return (
-    <section id="stage" aria-label="The rooms, one at a time" className="relative bg-conch lg:flex lg:min-h-svh lg:flex-col lg:justify-center lg:px-[var(--pad)] lg:py-14">
+    <section id="stage" aria-label="The rooms, one at a time" className="relative bg-conch lg:min-h-svh lg:px-[var(--pad)] lg:pt-[clamp(110px,15vh,150px)] lg:pb-14">
       {/* phone header + title (the index column is hidden on phones) */}
       <div className="px-5 pt-5 lg:hidden">
         <div className="flex items-center justify-between">
@@ -72,26 +82,27 @@ function Stage({ sel, setSel }: { sel: number; setSel: (i: number) => void }) {
         <p className="label mt-5 text-muted">Ten rooms on West Bay Street, Nassau</p>
         <p className="mt-3 font-display text-[2.35rem] leading-[1.06]">Ten rooms on a ridge, seventy feet above the sea.</p>
       </div>
-      <div className="mx-auto w-full max-w-[920px] px-5 pt-6 lg:px-0 lg:pt-0">
-        <div className="relative w-full" style={{ aspectRatio: r ? "4 / 3" : `${PIC.terrace.w} / ${PIC.terrace.h}`, maxWidth: r ? 800 : 920, transition: "max-width .6s cubic-bezier(.22,1,.36,1)" }}>
+      <div className="w-full px-5 pt-6 lg:px-0 lg:pt-0">
+        <div className="relative mx-auto w-full lg:w-[min(704px,calc((100svh-clamp(110px,15vh,150px)-150px)*1.333))]" style={{ aspectRatio: "4 / 3" }}>
           <AnimatePresence initial={false}>
             <motion.img key={pic.src} src={pic.src} alt={pic.alt} width={pic.w} height={pic.h}
               initial={{ opacity: 0, scale: 1.015 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.7, ease }}
               className="absolute inset-0 h-full w-full bg-conch-2 object-cover" />
           </AnimatePresence>
         </div>
-        <div className="mt-5 flex min-h-[88px] flex-wrap items-end justify-between gap-x-8 gap-y-3" style={{ maxWidth: r ? 800 : 920 }} aria-live="polite">
+        <div className="mx-auto mt-5 flex min-h-[88px] w-full flex-wrap items-end justify-between gap-x-8 gap-y-3 lg:w-[min(704px,calc((100svh-clamp(110px,15vh,150px)-150px)*1.333))]" aria-live="polite">
           <div>
             <p className="font-display text-[clamp(1.9rem,2.8vw,2.6rem)] leading-none">{r ? r.name : "The terrace"}</p>
             <p className="tnum mt-2 text-small text-muted">{r ? [r.bed, floorName(r.floor), r.view, r.note].filter(Boolean).join(" · ") : "Ten rooms, a pool on the terrace, the sea beyond the balustrade. Choose a room."}</p>
           </div>
-          <a href={BOOK} target="_blank" rel="noopener" className="tlink text-small text-rose">{r ? `Check dates for ${r.name}` : "Check dates"}<ArrowUpRight className="size-4" strokeWidth={1.5} aria-hidden /></a>
+          {r && <a href={BOOK} target="_blank" rel="noopener" className="tlink text-small text-rose">Check dates for {r.name}<ArrowUpRight className="size-4" strokeWidth={1.5} aria-hidden /></a>}
         </div>
       </div>
       {/* phone: the register collapses into a chip row */}
-      <div ref={rail} className="mt-4 flex gap-1 overflow-x-auto px-4 pb-6 [scrollbar-width:none] lg:hidden" role="group" aria-label="Choose a room">
+      <div ref={rail} className="mt-3 flex snap-x scroll-px-5 gap-5 overflow-x-auto border-t border-ink/15 px-5 pt-1 pb-6 [scrollbar-width:none] lg:hidden" role="group" aria-label="Choose a room">
+        <button type="button" aria-pressed={sel === -1} onClick={() => setSel(-1)} className={`min-h-12 shrink-0 snap-start border-b-2 font-display text-[1.6rem] leading-none transition-colors ${sel === -1 ? "border-rose text-rose" : "border-transparent"}`}>Terrace</button>
         {ROOMS.map((x, i) => (
-          <button key={x.key} type="button" aria-pressed={sel === i} onClick={() => setSel(i)} className={`min-h-11 shrink-0 border px-4 font-display text-[1.1rem] transition-colors ${sel === i ? "border-rose bg-rose text-white" : "border-ink/20"}`}>{x.name}</button>
+          <button key={x.key} type="button" aria-pressed={sel === i} onClick={() => setSel(i)} className={`min-h-12 shrink-0 snap-start border-b-2 font-display text-[1.6rem] leading-none transition-colors ${sel === i ? "border-rose text-rose" : "border-transparent"}`}>{x.name}</button>
         ))}
       </div>
     </section>
@@ -112,32 +123,23 @@ function Ridge() {
   )
 }
 
-function Compare({ sel, setSel }: { sel: number; setSel: (i: number) => void }) {
-  const [f, setF] = useState<"all" | "balcony" | "king" | "ocean">("all")
-  const list = useMemo(() => ROOMS.map((r, i) => ({ r, i })).filter(({ r }) => f === "all" || (f === "balcony" ? r.balcony : f === "king" ? r.king : r.view.startsWith("Ocean"))), [f])
-  const show = (i: number) => { setSel(i); document.getElementById("stage")?.scrollIntoView({ behavior: "smooth" }) }
-  const FILTERS = [["all", "All ten"], ["ocean", "Ocean view"], ["balcony", "Balcony"], ["king", "King bed"]] as const
+function Feature() {
+  const r = ROOMS.find(x => x.key === "emerald")!
   return (
     <section id="rooms" aria-labelledby="rooms-h" className="border-t border-line px-[var(--pad)] py-[clamp(72px,10vw,140px)]">
-      <p className="label text-muted">Every room has a fridge and a microwave</p>
-      <h2 id="rooms-h" className="mt-4 text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">Ten rooms, compared.</h2>
-      <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter rooms">
-        {FILTERS.map(([k, l]) => <button key={k} type="button" aria-pressed={f === k} onClick={() => setF(k)} className={`min-h-11 border px-4 text-small transition-colors duration-200 ${f === k ? "border-ink bg-ink text-shell" : "border-ink/20 hover:border-ink/50"}`}>{l}</button>)}
+      <p className="label text-muted">One room, in full</p>
+      <h2 id="rooms-h" className="mt-4 max-w-[18ch] text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">Emerald: a queen bed, an arched window, the sea.</h2>
+      <div className="mt-10 grid max-w-[1100px] items-end gap-x-10 gap-y-8 xl:grid-cols-[minmax(0,800px)_minmax(0,1fr)]">
+        <Photo pic={r.pic} className="w-full" />
+        <div>
+          <dl className="border-t border-line">
+            {[["Bed", r.bed], ["Floor", floorName(r.floor)], ["View", r.view], ["Outside", "Private balcony"], ["In the room", "Fridge, microwave, cable TV, hair dryer, free Wi-Fi"]].map(([k, v]) => (
+              <div key={k} className="grid grid-cols-[7rem_minmax(0,1fr)] gap-3 border-b border-line py-3"><dt className="text-cap text-muted">{k}</dt><dd className="m-0 text-small">{v}</dd></div>
+            ))}
+          </dl>
+          <a href="rooms.html" className="tlink mt-5 text-small text-shutter">All ten rooms, photographed<ArrowUpRight className="size-4" strokeWidth={1.5} aria-hidden /></a>
+        </div>
       </div>
-      <motion.ul layout className="mt-8 max-w-[920px] border-t border-line">
-        <AnimatePresence initial={false}>
-          {list.map(({ r, i }) => (
-            <motion.li key={r.key} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease }} className="border-b border-line">
-              <button type="button" onClick={() => show(i)} className="group grid min-h-16 w-full grid-cols-[minmax(0,9rem)_minmax(0,1fr)_auto] items-baseline gap-4 py-4 text-left max-sm:grid-cols-[minmax(0,1fr)_auto]">
-                <span className={`font-display text-[1.6rem] leading-none transition-colors ${sel === i ? "text-rose" : "group-hover:text-rose"}`}>{r.name}</span>
-                <span className="tnum text-small text-muted max-sm:col-span-2 max-sm:row-start-2">{[r.bed, floorName(r.floor), r.view, r.note].filter(Boolean).join(" · ")}</span>
-                <span className="text-cap text-shutter max-sm:col-start-2 max-sm:row-start-1">See it</span>
-              </button>
-            </motion.li>
-          ))}
-        </AnimatePresence>
-      </motion.ul>
-      <a href="rooms.html" className="tlink mt-6 text-small text-shutter">Every room, photographed<ArrowUpRight className="size-4" strokeWidth={1.5} aria-hidden /></a>
     </section>
   )
 }
@@ -224,7 +226,7 @@ function Home() {
         <main id="main">
           <Stage sel={sel} setSel={setSel} />
           <Ridge />
-          <Compare sel={sel} setSel={setSel} />
+          <Feature />
           <Days />
           <Rates />
           <Arrive />
