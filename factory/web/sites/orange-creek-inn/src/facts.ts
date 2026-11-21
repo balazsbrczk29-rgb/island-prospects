@@ -73,7 +73,9 @@ export function offersFor(nights: number, origin: Origin, arrive: string | null,
         if (hit) { status = "blocked"; note = `Not on these dates: blackout ${hit[2]}.` }
       }
     }
-    return { id: o.id, title: o.title, detail: o.detail, status, note }
+    const via = origin === "florida" && ["fly1", "fly2", "air"].includes(o.id)
+    if (via && status === "ok") note = "Fits if you connect through Nassau instead of flying direct."
+    return { id: o.id, title: o.title, detail: o.detail, status, note, via }
   })
 }
 
@@ -99,6 +101,7 @@ export const SPECIALS = [
   { ids: ["fl250"], title: "Up to $250 from Florida", who: "Air or ferry inclusive packages from Florida, four nights or longer.", book: "1 Nov 2026 to 31 Jan 2027", travel: "2 Nov 2026 to 31 Oct 2027", out: "Holiday blackouts apply" },
   { ids: ["eu"], title: "Europe and Latin America", who: "Residents of Europe, Argentina, Brazil, Colombia and Mexico: one free ticket from Nassau for four to six nights, two for seven, double occupancy.", book: "1 Jul 2026 to 30 Jun 2027", travel: "2 Jul 2026 to 31 Oct 2027", out: "Thanksgiving and Christmas blackouts" },
 ] as const
+export const specialTitle = (id: string) => SPECIALS.find(s => (s.ids as readonly string[]).includes(id))?.title ?? id
 export const BLACKOUTS = ["26 to 28 Nov 2026", "19 Dec 2026 to 1 Jan 2027", "25 to 28 Mar 2027", "1 to 4 Jul 2027"]
 
 const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]

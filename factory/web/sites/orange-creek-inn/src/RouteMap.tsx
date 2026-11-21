@@ -18,6 +18,23 @@ const LEGS: Record<Origin, { d: string; label: string }[]> = {
 }
 const draw = { hidden: { pathLength: 0, opacity: 0 }, show: (i: number) => ({ pathLength: 1, opacity: 1, transition: { pathLength: { delay: 0.15 + i * 0.75, duration: 0.9, ease: [0.45, 0, 0.2, 1] }, opacity: { delay: 0.15 + i * 0.75, duration: 0.01 } } }) }
 
+/** The same route, small, inside the hero's "Your way here": it redraws when you change where you fly from. */
+export function MiniRoute() {
+  const { origin } = usePlan()
+  const vb = "40 60 900 470"
+  return (
+    <svg className="mini" viewBox={vb} aria-hidden="true">
+      <path d={MAP.d} className="mini__land" />
+      <g key={origin}>
+        {LEGS[origin].map((l, i) => (
+          <motion.path key={i} d={l.d} className="mini__leg" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.2 + i * 0.6, duration: 0.8, ease: [0.45, 0, 0.2, 1] }} />
+        ))}
+      </g>
+      <circle cx={inn[0]} cy={inn[1]} r="16" className="mini__inn" />
+    </svg>
+  )
+}
+
 /** The getting-here map: real coastlines (Natural Earth), the route for where you start, drawn leg by leg. */
 export default function RouteMap() {
   const { origin, arrive, set } = usePlan()
@@ -34,7 +51,7 @@ export default function RouteMap() {
             ))}
           </motion.g>
           <g className="route__pts">
-            <circle cx={fxe[0]} cy={fxe[1]} r="5" /><text x={fxe[0] + 12} y={fxe[1] + 5}>Fort Lauderdale FXE</text>
+            <circle cx={fxe[0]} cy={fxe[1]} r="5" /><text x={fxe[0] + 10} y={fxe[1] + 36} className="route__fxe">Fort Lauderdale FXE</text>
             <circle cx={nas[0]} cy={nas[1]} r="5" /><text x={nas[0] - 8} y={nas[1] + 34} textAnchor="middle">Nassau</text>
             <circle cx={atc[0]} cy={atc[1]} r="5" />
             <circle cx={inn[0]} cy={inn[1]} r="11" className="route__pulse" />

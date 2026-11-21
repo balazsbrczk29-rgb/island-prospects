@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ArrowUpRight } from "lucide-react"
-import { Foot, Img, Masthead, Page, mount } from "./site"
+import { Foot, Img, Masthead, Page, mount, usePlan } from "./site"
 import { BOOK, PHONE, PHOTOS, TEL } from "./facts"
 import RouteMap from "./RouteMap"
 
@@ -9,7 +9,8 @@ const FULL = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 const MAKERS = [true, false, true, false, true, true, false]
 
 function DayPlan() {
-  const [d, setD] = useState(2)
+  const { arrive } = usePlan()
+  const [d, setD] = useState(() => (new Date(arrive + "T12:00:00Z").getUTCDay() + 6) % 7)
   const next = FULL[[1, 2, 3, 4, 5, 6].map(k => (d + k) % 7).find(i => MAKERS[i])!]
   return (
     <div>
