@@ -4,6 +4,10 @@
 @source "../../../src/components/ui/sheet.tsx";
 @source "../../../src/components/ui/tabs.tsx";
 
+@font-face { font-family: "Libre Caslon Display"; font-style: normal; font-weight: 400; font-display: swap; src: url("./fonts/libre-caslon-display-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Jost"; font-style: normal; font-weight: 300 700; font-display: swap; src: url("./fonts/jost-latin-wght-normal.woff2") format("woff2-variations"); }
+@font-face { font-family: "Caslon Fallback"; src: local("Georgia"); size-adjust: 92%; ascent-override: 96%; }
+
 @theme {
   --color-paper: #fbf8f5;
   --color-blush: #f5e6e1;
@@ -12,11 +16,15 @@
   --color-rose: #b44c6e;
   --color-lagoon: #8cc9c2;
   --color-line: #eadfd8;
-  --font-display: "Gloock", Georgia, serif;
-  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Libre Caslon Display", "Caslon Fallback", Georgia, serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
 }
 html { background: var(--color-paper); color: var(--color-ink); }
-body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-sans); font-size: 17px; letter-spacing: 0.005em; -webkit-font-smoothing: antialiased; }
+.font-display { font-weight: 400; letter-spacing: -0.01em; }
+.tnum { font-variant-numeric: tabular-nums lining-nums; }
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 ::selection { background: var(--color-blush); color: var(--color-ink); }
@@ -25,5 +33,5 @@ html.lenis, html.lenis body { height: auto; }
 .range { appearance: none; height: 4px; border-radius: 9px; background: var(--color-line); accent-color: var(--color-rose); }
 .range::-webkit-slider-thumb { appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--color-rose); border: 4px solid #fff; box-shadow: 0 2px 10px rgba(31,42,46,.25); cursor: grab; }
 .range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--color-rose); border: 4px solid #fff; }
-@media (max-width: 1023px) { body { padding-bottom: 64px; } }
+@media (max-width: 1023px) { body { padding-bottom: 64px; } :root { --concept-offset: 60px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
