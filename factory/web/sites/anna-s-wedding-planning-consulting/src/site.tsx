@@ -91,18 +91,18 @@ function Footer() {
   )
 }
 
-function ActionBar() {
+function PhoneDock() {
   return (
-    <nav aria-label="Quick actions" className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1.5fr] border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
-      <a href={TEL} className="flex min-h-14 items-center justify-center gap-2 text-[15px]"><Phone className="size-4" aria-hidden /> Call Anna</a>
-      <a href="index.html#finder" className="flex min-h-14 items-center justify-center bg-rose text-[15px] text-white">Find your package</a>
-    </nav>
+    <div className="fixed right-3 bottom-[calc(10px+env(safe-area-inset-bottom))] z-40 flex items-center gap-2 lg:hidden" role="group" aria-label="Plan or call">
+      <a href={TEL} aria-label={`Call Anna, ${PHONE}`} className="grid size-13 place-items-center rounded-full border border-line bg-paper text-rose shadow-[0_10px_24px_-14px_rgba(31,42,46,.6)]"><Phone className="size-5" aria-hidden /></a>
+      <a href="index.html#finder" className="inline-flex min-h-13 items-center rounded-full bg-rose px-5 text-[15px] text-white shadow-[0_10px_24px_-14px_rgba(31,42,46,.6)]">Find your package</a>
+    </div>
   )
 }
 
 export function Page({ current, children }: { current: string; children: ReactNode }) {
   useLenis()
-  return (<><a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:p-3 focus:text-paper">Skip to content</a><Header current={current} /><main id="main">{children}</main><Footer /><ActionBar /></>)
+  return (<><a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-ink focus:p-3 focus:text-paper">Skip to content</a><Header current={current} /><main id="main">{children}</main><Footer /><PhoneDock /></>)
 }
 
 export function mount(node: ReactNode) {
@@ -110,9 +110,10 @@ export function mount(node: ReactNode) {
   createRoot(document.getElementById("root")!).render(node)
 }
 
-export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
+/** Content unveils from a soft top edge, like a veil lifting: opacity with a short clip, no blur. */
+export function Unveil({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
   return (
-    <motion.div className={className} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ duration: 1, delay, ease }}>
+    <motion.div className={className} initial={{ opacity: 0, clipPath: "inset(0 0 18% 0)" }} whileInView={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ duration: 1.1, delay, ease }}>
       {children}
     </motion.div>
   )

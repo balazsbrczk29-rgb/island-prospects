@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react"
 import { ArrowUpRight, Phone, Check, Ship, Palmtree, Copy, CalendarHeart } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Page, mount, Reveal, Mark, ease, usd, PHONE, TEL, US_PHONE, US_TEL } from "./site"
+import { Page, mount, Unveil, Mark, ease, usd, PHONE, TEL, US_PHONE, US_TEL } from "./site"
 import { PACKAGES, LICENCE, SERVICES, GALLERY, IMG, HERO, PKG_W, PKG_H, TOLL, TOLL_TEL, CONTACT_URL, hasMusic, hasReception, type Pkg } from "./data"
 
 type Mode = "beach" | "cruise"
@@ -135,7 +135,7 @@ function Licence() {
   return (
     <section id="licence" className="scroll-mt-6 border-t border-line bg-paper" aria-labelledby="lic-title">
       <div className="mx-auto grid max-w-[1320px] gap-12 px-5 py-24 md:px-12 md:py-32 lg:grid-cols-12">
-        <Reveal className="lg:col-span-4">
+        <Unveil className="lg:col-span-4">
           <Mark n="ii.">Marriage licence</Mark>
           <h2 id="lic-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] tracking-[-0.015em]">Your paperwork, ticked off.</h2>
           <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-muted">Anna schedules your appointment with the Registrar's office and prepares the documents for the interview. Tick what you already have.</p>
@@ -143,8 +143,8 @@ function Licence() {
             <svg viewBox="0 0 44 44" className="size-24 -rotate-90" aria-hidden><circle cx="22" cy="22" r="19" fill="none" stroke="#eadfd8" strokeWidth="3" /><motion.circle cx="22" cy="22" r="19" fill="none" stroke="#b44c6e" strokeWidth="3" strokeLinecap="round" pathLength={1} strokeDasharray="1 1" animate={{ strokeDashoffset: 1 - done.length / LICENCE.length }} transition={{ duration: 0.6, ease }} /></svg>
             <p className="font-display text-4xl">{pct}%<span className="mt-1 block font-sans text-[14px] text-muted">ready for the Registrar</span></p>
           </div>
-        </Reveal>
-        <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
+        </Unveil>
+        <Unveil delay={0.1} className="lg:col-span-7 lg:col-start-6">
           <ul className="border-t border-ink/15">
             {LICENCE.map((t, i) => {
               const on = done.includes(i)
@@ -159,7 +159,7 @@ function Licence() {
             })}
           </ul>
           <p className="mt-4 text-[13px] text-muted">As published by Anna's Wedding Planning. Requirements are set by the Registrar General's Department of The Bahamas; Anna confirms the current rules when you book.</p>
-        </Reveal>
+        </Unveil>
       </div>
     </section>
   )
@@ -171,15 +171,15 @@ function Anna() {
   return (
     <section id="anna" className="mx-auto max-w-[1320px] scroll-mt-24 px-5 py-24 md:px-12 md:py-36" aria-labelledby="anna-title">
       <div className="grid gap-12 lg:grid-cols-12">
-        <Reveal className="lg:col-span-5">
+        <Unveil className="lg:col-span-5">
           <div className="relative mx-auto aspect-[556/331] w-full max-w-[556px] overflow-hidden rounded-t-[240px] bg-blush">
             <img src={IMG + "2015/11/COUPLE-CANADA_2-1.jpg"} alt="A beach ceremony in Nassau led by a minister, planned by Anna's Wedding Planning" width={556} height={331} loading="lazy" className="absolute inset-0 size-full object-cover" />
           </div>
           <div className="mx-auto mt-4 grid max-w-[556px] grid-cols-3 gap-3">
             {GALLERY.slice(0, 3).map(src => <img key={src} src={src} alt="A wedding in Nassau planned by Anna" width={300} height={300} loading="lazy" className="aspect-square w-full max-w-[300px] rounded-[14px] object-cover" />)}
           </div>
-        </Reveal>
-        <Reveal delay={0.1} className="self-center lg:col-span-6 lg:col-start-7">
+        </Unveil>
+        <Unveil delay={0.1} className="self-center lg:col-span-6 lg:col-start-7">
           <Mark n="iii.">About Anna</Mark>
           <h2 id="anna-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98] tracking-[-0.015em]">Since 1995, one planner who answers.</h2>
           <div className="mt-7 max-w-xl space-y-4 text-[18px] leading-relaxed text-muted">
@@ -190,7 +190,7 @@ function Anna() {
           <ul className="mt-3 flex flex-wrap gap-2">
             {COUNTRIES.map(c => <li key={c} className="rounded-full border border-line px-3.5 py-1.5 text-[14px] transition hover:border-rose hover:text-rose">{c}</li>)}
           </ul>
-        </Reveal>
+        </Unveil>
       </div>
     </section>
   )
@@ -214,10 +214,10 @@ function Services() {
   return (
     <section className="bg-ink text-paper" aria-labelledby="svc-title">
       <div className="mx-auto grid max-w-[1320px] gap-12 px-5 py-24 md:px-12 md:py-32 lg:grid-cols-12">
-        <Reveal className="lg:col-span-4">
+        <Unveil className="lg:col-span-4">
           <p className="flex items-baseline gap-3 text-[14px] text-paper/70"><span className="font-display text-[1.4rem] text-blush">iv.</span>What Anna does</p>
           <h2 id="svc-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[0.98]">From first call to the last toast.</h2>
-        </Reveal>
+        </Unveil>
         <ol className="lg:col-span-7 lg:col-start-6">
           {SERVICES.map(([t, d], i) => (
             <motion.li key={t} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06, duration: 0.8, ease }} className="group grid grid-cols-[2.5rem_1fr] gap-x-4 border-b border-paper/15 py-6 first:border-t">
@@ -253,12 +253,12 @@ function Plan({ req }: { req: Req }) {
   const copy = async () => { try { await navigator.clipboard.writeText(line); setCopied(true); setTimeout(() => setCopied(false), 2200) } catch { /* clipboard blocked */ } }
   return (
     <section id="plan" className="mx-auto grid max-w-[1320px] scroll-mt-6 gap-12 px-5 py-20 md:px-12 md:py-28 lg:grid-cols-12" aria-labelledby="plan-title">
-      <Reveal className="lg:col-span-4">
+      <Unveil className="lg:col-span-4">
         <Mark n="v.">Request your date</Mark>
         <h2 id="plan-title" className="mt-5 font-display text-[clamp(2.2rem,3.8vw,3.6rem)] leading-[1.02]">Your request, ready for Anna.</h2>
         <p className="mt-6 max-w-sm text-[17px] leading-relaxed text-muted">What you chose in the finder is already filled in. Add what you know, then call, or copy it into Anna's contact form.</p>
-      </Reveal>
-      <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
+      </Unveil>
+      <Unveil delay={0.1} className="lg:col-span-7 lg:col-start-6">
         <Tabs value={tab} onValueChange={v => setTab(v as K)}>
           <TabsList className="h-auto w-full justify-start gap-1 overflow-x-auto rounded-full bg-blush p-1">
             {(Object.keys(KINDS) as K[]).map(k => <TabsTrigger key={k} value={k} className="min-h-11 flex-none rounded-full px-5 text-[15px] data-[state=active]:bg-ink data-[state=active]:text-paper">{KINDS[k].label}</TabsTrigger>)}
@@ -285,7 +285,7 @@ function Plan({ req }: { req: Req }) {
           </div>
           <p className="mt-5 text-[14px] text-paper/65 tnum">From the US {US_PHONE} or toll free {TOLL}.</p>
         </div>
-      </Reveal>
+      </Unveil>
     </section>
   )
 }
@@ -301,9 +301,9 @@ function Questions() {
   return (
     <section className="border-t border-line" aria-labelledby="faq-title">
       <div className="mx-auto grid max-w-[1320px] gap-12 px-5 py-24 md:px-12 md:py-32 lg:grid-cols-12">
-        <Reveal className="lg:col-span-4"><Mark n="vi.">Questions</Mark>
-          <h2 id="faq-title" className="mt-5 font-display text-[clamp(2.2rem,3.8vw,3.6rem)] leading-[0.98]">What couples ask first.</h2></Reveal>
-        <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
+        <Unveil className="lg:col-span-4"><Mark n="vi.">Questions</Mark>
+          <h2 id="faq-title" className="mt-5 font-display text-[clamp(2.2rem,3.8vw,3.6rem)] leading-[0.98]">What couples ask first.</h2></Unveil>
+        <Unveil delay={0.1} className="lg:col-span-7 lg:col-start-6">
           <Accordion type="single" collapsible defaultValue="q0" className="border-t border-line">
             {FAQ.map(([q, a], i) => (
               <AccordionItem key={q} value={`q${i}`} className="border-line">
@@ -312,7 +312,7 @@ function Questions() {
               </AccordionItem>
             ))}
           </Accordion>
-        </Reveal>
+        </Unveil>
       </div>
     </section>
   )

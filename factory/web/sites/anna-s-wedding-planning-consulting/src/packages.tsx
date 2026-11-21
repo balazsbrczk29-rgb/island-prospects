@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { motion } from "motion/react"
 import { Check, Phone } from "lucide-react"
-import { Page, mount, Reveal, Mark, ease, usd, PHONE, TEL } from "./site"
+import { Page, mount, Unveil, Mark, ease, usd, PHONE, TEL } from "./site"
 import { PACKAGES, OTHER } from "./data"
 
 function Hero() {
@@ -56,7 +56,7 @@ function Group({ group, title, n }: { group: "beach" | "cruise"; title: string; 
 function More() {
   return (
     <section id="more" className="mx-auto max-w-[1320px] scroll-mt-24 px-5 py-24 md:px-12" aria-labelledby="more-title">
-      <Reveal><Mark n="iii.">Also from Anna</Mark><h2 id="more-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-[0.98]">For blended families, grand days and anniversaries.</h2></Reveal>
+      <Unveil><Mark n="iii.">Also from Anna</Mark><h2 id="more-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-[0.98]">For blended families, grand days and anniversaries.</h2></Unveil>
       <ul className="mt-12 border-t border-line">
         {OTHER.map(o => (
           <li key={o.name} className="group flex flex-wrap items-baseline justify-between gap-4 border-b border-line py-7">
