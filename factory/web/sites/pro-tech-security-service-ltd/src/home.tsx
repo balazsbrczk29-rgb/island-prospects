@@ -17,12 +17,12 @@ function Hero({ hour, setHour, live, weekday }: { hour: number; setHour: (h: num
         ))}
       </div>
       <div className="status" style={{ color: INK[scene] }}>
-        <p className="now" aria-live="polite"><span className="clock num">{live ? "It is " : "At "}{fmt(hour)}{live ? " in Nassau." : ","}</span> {live ? officeLine(hour, weekday) : hour >= 9 && hour < 17 ? "our office on Farrington Road is open." : "our office is closed."} The central station is watching.</p>
-        <h1 id="h1" className="sub">Pro-Tech Security: guards, CCTV and alarms, and 24/7 monitoring, from Nassau since 2004.</h1>
+        <h1 id="h1" className="now" aria-live="polite"><span className="clock num">{live ? "It is " : "At "}{fmt(hour)}{live ? " in Nassau." : ","}</span> <span className="rest">{live ? officeLine(hour, weekday) : hour >= 9 && hour < 17 ? "our office on Farrington Road is open." : "our office is closed."} The central station is watching.</span></h1>
+        <p className="sub">Pro-Tech Security: guards, CCTV and alarms, and 24/7 monitoring, from Nassau since 2004.</p>
       </div>
       <div className="strip">
         <div className="track">
-          <label className="sr" htmlFor="hour" style={{ position: "absolute", left: -9999 }}>Time of day in Nassau</label>
+          <label className="sr" htmlFor="hour">Time of day in Nassau</label>
           <input id="hour" type="range" min={0} max={23.5} step={0.25} value={hour} aria-valuetext={fmt(hour)} onChange={e => setHour(Number(e.target.value))} />
           <div className="stops">
             {STOPS.map(st => <button key={st.label} type="button" style={{ left: `${(st.hour / 23.5) * 100}%` }} aria-pressed={!live && hour === st.hour} onClick={() => setHour(st.hour)}><b className="num">{st.label}</b><span>{st.title}</span></button>)}
@@ -86,7 +86,7 @@ function Stage() {
         </motion.div>
       </div>
       {/* every chapter's words stay in the HTML for search and screen readers */}
-      <div style={{ position: "absolute", left: -9999 }}>{CHAPTERS.map(ch => <p key={ch.n}>{ch.time} {ch.title} {ch.lines.join(" ")}</p>)}</div>
+      <div className="sr">{CHAPTERS.map(ch => <p key={ch.n}>{ch.time} {ch.title} {ch.lines.join(" ")}</p>)}</div>
     </section>
   )
 }

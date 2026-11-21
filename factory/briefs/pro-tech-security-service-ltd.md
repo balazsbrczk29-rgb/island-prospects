@@ -76,3 +76,5 @@ Call (242) 328-0653 everywhere (hero, title card, chapters footer link, request)
 Standard (photographic film with crossfades; no WebGL).
 ## Distinct
 No other site in the repo runs a real-time-of-day hero; dark navy lane only in night chapters; Swiss grotesk numbering.
+
+**Plan gate verdict (applied):** photo >= 70svh with the status line as the display moment over the sky; hardware regenerated to read at hero scale; chapters pinned full-bleed, captions on a fixed night panel bottom-left; chapter 2.0 uses the CCTV close-up; text card dropped (its services moved into the planner).

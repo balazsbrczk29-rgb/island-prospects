@@ -56,5 +56,5 @@ export const PROPERTY = ["A home", "A shop or office", "A warehouse or yard", "A
 export const NEEDS = ["An alarm system", "CCTV cameras", "Monitoring for my alarm", "Security officers", "Security supplies", "Consulting or an investigation", "Collections"]
 
 export function requestText(p: string, needs: string[], area: string) {
-  return `Pro-Tech request: ${p || "property not chosen"}${area ? ` in ${area}` : ""}. Needs: ${needs.length ? needs.join(", ").toLowerCase() : "not chosen yet"}.`
+  return `Pro-Tech request: ${p || "property not chosen"}${area ? ` in ${area}` : ""}. Needs: ${needs.length ? needs.map(n => (n.startsWith("CCTV") ? n : n[0].toLowerCase() + n.slice(1))).join(", ") : "not chosen yet"}.`
 }

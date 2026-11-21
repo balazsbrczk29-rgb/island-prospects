@@ -54,7 +54,7 @@ export function Dock() {
       es.forEach(e => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)))
       el.dataset.hidden = seen.size ? "true" : "false"
     }, { threshold: 0.05 })
-    document.querySelectorAll("[data-hero], #contact, .summary").forEach(t => io.observe(t))
+    document.querySelectorAll("[data-hero], #who, #contact, .summary").forEach(t => io.observe(t))
     return () => io.disconnect()
   }, [])
   return <div className="dock" ref={ref} data-hidden="true"><a className="btn num" href={`tel:${TEL}`}>Call {PHONE}</a></div>
