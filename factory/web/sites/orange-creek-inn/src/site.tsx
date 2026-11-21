@@ -29,7 +29,10 @@ function useReplyTab() {
       document.documentElement.classList.toggle("show-reply", seen.size === 0)
     }, { rootMargin: "-80px 0px -80px 0px" })
     hide.forEach(h => io.observe(h))
-    return () => { io.disconnect(); document.documentElement.classList.remove("show-reply") }
+    let down = false
+    const onScroll = () => { const d = window.scrollY > 240; if (d !== down) { down = d; document.documentElement.classList.toggle("scrolled", d) } }
+    window.addEventListener("scroll", onScroll, { passive: true }); onScroll()
+    return () => { window.removeEventListener("scroll", onScroll); io.disconnect(); document.documentElement.classList.remove("show-reply") }
   }, [])
 }
 

@@ -244,6 +244,7 @@ a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22e
 .replytab svg { width: 20px; height: 20px; stroke-width: 1.75; }
 html.show-reply .replytab { transform: none; }
 html.show-reply { --concept-offset: 60px; }
+@media (max-width: 899px) { .tab { transition: transform var(--calm) var(--ease), padding var(--quick) var(--ease); } html.scrolled .tab { transform: translateX(110%); } }
 @media (min-width: 900px) {
   .replytab { left: auto; bottom: auto; top: 108px; min-height: 46px; padding: 0 var(--s4); font-size: var(--t-small); border-radius: var(--r-control) 0 0 var(--r-control); transform: translateX(110%); }
   html.show-reply { --concept-offset: 0px; }

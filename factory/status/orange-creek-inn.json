@@ -127,7 +127,29 @@
     "warnings": 2,
     "distinct": "distinct (closest 66)"
   },
-  "notes": "awaiting independent critic. BLIND: the sandbox cannot load outside images or reference sites; look.mjs not run, references (aman.com, habitas.com, papier.com) judged from knowledge. Photos were seen in the Lovable gallery project 3eb88dcd-7fe3-49c8-8637-2c233d526099 (two rounds, 1.2 credits, no generation) and QA screenshots use 404 px crops of that gallery, so photos look softer in screenshots than live (sources are 900x520, room 1046x786, creek 569x337; no print is shown wider than 548 CSS px). Rebuilt from scratch: old stay.html and island.html replaced by getting-here.html. Lenis only on fine pointers; no scroll-linked React state; prints animate transform only; prefers-reduced-motion gives settled prints. QA warnings are the shared concept-label button (32 px). interact.mjs reports 4 dead inputs: Playwright cannot fill radio inputs; they work. Commons search done (Cat Island) but no Commons photo used. Fonts self-hosted from @fontsource.",
+  "notes": "awaiting independent critic. BLIND: the sandbox cannot load outside images or reference sites; look.mjs not run, references (aman.com, habitas.com, papier.com) judged from knowledge. Photos were seen in the Lovable gallery project 3eb88dcd-7fe3-49c8-8637-2c233d526099 (two rounds, 1.2 credits, no generation) and QA screenshots use 404 px crops of that gallery, so photos look softer in screenshots than live (sources are 900x520, room 1046x786, creek 569x337; no print is shown wider than 548 CSS px). Rebuilt from scratch: old stay.html and island.html replaced by getting-here.html. Lenis only on fine pointers; no scroll-linked React state; prints animate transform only; prefers-reduced-motion gives settled prints. QA warnings are the shared concept-label button (32 px). interact.mjs reports 4 dead inputs: Playwright cannot fill radio inputs; they work. Commons search done (Cat Island) but no Commons photo used. Fonts self-hosted from @fontsource. | Final critic 2026-11-21 (mode 2, photos BLIND as labelled boxes): fix pass applied (phone Contents tab slides away once scrolled so it never covers text; letter close added to the sign-off). Still below 4: composition 3 (alternating text and print rows, prints do not walk down the margin, slate band breaks the sheet), distinct 3, references 3, photography 3; getting-here repeats the cost table and a home print. Left needs-review: needs a layout rework (prints laid in the margin) or a reroll.",
   "built_at": "2026-11-21T00:00:00Z",
-  "review_claimed_at": "2026-11-21T13:28:38.644Z"
+  "review_claimed_at": "2026-11-21T13:28:38.644Z",
+  "final_critic": {
+    "date": "2026-11-21",
+    "before": {
+      "photography": 3,
+      "typography": 4,
+      "composition": 3,
+      "colour": 4,
+      "fit": 4,
+      "distinct": 3,
+      "references": 3
+    },
+    "after_fix": {
+      "photography": 3,
+      "typography": 4,
+      "composition": 3,
+      "colour": 4,
+      "fit": 4,
+      "distinct": 3,
+      "references": 3
+    }
+  },
+  "updated_at": "2026-11-21T13:31:29.474Z"
 }

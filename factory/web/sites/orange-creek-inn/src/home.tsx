@@ -160,6 +160,7 @@ function SignOff() {
   return (
     <section className="signoff" aria-labelledby="signoff-title">
       <div>
+        <p className="voice">With warm wishes from the top of Cat Island,</p>
         <h2 id="signoff-title">Come up and see us.</h2>
         <p className="signoff__name">{NAME}</p>
       </div>
