@@ -4,22 +4,25 @@
 @font-face { font-family: "Syne"; src: url("./fonts/syne-latin-wght-normal.woff2") format("woff2"); font-weight: 400 800; font-display: swap; }
 @font-face { font-family: "Atkinson Hyperlegible"; src: url("./fonts/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Atkinson Hyperlegible"; src: url("./fonts/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
-@font-face { font-family: "Permanent Marker"; src: url("./fonts/permanent-marker-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-.marker { font-family: "Permanent Marker", "Comic Sans MS", cursive; letter-spacing: 0; line-height: 1; }
 @font-face { font-family: "Syne Fallback"; src: local("Arial"); size-adjust: 104%; ascent-override: 92%; descent-override: 26%; }
 
-/* P14 Blue hole, tuned to Cheryl's own navy-and-yellow uniform */
+/* Cheryl's own navy-and-yellow uniform, on a warm island paper */
 @theme {
-  --color-paper: #f3f7f6;
-  --color-paper-2: #e6eeec;
-  --color-ink: #0f2233;
-  --color-muted: #4a5a66;
-  --color-line: #cfdcda;
-  --color-deep: #0b4f6c;
-  --color-deep-2: #083b52;
-  --color-aqua: #9ed8db;
-  --color-yellow: #f2d16b;
+  --color-paper: #f6f3ec;
+  --color-paper-2: #ece7dc;
+  --color-ink: #101a33;
+  --color-muted: #4d5568;
+  --color-line: #d8d2c4;
+  --color-navy: #14254a;
+  --color-navy-2: #0d1a36;
+  --color-deep: #14254a;
+  --color-yellow: #f5c84c;
   --color-card: #ffffff;
+  --color-sea: #b9dadd;
+  --color-shallow: #d3ece9;
+  --color-shallow-2: #e4f3ef;
+  --color-sand: #f6eed9;
+  --color-coast: #b3a47c;
   --font-display: "Syne", "Syne Fallback", sans-serif;
   --font-sans: "Atkinson Hyperlegible", ui-sans-serif, sans-serif;
   --radius-s: 6px;
@@ -62,29 +65,36 @@ p, li { text-wrap: pretty; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 52px; padding: 0 1.5rem; border-radius: 999px; font-weight: 700; font-size: 1.0625rem; transition: transform var(--dur-fast) var(--ease-out-quint), background-color var(--dur-fast); }
 .btn:active { transform: scale(.97); }
 .btn-primary { background: var(--color-yellow); color: var(--color-ink); }
-.btn-primary:hover { background: #f6dc86; }
+.btn-primary:hover { background: #f8d572; }
+.btn-navy { background: var(--color-navy); color: #fff; }
+.btn-navy:hover { background: #1d3363; }
 .btn-text { min-height: 44px; padding: 0 .25rem; border-radius: 4px; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
 
 .field label, .field .lab { display: block; font-size: var(--t-6); font-weight: 700; margin-bottom: .4rem; }
 .field input, .field select, .field textarea { width: 100%; min-height: 50px; border-radius: 10px; border: 1.5px solid var(--color-line); background: #fff; padding: .7rem .9rem; font: inherit; color: var(--color-ink); transition: border-color var(--dur-fast); }
 .field textarea { min-height: 96px; resize: vertical; }
-.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--color-deep); box-shadow: 0 0 0 3px rgba(11,79,108,.18); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--color-deep); box-shadow: 0 0 0 3px rgba(20,37,74,.18); }
 
 .seg { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; padding: 4px; gap: 4px; border-radius: 12px; background: var(--color-paper-2); }
 .seg button { min-height: 44px; padding: 0 1rem; border-radius: 8px; font-weight: 700; font-size: var(--t-6); color: var(--color-muted); transition: background-color var(--dur-fast), color var(--dur-fast); }
 .seg button[aria-pressed="true"] { background: var(--color-deep); color: #fff; }
 
-.img-ph { background: linear-gradient(135deg, #cfe3e4, #e6eeec); }
+.img-ph { background: #e3ddd0; }
 
-@keyframes sway { 0%,100% { transform: rotate(-0.6deg) } 50% { transform: rotate(0.6deg) } }
-.sign-sway { transform-origin: 50% 0; animation: sway 6s var(--ease-in-out-cubic) infinite; will-change: transform; }
 
 .field input::placeholder, .field textarea::placeholder { color: #5b6b76; opacity: 1; }
-.perf-ink { background-image: radial-gradient(circle at 50% 50%, var(--color-ink) 7px, transparent 7.5px); background-size: 100% 26px; background-repeat: repeat-y; }
+.perf-ink { background-image: radial-gradient(circle at 50% 50%, var(--color-paper) 7px, transparent 7.5px); background-size: 100% 26px; background-repeat: repeat-y; }
 @media (max-width: 1023px) { .perf-ink { background-size: 26px 100%; background-repeat: repeat-x; } }
 
-/* the perforation on the pickup ticket */
-.perf { background-image: radial-gradient(circle at 50% 50%, var(--color-aqua) 7px, transparent 7.5px); background-size: 100% 26px; background-repeat: repeat-y; }
-@media (max-width: 1023px) { .perf { background-image: radial-gradient(circle at 50% 50%, var(--color-aqua) 7px, transparent 7.5px); background-size: 26px 100%; background-repeat: repeat-x; } }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* the tour map */
+.map-label { font-family: var(--font-sans); font-weight: 700; fill: #6b6450; }
+.map-big { font-family: var(--font-display); font-weight: 700; fill: #c4b48c; }
+.map-sea { font-family: var(--font-sans); font-style: italic; fill: #5f8e93; }
+.map-stop { font-family: var(--font-sans); font-weight: 700; fill: var(--color-navy); stroke: #fff; stroke-width: 3px; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.map-num { font-family: var(--font-sans); font-weight: 700; fill: var(--color-yellow); }
+@keyframes pinpulse { 0% { opacity: .9; transform: scale(.7) } 100% { opacity: 0; transform: scale(1.6) } }
+.pin-pulse { transform-box: fill-box; transform-origin: center; animation: pinpulse 1.6s var(--ease-out-quint) infinite; }
+.scroll-thin { scrollbar-width: thin; scrollbar-color: var(--color-line) transparent; }

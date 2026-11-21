@@ -59,8 +59,8 @@ export function Masthead({ dark = true }: { dark?: boolean }) {
           <span className={`hidden text-[14px] sm:inline ${dark ? "text-white/75" : "text-muted"}`}>Bahamas Taxi and Tours, Nassau</span>
         </a>
         <nav aria-label="Main" className="flex items-center gap-1 sm:gap-6">
-          <a href="index.html#pickup" className="hidden min-h-11 items-center font-bold md:inline-flex">Airport pickup</a>
-          <a href="tours.html" className="hidden min-h-11 items-center font-bold md:inline-flex">Private tours</a>
+          <a href="#pickup" className="hidden min-h-11 items-center font-bold md:inline-flex">Airport pickup</a>
+          <a href="#tour" className="hidden min-h-11 items-center font-bold md:inline-flex">Private tours</a>
           <a href={TEL} className="tnum inline-flex min-h-11 items-center gap-2 font-bold"><Phone className="size-4" strokeWidth={2.25} aria-hidden /><span>{PHONE}</span></a>
         </nav>
       </div>
@@ -86,9 +86,9 @@ export function Dock({ action, hideWhile = [] }: { action: { href: string; label
   return (
     <motion.nav aria-label="Quick links" initial={{ y: 110 }} animate={{ y: hidden ? 110 : 0 }} transition={spring} aria-hidden={hidden}
       className="fixed inset-x-0 bottom-0 z-[8000] flex justify-center px-3 pb-[calc(10px+env(safe-area-inset-bottom))] pointer-events-none">
-      <div className={`flex items-center gap-1 rounded-[18px] border border-white/15 bg-ink p-1.5 text-white shadow-[0_14px_40px_-12px_rgba(15,34,51,.55)] ${hidden ? "" : "pointer-events-auto"}`}>
-        <a tabIndex={hidden ? -1 : undefined} href="index.html#pickup" className="hidden min-h-12 items-center rounded-[12px] px-4 font-bold hover:bg-white/10 sm:inline-flex">Pickup</a>
-        <a tabIndex={hidden ? -1 : undefined} href="tours.html" className="inline-flex min-h-12 items-center rounded-[12px] px-4 font-bold hover:bg-white/10">Tours</a>
+      <div className={`flex items-center gap-1 rounded-[18px] border border-white/15 bg-navy p-1.5 text-white shadow-[0_14px_40px_-12px_rgba(13,26,54,.6)] ${hidden ? "" : "pointer-events-auto"}`}>
+        <a tabIndex={hidden ? -1 : undefined} href="#pickup" className="hidden min-h-12 items-center rounded-[12px] px-4 font-bold hover:bg-white/10 sm:inline-flex">Pickup</a>
+        <a tabIndex={hidden ? -1 : undefined} href="#tour" className="inline-flex min-h-12 items-center rounded-[12px] px-4 font-bold hover:bg-white/10">Tours</a>
         <a tabIndex={hidden ? -1 : undefined} href={TEL} className="inline-flex min-h-12 items-center gap-2 rounded-[12px] px-4 font-bold hover:bg-white/10"><Phone className="size-4" aria-hidden />Call</a>
         <a tabIndex={hidden ? -1 : undefined} href={action.href} onClick={action.onClick} className="inline-flex min-h-12 items-center rounded-[12px] bg-yellow px-5 font-bold text-ink transition-transform active:scale-[.97]">{action.label}</a>
       </div>
@@ -123,7 +123,7 @@ export function Contact() {
         </div>
         <footer className="mt-20 flex flex-col gap-2 border-t border-white/20 pt-6 text-[14px] text-white/65 sm:flex-row sm:justify-between">
           <p>Cheryl's Bahamas Taxi and Tours, Nassau and Paradise Island, New Providence.</p>
-          <p>TripAdvisor Travellers' Choice 2022. Photographs: Cheryl's Bahamas Taxi and Tours.</p>
+          <p>TripAdvisor Travellers' Choice 2022. Photographs: Cheryl's Bahamas Taxi and Tours. Map coastline: geoBoundaries, CC BY 4.0.</p>
         </footer>
       </div>
     </section>
