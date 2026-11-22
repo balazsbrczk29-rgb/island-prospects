@@ -4,8 +4,31 @@
  "name": "Majestic Tours",
  "batch": "11",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T13:08:05.613Z"
+ "claimed_at": "2026-11-22T13:08:05.613Z",
+ "jobspec_built": true,
+ "built_at": "2026-11-22",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/majestic-tours/",
+ "critic": {
+  "gate1": "pass",
+  "scores": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion": 4,
+   "phone": 4
+  }
+ },
+ "notes": [
+  "Rebuilt from the approved job spec: screen 1 is a trip finder (What, How long, Stays on deck or on land) over a real map of the Nassau waters (OpenStreetMap coastline, credited) whose pins light with counts; a rail of the 37 tours with their own photos; every card opens an enquiry sheet with the trip prefilled to transport@majesticholidays.com, call beside it; second tab for airport transfers (shared, private, accessible).",
+  "Kept: the stop-by-stop journey (now the browse view below), Bay Street palette, excursions and transfers pages, prefilled enquiry, all tour links, prices and pickups, desks, awards, 1959 story.",
+  "Spec phrase 'kids' filter NOT built: no source states ages or family suitability per tour. Needs Balazs/owner input before it can be added truthfully.",
+  "Lengths shown only where the tour name or line states them; 'Stays on deck or on land' covers land tours, evening/sunset sails and fishing charters (an inference, labelled as such, confirm with owner).",
+  "Spec says 38 excursions; the scraped list has 37, so the site shows 37.",
+  "Body font changed from Newsreader to Figtree (one serif + one sans per GUIDE).",
+  "Sandbox blocked the tour photo host: photos checked by URL and native size only (BLIND)."
+ ]
 }

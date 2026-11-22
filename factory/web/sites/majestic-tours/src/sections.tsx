@@ -20,21 +20,21 @@ export function Story() {
     <section id="story" aria-labelledby="story-h" className="scroll-mt-0 bg-green-deep px-[var(--pad)] py-[clamp(80px,12vw,160px)] text-ground">
       <div className="grid gap-x-[6vw] gap-y-14 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
         <motion.div {...rise}>
-          <p className="text-small text-ground/70 italic">Since June 1959</p>
+          <p className="text-small text-[#dbe4d9] italic">Since June 1959</p>
           <h2 id="story-h" className="display mt-4 text-[clamp(3rem,5.6vw,5.8rem)] leading-[0.92]">Founded by Bill and Iris Saunders, in June 1959.</h2>
-          <p className="mt-10 max-w-[36rem] text-lead leading-snug text-ground/90">The motto has not changed: Service is our Profession. Majestic still meets guests off the plane and puts them on the right boat. Representatives speak Spanish, French, German, Italian, Portuguese and Swiss German, and the family's sister companies plan Out Island holidays and travel across the islands.</p>
+          <p className="mt-10 max-w-[36rem] text-lead leading-snug text-[#f3f1e6]">The motto has not changed: Service is our Profession. Majestic still meets guests off the plane and puts them on the right boat. Representatives speak Spanish, French, German, Italian, Portuguese and Swiss German, and the family's sister companies plan Out Island holidays and travel across the islands.</p>
         </motion.div>
         <motion.div {...rise} transition={{ ...rise.transition, delay: 0.12 }} className="md:pt-24">
-          <p className="text-small text-ground/70 italic">What the travel industry has said</p>
+          <p className="text-small text-[#dbe4d9] italic">What the travel industry has said</p>
           <ul className="mt-4 border-t border-ground/25">
             {AWARDS.map(([y, a, by]) => (
               <li key={a} className="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-b border-ground/25 py-4">
-                <span className="tnum text-small text-ground/70">{y}</span>
-                <span><span className="block font-display text-[1.45rem] leading-tight">{a}</span><span className="text-small text-ground/70 italic">{by}</span></span>
+                <span className="tnum text-small text-[#dbe4d9]">{y}</span>
+                <span><span className="block font-display text-[1.45rem] leading-tight">{a}</span><span className="text-small text-[#dbe4d9] italic">{by}</span></span>
               </li>
             ))}
           </ul>
-          <p className="mt-5 text-cap text-ground/70">Member of ASTA, CHA and IATA.</p>
+          <p className="mt-5 text-cap text-[#dbe4d9]">Member of ASTA, CHA and IATA.</p>
         </motion.div>
       </div>
     </section>
@@ -120,7 +120,7 @@ export function Faq() {
 }
 
 /** Desktop: a small corner action once the title frame has gone. Phone: a call + plan bar, hidden on the first screen and over the forms. */
-export function FloatingActions({ planHref = "#book" }: { planHref?: string }) {
+export function FloatingActions({ planHref = "#ask" }: { planHref?: string }) {
   const [show, setShow] = useState(false)
   useEffect(() => {
     const hide = new Set<Element>()
@@ -142,7 +142,7 @@ export function FloatingActions({ planHref = "#book" }: { planHref?: string }) {
       <a href={planHref} className={`btn fixed top-5 right-5 z-40 hidden transition-[opacity,transform] duration-300 md:inline-flex ${show ? "opacity-100" : "pointer-events-none -translate-y-2 opacity-0"}`} tabIndex={show ? 0 : -1}>Plan my excursion</a>
       <div className={`fixed inset-x-0 bottom-0 z-40 grid grid-cols-[auto_1fr] gap-2 border-t border-line bg-ground px-4 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))] transition-transform duration-300 md:hidden ${show ? "translate-y-0" : "translate-y-full"}`} aria-hidden={!show}>
         <a href={TEL} tabIndex={show ? 0 : -1} className="grid size-12 place-items-center border border-ink/20" aria-label={`Call ${PHONE}`}><Phone className="size-5" strokeWidth={1.5} aria-hidden /></a>
-        <a href={planHref.replace("#book", "#book-phone")} tabIndex={show ? 0 : -1} className="btn">Plan my excursion</a>
+        <a href={planHref} tabIndex={show ? 0 : -1} className="btn">Plan my excursion</a>
       </div>
     </>
   )
