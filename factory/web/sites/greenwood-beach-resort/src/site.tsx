@@ -32,18 +32,20 @@ export const IMG = {
   poolDive: { src: U + "GOPR7892-768x576.jpg", ratio: 1.33 },
   reefDivers: { src: U + "The-nursery-Dive-site-768x473.jpg", ratio: 1.62 },
 }
+/** Native pixel width, read from the WordPress size suffix in the file name. */
+export const nativeW = (img: { src: string }) => { const m = img.src.match(/-(\d+)x\d+\.(?:jpe?g|png|webp)$/); return m ? +m[1] : 1024 }
 export type Img = { src: string; fallback?: string; ratio: number; pos?: string; posM?: string }
 
 export const ROOMS = [
   {
     id: "king", name: "Executive King Room", guests: 2, beds: "One king-size bed", roomTypeId: "367604",
-    line: "For two. A king-size bed under a ceiling fan, with a door and windows opening onto the garden.",
-    img: IMG.roomKing, alt: "Executive King Room at Greenwood: a king bed with a green cover, ceiling fan and garden windows",
+    line: "For two. One king-size bed and a private bathroom, in the garden a few steps from the sand.", short: "One king",
+    img: IMG.roomKing, alt: "The Executive King Room at Greenwood Beach Resort",
   },
   {
     id: "family", name: "Executive Family Room", guests: 3, beds: "One king-size bed and one single", roomTypeId: "367936",
-    line: "For three. A king-size bed and a single, air conditioning, white wicker chairs and louvred windows onto the palms.",
-    img: IMG.roomFamily, alt: "Executive Family Room at Greenwood: a king bed, wicker chairs and windows onto palms",
+    line: "For up to three. A king-size bed, a single and a private bathroom, in the garden by the beach.", short: "King and single",
+    img: IMG.roomFamily, alt: "The Executive Family Room at Greenwood Beach Resort",
   },
 ] as const
 
@@ -52,7 +54,7 @@ export function bookingUrl(o: { roomTypeId?: string; arrive?: string; nights?: n
   if (!o.arrive) return BOOK
   const a = new Date(o.arrive + "T12:00:00")
   const d = new Date(a.getTime() + (o.nights ?? 3) * 864e5)
-  const iso = (x: Date) => x.toISOString().slice(0, 10)
+  const iso = (x: Date) => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, "0")}-${String(x.getDate()).padStart(2, "0")}`
   const q = new URLSearchParams({ currency: "USD", checkInDate: iso(a), checkOutDate: iso(d), "items[0][adults]": String(o.adults ?? 2), "items[0][children]": "0", "items[0][infants]": "0" })
   if (o.roomTypeId) { q.set("roomTypeId", o.roomTypeId); q.set("rateId", "749316") }
   return `${BOOK}?${q.toString()}`
@@ -63,9 +65,10 @@ export const ease = [0.22, 1, 0.36, 1] as const
 /* ---------- photo with reserved space, tinted placeholder and a fallback size ---------- */
 export function Photo({ img, alt, className = "", eager = false, style }: { img: Img; alt: string; className?: string; eager?: boolean; style?: React.CSSProperties }) {
   const [src, setSrc] = useState(img.src)
+  const m = img.src.match(/-(\d+)x(\d+)\.(?:jpe?g|png|webp)$/)
   return (
     <div className={`photo ${className}`} style={{ ...style, ...(img.pos ? { ["--pos" as string]: img.pos } : {}), ...(img.posM ? { ["--pos-m" as string]: img.posM } : {}) }}>
-      <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} decoding="async" fetchPriority={eager ? "high" : "auto"}
+      <img src={src} alt={alt} width={m ? +m[1] : undefined} height={m ? +m[2] : undefined} loading={eager ? "eager" : "lazy"} decoding="async" fetchPriority={eager ? "high" : "auto"}
         onError={() => { if (img.fallback && src !== img.fallback) setSrc(img.fallback) }} />
     </div>
   )
@@ -107,7 +110,7 @@ function Header() {
       <div className="flex h-full items-center justify-between px-[var(--gutter)]">
         <Wordmark />
         <div className="flex items-center gap-6">
-          <a href={BOOK} className="link hidden text-[length:var(--t-sm)] md:inline">Check dates</a>
+          <a href="index.html#dates" className="link hidden text-[length:var(--t-sm)] md:inline">Check dates</a>
           <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger className="group flex min-h-11 items-center gap-3 text-[length:var(--t-sm)]">
               <span>Menu</span>
@@ -135,9 +138,9 @@ function Header() {
                           ))}
                         </ul>
                         <div className="mt-10 flex flex-col gap-4 text-[length:var(--t-sm)] md:flex-row md:items-center md:gap-10">
-                          <a href={BOOK} className="btn self-start">Check dates and book</a>
+                          <a href="index.html#dates" className="btn self-start">Check dates and book</a>
                           <a href={WA} className="link num self-start">WhatsApp {WHATSAPP}</a>
-                          <a href={`mailto:${EMAIL}`} className="link self-start">{EMAIL}</a>
+                          <a href={`mailto:${EMAIL}`} className="link inline-flex min-h-11 items-center self-start break-all">{EMAIL}</a>
                         </div>
                       </nav>
                     </motion.div>
@@ -169,7 +172,7 @@ function MobileBookBar() {
   return (
     <div aria-hidden={!shown} className={`fixed inset-x-0 bottom-0 z-30 bg-glass pb-[env(safe-area-inset-bottom)] text-on-glass transition-transform duration-300 ease-[var(--ease-film)] md:hidden ${shown ? "translate-y-0" : "pointer-events-none translate-y-[110%]"}`}>
       <div className="flex h-14 items-stretch">
-        <a href={BOOK} className="flex flex-1 items-center justify-center text-[length:var(--t-sm)] font-medium">Check dates and book</a>
+        <a href="index.html#dates" className="flex flex-1 items-center justify-center text-[length:var(--t-sm)] font-medium">Check dates and book</a>
         <a href={WA} className="flex items-center border-l border-on-glass/30 px-5 text-[length:var(--t-sm)]">WhatsApp</a>
       </div>
     </div>
@@ -183,12 +186,12 @@ function Footer() {
         <div className="md:col-span-5">
           <p className="display text-[length:var(--t-2xl)]">Ask about your dates.</p>
           <p className="mt-5 max-w-sm text-muted">Pauline and Antoine answer by WhatsApp and email. For live availability and rates, use the booking page.</p>
-          <a href={BOOK} className="btn mt-8">Check dates and book</a>
+          <a href="index.html#dates" className="btn mt-8">Check dates and book</a>
         </div>
         <address className="grid content-start gap-6 not-italic md:col-span-3 md:col-start-7">
           <a href={WA} className="num text-[length:var(--t-lg)]"><span className="block text-[length:var(--t-xs)] italic text-muted">WhatsApp</span>{WHATSAPP}</a>
           <a href={TEL2} className="num text-[length:var(--t-lg)]"><span className="block text-[length:var(--t-xs)] italic text-muted">Telephone</span>{PHONE2}</a>
-          <a href={`mailto:${EMAIL}`} className="text-[length:var(--t-lg)] break-words">{EMAIL}</a>
+          <a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center text-[length:var(--t-lg)] break-all">{EMAIL}</a>
         </address>
         <div className="grid content-start gap-6 md:col-span-3">
           <a href={MAP} className="text-[length:var(--t-lg)]">1 Ocean Drive<br />Port Howe, Cat Island<br />The Bahamas</a>

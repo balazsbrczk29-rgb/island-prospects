@@ -28,7 +28,7 @@ function PackageEnquiry() {
   return (
     <form className="grid gap-6" onSubmit={(e) => { e.preventDefault(); window.location.href = href }}>
       <div className="grid grid-cols-2 gap-x-8 gap-y-5">
-        <Count label="Nights" value={nights} set={setNights} min={1} max={28} />
+        <Count label="Nights" value={nights} set={(v) => { setNights(v); setDays((d) => Math.min(d, v)) }} min={1} max={28} />
         <Count label="Whitetip dive days" value={days} set={setDays} min={1} max={nights} />
         <Count label="Divers" value={divers} set={setDivers} min={1} />
         <Count label="Non-divers" value={others} set={setOthers} />
@@ -55,7 +55,7 @@ function PackageEnquiry() {
 
 export function Whitetips() {
   return (
-    <section id="whitetips" className="on-glass bg-glass text-on-glass" aria-labelledby="wt-title">
+    <section id="whitetips" className="on-glass bg-deep text-on-glass" aria-labelledby="wt-title">
       <div className="px-[var(--gutter)] pt-[var(--s-12)] md:pt-[var(--s-16)]">
         <h2 id="wt-title" className="mono-word">
           <span className="block">March</span>

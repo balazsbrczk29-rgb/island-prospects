@@ -4,7 +4,28 @@
  "name": "Greenwood Beach Resort",
  "batch": "05",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
- "claimed_at": "2026-11-22T13:21:18.211Z"
+ "claimed_at": "2026-11-22T13:21:18.211Z",
+ "jobspec_built": true,
+ "built_at": "2026-11-22",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/greenwood-beach-resort/",
+ "critic": {
+  "gate1": "pass",
+  "scores": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion": 4,
+   "phone": 4
+  }
+ },
+ "notes": [
+  "Rebuilt from the approved job spec: screen 1 is their whitetip photo, 'Port Howe', and a booking strip (King / Family tiles with their photos, arrival, nights, adults) that opens direct-book with the dates filled; a 12-month season line marks whitetips March to June and reacts to the arrival month. Screen 2 compares the two rooms; the letterbox film, whitetip package builder, hosts and route are kept.",
+  "Kite season months are not published by Greenwood, so the season line claims none.",
+  "Body font changed from Source Serif 4 to Albert Sans (one serif + one sans).",
+  "Review quote removed from the hosts section (spec: drop review cards).",
+  "Assumptions to confirm: room photos assigned King = King-size-AC-room, Family = Cat-Island-Greenwood-room (their site has them the other way round); 'in the garden' for both rooms; private bathroom in both; hero crop 50% 45% of Surface-1024x683 not visually verified (sandbox blocked photos, BLIND)."
+ ]
 }

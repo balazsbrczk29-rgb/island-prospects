@@ -14,7 +14,7 @@ function RoomRow({ r, flip }: { r: (typeof ROOMS)[number]; flip: boolean }) {
         </dl>
         <p>{r.line} Surrounded by tropical gardens, a few steps from the water.</p>
         <p className="text-[length:var(--t-sm)] text-muted">Rates on the booking page, live for your dates.</p>
-        <a href={bookingUrl({ roomTypeId: r.roomTypeId })} className="link self-start">Open this room on the booking page</a>
+        <a href={bookingUrl({ roomTypeId: r.roomTypeId })} className="link inline-flex min-h-11 items-center self-start">Open this room on the booking page</a>
       </div>
     </article>
   )
@@ -31,7 +31,7 @@ function Meals() {
       <div className="self-start md:sticky md:top-28 md:col-span-5">
         <h2 id="meals-title" className="display text-[length:var(--t-2xl)]">At the table</h2>
         <p className="mt-5 max-w-[42ch] text-muted">Homemade cooking inspired by the ocean and the island, served on the terrace by the beach. Book dinner by WhatsApp a day ahead.</p>
-        <a href={WA} className="link num mt-6 inline-block">WhatsApp {WHATSAPP}</a>
+        <a href={WA} className="link num mt-6 inline-flex min-h-11 items-center">WhatsApp {WHATSAPP}</a>
       </div>
       <div className="md:col-span-6 md:col-start-7">
         <Photo img={IMG.crabs} alt="Stuffed local crab with lime, served at Greenwood" className="aspect-[3/2] w-full" />
@@ -51,7 +51,7 @@ function Meals() {
 
 mount(
   <Page>
-    <Hero img={IMG.roomKing} alt="The Executive King Room at Greenwood: king bed, ceiling fan, garden windows"
+    <Hero img={IMG.roomKing} alt="The Executive King Room at Greenwood Beach Resort"
       title={<>Two rooms, a few steps from the water.</>}>
       <p className="max-w-[44ch] text-muted">The Executive King Room sleeps two; the Executive Family Room sleeps three. Both sit among the gardens at Greenwood, Port Howe.</p>
       <div><a href="#dates" className="btn">Check your dates</a></div>

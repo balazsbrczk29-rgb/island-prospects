@@ -55,7 +55,7 @@ mount(
           <p>Tell Pauline and Antoine your flight and they will help with the rest, including the MakersAir promo code for Greenwood guests.</p>
           <div className="flex flex-col gap-4">
             <a href={BOOK} className="btn self-start">Check dates and book</a>
-            <a href={`mailto:${EMAIL}?subject=${encodeURIComponent("Arrival on Cat Island")}`} className="link self-start">{EMAIL}</a>
+            <a href={`mailto:${EMAIL}?subject=${encodeURIComponent("Arrival on Cat Island")}`} className="link inline-flex min-h-11 items-center self-start break-all">{EMAIL}</a>
           </div>
         </div>
       </section>
