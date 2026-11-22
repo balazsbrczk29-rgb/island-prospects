@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'motion/react'
-import { ROOMS, ALL_ROOMS_HAVE, bookingUrl, BIZ, type Room } from './data'
+import { ROOMS, ALL_ROOMS_HAVE, bookingUrl, BIZ, todayISO, type Room } from './data'
+import { useBookHref } from './store'
 import { scrollToY } from './smooth'
 
 const OCEAN = ROOMS.filter(r => r.side === 'ocean'), HILL = ROOMS.filter(r => r.side === 'hill')
@@ -39,6 +40,7 @@ function Specs({ r }: { r: Room }) {
 }
 
 function RoomFrame({ r, i }: { r: Room; i: number }) {
+  const href = useBookHref()
   return (
     <article className="room" data-side={r.side}>
       <div className="room-photo"><img src={r.photo} alt={r.alt} width={580} height={440} loading="lazy" /></div>
@@ -46,7 +48,7 @@ function RoomFrame({ r, i }: { r: Room; i: number }) {
         <p className="room-no num">{String(i + 1).padStart(2, '0')} <span>/ {String(ROOMS.length).padStart(2, '0')}</span></p>
         <h3 className="h3">{r.name}</h3>
         <Specs r={r} />
-        <a className="room-go" href={BIZ.booking}>Check dates for this room</a>
+        <a className="room-go" href={href} target="_blank" rel="noopener">Check dates for this room</a>
       </div>
     </article>
   )
@@ -84,7 +86,7 @@ export function CompareTable() {
 
 export function BookFrame({ compact = false }: { compact?: boolean }) {
   const [a, setA] = useState(''), [d, setD] = useState(''), [g, setG] = useState(2)
-  const today = new Date().toISOString().slice(0, 10)
+  const today = todayISO()
   const ok = a && d && d > a
   return (
     <form className={`book ${compact ? 'compact' : ''}`} onSubmit={e => { e.preventDefault(); window.open(bookingUrl(ok ? a : undefined, ok ? d : undefined, g), '_blank', 'noopener') }}>

@@ -22,7 +22,7 @@ Scale (px, desktop / phone):
 | h2 | 44 to 88 / 44 | 0.98 | -0.03em | section heads |
 | hero | 168 (min(11.6vw, 19vh)) / 19vw | 0.8 | -0.035em | "sand", "hill" |
 
-**Colour (OKLCH).**
+**Colour (OKLCH; written in styles.css as the equivalent sRGB hex with the OKLCH value in a comment, because the inspect tool and older Safari read rgb).**
 - ground `oklch(96.6% 0.012 92)` pale sand paper
 - surface `oklch(98.6% 0.006 95)` planner panel, inputs, offer cards
 - ground-2 `oklch(93% 0.018 90)` contact band, image placeholders
@@ -127,3 +127,11 @@ Every img carries its native width/height. Full-resolution originals to be reque
   - A19 copy specific and true, no em dashes: all sourced facts. Satisfied.
   - A20 strong close: contact with prefilled enquiry and Check availability. Satisfied.
 - **Unmistakably this business:** the two halves of one bay as the opening question, their own photos, their codes and blackouts. No other site in the repo opens with a binary choice that is also the booking tool.
+
+## 9. Changes after the critic (round 1)
+- "sand or hill" set as one phrase with "or" at 0.32em on the x-height, so the question reads in one glance.
+- Hero frames capped at 440 px tall so a 580x440 room photo is never upscaled; no digital zoom on the hill photo; planner bottom aligned with the "where" line.
+- Planner rows use short room names (no truncation), "All 5 on the sand sleep 4" copy, the garden studio/one-bed shows "Beds for 2 to 4".
+- Every Check availability (header, corner, dock, room frames) carries the planner's dates and guests; the phone dock appears once the planner's own button leaves the screen.
+- Offers finder shares the hero's "I live in" with no default; per-group "no offer open" copy; local-time "today"; clipboard failure handled; contact form side change resets the room; guests clamped to 6.
+- Removed claims not in the brief: Freeport, the Latin America country list, the promotion-board line; the European $250 credit carries no blackouts (spec).

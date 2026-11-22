@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
-import { BIZ, PHOTOS, ROOMS, SPECIALS, WHO, bookingUrl, openToday, offerProblem, nightsOf, type Side, type Who } from './data'
-import { usePlan, setPlan } from './store'
+import { BIZ, PHOTOS, ROOMS, SPECIALS, WHO, bookingUrl, openToday, offerProblem, nightsOf, fits, firstFit, capText, noneOpen, todayISO, type Side, type Who } from './data'
+import { usePlan, setPlan, useBookHref } from './store'
 
 export function Top({ base = '' }: { base?: string }) {
+  const href = useBookHref()
   return (
     <header className="top">
       <a className="wordmark" href="./">Hideaways at Palm Bay</a>
@@ -13,7 +14,7 @@ export function Top({ base = '' }: { base?: string }) {
         <a className="navlink" href={base + '#splash'}>Splash</a>
         <a className="navlink" href={base + '#here'}>Getting here</a>
         <a className="navlink num" href={`tel:${BIZ.tel}`}>{BIZ.phone}</a>
-        <a className="btn btn-primary book" href={BIZ.booking}><span className="long">Check availability</span><span className="short">Book</span></a>
+        <a className="btn btn-primary book" href={href} target="_blank" rel="noopener"><span className="long">Check availability</span><span className="short">Book</span></a>
       </nav>
     </header>
   )
@@ -28,13 +29,13 @@ const SIDES: Record<Side, { word: string; label: string; count: string; photo: s
 function Half({ side, i }: { side: Side; i: number }) {
   const p = usePlan(), reduce = useReducedMotion()
   const s = SIDES[side]
-  const room = p.side === side && p.room ? ROOMS.find(r => r.id === p.room) : undefined
+  const room = p.side === side && p.room ? ROOMS.find(r => r.id === p.room && r.side === side) : undefined
   const src = room ? room.photo : s.photo
   const dim = p.side !== null && p.side !== side
   const frame = reduce ? {} : { initial: { clipPath: 'inset(100% 0 0 0)' }, animate: { clipPath: 'inset(0% 0 0 0)' }, transition: { duration: 1.25, ease, delay: 0.3 + i * 0.16 } }
   return (
     <button type="button" className={`half ${side === 'ocean' ? 'sand' : 'hill'} ${dim ? 'dim' : ''} ${p.side === side ? 'on' : ''}`} aria-pressed={p.side === side}
-      onClick={() => setPlan({ side, room: firstFit(side, p.guests) })}>
+      onClick={() => p.side !== side && setPlan({ side, room: firstFit(side, p.guests) })}>
       <motion.div className="frame" {...frame}>
         <AnimatePresence initial={false}>
           <motion.img key={src} src={src} alt={room ? room.alt : s.alt} width={room ? 580 : s.w} height={room ? 440 : s.h}
@@ -43,13 +44,11 @@ function Half({ side, i }: { side: Side; i: number }) {
             transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }} />
         </AnimatePresence>
       </motion.div>
-      <span className="cap"><span>{room ? room.name : s.label}</span><span className="num">{room ? `Beds for ${room.cap}` : s.count}</span></span>
+      <span className="cap"><span>{room ? room.name : s.label}</span><span className="num">{room ? capText(room) : s.count}</span></span>
     </button>
   )
 }
 
-const fits = (side: Side, g: number) => ROOMS.filter(r => r.side === side && r.cap >= g)
-const firstFit = (side: Side, g: number) => fits(side, g)[0]?.id ?? null
 
 function Stepper() {
   const p = usePlan()
@@ -77,7 +76,7 @@ function Results() {
   const all = ROOMS.filter(r => r.side === p.side), list = fits(p.side, p.guests)
   return (
     <div className="results">
-      <p className="rhead small"><span className="num">{list.length} of {all.length}</span> {p.side === 'ocean' ? 'on the sand' : 'on the hill'} sleep {p.guests} in the listed beds</p>
+      <p className="rhead small"><span className="num">{list.length === all.length ? `All ${all.length}` : `${list.length} of ${all.length}`}</span> {p.side === 'ocean' ? 'on the sand' : 'on the hill'} sleep {p.guests}</p>
       {list.length === 0 ? (
         <p className="none small">No single room sleeps {p.guests} in its listed beds. Two rooms side by side work: <a href={`mailto:${BIZ.email}?subject=Two%20rooms%20for%20${p.guests}%20guests`}>ask us</a> or choose two when you book.</p>
       ) : (
@@ -89,7 +88,7 @@ function Results() {
                 <input type="radio" name="room" value={r.id} checked={p.room === r.id} onChange={() => setPlan({ room: r.id })} />
                 {p.room === r.id && <motion.span className="rule" layoutId="rule" />}
                 <img src={r.photo} alt="" width={580} height={440} loading="lazy" />
-                <span className="rt"><span className="rn">{r.name}</span><span className="rs num">Beds for {r.cap} · {r.baths.toLowerCase()} · {r.kitchen.split(',')[0].toLowerCase()}</span></span>
+                <span className="rt"><span className="rn">{r.short}</span><span className="rs num">{capText(r)} · {r.baths.toLowerCase()} · {r.kitchen.split(',')[0].replace('Expanded k', 'K').toLowerCase()}</span></span>
               </motion.label>
             ))}
           </AnimatePresence>
@@ -105,16 +104,16 @@ function Code() {
   const [copied, setCopied] = useState('')
   if (!p.who) return <p className="code-line small muted">Choose where you live to see the offer code open for you.</p>
   const open = SPECIALS.filter(s => s.who.includes(p.who!) && openToday(s))
-  if (open.length === 0) return <p className="code-line small">No air credit is open for U.S. and Canadian residents today. Booking direct gets the best available rate.</p>
+  if (open.length === 0) return <p className="code-line small">{noneOpen(p.who)}</p>
   const n = nightsOf(p.arrive, p.leave)
   const good = open.filter(s => !offerProblem(s, p.arrive, p.leave))
   if (good.length === 0) return <p className="code-line small">{offerProblem(open[0], p.arrive, p.leave)} <a href="#offers">See every offer</a></p>
   const s = good[0]
-  const copy = () => navigator.clipboard?.writeText(s.code).then(() => { setCopied(s.code); setTimeout(() => setCopied(''), 1600) })
+  const copy = () => { const done = () => { setCopied(s.code); setTimeout(() => setCopied(''), 1600) }; const fail = () => { setCopied('Select and copy'); setTimeout(() => setCopied(''), 2400) }; navigator.clipboard ? navigator.clipboard.writeText(s.code).then(done, fail) : fail() }
   return (
     <div className="code-wrap">
       <button type="button" className="code" onClick={copy} aria-label={`Copy code ${s.code}`}>
-        <span className="mono">{s.code}</span><span className="copy" aria-live="polite">{copied === s.code ? 'Copied' : 'Copy code'}</span>
+        <span className="mono">{s.code}</span><span className="copy" aria-live="polite">{copied === s.code ? 'Copied' : copied || 'Copy code'}</span>
       </button>
       <p className="small muted">{s.title}{n ? '' : `, ${s.nights}`}. {n ? 'Fits your dates.' : 'Add dates to check them.'}{good.length > 1 && <> <a href="#offers">{good.length - 1} more</a></>}</p>
     </div>
@@ -123,7 +122,7 @@ function Code() {
 
 function Planner() {
   const p = usePlan()
-  const today = new Date().toISOString().slice(0, 10)
+  const today = todayISO()
   const n = nightsOf(p.arrive, p.leave)
   const ok = n > 0
   return (
@@ -158,7 +157,10 @@ function Planner() {
       </div>
       <Results />
       <Code />
-      <button className="btn btn-primary go" type="submit">Check availability</button>
+      <div className="go-row">
+        <button className="btn btn-primary go" type="submit">Check availability</button>
+        <p className="small muted">Live rates in the resort's own system, or call <a className="num" href={`tel:${BIZ.tel}`}>{BIZ.phone}</a></p>
+      </div>
     </form>
   )
 }

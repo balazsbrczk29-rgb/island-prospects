@@ -4,8 +4,97 @@
  "name": "Hideaways at Palm Bay",
  "batch": "11",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T12:57:30.349Z"
+ "claimed_at": "2026-11-22T12:57:30.349Z",
+ "pages": [
+  "index.html",
+  "stay.html"
+ ],
+ "primary_cta": "Check availability (their Cloudbeds engine, dates and guests from the screen-1 planner carried into every booking button)",
+ "brand_truth": "Two places on one bay: ocean-side cottages and villas by the beach on Jolly Hall Bay, and Island Time villas on the hill above it, 15 minutes from Exuma International.",
+ "buyer": "US/Canadian couples and families, Bahamian residents on fly-free offers, private pilots and Europeans, planning on a phone and comparing George Town options.",
+ "direction": {
+  "archetype": "A11 Horizontal journey",
+  "lane": "P02 Shallow flats",
+  "type": "T01 Monumental serif (Fraunces + Source Serif 4)",
+  "why": "The rooms are the product and there are eight; a sideways journey grouped ocean side then hillside compares them, and the monumental two-word question sand or hill makes the choice the hero. Elizabeth Harbour is shallow-flats water, so aqua is the offers field and deep teal the Splash evening field."
+ },
+ "tier_visual": "standard",
+ "tier_why": "Photography, monumental type, a pinned horizontal room track and a scroll-panned harbour panorama; 3D would explain nothing a room photo does not.",
+ "concept_type": "booking: screen-1 planner (side, guests, dates, residence) with room fit and offer-code check, room journey and comparison, handing off to Cloudbeds",
+ "images": [
+  {
+   "src": "https://hideawayspalmbay.com/wp-content/uploads/2020/01/gallery3.jpg",
+   "source": "own",
+   "credit": "Hideaways at Palm Bay (hero sand)"
+  },
+  {
+   "src": "https://hideawayspalmbay.com/wp-content/uploads/2023/11/hillside-2-bedroom-oceanview-img2.jpg",
+   "source": "own",
+   "credit": "Hideaways at Palm Bay (hero hill)"
+  },
+  {
+   "src": "https://hideawayspalmbay.com/wp-content/uploads/2020/01/getting-here-bg.jpg",
+   "source": "own",
+   "credit": "Hideaways at Palm Bay (harbour panorama)"
+  },
+  {
+   "src": "https://hideawayspalmbay.com/wp-content/uploads/2020/01/gallery5.jpg",
+   "source": "own",
+   "credit": "Hideaways at Palm Bay (Stocking Island)"
+  },
+  {
+   "src": "https://hideawayspalmbay.com/wp-content/uploads/2020/01/splash-img-1.jpg",
+   "source": "own",
+   "credit": "Hideaways at Palm Bay (Splash)"
+  },
+  {
+   "src": "https://hideawayspalmbay.com/wp-content/uploads/2026/05/*-img-home.* and 2023/05/* (8 room photos, 580x440)",
+   "source": "own",
+   "credit": "Hideaways at Palm Bay"
+  }
+ ],
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion_clarity": 5,
+  "phone": 4
+ },
+ "critic_note": "Independent critic, two rounds (GUIDE 3b.6). Round 1 found state-sync bugs, hard-coded U.S. copy, unsourced claims (Freeport, LatAm country list, promotion-board line) and a split hero phrase; all fixed. Round 2 fixes applied after scoring: Offers title for U.S./Canada, hero fold, phone airport line, copy fallback. Not applied: larger planner thumbnails (would push the planner past the fold).",
+ "current_site_findings": [
+  "COVID-19 banner still on every page in 2026",
+  "expired offers listed next to current ones",
+  "rooms and activity tiles repeated 2-3 times on the homepage",
+  "no room comparison, no rates outside Cloudbeds",
+  "three different resort names, homepage title says GeorgeTown",
+  "dated WordPress page-builder sliders"
+ ],
+ "pitch_line": "Guests decide sand or hill in one tap, compare all eight rooms in one sideways scroll, see only the offers that apply to them today, and land in your Cloudbeds booking with their dates filled in.",
+ "assumptions": [
+  "Cloudbeds accepts #checkin, #checkout and #adults in the URL hash",
+  "Room capacities derived from the listed beds (king, queen, queen sofa sleeper = 2, single = 1): cottages and ocean-side villas 4, garden studio or one-bed 2 to 4, hillside studio and one-bed villa 2, hillside two-bed villa 4",
+  "Offer book-from and travel-from dates as scraped from their specials page 2026-11-21; offers hidden after their book-by date",
+  "Photo-to-room matching by filename"
+ ],
+ "sources": [
+  "https://hideawayspalmbay.com/",
+  "https://hideawayspalmbay.com/specials/",
+  "https://hideawayspalmbay.com/faqs/",
+  "https://hideawayspalmbay.com/splash-beach-bar/",
+  "https://hideawayspalmbay.com/contact-us/"
+ ],
+ "notes": "BLIND: look.mjs, outside images and Google Fonts blocked in the sandbox; photos verified through Lovable gallery project ip-assets-hideaways-at-palm-bay (3b342987) and routed into QA screenshots as crops; references judged from knowledge (aman.com, habitas.com). Fonts self-hosted from @fontsource-variable. PhotoDepth not used: their host has no CORS for WebGL textures, so the harbour panorama gets a scroll-linked pan instead. qa.mjs 0 blockers; tap-target warning is the shared concept-label button. interact.mjs: 0 JS errors (dead entries are the hidden radio inputs of the offers finder, which fill() cannot type into). distinct.mjs: distinct; ground retinted from cream to sea-glass #f2f4ee after its warning.",
+ "built_at": "2026-11-22T13:13:45.459Z",
+ "jobspec_built": true,
+ "big_idea": "Sand or hill: the two halves of one bay are the opening question, and the planner beside them answers it on the same screen: the room types that sleep your party, the room photo in the chosen half, the one promo code open for your dates (minimum nights, travel window and blackouts checked), and Check availability.",
+ "design_doc": "factory/web/sites/hideaways-at-palm-bay/design.md"
 }

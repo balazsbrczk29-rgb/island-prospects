@@ -20,17 +20,17 @@ export function bookingUrl(arrive?: string, depart?: string, adults?: number) {
 }
 
 export type Side = 'ocean' | 'hill'
-export type Room = { id: string; side: Side; cap: number; name: string; view: string; beds: string; baths: string; kitchen: string; patio: string; photo: string; alt: string }
+export type Room = { id: string; side: Side; cap: number; capLabel?: string; short: string; name: string; view: string; beds: string; baths: string; kitchen: string; patio: string; photo: string; alt: string }
 
 export const ROOMS: Room[] = [
-  { id: 'cottage-1br-ocean', side: 'ocean', cap: 4, name: 'One-bedroom cottage, ocean view', view: 'Ocean view', beds: '1 king or 2 queens', baths: 'Full bath', kitchen: 'Expanded kitchenette, dinette for four', patio: 'Private patio', photo: img('2026/05/one-bedroom-ocean-view-cottage-img-home.jpg'), alt: 'Living room of an ocean-view cottage with a dining table by windows onto the sea' },
-  { id: 'cottage-1br-garden', side: 'ocean', cap: 4, name: 'Studio or one-bedroom cottage, garden view', view: 'Garden view', beds: '1 king, king and queen, or king and 2 singles', baths: 'Full bath', kitchen: 'Kitchenette, dinette for four', patio: 'Patio for two', photo: img('2026/05/one-bedroom-garden-view-img-home.jpg'), alt: 'Row of blue ocean-side cottages behind a boardwalk and palms' },
-  { id: 'cottage-2br-garden', side: 'ocean', cap: 4, name: 'Two-bedroom cottage, garden view', view: 'Garden view', beds: 'King and queen', baths: '1.5 baths', kitchen: 'Kitchenette', patio: 'Patio for four', photo: img('2023/05/home-ocean-side-cottages-two-bedroom.jpg'), alt: 'Bedroom in a two-bedroom cottage with sun across the bed' },
-  { id: 'villa-1br-partial', side: 'ocean', cap: 4, name: 'One-bedroom villa, partial ocean view', view: 'Partial ocean view', beds: 'King, plus a queen sofa sleeper', baths: '2 full baths', kitchen: 'Full kitchen', patio: 'Patio for two', photo: img('2023/05/partial-ocean-view-villas-img-home.jpg'), alt: 'King bedroom in an ocean-side villa' },
-  { id: 'villa-2br-ocean', side: 'ocean', cap: 4, name: 'Two-bedroom villa, ocean view', view: 'Ocean view', beds: 'King and queen', baths: '2 ensuite baths', kitchen: 'Full kitchen', patio: 'Ocean-view patio for four', photo: img('2026/05/ocean-side-villas-two-bedroom-ocean-view-home.png'), alt: 'Ocean-side villa patio with two loungers' },
-  { id: 'hill-studio', side: 'hill', cap: 2, name: 'Island Time studio, island view', view: 'Island view', beds: '1 king', baths: '1 bath', kitchen: 'Mini kitchen', patio: 'Garden-view patio', photo: img('2026/05/island-time-villas-hillside-studio-room-img-home.jpg'), alt: 'Bright hillside studio with a king bed' },
-  { id: 'hill-1br', side: 'hill', cap: 2, name: 'Island Time one-bedroom villa', view: 'Over the Beach Club and the bay', beds: '1 king', baths: '2 baths', kitchen: 'Full kitchen', patio: 'Patio over the Beach Club and Elizabeth Bay', photo: img('2026/05/one-bedroom-villa-hillside-img-home.png'), alt: 'Sitting room of a hillside one-bedroom villa' },
-  { id: 'hill-2br', side: 'hill', cap: 4, name: 'Island Time two-bedroom villa', view: 'Over the Beach Club and the bay', beds: 'King, plus a queen sofa sleeper', baths: '2 baths', kitchen: 'Full kitchen', patio: 'Patio over the Beach Club and Elizabeth Bay', photo: img('2026/05/two-bedroom-villa-hillside-img-home.jpg'), alt: 'Two-storey turquoise hillside villas with balconies' },
+  { id: 'cottage-1br-ocean', side: 'ocean', cap: 4, short: 'Ocean-view cottage', name: 'One-bedroom cottage, ocean view', view: 'Ocean view', beds: '1 king or 2 queens', baths: 'Full bath', kitchen: 'Expanded kitchenette, dinette for four', patio: 'Private patio', photo: img('2026/05/one-bedroom-ocean-view-cottage-img-home.jpg'), alt: 'Living room of an ocean-view cottage with a dining table by windows onto the sea' },
+  { id: 'cottage-1br-garden', side: 'ocean', cap: 4, capLabel: '2 to 4', short: 'Garden cottage, studio or one-bed', name: 'Studio or one-bedroom cottage, garden view', view: 'Garden view', beds: '1 king, king and queen, or king and 2 singles', baths: 'Full bath', kitchen: 'Kitchenette, dinette for four', patio: 'Patio for two', photo: img('2026/05/one-bedroom-garden-view-img-home.jpg'), alt: 'Row of blue ocean-side cottages behind a boardwalk and palms' },
+  { id: 'cottage-2br-garden', side: 'ocean', cap: 4, short: 'Two-bed garden cottage', name: 'Two-bedroom cottage, garden view', view: 'Garden view', beds: 'King and queen', baths: '1.5 baths', kitchen: 'Kitchenette', patio: 'Patio for four', photo: img('2023/05/home-ocean-side-cottages-two-bedroom.jpg'), alt: 'Bedroom in a two-bedroom cottage with sun across the bed' },
+  { id: 'villa-1br-partial', side: 'ocean', cap: 4, short: 'Partial ocean-view villa', name: 'One-bedroom villa, partial ocean view', view: 'Partial ocean view', beds: 'King, plus a queen sofa sleeper', baths: '2 full baths', kitchen: 'Full kitchen', patio: 'Patio for two', photo: img('2023/05/partial-ocean-view-villas-img-home.jpg'), alt: 'King bedroom in an ocean-side villa' },
+  { id: 'villa-2br-ocean', side: 'ocean', cap: 4, short: 'Two-bed ocean-view villa', name: 'Two-bedroom villa, ocean view', view: 'Ocean view', beds: 'King and queen', baths: '2 ensuite baths', kitchen: 'Full kitchen', patio: 'Ocean-view patio for four', photo: img('2026/05/ocean-side-villas-two-bedroom-ocean-view-home.png'), alt: 'Ocean-side villa patio with two loungers' },
+  { id: 'hill-studio', side: 'hill', cap: 2, short: 'Hillside studio', name: 'Island Time studio, island view', view: 'Island view', beds: '1 king', baths: '1 bath', kitchen: 'Mini kitchen', patio: 'Garden-view patio', photo: img('2026/05/island-time-villas-hillside-studio-room-img-home.jpg'), alt: 'Bright hillside studio with a king bed' },
+  { id: 'hill-1br', side: 'hill', cap: 2, short: 'Hillside one-bed villa', name: 'Island Time one-bedroom villa', view: 'Over the Beach Club and the bay', beds: '1 king', baths: '2 baths', kitchen: 'Full kitchen', patio: 'Patio over the Beach Club and Elizabeth Bay', photo: img('2026/05/one-bedroom-villa-hillside-img-home.png'), alt: 'Sitting room of a hillside one-bedroom villa' },
+  { id: 'hill-2br', side: 'hill', cap: 4, short: 'Hillside two-bed villa', name: 'Island Time two-bedroom villa', view: 'Over the Beach Club and the bay', beds: 'King, plus a queen sofa sleeper', baths: '2 baths', kitchen: 'Full kitchen', patio: 'Patio over the Beach Club and Elizabeth Bay', photo: img('2026/05/two-bedroom-villa-hillside-img-home.jpg'), alt: 'Two-storey turquoise hillside villas with balconies' },
 ]
 /** Sleeping capacity derived from the listed beds (king, queen, queen sofa sleeper = 2, single = 1). Assumption to confirm. */
 export const ALL_ROOMS_HAVE = 'Every room: air conditioning, cable TV, in-room safe, iron and hairdryer.'
@@ -47,15 +47,17 @@ export const WHO: { id: Who; label: string }[] = [
 const BLACKOUT = 'Nov 26 to 28, 2026; Dec 19, 2026 to Jan 1, 2027; Mar 25 to 28, 2027; Jul 1 to 4, 2027'
 const BO: [string, string][] = [['2026-11-26', '2026-11-28'], ['2026-12-19', '2027-01-01'], ['2027-03-25', '2027-03-28'], ['2027-07-01', '2027-07-04']]
 export const SPECIALS: Special[] = [
-  { id: 'bahamas', min: 2, blackouts: BO, who: ['bahamas'], title: 'Fly or cruise free from Nassau or Freeport', what: 'One free airline or Bahamas Ferries ticket from Nassau with a pre-booked 2-night stay, two free tickets with 4 nights or more.', code: 'FLYFREEBAHAMAS', nights: '2 nights or more', bookFrom: '2026-07-01', bookTo: '2027-06-30', travelFrom: '2026-07-05', travelTo: '2027-10-31', blackout: BLACKOUT },
+  { id: 'bahamas', min: 2, blackouts: BO, who: ['bahamas'], title: 'Fly or cruise free from Nassau', what: 'One free airline or Bahamas Ferries ticket from Nassau with a pre-booked 2-night stay, two free tickets with 4 nights or more.', code: 'FLYFREEBAHAMAS', nights: '2 nights or more', bookFrom: '2026-07-01', bookTo: '2027-06-30', travelFrom: '2026-07-05', travelTo: '2027-10-31', blackout: BLACKOUT },
   { id: 'feefree', min: 4, blackouts: BO, who: ['pilot'], title: 'Fly almost fee free', what: 'A $300 fee credit for licensed private pilots on a 4-night stay or longer.', code: 'FEEFREE', nights: '4 nights or more', bookFrom: '2026-07-01', bookTo: '2027-06-30', travelFrom: '2026-07-05', travelTo: '2027-10-31', blackout: BLACKOUT },
   { id: 'hopping', min: 2, blackouts: BO, who: ['pilot'], title: 'Island hopping', what: 'A $150 fee credit for licensed private pilots on a pre-booked 2-night stay.', code: 'ISLANDHOPPING', nights: '2 nights', bookFrom: '2026-07-01', bookTo: '2027-06-30', travelFrom: '2026-07-05', travelTo: '2027-10-31', blackout: BLACKOUT },
-  { id: 'eu-florida', min: 4, blackouts: BO, who: ['europe'], title: '$250 air or ferry credit via Florida', what: 'Up to $250 off an air or ferry-inclusive package from Florida, 4 consecutive nights or longer.', code: 'FLYFREEEUROPE', nights: '4 nights or more', bookFrom: '2026-11-01', bookTo: '2027-01-31', travelFrom: '2026-11-02', travelTo: '2027-10-31', blackout: BLACKOUT },
+  { id: 'eu-florida', min: 4, blackouts: [], who: ['europe'], title: 'Up to $250 air or ferry credit', what: 'Up to $250 off your air or ferry travel on a stay of 4 consecutive nights or longer.', code: 'FLYFREEEUROPE', nights: '4 nights or more', bookFrom: '2026-11-01', bookTo: '2027-01-31', travelFrom: '2026-11-02', travelTo: '2027-10-31', blackout: 'None' },
   { id: 'eu-two', min: 4, blackouts: [], who: ['europe'], title: 'Two fly free from Nassau', what: 'One free round-trip ticket from Nassau for 4 to 6 nights, two free tickets for 7 nights, on an air-inclusive package.', code: 'FLYFREEEUROPE', nights: '4 nights or more', bookFrom: '2026-07-01', bookTo: '2027-06-30', travelFrom: '2026-07-02', travelTo: '2027-10-31', blackout: 'None' },
-  { id: 'latam', min: 4, blackouts: [], who: ['latam'], title: 'Two fly free from Nassau', what: 'For residents of Argentina, Brazil, Colombia and Mexico: one free ticket from Nassau for 4 to 6 nights, two for 7 nights.', code: 'FLYFREEEUROPE/LATINAMERICA', nights: '4 nights or more', bookFrom: '2026-07-01', bookTo: '2027-06-30', travelFrom: '2026-07-02', travelTo: '2027-10-31', blackout: 'None' },
+  { id: 'latam', min: 4, blackouts: [], who: ['latam'], title: 'Two fly free from Nassau', what: 'One free ticket from Nassau for 4 to 6 nights, two for 7 nights.', code: 'FLYFREEEUROPE/LATINAMERICA', nights: '4 nights or more', bookFrom: '2026-07-01', bookTo: '2027-06-30', travelFrom: '2026-07-02', travelTo: '2027-10-31', blackout: 'None' },
 ]
+/** Today's date in the visitor's own time zone, as YYYY-MM-DD. */
+export const todayISO = (t = new Date()) => `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`
 export const openToday = (s: Special, today = new Date()) => {
-  const d = today.toISOString().slice(0, 10)
+  const d = todayISO(today)
   return d >= s.bookFrom && d <= s.bookTo
 }
 const DAY = 86400000
@@ -71,6 +73,12 @@ export function offerProblem(s: Special, a?: string, d?: string): string {
   for (const [f, to] of s.blackouts) if (a! <= to && d! > f) return `Your dates touch the ${fmtShort(f)} to ${fmtShort(to)} blackout.`
   return ''
 }
+export const fits = (side: Side, g: number) => ROOMS.filter(r => r.side === side && r.cap >= g)
+export const firstFit = (side: Side, g: number) => fits(side, g)[0]?.id ?? null
+export const capText = (r: Room) => `Beds for ${r.capLabel ?? r.cap}`
+const WHO_LONG: Record<Who, string> = { usca: 'U.S. and Canadian residents', bahamas: 'Bahamas residents', pilot: 'private pilots', europe: 'European residents', latam: 'Latin American residents' }
+export const noneOpenTitle = (who: Who) => `No offer is open for ${WHO_LONG[who]} today`
+export const noneOpen = (who: Who) => `No offer is open for ${({ usca: 'U.S. and Canadian residents', bahamas: 'Bahamas residents', pilot: 'private pilots', europe: 'European residents', latam: 'Latin American residents' } as Record<Who, string>)[who]} today. Booking direct gets the best available rate.`
 export const fmt = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 
 export const NEARBY = [

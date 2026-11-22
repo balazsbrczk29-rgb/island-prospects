@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react'
-import { BIZ, PHOTOS, SPECIALS, WHO, openToday, fmt, SPLASH, NEARBY, ACTIVITIES, GATEWAYS, AIRLINES, type Who } from './data'
-import { usePlan, setPlan } from './store'
+import { BIZ, PHOTOS, SPECIALS, WHO, openToday, fmt, firstFit, noneOpenTitle, SPLASH, NEARBY, ACTIVITIES, GATEWAYS, AIRLINES, type Who } from './data'
+import { usePlan, setPlan, useBookHref } from './store'
 
 export function Harbour() {
   const ref = useRef<HTMLDivElement>(null)
@@ -26,11 +26,11 @@ export function Harbour() {
 
 export function Offers() {
   const p = usePlan()
-  const who: Who = p.who ?? 'usca'
+  const who = p.who
   const setWho = (w: Who) => setPlan({ who: w })
   const [copied, setCopied] = useState('')
-  const list = SPECIALS.filter(s => s.who.includes(who) && openToday(s))
-  const copy = (c: string) => { navigator.clipboard?.writeText(c).then(() => { setCopied(c); setTimeout(() => setCopied(''), 1600) }) }
+  const list = who ? SPECIALS.filter(s => s.who.includes(who) && openToday(s)) : []
+  const copy = (c: string) => { navigator.clipboard?.writeText(c).then(() => { setCopied(c); setTimeout(() => setCopied(''), 1600) }, () => { setCopied('fail:' + c); setTimeout(() => setCopied(''), 2400) }) }
   return (
     <section id="offers" className="offers" aria-labelledby="offers-h">
       <div className="wrap offers-grid">
@@ -47,9 +47,10 @@ export function Offers() {
           </fieldset>
         </div>
         <div className="offer-list" aria-live="polite">
-          {list.length === 0 && (
+          {!who && <div className="offer empty"><h3 className="h3">Choose where you live, or that you fly yourself.</h3><p>Only offers open for booking today appear, each with its code, stay length, travel window and blackout dates.</p></div>}
+          {who && list.length === 0 && (
             <div className="offer empty">
-              <h3 className="h3">No air credit is open for U.S. and Canadian residents today.</h3>
+              <h3 className="h3">{noneOpenTitle(who)}.</h3>
               <p>Booking direct still gets you the best available rate. Ask us about your dates and we will tell you if anything new applies.</p>
               <a className="link" href={`mailto:${BIZ.email}?subject=Offers%20for%20my%20dates`}>{BIZ.email}</a>
             </div>
@@ -59,7 +60,7 @@ export function Offers() {
               <h3 className="h3">{s.title}</h3>
               <p>{s.what}</p>
               <button type="button" className="code" onClick={() => copy(s.code)} aria-label={`Copy code ${s.code}`}>
-                <span className="mono">{s.code}</span><span className="copy">{copied === s.code ? 'Copied' : 'Copy code'}</span>
+                <span className="mono">{s.code}</span><span className="copy">{copied === s.code ? 'Copied' : copied === 'fail:' + s.code ? 'Select and copy' : 'Copy code'}</span>
               </button>
               <dl className="terms num">
                 <div><dt>Stay</dt><dd>{s.nights}</dd></div>
@@ -69,7 +70,7 @@ export function Offers() {
               </dl>
             </motion.article>
           ))}
-          <p className="small fine">Offers run with the Bahama Out Islands Promotion Board; terms apply. Pre-book and enter the code in the booking system.</p>
+          <p className="small fine">Terms apply. Pre-book and enter the code in the booking system's promo field.</p>
         </div>
       </div>
     </section>
@@ -153,9 +154,9 @@ export function Contact() {
             <label>Leaving<input type="date" name="Departure" value={p.leave} min={p.arrive || undefined} onChange={e => setPlan({ leave: e.target.value })} /></label>
           </div>
           <div className="two">
-            <label>Guests<input type="number" name="Guests" min={1} max={12} value={p.guests} inputMode="numeric" onChange={e => setPlan({ guests: Math.max(1, Number(e.target.value) || 1) })} /></label>
+            <label>Guests<input type="number" name="Guests" min={1} max={6} value={p.guests} inputMode="numeric" onChange={e => setPlan({ guests: Math.min(6, Math.max(1, Number(e.target.value) || 1)) })} /></label>
             <label>Where
-              <select name="Preference" value={p.side ?? ''} onChange={e => setPlan({ side: (e.target.value || null) as any })}>
+              <select name="Preference" value={p.side ?? ''} onChange={e => { const v = (e.target.value || null) as any; setPlan({ side: v, room: v ? firstFit(v, p.guests) : null }) }}>
                 <option value="">Either</option><option value="ocean">Ocean Side, by the beach</option><option value="hill">Island Time, on the hill</option>
               </select>
             </label>
@@ -185,8 +186,9 @@ export function Footer() {
 /** Desktop: a booking button in the corner after the hero. Phone: a dock, hidden over the hero and the contact block. */
 export function Persistent() {
   const [on, setOn] = useState(false)
+  const href = useBookHref()
   useEffect(() => {
-    const hero = document.querySelector('.hero')
+    const hero = document.querySelector('.planner .go')
     const quiet = [document.getElementById('contact'), ...Array.from(document.querySelectorAll('.book'))].filter(Boolean) as Element[]
     let heroVis = true; const vis = new Set<Element>()
     const upd = () => setOn(!heroVis && vis.size === 0)
@@ -197,10 +199,10 @@ export function Persistent() {
   useEffect(() => { document.documentElement.style.setProperty('--concept-offset', on && matchMedia('(max-width: 767px)').matches ? '72px' : '0px') }, [on])
   return (
     <>
-      <div className={`corner ${on ? 'on' : ''}`}><a className="btn btn-primary" href={BIZ.booking} tabIndex={on ? 0 : -1}>Check availability</a></div>
+      <div className={`corner ${on ? 'on' : ''}`}><a className="btn btn-primary" href={href} target="_blank" rel="noopener" tabIndex={on ? 0 : -1}>Check availability</a></div>
       <div className={`dock ${on ? 'on' : ''}`}>
         <a className="dock-call num" href={`tel:${BIZ.tel}`} tabIndex={on ? 0 : -1}>Call</a>
-        <a className="btn btn-primary" href={BIZ.booking} tabIndex={on ? 0 : -1}>Check availability</a>
+        <a className="btn btn-primary" href={href} target="_blank" rel="noopener" tabIndex={on ? 0 : -1}>Check availability</a>
       </div>
     </>
   )
