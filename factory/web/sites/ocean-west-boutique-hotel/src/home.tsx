@@ -150,7 +150,7 @@ function Ridge() {
         <p className="label text-muted">Seventy feet above sea level</p>
         <h2 id="ridge-h" className="mt-4 max-w-[18ch] text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">Lake Killarney to the south. The Atlantic to the north.</h2>
       </div>
-      <div ref={ref} className="pic mt-10 w-full max-w-[1200px]" style={{ aspectRatio: `${pic.w} / ${pic.h}` }}>
+      <div ref={ref} className="pic mt-10 w-full max-w-[1150px]" style={{ aspectRatio: `${pic.w} / ${pic.h}` }}>
         <motion.img style={{ x, scale: 1.04 }} src={pic.src} alt={pic.alt} width={pic.w} height={pic.h} loading="lazy" decoding="async" />
       </div>
       <div className="mt-3 flex max-w-[1200px] justify-between px-[var(--pad)] text-cap text-muted"><span>South: Lake Killarney</span><span>North: the Atlantic</span></div>
