@@ -16,8 +16,8 @@ const LABEL: Record<Place, { t: string; dx: number; dy: number; a?: "end" | "sta
   lagoon: { t: "Blue Lagoon Island", dx: 0, dy: -13, a: "middle" },
   rose: { t: "Rose Island", dx: 13, dy: 3, a: "start" },
   reefs: { t: "Southwest reefs", dx: 0, dy: 20, a: "middle" },
-  exuma: { t: "Exuma Cays, 38 nm, 55 min", dx: -13, dy: 3, a: "end" },
-  harbourisland: { t: "Harbour Island, northeast", dx: -13, dy: 3, a: "end" },
+  exuma: { t: "To the Exuma Cays, 38 nm, 55 min \u2198", dx: -13, dy: 3, a: "end" },
+  harbourisland: { t: "To Harbour Island \u2197", dx: -13, dy: 3, a: "end" },
 }
 const LENS: { id: Len | "any"; label: string }[] = [{ id: "any", label: "Any length" }, { id: "half", label: "Half day" }, { id: "full", label: "Full day" }, { id: "evening", label: "Evening" }]
 const isoToday = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}` }
@@ -56,7 +56,7 @@ function Card({ t, onAsk, onFocus }: { t: Tour; onAsk: (t: Tour) => void; onFocu
       <div className="card-pic"><img src={t.img} alt={t.alt} width={232} height={150} loading="lazy" decoding="async" /></div>
       <p className="card-place">{PLACE_NAME[t.place]}{len ? <> · {LEN_LABEL[len]}</> : null}</p>
       <h3 className="card-name">{t.name}</h3>
-      <p className="card-fact tnum">{FACTS[t.id] ?? (len ? t.line : "Length and price on the tour page")}</p>
+      <p className={`card-fact tnum ${FACTS[t.id] ? "is-facts" : ""}`}>{FACTS[t.id] ?? (len ? t.line : "Length and price on the tour page")}</p>
       <div className="card-acts">
         <button type="button" className="card-ask" onClick={() => onAsk(t)}>Ask about this trip</button>
         <a href={tourUrl(t.id)} target="_blank" rel="noopener" className="card-link" aria-label={`${t.name}, tour page`}>Tour page<ArrowUpRight className="size-3.5" strokeWidth={1.5} aria-hidden /></a>
@@ -217,7 +217,7 @@ export function Finder() {
           <div className={`map ${tab === "transfer" ? "is-dim" : ""}`}>
             <NassauMap lit={tab === "trips" ? lit : new Map()} focus={focus} place={place} onPin={p => { setTab("trips"); setPlace(cur => (cur === p ? null : p)) }} />
             <p className="map-credit">Coastline © OpenStreetMap contributors</p>
-            <figure className="fphoto fphoto-desk"><Img pic={PIC.flyingCloud} className="w-full" eager maxW={220} /><figcaption>The Flying Cloud leaving the harbour at sunset</figcaption></figure>
+            <figure className="fphoto fphoto-desk"><Img pic={PIC.flyingCloud} className="w-full" eager maxW={300} /><figcaption>The Flying Cloud leaving the harbour at sunset</figcaption></figure>
           </div>
           {tab === "trips" && (
             <div className="places chips" role="group" aria-label="Where">
