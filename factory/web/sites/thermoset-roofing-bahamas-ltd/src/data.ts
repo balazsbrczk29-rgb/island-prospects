@@ -102,10 +102,10 @@ export const makers = ['Carlisle', 'Elevate', 'Englert', 'Sika', 'Siplast', 'Tre
 // Our grouping of the names on Thermoset's portfolio page by type of building (stated on the page as ours).
 export type Kind = 'home' | 'commercial' | 'industrial' | 'institution' | 'resort'
 export const KINDS: [Kind, string, string][] = [
-  ['commercial', 'Commercial', 'Commercial'],
+  ['commercial', 'Commercial', 'Commercial buildings'],
   ['resort', 'Resort, hotel', 'Resorts and hotels'],
   ['institution', 'Church, public', 'Churches and institutions'],
-  ['industrial', 'Industrial', 'Industrial'],
+  ['industrial', 'Industrial', 'Industrial sites'],
   ['home', 'Home', 'Homes'],
 ]
 const K: Record<Kind, string[]> = {
