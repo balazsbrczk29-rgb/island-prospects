@@ -36,8 +36,8 @@ export const services: Service[] = [
   {
     id: 'backup', name: 'Cloud backup', short: 'Your data and your endpoints, protected.',
     body: 'A cloud backup solution built on a best-in-class IT management platform, to help protect your data and your endpoints from online threats while you run the day.',
-    points: ['Off-device backup of your data', 'Endpoint protection', 'Runs alongside the working day'],
-    img: 'counter-hero.jpg', alt: 'The point-of-sale counter seen as an X-ray, showing the system behind it (illustrative photograph)', xray: true,
+    points: ['Cloud backup of your data', 'Endpoint protection', 'A best-in-class IT management platform'],
+    img: 'counter-hero.jpg', alt: 'A point-of-sale counter in a Nassau shop, the system behind it backed up to the cloud (illustrative photograph)',
   },
 ]
 

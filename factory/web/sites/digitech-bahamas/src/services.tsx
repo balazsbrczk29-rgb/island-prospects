@@ -23,7 +23,7 @@ function Services() {
               <h2 id={`${s.id}-h`}>{s.name}</h2>
               <p>{s.body}</p>
               <ul>{s.points.map(pt => <li key={pt}>{pt}</li>)}</ul>
-              <p style={{ marginTop: '2rem' }}><a className="btn btn-primary" href="./#work-order">Request a site visit</a></p>
+              <p style={{ marginTop: '2rem' }}><a className="btn btn-primary" href="./#compose">Build your quote</a></p>
             </div>
             <img className={'svc__img' + (s.xray ? ' xr__img' : '')} src={IMG + s.img} alt={s.alt} loading={i ? 'lazy' : 'eager'} width={800} height={533} data-source="generated" />
           </section>

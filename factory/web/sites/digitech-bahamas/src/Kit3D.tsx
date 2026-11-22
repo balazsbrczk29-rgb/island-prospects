@@ -1,16 +1,17 @@
 // Studio-lit procedural counter kit (Razor POS terminals, printers, drawers, router, access point, backup unit).
 // Built on the ModelStage recipe's studio lighting. Objects for up to 8 stations are always mounted and spring in or out.
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame, useThree, invalidate } from '@react-three/fiber'
 import { Environment, Lightformer, ContactShadows, RoundedBox } from '@react-three/drei'
 import * as THREE from 'three'
 
 export type Kind = 'fnb' | 'retail' | 'office'
-export type KitState = { kind: Kind; count: number; wifi: boolean; backup: boolean }
+export type KitState = { kind: Kind; count: number; wifi: boolean; backup: boolean; managed: boolean }
 
-const white = { color: '#f3f1ec', roughness: 0.38, metalness: 0, clearcoat: 0.6, clearcoatRoughness: 0.25 }
+const white = { color: '#fbfaf7', roughness: 0.38, metalness: 0, clearcoat: 0.6, clearcoatRoughness: 0.25 }
 const alu = { color: '#c9ccd0', roughness: 0.32, metalness: 0.85 }
 const dark = { color: '#1c1f22', roughness: 0.5, metalness: 0.1 }
+const coarseP = typeof window !== 'undefined' && !!window.matchMedia?.('(pointer: coarse)').matches
 const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
 function screenTexture(wide: boolean) {
@@ -47,18 +48,20 @@ function Slot({ on, pos, delay = 0, children }: { on: boolean; pos: [number, num
     const v = Math.max(0.001, s.current)
     g.current.scale.setScalar(v); g.current.visible = s.current > 0.01
     g.current.position.set(pos[0], pos[1] + lift.current, pos[2])
+    if (Math.abs(target - s.current) > 0.002 || wait) invalidate()
   })
   return <group ref={g} position={pos}>{children}</group>
 }
 
 function Terminal({ tex }: { tex: THREE.Texture }) {
+  // An all-in-one POS: heavy low base, short hinge, a thin-bezel touchscreen tilted back about 25 degrees.
   return (
     <group>
-      <RoundedBox args={[0.42, 0.04, 0.3]} radius={0.015} position={[0, 0.02, 0]} castShadow><meshPhysicalMaterial {...alu} /></RoundedBox>
-      <mesh position={[0, 0.2, -0.02]} rotation={[-0.25, 0, 0]} castShadow><cylinderGeometry args={[0.035, 0.045, 0.36, 24]} /><meshPhysicalMaterial {...alu} /></mesh>
-      <group position={[0, 0.42, 0.02]} rotation={[-0.32, 0, 0]}>
-        <RoundedBox args={[0.62, 0.46, 0.045]} radius={0.02} castShadow><meshPhysicalMaterial {...white} /></RoundedBox>
-        <mesh position={[0, 0.005, 0.024]}><planeGeometry args={[0.56, 0.4]} /><meshStandardMaterial map={tex} emissiveMap={tex} emissive="#ffffff" emissiveIntensity={0.55} roughness={0.15} /></mesh>
+      <RoundedBox args={[0.36, 0.07, 0.3]} radius={0.03} position={[0, 0.035, 0]} castShadow><meshPhysicalMaterial {...white} /></RoundedBox>
+      <RoundedBox args={[0.12, 0.12, 0.06]} radius={0.02} position={[0, 0.12, -0.08]} castShadow><meshPhysicalMaterial {...alu} /></RoundedBox>
+      <group position={[0, 0.3, -0.04]} rotation={[-0.44, 0, 0]}>
+        <RoundedBox args={[0.54, 0.38, 0.035]} radius={0.018} castShadow><meshPhysicalMaterial {...white} /></RoundedBox>
+        <mesh position={[0, 0, 0.0185]}><planeGeometry args={[0.51, 0.35]} /><meshStandardMaterial map={tex} emissiveMap={tex} emissive="#ffffff" emissiveIntensity={0.6} roughness={0.12} /></mesh>
       </group>
     </group>
   )
@@ -95,7 +98,7 @@ function Drawer() {
 }
 function Pulse({ color, pos, size = 0.012 }: { color: string; pos: [number, number, number]; size?: number }) {
   const m = useRef<THREE.MeshStandardMaterial>(null!)
-  useFrame(st => { m.current.emissiveIntensity = reduce ? 1.4 : 0.6 + 1.2 * (0.5 + 0.5 * Math.sin(st.clock.elapsedTime * Math.PI)) })
+  useFrame(st => { m.current.emissiveIntensity = reduce || coarseP ? 1.4 : 0.6 + 1.2 * (0.5 + 0.5 * Math.sin(st.clock.elapsedTime * Math.PI)) })
   return <mesh position={pos}><sphereGeometry args={[size, 16, 16]} /><meshStandardMaterial ref={m} color={color} emissive={color} emissiveIntensity={1} /></mesh>
 }
 function Router() {
@@ -129,25 +132,32 @@ function Rig({ s }: { s: KitState }) {
   const termTex = useMemo(() => screenTexture(false), [])
   const monTex = useMemo(() => screenTexture(true), [])
   const pitch = s.kind === 'office' ? 1.05 : 0.95
-  const xs = (n: number, i: number) => (i - (n - 1) / 2) * pitch - 0.45
-  const aps = s.wifi ? Math.ceil(s.count / 4) : 0
+  const { camera, size } = useThree()
+  const compact = size.width / size.height < 1.5
+  const xs = (n: number, i: number) => (i - (n - 1) / 2) * pitch - (compact ? 0 : 0.45)
+  const last = xs(s.count, s.count - 1), first = xs(s.count, 0)
+  // network corner: beside the tills on a wide stage, in a row behind them on a narrow one
+  const net = compact
+    ? { kp: [-0.95, 0, -0.85], router: [0.05, 0, -0.85], server: [0.62, 0, -0.85], backup: [s.managed ? 1.02 : 0.62, 0, -0.85] }
+    : { kp: [first - 0.75, 0, -0.35], router: [last + 1.0, 0, -0.3], server: [last + 1.55, 0, -0.3], backup: [last + (s.managed ? 1.95 : 1.55), 0, -0.3] }
+  const left = compact ? Math.min(first - 0.4, -1.2) : first - (s.kind === 'fnb' ? 1.0 : 0.4)
+  const right = compact ? Math.max(last + 0.65, 1.25) : last + (s.managed && s.backup ? 2.15 : 1.75)
+  const span = right - left + 0.3, mid = (left + right) / 2
   const camTarget = useRef(new THREE.Vector3())
   const lookAt = useRef(new THREE.Vector3(0, 0.5, 0.1))
-  const { camera, size } = useThree()
   useFrame(() => {
-    const left = xs(s.count, 0) - (s.kind === 'fnb' ? 1.0 : 0.4), right = xs(s.count, s.count - 1) + 1.75
-    const span = right - left + 0.4, mid = (left + right) / 2
     const aspect = size.width / size.height
-    const dist = Math.max(2.6, (span / aspect) * 1.35 + 0.4)
-    camTarget.current.set(mid, 1.0 + dist * 0.34, dist)
-    lookAt.current.lerp(new THREE.Vector3(mid, 0.5, 0.1), reduce ? 1 : 0.06)
+    const dist = Math.max(2.3, ((span / 2) / (Math.tan((15 * Math.PI) / 180) * aspect)) * (compact ? 0.7 : 0.9) + (compact ? 0.1 : 0.2))
+    camTarget.current.set(mid, 0.6 + dist * 0.3, dist)
+    lookAt.current.lerp(new THREE.Vector3(mid, 0.34, 0.1), reduce ? 1 : 0.06)
     camera.position.lerp(camTarget.current, reduce ? 1 : 0.06)
     camera.lookAt(lookAt.current)
+    if (camera.position.distanceTo(camTarget.current) > 0.002) invalidate()
   })
   return (
     <group>
       {/* counter top */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow><planeGeometry args={[60, 60]} /><shadowMaterial opacity={0.12} /></mesh>
+      {/* no plinth: a seamless studio sweep, grounded by contact shadows */}
       {Array.from({ length: 8 }, (_, i) => {
         const on = i < s.count; const x = on ? xs(s.count, i) : xs(Math.max(s.count, i + 1), i)
         return (
@@ -155,15 +165,16 @@ function Rig({ s }: { s: KitState }) {
             <Slot on={on && s.kind !== 'office'} pos={[x, 0, -0.05]} delay={i * 0.06}><Terminal tex={termTex} /></Slot>
             <Slot on={on && s.kind === 'office'} pos={[x, 0, -0.05]} delay={i * 0.06}><Monitor tex={monTex} /></Slot>
             <Slot on={on && s.kind === 'retail'} pos={[x, 0, 0.42]} delay={0.1 + i * 0.06}><Drawer /></Slot>
-            <Slot on={on && s.kind !== 'office'} pos={[x + 0.4, s.kind === 'retail' ? 0 : 0, s.kind === 'retail' ? -0.15 : 0.12]} delay={0.15 + i * 0.06}><Printer /></Slot>
+            <Slot on={on && s.kind !== 'office'} pos={[x + 0.36, 0, s.kind === 'retail' ? -0.15 : 0.12]} delay={0.15 + i * 0.06}><Printer /></Slot>
           </group>
         )
       })}
-      <Slot on={s.kind === 'fnb'} pos={[xs(s.count, 0) - 0.75, 0, -0.35]} delay={0.2}><Printer /></Slot>
+      <Slot on={s.kind === 'fnb'} pos={net.kp as [number, number, number]} delay={0.2}><Printer /></Slot>
       {/* network corner */}
-      <Slot on pos={[xs(s.count, s.count - 1) + 1.0, 0, -0.3]} delay={0.25}><Router /></Slot>
-      <Slot on={s.backup} pos={[xs(s.count, s.count - 1) + 1.55, 0, -0.3]} delay={0.3}><Backup /></Slot>
-      {[0, 1].map(i => <Slot key={i} on={i < aps} pos={[aps === 2 ? (i ? 1.2 : -1.4) : -0.1, 1.3, -0.7]} delay={0.35 + i * 0.08}><AccessPoint /></Slot>)}
+      <Slot on pos={net.router as [number, number, number]} delay={0.25}><Router /></Slot>
+      <Slot on={s.managed} pos={net.server as [number, number, number]} delay={0.3}><Backup /></Slot>
+      <Slot on={s.backup} pos={net.backup as [number, number, number]} delay={0.3}><Backup /></Slot>
+      {/* Wi-Fi access points are listed in the kit; the router stands for the network on the counter. */}
     </group>
   )
 }
@@ -178,17 +189,17 @@ export default function Kit3D({ s, onReady }: { s: KitState; onReady?: () => voi
   const coarse = typeof window !== 'undefined' && window.matchMedia?.('(pointer: coarse)').matches
   return (
     <div ref={wrap} className="kit3d" aria-hidden="true">
-      <Canvas shadows dpr={coarse ? [1, 1.25] : [1, 1.5]} frameloop={inView ? 'always' : 'never'} camera={{ position: [0.5, 2.2, 5.2], fov: 30 }}
-        gl={{ alpha: true, antialias: !coarse, toneMapping: THREE.ACESFilmicToneMapping, preserveDrawingBuffer: true }}
+      <Canvas dpr={coarse ? [1, 1.25] : [1, 1.5]} frameloop={inView ? (coarse ? 'demand' : 'always') : 'never'} camera={{ position: [0.5, 2.2, 5.2], fov: 30 }}
+        gl={{ alpha: true, antialias: !coarse, toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.15, }}
         onCreated={() => requestAnimationFrame(() => requestAnimationFrame(() => onReady?.()))}>
         <Rig s={s} />
         <Environment resolution={256}>
-          <Lightformer form="rect" intensity={2.4} color="#ffffff" position={[3, 4, 3]} scale={[6, 3, 1]} target={[0, 0, 0]} />
+          <Lightformer form="rect" intensity={3.5} color="#ffffff" position={[3, 4, 3]} scale={[6, 3, 1]} target={[0, 0, 0]} />
           <Lightformer form="rect" intensity={1.2} color="#e8eefc" position={[-4, 2, -2]} scale={[4, 6, 1]} target={[0, 0, 0]} />
           <Lightformer form="ring" intensity={0.8} color="#ffffff" position={[0, 6, -6]} scale={4} target={[0, 0, 0]} />
         </Environment>
-        <directionalLight position={[3, 6, 4]} intensity={1.1} castShadow shadow-mapSize={[1024, 1024]} />
-        <ContactShadows position={[0, 0.001, 0]} opacity={0.62} scale={14} blur={2} far={1.6} />
+        <directionalLight position={[3, 6, 4]} intensity={1.0} />
+        <ContactShadows position={[0, 0.002, 0]} opacity={0.5} scale={16} blur={2.4} far={1.2} resolution={512} />
       </Canvas>
     </div>
   )
