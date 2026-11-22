@@ -120,7 +120,7 @@ export function Faq() {
 }
 
 /** Desktop: a small corner action once the title frame has gone. Phone: a call + plan bar, hidden on the first screen and over the forms. */
-export function FloatingActions({ planHref = "#book" }: { planHref?: string }) {
+export function FloatingActions({ planHref = "#ask" }: { planHref?: string }) {
   const [show, setShow] = useState(false)
   useEffect(() => {
     const hide = new Set<Element>()
@@ -142,7 +142,7 @@ export function FloatingActions({ planHref = "#book" }: { planHref?: string }) {
       <a href={planHref} className={`btn fixed top-5 right-5 z-40 hidden transition-[opacity,transform] duration-300 md:inline-flex ${show ? "opacity-100" : "pointer-events-none -translate-y-2 opacity-0"}`} tabIndex={show ? 0 : -1}>Plan my excursion</a>
       <div className={`fixed inset-x-0 bottom-0 z-40 grid grid-cols-[auto_1fr] gap-2 border-t border-line bg-ground px-4 pt-3 pb-[calc(12px+env(safe-area-inset-bottom))] transition-transform duration-300 md:hidden ${show ? "translate-y-0" : "translate-y-full"}`} aria-hidden={!show}>
         <a href={TEL} tabIndex={show ? 0 : -1} className="grid size-12 place-items-center border border-ink/20" aria-label={`Call ${PHONE}`}><Phone className="size-5" strokeWidth={1.5} aria-hidden /></a>
-        <a href={planHref.replace("#book", "#book-phone")} tabIndex={show ? 0 : -1} className="btn">Plan my excursion</a>
+        <a href={planHref} tabIndex={show ? 0 : -1} className="btn">Plan my excursion</a>
       </div>
     </>
   )

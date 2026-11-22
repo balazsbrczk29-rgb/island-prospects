@@ -1,21 +1,23 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { motion, AnimatePresence, useReducedMotion } from "motion/react"
 import { Phone, X, ArrowUpRight } from "lucide-react"
-import { DRY, EMAIL, FACTS, LEN, LEN_LABEL, PHONE, PLACE_NAME, TEL, TOURS, WHAT, whatOf, tourUrl, type Len, type Place, type Tour, type What } from "./data"
-import { NAV, Wordmark } from "./ui"
+import { PIC, DRY, EMAIL, FACTS, LEN, LEN_LABEL, PHONE, PLACE_NAME, TEL, TOURS, WHAT, whatOf, tourUrl, type Len, type Place, type Tour, type What } from "./data"
+import { Img, NAV, Wordmark } from "./ui"
 import MAP from "./map.json"
 
 const EASE = [0.16, 1, 0.3, 1] as const
 /** Pins projected from real coordinates with the same Mercator as the OpenStreetMap coastline. */
-const PIN: Record<Place, [number, number]> = { harbour: [312, 392], land: [262, 420], lagoon: [367, 361], rose: [421, 386], reefs: [170, 460], exuma: [668, 650], harbourisland: [808, 64] }
+const PIN: Record<Place, [number, number]> = { harbour: [312, 392], land: [262, 420], lagoon: [367, 361], rose: [421, 386], reefs: [170, 460], exuma: [484, 478], harbourisland: [484, 322] }
+/** Exuma and Harbour Island lie beyond the frame: drawn as edge markers pointing the way. */
+const EDGE = new Set<Place>(["exuma", "harbourisland"])
 const LABEL: Record<Place, { t: string; dx: number; dy: number; a?: "end" | "start" | "middle" }> = {
-  harbour: { t: "Nassau Harbour", dx: -6, dy: -18, a: "end" },
-  land: { t: "On the island", dx: -14, dy: 34, a: "middle" },
-  lagoon: { t: "Blue Lagoon", dx: 0, dy: -18, a: "middle" },
-  rose: { t: "Rose Island", dx: 16, dy: 6, a: "start" },
-  reefs: { t: "Southwest reefs", dx: 0, dy: 34, a: "middle" },
-  exuma: { t: "Exuma Cays", dx: -18, dy: 6, a: "end" },
-  harbourisland: { t: "Harbour Island", dx: -18, dy: 6, a: "end" },
+  harbour: { t: "Nassau Harbour", dx: 0, dy: -13, a: "middle" },
+  land: { t: "On the island", dx: 0, dy: 20, a: "middle" },
+  lagoon: { t: "Blue Lagoon Island", dx: 0, dy: -13, a: "middle" },
+  rose: { t: "Rose Island", dx: 13, dy: 3, a: "start" },
+  reefs: { t: "Southwest reefs", dx: 0, dy: 20, a: "middle" },
+  exuma: { t: "Exuma Cays, 38 nm, 55 min", dx: -13, dy: 3, a: "end" },
+  harbourisland: { t: "Harbour Island, northeast", dx: -13, dy: 3, a: "end" },
 }
 const LENS: { id: Len | "any"; label: string }[] = [{ id: "any", label: "Any length" }, { id: "half", label: "Half day" }, { id: "full", label: "Full day" }, { id: "evening", label: "Evening" }]
 const isoToday = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}` }
@@ -27,19 +29,18 @@ function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; chi
 function NassauMap({ lit, focus, place, onPin }: { lit: Map<Place, number>; focus: Place | null; place: Place | null; onPin: (p: Place) => void }) {
   const reduce = useReducedMotion()
   return (
-    <svg className="map-svg" viewBox="40 24 940 660" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Map of the Nassau waters: where the matching trips go">
+    <svg className="map-svg" viewBox="120 300 380 200" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Map of the Nassau waters: where the matching trips go">
       <path d={(MAP as { d: string }).d} className="map-land" />
-      <path d={`M${PIN.harbour[0]} ${PIN.harbour[1]} Q 560 470 ${PIN.exuma[0]} ${PIN.exuma[1]}`} className="map-route" />
-      <text x={548} y={512} className="map-route-t" transform="rotate(26 548 512)">38 nautical miles, 55 minutes</text>
+      <path d={`M${PIN.harbour[0]} ${PIN.harbour[1]} Q 420 430 ${PIN.exuma[0] - 8} ${PIN.exuma[1] - 2}`} className="map-route" />
       {(Object.keys(PIN) as Place[]).map(p => {
         const n = lit.get(p) ?? 0, on = n > 0, [x, y] = PIN[p], L = LABEL[p], sel = place === p
         return (
           <g key={p} className={`pin ${on ? "is-lit" : ""} ${focus === p ? "is-focus" : ""} ${sel ? "is-sel" : ""}`}>
-            <motion.circle cx={x} cy={y} r={30} className="pin-ring" initial={false} animate={{ scale: focus === p || sel ? 1 : 0.4, opacity: focus === p || sel ? 1 : 0 }} transition={{ duration: reduce ? 0 : 0.25, ease: EASE }} style={{ transformOrigin: `${x}px ${y}px` }} />
-            <motion.circle cx={x} cy={y} r={15} className="pin-dot" initial={false} animate={{ scale: on ? 1 : 0.55 }} transition={{ duration: reduce ? 0 : 0.35, ease: EASE }} style={{ transformOrigin: `${x}px ${y}px` }} />
-            {on && <text x={x} y={y + 5} textAnchor="middle" className="pin-n">{n}</text>}
+            <motion.circle cx={x} cy={y} r={15} className="pin-ring" initial={false} animate={{ scale: focus === p || sel ? 1 : 0.4, opacity: focus === p || sel ? 1 : 0 }} transition={{ duration: reduce ? 0 : 0.25, ease: EASE }} style={{ transformOrigin: `${x}px ${y}px` }} />
+            <motion.circle cx={x} cy={y} r={EDGE.has(p) ? 8.5 : 8} className={`pin-dot ${EDGE.has(p) ? "is-edge" : ""}`} initial={false} animate={{ scale: on ? 1 : 0.55 }} transition={{ duration: reduce ? 0 : 0.35, ease: EASE }} style={{ transformOrigin: `${x}px ${y}px` }} />
+            {on && <text x={x} y={y + 2.9} textAnchor="middle" className="pin-n">{n}</text>}
             <text x={x + L.dx} y={y + L.dy} textAnchor={L.a} className="pin-l">{L.t}</text>
-            <circle cx={x} cy={y} r={26} className="pin-hit" role="button" tabIndex={0} aria-label={`${L.t}: ${n} trip${n === 1 ? "" : "s"}${sel ? ", selected" : ""}`} aria-pressed={sel}
+            <circle cx={x} cy={y} r={13} className="pin-hit" role="button" tabIndex={0} aria-label={`${L.t}: ${n} trip${n === 1 ? "" : "s"}${sel ? ", selected" : ""}`} aria-pressed={sel}
               onClick={() => onPin(p)} onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPin(p) } }} />
           </g>
         )
@@ -51,7 +52,7 @@ function NassauMap({ lit, focus, place, onPin }: { lit: Map<Place, number>; focu
 function Card({ t, onAsk, onFocus }: { t: Tour; onAsk: (t: Tour) => void; onFocus: (p: Place | null) => void }) {
   const len = LEN[t.id]
   return (
-    <div className="card" onMouseEnter={() => onFocus(t.place)} onMouseLeave={() => onFocus(null)} onFocus={() => onFocus(t.place)} onBlur={() => onFocus(null)}>
+    <div className="card" onMouseEnter={() => onFocus(t.place)} onMouseLeave={() => onFocus(null)} onFocusCapture={() => onFocus(t.place)} onBlurCapture={e => { if (!e.currentTarget.contains(e.relatedTarget as Node)) onFocus(null) }}>
       <div className="card-pic"><img src={t.img} alt={t.alt} width={232} height={150} loading="lazy" decoding="async" /></div>
       <p className="card-place">{PLACE_NAME[t.place]}{len ? <> · {LEN_LABEL[len]}</> : null}</p>
       <h3 className="card-name">{t.name}</h3>
@@ -64,7 +65,7 @@ function Card({ t, onAsk, onFocus }: { t: Tour; onAsk: (t: Tour) => void; onFocu
   )
 }
 
-type Ask = { kind: "trip"; tour: Tour } | { kind: "transfer"; type: string }
+type Ask = { kind: "trip"; tour: Tour } | { kind: "transfer"; type: string } | { kind: "any" }
 
 function Sheet({ ask, onClose }: { ask: Ask | null; onClose: () => void }) {
   const reduce = useReducedMotion()
@@ -74,7 +75,7 @@ function Sheet({ ask, onClose }: { ask: Ask | null; onClose: () => void }) {
     if (!ask) return
     setSent(false)
     const prev = document.activeElement as HTMLElement | null
-    setTimeout(() => box.current?.querySelector<HTMLElement>("input, select, button")?.focus(), 60)
+    setTimeout(() => box.current?.querySelector<HTMLElement>("#sheet-h")?.focus(), 60)
     const key = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose()
       if (e.key === "Tab" && box.current) {
@@ -86,16 +87,16 @@ function Sheet({ ask, onClose }: { ask: Ask | null; onClose: () => void }) {
     window.addEventListener("keydown", key)
     return () => { window.removeEventListener("keydown", key); prev?.focus() }
   }, [ask, onClose])
-  const title = ask?.kind === "trip" ? ask.tour.name : `Airport transfer, ${ask?.kind === "transfer" ? ask.type.toLowerCase() : ""}`
+  const title = ask?.kind === "trip" ? ask.tour.name : ask?.kind === "any" ? "Plan my excursion" : `Airport transfer, ${ask?.kind === "transfer" ? ask.type.toLowerCase() : ""}`
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     const f = e.currentTarget
     if (!f.checkValidity()) return
     e.preventDefault()
     const fd = new FormData(f)
-    const lines = ["Hello Majestic Tours,", "", ask?.kind === "trip" ? `I would like to ask about: ${ask.tour.name}` : `I would like a quote for an airport transfer (${ask?.kind === "transfer" ? ask.type : ""}).`, ""]
+    const lines = ["Hello Majestic Tours,", "", ask?.kind === "trip" ? `I would like to ask about: ${ask.tour.name}` : ask?.kind === "any" ? "Please suggest an excursion for us." : `I would like a quote for an airport transfer (${ask?.kind === "transfer" ? ask.type : ""}).`, ""]
     fd.forEach((v, k) => { const s = String(v).trim(); if (s) lines.push(`${k}: ${s}`) })
     lines.push("", "Sent from the Majestic Tours website.")
-    const subj = `${ask?.kind === "trip" ? "Excursion enquiry" : "Airport transfer"}: ${ask?.kind === "trip" ? ask.tour.name : ask?.kind === "transfer" ? ask.type : ""}${fd.get("Date") ? ", " + fd.get("Date") : ""}`
+    const subj = `${ask?.kind === "transfer" ? "Airport transfer" : "Excursion enquiry"}: ${ask?.kind === "trip" ? ask.tour.name : ask?.kind === "transfer" ? ask.type : "not sure yet"}${fd.get("Date") ? ", " + fd.get("Date") : ""}`
     window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(lines.join("\n"))}`
     setSent(true)
   }
@@ -106,17 +107,18 @@ function Sheet({ ask, onClose }: { ask: Ask | null; onClose: () => void }) {
           <motion.div ref={box} role="dialog" aria-modal="true" aria-labelledby="sheet-h" className="sheet"
             initial={reduce ? false : { x: "8%", opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={reduce ? undefined : { x: "8%", opacity: 0 }} transition={{ duration: 0.45, ease: EASE }}>
             <div className="sheet-top">
-              <p className="sheet-k">{ask.kind === "trip" ? PLACE_NAME[ask.tour.place] : "Meet and greet after Customs"}</p>
+              <p className="sheet-k">{ask.kind === "trip" ? PLACE_NAME[ask.tour.place] : ask.kind === "any" ? "Tell us the day; an agent suggests the trip" : "Meet and greet after Customs"}</p>
               <button type="button" className="sheet-x" onClick={onClose} aria-label="Close"><X className="size-5" strokeWidth={1.5} aria-hidden /></button>
             </div>
-            <h2 id="sheet-h" className="sheet-h">{title}</h2>
+            <h2 id="sheet-h" className="sheet-h" tabIndex={-1}>{title}</h2>
             {ask.kind === "trip" && FACTS[ask.tour.id] && <p className="sheet-fact tnum">{FACTS[ask.tour.id]}</p>}
             <form className="sheet-form" onSubmit={submit}>
+              {ask.kind === "any" && <label><span className="field-label">What you have in mind</span><input name="Ideas" className="field-input" placeholder="Animals, a beach, an evening sail..." /></label>}
               {ask.kind === "transfer" && <label><span className="field-label">Arrival flight</span><input name="Flight" className="field-input" placeholder="Airline and flight number" /></label>}
               <label><span className="field-label">{ask.kind === "trip" ? "Date" : "Arrival date"}</span><input name="Date" type="date" min={isoToday()} className="field-input tnum" required /></label>
               <div className="sheet-two">
-                <label><span className="field-label">Adults</span><input name="Adults" inputMode="numeric" defaultValue="2" className="field-input tnum" /></label>
-                <label><span className="field-label">Children</span><input name="Children" inputMode="numeric" defaultValue="0" className="field-input tnum" /></label>
+                <label><span className="field-label">Adults</span><input name="Adults" type="number" min="1" defaultValue="2" className="field-input tnum" /></label>
+                <label><span className="field-label">Children</span><input name="Children" type="number" min="0" defaultValue="0" className="field-input tnum" /></label>
               </div>
               <label><span className="field-label">{ask.kind === "trip" ? "Staying at (hotel or ship)" : "Hotel"}</span><input name="Staying at" className="field-input" autoComplete="off" /></label>
               <label><span className="field-label">Your name</span><input name="Name" className="field-input" autoComplete="name" required /></label>
@@ -148,6 +150,10 @@ export function Finder() {
   const [focus, setFocus] = useState<Place | null>(null)
   const [ask, setAsk] = useState<Ask | null>(null)
   const [ttype, setTtype] = useState("Shared")
+  useEffect(() => {
+    const h = () => { if (location.hash === "#ask") { setAsk({ kind: "any" }); history.replaceState(null, "", location.pathname + location.search) } }
+    h(); window.addEventListener("hashchange", h); return () => window.removeEventListener("hashchange", h)
+  }, [])
   const rail = useRef<HTMLUListElement>(null)
 
   const base = useMemo(() => TOURS.filter(t => (what === "all" || whatOf(t) === what) && (len === "any" || LEN[t.id] === len) && (!dry || DRY.has(t.id))), [what, len, dry])
@@ -172,21 +178,25 @@ export function Finder() {
         <div className="fleft">
           <motion.p className="fcap" initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>Nassau and Paradise Island · a Bahamian family company since June 1959</motion.p>
           <motion.h1 id="h1" className="display fh1" initial={reduce ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: EASE }}>Out of Nassau.</motion.h1>
+          <figure className="fphoto fphoto-phone"><Img pic={PIC.flyingCloud} className="w-full" eager /><figcaption>The Flying Cloud leaving Nassau Harbour at sunset.</figcaption></figure>
           <div className="ftabs" role="tablist" aria-label="What you are planning">
-            <button role="tab" aria-selected={tab === "trips"} className={tab === "trips" ? "is-on" : ""} onClick={() => setTab("trips")}>Excursions</button>
-            <button role="tab" aria-selected={tab === "transfer"} className={tab === "transfer" ? "is-on" : ""} onClick={() => setTab("transfer")}>Airport transfer</button>
+            <button role="tab" id="tab-trips" aria-controls="panel" aria-selected={tab === "trips"} tabIndex={tab === "trips" ? 0 : -1} className={tab === "trips" ? "is-on" : ""} onClick={() => setTab("trips")} onKeyDown={e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { setTab("transfer"); document.getElementById("tab-transfer")?.focus() } }}>Excursions</button>
+            <button role="tab" id="tab-transfer" aria-controls="panel" aria-selected={tab === "transfer"} tabIndex={tab === "transfer" ? 0 : -1} className={tab === "transfer" ? "is-on" : ""} onClick={() => setTab("transfer")} onKeyDown={e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { setTab("trips"); document.getElementById("tab-trips")?.focus() } }}>Airport transfer</button>
           </div>
           {tab === "trips" ? (
-            <div className="filters" role="tabpanel" aria-label="Find a trip">
+            <div className="filters" role="tabpanel" id="panel" aria-labelledby="tab-trips">
               <fieldset><legend>What</legend><div className="chips">{WHAT.map(w => <Chip key={w.id} on={what === w.id} onClick={() => setWhat(w.id)}>{w.label}</Chip>)}</div></fieldset>
               <fieldset><legend>How long</legend><div className="chips">{LENS.map(l => <Chip key={l.id} on={len === l.id} onClick={() => setLen(l.id)}>{l.label}</Chip>)}</div></fieldset>
-              <label className="dry"><input type="checkbox" checked={dry} onChange={e => setDry(e.target.checked)} /><span className="dry-sw" aria-hidden /><span>No swimming needed</span></label>
+              <label className="dry"><input type="checkbox" checked={dry} onChange={e => setDry(e.target.checked)} /><span className="dry-sw" aria-hidden /><span>Stays on deck or on land</span></label>
+              <div className="frow">
               <p className="fcount tnum" aria-live="polite">
                 {shown.length ? <><strong>{shown.length}</strong> {shown.length === 1 ? "trip fits" : "trips fit"}{place ? <> at {PLACE_NAME[place]} <button type="button" className="fclear" onClick={() => setPlace(null)}>show all places</button></> : "."}</> : <>No trip fits all of that. <button type="button" className="fclear" onClick={clear}>Clear the filters</button></>}
               </p>
+              <button type="button" className="btn" onClick={() => setAsk({ kind: "any" })}>Plan my excursion</button>
+              </div>
             </div>
           ) : (
-            <div className="filters" role="tabpanel" aria-label="Airport transfer">
+            <div className="filters" role="tabpanel" id="panel" aria-labelledby="tab-transfer">
               <p className="tlead">Met after Customs at Ground Transportation by a Majestic representative with a sign.</p>
               <div className="ttypes" role="radiogroup" aria-label="Transfer type">
                 {TRANSFER.map(t => (
@@ -201,12 +211,13 @@ export function Finder() {
               </div>
             </div>
           )}
-          <p className="fcall">Rather talk? <a href={TEL} className="tnum">Call {PHONE}</a>, or find the Majestic desk in your hotel lobby.</p>
+          <p className="fcall">Rather talk? <a href={TEL} className="tnum">Call {PHONE}</a>, or find the Majestic desk in your hotel lobby. {tab === "trips" ? "Ask on each trip, or let an agent suggest one." : "Private vans and buses for groups are arranged ahead."}</p>
         </div>
         <div className="fright">
           <div className={`map ${tab === "transfer" ? "is-dim" : ""}`}>
             <NassauMap lit={tab === "trips" ? lit : new Map()} focus={focus} place={place} onPin={p => { setTab("trips"); setPlace(cur => (cur === p ? null : p)) }} />
             <p className="map-credit">Coastline © OpenStreetMap contributors</p>
+            <figure className="fphoto fphoto-desk"><Img pic={PIC.flyingCloud} className="w-full" eager maxW={220} /><figcaption>The Flying Cloud leaving the harbour at sunset</figcaption></figure>
           </div>
           {tab === "trips" && (
             <div className="places chips" role="group" aria-label="Where">

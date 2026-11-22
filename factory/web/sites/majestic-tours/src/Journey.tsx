@@ -172,8 +172,8 @@ function Title({ onPlan }: { onPlan: () => void }) {
           </div>
         </div>
         <figure className="w-[min(41vw,600px,calc((100svh-var(--tl)-260px)*1.43))]">
-          <Img pic={PIC.flyingCloud} className="w-full" />
-          <figcaption className="mt-3 text-cap text-muted italic">The Flying Cloud leaving Nassau Harbour at sunset, Atlantis on the horizon.</figcaption>
+          <Img pic={PIC.perfectDay} className="w-full" />
+          <figcaption className="mt-3 text-cap text-muted italic">Guests on the Rose Island beach on the Perfect Day tour.</figcaption>
           <p className="mt-6 flex items-center gap-2 text-small">Scroll, and the boat leaves the harbour <ArrowRight className="size-4 text-green" strokeWidth={1.5} aria-hidden /></p>
         </figure>
       </div>
@@ -287,8 +287,8 @@ export function JourneyPhone({ where, setWhere }: { where: string; setWhere: (v:
           <h2 className="display mt-2 text-[2.75rem] leading-[0.95]">Stop by stop, out of Nassau.</h2>
         </div>
         <figure className="mt-6 px-5">
-          <Img pic={PIC.flyingCloud} className="w-full" />
-          <figcaption className="mt-2 text-cap text-muted italic">The Flying Cloud leaving Nassau Harbour at sunset.</figcaption>
+          <Img pic={PIC.perfectDay} className="w-full" />
+          <figcaption className="mt-2 text-cap text-muted italic">Guests on the Rose Island beach on the Perfect Day tour.</figcaption>
         </figure>
       </section>
       <section id="stops" aria-label="Where the day goes" className="scroll-mt-4 pt-10 pb-6">

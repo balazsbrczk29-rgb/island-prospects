@@ -42,7 +42,7 @@ export const TOURS: Tour[] = [
   { id: "32", name: "Blue Lagoon Island, Dolphin Encounter", line: "The Close Encounter programme, standing in the shallows.", place: "lagoon", kind: "Culture and family", img: IMG + "dolphin-encounters/encounter-02.jpg", alt: "A dolphin encounter in the shallows" },
   { id: "53", name: "Blue Lagoon Island, Sea Lion Encounter", line: "Meet the sea lions at Blue Lagoon.", place: "lagoon", kind: "Culture and family", img: IMG + "blue-lagoon-sea-lion-encounter/sealion3.jpg", alt: "A sea lion at Blue Lagoon Island" },
   { id: "56", name: "Blue Lagoon, Island Beach Day", line: "Get away from busy Nassau for a serene beach day.", place: "lagoon", kind: "Sea and islands", img: IMG + "blue-lagoon/BLI12.jpg", alt: "The beach at Blue Lagoon Island" },
-  { id: "35", name: "The Fantastic Exuma Day Trip", line: "55 minutes and 38 nautical miles by powerboat to the Exuma Cays: iguanas, stingrays, the pigs of Ship Channel Cay.", place: "exuma", kind: "Sea and islands", img: IMG + "powerboat/powerboat.jpg", alt: "An offshore powerboat running across turquoise water", detail: "Hotel transfer included" },
+  { id: "35", name: "The Fantastic Exuma Day Trip", line: "55 minutes and 38 nautical miles by powerboat to the Exuma Cays: the iguanas of Allan's Cay and Ship Channel Cay.", place: "exuma", kind: "Sea and islands", img: IMG + "powerboat/powerboat.jpg", alt: "An offshore powerboat running across turquoise water", detail: "Hotel transfer included" },
   { id: "70", name: "Aqua Shores, Exuma", line: "Swimming pigs, sharks and iguanas by luxury powerboat.", place: "exuma", kind: "Sea and islands", img: IMG + "aqua-shores/image001.jpg", alt: "An Aqua Shores powerboat" },
   { id: "60", name: "Born Free Charters, Exuma Island Hopping", line: "A full, all-inclusive day led by local guides.", place: "exuma", kind: "Sea and islands", img: IMG + "born-free-charters/20210104_173005000_iOS.jpg", alt: "A Born Free Charters boat in the Exuma Cays" },
   { id: "82", name: "Harbour Island Pink Sands Experience", line: "Pink Sands Beach, swimming pigs and turtles in one powerboat day.", place: "harbourisland", kind: "Sea and islands", img: IMG + "born-free-charters/pink_sand_walk.png", alt: "Walking on the pink sand beach of Harbour Island" },
@@ -95,16 +95,16 @@ export const MODES = {
 export type Len = "half" | "full" | "evening"
 /** Length only where the tour's own name or line says it; others are "on the tour page". */
 export const LEN: Record<string, Len> = {
-  "84": "half", "05": "half", "41": "half", "38": "half", "26": "half", "25": "half",
+  "84": "half", "05": "half", "41": "half", "38": "half",
   "08": "full", "04": "full", "37": "full", "35": "full", "30": "full", "60": "full", "82": "full",
-  "09": "evening", "42": "evening", "06": "evening", "27": "evening",
+  "09": "evening", "42": "evening", "06": "evening",
 }
 export const LEN_LABEL: Record<Len, string> = { half: "Half day", full: "Full day", evening: "Evening" }
 /** Trips that do not need a swim: on land, on deck at dusk, the pirate ship, the fishing charters. */
-export const DRY = new Set(["09", "42", "06", "68", "37", "38", "43", "49", "81", "73", "10", "75", "03"])
+export const DRY = new Set(["09", "42", "06", "37", "38", "43", "49", "81", "10", "75", "03"])
 /** Published facts shown on the cards, from the tour pages. */
 export const FACTS: Record<string, string> = {
-  "09": "Pickups 5:00 to 5:30 pm · $137.50 adult, $68.75 child under 11",
+  "09": "Pickups 5:00 Cable Beach, 5:15 Downtown, 5:30 Paradise Island · $137.50 adult, $68.75 child under 11",
   "35": "Hotel transfer included · from $328.90 adult, $209.00 child",
 }
 export type What = "all" | "sail" | "islands" | "dive" | "fishing" | "land"
