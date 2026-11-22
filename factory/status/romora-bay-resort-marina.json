@@ -4,8 +4,82 @@
  "name": "Romora Bay Resort & Marina",
  "batch": "12",
  "tier": "A",
- "state": "building",
+ "state": "built",
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "Two-way arrival tool on screen 1: by boat (length, power, clearing in) -> prefilled email to marina@romorabay.com naming the Dockmaster; by air (dates, nights, room) -> officialbookings engine",
+ "brand_truth": "Harbour Island's resort where the yacht and the room share one address: an official port of entry with 17 rooms behind it.",
+ "design": {
+  "display_font": "Bodoni Moda 400/500 + italic",
+  "body_font": "Outfit 300/400/500",
+  "palette": [
+   "#fbf6f1",
+   "#1e2331",
+   "#155e67",
+   "#0e434a",
+   "#ebc3b6",
+   "#f3e6dc",
+   "#e6dbd2"
+  ],
+  "hero_pattern": "dual-arrival-switch (By sea / By air) over real drone photo with floating paper panel",
+  "signature": "Arrival switch that swaps hero story, facts, photo and CTA between yacht owners and room guests; captain's fit-and-power checker (LOA vs 190 ft, published power list) with prefilled marina email; room selector with photo strip"
+ },
+ "current_site_findings": [
+  "Marina tel links dial different numbers than printed (786-535-7322 dials 833-717-6499; 242.333.2325 dials 242-333-2500).",
+  "'40-slip' in Google description vs '40+ slips' on page.",
+  "190 ft limit buried in prose; no fit or power check; '408V' looks like a typo.",
+  "Resort phone and location not visible on the homepage outside the booking block.",
+  "Homepage leads with a dated pickleball event."
+ ],
+ "pitch_line": "Your marina page prints one phone number and dials another; this concept fixes that and lets a captain check 190 ft and power in five seconds, while room guests get their own version of the same first screen.",
+ "sources": [
+  "https://www.romorabay.com/",
+  "https://www.romorabay.com/marina",
+  "https://www.romorabay.com/stay",
+  "https://www.romorabay.com/dining"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Pink sand beach 'steps away' (their wording)",
+  "Power list includes '408V 3 phase' as published (probably 480V)",
+  "Pickleball bootcamp is a dated event (Nov 20-21 2026); remove after"
+ ],
+ "notes": [
+  "Built from approved job spec 2026-11-22 by an unattended site worker; design.md in factory/web/sites/romora-bay-resort-marina/.",
+  "Previous three pages (index, marina, stay) merged into one page; gen-1 clones removed (key-info band, sticky blurred header, Reveal, uppercase eyebrows, Google Fonts).",
+  "Critic round 1: wow/photo/composition/phone 3; fixes applied (split full-bleed hero, honest booking hand-off, 408V labelled as published, dates optional, mode-setting slip links, larger rooms, unverified copy trimmed). Re-score all 4.",
+  "Getting here line sourced from romorabay.com/getting-here (search snippet, 2026-11-22).",
+  "To confirm with the resort: 408V (possibly 480V); VHF channel (not published, left out); whether officialbookings accepts date parameters (hand-off is a plain link).",
+  "Photo native sizes could not be measured in the sandbox; width/height attributes are assumed (1920x1280 aerials, 1200x800 rooms). Verify against the live files.",
+  "Pickleball bootcamp (dated event) removed from the page per spec Fix list."
+ ],
+ "built_at": "2026-11-22T14:18:27.123666+00:00",
  "generation": 2,
- "rebuild_of": 1,
- "claimed_at": "2026-11-22T14:08:23.359Z"
+ "jobspec_built": true,
+ "history": null,
+ "direction": {
+  "type": "Bodoni Moda (opsz) + Outfit, self-hosted",
+  "palette": "paper ground, ink, harbour blue accent for primary actions, pink sand field, one deep harbour section",
+  "why": "Job spec first: split hero, left paper column with the By boat / By air tool, right the real aerial that changes with the answer; previous three pages merged into one journey."
+ },
+ "scores": {
+  "gate1": {
+   "product_and_tool_on_screen1": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "gate2": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion": 4,
+   "phone": 4
+  }
+ }
 }

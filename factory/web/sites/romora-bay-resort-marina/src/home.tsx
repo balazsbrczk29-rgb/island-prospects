@@ -329,11 +329,11 @@ function Contact() {
 function Dock() {
   const [show, setShow] = useState(false)
   useEffect(() => {
-    const top = document.getElementById("top"), close = document.getElementById("c-h")
+    const top = document.querySelector(".sw"), close = document.getElementById("c-h")
     if (!top || !close) return
     let past = false, atClose = false
     const io = new IntersectionObserver(es => {
-      for (const e of es) { if (e.target === top) past = !e.isIntersecting; if (e.target === close) atClose = e.isIntersecting }
+      for (const e of es) { if (e.target === top) past = !e.isIntersecting && e.boundingClientRect.top < 0; if (e.target === close) atClose = e.isIntersecting }
       setShow(past && !atClose)
     })
     io.observe(top); io.observe(close)
