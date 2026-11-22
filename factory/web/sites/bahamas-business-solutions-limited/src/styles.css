@@ -2,42 +2,75 @@
 @source "./";
 @source "../../../src/components/ui/accordion.tsx";
 @source "../../../src/components/ui/sheet.tsx";
-@source "../../../src/components/ui/tabs.tsx";
-@source "../../../src/components/magicui/marquee.tsx";
 
+@font-face { font-family: "Instrument Serif"; src: url("./fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url("./fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Geist"; src: url("./fonts/geist-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url("./fonts/geist-mono-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+/* Tokens (design.md section 3). Components use these only. */
 @theme {
-  --color-paper: #f2f0ea;
-  --color-paper-2: #e7e3d8;
-  --color-sheet: #fbfaf6;
-  --color-ink: #121417;
-  --color-graphite: #23272c;
-  --color-muted: #5b5f63;
-  --color-line: #d3cec2;
-  --color-cyan: #0a6d8c;
-  --color-cyan-deep: #07506a;
-  --color-toner: #e3b505;
-  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --color-paper: #f1efea /* oklch(95.3% 0.008 90) */;
+  --color-paper-2: #e6e3d9 /* oklch(91.5% 0.013 88) */;
+  --color-sheet: #fcfaf7 /* oklch(98.6% 0.005 90) */;
+  --color-ink: #111315 /* oklch(18.5% 0.006 255) */;
+  --color-graphite: #22262a /* oklch(26.5% 0.01 250) */;
+  --color-muted: #575b5f /* oklch(47% 0.008 250) */;
+  --color-line: #d2cdc3 /* oklch(85% 0.015 85) */;
+  --color-cyan: #036884 /* oklch(48% 0.09 225) */;
+  --color-cyan-deep: #005068 /* oklch(40% 0.08 225) */;
+  --color-toner: #e8b616 /* oklch(80% 0.16 88) */;
+  --color-paper-soft: #a9abab;
+  --color-paper-mid: #cfd0cd;
+  --color-rule-dark: #43474b;
+  --color-rule-ink: #2b2d30;
+  --color-edge-dark: #6a6d70;
+  --color-go: #2e9e52 /* oklch(62% 0.15 150) */;
+  --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --text-cap: 13px;
+  --text-body: 16px;
+  --text-lead: 19px;
+  --text-h3: 26px;
+  --text-h2: clamp(40px, 4.4vw, 60px);
+  --text-hero: clamp(46px, 5.4vw, 78px);
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-mask: cubic-bezier(.77, 0, .175, 1);
+  --shadow-sheet: 0 1px 0 var(--color-line), 0 30px 60px -32px rgb(14 18 22 / .28);
 }
 
 html { background: var(--color-paper); color: var(--color-ink); }
-body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-sans); font-size: var(--text-body); line-height: 1.6; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 ::selection { background: var(--color-toner); color: var(--color-ink); }
 :focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 3px; }
 
-/* print-production detailing: crop marks and registration targets */
+.wrap { width: 100%; max-width: 1320px; margin-inline: auto; padding-inline: 20px; }
+@media (min-width: 768px) { .wrap { padding-inline: 56px; } }
+
+/* print-production detailing: crop marks */
 .crop { position: absolute; width: 28px; height: 28px; pointer-events: none; }
 .crop::before, .crop::after { content: ""; position: absolute; background: var(--color-ink); opacity: .55; }
 .crop::before { width: 100%; height: 1px; top: 50%; }
 .crop::after { height: 100%; width: 1px; left: 50%; }
-.paper-tex { position: relative; }
-.paper-tex::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.07 0 0 0 0 0.08 0 0 0 0 0.09 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-@media (max-width: 767px) { body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); } }
+
+.slug { font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--color-muted); }
+
+/* the helpdesk lamp */
+.lamp { position: relative; width: 10px; height: 10px; border-radius: 999px; flex: none; }
+.lamp[data-open="true"] { background: var(--color-go); }
+.lamp[data-open="false"] { background: var(--color-toner); }
+.lamp[data-open="true"]::after { content: ""; position: absolute; inset: -5px; border-radius: 999px; border: 1px solid var(--color-go); animation: lamp 2.4s var(--ease-out) 1 .6s both; }
+@keyframes lamp { from { transform: scale(.6); opacity: 1 } to { transform: scale(1.6); opacity: 0 } }
+.caret::after { content: ""; display: inline-block; width: .55em; height: 1em; margin-left: 2px; vertical-align: -0.12em; background: var(--color-cyan); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0 } }
+
+.field { display: block; width: 100%; min-height: 48px; border: 0; border-bottom: 1px solid rgb(17 19 21 / .25); background: transparent; font-size: 17px; outline: none; transition: border-color .18s var(--ease-out); border-radius: 0; }
+.field:focus { border-color: var(--color-cyan); }
+select.field { appearance: none; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: calc(100% - 14px) 22px, calc(100% - 9px) 22px; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 28px; }
+
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

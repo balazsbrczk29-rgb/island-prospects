@@ -1,13 +1,11 @@
-// Signature visual: a fanned stack of the documents BBSL's equipment and Document Centre actually produce,
-// each sheet drawn from a line on bbsl.com: a colour proof (digital on-demand printing), an architectural
-// plan (architectural and engineering services), an NCR point-of-sale receipt, a mailing letter (Neopost
-// folder/inserter), a wide-format poster and a scanned, indexed record (OnBase content management).
-// Hover or tap a sheet to lift it; the parent shows what BBSL does for that document.
+// Screen 2 showpiece (kept from the Nov 5 concept): a fanned stack of six documents, one for each BBSL product line:
+// colour proof (Xerox), receipt (NCR), indexed record (OnBase), port map (Lenovo & HP, networking), address-window
+// letter (Neopost), access log (security). Pick a sheet to lift it; the index beside it shows that line.
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { useMemo, useRef, type ReactNode } from "react"
 import * as THREE from "three"
 
-export type SheetKind = "proof" | "plan" | "receipt" | "letter" | "poster" | "record"
+export type SheetKind = "proof" | "network" | "receipt" | "letter" | "access" | "record"
 const INK = "#121417", CYAN = "#0a6d8c", TONER = "#e3b505", GREY = "#8a8d90", SHEET = "#fbfaf6"
 
 function bars(g: CanvasRenderingContext2D, x: number, y: number, w: number, rows: number, gap = 22, h = 7) {
@@ -27,13 +25,13 @@ function draw(kind: SheetKind, W: number, H: number) {
     bars(g, 40, 600, W - 80, 14)
     g.strokeStyle = INK; g.lineWidth = 2; for (const [x, y] of [[W - 70, H - 70]]) { g.beginPath(); g.arc(x, y, 22, 0, Math.PI * 2); g.moveTo(x - 34, y); g.lineTo(x + 34, y); g.moveTo(x, y - 34); g.lineTo(x, y + 34); g.stroke() }
   }
-  if (kind === "plan") {
-    g.fillStyle = "#eef3f5"; g.fillRect(0, 0, W, H)
-    g.strokeStyle = CYAN; g.lineWidth = 1; for (let x = 0; x < W; x += 32) { g.globalAlpha = .25; g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.stroke() } for (let y = 0; y < H; y += 32) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke() }
-    g.globalAlpha = 1; g.lineWidth = 6; g.strokeStyle = INK
-    g.strokeRect(70, 90, W - 140, H - 260); g.beginPath(); g.moveTo(70, 420); g.lineTo(380, 420); g.moveTo(380, 90); g.lineTo(380, 640); g.moveTo(380, 520); g.lineTo(W - 70, 520); g.stroke()
-    g.lineWidth = 2; g.beginPath(); g.arc(380, 330, 70, Math.PI, Math.PI * 1.5); g.stroke()
-    g.fillStyle = INK; g.font = "26px 'Geist Mono', monospace"; g.fillText("SHEET A-101", 70, H - 140); g.fillText("SCALE 1:100", W - 290, H - 140)
+  if (kind === "network") {
+    // a port map and rack sheet, the kind of drawing that comes with a Lenovo/HP install and structured cabling
+    g.fillStyle = INK; g.font = "28px 'Geist Mono', monospace"; g.fillText("RACK 01 · PORT MAP", 50, 50)
+    for (let r = 0; r < 6; r++) { g.strokeStyle = INK; g.lineWidth = 2; g.strokeRect(50, 120 + r * 70, W - 100, 52)
+      for (let p = 0; p < 12; p++) { g.fillStyle = (p + r) % 5 === 0 ? CYAN : "#c4c5c6"; g.fillRect(70 + p * ((W - 160) / 12), 134 + r * 70, 26, 24) } }
+    g.strokeStyle = CYAN; g.lineWidth = 3; g.beginPath(); g.moveTo(90, 580); g.bezierCurveTo(200, 700, 380, 520, W - 90, 720); g.stroke()
+    bars(g, 50, H - 200, W - 100, 6, 26, 7)
   }
   if (kind === "receipt") {
     g.fillStyle = INK; g.font = "bold 44px 'Geist Mono', monospace"; g.textAlign = "center"; g.fillText("RECEIPT", W / 2, 60)
@@ -48,11 +46,13 @@ function draw(kind: SheetKind, W: number, H: number) {
     bars(g, 60, 470, W - 120, 18, 26, 8)
     g.setLineDash([12, 10]); g.strokeStyle = CYAN; g.beginPath(); g.moveTo(0, H / 3); g.lineTo(W, H / 3); g.moveTo(0, (2 * H) / 3); g.lineTo(W, (2 * H) / 3); g.stroke()
   }
-  if (kind === "poster") {
-    g.fillStyle = INK; g.fillRect(0, 0, W, H)
-    g.fillStyle = SHEET; g.font = "italic 520px 'Instrument Serif', Georgia, serif"; g.fillText("B", 40, 40)
-    g.fillStyle = TONER; g.fillRect(40, H - 230, W - 80, 10)
-    g.fillStyle = SHEET; g.font = "34px 'Geist Mono', monospace"; g.fillText("WIDE FORMAT · COLOUR", 40, H - 190)
+  if (kind === "access") {
+    g.fillStyle = INK; g.font = "28px 'Geist Mono', monospace"; g.fillText("ACCESS LOG · DOOR 2", 40, 50)
+    g.fillRect(40, 100, W - 80, 2)
+    g.font = "24px 'Geist Mono', monospace"
+    for (let i = 0; i < 14; i++) { const hh = String(7 + Math.floor(i / 2)).padStart(2, "0"), mm = String((i * 17) % 60).padStart(2, "0")
+      g.fillStyle = INK; g.fillText(`${hh}:${mm}`, 40, 130 + i * 48); g.fillStyle = "#6b6e72"; g.fillText(`BADGE ${(1040 + i * 37) % 9000}`, 170, 130 + i * 48)
+      g.fillStyle = i === 9 ? TONER : CYAN; g.fillRect(W - 120, 132 + i * 48, 70, 22) }
   }
   if (kind === "record") {
     g.fillStyle = "#e9e6dd"; g.fillRect(0, 0, W, 120)
@@ -66,8 +66,8 @@ function draw(kind: SheetKind, W: number, H: number) {
 }
 
 const SHEETS: { kind: SheetKind; w: number; h: number; px: [number, number] }[] = [
-  { kind: "poster", w: 2.0, h: 2.8, px: [640, 896] },
-  { kind: "plan", w: 2.3, h: 1.7, px: [900, 666] },
+  { kind: "access", w: 1.7, h: 2.2, px: [640, 828] },
+  { kind: "network", w: 1.7, h: 2.2, px: [640, 828] },
   { kind: "record", w: 1.7, h: 2.2, px: [640, 828] },
   { kind: "letter", w: 1.7, h: 2.2, px: [640, 828] },
   { kind: "receipt", w: 0.85, h: 2.5, px: [340, 1000] },
@@ -100,7 +100,7 @@ function Paper({ i, kind, w, h, px, active, onPick }: { i: number; kind: SheetKi
   return (
     <group ref={ref} position={[base * 0.2, -3, i * 0.05]}>
       <mesh geometry={geo} castShadow receiveShadow
-        onPointerOver={e => { e.stopPropagation(); onPick(kind); document.body.style.cursor = "pointer" }}
+        onPointerOver={e => { e.stopPropagation(); document.body.style.cursor = "pointer" }}
         onPointerOut={() => { document.body.style.cursor = "" }}
         onClick={e => { e.stopPropagation(); onPick(kind) }}>
         <meshStandardMaterial map={map} roughness={0.92} metalness={0} side={THREE.DoubleSide} />
@@ -111,9 +111,8 @@ function Paper({ i, kind, w, h, px, active, onPick }: { i: number; kind: SheetKi
 
 function Layout({ children }: { children: ReactNode }) {
   const { viewport } = useThree()
-  const wide = viewport.aspect > 1.3
-  const scale = wide ? 0.86 : Math.min(1.1, viewport.width / 5.6)
-  return <group position={[wide ? viewport.width * 0.3 : 0, wide ? -0.05 : 0, 0]} scale={scale}>{children}</group>
+  const scale = Math.min(1.05, viewport.width / 6.2)
+  return <group scale={scale}>{children}</group>
 }
 
 function Rig() {
@@ -126,9 +125,10 @@ function Rig() {
   return null
 }
 
-export default function Scene({ active, onPick }: { active: SheetKind | null; onPick: (k: SheetKind | null) => void }) {
+export default function Scene({ active, onPick, run }: { active: SheetKind | null; onPick: (k: SheetKind | null) => void; run: boolean }) {
+  const coarse = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches
   return (
-    <Canvas shadows dpr={[1, 1.8]} camera={{ position: [0, 0.4, 7.4], fov: 34 }} gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }} onPointerMissed={() => onPick(null)} aria-hidden>
+    <Canvas frameloop={run ? "always" : "never"} shadows={!coarse} dpr={coarse ? [1, 1.25] : [1, 1.5]} camera={{ position: [0, 0.4, 7.4], fov: 34 }} gl={{ antialias: !coarse, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}  aria-hidden>
       <ambientLight intensity={0.9} />
       <hemisphereLight args={["#ffffff", "#d8d2c4", 0.6]} />
       <directionalLight position={[3.5, 5, 6]} intensity={1.6} castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0004} />
