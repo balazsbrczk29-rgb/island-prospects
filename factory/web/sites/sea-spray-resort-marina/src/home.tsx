@@ -31,7 +31,7 @@ function Console({ t, set }: { t: Trip; set: (t: Trip) => void }) {
       <div className="wrap console__grid">
         <div className="console__title">
           <h1 id="t-h" className="h1">White Sound, Elbow&nbsp;Cay.</h1>
-          <p className="lede muted">{LIMITS.slips} slips for boats from {LIMITS.minLoa} to {LIMITS.maxLoa} ft, drafts to {LIMITS.maxDraft} ft, at the head of the sound.</p>
+          <p className="lede muted">{LIMITS.slips} slips for boats from {LIMITS.minLoa} to {LIMITS.maxLoa}&nbsp;ft, drafts to {LIMITS.maxDraft}&nbsp;ft.</p>
         </div>
         <div className="console__in">
           <p className="q">Will she fit, and what will it cost?</p>
@@ -59,9 +59,9 @@ function Console({ t, set }: { t: Trip; set: (t: Trip) => void }) {
           ) : (
             <p className="verdict verdict--no">{t.loa > LIMITS.maxLoa ? `Over our ${LIMITS.maxLoa} ft limit.` : t.loa < LIMITS.minLoa ? `Under ${LIMITS.minLoa} ft: ask the dockmaster.` : `Deeper than the ${LIMITS.maxDraft} ft we take.`} Call before you plan the run.</p>
           )}
-          <a className="btn" href={wa(waText(t))}>Request this slip on WhatsApp</a>
+          <a id="req" className="btn" href={wa(waText(t))}>Request this slip on WhatsApp</a>
           <p className="acts2"><a className="tlink num" href={`tel:${CONTACT.tel}`}>Call {CONTACT.phone}</a><span>{CONTACT.vhf}</span></p>
-          <p className="acts3 cap"><a href={CONTACT.stay}>Book your stay</a><a href={CONTACT.order}>Order food</a><a href={CONTACT.slip}>Book a slip page</a></p>
+          <p className="acts3 cap"><a href={CONTACT.stay}>Book your stay</a><a href={CONTACT.order}>Order food</a><a href={CONTACT.slip}>Slip booking form</a></p>
         </div>
       </div>
     </div>
@@ -129,9 +129,7 @@ function Week() {
         <h2 id="w-h" className="h2">This week at the bar.</h2>
         <ul className="sched">
           <li><b>Thursday night</b><span>Live music, a DJ or Junkanoo</span></li>
-          <li><b>Happy Hour</b><span>Ask the bar for this week’s times</span></li>
-          <li><b>Game Night</b><span>Ask the bar for this week’s night</span></li>
-          <li><b>Karaoke</b><span>Ask the bar for this week’s night</span></li>
+          <li><b>Through the week</b><span>Happy Hour, Game Night and Karaoke: ask the bar for this week’s nights</span></li>
         </ul>
         <p className="muted">Private events and fishing tournaments: tell us your dates on WhatsApp.</p>
         <p className="row"><a className="btn btn--line" href={CONTACT.order}>Order food online</a><a className="tlink" href={wa('Hello Sea Spray, I would like to ask about a private event or tournament on these dates: ')}>Ask about an event</a></p>
@@ -142,7 +140,7 @@ function Week() {
 
 function Day() {
   const shots = [
-    { p: P.fleet, c: 'Out across the Sea of Abaco.' },
+    { p: P.fleet, c: 'Out for the day.' },
     { p: P.docks, c: 'Back to the docks: fuel, ice and bait.' },
     { p: P.lunch, c: 'Lunch by the marina.' },
     { p: P.bar, c: 'The bar at golden hour.' },
@@ -216,7 +214,7 @@ function Story() {
 function Bar({ t }: { t: Trip }) {
   const [on, setOn] = useState(false);
   useEffect(() => {
-    const els = [document.getElementById('slip'), document.getElementById('story')].filter(Boolean) as Element[];
+    const els = [document.getElementById('req'), document.getElementById('story')].filter(Boolean) as Element[];
     const vis = new Set<Element>();
     const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? vis.add(e.target) : vis.delete(e.target)); setOn(vis.size === 0); });
     els.forEach(e => io.observe(e)); return () => io.disconnect();
