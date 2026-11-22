@@ -63,7 +63,7 @@ function Drawer() {
                 <div className="meter__bar"><motion.i initial={false} animate={{ scaleX: Math.min(1, total / 55) }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} /></div>
                 <p className="tnum">{total >= 55 ? 'Free ground shipping unlocked (US orders)' : `${money(55 - total)} to free ground shipping`}</p>
               </div>
-              <p className="fine">USPS, UPS or FedEx: Ground, Priority or Express, priced at checkout on the factory's own store. Outside the US? <a href={ETSY}>Order on Etsy</a>.</p>
+              <p className="fine">USPS, UPS or FedEx: Ground, Priority or Express, priced at checkout on the factory's own store. Outside the US and Canada? <a href={ETSY}>Order on Etsy</a>.</p>
               <a className="btn btn-ink wide" href={checkoutUrl(lines)} aria-disabled={!lines.length}>Checkout on thebahamasrumcakefactory.com</a>
             </footer>
           </motion.aside>
