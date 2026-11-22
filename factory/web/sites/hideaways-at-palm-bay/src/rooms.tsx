@@ -52,12 +52,32 @@ function RoomFrame({ r, i }: { r: Room; i: number }) {
   )
 }
 
-function Intro() {
+function Intro({ onTable, phone = false }: { onTable?: () => void; phone?: boolean }) {
   return (
     <div className="track-intro">
       <h2 className="h2">Five on the ocean side. Three on the hill.</h2>
-      <p className="lede muted">Eight ways to stay, each with its own kitchen and patio. Scroll sideways through all of them, then check your dates.</p>
+      <p className="lede muted">Eight ways to stay, each with its own kitchen and patio. {phone ? 'Swipe through all of them' : 'Scroll sideways through all of them'}, then check your dates.</p>
       <p className="note muted">{ALL_ROOMS_HAVE}</p>
+      {onTable ? <button type="button" className="link view-toggle" onClick={onTable}>See all eight side by side</button>
+        : <a className="link view-toggle" href="stay.html">Compare all eight side by side</a>}
+    </div>
+  )
+}
+
+export function CompareTable() {
+  return (
+    <div className="cmp-scroll" tabIndex={0} role="region" aria-label="Room comparison table">
+      <table className="cmp">
+        <thead><tr><th scope="col">Room</th><th scope="col">Where</th><th scope="col">Beds for</th><th scope="col">View</th><th scope="col">Beds</th><th scope="col">Baths</th><th scope="col">Kitchen</th><th scope="col">Outside</th></tr></thead>
+        <tbody>
+          {ROOMS.map(r => (
+            <tr key={r.id}>
+              <th scope="row"><img src={r.photo} alt="" width={580} height={440} loading="lazy" /><span>{r.name}</span></th>
+              <td>{r.side === 'ocean' ? 'Ocean Side' : 'Hillside'}</td><td className="num">{r.cap}</td><td>{r.view}</td><td>{r.beds}</td><td>{r.baths}</td><td>{r.kitchen}</td><td>{r.patio}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
@@ -84,6 +104,7 @@ export function BookFrame({ compact = false }: { compact?: boolean }) {
 }
 
 export function Rooms() {
+  const [table, setTable] = useState(false)
   const ref = useRef<HTMLDivElement>(null), row = useRef<HTMLUListElement>(null)
   const max = useRef(0)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
@@ -104,11 +125,22 @@ export function Rooms() {
   }, [])
   return (
     <>
-      <section id="rooms" className="rooms-desk" aria-label="The eight room types">
+      {table && (
+        <section id="rooms" className="rooms-table wrap" aria-label="The eight room types, side by side">
+          <div className="rt-head">
+            <h2 className="h2">All eight, side by side.</h2>
+            <button type="button" className="link view-toggle" onClick={() => setTable(false)}>Back to the room journey</button>
+          </div>
+          <CompareTable />
+          <p className="small muted cmp-note">Beds for: how many sleep in the listed beds. Rates live in the booking system for your dates. {ALL_ROOMS_HAVE}</p>
+          <a className="btn btn-primary" href={BIZ.booking}>Check availability</a>
+        </section>
+      )}
+      <section id={table ? undefined : 'rooms'} className="rooms-desk" hidden={table} aria-label="The eight room types">
         <div ref={ref as any} id="rooms-track" data-stage style={{ height: `${FRAMES * 62}svh` }}>
           <div className="track-pin">
             <motion.ul ref={row} className="track" style={{ x }}>
-              <li className="f-intro"><Intro /></li>
+              <li className="f-intro"><Intro onTable={() => { setTable(true); requestAnimationFrame(() => document.getElementById('rooms')?.scrollIntoView()) }} /></li>
               {ROOMS.map((r, i) => <li key={r.id}><RoomFrame r={r} i={i} /></li>)}
               <li className="f-book"><BookFrame /></li>
             </motion.ul>
@@ -120,8 +152,8 @@ export function Rooms() {
           </div>
         </div>
       </section>
-      <section className="rooms-phone" aria-label="The eight room types">
-        <div className="wrap"><Intro /></div>
+      <section id={undefined} className="rooms-phone" aria-label="The eight room types">
+        <div className="wrap"><Intro phone /></div>
         <div className="side-switch" role="group" aria-label="Jump to">
           <button type="button" onClick={() => goToSide('ocean')}>Ocean Side · 5</button>
           <button type="button" onClick={() => goToSide('hill')}>Hillside · 3</button>

@@ -2,8 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import { Top } from './hero'
-import { ROOMS, ALL_ROOMS_HAVE, BIZ } from './data'
-import { BookFrame } from './rooms'
+import { ALL_ROOMS_HAVE, BIZ } from './data'
+import { BookFrame, CompareTable } from './rooms'
 import { Footer } from './sections'
 import { useSmooth } from './smooth'
 
@@ -28,20 +28,8 @@ function Stay() {
           <p className="lede muted">Five on the ocean side by the beach, three Island Time villas on the hill. {ALL_ROOMS_HAVE}</p>
         </header>
         <div className="wrap">
-          <div className="cmp-scroll" tabIndex={0} role="region" aria-label="Room comparison table">
-            <table className="cmp">
-              <thead><tr><th scope="col">Room</th><th scope="col">Where</th><th scope="col">View</th><th scope="col">Beds</th><th scope="col">Baths</th><th scope="col">Kitchen</th><th scope="col">Outside</th></tr></thead>
-              <tbody>
-                {ROOMS.map(r => (
-                  <tr key={r.id}>
-                    <th scope="row"><img src={r.photo} alt="" width={580} height={440} loading="lazy" /><span>{r.name}</span></th>
-                    <td>{r.side === 'ocean' ? 'Ocean Side' : 'Hillside'}</td><td>{r.view}</td><td>{r.beds}</td><td>{r.baths}</td><td>{r.kitchen}</td><td>{r.patio}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="small muted cmp-note">Rates on request, or live in the booking system for your dates.</p>
+          <CompareTable />
+          <p className="small muted cmp-note">Beds for: how many sleep in the listed beds. Rates on request, or live in the booking system for your dates.</p>
         </div>
         <section className="wrap amen" aria-labelledby="amen-h">
           <h2 id="amen-h" className="h2">What comes with every stay.</h2>
