@@ -1,4 +1,4 @@
-// Every fact here is from bahamaschoicerealestate.com (home, /active/, /sold/, listing #68204), checked 2026-11-21.
+// Every fact here is from bahamaschoicerealestate.com (home, /active/, /sold/, listing #68204), checked 2026-11-21; /active/ re-checked 2026-11-22 (same four listings).
 const IDX = (id: number, n: number) => `https://pix.idxre.com/pix/BSBREA/main/${n % 10}/${id}_${n}.jpg`;
 const WP = 'https://bahamaschoicerealestate.com/wp-content/uploads/';
 
@@ -20,6 +20,7 @@ export const PHOTO = {
 export type Photo = { src: string; w: number; h: number; alt: string };
 export type Listing = {
   id: number; status: 'For sale' | 'To rent' | 'Sold'; kind: 'Condo' | 'Land' | 'Rental' | 'House';
+  type: 'home' | 'land' | 'commercial'; value: number; beds?: number; baths?: number; size: string;
   title: string; area: string; island: string; price: string; priceNote?: string;
   facts: string[]; photos: Photo[]; photoCount: number; summary: string; source: string; page?: string;
 };
@@ -36,35 +37,35 @@ export const FILM = [
 
 export const LISTINGS: Listing[] = [
   {
-    id: 68204, status: 'For sale', kind: 'Condo', title: '5 Bayview Drive', area: 'Paradise Island Estates', island: 'New Providence',
+    id: 68204, status: 'For sale', kind: 'Condo', type: 'home', value: 690000, beds: 2, baths: 2, size: '1,226 sq ft', title: '5 Bayview Drive', area: 'Paradise Island Estates', island: 'New Providence and Paradise Island',
     price: '$690,000', facts: ['2 bedrooms', '2 bathrooms', '1,226 sq ft', 'Furnished', 'HOA $417'],
     photos: [0, 1, 6, 9, 15].map((n, i) => condo(n, FILM[i].photo.alt)), photoCount: 16,
     summary: 'A charming, fully furnished two-bedroom, two-bath apartment in one of Paradise Island’s most desirable residential communities: an enclosed private patio, a small garden, and a quiet, well-kept community ideal for professionals or couples.',
     source: 'https://bahamaschoicerealestate.com/homes-for-sale-details/5-BAYVIEW-DR-PARADISE-EST-5-NEW-PROVIDENCE/68204/516/', page: 'property-68204.html',
   },
   {
-    id: 68126, status: 'For sale', kind: 'Land', title: 'Lot 30, Davis Street and Hawthorn', area: 'Block 1', island: 'New Providence',
+    id: 68126, status: 'For sale', kind: 'Land', type: 'land', value: 602000, size: '0.909 acres', title: 'Lot 30, Davis Street and Hawthorn', area: 'Block 1', island: 'New Providence and Paradise Island',
     price: '$602,000', facts: ['0.909 acres', 'Lots and land'],
     photos: [{ src: IDX(68126, 0), w: 800, h: 1066, alt: 'Lot 30 Davis Street: level green land with mature trees' }, { src: IDX(68126, 1), w: 800, h: 1066, alt: 'Lot 30 Davis Street: open grass under a poinciana' }], photoCount: 7,
     summary: 'Just under an acre at Davis Street and Hawthorn, New Providence, listed as lots and land.',
     source: 'https://bahamaschoicerealestate.com/homes-for-sale-details/LOT-30-DAVIS-STREET-AND-HAWTHORN-BLOCK-1-NEW-PROVIDENCE/68126/516/', page: 'property-68126.html',
   },
   {
-    id: 67126, status: 'For sale', kind: 'Land', title: 'Lot 6, Block 2', area: 'Stella Maris', island: 'Long Island',
+    id: 67126, status: 'For sale', kind: 'Land', type: 'land', value: 130000, size: '0.689 acres', title: 'Lot 6, Block 2', area: 'Stella Maris', island: 'Long Island',
     price: '$130,000', facts: ['0.689 acres', 'Lots and land'],
     photos: [{ src: IDX(67126, 0), w: 800, h: 533, alt: 'Lot 6 Stella Maris: coppice and a coconut palm with the sea beyond' }, { src: IDX(67126, 1), w: 800, h: 533, alt: 'Lot 6 Stella Maris: native bush and a palm under open sky' }], photoCount: 8,
     summary: 'Over two thirds of an acre at Stella Maris, Long Island, listed as lots and land.',
     source: 'https://bahamaschoicerealestate.com/homes-for-sale-details/LOT-6-BLOCK-2-STELLA-MARI-LONG-ISLAND/67126/516/', page: 'property-67126.html',
   },
   {
-    id: 66392, status: 'To rent', kind: 'Rental', title: 'Bayview Drive, Unit 5', area: 'Paradise Island Estates', island: 'New Providence',
+    id: 66392, status: 'To rent', kind: 'Rental', type: 'home', value: 3800, beds: 2, baths: 2, size: '1,226 sq ft', title: 'Bayview Drive, Unit 5', area: 'Paradise Island Estates', island: 'New Providence and Paradise Island',
     price: '$3,800', priceNote: 'a month', facts: ['2 bedrooms', '2 bathrooms', '1,226 sq ft'],
     photos: [{ src: IDX(66392, 0), w: 800, h: 1066, alt: 'The white picket gate at Bayview Drive, Unit 5' }], photoCount: 16,
     summary: 'A two-bedroom, two-bath home of 1,226 sq ft on Bayview Drive, offered to rent.',
     source: 'https://bahamaschoicerealestate.com/homes-for-sale-details/BAYVIEW-DRIVE-UNIT-5-NEW-PROVIDENCE/66392/516/', page: 'property-66392.html',
   },
   {
-    id: 51845, status: 'Sold', kind: 'House', title: '76 Lumumba Road', area: 'Nassau', island: 'New Providence',
+    id: 51845, status: 'Sold', kind: 'House', type: 'home', value: 315000, beds: 3, baths: 2, size: '', title: '76 Lumumba Road', area: 'Nassau', island: 'New Providence and Paradise Island',
     price: '$315,000', priceNote: 'list price', facts: ['3 bedrooms', '2 bathrooms'], photos: [], photoCount: 27,
     summary: 'A three-bedroom house, sold.', source: 'https://bahamaschoicerealestate.com/sold/',
   },
@@ -101,3 +102,13 @@ export const SOCIALS = [
   { label: 'Facebook', href: 'https://www.facebook.com/BahamaChoiceRealEstate' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/bahamas-choice-real-estate/' },
 ];
+
+/** Developments presented on bahamaschoicerealestate.com (nav, 2026-11-22). Islands are not stated there, so none are shown. */
+export const DEVELOPMENTS = ['Aqualina', 'Bayroc', 'Charlottesville and Turnberry', 'Goldwynn', 'Ocean Club Residences and Marina', 'Palm Cay', 'Treasure Cove', 'Windsor Lakes', 'The Residences at Montage Cay', 'The Ocean Club Four Seasons Residences', 'Venetian West'];
+
+/** Their island names, shortened for the chart labels only. */
+export const SHORT: Record<string, string> = {
+  'New Providence and Paradise Island': 'New Providence', 'Great Exuma and Little Exuma': 'Exuma', 'Great Abaco and Little Abaco': 'Abaco',
+  'Grand Bahama and Freeport': 'Grand Bahama', 'Cat Island and Cat Cay': 'Cat Island', 'Acklins and Crooked Island': 'Acklins and Crooked',
+};
+export const short = (n: string) => SHORT[n] || n;

@@ -13,9 +13,9 @@ const TYPES: Record<Mode, string[]> = {
 const BUDGET: Record<Mode, string> = { Buy: 'Budget', Sell: 'Asking price in mind (optional)', Rent: 'Monthly budget', Invest: 'Budget' };
 const WHEN = ['As soon as possible', 'In the next 3 months', 'In the next year', 'Just exploring'];
 
-export function Brief({ initialMode = 'Buy', initialIsland = '' }: { initialMode?: Mode; initialIsland?: string }) {
+export function Brief({ initialMode = 'Buy', initialIsland = '', initialType = '', initialBudget = '', initialNote = '' }: { initialMode?: Mode; initialIsland?: string; initialType?: string; initialBudget?: string; initialNote?: string }) {
   const [mode, setMode] = useState<Mode>(initialMode);
-  const [v, setV] = useState({ type: TYPES[initialMode][0], island: initialIsland || ISLANDS[0].name, budget: '', when: WHEN[1], name: '', email: '', phone: '', note: '' });
+  const [v, setV] = useState({ type: TYPES[initialMode].includes(initialType) ? initialType : TYPES[initialMode][0], island: initialIsland || ISLANDS[0].name, budget: initialBudget, when: WHEN[1], name: '', email: '', phone: '', note: initialNote });
   const set = (k: keyof typeof v) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => setV({ ...v, [k]: e.target.value });
   const verb = { Buy: 'buy', Sell: 'sell', Rent: 'rent', Invest: 'invest in' }[mode];
   const summary = `${v.name || 'You'} would like to ${verb} ${v.type.toLowerCase()} on ${v.island}${v.budget ? `, ${mode === 'Sell' ? 'thinking of' : 'budget'} ${v.budget}` : ''}, ${v.when.toLowerCase()}.`;

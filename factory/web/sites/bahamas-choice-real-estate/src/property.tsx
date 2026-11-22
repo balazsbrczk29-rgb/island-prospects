@@ -1,6 +1,6 @@
 import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { LISTINGS, OFFICE, TEAM } from './data';
+import { LISTINGS, OFFICE, TEAM, short } from './data';
 import { Footer, Mast, Strip, Window, mailto, useLenis, type Layer } from './site';
 
 const id = Number(document.body.dataset.listing);
@@ -33,7 +33,7 @@ function Property() {
               </figure>
               <p className="muted">{L.status} <span aria-hidden="true">{'·'}</span> <span className="num">Listing #{L.id}</span></p>
               <h1 id="p-h" className="h2" style={{ marginTop: 16, fontSize: 'var(--t-3xl)', maxWidth: '14ch' }}>{L.title}</h1>
-              <p className="lede muted" style={{ marginTop: 16 }}>{L.area}, {L.island}</p>
+              <p className="lede muted" style={{ marginTop: 16 }}>{L.area}, {short(L.island)}</p>
               <p className="num" style={{ fontSize: 'var(--t-2xl)', marginTop: 40, lineHeight: 1 }}>{L.price}{L.priceNote && <span className="muted" style={{ fontSize: 'var(--t-m)' }}> {L.priceNote}</span>}</p>
               <p className="num muted" style={{ marginTop: 16 }}>{L.facts.join('  ·  ')}</p>
               {L.photos.length > 1 && (
@@ -68,7 +68,7 @@ function Property() {
                 {others.map(o => (
                   <li key={o.id} className="row"><a href={o.page}>
                     <img src={o.photos[0].src} alt={o.photos[0].alt} width={88} height={110} loading="lazy" />
-                    <div><h3>{o.title}</h3><p className="where">{o.area}, {o.island}</p></div>
+                    <div><h3>{o.title}</h3><p className="where">{o.area}, {short(o.island)}</p></div>
                     <p className="price num">{o.price}{o.priceNote && <small>{o.priceNote}</small>}</p>
                   </a></li>
                 ))}

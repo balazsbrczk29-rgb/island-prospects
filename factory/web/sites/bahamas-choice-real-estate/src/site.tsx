@@ -1,23 +1,23 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Lenis from 'lenis';
 import { OFFICE, SOCIALS, type Photo } from './data';
 import './styles.css';
 
-export type Layer = { key: string; photo: Photo; mode?: 'cover' | 'framed'; caption?: string; pos?: string };
+export type Layer = { key: string; photo?: Photo; node?: ReactNode; mode?: 'cover' | 'framed'; caption?: string; pos?: string };
 
 /** The fixed window: every layer is mounted once; only opacity changes (no layout work while scrolling). */
-export function Window({ layers, active, hint }: { layers: Layer[]; active: string; hint?: string }) {
+export function Window({ layers, active }: { layers: Layer[]; active: string }) {
   const [seen, setSeen] = useState<Set<string>>(() => new Set([active]));
   useEffect(() => { setSeen(s => (s.has(active) ? s : new Set(s).add(active))); }, [active]);
   return (
-    <aside className="window reveal-in" aria-hidden="true">
-      {hint && <p className="window-hint" style={{ opacity: active === layers[0].key ? 1 : 0 }}>{hint}</p>}
+    <aside className="window reveal-in">
       {layers.map((l, i) => {
         const near = seen.has(l.key) || Math.abs(layers.findIndex(x => x.key === active) - i) <= 1;
         const framed = l.mode === 'framed';
         return (
-          <figure key={l.key} className={`layer ${framed ? 'framed' : 'cover-cap'} ${l.key === active ? 'on' : ''}`} style={{ margin: 0 }}>
-            {near && (
+          l.node ? <div key={l.key} className={`layer node ${l.key === active ? 'on' : ''}`}>{l.node}</div> :
+          <figure key={l.key} aria-hidden="true" className={`layer ${framed ? 'framed' : 'cover-cap'} ${l.key === active ? 'on' : ''}`} style={{ margin: 0 }}>
+            {near && l.photo && (
               <img
                 className={framed ? '' : 'cover'}
                 src={l.photo.src}
