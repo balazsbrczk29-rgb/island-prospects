@@ -17,7 +17,7 @@ const noun = (cat: Cat | "All", n: number) => cat === "All" ? (n === 1 ? "projec
 // label placement per island so nothing collides (viewBox units)
 const LABEL: Record<string, { dx: number; dy: number; anchor: "start" | "middle" | "end" }> = {
   "Grand Bahama": { dx: -30, dy: -34, anchor: "middle" }, Bimini: { dx: 0, dy: -26, anchor: "middle" }, Abaco: { dx: 26, dy: 8, anchor: "start" },
-  "New Providence": { dx: 0, dy: 52, anchor: "middle" }, Eleuthera: { dx: 22, dy: -14, anchor: "start" }, Andros: { dx: -26, dy: 10, anchor: "end" }, Exuma: { dx: 22, dy: 10, anchor: "start" },
+  "New Providence": { dx: 14, dy: 36, anchor: "start" }, Eleuthera: { dx: 22, dy: -14, anchor: "start" }, Andros: { dx: -26, dy: 10, anchor: "end" }, Exuma: { dx: 22, dy: 10, anchor: "start" },
 }
 
 export type Sel = { cat: Cat | "All"; island: string; work: string }

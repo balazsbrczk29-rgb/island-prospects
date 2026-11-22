@@ -97,7 +97,7 @@ function Runways() {
 
       <div className="wrap pt-10 pb-28 lg:pt-20 lg:pb-40 grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <p className="max-w-[52ch] text-base lg:text-[1.125rem]">Over three decades of airport construction: Lynden Pindling runway 10-28 and the terminal, Grand Bahama, Marsh Harbour, Bimini, Hog Cay as main contractor, Norman's Cay and both Odyssey FBOs. Asphalt from their own plants, two of them fully mobile, with mobile labs.</p>
+          <p className="max-w-[52ch] text-base lg:text-[1.125rem]">Over three decades of airport construction: Lynden Pindling runway 10-28 and the terminal, Grand Bahama, Marsh Harbour, Bimini, Hog Cay as main contractor, Norman's Cay, and Odyssey in Nassau and Exuma. Asphalt from their own plants, two of them fully mobile, with mobile labs.</p>
           <ol className="mt-12 border-t border-[var(--color-line)]">
             {RUNWAYS.map((r, k) => (
               <li key={r.name} className="border-b border-[var(--color-line)]">
