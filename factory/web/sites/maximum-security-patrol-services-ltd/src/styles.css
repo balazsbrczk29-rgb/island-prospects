@@ -118,7 +118,7 @@ p, li { text-wrap: pretty; }
 .lbl--b { fill: var(--ink); font-size: 13px; }
 .lbl--t { font-size: 10.5px; font-weight: 500; font-variant-numeric: tabular-nums; }
 .lbl--street { font-size: 11px; letter-spacing: .04em; }
-.lbl--acc { fill: var(--accent-deep); }
+.lbl--acc { fill: var(--accent-deep); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
 .hours__bg { fill: rgb(16 26 33 / 0.08); }
 .hours__on { fill: var(--accent); transition: x 400ms var(--ease), width 400ms var(--ease); }
 .sheet-in { animation: fade 360ms var(--ease); }

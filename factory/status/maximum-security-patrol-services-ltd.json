@@ -4,8 +4,20 @@
  "name": "Maximum Security & Patrol Services Ltd",
  "batch": "06",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T12:02:41.670Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T12:13:24.396196+00:00",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/maximum-security-patrol-services-ltd/",
+ "scores": {
+  "gate1": "pass",
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 5,
+  "phone": 4
+ },
+ "notes": "Job-spec build 2026-11-22 from design.md: proposal builder on a site-plan sheet (premises tabs, legend toggles draw officers, patrol route, alarm sensors, case file, survey; hours strip and night wash; read-back to call, copy or email). Red Hat Display + Text, olive accent, concrete ground. services.html folded into service lanes on one page. Illustrative Lovable photos labelled. Assumptions in concept notes: premises types and plan layouts, patrols line, proposal steps, audience lines, control line, proposed domain."
 }
