@@ -1,208 +1,179 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import { useScroll, useMotionValueEvent, useTransform, motion, AnimatePresence } from 'motion/react'
-import { Header, CallingCard, Footer, MobileCall, mount, PHONE, TEL, COORD, reduced } from './common'
-import { IMG, type Img } from './images'
+import { StrictMode, useEffect, useRef, useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
+import { IMG, CREDITS } from './images'
+import { InletMap, MAP_CREDIT } from './map'
+import './styles.css'
 
-const Arrival = lazy(() => import('./Arrival'))
+const PHONE = '(242) 373-2673'
+const TEL = 'tel:+12423732673'
+const FAX = '(242) 373-3802'
+const COORD = '26°30.9′ N, 78°38.2′ W'
+const DIR = 'https://www.google.com/maps/dir/?api=1&destination=26.5147,-78.6368'
 
-const CHAPTERS: { at: [number, number]; text: string }[] = [
-  { at: [0.0, 0.16], text: `${COORD}. Open water off Lucaya, Grand Bahama, as the sun goes down.` },
-  { at: [0.2, 0.4], text: 'Ahead, the island: low and dark, its shore lights coming on.' },
-  { at: [0.43, 0.6], text: 'Bell Channel. The cut from the open sea into Bell Channel Bay.' },
-  { at: [0.63, 0.79], text: 'On its shore, between the canal and the beach, the club.' },
+type Who = 'owner' | 'buyer' | 'boat'
+const WHO: { id: Who; label: string; call: string; facts: string[] }[] = [
+  { id: 'owner', label: 'Owner or guest', call: 'Call the club office', facts: [
+    'Heated pool, tennis courts and the owners’ library.',
+    'Reverse-osmosis water to every unit. The beach is kept by the owners’ association.',
+    'For gate access, garages and guest arrangements, call the club office.'] },
+  { id: 'buyer', label: 'Buying or renting', call: 'Call about units', facts: [
+    'Condominiums and townhouses on both the canal and the beach, overlooking the inlet.',
+    'Pool, tennis, a limited number of storage garages, and a private marina for owners.',
+    'Owners’ units are sold and let privately. Ask the office.'] },
+  { id: 'boat', label: 'Visiting by boat', call: 'Call about a slip', facts: [
+    'The marina is private, for owners.',
+    'Call the office about availability before you come in through the cut.',
+    'Slip count, depths and rates: ask the office.'] },
 ]
 
-
-const sm = (a: number, b: number, x: number) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t) }
-
-function useWebGL() {
-  const [ok, setOk] = useState<boolean | null>(null)
-  useEffect(() => { try { const c = document.createElement('canvas'); setOk(!!(c.getContext('webgl2') || c.getContext('webgl'))) } catch { setOk(false) } }, [])
-  return ok
-}
-
-function ArrivalStage() {
-  const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress: p } = useScroll({ target: ref, offset: ['start start', 'end end'] })
-  // only the chapter index and visibility are React state; every fade is a motion value (no re-render per scroll frame)
-  const [active, setActive] = useState(0)
-  const [inView, setInView] = useState(true)
-  useMotionValueEvent(p, 'change', v => {
-    const i = CHAPTERS.findIndex(c => v >= c.at[0] && v < c.at[1])
-    setActive(a => (a === i ? a : i))
-  })
-  useEffect(() => {
-    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { rootMargin: '200px 0px' })
-    if (ref.current) io.observe(ref.current)
-    return () => io.disconnect()
-  }, [])
-  const gl = useWebGL()
-  const still = reduced()
-  // function transforms on purpose: motion's native scroll-timeline acceleration mis-maps these ranges
-  const photo = useTransform(p, v => sm(0.8, 0.93, v))
-  const photoScale = useTransform(p, v => 1.08 - 0.08 * sm(0.8, 0.93, v))
-  const title = useTransform(p, v => 1 - sm(0.06, 0.16, v))
-  const grade = useTransform(p, v => sm(0.25, 0.85, v))
-  const foot = useTransform(p, v => 1 - sm(0.7, 0.8, v))
+function Chooser() {
+  const [who, setWho] = useState<Who>('owner')
+  const reduce = useReducedMotion()
+  const refs = useRef<(HTMLButtonElement | null)[]>([])
+  const cur = WHO.find(w => w.id === who)!
+  const key = (e: React.KeyboardEvent, i: number) => {
+    const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0
+    if (!d) return
+    e.preventDefault(); const n = (i + d + WHO.length) % WHO.length; setWho(WHO[n].id); refs.current[n]?.focus()
+  }
   return (
-    <section id="arrival" ref={ref} className="stage" aria-label="Arriving at Bell Channel from the sea">
-      <div className="stage__pin">
-        <div className="stage__scene" aria-hidden="true">
-          <img className="stage__poster" src="poster-dusk.jpg" alt="" />
-          {gl && <Suspense fallback={null}><Arrival progress={p} still={still} active={inView} className="stage__canvas" /></Suspense>}
-          <motion.div className="stage__grade" style={{ opacity: grade }} />
-        </div>
-        <motion.figure className="stage__photo" style={{ opacity: photo }}>
-          <motion.img src={IMG.bay.src} alt={IMG.bay.alt} style={{ scale: photoScale }} decoding="async" loading="lazy" data-source="commons" />
-          <figcaption className="sub sub--photo">{IMG.bay.caption}</figcaption>
-        </motion.figure>
-        <Header tone="dark" />
-        <motion.div className="hero" style={{ opacity: title }}>
-          <h1 className="hero__h1"><span className="hero__big">Bell Channel</span><span className="hero__small">Club &amp; Marina, Lucaya, Grand Bahama</span></h1>
-        </motion.div>
-        <div className="stage__subs" aria-live="off">
-          <AnimatePresence mode="wait">
-            {active >= 0 && (
-              <motion.p key={active} className="sub" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}>
-                {CHAPTERS[active].text}
-              </motion.p>
-            )}
-          </AnimatePresence>
-        </div>
-        <motion.div className="stage__foot" style={{ opacity: foot }}>
-          <span className="stage__hint">Scroll to come in from the sea</span>
-          <a className="stage__tel nw" href={TEL}>Club office {PHONE}</a>
-        </motion.div>
+    <div className="who">
+      <p className="who__q" id="who-q">Who’s asking?</p>
+      <div className="who__seg" role="radiogroup" aria-labelledby="who-q">
+        {WHO.map((w, i) => (
+          <button key={w.id} ref={el => { refs.current[i] = el }} type="button" role="radio" aria-checked={who === w.id} tabIndex={who === w.id ? 0 : -1}
+            onClick={() => setWho(w.id)} onKeyDown={e => key(e, i)}>{w.label}</button>
+        ))}
       </div>
-      {/* the chapters, for readers, search engines and anyone without the scene */}
-      <ol className="sr-only">{CHAPTERS.map(c => <li key={c.text}>{c.text}</li>)}</ol>
-    </section>
+      <div className="who__ans" aria-live="polite">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.ul key={who} initial={reduce ? false : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, transition: { duration: 0.12 } }} transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}>
+            {cur.facts.map(f => <li key={f}>{f}</li>)}
+          </motion.ul>
+        </AnimatePresence>
+      </div>
+      <a id="hero-call" className="btn btn--call" href={TEL}><span>{cur.call}</span><span className="num">{PHONE}</span></a>
+      <a className="tlink" href={DIR}>Directions to the gate</a>
+    </div>
   )
 }
 
-function TwoWaters() {
-  const [side, setSide] = useState<'canal' | 'beach'>('beach')
-  const img: Img = side === 'canal' ? IMG.dockline : IMG.beach
+function Header() {
   return (
-    <section className="two" aria-labelledby="two-h">
-      <AnimatePresence initial={false}>
-        <motion.img key={img.src} className="two__img" src={img.src} alt={img.alt} loading="lazy" decoding="async" data-source={img.source}
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }} />
-      </AnimatePresence>
-      <div className={`two__over two__over--${side}`}>
-        <h2 id="two-h" className="display">Two waters, one quiet gate.</h2>
-        <p className="lede">A gated community of condominiums and townhouses in Lucaya. One side lies on the canal, the other on the beach, and the homes look out over the inlet into Port Lucaya.</p>
-        <div className="toggle" role="radiogroup" aria-label="Show a side of the club">
-          <button role="radio" aria-checked={side === 'beach'} onClick={() => setSide('beach')}>The beach side</button>
-          <button role="radio" aria-checked={side === 'canal'} onClick={() => setSide('canal')}>The canal side</button>
-        </div>
-      </div>
-      <p className="two__cap">{img.caption}</p>
-    </section>
+    <header className="hdr">
+      <a className="hdr__name" href="./">Bell Channel Club &amp; Marina</a>
+      <nav aria-label="Main" className="hdr__nav"><a href="#club">The club</a><a href="#marina">The marina</a><a href="#office">Finding the gate</a></nav>
+      <a className="hdr__tel num" href={TEL}>{PHONE}</a>
+    </header>
   )
 }
 
-const AMENITIES: { t: string; d: string; img?: Img }[] = [
-  { t: 'A heated pool', d: 'Warm water through the cooler months.', img: IMG.pool },
-  { t: 'Tennis courts', d: 'Best played early, before the heat.', img: IMG.tennis },
-  { t: 'The beach', d: 'Kept by the owners’ association.', img: IMG.beach },
-  { t: 'The owners’ marina', d: 'Private, for owners, when a slip is free.' },
-  { t: 'An owners’ library', d: 'A reading room for owners.' },
-  { t: 'Storage garages', d: 'A limited number, for owners.' },
-  { t: 'Reverse osmosis water', d: 'Piped to every home.' },
-  { t: 'A gate, and pets welcome', d: 'A quiet corner of Lucaya.' },
-]
+function Hero() {
+  const [phone, setPhone] = useState(false)
+  useEffect(() => { setPhone(matchMedia('(max-width: 900px)').matches) }, [])
+  return (
+    <section className="hero" aria-labelledby="hero-h">
+      <InletMap zoom={16} at={phone ? [0.4, 0.34] : [0.68, 0.52]} className="hero__map" />
+      <div className="card" id="card">
+        <p className="coord num">{COORD}</p>
+        <h1 id="hero-h" className="h1">Bell Channel Club &amp; Marina</h1>
+        <p className="lede muted">A private condominium club between the canal and the beach, on the inlet into Port Lucaya, Grand Bahama.</p>
+        <Chooser />
+      </div>
+    </section>
+  )
+}
 
 function Club() {
-  const [i, setI] = useState(0)
-  const shown = AMENITIES.slice(0, i + 1).reverse().find(a => a.img)?.img ?? IMG.pool
+  const A: [string, string][] = [
+    ['Heated pool', ''],
+    ['Tennis courts', ''],
+    ['Owners’ library', ''],
+    ['Storage garages', 'A limited number. Ask the office.'],
+    ['Reverse-osmosis water', 'For every unit.'],
+    ['The beach', 'Kept by the owners’ association.'],
+  ]
   return (
-    <section id="club" className="club" aria-labelledby="club-h">
-      <figure className="club__fig">
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.img key={shown.src} src={shown.src} alt={shown.alt} loading="lazy" decoding="async" data-source={shown.source}
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }} />
-        </AnimatePresence>
-        <figcaption className="cap">{shown.caption}</figcaption>
-      </figure>
-      <div className="club__text">
-        <h2 id="club-h" className="display">What the club keeps.</h2>
-        <ul className="amen">
-          {AMENITIES.map((a, k) => (
-            <li key={a.t}>
-              <button className={k === i ? 'is-on' : ''} onMouseEnter={() => setI(k)} onFocus={() => setI(k)} onClick={() => setI(k)} aria-pressed={k === i}>
-                <span className="amen__t">{a.t}</span><span className="amen__d">{a.d}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
+    <section id="club" className="sec wrap" aria-labelledby="club-h">
+      <div className="club">
+        <div className="club__text">
+          <h2 id="club-h" className="h2">Between the canal and the beach.</h2>
+          <p className="lede muted">Gated condominiums and townhouses on both the canal and the beach, overlooking the inlet into Port Lucaya Marketplace.</p>
+          <dl className="amen">{A.map(([a, b]) => <div key={a}><dt>{a}</dt>{b && <dd className="muted">{b}</dd>}</div>)}</dl>
+        </div>
+        <figure className="club__a"><img src={IMG.pool.src} alt={IMG.pool.alt} width={IMG.pool.w} height={IMG.pool.h} loading="lazy" /><figcaption className="cap muted">Illustrative photograph of a heated pool at night.</figcaption></figure>
+        <figure className="club__b"><img src={IMG.beach.src} alt={IMG.beach.alt} width={IMG.beach.w} height={IMG.beach.h} loading="lazy" /><figcaption className="cap muted">Illustrative photograph of the beach side.</figcaption></figure>
       </div>
     </section>
   )
 }
-
-const ASK = [
-  { k: 'owner', q: 'I own a home at the club', a: 'The marina is kept for owners. Call the club office to ask which slip is free for your boat and when.' },
-  { k: 'guest', q: 'I am staying with an owner', a: 'Slips go to owners first. Ask your host, then the office, whether one can be arranged for your stay.' },
-  { k: 'visit', q: 'I am bringing a visiting boat', a: 'This is a private marina, so call before you come in. If the club has no space, Port Lucaya Marina is inside the same cut.' },
-  { k: 'buy', q: 'I am buying or renting here', a: 'Listings describe the slips as “if available”: a slip does not come with every home. The office can explain how it works before you commit.' },
-]
 
 function Marina() {
-  const [k, setK] = useState('owner')
-  const cur = ASK.find(a => a.k === k)!
   return (
-    <section className="mar" aria-labelledby="mar-h">
-      <h2 id="mar-h" className="display display--xl">A private marina,<br />for owners.</h2>
-      <div className="mar__grid">
-        <div className="ask" role="radiogroup" aria-label="Who is asking?">
-          <p className="ask__q">Who is asking?</p>
-          {ASK.map(a => <button key={a.k} role="radio" aria-checked={a.k === k} onClick={() => setK(a.k)}>{a.q}</button>)}
-        </div>
-        <div className="ask__a" aria-live="polite">
-          <AnimatePresence mode="wait">
-            <motion.p key={k} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>{cur.a}</motion.p>
-          </AnimatePresence>
-          <div className="ask__cta">
-            <a className="btn" href={TEL}>Call the club office</a>
-            <a className="link" href="marina.html">Prepare your slip question</a>
-          </div>
+    <section id="marina" className="sec marina" aria-labelledby="marina-h">
+      <figure className="marina__photo">
+        <img src={IMG.bay.src} alt={IMG.bay.alt} width={IMG.bay.w} height={IMG.bay.h} loading="lazy" />
+        <figcaption className="wrap cap muted">Port Lucaya Marina, at the head of the inlet the club overlooks. Photograph: qwesy qwesy, CC BY 3.0, Wikimedia Commons.</figcaption>
+      </figure>
+      <div className="wrap marina__grid">
+        <h2 id="marina-h" className="h2">A private marina, for owners.</h2>
+        <div className="marina__ask">
+          <p className="lede">Before you come in through the cut, call the office and ask:</p>
+          <ol className="asks">
+            <li>Is a slip free for your dates?</li>
+            <li>Will your length and draft suit it?</li>
+            <li>Where to tie up when you arrive.</li>
+            <li>How to reach the office and the gate from the dock.</li>
+          </ol>
+          <a className="btn btn--call" href={TEL}><span>Call about a slip</span><span className="num">{PHONE}</span></a>
         </div>
       </div>
     </section>
   )
 }
 
-function Here() {
+function Office() {
   return (
-    <section className="here" aria-labelledby="here-h">
-      <img className="here__img" src="channel-night.jpg" alt="Blue hour at Bell Channel: the low shore of Grand Bahama, lit windows, and the red and green lights on the breakwater heads" loading="lazy" decoding="async" />
-      <h2 id="here-h" className="display here__h">Where the inlet opens.</h2>
-      <div className="here__subs">
-        <p><span>By sea.</span> Come in from the south shore of Grand Bahama through Bell Channel, the cut into Bell Channel Bay. Call the office before you arrive.</p>
-        <p><span>By air.</span> Grand Bahama International Airport, Freeport.</p>
-        <p><span>Across the water.</span> The shops and restaurants of Port Lucaya Marketplace, at the head of the inlet.</p>
+    <section id="office" className="office field" aria-labelledby="office-h">
+      <div className="wrap office__grid">
+        <div className="office__text">
+          <h2 id="office-h" className="h2">Call the club office.</h2>
+          <a className="office__tel num" href={TEL}>{PHONE}</a>
+          <dl className="office__dl">
+            <div><dt>Fax</dt><dd className="num">{FAX}</dd></div>
+            <div><dt>Post</dt><dd>P.O. Box F-44053, Freeport, Grand Bahama</dd></div>
+            <div><dt>Position</dt><dd className="num">{COORD}</dd></div>
+          </dl>
+          <a className="tlink tlink--f" href={DIR}>Directions to the gate</a>
+        </div>
+        <InletMap zoom={14} className="office__map" initial={[600, 440]} />
       </div>
     </section>
   )
+}
+
+function CallBar() {
+  const [on, setOn] = useState(false)
+  useEffect(() => {
+    const els = [document.getElementById('hero-call'), document.getElementById('office')].filter(Boolean) as Element[]
+    const vis = new Set<Element>()
+    const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? vis.add(e.target) : vis.delete(e.target)); setOn(vis.size === 0) })
+    els.forEach(e => io.observe(e)); return () => io.disconnect()
+  }, [])
+  useEffect(() => { document.documentElement.style.setProperty('--concept-offset', on && matchMedia('(max-width: 900px)').matches ? '76px' : '0px') }, [on])
+  return <div className={`cbar ${on ? 'on' : ''}`} aria-hidden={!on}><a className="btn btn--call" href={TEL} tabIndex={on ? 0 : -1}><span>Call the club office</span><span className="num">{PHONE}</span></a></div>
 }
 
 function Home() {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <ArrivalStage />
-      <main id="main">
-        <TwoWaters />
-        <Club />
-        <Marina />
-        <Here />
-      </main>
-      <CallingCard />
-      <Footer />
-      <MobileCall />
+      <Header />
+      <main id="main"><Hero /><Club /><Marina /><Office /></main>
+      <footer className="foot field"><div className="wrap foot__row"><p>Bell Channel Club &amp; Marina, Lucaya, Grand Bahama, The Bahamas.</p><p>{MAP_CREDIT}.</p><p>{CREDITS}</p></div></footer>
+      <CallBar />
     </>
   )
 }
-
-mount(<Home />)
+createRoot(document.getElementById('root')!).render(<StrictMode><Home /></StrictMode>)

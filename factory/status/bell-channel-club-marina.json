@@ -4,7 +4,7 @@
  "name": "Bell Channel Club & Marina",
  "batch": "01",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "history": [
   {
@@ -36,5 +36,31 @@
   }
  ],
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T13:16:40.196Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T13:24:17.917597+00:00",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/bell-channel-club-marina/",
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "gate2": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 5,
+   "composition": 5,
+   "conversion": 4,
+   "phone": 4
+  },
+  "note": "Re-score passed; its recommended phone fix (150 px map strip, call bar shown once the hero Call button leaves view) applied before publish."
+ },
+ "notes": [
+  "Job-spec rebuild from design.md: real satellite map of the Bell Channel inlet (Esri World Imagery tiles, credited) with the club pinned at 26.5147, -78.6368, and a chart-paper card with Who's asking? (owner or guest / buying or renting / visiting by boat), answer facts and Call (242) 373-2673; directions link.",
+  "Replaced the previous 3D ocean arrival (spec asked for the inlet map); kept phone, fax, P.O. box, private-marina-for-owners message, amenities, router.",
+  "New text face Instrument Sans with Fraunces kept. Removed marina.html (one-page brochure per spec) and the old poster/channel images.",
+  "Images: Commons Port Lucaya Marina (1920 thumb, CC BY 3.0); pool and beach are illustrative Lovable images, labelled; replace with the club's own.",
+  "Assumptions to confirm: canonical domain bellchannelclubbahamas.com is proposed; slip count, depths, rates, email, unit count unknown (ask the office); older directory mentions 18 slips and Jolly Roger Drive, not shown.",
+  "Esri tiles and Commons photo could not be viewed in the sandbox; tile maths verified in code by the critic."
+ ]
 }
