@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Schooner Bay Marina: job spec
 Current site: schoonerbaybahamas.com (WordPress; homepage leads with real estate, marina facts on an inner page and a 2017 handout PDF; no online slip request) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/schooner-bay-marina/ (gen 2, three pages: a "check her against the harbour" fit checker on the homepage, the numbers page, the village and Discovery Stay page, enquiry tabs Slip / Fuel / Discovery Stay) · Kind of site: brochure + slip and fuel request (marina), real-estate enquiry (village)
@@ -42,3 +42,5 @@ Current site: schoonerbaybahamas.com (WordPress; homepage leads with real estate
    - **Wow:** a captain sets 72 ft and 6 ft, the chart draws the run from the Abaco Cays to the harbour mouth with Hole in the Wall beside it, and the request is ready to send.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Bluff House Beach Resort & Marina: job spec
 Current site: bluffhouse.com (Wix; rooms book on Cloudbeds, slips on Dockwa) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/bluff-house-beach-resort-marina/ (a magazine feature about the Out Islands' first resort in which you book the balcony you just read about, by season) · Kind of site: booking (rooms + slips)
@@ -29,3 +29,5 @@ Current site: bluffhouse.com (Wix; rooms book on Cloudbeds, slips on Dockwa) · 
 8. **Look and feel:** storied, breezy, hilltop, unhurried, nautical. A literary serif for headlines and a calm sans; paper ground with Abaco blue. Their own photographs large. The wow: the planner switching from a balcony at sunset to a slip in White Sound as you choose plane or boat.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

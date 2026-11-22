@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Fernandez Bay Village: job spec
 Current site: fernandezbayvillage.com (Squarespace, Book Now goes to innRoad) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/fernandez-bay-village/ (gen 2, letterboxed film) · Kind of site: booking (cottages and villas, innRoad handoff, WhatsApp for groups)
@@ -46,3 +46,5 @@ Current site: fernandezbayvillage.com (Squarespace, Book Now goes to innRoad) ·
    - **Wow:** you say who is coming and the village answers with the exact cottages for you, side by side on the sand, with dinner and the flight already worked out.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

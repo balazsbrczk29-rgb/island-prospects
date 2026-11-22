@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Pro Tech Security Service Ltd: job spec
 Current site: none (directory listings, YouTube channel) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/pro-tech-security-service-ltd/ · Kind of site: brochure + call / site-survey request
@@ -35,3 +35,5 @@ Current site: none (directory listings, YouTube channel) · Previous concept: ht
 8. **Look and feel:** calm, solid and local, not military. Light page with one night section for monitoring. Photography is illustrative (Lovable), clearly labelled; use their own install photos if sourced from YouTube thumbnails. The wow is the planner's live read-out.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

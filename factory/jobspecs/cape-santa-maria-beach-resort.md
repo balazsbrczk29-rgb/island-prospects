@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Cape Santa Maria Beach Resort: job spec
 Current site: capesantamaria.com (Tambourine; booking on bookonthenet.net) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/cape-santa-maria-beach-resort/ (travel-magazine opening whose standfirst tells you how you arrive from your gateway) · Kind of site: booking
@@ -28,3 +28,5 @@ Current site: capesantamaria.com (Tambourine; booking on bookonthenet.net) · Pr
 8. **Look and feel:** remote, sunlit, barefoot, a little aviation. A travel-magazine Didone with a clean sans, sand ground and flats aqua. Their own aerial and beach photos large. The wow: a route drawing across the islands from your own gateway down to the white sand at Cape Santa Maria.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Hope Town Inn & Marina: job spec
 Current site: hopetownmarina.com (Wix, rooms on Vertical Booking, slips on Dockwa) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/hope-town-inn-marina/ (gen 2, built) · Kind of site: booking (rooms and slips)
@@ -60,3 +60,5 @@ Current site: hopetownmarina.com (Wix, rooms on Vertical Booking, slips on Dockw
    - **Wow:** the screen splits by how you arrive, and every answer ends in the right booking engine.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

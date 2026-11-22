@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # The Conch Inn & Marina: job spec
 Current site: conchinn.com (Wix; rooms book on RezExpert, slips by hand-written email) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/conch-inn-marina/ · Kind of site: booking (rooms hand-off) + slip request
@@ -39,3 +39,5 @@ Current site: conchinn.com (Wix; rooms book on RezExpert, slips by hand-written 
 8. **Look and feel:** a practical, sunny, family-run boaters' place. The arrival by water is the product, so the wow is a top-down harbour plan: you watch your boat's length and beam drawn to scale in a slip as you type. Use real dock photos only if sourced; otherwise Commons photos of Marsh Harbour, credited. Large tabular numbers.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

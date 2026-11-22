@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Island Marine Covering Ltd (Cover Up): job spec
 Current site: coverupbahamas.com (broken WordPress brochure on Bluehost, no booking) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/island-marine-covering-ltd/ · Kind of site: brochure + enquiry (get a measure)
@@ -32,3 +32,5 @@ Current site: coverupbahamas.com (broken WordPress brochure on Bluehost, no book
 8. **Look and feel:** workshop-honest and sunlit. Canvas, stitch and shade, not luxury gloss. Their own photos only. The wow: as you choose a job, the selected photo reveals like an awning unrolling over it.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Stella Maris Resort Club & Marina: job spec
 Current site: stellamarisresort.com (WordPress + Elementor; a rates page with two season tables, all-inclusive packages, specials, a generic contact form; reservations by email or phone, credit card only) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/stella-maris-resort-club/ (gen 2, three pages: split editorial hero with a star-of-the-sea mark, a two-shoreline band, a "Who's coming?" house finder over the ten accommodation types, activity chips composing the enquiry, Stay / Wedding / Fly in tabs) · Kind of site: brochure + priced stay enquiry (no booking engine seen; the rates page mentions online reservation deposits, to confirm)
@@ -52,3 +52,5 @@ Research this run (Nov 21): accommodations page and rates page read live (rates 
 Assumptions to confirm: whether "online reservation deposits" means an online booking path exists; how many guests each house sleeps (only bedrooms and the "Six" rate column are published); marina services; whether the resort is still listed for sale.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

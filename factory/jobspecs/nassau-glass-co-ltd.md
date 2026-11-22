@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Nassau Glass Co Ltd: job spec
 Current site: nassauglass.com (WordPress brochure, contact form) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/nassau-glass-co-ltd/ · Kind of site: brochure + quote request (phone-first)
@@ -42,3 +42,5 @@ Current site: nassauglass.com (WordPress brochure, contact form) · Previous con
 8. **Look and feel:** clear, precise, luminous and established, with no stock photos. The wow is the sheet itself: it changes thickness and tint as you choose, and its edge is visible. Real-time 3D is used only for that object. Photos come from their Facebook if sourceable; otherwise none.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

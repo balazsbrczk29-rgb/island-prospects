@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Thermoset Roofing Bahamas Ltd: job spec
 Current site: thermosetroofing242.com (Squarespace brochure; old thermosetbahamas.com still says South Florida) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/thermoset-roofing-bahamas-ltd/ · Kind of site: brochure + free estimate / R.A.D.A.R. assessment request
@@ -38,3 +38,5 @@ Current site: thermosetroofing242.com (Squarespace brochure; old thermosetbahama
 8. **Look and feel:** precise, solid and hurricane-ready, in their logo teal. Use their own job photos (membrane install, scaffolding), never the third-party resort photos. The wow is the client list filtering to buildings like yours as you choose. Keep 3D only for the build-up, if it reads as real.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

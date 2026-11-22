@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Armoured Express (Bahamas) Ltd.: job spec
 Current site: none (the company's own text lives in a featured BahamasLocal listing; a near-empty Facebook page; no email published) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/armoured-express-ltd/ (two pages: typographic monument hero with a line-drawn armoured truck arriving, a chain-of-custody stepper with a transit tag that stamps "Signed" at each hand-off, "Request a service proposal" planner ending in a call) · Kind of site: B2B brochure + service proposal request (Track B, phone only)
@@ -40,3 +40,5 @@ Research this run (Nov 21): one search confirming the featured BahamasLocal list
 Assumptions to confirm: still trading under this name; an email address; Grand Bahama office address; whether air courier covers every Family Island; photos of crews and vehicles; whether the sister company wants to share the site.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Bahamas Business Solutions Limited (BBSL): job spec
 Current site: bbsl.com (WordPress; Home, About, Sales, Service, Copy Service, Vendors, a "Get a quote" form and a separate "Xerox quote" form; every page still carries `noindex, nofollow`, re-checked Nov 21) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/bahamas-business-solutions-limited/ (two pages: print-proof hero with crop marks and a 3D fanned stack of six documents, product-line index, service-plan coverage chooser, tabbed quote router to sales, service and copy inboxes, Nassau and Freeport office switcher, Document Centre job-ticket builder) · Kind of site: B2B brochure + three enquiry routes (equipment quote, service call, print job)
@@ -49,3 +49,5 @@ Research this run (Nov 21): Service page re-read live (noindex still present, se
 Assumptions to confirm: Freeport street address and hours; Turks and Caicos office address; whether the Xerox quote form should stay separate; whether the Document Centre takes uploads online today.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

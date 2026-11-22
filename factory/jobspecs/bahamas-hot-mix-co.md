@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # BHM (Bahamas Hot Mix): job spec
 Current site: bhmgroup.com (WordPress Divi 4.27, about 25 pages, a filterable portfolio of about 60 projects) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/bahamas-hot-mix-co/ (gen 2, built) · Kind of site: brochure + project portfolio + quote enquiry
@@ -43,3 +43,5 @@ Current site: bhmgroup.com (WordPress Divi 4.27, about 25 pages, a filterable po
    - **Type:** a strong grotesk with tabular numbers for project data.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

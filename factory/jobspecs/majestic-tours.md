@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Majestic Tours: job spec
 Current site: majestictoursbahamas.com (custom PHP from 2012, enquiry by email and phone, no booking engine) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/majestic-tours/ (gen 2, sideways "Out of Nassau" journey) · Kind of site: brochure + enquiry (excursion catalogue, airport transfers)
@@ -41,3 +41,5 @@ Current site: majestictoursbahamas.com (custom PHP from 2012, enquiry by email a
    - **Wow:** you tell it "kids, animals, half day" in a lobby and the map of the Nassau waters lights up the three boats that fit, each one tap from a prefilled enquiry.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

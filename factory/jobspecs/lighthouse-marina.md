@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Lighthouse Marina: job spec
 Current site: htlighthousemarina.com (Wix brochure, Gmail contact, no booking) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/lighthouse-marina/ (gen 2, lighthouse panorama + fit check + boatyard estimator) · Kind of site: brochure + enquiry (fuel, slips, boatyard, store)
@@ -44,3 +44,5 @@ Current site: htlighthousemarina.com (Wix brochure, Gmail contact, no booking) �
    - **Wow:** a captain types three numbers on a phone and sees, under the lighthouse, whether the boat fits and exactly what the yard will cost.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

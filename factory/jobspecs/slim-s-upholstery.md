@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Slim's Upholstery: job spec
 Current site: none (Facebook, Instagram, TikTok; lapsed domain slimupholstery.com) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/slim-s-upholstery/ · Kind of site: brochure + free-quote request
@@ -34,3 +34,5 @@ Current site: none (Facebook, Instagram, TikTok; lapsed domain slimupholstery.co
 8. **Look and feel:** warm, crafted and tactile. Fabric and stitch detail, never SVG furniture. Their own photos if Facebook images can be sourced; otherwise illustrative Lovable close-ups of upholstery work, labelled. The wow is the chair rebuilding under the quote.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

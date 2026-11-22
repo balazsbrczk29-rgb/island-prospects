@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Sea Spray Resort & Marina: job spec
 Current site: seasprayresort.com (Webflow template, 2026; stays on Guesty, food on Revel online ordering, a "Book a slip" page) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/sea-spray-resort-marina/ (gen 2, marina-first single page, fit and cost check on screen 2 sending the slip request on WhatsApp, a day at Sea Spray in their photographs) · Kind of site: booking (slip request, Guesty stays, Revel ordering) + residences enquiry
@@ -49,3 +49,5 @@ Current site: seasprayresort.com (Webflow template, 2026; stays on Guesty, food 
    - **Wow:** a captain drags a length slider on a phone and watches White Sound answer: she fits, this is the week's cost, send it on WhatsApp.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

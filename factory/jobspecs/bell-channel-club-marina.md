@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Bell Channel Club & Marina: job spec
 Current site: none (bellchannelclub.com now serves a gambling site; only an unclaimed marinas.com listing) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/bell-channel-club-marina/ (chart of the inlet, a who-is-asking router, call the club office) · Kind of site: brochure + call (one page)
@@ -28,3 +28,5 @@ Current site: none (bellchannelclub.com now serves a gambling site; only an uncl
 Notes from Balazs:
 
 Worker note (parallel draft, Nov 21): an older Bahamasnet directory entry describes an 18-slip marina, 82 units, a private beach, an oceanside pool and clubhouse on Taino Beach and tennis courts, on Jolly Roger Drive. Usable only as "to confirm with the office". Holiday rentals of owners' units appear on VRBO and Sarles Realty, so renters are a real visitor type for the router.
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

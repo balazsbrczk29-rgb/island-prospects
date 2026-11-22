@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Runaway Hill Inn (listed as Runaway Hill Club): job spec
 Current site: runawayhill.com (WordPress; Book Your Stay goes to direct-book.com, rates in a pop-up table, a property map PDF) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/runaway-hill-club/ (gen 2, three pages: descent from the hill to the beach, a named-room register with an after-tax estimator, a dated room enquiry, island and getting-here page) · Kind of site: booking (direct-book engine) + room enquiry by email
@@ -40,3 +40,5 @@ Current site: runawayhill.com (WordPress; Book Your Stay goes to direct-book.com
    - **Wow:** dragging through the register, the house photo shows where your room sits (Main House, Courtyard, Villas or down by the beach), and the total for your nights updates beside it, itemised and exact.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

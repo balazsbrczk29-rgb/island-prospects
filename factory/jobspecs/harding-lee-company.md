@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Harding-Lee & Company: job spec
 Current site: hardinglee.com (three-page WordPress, last updated July 2022, contact form) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/harding-lee-company/ · Kind of site: brochure + enquiry (professional services)
@@ -39,3 +39,5 @@ Current site: hardinglee.com (three-page WordPress, last updated July 2022, cont
 8. **Look and feel:** discreet, senior, exact. Paper tones, serif display, generous space. Real portraits only. The wow: choosing a matter draws the line from the question to the attorney and to the office on a two-island map.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

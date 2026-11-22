@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Hideaways at Palm Bay: job spec
 Current site: hideawayspalmbay.com (WordPress + WPBakery + Slider Revolution, Check availability goes to Cloudbeds) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/hideaways-at-palm-bay/ (gen 2, "sand or hill" + sideways room track) · Kind of site: booking (room types, Cloudbeds handoff)
@@ -55,3 +55,5 @@ Current site: hideawayspalmbay.com (WordPress + WPBakery + Slider Revolution, Ch
    - **Wow:** two photographs of the same bay ask one question, and the answer is your room, your code and your booking button on the same screen.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

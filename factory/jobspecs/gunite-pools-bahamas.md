@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Gunite Pools of Nassau (listed as Gunite Pools Bahamas): job spec
 Current site: gunitepoolsbahamas.com (Wix; pages for New Pool Construction, Pool Maintenance, Fiberglass Tanks, Repair & Renovation, Residential portfolio, Commercial "Showpieces", About, a blog; every service ends in a "Request Quote" contact form; the "Store" tile links to a Google Maps search) · Previous concept: none (never built) · Kind of site: trade brochure + quote request (two kinds of buyer: a new pool, and monthly service)
@@ -47,3 +47,5 @@ Research this run (Nov 21): homepage, maintenance and about pages read live. Con
 Assumptions to confirm: phone, email, WhatsApp and store hours; whether Great Exuma also takes construction or only service; which portfolio projects may be named.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

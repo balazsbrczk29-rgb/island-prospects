@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Ocean West Boutique Hotel: job spec
 Current site: oceanwestbahamas.com (static HTML image tables; books on innRoad at oceanwestbahamas.client.innroad.com) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/ocean-west-boutique-hotel/ (the room register: ten gem-named rooms in an index column, the room appears beside it, Check dates to innRoad) · Kind of site: booking
@@ -28,3 +28,5 @@ Current site: oceanwestbahamas.com (static HTML image tables; books on innRoad a
 8. **Look and feel:** elevated, intimate, jewel-like, breezy. A Didone for the gem names like a jeweller's engraving, a clean sans for facts. Conch pink and shell white from the house itself, one deep-pink accent for Check dates. Their own photos never above source size (room photos are 800x600). The wow: touching a stone's name and the room appearing, like opening a jewel case.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

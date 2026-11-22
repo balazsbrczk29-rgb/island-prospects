@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Bahamas Rum Cake Factory: job spec
 Current site: thebahamasrumcakefactory.com (Shopify, about 80 products, real cart and checkout, US and Canada only; non-US buyers sent to an Etsy shop; old listings still point to bacardirumcake.com) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/bahamas-rum-cake-factory/ (gen 2 built Nov 21, two pages: a colour-poster hero that turns the flavour's colour when you pick it, price card with Add to bag, a six-pack builder, the 2000 story, cart drawer and checkout preview handing off to their Shopify cart) · Kind of site: webshop (keep the shop; hand off to their Shopify checkout)
@@ -47,3 +47,5 @@ Research this run (Nov 21): FAQ page read live (address, hours, holiday hours, s
 Assumptions to confirm: master baker or owner title for Simon Smith; whether Etsy remains the non-US route; whether the downtown resellers should be named.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

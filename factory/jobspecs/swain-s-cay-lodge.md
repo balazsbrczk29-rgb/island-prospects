@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Swain's Cay Lodge: job spec
 Current site: swainscaylodge.com (WordPress, rebuilt Sept 2026 by Hotel Traffic Builders; a Check-In / Check-Out "Book Now" engine, a fishing page with 2026-2027 package terms and a price PDF, a live Google and TripAdvisor review feed) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/swain-s-cay-lodge/ (gen 2, three pages: a "where you'll fish" chart of the bights, a trip planner that works out boats and gratuities and composes the enquiry, rooms, Reefside and getting here) · Kind of site: booking (their engine for rooms) + fishing-week enquiry
@@ -43,3 +43,5 @@ Current site: swainscaylodge.com (WordPress, rebuilt Sept 2026 by Hotel Traffic 
    - **Wow:** an angler taps the Middle Bight, then the home flat, adds a non-angling partner, and the week (boats, guides, gratuities, what to bring) assembles beside the map, ready to send.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

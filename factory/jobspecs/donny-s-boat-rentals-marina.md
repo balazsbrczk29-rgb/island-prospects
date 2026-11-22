@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Donny's Boat Rentals & Marina: job spec
 Current site: donnysboatrentalsgtc.com (Wix brochure, 2020, mailto "Book Now" only) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/donny-s-boat-rentals-marina/ · Kind of site: booking enquiry (boat rental) + marina (dockage)
@@ -38,3 +38,5 @@ Current site: donnysboatrentalsgtc.com (Wix brochure, 2020, mailto "Book Now" on
 8. **Look and feel:** sunny, practical, family-run. Their own aerials at native size, clear numbers in tabular type. The wow: the planner's route lines draw from Black Sound to No Name Cay and Manjack Cay on a real chart-like map.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

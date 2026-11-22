@@ -27,6 +27,8 @@ It answers, from real research:
 **Balazs approves job specs in batches.** A spec's first line reads `Status: approved` (or `Status: draft`). Workers build only approved specs. `batch.mjs pending` lists only those.
 
 ## 3. Building to the spec
+**The benchmark (Balazs, Nov 22):** the first five job-spec sites set the bar: Pigeon Cay, Cheryl's, Orange Creek, Anna's and Abaco. Screenshot them from their live URLs, or build them locally to see them (don't read their source). Match their composition, craft and finish. Every site still gets its own individual design: its own type, palette, imagery and core tool, true to its business. Never copy their layouts.
+
 - Build screen 1 first: the product and the core tool, working and beautiful. Then the rest, exactly as the spec says.
 - Start from the previous version when the spec says to keep it. Refactor and elevate it; don't rewrite for the sake of rewriting.
 - Craft polish follows `art-director/references/craft-checklist.md` (A and B): spacing, type, contrast, tabular numbers, phone smoothness.

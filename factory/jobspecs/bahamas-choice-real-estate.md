@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Bahamas Choice Real Estate: job spec
 Current site: bahamaschoicerealestate.com (WordPress, AgentImage template with an IDX feed of about 50 listings) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/bahamas-choice-real-estate/ (gen 2, built) · Kind of site: listings
@@ -38,3 +38,5 @@ Current site: bahamaschoicerealestate.com (WordPress, AgentImage template with a
    - **Wow:** the island map that filters the listings.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

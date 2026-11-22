@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Man-O-War Marina: job spec
 Current site: manowarmarinavillage.com (Wix, every title "My Site 1"; the listed manowarmarina.com now shows someone else's article; rates are a PDF, booking is a bare email link) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/man-o-war-marina/ (harbour broadsheet with a live "what's open now" dateline, a will-she-fit checker and a slip-request letter) · Kind of site: brochure + slip request
@@ -30,3 +30,5 @@ Current site: manowarmarinavillage.com (Wix, every title "My Site 1"; the listed
 Notes from Balazs:
 
 Worker note (parallel draft, Nov 21): the rates PDF linked on /services publishes dockage: day stop $40 (first hour free), $2.50/ft/night to 14 nights, $2.00 for 15 to 30, $1.50 for 30+, $1.00 for 60+, free dockage while dining; power $0.75/kW, water $0.50/gal, laundry $20/load. Its hours differ from the website (office and fuel to 5 pm; lunch Tue to Sat 11 to 2:30, dinner Thu to Sat 5:30 to 8). Worth adding a dockage estimate to the fit tool and the hours conflict to Fix.
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Digitech Bahamas: job spec
 Current site: digitechbahamas.com (WordPress/Elementor template, WooCommerce installed but no shop) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/digitech-bahamas/ (gen 2, built) · Kind of site: brochure + quote enquiry
@@ -41,3 +41,5 @@ Current site: digitechbahamas.com (WordPress/Elementor template, WooCommerce ins
    - **Wow:** the setup assembling as you answer.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

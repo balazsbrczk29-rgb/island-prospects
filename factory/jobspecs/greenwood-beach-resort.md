@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Greenwood Beach Resort: job spec
 Current site: greenwoodbeachresort.com (WordPress + Elementor 2026, booking engine direct-book.com/properties/greenwoodbeachresort) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/greenwood-beach-resort/ (gen 2, needs-review) · Kind of site: booking
@@ -44,3 +44,5 @@ Current site: greenwoodbeachresort.com (WordPress + Elementor 2026, booking engi
    - **Wow:** the season line on screen 1 turns the calendar into a reason to book.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

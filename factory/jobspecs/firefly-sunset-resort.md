@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Firefly Sunset Resort: job spec
 Current site: fireflysunsetresort.com (Duda, Request to book per villa on Guesty, dinner on Tablein) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/firefly-sunset-resort/ (gen 2, live sunset countdown) · Kind of site: booking (six villas, request-to-book handoff)
@@ -56,3 +56,5 @@ Current site: fireflysunsetresort.com (Duda, Request to book per villa on Guesty
    - **Wow:** the price of your exact week, VAT and all, appears under tonight's sunset time, and one tap sends the request.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

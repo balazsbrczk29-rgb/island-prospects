@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # BVG Design Services: job spec
 Current site: bvgdesign.com (hand-coded HTML, footer "Last Updated on 30 May, 2014", GIF buttons, a dead advertising agency link) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/bvg-design-services/ (gen 2, one page: "Bahamian websites, built and found since 1996", a 1996 to 2026 then-and-now frame, the founding story, offices, how a project goes, a tabbed brief builder that opens a prefilled email) · Kind of site: studio brochure + project enquiry
@@ -40,3 +40,5 @@ Current site: bvgdesign.com (hand-coded HTML, footer "Last Updated on 30 May, 20
    - **Wow:** the then-and-now frame: the 1996 Bahamas Vacation Guide page rebuilds itself into a 2026 phone layout as you scroll, then hands you the brief builder.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

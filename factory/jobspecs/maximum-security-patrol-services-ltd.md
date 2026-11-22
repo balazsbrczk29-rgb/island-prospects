@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Maximum Security & Patrol Services Ltd: job spec
 Current site: none (maximumsecurityservice.com no longer resolves; directories only) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/maximum-security-patrol-services-ltd/ · Kind of site: brochure + request a proposal (call)
@@ -31,3 +31,5 @@ Current site: none (maximumsecurityservice.com no longer resolves; directories o
 8. **Look and feel:** calm, exact, institutional. One strong brand colour, a large grotesk, technical plan drawings. No own photos exist, so any illustrative photography is labelled. The wow: the builder draws coverage on a plan of the chosen premises as services are added.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

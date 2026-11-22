@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Romora Bay Resort & Marina: job spec
 Current site: romorabay.com (modern 2026 React build; rooms on the officialbookings.com engine, slips on /marina/reservations, a Marina Map PDF) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/romora-bay-resort-marina/ (gen 2, three pages: "By sea / By air" arrival switch on the drone photo, a yacht length and power checker on the marina page, a room selector on the stay page) · Kind of site: booking (rooms on their engine, slip reservation request)
@@ -39,3 +39,5 @@ Current site: romorabay.com (modern 2026 React build; rooms on the officialbooki
    - **Wow:** the drone photo of the harbour is the switch. Choosing By sea brings the slips forward and the checker answers "she fits". Choosing By air brings the rooms forward on the same photo.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.

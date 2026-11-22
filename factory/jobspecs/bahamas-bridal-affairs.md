@@ -1,4 +1,4 @@
-Status: draft
+Status: approved
 
 # Bahamas Bridal Affairs: job spec
 Current site: none (bahamasbridalaffairs.com no longer resolves; directories and two magazines still link to it) · Previous concept: https://balazsbrczk29-rgb.github.io/island-prospects/bahamas-bridal-affairs/ · Kind of site: brochure + date enquiry
@@ -31,3 +31,5 @@ Current site: none (bahamasbridalaffairs.com no longer resolves; directories and
 8. **Look and feel:** luminous, poised, celebratory. Paper, light and fine serif type. No own photos exist, so any illustrative photography is labelled and never shown as her weddings. The wow: the invitation card sets itself in type as the couple fills it in.
 
 Notes from Balazs:
+
+Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.
