@@ -105,12 +105,15 @@ export function Chart({ plan, photo = true }: { plan: Plan; photo?: boolean }) {
           {map.gx.map(([lo, x]) => <line key={'x' + lo} x1={x} x2={x} y1={0} y2={map.h} />)}
           {map.gy.map(([la, y]) => <line key={'y' + la} y1={y} y2={y} x1={0} x2={map.w} />)}
         </g>
-        <defs><clipPath id="sea"><path clipRule="evenodd" d={`M0 0H${map.w}V${map.h}H0Z ` + map.land} /></clipPath></defs>
+        <defs>
+          <radialGradient id="zg"><stop offset="0" stopColor="#2f6c8f" stopOpacity=".6" /><stop offset=".55" stopColor="#2f6c8f" stopOpacity=".34" /><stop offset="1" stopColor="#2f6c8f" stopOpacity="0" /></radialGradient>
+          <clipPath id="sea"><path clipRule="evenodd" d={`M0 0H${map.w}V${map.h}H0Z ` + map.land} /></clipPath>
+        </defs>
         {zone('deep', <path d={deepD} className="z__fill z__fill--deep" />, 'Outside the reef')}
         <g clipPath="url(#sea)">
-          {zone('middle', <ellipse cx={455} cy={338} rx={170} ry={46} transform="rotate(-8 455 338)" className="z__fill" />, 'The Middle Bight')}
-          {zone('south', <ellipse cx={575} cy={772} rx={150} ry={40} transform="rotate(-14 575 772)" className="z__fill" />, 'The South Bight')}
-          {zone('home', <ellipse cx={694} cy={424} rx={20} ry={58} className="z__fill" />, 'The home flat')}
+          {zone('middle', <ellipse cx={455} cy={338} rx={200} ry={70} transform="rotate(-8 455 338)" className="z__fill" />, 'The Middle Bight')}
+          {zone('south', <ellipse cx={575} cy={772} rx={180} ry={62} transform="rotate(-14 575 772)" className="z__fill" />, 'The South Bight')}
+          {zone('home', <ellipse cx={696} cy={424} rx={30} ry={70} className="z__fill" />, 'The home flat')}
         </g>
         <path d={map.land} className="chart__land" />
         {zone('reef', <><path d={reefD} className="z__hit" /><path d={reefD} className="chart__reef" /></>, 'The Andros Barrier Reef')}
@@ -125,11 +128,14 @@ export function Chart({ plan, photo = true }: { plan: Plan; photo?: boolean }) {
           <text className={'w' + (on('south') ? ' is-on' : '')} x={420} y={830}>South Bight</text>
           <text className={'w' + (on('reef') ? ' is-on' : '')} x={700} y={330} transform="rotate(-68 700 330)">Barrier reef</text>
           <text className={'w' + (on('deep') ? ' is-on' : '')} x={850} y={620}>6,000 ft</text>
+          <text className={'sp' + (on('middle') ? ' is-on' : '')} x={330} y={326}>bonefish, guided skiff</text>
+          <text className={'sp' + (on('south') ? ' is-on' : '')} x={420} y={856}>bonefish, guided skiff</text>
+          <text className={'sp' + (on('deep') ? ' is-on' : '')} x={850} y={646}>wahoo, tuna, billfish</text>
         </g>
         <g className="chart__lodge">
           <circle cx={P.lodge[0]} cy={P.lodge[1]} r={7} />
           <text x={P.lodge[0] - 16} y={P.lodge[1] - 30} textAnchor="end" className={'w' + (on('home') ? ' is-on' : '')}>The lodge</text>
-          <text x={P.lodge[0] - 16} y={P.lodge[1] - 8} textAnchor="end" className="small">and its home flat</text>
+          <text x={P.lodge[0] - 16} y={P.lodge[1] - 8} textAnchor="end" className="small">{on('home') ? 'home flat: wade for bonefish' : 'and its home flat'}</text>
         </g>
       </svg>
       <figcaption className="chart__hint">Tap a water to add it to your week.</figcaption>
@@ -174,7 +180,7 @@ export function Planner({ plan, h1 = true }: { plan: Plan; h1?: boolean }) {
           <Stepper label="Non-anglers" id="s-o" v={plan.others} set={plan.setOthers} min={0} max={8} />
           <Stepper label="Nights" id="s-n" v={plan.nights} set={plan.setNights} min={2} max={14} />
           <Stepper label="Guided days" id="s-d" v={plan.days} set={plan.setDays} min={0} max={plan.nights} />
-          <label className="ctl__date"><span className="lbl">Arrival</span><input type="date" value={plan.arrival} min={new Date().toISOString().slice(0, 10)} onChange={e => plan.setArrival(e.target.value)} /></label>
+          <label className={'ctl__date' + (plan.arrival ? '' : ' is-empty')}><span className="lbl">Arrival</span><span className="ctl__in"><input type="date" value={plan.arrival} min={new Date().toISOString().slice(0, 10)} onChange={e => plan.setArrival(e.target.value)} /><span className="ctl__flex" aria-hidden="true">Flexible</span></span></label>
         </div>
         <div className="waters" role="group" aria-label="Waters for your week">
           {WATERS.map(x => (
@@ -190,12 +196,12 @@ export function Planner({ plan, h1 = true }: { plan: Plan; h1?: boolean }) {
             <li><span>Lodge staff, $35 a guest a night, recommended</span><Num v={money(w.tipStaff)} /></li>
           </ul>
           <p className="wk__sum"><span>Gratuities to budget</span><Num v={money(w.tips)} /></p>
+          <p className="wk__note">Package price per person from the season sheet. As day trips, no room: {money(w.dayTrips)}.</p>
           <div className="wk__acts">
             <a className="btn" href={mail(plan)}>Send my week to the lodge</a>
             <a className="link" href={BOOK}>Book a room</a>
             <a className="link tnum" href={PHONES[0][1]}>{PHONES[0][0]}</a>
           </div>
-          <p className="wk__note">Package price per person from the lodge's 2026-2027 season sheet, with guide and boat, room, meals and transfers. As day trips with no room, $975 a boat a day comes to {money(w.dayTrips)}.</p>
         </div>
       </div>
       <div className="plan__map"><Chart plan={plan} /></div>

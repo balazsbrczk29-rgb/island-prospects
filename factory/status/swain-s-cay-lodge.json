@@ -4,27 +4,29 @@
  "name": "Swain's Cay Lodge",
  "batch": "13",
  "tier": "A",
- "state": "needs-review",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
  "claimed_at": "2026-11-22T14:37:11.751Z",
- "jobspec_built": false,
+ "jobspec_built": true,
  "scores": {
   "gate1": {
    "screen1_product_and_tool": true,
    "job_easier": true,
-   "keep_present": false
+   "keep_present": true
   },
-  "wow": 3,
-  "photography": 3,
+  "wow": 4,
+  "photography": 4,
   "typography": 4,
-  "composition": 3,
+  "composition": 4,
   "conversion_clarity": 4,
   "phone": 4
  },
  "notes": [
   "WIP only (not published to main): built from approved spec + design.md 2026-11-22 on branch wip/swain-s-cay-lodge. Core tool: anglers, non-anglers, nights, guided days, arrival, waters toggled on a baked Natural Earth chart of Mangrove Cay; boats, guide days, recommended gratuities; email to fish@; Book a room.",
   "Critic re-score failed (keep: rooms picker, FAQ, fishing gallery 6-8 and spearfishing photo; wow 3, photo 3, composition 3). After the re-score these were applied: dawn photo moved to bottom-left open water, Orvis set as its own small-caps line, rooms picker restored (list + crossfading photo), concept offset 96px on phone. Still to do: FAQ dl on fishing.html, gallery 6-8 and spearfishing image (filenames and sizes not yet sourced), then a fresh critic.",
-  "Assumptions: lodge pin approximate on a 1:10m coastline; non-angler $450 unit unclear; six offer blocks merged into four with all dates kept."
- ]
+  "Assumptions: lodge pin approximate on a 1:10m coastline; non-angler $450 unit unclear; six offer blocks merged into four with all dates kept.",
+  "Resumed 2026-11-22 by a site worker after a stale claim: field card on the chart crossfades to the gallery photo of the water last added; zones redrawn as water-clipped gradient glows with species labels; waters as lead + staggered 2-up grid; fishing.html gained spearfishing (their spear-fishing.png), gallery photos 6-8 and the lodge's FAQ with FAQPage JSON-LD; phone header Menu disclosure, controls before the chart; zero-angler wording; Arrival shows Flexible. Fresh critic: gate 1 all yes, gate 2 all 4 after two re-scores. Assumption: native sizes of fishing-gallery6-8.jpg and spear-fishing.png are not published; declared 1024x683 and 800x600, displayed no wider than about 760 px and 420 px."
+ ],
+ "built_at": "2026-11-22"
 }
