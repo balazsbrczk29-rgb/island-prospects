@@ -4,8 +4,29 @@
  "name": "Stella Maris Resort Club",
  "batch": "13",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T14:26:29.296Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T14:37:01.026Z",
+ "scores": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion_clarity": 5,
+  "phone": 4
+ },
+ "notes": [
+  "Built from approved job spec + design.md (2026-11-22). Core tool on screen 1: arrival, nights, adults, children; the ten places reorder by fit; itemised estimate from the published rate page (season per night, VAT, levy, maid, energy, optional MAP, deposit); Send this stay prefilled email with the itemised estimate; Add flights mail to the air service.",
+  "Re-checked 22 Nov 2026: homepage still carries spam links (replica rolex daytona, forex trading SA, crocobetonline); their site has a Marina menu item (/marina/), so the old marina finding was dropped.",
+  "Interpretations to confirm with the club: 2BR single = double rate; maid and energy surcharges counted for all guests; deposit ranges read as 1-2/3-4/5-7/10+ (8-9 ask); MAP x1.25 (15% gratuity + 10% VAT on the meal price); guests capacity beyond published occupancy unknown.",
+  "Not reproduced: their ten-language switch (translation URLs not sourced); wedding and fly-in are prefilled mailtos rather than field forms. Fonts now self-hosted (Sorts Mill Goudy + Mulish).",
+  "Critic (fresh subagent): first pass gate 1 fail (keep gaps), wow 3, photo 3, type 4, comp 3, conv 4, phone 4; fixes applied; re-score gate 1 pass, wow 4, photo 4, type 4, comp 4, conv 5, phone 3 due to one ordering bug (strip note above the kicker on phone), fixed and verified on the phone screenshot."
+ ]
 }

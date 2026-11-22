@@ -234,7 +234,7 @@ b { font-weight: 600; }
   .plan__hero { order: 3; margin: var(--s4) calc(-1 * var(--pad)) 0; }
   .ctl { order: 4; }
   .strip { order: 5; margin-inline: calc(-1 * var(--pad)); padding-inline: var(--pad); }
-  .strip__note { order: 6; }
+  .strip__foot { order: 6; }
   .sum { order: 7; margin-top: var(--s5); }
   .film { width: 150px; }
   .ctl { grid-template-columns: 1fr 1fr; }
