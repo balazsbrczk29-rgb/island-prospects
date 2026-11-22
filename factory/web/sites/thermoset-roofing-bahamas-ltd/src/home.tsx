@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import Lenis from 'lenis'
 import './styles.css'
 import Anatomy from './Anatomy'
-import Top from './Top'
+import Top, { TopBar } from './Top'
 import { Clients, Work, Services, Radar, Certified, Contact, Footer, Dock } from './Sections'
 
 function Home() {
@@ -16,8 +16,8 @@ function Home() {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <Top />
-      <main id="main"><Clients /><Anatomy /><Work /><Services /><Radar /><Certified /><Contact /></main>
+      <TopBar />
+      <main id="main"><Top /><Clients /><Anatomy /><Work /><Services /><Radar /><Certified /><Contact /></main>
       <Footer /><Dock />
     </>
   )

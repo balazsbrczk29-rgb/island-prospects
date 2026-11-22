@@ -149,7 +149,7 @@ export function Footer() {
       <p className="foot__name">Thermoset Roofing Bahamas Ltd.</p>
       <p>Roofing and waterproofing across New Providence and the surrounding islands. 100% Bahamian owned.</p>
       <ul>{business.socials.map(s => <li key={s.label}><a href={s.href} rel="noopener">{s.label}</a></li>)}</ul>
-      <p className="foot__small">Job photographs: Thermoset Roofing Bahamas Ltd. The building at the top of the page is a 3D model made for this concept, not a Thermoset project.</p>
+      <p className="foot__small">Job photographs: Thermoset Roofing Bahamas Ltd. The building in the roof build-up is a 3D model made for this concept, not a Thermoset project.</p>
     </footer>
   )
 }
@@ -162,7 +162,7 @@ export function Dock() {
     <nav className={`dock${on ? ' is-on' : ''}`} aria-label="Quick navigation">
       <a className="dock__link" href="#clients">Clients</a><a className="dock__link" href="#work">Work</a><a className="dock__link" href="#services">Services</a><a className="dock__link" href="#radar">R.A.D.A.R.</a>
       <a className="dock__call" href={business.office.href}>Call<span> {business.office.label}</span></a>
-      <a className="dock__cta" href="#request">Free estimate</a>
+      <a className="dock__cta" href="#wo-card">Free estimate</a>
     </nav>
   )
 }

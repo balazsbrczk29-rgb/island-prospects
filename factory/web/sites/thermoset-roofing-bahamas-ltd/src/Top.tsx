@@ -1,7 +1,7 @@
 // Screen 1: the work order. Inputs on the left, their crew photo and the live answer on the right.
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'motion/react'
-import { business, photos, KINDS, likeYours, sqw, makers, type Kind } from './data'
+import { business, photos, KINDS, likeYours, sqw, makers, clientIndex, type Kind } from './data'
 
 const ease = [0.22, 1, 0.36, 1] as const
 type Problem = 'leak' | 'new' | 'reroof' | 'water' | 'plan'
@@ -39,11 +39,25 @@ function Chips<T extends string>({ name, legend, opts, value, onChange }: { name
   )
 }
 
+export function TopBar() {
+  return (
+    <header className="top">
+        <a className="top__name" href="./" aria-label={`${business.name}, home`}>Thermoset <span>Roofing Bahamas</span></a>
+        <nav className="top__nav" aria-label="Sections">
+          <a href="#clients">Clients</a><a href="#services">Services</a><a href="#radar">R.A.D.A.R.</a><a href="#contact">Contact</a>
+        </nav>
+        <a className="top__tel" href={business.office.href}>{business.office.label}</a>
+      </header>
+  )
+}
+
 export default function Top() {
   const [kind, setKind] = useState<Kind>('commercial')
   const [problem, setProblem] = useState<Problem>('leak')
   const [roof, setRoof] = useState<Roof>('unsure')
   const [island, setIsland] = useState(ISLANDS[0])
+  const [who, setWho] = useState('')
+  const [tel, setTel] = useState('')
   useEffect(() => {
     const on = (e: Event) => {
       const a = (e.target as HTMLElement).closest?.('[data-job]') as HTMLElement | null
@@ -56,24 +70,18 @@ export default function Top() {
   const pickKind = (k: Kind) => { setKind(k); dispatchEvent(new CustomEvent('tr:type', { detail: k })) }
   const rec = recommend(kind, problem, roof)
   const names = likeYours(kind)
+  const count = clientIndex.filter(c => c.kind === kind).length
+  const plural = KINDS.find(k => k[0] === kind)![2]
   const kindLabel = KINDS.find(k => k[0] === kind)![1]
   const probLabel = PROBLEMS.find(p => p[0] === problem)![1]
   const mail = useMemo(() => {
-    const body = `Hello Croix,\n\nI would like a free estimate.\n\nBuilding: ${kindLabel}\nWhat it needs: ${probLabel}\nRoof: ${ROOFS.find(r => r[0] === roof)![1]}\nIsland: ${island}\nSuggested on your site: ${rec.name}\n\nMy name:\nPhone:\nAddress of the building:\n`
+    const body = `Hello Croix,\n\nI would like a free estimate.\n\nBuilding: ${kindLabel}\nWhat it needs: ${probLabel}\nRoof: ${ROOFS.find(r => r[0] === roof)![1]}\nIsland: ${island}\nSuggested on your site: ${rec.name}\n\nMy name: ${who}\nPhone: ${tel}\nAddress of the building:\n`
     return `mailto:${business.people[1].email}?cc=${business.people[0].email}&subject=${encodeURIComponent(`Free estimate request: ${probLabel.toLowerCase()}, ${kindLabel.toLowerCase()}`)}&body=${encodeURIComponent(body)}`
-  }, [kindLabel, probLabel, roof, island, rec.name])
+  }, [kindLabel, probLabel, roof, island, rec.name, who, tel])
   const hero = photos[0]
 
   return (
     <>
-      <header className="top">
-        <a className="top__name" href="./" aria-label={`${business.name}, home`}>Thermoset <span>Roofing Bahamas</span></a>
-        <nav className="top__nav" aria-label="Sections">
-          <a href="#clients">Clients</a><a href="#services">Services</a><a href="#radar">R.A.D.A.R.</a><a href="#contact">Contact</a>
-        </nav>
-        <a className="top__tel" href={business.office.href}>{business.office.label}</a>
-      </header>
-
       <section id="request" className="wo" aria-labelledby="wo-title">
         <div className="wo__left">
           <h1 id="wo-title">The roof over the brands you know, and over yours.</h1>
@@ -95,16 +103,20 @@ export default function Top() {
             <img src={sqw(hero.src, 1500)} width={1500} height={1125} alt={hero.alt} fetchPriority="high" />
             <figcaption>{hero.cap}. Photograph: Thermoset.</figcaption>
           </figure>
-          <div className="wo__card" aria-live="polite">
-              <motion.div key={rec.name + kind} initial={{ opacity: 0.4, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, ease }}>
-                <p className="wo__label">{kindLabel}: {probLabel.charAt(0).toLowerCase() + probLabel.slice(1)}</p>
+          <div className="wo__card" id="wo-card">
+              <motion.div aria-live="polite" key={rec.name + kind} initial={{ opacity: 0.4, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, ease }}>
+                <p className="wo__label">{kindLabel}, {island}: {probLabel.charAt(0).toLowerCase() + probLabel.slice(1)}</p>
                 <h2 className="wo__rec">{rec.name}</h2>
                 <p className="wo__line">{rec.line}</p>
-                <p className="wo__label wo__label--names">Thermoset has roofed</p>
+                <p className="wo__label wo__label--names">Thermoset has roofed {count} {plural.toLowerCase()}, including <a href="#clients" className="wo__all" onClick={() => dispatchEvent(new CustomEvent('tr:type', { detail: kind }))}>see them all</a></p>
                 <ul className="wo__names">
                   {names.map((n, i) => <motion.li key={n} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, ease, delay: 0.05 + i * 0.04 }}>{n}</motion.li>)}
                 </ul>
               </motion.div>
+            <div className="wo__you">
+              <label><span className="sr-only">Your name</span><input value={who} onChange={e => setWho(e.target.value)} placeholder="Your name" autoComplete="name" /></label>
+              <label><span className="sr-only">Your phone</span><input type="tel" value={tel} onChange={e => setTel(e.target.value)} placeholder="Phone" autoComplete="tel" /></label>
+            </div>
             <div className="wo__act">
               <a className="btn btn--sea" href={mail}>Send the request to Croix Culmer, GM</a>
               <p className="wo__calls">Or call <a href={business.people[1].href}>Croix {business.people[1].tel}</a>, <a href={business.people[0].href}>Stuart, the owner, {business.people[0].tel}</a></p>
