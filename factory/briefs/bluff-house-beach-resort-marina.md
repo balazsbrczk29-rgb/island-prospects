@@ -48,3 +48,7 @@ Research this session: homepage (Cloudbeds "Book Now", 40-slip marina, Tranquil 
 **Phone:** masthead and lead photo 38svh, headline, standfirst, CTA in the first screen; tear-off strip (Call / Book a suite) after the first screen.
 **Conversion.** Primary "Check dates and book" (Cloudbeds). Secondary: call +1 242 824 9550, Dockwa slip, email.
 **Tier.** Standard. **Pages:** single page (gen-1 history.html and marina.html folded in).
+
+## Job-spec build sources (2026-11-22)
+- /marina-rates scraped this session: slips 6 & 19 premiums by season ($2.75 winter, $3.50 holiday and spring and late summer, $3.75 summer, $3.00 fall), T-head $4.00, water $0.35 daily / $0.30 weekly with contract, key deposit $50, laundry tokens $5 (shower included), Wi-Fi free; fresh water swimming pool listed among marina amenities; closed Sep 2 to Oct 26 (2025).
+- /private-cottages scraped this session: Summerset studio/1 bath; La Conchita 1/1; Turtle Bluff Villa 2/2.5; Pineapple House 2/2.5; Sweet Guava Villa 3/3; Blue Bay Cottage 3/3.5; Dove Cottage 3/3.5; Coral Haven 3/3.5; Sunset Cottage 4, 4/5. Rates $270 to $650 a night, Sunset Cottage 4 $600 to $1,000; custom quote by contact.
