@@ -132,14 +132,17 @@ function Rig({ s }: { s: KitState }) {
   const xs = (n: number, i: number) => (i - (n - 1) / 2) * pitch - 0.45
   const aps = s.wifi ? Math.ceil(s.count / 4) : 0
   const camTarget = useRef(new THREE.Vector3())
+  const lookAt = useRef(new THREE.Vector3(0, 0.5, 0.1))
   const { camera, size } = useThree()
   useFrame(() => {
-    const span = s.count * pitch + 2.4
+    const left = xs(s.count, 0) - (s.kind === 'fnb' ? 1.0 : 0.4), right = xs(s.count, s.count - 1) + 1.75
+    const span = right - left + 0.4, mid = (left + right) / 2
     const aspect = size.width / size.height
-    const dist = Math.max(2.3, (span / aspect) * 0.86 + 0.95)
-    camTarget.current.set(0.6, 1.0 + dist * 0.34, dist)
+    const dist = Math.max(2.6, (span / aspect) * 1.35 + 0.4)
+    camTarget.current.set(mid, 1.0 + dist * 0.34, dist)
+    lookAt.current.lerp(new THREE.Vector3(mid, 0.5, 0.1), reduce ? 1 : 0.06)
     camera.position.lerp(camTarget.current, reduce ? 1 : 0.06)
-    camera.lookAt(0.15, 0.5, 0.1)
+    camera.lookAt(lookAt.current)
   })
   return (
     <group>
@@ -158,8 +161,8 @@ function Rig({ s }: { s: KitState }) {
       })}
       <Slot on={s.kind === 'fnb'} pos={[xs(s.count, 0) - 0.75, 0, -0.35]} delay={0.2}><Printer /></Slot>
       {/* network corner */}
-      <Slot on pos={[xs(s.count, s.count - 1) + 1.15, 0, -0.25]} delay={0.25}><Router /></Slot>
-      <Slot on={s.backup} pos={[xs(s.count, s.count - 1) + 1.2, 0, 0.25]} delay={0.3}><Backup /></Slot>
+      <Slot on pos={[xs(s.count, s.count - 1) + 1.0, 0, -0.3]} delay={0.25}><Router /></Slot>
+      <Slot on={s.backup} pos={[xs(s.count, s.count - 1) + 1.55, 0, -0.3]} delay={0.3}><Backup /></Slot>
       {[0, 1].map(i => <Slot key={i} on={i < aps} pos={[aps === 2 ? (i ? 1.2 : -1.4) : -0.1, 1.3, -0.7]} delay={0.35 + i * 0.08}><AccessPoint /></Slot>)}
     </group>
   )
