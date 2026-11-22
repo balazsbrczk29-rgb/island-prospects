@@ -8,13 +8,15 @@ import { FLEET, estimate, usd, wa, mail, wix, stayCost, fit, AMP30, ENTRY_NOTE, 
 import { WhatsAppGlyph, ease } from './site'
 
 type Tab = 'rent' | 'fit'
+const today = () => new Date().toLocaleDateString('en-CA')
 
 function Figure({ value, label }: { value: string; label: string }) {
   return (
-    <div className="h-[3.75rem] md:h-[4.75rem] overflow-hidden" aria-label={label}>
+    <div className="h-[3.75rem] md:h-[4.75rem] overflow-hidden" role="status" aria-live="polite">
+      <span className="sr-only">{label}</span>
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.p key={value} initial={{ y: '70%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: '-70%', opacity: 0 }} transition={{ duration: 0.28, ease }}
-          className="font-sans font-bold text-[3.5rem] md:text-[4.5rem] leading-none tracking-[-0.04em] tnum">{value}</motion.p>
+          aria-hidden="true" className="font-sans font-bold text-[3.5rem] md:text-[4.5rem] leading-none tracking-[-0.04em] tnum">{value}</motion.p>
       </AnimatePresence>
     </div>
   )
@@ -43,8 +45,9 @@ function Rent() {
   const [days, setDays] = useState(7)
   const [date, setDate] = useState('')
   const [people, setPeople] = useState(2)
+  const [where, setWhere] = useState('')
   const [flash, setFlash] = useState(0)
-  const dateId = useId(), peopleId = useId()
+  const dateId = useId(), peopleId = useId(), whereId = useId()
   const boat = FLEET.find(b => b.id === boatId)!
   const maxPeople = boat.id === 'whaler17' ? 3 : boat.id === 'whaler19' ? 4 : 6
   const group = useRef<HTMLDivElement>(null)
@@ -64,9 +67,9 @@ function Rent() {
     `Hello Taylor, I'd like to rent the ${boat.name} from Donny's.`,
     `Days: ${days}${nice ? `, starting ${nice}` : ''}`,
     `People: ${people}`,
-    'Staying on Green Turtle Cay',
+    where ? `Staying at: ${where}, Green Turtle Cay` : 'Staying on Green Turtle Cay',
     `My estimate from your published rates: ${usd(total)} (${breakdown}). Is the boat free?`,
-  ].join('\n'), [boat, days, nice, people, total, breakdown])
+  ].join('\n'), [boat, days, nice, people, where, total, breakdown])
 
   const onKey = (e: KeyboardEvent) => {
     const i = FLEET.findIndex(b => b.id === boatId)
@@ -99,9 +102,15 @@ function Rent() {
         <Stepper label="Days" unit={days === 1 ? 'day' : 'days'} value={days} min={3} max={14} onChange={setDays} />
         <div>
           <label htmlFor={dateId} className="block text-[0.9375rem] font-semibold mb-2">First day</label>
-          <input id={dateId} type="date" value={date} onChange={e => setDate(e.target.value)}
+          <input id={dateId} type="date" min={today()} value={date} onChange={e => setDate(e.target.value)}
             className="w-full h-12 px-3 rounded-[var(--radius-sm)] bg-ground text-ink text-[1rem] tnum" />
         </div>
+      </div>
+
+      <div>
+        <label htmlFor={whereId} className="sr-only">Where you are staying on Green Turtle Cay (optional)</label>
+        <input id={whereId} type="text" value={where} onChange={e => setWhere(e.target.value)} placeholder="Where you're staying (optional)" autoComplete="off"
+          className="w-full h-11 px-3 rounded-[var(--radius-sm)] bg-ground text-ink text-[1rem] placeholder:text-muted" />
       </div>
 
       <div className="flex items-end justify-between gap-4 pt-1 border-t border-line">
@@ -119,7 +128,7 @@ function Rent() {
       </div>
 
       <div className="grid gap-2">
-        <a className="btn btn-primary w-full" href={wa(message)} target="_blank" rel="noopener"><WhatsAppGlyph />Send to Taylor on WhatsApp</a>
+        <a className="btn btn-primary w-full max-lg:sticky max-lg:bottom-[88px] max-lg:z-10 max-lg:shadow-[0_8px_24px_rgb(13_43_46/0.25)]" href={wa(message)} target="_blank" rel="noopener"><WhatsAppGlyph />Send to Taylor on WhatsApp</a>
         <p className="text-[0.875rem] text-muted text-center leading-snug">
           Cash only, $100 deposit, 3-day minimum{boat.experience ? ', boating experience needed' : ''}. Nothing is booked here.<br />
           <a className="inline-flex items-center min-h-11 font-semibold text-ink underline underline-offset-4 decoration-1 hover:decoration-2" href={mail(`Boat rental request: ${boat.name}, ${days} days`, message)}>Email Donny instead</a>
@@ -129,7 +138,7 @@ function Rent() {
   )
 }
 
-function Fits() {
+export function Fits() {
   const [loa, setLoa] = useState(38)
   const [draft, setDraft] = useState(5)
   const [nights, setNights] = useState(3)
@@ -174,7 +183,7 @@ function Fits() {
             <p className="text-[0.9375rem] text-muted tnum">{cost.how}{power ? `, plus 30 amp ${usd(power.total)}` : ''}</p>
           </>
         ) : (
-          <p className="mt-2 text-[1rem] text-muted max-w-[44ch]">Donny&rsquo;s publishes dockage up to {MARINA.loa} ft LOA and {MARINA.draft} ft draft. Call or radio before you come; a mooring may still work.</p>
+          <p className="mt-2 text-[1rem] text-muted max-w-[44ch]">Donny&rsquo;s publishes dockage up to {MARINA.loa} ft LOA and {MARINA.draft} ft draft. Call or radio before you come and ask what is possible.</p>
         )}
         <AnimatePresence initial={false}>
           {draft >= 6 && (
@@ -198,8 +207,9 @@ export default function TripSheet(): ReactNode {
   const [tab, setTab] = useState<Tab>('rent')
   const ids = { rent: useId(), fit: useId() }
   useEffect(() => {
-    const open = (t: Tab) => { setTab(t); document.getElementById('sheet')?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }) }
+    const open = (t: Tab) => { setTab(t); document.getElementById('sheet')?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }) }
     if (location.hash === '#fit') setTab('fit')
+    if (new URLSearchParams(location.search).get('boat') || location.hash === '#sheet') setTimeout(() => open('rent'), 300)
     const onFit = () => open('fit'); const onBoat = () => open('rent')
     window.addEventListener('donny:fit', onFit); window.addEventListener('donny:boat', onBoat)
     return () => { window.removeEventListener('donny:fit', onFit); window.removeEventListener('donny:boat', onBoat) }

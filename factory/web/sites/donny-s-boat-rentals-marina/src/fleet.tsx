@@ -40,7 +40,7 @@ function BoatSection({ b, i }: { b: Boat; i: number }) {
             {b.kit.map(k => <li key={k} className="px-3.5 py-1.5 rounded-full bg-flats text-[0.9375rem]">{k}</li>)}
           </ul>
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <a className="btn btn-primary" href={`index.html?boat=${b.id}#plan`}>Plan this boat<ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" /></a>
+            <a className="btn btn-primary" href={`index.html?boat=${b.id}#sheet`}>Plan this boat<ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" /></a>
             <a className="inline-flex items-center gap-2 min-h-11 font-semibold underline decoration-[1.5px] underline-offset-[6px]" href={wa(`Hello Taylor, is the ${b.name} free for my dates on Green Turtle Cay?`)} target="_blank" rel="noopener"><WhatsAppGlyph size={18} />Ask if it&rsquo;s free</a>
           </div>
         </div>
