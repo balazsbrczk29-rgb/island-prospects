@@ -56,7 +56,7 @@ function Property() {
                 <div className="field full"><label htmlFor="v-when">When suits you</label><input id="v-when" placeholder="e.g. a weekday morning, or a video call" value={v.when} onChange={e => setV({ ...v, when: e.target.value })} /></div>
                 <div className="full" style={{ display: 'flex', flexWrap: 'wrap', gap: '16px 32px', alignItems: 'center' }}>
                   <button className="btn btn-primary" type="submit" aria-disabled={!ok}>Request a viewing</button>
-                  <a className="link num" href={`tel:${OFFICE.tel}`}>or call {OFFICE.phone}</a>
+                  <a className="link num" style={{ minHeight: 44, display: "inline-flex", alignItems: "center" }} href={`tel:${OFFICE.tel}`}>or call {OFFICE.phone}</a>
                 </div>
               </form>
               <p className="muted" style={{ marginTop: 32, fontSize: 'var(--t-s)' }}>Prefer to {verb} through a person you know? <a className="link num" href={`tel:${TEAM[0].tel}`}>Lana Munnings-Basalyga, {TEAM[0].phone}</a></p>

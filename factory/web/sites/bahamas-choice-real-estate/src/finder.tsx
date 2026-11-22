@@ -40,7 +40,7 @@ const LABEL: Record<string, [number, number, 'start' | 'middle' | 'end']> = {
   'Berry Islands': [178, 176, 'start'], Andros: [104, 300, 'end'], 'New Providence and Paradise Island': [196, 224, 'middle'],
   Eleuthera: [334, 226, 'start'], 'Great Exuma and Little Exuma': [312, 402, 'end'], 'Cat Island and Cat Cay': [392, 300, 'start'],
   'San Salvador': [482, 342, 'start'], 'Rum Cay': [448, 382, 'start'], 'Long Island': [430, 432, 'start'],
-  'Acklins and Crooked Island': [505, 524, 'middle'], Mayaguana: [628, 490, 'end'], Inagua: [530, 642, 'end'], 'Ragged Island': [336, 526, 'end'],
+  'Acklins and Crooked Island': [512, 540, 'end'], Mayaguana: [604, 534, 'middle'], Inagua: [530, 642, 'end'], 'Ragged Island': [336, 526, 'end'],
 };
 
 /** The chart: Natural Earth outlines, every island group they serve. Pointer-only; the Island select is its keyboard twin. */
