@@ -1,79 +1,47 @@
-import { useMemo, useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
-import { BIZ, VILLAS, VAT, WHOLE, HOURS, ph } from './data'
+import { useRef } from 'react'
+import { motion, useInView, useReducedMotion } from 'motion/react'
+import { BIZ, VILLAS, WHOLE, HOURS, ph } from './data'
+import { money } from './price'
+import { priceVilla } from './tool'
 
-const money = (n: number) => '$' + Math.round(n).toLocaleString('en-US')
-const iso = (d: Date) => d.toISOString().slice(0, 10)
-const addDays = (s: string, n: number) => { const d = new Date(s + 'T12:00'); d.setDate(d.getDate() + n); return iso(d) }
+const ease = [0.22, 1, 0.36, 1] as const
+function Title({ id, children, className = 'h2' }: { id: string; children: React.ReactNode; className?: string }) {
+  return <h2 id={id} className={className}>{children}</h2>
+}
 
-export function Pair() {
+export function Villas() {
   return (
-    <section className="pair" aria-labelledby="pair-h">
-      <figure className="pair-a"><img src={ph('099')} alt="The lower pool and lawn at Firefly, sailboats on the Sea of Abaco beyond" width={1920} height={1420} loading="lazy" /></figure>
-      <figure className="pair-b"><img src={ph('114')} alt="Firefly Sunset Resort seen from the water: the rebuilt dock, bar and dining deck" width={1920} height={2553} loading="lazy" /></figure>
-      <div className="pair-cap">
-        <h2 id="pair-h" className="h2">Six homes on the Sea of Abaco.</h2>
-        <p className="muted">Hurricane Dorian took two villas in 2019. The dock, the outside bar and the dining deck were rebuilt. Today there are five villas and the original owners’ house, all above the water.</p>
+    <section id="villas" className="villas-s" aria-labelledby="villas-h">
+      <figure className="villas-photo"><img src={ph('114')} srcSet={`${ph('114', 1280)} 1280w, ${ph('114')} 1920w`} sizes="(max-width: 900px) 100vw, 40vw" alt="Firefly Sunset Resort seen from the water: the villas above the rebuilt dock and dining deck" width={1920} height={2553} loading="lazy" /></figure>
+      <div className="villas-list">
+        <Title id="villas-h">Every villa faces the sunset.</Title>
+        <ol className="index">
+          {VILLAS.map(v => (
+            <li key={v.id}>
+              <div className="ix-head"><h3 className="h3">{v.name}</h3><p className="cap num">{v.beds}</p></div>
+              <p className="ix-line">{v.line}</p>
+              {v.inDay && v.inWeek && v.offDay && v.offWeek
+                ? <dl className="ix-rates num"><div><dt>February to August</dt><dd>{money(v.inDay)} a night, {money(v.inWeek)} a week</dd></div><div><dt>September to January</dt><dd>{money(v.offDay)} a night, {money(v.offWeek)} a week</dd></div></dl>
+                : <p className="ix-rates cap">Rates on request</p>}
+              <p className="ix-acts"><button type="button" className="textlink" onClick={() => priceVilla(v.id)}>Price my dates</button><a className="textlink quiet" href={v.book}>Request to book</a></p>
+            </li>
+          ))}
+        </ol>
+        <p className="rules cap">Rates in US dollars before 10% VAT. February to August: three nights minimum. The September to January rate excludes Thanksgiving, Christmas and New Year. <a href="villas.html">All rates in one table</a></p>
       </div>
     </section>
   )
 }
 
-export function VillaCheck() {
-  const [id, setId] = useState('mint')
-  const start = useMemo(() => { const t = new Date(); const y = t.getMonth() >= 1 && t.getMonth() <= 6 ? t.getFullYear() : t.getFullYear() + (t.getMonth() >= 7 ? 1 : 0); const d = `${y}-03-07`; return d > iso(t) ? d : addDays(iso(t), 14) }, [])
-  const [arrive, setArrive] = useState(start), [leave, setLeave] = useState(addDays(start, 7))
-  const v = VILLAS.find(x => x.id === id)!
-  const n = Math.max(0, Math.round((new Date(leave + 'T12:00').getTime() - new Date(arrive + 'T12:00').getTime()) / 86400000))
-  const m = new Date(arrive + 'T12:00').getMonth()
-  const inSeason = m >= 1 && m <= 7
-  const holiday = (() => { for (let i = 0; i < n; i++) { const d = addDays(arrive, i).slice(5); if ((d >= '11-25' && d <= '11-29') || d >= '12-20' || d <= '01-02') return true } return false })()
-  const day = inSeason ? v.inDay : v.offDay, week = inSeason ? v.inWeek : v.offWeek
-  let result: { head: string; sub: string }
-  if (!day || !week) result = { head: 'Rate on request', sub: `${v.name} has no published rate yet. Ask for your dates.` }
-  else if (n <= 0) result = { head: 'Pick your dates', sub: '' }
-  else if (!inSeason && holiday) result = { head: 'Holiday dates', sub: 'Thanksgiving, Christmas and New Year are priced separately. Ask for your dates.' }
-  else if (inSeason && n < 3) result = { head: 'Three nights minimum', sub: 'From February to August stays start at three nights.' }
-  else {
-    const base = Math.floor(n / 7) * week + (n % 7) * day
-    result = { head: money(base * (1 + VAT)), sub: `${n} nights, ${inSeason ? 'in season' : 'off season'}: ${money(base)} plus 10% VAT${n >= 7 ? ', weekly rate applied' : ''}.` }
-  }
-  const mail = `mailto:${BIZ.email}?subject=${encodeURIComponent(`Villa request: ${v.name}`)}&body=${encodeURIComponent(`Villa: ${v.name}\nArrival: ${arrive}\nDeparture: ${leave}\nGuests: \n\nSent from the Firefly website.`)}`
+export function Resort() {
   return (
-    <section id="villas" className="check" aria-labelledby="check-h">
-      <div className="wrap check-grid">
-        <div>
-          <h2 id="check-h" className="h2">Choose your villa.</h2>
-          <ul className="villa-list" role="radiogroup" aria-label="Villas">
-            {VILLAS.map(x => (
-              <li key={x.id}>
-                <button type="button" role="radio" aria-checked={x.id === id} className={x.id === id ? 'on' : ''} onClick={() => setId(x.id)}>
-                  <span className="vn">{x.name}</span>
-                  <span className="vb">{x.beds}</span>
-                  <span className="vp num">{x.offDay ? `from ${money(x.offDay)} a night` : 'rate on request'}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="panel" aria-live="polite">
-          <p className="panel-name h3">{v.name}</p>
-          <p className="muted small">{v.line}</p>
-          <div className="dates">
-            <label>Arrive<input type="date" value={arrive} min={iso(new Date())} onChange={e => { setArrive(e.target.value); if (leave <= e.target.value) setLeave(addDays(e.target.value, 3)) }} /></label>
-            <label>Leave<input type="date" value={leave} min={addDays(arrive, 1)} onChange={e => setLeave(e.target.value)} /></label>
-          </div>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.p key={result.head} className="total num" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>{result.head}</motion.p>
-          </AnimatePresence>
-          <p className="small muted total-sub">{result.sub}</p>
-          <div className="panel-acts">
-            <a className="btn" href={v.book}>Request to book</a>
-            <a className="textlink" href={mail}>or email us</a>
-          </div>
-          <p className="small muted">Live availability is on each villa's booking page. The whole resort: {money(WHOLE.three)} for three days or {money(WHOLE.week)} a week, VAT included.</p>
-        </div>
+    <section className="resort" aria-labelledby="resort-h">
+      <figure className="r-a"><img src={ph('183')} srcSet={`${ph('183', 1280)} 1280w, ${ph('183')} 1920w`} sizes="(max-width: 900px) 100vw, 62vw" alt="Wooden steps from the Firefly dock down into clear water" width={1920} height={1440} loading="lazy" /></figure>
+      <div className="r-text">
+        <Title id="resort-h">Down the steps, the reef.</Title>
+        <p className="lead">A private beach, a snorkel reef off the dock, free kayaks, two pools (the upper pool for villa guests), dock slips for your boat, and a boutique. Pets are welcome.</p>
       </div>
+      <figure className="r-b"><img src={ph('099')} srcSet={`${ph('099', 1280)} 1280w, ${ph('099')} 1920w`} sizes="(max-width: 900px) 100vw, 58vw" alt="The lower pool and lawn at Firefly, sailboats on the Sea of Abaco beyond" width={1920} height={1420} loading="lazy" /><figcaption className="cap">Two pools, the Sea of Abaco beyond.</figcaption></figure>
     </section>
   )
 }
@@ -81,37 +49,67 @@ export function VillaCheck() {
 export function Grill() {
   return (
     <section id="grill" className="grill" aria-labelledby="grill-h">
-      <figure className="grill-photo"><img src={ph('123')} alt="The Firefly dining deck at dusk under string lights, the dock and the water beyond" width={1920} height={1280} loading="lazy" /></figure>
+      <figure className="grill-photo"><img src={ph('123')} srcSet={`${ph('123', 1280)} 1280w, ${ph('123')} 1920w`} sizes="(max-width: 900px) 100vw, 58vw" alt="The Firefly dining deck at dusk under string lights, the dock and the water beyond" width={1920} height={1280} loading="lazy" /></figure>
       <div className="grill-text">
-        <h2 id="grill-h" className="h2">Firefly Bar &amp; Grill</h2>
-        <p className="muted">Open seven days, to guests, locals and visitors.</p>
+        <Title id="grill-h">Firefly Bar &amp; Grill</Title>
+        <p className="lead">Open seven days, to guests, locals and visitors.</p>
         <dl className="hours num">
           {HOURS.map(h => <div key={h.meal}><dt>{h.meal}</dt><dd>{h.time}{h.note && <span>{h.note}</span>}</dd></div>)}
         </dl>
-        <p className="small muted">To-go orders in The Boutique until 8 pm.</p>
-        <a className="btn" href={BIZ.dinner}>Reserve dinner</a>
+        <p className="cap">Parties of 12 or more, call <a className="num" href={`tel:${BIZ.tel}`}>{BIZ.phone}</a>. To-go orders in The Boutique until 8 pm.</p>
+        <a className="btn btn-line" href={BIZ.dinner}>Reserve dinner</a>
       </div>
     </section>
   )
 }
 
-export function Water() {
-  return (
-    <section className="water" aria-labelledby="water-h">
-      <img src={ph('183')} alt="Wooden steps from the Firefly dock down into clear water" width={1920} height={1440} loading="lazy" />
-      <div className="water-line">
-        <h2 id="water-h" className="h3">Down the steps:</h2>
-        <p>a private beach, a reef off the dock where guests have seen stingrays, turtles and sharks, free kayaks, two pools, dock slips, corn hole on the sand. Golf carts and boats arranged for you.</p>
-      </div>
-    </section>
-  )
-}
-
+const ROUTE = [
+  { t: 'Fly', m: 'Marsh Harbour', d: 'Fly into Marsh Harbour, Abaco' },
+  { t: '15 min', m: 'Taxi', d: 'to the ferry dock' },
+  { t: '20 min', m: 'Ferry', d: 'across to Hope Town' },
+  { t: 'Shuttle', m: 'Firefly', d: 'our shuttle meets you at the harbour' },
+]
 export function Arrive() {
+  const ref = useRef<HTMLOListElement>(null)
+  const seen = useInView(ref, { once: true, margin: '-15% 0px' })
+  const reduce = useReducedMotion()
   return (
-    <section className="arrive wrap" aria-labelledby="arrive-h">
-      <h2 id="arrive-h" className="h2">Getting here.</h2>
-      <p className="arrive-p">Fly to Marsh Harbour. A fifteen-minute taxi takes you to the ferry dock, a twenty-minute ferry takes you to Hope Town, and our shuttle meets you at the harbour. Abaco is under 180 miles from Florida.</p>
+    <section id="arrive" className="arrive" aria-labelledby="arrive-h">
+      <Title id="arrive-h">Getting here takes four easy steps.</Title>
+      <ol className="route" ref={ref}>
+        <motion.span className="route-line" aria-hidden="true" initial={false} animate={{ scaleX: seen || reduce ? 1 : 0 }} transition={{ duration: reduce ? 0 : 1.2, ease: [0.65, 0, 0.35, 1] }} />
+        {ROUTE.map((r, i) => (
+          <motion.li key={r.m} initial={false} animate={{ opacity: seen || reduce ? 1 : 0 }} transition={{ duration: reduce ? 0 : 0.5, delay: reduce ? 0 : 0.25 + i * 0.25 }}>
+            <span className="stop" aria-hidden="true" />
+            <span className="r-t num">{r.t}</span>
+            <span className="r-m">{r.m}</span>
+            <span className="r-d">{r.d}</span>
+          </motion.li>
+        ))}
+      </ol>
+      <p className="cap">Abaco is under 180 miles from Florida.</p>
+    </section>
+  )
+}
+
+export function Groups() {
+  return (
+    <section className="groups" aria-labelledby="groups-h">
+      <div className="g-a">
+        <Title id="groups-h">Take the whole resort.</Title>
+        <dl className="g-prices num">
+          <div><dt>Three days</dt><dd>{money(WHOLE.three)}</dd></div>
+          <div><dt>One week</dt><dd>{money(WHOLE.week)}</dd></div>
+        </dl>
+        <p className="cap">VAT included. All six villas, for your group.</p>
+        <button type="button" className="btn" onClick={() => priceVilla('whole')}>Price the whole resort</button>
+      </div>
+      <div className="g-b">
+        <h3 className="h3">Weddings and events</h3>
+        <p>Weddings and events on the beach and the decks. Tell the resort your date and your numbers.</p>
+        <h3 className="h3">Concierge</h3>
+        <ul className="plain"><li>Golf carts</li><li>Boats</li><li>Charters</li><li>Provisions before you arrive</li></ul>
+      </div>
     </section>
   )
 }
@@ -119,19 +117,24 @@ export function Arrive() {
 export function Night() {
   return (
     <section id="contact" className="night" aria-labelledby="night-h">
-      <img src={ph('029')} alt="Firefly Sunset Resort at night, lights on the deck and the dock" width={1920} height={1427} loading="lazy" />
+      <img src={ph('029')} srcSet={`${ph('029', 1280)} 1280w, ${ph('029')} 1920w`} sizes="100vw" alt="Firefly Sunset Resort at night, lights on the deck and the dock" width={1920} height={1427} loading="lazy" />
       <div className="calling">
         <h2 id="night-h" className="h3">Firefly Sunset Resort</h2>
-        <p className="small">{BIZ.place}</p>
-        <p><a href={`mailto:${BIZ.email}`}>{BIZ.email}</a></p>
-        <p className="num"><a href={`tel:${BIZ.tel}`}>{BIZ.phone}</a> <span className="muted small">(restaurant)</span></p>
-        <p className="small muted">Island phone lines can drop with the power; email always reaches us.</p>
-        <p className="calling-links"><a href="#villas">Request a villa</a><a href={BIZ.dinner}>Reserve dinner</a><a href={BIZ.instagram}>Instagram</a></p>
+        <p className="cap">{BIZ.place}</p>
+        <p className="mail"><a href={`mailto:${BIZ.email}`}>{BIZ.email}</a></p>
+        <p className="num"><a href={`tel:${BIZ.tel}`}>{BIZ.phone}</a>, Bar &amp; Grill</p>
+        <p className="cap">Island lines can drop with the power; email always reaches us.</p>
+        <button type="button" className="btn" onClick={() => priceVilla('mint')}>Request a villa</button>
       </div>
     </section>
   )
 }
 
 export function Footer() {
-  return <footer className="foot wrap"><p className="small muted">Firefly Sunset Resort, Hope Town, Elbow Cay. Photographs: Firefly Sunset Resort.</p><nav aria-label="Footer"><a href="./">Home</a><a href="villas.html">Villas and rates</a></nav></footer>
+  return (
+    <footer className="foot">
+      <p className="cap">Firefly Sunset Resort, Hope Town, Elbow Cay. Photographs: Firefly Sunset Resort.</p>
+      <nav aria-label="Footer"><a href="./">Home</a><a href="villas.html">Villas and rates</a><a href={BIZ.instagram}>Instagram</a><a href={BIZ.facebook}>Facebook</a></nav>
+    </footer>
+  )
 }
