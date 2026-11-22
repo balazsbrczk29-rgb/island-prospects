@@ -58,3 +58,40 @@ export const NEEDS = ["An alarm system", "CCTV cameras", "Monitoring for my alar
 export function requestText(p: string, needs: string[], area: string) {
   return `Pro-Tech request: ${p || "property not chosen"}${area ? ` in ${area}` : ""}. Needs: ${needs.length ? needs.map(n => (n.startsWith("CCTV") ? n : n[0].toLowerCase() + n.slice(1))).join(", ") : "not chosen yet"}.`
 }
+
+/* ===== Nov 22 planner (job spec) ===== */
+export const PROPS = ["A home", "A shop or office", "A warehouse or yard"] as const
+export const NEEDS2 = ["Alarm", "Cameras", "Monitoring", "Guards", "Not sure"] as const
+export type Need = (typeof NEEDS2)[number]
+export const AREAS = ["Downtown and Over-the-Hill", "Palmdale and Centreville", "Cable Beach and the West", "Western New Providence", "Carmichael and the South West", "Eastern Road and the East", "Elsewhere in Nassau"]
+
+export const DIVISIONS = {
+  guards: { n: "2.1", name: "Security guard services", line: "Officers on post at your business or site, trained in Pro-Tech's own programme." },
+  cctv: { n: "2.2", name: "CCTV and alarm sales and service", line: "Alarm systems and CCTV cameras supplied, installed and serviced." },
+  monitoring: { n: "2.3", name: "24/7 central station monitoring", line: "Your alarm reports to Pro-Tech's central station, day and night, weekends included." },
+  supplies: { n: "2.4", name: "Security supplies", line: "Security equipment and supplies from the Farrington Road office." },
+  consulting: { n: "2.5", name: "Consulting and investigations", line: "Advice on what your property needs, and investigations when something has happened." },
+  collections: { n: "2.6", name: "Collections", line: "A collections service for businesses." },
+} as const
+export type DKey = keyof typeof DIVISIONS
+
+const NEED_DIV: Record<Need, DKey> = { Alarm: "cctv", Cameras: "cctv", Monitoring: "monitoring", Guards: "guards", "Not sure": "consulting" }
+
+export function covered(needs: Need[]): DKey[] {
+  const out: DKey[] = []
+  needs.forEach(n => { const d = NEED_DIV[n]; if (!out.includes(d)) out.push(d) })
+  return out
+}
+
+export function request2(p: string, needs: Need[], area: string) {
+  const list = needs.map(n => (n === "Not sure" ? "advice on what I need" : n.toLowerCase()))
+  return `Pro-Tech request: ${p.charAt(0).toLowerCase() + p.slice(1)}${area ? ` in ${area}` : " in Nassau"}. I need ${list.length ? list.join(", ").replace(/, ([^,]*)$/, " and $1") : "advice"}.`
+}
+
+export function officeShort(hour: number, weekday: number) {
+  const weekdayOpen = weekday >= 1 && weekday <= 5
+  if (weekdayOpen && hour >= 9 && hour < 17) return "office open until 5"
+  if (weekdayOpen && hour < 9) return "office opens at 9"
+  if (weekday === 6 || weekday === 0 || (weekday === 5 && hour >= 17)) return "office reopens Monday at 9"
+  return "office closed for the day"
+}
