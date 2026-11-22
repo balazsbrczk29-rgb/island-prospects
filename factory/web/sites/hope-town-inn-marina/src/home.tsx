@@ -1,38 +1,37 @@
 import { createRoot } from 'react-dom/client'
 import './styles.css'
-import { ArrowDown } from 'lucide-react'
 import { IMG, RATES, DOCKWA, pics } from './data'
-import { useActivePic, Fixed, SecPic, Nav, StayFinder, SlipCheck, Specs, Contact, Strip, Foot } from './site'
+import { useState } from 'react'
+import { useActivePic, Fixed, SecPic, Nav, StayFinder, SlipCheck, Specs, Contact, Strip, Foot, Arrive } from './site'
 
 const IDS = ['top', 'ferry', 'boat', 'bar', 'cay', 'here', 'contact']
 
 function Home() {
   const [pic, sec] = useActivePic(IDS, 'harbour')
-  const mode = sec === 'top' ? 'both' : sec === 'boat' || sec === 'here' ? 'slip' : 'room'
+  const [way, setWay] = useState<'ferry' | 'boat'>('ferry')
+  const mode = sec === 'top' ? (way === 'boat' ? 'slip' : 'room') : sec === 'boat' || sec === 'here' ? 'slip' : 'room'
+  const shown = sec === 'top' && way === 'boat' ? 'docks' : pic
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
       <div className="split">
-        <Fixed pic={pic} />
+        <Fixed pic={shown} />
         <div className="col">
           <main id="main">
             <section className="sec sec--hero" id="top" data-pic="harbour" aria-labelledby="h">
               <SecPic k="harbour" eager />
               <p className="brand">Hope Town Inn &amp; Marina &middot; Elbow Cay, Abaco</p>
               <div className="hide-sm"><Nav /></div>
-              <h1 id="h" className="big">Two ways in.</h1>
-              <p className="lede">A 15-acre estate beside the Elbow Reef Lighthouse, on the west side of Hope Town Harbour. Guests and boats arrive at the same dock.</p>
-              <div className="ways">
-                <a className="way" href="#ferry"><b>By ferry <ArrowDown aria-hidden="true" size={20} strokeWidth={1.25} /></b><span>Three room types and six villas, for one to eight</span></a>
-                <a className="way" href="#boat"><b>By boat <ArrowDown aria-hidden="true" size={20} strokeWidth={1.25} /></b><span>Fifty surge-free slips, boats to 125 ft</span></a>
-              </div>
+              <h1 id="h" className="hero-h">Two ways in.</h1>
+              <p className="lede lede--hero">A 15-acre estate beside the Elbow Reef Lighthouse on Hope Town Harbour, where guests and boats arrive at the same dock.</p>
+              <Arrive mode={way} setMode={setWay} />
             </section>
 
             <section className="sec" id="ferry" data-pic="cottage" aria-labelledby="ferry-h">
               <SecPic k="cottage" />
               <p className="kicker">Rooms and villas</p>
               <h2 id="ferry-h" className="big">By ferry.</h2>
-              <p className="body">The ferry brings you across from Marsh Harbour. Choose how many of you are coming and see which of the nine stays fits, from a king room for two to the eight-guest villas.</p>
+              <p className="body">All nine, side by side: three hotel rooms and six villas, from a king room for two to the eight-guest villas.</p>
               <div style={{ marginTop: 'var(--s-4)' }}><StayFinder /></div>
             </section>
 
@@ -77,7 +76,7 @@ function Home() {
             </section>
           </main>
           <Foot />
-          <Strip mode={mode} />
+          <Strip mode={mode} quiet={sec === 'top'} />
         </div>
       </div>
     </>
