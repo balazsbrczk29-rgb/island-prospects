@@ -4,8 +4,40 @@
  "name": "Digitech Bahamas",
  "batch": "04",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T14:06:22.532Z"
+ "claimed_at": "2026-11-22T14:06:22.532Z",
+ "jobspec_built": true,
+ "built_at": "2026-11-22T14:29:23.567686+00:00",
+ "pages": [
+  "index.html",
+  "services.html"
+ ],
+ "primary_cta": "Send this setup for a quote (mailto sales@ with the composed kit list); call (242) 676-2033 second",
+ "brand_truth": "The local Nassau team that installs Razor POS, cables the network and keeps it backed up and supported.",
+ "buyer": "Owners and managers of Nassau restaurants, bars, shops and small offices comparing Digitech with bigger IT firms and DIY.",
+ "direction": {
+  "type": "Sora 600 + IBM Plex Sans, Plex Mono for counts and phones",
+  "palette": "limestone #efeae0, ink #1b1a17, sea glass accent #2f6f73, night band #121a1c",
+  "why": "A light, product-led configurator: studio-lit procedural 3D of the counter kit explains what Digitech installs."
+ },
+ "big_idea": "Your counter, assembled: screen 1 is a quote composer (restaurant, shop or office; tills; Wi-Fi, backup, managed IT) that builds the kit in studio-lit 3D beside a plain-words list, then emails the list to sales@.",
+ "concept_type": "brochure + quote enquiry (composer)",
+ "critic_scores": {
+  "gate1": "pass",
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 4,
+  "phone": 4
+ },
+ "notes": [
+  "Built from approved job spec 2026-11-22 by an unattended worker; design.md in the source folder. No new research.",
+  "3D is procedural (Kit3D.tsx, drei RoundedBox, studio Lightformers, ContactShadows); poster kit-poster.jpg rendered at build time with swiftshader.",
+  "Kit list counts (one access point per four tills, one kitchen printer, cable runs) are starting estimates, listed as assumptions in the concept notes.",
+  "Critic non-blocking follow-ups: two rows of terminals on phone above 3 tills; check contact shadow strength on a real phone GPU.",
+  "Section 2 and 4 photographs remain illustrative (Lovable asset project), labelled."
+ ]
 }
