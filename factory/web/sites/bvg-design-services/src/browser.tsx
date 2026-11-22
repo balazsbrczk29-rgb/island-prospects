@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { GUIDE_FUN, GUIDE_LEAD, GUIDE_LINE, GUIDE_LINKS, IMG } from "./data"
 
@@ -80,31 +79,20 @@ function Era2026() {
 
 const VIEWS: Record<Year, () => JSX.Element> = { 1996: Era1996, 2006: Era2006, 2016: Era2016, 2026: Era2026 }
 
-export default function EraBrowser() {
+export { ERAS }
+export type { Year }
+
+export function EraWindow({ year }: { year: Year }) {
   const reduce = useReducedMotion()
-  const [year, setYear] = useState<Year>(1996)
-  const [auto, setAuto] = useState(true)
-  const t = useRef<number>()
-  useEffect(() => {
-    if (reduce) { setYear(2026); setAuto(false); return }
-    if (!auto) return
-    const i = ERAS.findIndex(e => e.year === year)
-    if (i === ERAS.length - 1) { setAuto(false); return }
-    t.current = window.setTimeout(() => setYear(ERAS[i + 1].year), i === 0 ? 2600 : 2300)
-    return () => window.clearTimeout(t.current)
-  }, [year, auto, reduce])
-  const pick = (y: Year) => { setAuto(false); setYear(y) }
   const View = VIEWS[year]
   return (
-    <figure className="era" aria-label="The Bahamas Vacation Guide, rebuilt in four eras of web design">
-      <div className="era__stage">
-      <motion.div layout transition={{ layout: { duration: reduce ? 0 : 0.8, ease: [0.65, 0, 0.35, 1] } }} className="era__win" data-phone={year === 2026}>
-        <motion.div layout="position" className="era__chrome" aria-hidden="true">
+    <div className="era__stage" aria-hidden="true">
+      <motion.div layout transition={{ layout: { duration: reduce ? 0 : 0.9, ease: [0.65, 0, 0.35, 1] } }} className="era__win" data-phone={year === 2026}>
+        <motion.div layout="position" className="era__chrome">
           <span className="era__dots"><i /><i /><i /></span>
           <span className="era__url">{year === 2026 ? "bahamasvacationguide.com" : "www.bahamasvacationguide.com"}</span>
-          <span className="era__yr num">{year}</span>
         </motion.div>
-        <div className="era__page" aria-hidden="true">
+        <div className="era__page">
           <AnimatePresence initial={false}>
             <motion.div
               key={year}
@@ -120,16 +108,6 @@ export default function EraBrowser() {
           </AnimatePresence>
         </div>
       </motion.div>
-      </div>
-      <div className="era__rail" role="group" aria-label="Choose an era">
-        {ERAS.map(e => (
-          <button key={e.year} type="button" aria-pressed={year === e.year} onClick={() => pick(e.year)}>
-            <span className="num">{e.year}</span>
-            <small>{e.label}</small>
-          </button>
-        ))}
-      </div>
-      <figcaption className="era__cap">BVG's first site, the Bahamas Vacation Guide, rebuilt in four eras. The text and island photos are the guide's own; the layouts are recreations for this concept.</figcaption>
-    </figure>
+    </div>
   )
 }
