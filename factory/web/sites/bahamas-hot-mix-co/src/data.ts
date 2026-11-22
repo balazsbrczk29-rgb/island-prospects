@@ -111,3 +111,23 @@ export const PROJECTS: { name: string; cat: Cat; thumb: string; url: string }[] 
   ["Independence Business Park", "Buildings", "2024/02/14-400x284.jpg", "independence-business-park"],
   ["Lucayan Products Greenhouse", "Buildings", "2023/01/BHM-Lucayan-Tropical-400x284.jpg", "lucayan-tropical-green-house"],
 ].map(([name, cat, thumb, slug]) => ({ name, cat: cat as Cat, thumb: T + thumb, url: P + slug + "/" }))
+
+// Island, only where the project's own name states the place or makes it unambiguous (assumption list in status notes).
+export const ISLANDS_ON_MAP = ["New Providence", "Grand Bahama", "Abaco", "Exuma", "Eleuthera", "Bimini", "Andros"] as const
+export type Isl = (typeof ISLANDS_ON_MAP)[number] | "Across the islands"
+const ISL: Record<string, Isl> = {
+  "New Providence Road Improvement Works": "New Providence", "Baha Mar West Bay Street & C7 Realignment": "New Providence", "Baha Mar Resort Core Civil": "New Providence",
+  "Paradise Island (PITDA) Road Works": "New Providence", "Bay Street Road Rehabilitation": "New Providence", "Lynden Pindling International 10-28": "New Providence",
+  "Odyssey Nassau": "New Providence", "LPIA Expansion": "New Providence", "LPIA Terminal Redevelopment": "New Providence", "Arawak Cay Port New Port Facility": "New Providence",
+  "Western New Providence Wastewater Treatment Plant": "New Providence", "Bay Street Marina": "New Providence", "Bay Street Sea Wall": "New Providence",
+  "Atlantis Paradise Island": "New Providence", "Atlantis Chilled Water Line for Dolphin Cay": "New Providence", "Western New Providence Water Improvement Upgrade": "New Providence",
+  "Nassau Road Improvement Project": "New Providence", "BEC Substation & Generator Facility, Baha Mar": "New Providence", "Lyford Cay High School": "New Providence", "Lyford Cay Rehabilitation": "New Providence",
+  "Grand Bahama Roads": "Grand Bahama", "Grand Bahama International Airport": "Grand Bahama", "Freeport Container Port Phase 1": "Grand Bahama",
+  "Freeport Container Port: Delta 2-4 & GS6": "Grand Bahama", "Grand Bahama Well Field 1": "Grand Bahama",
+  "North Abaco Roads": "Abaco", "Marsh Harbour International Airport": "Abaco", "Marsh Harbour Port & Customs Facility": "Abaco", "Winding Bay Abaco": "Abaco",
+  "Green Turtle Cay": "Abaco", "Bakers Bay Site Development": "Abaco", "Disney Castaway Cay": "Abaco",
+  "Hog Cay Airport": "Exuma", "Norman's Cay": "Exuma", "Odyssey Exuma": "Exuma",
+  "Eleuthera Roads": "Eleuthera", "Bimini Airport": "Bimini", "Kemps Bay RO Plant": "Andros",
+}
+export const islandOf = (name: string): Isl => ISL[name] ?? "Across the islands"
+export const officeFor = (isl: string) => (isl === "Grand Bahama" ? OFFICES[1] : isl === "Abaco" ? OFFICES[2] : OFFICES[0])
