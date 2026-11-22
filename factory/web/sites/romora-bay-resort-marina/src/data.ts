@@ -23,15 +23,15 @@ export const IMG = {
 }
 
 export const MAX_LOA = 190
-export const POWER = ["30 amp", "50 amp", "110V single phase", "220V 3 phase", "408V 3 phase"]
+export const POWER = ["30 amp", "50 amp", "110V single phase", "220V 3 phase", "408V 3 phase (as published)"]
 
 export type Room = { key: string; name: string; short: string; text: string; feats: string[]; imgs: string[] }
 export const ROOMS: Room[] = [
-  { key: "king", name: "King with Waterfront View", short: "Waterfront King", text: "A private balcony over the water, premium king bedding, a spacious living area and a bathroom with a walk-in shower.",
+  { key: "king", name: "King with Waterfront View", short: "Waterfront King", text: "A private balcony over the water, a king bed and a bathroom with a walk-in shower.",
     feats: ["Private balcony", "Water views", "King bed", "Walk-in shower"], imgs: ["room1-1-DlzYwzon.jpg", "room1-3-ClMT7fz1.jpg", "room1-5-GeiL2ZYS.jpg", "room1-6-BCGiD4IM.jpg"].map(s => A + s) },
-  { key: "suite", name: "The Suites", short: "Suite", text: "Vaulted wood-panelled ceilings, a cosy seating area, a king bed with a daybed and an elegant bathroom, over the garden.",
+  { key: "suite", name: "The Suites", short: "Suite", text: "Vaulted wood-panelled ceilings, a seating area and a king bed with a daybed, looking over the garden.",
     feats: ["Vaulted ceilings", "Seating area", "King and daybed", "Garden views"], imgs: ["room2-1-CCtU0pS5.jpg", "room2-2-DhbF-0zK.jpg", "room2-5-D-rf6F4-.jpg", "room2-6-P_BGlF2m.jpg"].map(s => A + s) },
-  { key: "house", name: "The House", short: "The House", text: "A standalone villa with a fully equipped gourmet kitchen, spacious living areas, several bedrooms and private terraces over the water and garden.",
+  { key: "house", name: "The House", short: "The House", text: "A standalone villa with a full kitchen, several bedrooms and private terraces over the water and the garden.",
     feats: ["Full kitchen", "Several bedrooms", "Private terraces", "Water and garden views"], imgs: ["room3-6-DTuJzSJC.jpg", "room3-2-BRuHyVq7.jpg", "room3-3-BJJNvOdQ.jpg", "room3-9-BN6CIl9k.jpg"].map(s => A + s) },
 ]
 
@@ -43,7 +43,7 @@ export const SPECS: [string, string][] = [
   ["Backup power", "550kW generator"],
   ["Fresh water", "Reverse osmosis, up to 17,000 gallons a day"],
   ["Pumpout", "On site"],
-  ["Yacht assistance", "24/7, local and international providers"],
+  ["Yacht assistance", "24/7"],
   ["Provisioning", "Provisioning, concierge and yacht agency"],
   ["Security", "Video surveillance and on-site guards"],
   ["Guest facilities", "Showers, air-conditioned facilities, laundry and the resort's amenities"],
