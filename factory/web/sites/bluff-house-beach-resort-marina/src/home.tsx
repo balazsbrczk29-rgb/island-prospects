@@ -1,4 +1,4 @@
-import { StrictMode, createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { StrictMode, createContext, useContext, useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { AnimatePresence, animate, motion, useReducedMotion } from 'motion/react';
 import './styles.css';
@@ -6,22 +6,25 @@ import './styles.css';
 // Facts from bluffhouse.com (home, /room-type-and-rates, /private-cottages, /marina-rates, /a-little-history), checked 2026-11-05, 2026-11-21 and 2026-11-22.
 const W = 'https://static.wixstatic.com/media/';
 type Pic = { src: string; w: number; h: number; alt: string };
-const wix = (id: string, w: number, h: number, alt: string): Pic => ({ src: `${W}${id}/v1/fill/w_${w},h_${h},al_c,q_80,enc_avif,quality_auto/${id}`, w, h, alt });
+const wix = (id: string, w: number, h: number, alt: string, al = 'c'): Pic => ({ src: `${W}${id}/v1/fill/w_${w},h_${h},al_${al},q_80,enc_avif,quality_auto/${id}`, w, h, alt });
 const raw = (id: string, w: number, h: number, alt: string): Pic => ({ src: W + id, w, h, alt });
 
 const HERO = {
-  upper: wix('5c5976_4d430b71b1694947902404f615c7b9f8~mv2.jpg', 1600, 1067, 'An upper suite balcony with two Adirondack chairs over the Sea of Abaco'),
-  lower: wix('5c5976_77c8eb03fd5a483e8052b2b833d2edff~mv2.jpg', 1600, 1067, 'A lower suite porch opening onto the water through sea grape'),
-  cottage: wix('5c5976_a09cf38a6dc3489080c5591cccda567c~mv2.jpg', 1600, 1067, 'A Bluff House villa among the palms above White Sound'),
-  sea: wix('5c5976_cd07c1191ea14bd8bee1baad32ba7ed7~mv2.jpg', 1600, 1200, 'The Bluff House docks in White Sound'),
+  // Cropped by Wix to the frame's own proportion (about 1:1 on desktop), so the browser never crops them again.
+  upper: wix('5c5976_17ae16c3cdb94ff08128144740eb6b00f000.jpg', 1080, 1080, 'Bluff House suites stepping down the bluff to the Sea of Abaco, palms below', 'r'),
+  lower: wix('5c5976_77c8eb03fd5a483e8052b2b833d2edff~mv2.jpg', 1200, 1200, 'A lower suite porch opening onto the water through sea grape'),
+  cottage: wix('5c5976_a09cf38a6dc3489080c5591cccda567c~mv2.jpg', 1200, 1200, 'A Bluff House villa among the palms above White Sound'),
+  sea: wix('5c5976_cd07c1191ea14bd8bee1baad32ba7ed7~mv2.jpg', 1200, 1200, 'The Bluff House docks in White Sound'),
 };
 const CAPTION = {
-  upper: 'An upper suite balcony, above the shoreline of the Sea of Abaco.',
+  upper: 'The suites step down the bluff to the Sea of Abaco.',
   lower: 'A lower suite porch, the water a few steps from the door.',
   cottage: 'One of nine private villas and cottages in the grounds over White Sound.',
   sea: 'The docks in White Sound, through the dredged 7 ft channel.',
 };
 const PH = {
+  upperBalcony: wix('5c5976_4d430b71b1694947902404f615c7b9f8~mv2.jpg', 960, 640, 'An upper suite balcony with two Adirondack chairs over the Sea of Abaco'),
+  lowerPorch: wix('5c5976_77c8eb03fd5a483e8052b2b833d2edff~mv2.jpg', 960, 640, 'A lower suite porch opening onto the water through sea grape'),
   upperRoom: wix('5c5976_6b9dd005f8f243c8af937a9b727d5914~mv2.jpg', 960, 640, 'An upper king suite with a vaulted ceiling and French doors to the balcony'),
   lowerRoom: wix('5c5976_ebd836a292384a7193593c0c11727400~mv2.jpg', 960, 640, 'A lower queen suite with a white bed and a sitting area'),
   boathouse: wix('5c5976_0a65c2bd573346e78cf9d2b617f7ba83~mv2.jpg', 1600, 1131, 'The Boathouse Bar and Restaurant, a yellow building with a harbourside deck'),
@@ -86,11 +89,16 @@ function stayQuote(arrive: Date, nights: number, level: Level) {
   return { total, from, seasons: [...names], rate };
 }
 function dockQuote(arrive: Date, nights: number, loa: number) {
-  const feet = Math.max(30, Math.round(loa)); let dockage = 0; const names = new Set<string>(); let rate = 0;
-  for (let i = 0; i < nights; i++) { const s = dockSeason(addDays(arrive, i)); if (!s) return null; rate = nights >= 7 && s.weekly ? s.weekly : s.daily; dockage += feet * rate; names.add(s.name); }
+  const feet = Math.max(30, Math.ceil(loa)); let dockage = 0; const names = new Set<string>(); const byRate = new Map<number, number>(); let weekly = false;
+  for (let i = 0; i < nights; i++) {
+    const s = dockSeason(addDays(arrive, i)); if (!s) return null;
+    const useWeekly = nights >= 7 && s.weekly !== null; const rate = useWeekly ? s.weekly! : s.daily; weekly ||= useWeekly;
+    dockage += feet * rate; names.add(s.name); byRate.set(rate, (byRate.get(rate) ?? 0) + 1);
+  }
   dockage = Math.round(dockage * 100) / 100; const vat = Math.round(dockage * 10) / 100;
-  return { feet, dockage, vat, total: dockage + vat, rate, seasons: [...names] };
+  return { feet, dockage, vat, total: dockage + vat, weekly, seasons: [...names], byRate: [...byRate.entries()] };
 }
+const openForStay = (arrive: Date, nights: number) => { for (let i = 0; i < nights; i++) if (!roomSeason(addDays(arrive, i))) return false; return true; };
 function defaultArrival() {
   const t = new Date(); let d = new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth() + 2, 15));
   if (!roomSeason(d)) d = new Date(Date.UTC(d.getUTCFullYear(), 10, 1));
@@ -179,7 +187,7 @@ function Planner() {
       ) : null;
     } else if (P.mode === 'air') {
       const body = `Hello Bluff House, we would like a quote for a cottage or villa, arriving ${fmtDay(arrive)} for ${P.nights} nights.`;
-      result = roomSeason(arrive) ? (
+      result = openForStay(arrive, P.nights) ? (
         <>
           <p className="total" style={{ fontSize: 'clamp(2rem, 2.8vw, 2.6rem)' }}>$270 to $650<small>a night, by house</small></p>
           <p>Nine houses from a studio to four bedrooms, each priced for your dates. Sunset Cottage 4 runs $600 to $1,000 a night.</p>
@@ -199,13 +207,13 @@ function Planner() {
           <div className="fit">
             <div>
               <p className="total"><Ticker value={q.total} cents /><small>dockage, {P.nights} night{P.nights > 1 ? 's' : ''}, with VAT</small></p>
-              <p className="num" style={{ marginTop: 12 }}>{q.feet} ft{loa < 30 ? ' (30 ft minimum)' : ''} at {money(q.rate, true)} a foot{P.nights >= 7 && q.rate < 3.5 ? ', weekly rate' : ''}: {money(q.dockage, true)} plus {money(q.vat, true)} VAT.</p>
+              <p className="num" style={{ marginTop: 12 }}>{q.seasons.join(' and ')}{q.weekly ? ', weekly rate' : ''}. {q.feet} ft{loa < 30 ? ' (30 ft minimum)' : ''} at {q.byRate.map(([r, n]) => q.byRate.length > 1 ? `${money(r, true)} for ${n} night${n > 1 ? 's' : ''}` : `${money(r, true)} a foot a night`).join(', ')}: {money(q.dockage, true)} plus {money(q.vat, true)} VAT.</p>
               <p style={{ marginTop: 12 }}>{fit}</p>
             </div>
             <div className="gauge" aria-hidden="true">
               <span className="surf">0 ft</span>
               <div className="chan"><span>7 ft MLW</span></div>
-              <div className="keel" style={{ transform: `translateY(${keel * 116}px)` }}><span className="num">{draft} ft</span></div>
+              <div className="keel" style={{ transform: `translateY(${keel * 120 - 4}px)` }}><span className="num">{draft} ft</span></div>
             </div>
           </div>
           <div className="row">
@@ -220,7 +228,7 @@ function Planner() {
       result = (
         <>
           <p className="total" style={{ fontSize: 'clamp(1.8rem, 2.4vw, 2.2rem)', color: 'var(--ink)' }}>Closed for the season on those nights.</p>
-          <p>Bluff House closes from 3 September to 31 October{P.mode === 'sea' ? ', and the marina from 2 September to 26 October' : ''}. Try an arrival from 1 November.</p>
+          <p>{P.mode === 'sea' ? 'The marina closes for maintenance from 2 September to 26 October.' : 'Bluff House closes from 3 September to 31 October.'} Try an arrival from {P.mode === 'sea' ? '27 October' : '1 November'}.</p>
           <div className="row"><a className="btn" href={`mailto:${MAIL}`}>Ask the front desk</a></div>
         </>
       );
@@ -233,8 +241,8 @@ function Planner() {
       <p className="no">No. 1 &middot; Stay or dock</p>
       <h1>A balcony over the Sea of Abaco, or a slip in White&nbsp;Sound.</h1>
       <div className="sentence">
-        <span className="line">We arrive on <label className="field"><span className="sr-only">Arrival date</span><input type="date" value={P.date} onChange={e => P.setDate(e.target.value)} /></label></span>
-        <span className="line">for <button type="button" className="step" aria-label="One night fewer" onClick={() => P.setNights(P.nights - 1)}>&minus;</button><span className="field num" aria-live="polite"><span style={{ minWidth: '1.2em', textAlign: 'center' }}>{P.nights}</span></span><button type="button" className="step" aria-label="One night more" onClick={() => P.setNights(P.nights + 1)}>+</button> night{P.nights > 1 ? 's' : ''}, by <Choice on={P.mode === 'air'} onClick={() => P.setMode('air')}>air</Choice> <span className="or">or</span> <Choice on={P.mode === 'sea'} onClick={() => P.setMode('sea')}>sea</Choice>,</span>
+        <span className="line">We arrive on <label className="field datef"><span className="sr-only">Arrival date</span><span aria-hidden="true">{arrive ? `${fmtDay(arrive)} ${arrive.getUTCFullYear()}` : 'choose a date'}</span><input type="date" value={P.date} onChange={e => P.setDate(e.target.value)} onClick={e => { try { (e.currentTarget as HTMLInputElement).showPicker(); } catch { /* older browsers open on focus */ } }} /></label></span>
+        <span className="line">for <button type="button" className="step" aria-label="One night fewer" onClick={() => P.setNights(P.nights - 1)}>&minus;</button><span className="field num" aria-live="polite"><span style={{ minWidth: '1.2em', textAlign: 'center' }}>{P.nights}</span></span><button type="button" className="step" aria-label="One night more" onClick={() => P.setNights(P.nights + 1)}>+</button> night{P.nights > 1 ? 's' : ''}, <span className="nw">by <Choice on={P.mode === 'air'} onClick={() => P.setMode('air')}>air</Choice> <span className="or">or</span> <Choice on={P.mode === 'sea'} onClick={() => P.setMode('sea')}>sea</Choice>,</span></span>
         <AnimatePresence mode="wait" initial={false}>
           {P.mode === 'air' ? (
             <motion.span key="air" className="line" {...clause}>and stay in <Choice on={P.stay === 'upper'} onClick={() => P.setStay('upper')}>an upper suite</Choice>, <Choice on={P.stay === 'lower'} onClick={() => P.setStay('lower')}>a lower suite</Choice> <span className="or">or</span> <Choice on={P.stay === 'cottage'} onClick={() => P.setStay('cottage')}>a&nbsp;cottage</Choice>.</motion.span>
@@ -254,45 +262,45 @@ function Planner() {
 // ---------- screen 2: where you sleep ----------
 function Rooms() {
   const P = usePlan(); const arrive = parse(P.date);
-  const suite = (level: Level) => {
-    const q = arrive ? stayQuote(arrive, P.nights, level) : null;
-    return q ? <><strong className="num">{q.from ? 'from ' : ''}{money(q.total)}</strong> for your {P.nights} night{P.nights > 1 ? 's' : ''}</> : <>Closed on your dates</>;
-  };
   const href = arrive ? bookUrl(arrive, P.nights) : BOOK;
+  const suites: { level: Level; name: string; view: string; pics: Pic[] }[] = [
+    { level: 'upper', name: 'Upper suite', view: 'Perched above the shoreline: the long view of the Sea of Abaco, sunset and moonrise from the balcony.', pics: [PH.upperBalcony, PH.upperRoom] },
+    { level: 'lower', name: 'Lower suite', view: 'Up close and waterfront: the Sea of Abaco right from your doorstep.', pics: [PH.lowerPorch, PH.lowerRoom] },
+  ];
   return (
     <section className="sec wrap" id="rooms" aria-labelledby="rooms-h">
       <div className="sec-head">
         <div><p className="no">No. 2 &middot; Where you sleep</p><h2 id="rooms-h">Eight suites on the water, nine houses in the&nbsp;garden.</h2></div>
-        <p className="muted">Every suite has a balcony or porch on the Sea of Abaco, air conditioning, a mini fridge and a coffee maker. The cottages and villas sit in the grounds over White Sound, with the whole resort a short walk from the door. Prices follow the dates you chose above.</p>
+        <p className="muted">Twelve acres of palms and pines from White Sound to the Sea of Abaco, with the only private beach on Green Turtle Cay. Every suite has a balcony or porch on the water, air conditioning, a king or two queens, a mini fridge and a coffee maker. Prices follow the dates you chose above.</p>
       </div>
-      <ul className="rooms">
-        <li className="room">
-          <img src={PH.upperRoom.src} alt={PH.upperRoom.alt} width={PH.upperRoom.w} height={PH.upperRoom.h} loading="lazy" decoding="async" />
-          <div><h3>Upper suite</h3><p className="meta">A king or two queens</p></div>
-          <p className="view">Perched above the shoreline, the long view of the Sea of Abaco, sunset and moonrise.</p>
-          <p className="rate">{suite('upper')}</p>
-          <div className="acts"><a className="tlink" href={href} target="_blank" rel="noopener">Book</a>{TOURS.upper.map(([l, id]) => <a key={id} className="tlink" href={`https://my.matterport.com/show/?m=${id}`} target="_blank" rel="noopener">3D: {l.toLowerCase()}</a>)}</div>
-        </li>
-        <li className="room">
-          <img src={PH.lowerRoom.src} alt={PH.lowerRoom.alt} width={PH.lowerRoom.w} height={PH.lowerRoom.h} loading="lazy" decoding="async" />
-          <div><h3>Lower suite</h3><p className="meta">A king or two queens</p></div>
-          <p className="view">Up close and waterfront: the Sea of Abaco right from your doorstep.</p>
-          <p className="rate">{suite('lower')}</p>
-          <div className="acts"><a className="tlink" href={href} target="_blank" rel="noopener">Book</a>{TOURS.lower.map(([l, id]) => <a key={id} className="tlink" href={`https://my.matterport.com/show/?m=${id}`} target="_blank" rel="noopener">3D: {l.toLowerCase()}</a>)}</div>
-        </li>
-      </ul>
-      <div className="rooms-sub"><h3>The cottages and villas</h3><p className="muted num">$270 to $650 a night, Sunset Cottage 4 $600 to $1,000. Quoted for your dates.</p></div>
-      <ul className="rooms">
+      <div className="suites">
+        {suites.map(su => {
+          const q = arrive ? stayQuote(arrive, P.nights, su.level) : null;
+          return (
+            <article className="suite" key={su.level}>
+              <div className="pair">{su.pics.map(p => <img key={p.src} src={p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" decoding="async" />)}</div>
+              <div className="suite-txt">
+                <h3>{su.name}</h3>
+                <p className="muted">{su.view}</p>
+                <p className="rate">{q ? <><strong className="num">{q.from ? 'from ' : ''}{money(q.total)}</strong> for your {P.nights} night{P.nights > 1 ? 's' : ''}, before taxes</> : <>Closed on your dates</>}</p>
+                <div className="acts"><a className="btn" href={href} target="_blank" rel="noopener">Book this suite</a>{TOURS[su.level].map(([l, id]) => <a key={id} className="tlink" href={`https://my.matterport.com/show/?m=${id}`} target="_blank" rel="noopener">3D: {l.toLowerCase()}</a>)}</div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+      <div className="rooms-sub"><h3>The cottages and villas</h3><p className="muted num">$270 to $650 a night by house, Sunset Cottage 4 $600 to $1,000. Each one quoted for your dates, with the whole resort a short walk away.</p></div>
+      <ul className="cots">
         {COTTAGES.map(c => {
-          const p = wix(c.id, 640, 640, `${c.name}, a Bluff House ${c.name.includes('Villa') ? 'villa' : 'cottage'}`);
+          const p = wix(c.id, 640, 640, `${c.name} at Bluff House`);
           const body = `Hello Bluff House, we would like a quote for ${c.name}${arrive ? `, arriving ${fmtDay(arrive)} for ${P.nights} nights` : ''}.`;
           return (
-            <li className="room sq" key={c.name}>
+            <li className="cot" key={c.name}>
               <img src={p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" decoding="async" />
-              <div><h3>{c.name}</h3><p className="meta">{c.beds}</p></div>
-              <p className="view">Over the protected water of White Sound.</p>
-              <p className="rate num">{c.note ?? 'Quote for your dates'}</p>
-              <div className="acts"><a className="tlink" href={`mailto:${MAIL}?subject=${encodeURIComponent(c.name)}&body=${encodeURIComponent(body)}`}>Ask for a quote</a><a className="tlink" href={`https://www.bluffhouse.com/${c.page}`} target="_blank" rel="noopener">See inside</a></div>
+              <div>
+                <h4>{c.name}</h4><p className="muted">{c.beds}{c.note ? `, ${c.note}` : ''}</p>
+                <p className="links"><a className="tlink" href={`mailto:${MAIL}?subject=${encodeURIComponent(c.name)}&body=${encodeURIComponent(body)}`}>Ask for a quote</a><a className="tlink" href={`https://www.bluffhouse.com/${c.page}`} target="_blank" rel="noopener">See inside</a></p>
+              </div>
             </li>
           );
         })}
@@ -355,9 +363,9 @@ function Eat() {
           <p className="cap"><a className="tlink" href="https://www.caribjournal.com/2024/01/04/best-beach-bars-in-the-caribbean-2024/6/" target="_blank" rel="noopener">Caribbean Journal, 2024</a></p>
           <figure className="turtle">
             <img src={PH.beachbar.src} alt={PH.beachbar.alt} width={PH.beachbar.w} height={PH.beachbar.h} loading="lazy" decoding="async" />
-            <figcaption className="cap"><strong>The Tranquil Turtle</strong>The beach bar on the only private beach on Green Turtle Cay: swim, play volleyball, take a kayak out, eat on the patio deck.</figcaption>
+            <figcaption className="cap"><strong>The Tranquil Turtle</strong>The beach bar on the only private beach on Green Turtle Cay: swim, play volleyball, take a kayak out, and eat island food by the sea.</figcaption>
           </figure>
-          <p className="wed">Weddings on the bluff and on the beach, planned with the resort. <a className="tlink" href="https://www.bluffhouse.com/wedding" target="_blank" rel="noopener">See weddings</a>. And the Low Tide Gift Shop for what you forgot to pack.</p>
+          <div className="wed"><h3>Weddings</h3><p className="muted" style={{ marginTop: 8 }}>Bluff House hosts weddings on its twelve acres over the water. Tell the front desk your date and your numbers and they will come back to you.</p><p><a className="tlink" href={`mailto:${MAIL}?subject=${encodeURIComponent('Wedding at Bluff House')}`}>Ask about a wedding date</a> <span className="muted">&middot;</span> <a className="tlink" href="https://www.bluffhouse.com/wedding" target="_blank" rel="noopener">Weddings on bluffhouse.com</a></p><p className="muted" style={{ marginTop: 12 }}>And the Low Tide Gift Shop, for what you forgot to pack.</p></div>
         </div>
       </div>
     </section>
@@ -429,22 +437,28 @@ function Close() {
 function Strip() {
   const [show, setShow] = useState(false); const P = usePlan(); const a = parse(P.date);
   useEffect(() => {
-    let past = false, over = false;
-    const upd = () => { const s = past && !over; setShow(s); document.documentElement.style.setProperty('--concept-offset', s && innerWidth <= 900 ? '72px' : '0px'); };
-    const top = document.querySelector('.spread'), end = document.querySelector('.close');
-    const io1 = new IntersectionObserver(es => { past = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; upd(); });
+    let atTool = false, over = false;
+    const upd = () => { const s = !atTool && !over; setShow(s); document.documentElement.style.setProperty('--concept-offset', s && innerWidth <= 900 ? '72px' : '0px'); };
+    const io1 = new IntersectionObserver(es => { atTool = es.some(e => e.isIntersecting); upd(); });
     const io2 = new IntersectionObserver(es => { over = es[0].isIntersecting; upd(); });
-    if (top) io1.observe(top); if (end) io2.observe(end);
-    return () => { io1.disconnect(); io2.disconnect(); };
+    const watch = () => { io1.disconnect(); document.querySelectorAll('.result .row').forEach(el => io1.observe(el)); };
+    watch(); const mo = new MutationObserver(watch); const r = document.querySelector('.result'); if (r) mo.observe(r, { childList: true, subtree: true });
+    const end = document.querySelector('.close'); if (end) io2.observe(end); upd();
+    return () => { io1.disconnect(); io2.disconnect(); mo.disconnect(); };
   }, []);
-  const go = useMemo(() => (P.mode === 'sea' ? DOCKWA : a ? bookUrl(a, P.nights) : BOOK), [P.mode, a, P.nights]);
+  const arrive = a; let figure = '';
+  if (arrive && P.mode === 'sea') { const q = dockQuote(arrive, P.nights, parseFloat(P.loa) || 0); if (q) figure = money(Math.round(q.total)); }
+  else if (arrive && P.stay !== 'cottage') { const q = stayQuote(arrive, P.nights, P.stay); if (q) figure = (q.from ? 'from ' : '') + money(q.total); }
+  const go = P.mode === 'sea' ? DOCKWA : arrive ? bookUrl(arrive, P.nights) : BOOK;
   return (
     <div className={`strip ${show ? 'show' : ''}`} aria-hidden={!show}>
       <a className="wa" href={WA} target="_blank" rel="noopener" tabIndex={show ? 0 : -1}>WhatsApp</a>
-      <a className="go" href={go} target="_blank" rel="noopener" tabIndex={show ? 0 : -1}>{P.mode === 'sea' ? 'Reserve a slip' : 'Book a stay'}</a>
+      <a className="go" href={go} target="_blank" rel="noopener" tabIndex={show ? 0 : -1}><span className="num">{figure}</span>{figure ? <span aria-hidden="true">&middot;</span> : null}{P.mode === 'sea' ? 'Reserve' : 'Book'}</a>
     </div>
   );
 }
+
+function MastBook() { const P = usePlan(); const a = parse(P.date); return <a className="book" href={P.mode === 'sea' ? DOCKWA : a ? bookUrl(a, P.nights) : BOOK} target="_blank" rel="noopener">{P.mode === 'sea' ? 'Reserve a slip' : 'Book now'}</a>; }
 
 function Home() {
   return (
@@ -454,7 +468,7 @@ function Home() {
         <div className="mast">
           <a className="word" href="index.html">Bluff House</a>
           <p className="date">White Sound, Green Turtle Cay, Abaco</p>
-          <nav aria-label="Sections"><a className="nsec" href="#rooms">Rooms</a><a className="nsec" href="#marina">Marina</a><a className="nsec" href="#eat">Eat and drink</a><a className="nsec" href="#story">Story</a><a className="book" href={BOOK} target="_blank" rel="noopener">Book now</a></nav>
+          <nav aria-label="Sections"><a className="nsec" href="#rooms">Rooms</a><a className="nsec" href="#marina">Marina</a><a className="nsec" href="#eat">Eat and drink</a><a className="nsec" href="#story">Story</a><MastBook /></nav>
         </div>
       </header>
       <main id="main">
