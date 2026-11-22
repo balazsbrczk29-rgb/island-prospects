@@ -20,7 +20,7 @@ Scale (px, desktop / phone):
 - hero 64/38, Newsreader 360 opsz 72, tracking -0.03em, leading 1.0 (h1)
 - figure 56/44, Hanken 300, tabular, tracking -0.03em (the bill total)
 
-**Colour (OKLCH).**
+**Colour (OKLCH, written to styles.css as the equivalent sRGB hex so the inspect tool can read them).**
 - ground (sand paper) oklch(97.2% 0.012 85)
 - surface oklch(99.3% 0.005 85)
 - ink oklch(25% 0.045 250)
