@@ -1,105 +1,11 @@
 {
  "slug": "conch-inn-marina",
  "id": 65,
- "name": "The Conch Inn & Marina",
+ "name": "Conch Inn & Marina",
  "batch": "10",
  "tier": "A",
- "state": "built",
+ "state": "building",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-21T17:53:51.938Z",
- "pages": [
-  "index.html",
-  "rooms.html"
- ],
- "primary_cta": "Send to the dock office (slip letter, prefilled email to info@conchinn.com); rooms: Book online (RezExpert)",
- "brand_truth": "Since 1972 the Conch Inn has been Marsh Harbour's front door from the water: the dock you tie up to and walk into town from, rebuilt after Dorian.",
- "buyer": "Cruising sailors, charter catamaran crews and US East Coast boat owners planning on a phone; second, hotel guests flying into Marsh Harbour.",
- "direction": {
-  "archetype": "A07 Letter and stationery",
-  "lane": "P13 Hull and brass",
-  "type": "T02 Text-led editorial (Newsreader)",
-  "why": "Their office asks boaters to write an email with boat type, name, LOA, beam, draft and dates; the page is that letter, filled in live and answered with their published rates. No tape or script: clean paper, letterhead, brass for the reply."
- },
- "tier_visual": "standard",
- "tier_why": "Their own photographs are excellent and large; the wow is the living letter and its live reply. 3D would add nothing a captain needs.",
- "concept_type": "booking: slip request letter with published rates + RezExpert room booking",
- "images": [
-  {
-   "src": "https://static.wixstatic.com/media/21c3e0_89587c3dc79247f6a6952532ee1ae5c6~mv2.jpg",
-   "source": "own",
-   "credit": "The Conch Inn & Marina (docks at sunset (hero))"
-  },
-  {
-   "src": "https://static.wixstatic.com/media/21c3e0_9d42be5dced64df7b10fd0ccedf396fa~mv2.jpg",
-   "source": "own",
-   "credit": "The Conch Inn & Marina (balcony view)"
-  },
-  {
-   "src": "https://static.wixstatic.com/media/21c3e0_b0563f098d4c4f92878f4d0645cfa39f~mv2.jpg",
-   "source": "own",
-   "credit": "The Conch Inn & Marina (Snappas deck)"
-  },
-  {
-   "src": "https://static.wixstatic.com/media/six room photos 21c3e0_323212da, 057d7512, 820f47f2, 93e55885, 8c67ac12, fb0d9e48",
-   "source": "own",
-   "credit": "The Conch Inn & Marina (rooms)"
-  }
- ],
- "plan_gate": {
-  "verdict": "revise, applied once",
-  "predicted": {
-   "photography": 4,
-   "typography": 4,
-   "composition": 4,
-   "colour": 4,
-   "fit": 5,
-   "distinct": 5,
-   "references": 4
-  },
-  "changes_applied": [
-   "Ashore is a full-bleed Snappas photo with the walk-to-town list in a paper caption panel",
-   "Rooms: photo full height on the left, selector on the right (mirrors the hero, no alternating rows)",
-   "house rules as a one-column P.S. running into the dock-office card",
-   "hero gets Staying ashore? Book a room online; the total is in brass",
-   "dates are typeset italic blanks over a hidden native picker",
-   "paper warmed to #f5f4f0, brass letterhead rule"
-  ]
- },
- "critic": {
-  "photography": 0,
-  "typography": 0,
-  "composition": 0,
-  "colour": 0,
-  "fit": 0,
-  "distinct": 0,
-  "references": 0
- },
- "critic_note": "Final critic not run (plan-gate workflow); self-critique against art-director section 7 and craft checklist A/B done.",
- "current_site_findings": [
-  "robots meta nofollow, noimageindex, nosnippet on the homepage",
-  "slip requests typed by hand into an email",
-  "Wix stock images where their own docks should be",
-  "two phone numbers on different pages",
-  "history, 73 slips, 30 ft beam and airport distance only on other websites"
- ],
- "pitch_line": "A captain fills in one sentence, sees your published dockage for their boat and dates, and sends your office exactly the email you ask for; hotel guests are one tap from your booking engine.",
- "assumptions": [
-  "Monthly rate $2.25/ft read as the 30+ night tier; the letter defers the monthly total to the office",
-  "dockage VAT not stated on their site (moorings say +VAT)",
-  "photo-to-room matching by Wix alt text and order on their rooms page",
-  "73 slips, 1972, March 2021 reopening, 3 miles to airport from bahamasmarinas.com; 30 ft catamaran beam and live music at Snappas from noonsite.com",
-  "boat-type options in the letter are generic categories"
- ],
- "sources": [
-  "https://www.conchinn.com/",
-  "https://www.conchinn.com/marina",
-  "https://www.conchinn.com/rooms",
-  "https://www.conchinn.com/contact-us",
-  "https://www.conchinn.com/marina-rules",
-  "https://www.noonsite.com/business/conch-inn-marina/",
-  "https://www.bahamasmarinas.com/post/resort-renovation-complete-at-conch-inn-abaco"
- ],
- "notes": "BLIND: outside images and look.mjs blocked in the sandbox; photos verified and measured through Lovable gallery ip-assets-conch-inn-marina (30267545), crops routed into QA shots. Wix originals are large (1566-8256 px) so photos are requested at display size through Wix transforms. Gen-1 marina.html removed (rates now on home). qa.mjs 0 blockers (tap warning is the shared concept-label button). interact.mjs 0 JS errors. distinct.mjs: distinct (closest harding-lee 66).",
- "built_at": "2026-11-21T18:05:01.657Z"
+ "claimed_at": "2026-11-22T12:51:11.209Z"
 }
