@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import './styles.css'
-import { Header, Planner, Places, Close, PhoneBar, usePlan } from './site'
+import { Header, Planner, Places, RateTable, Close, PhoneBar, usePlan } from './site'
 
 function Stay() {
   const plan = usePlan()
@@ -11,6 +11,7 @@ function Stay() {
       <main id="main">
         <Planner plan={plan} />
         <Places plan={plan} />
+        <RateTable />
       </main>
       <Close plan={plan} />
       <PhoneBar plan={plan} />

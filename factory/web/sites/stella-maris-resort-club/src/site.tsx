@@ -24,10 +24,11 @@ export function usePlan() {
   return { arrival, setArrival, nights, setNights, adults, setAdults, kids, setKids, unitId, setUnitId, meals, setMeals, acts, setActs }
 }
 
+export const isOver = (x: Unit, adults: number) => x.cat !== 'house' && x.cat !== 'housepool' && adults > RATES[x.cat].max
 export function fitOrder(adults: number, kids: number) {
   const guests = adults + kids, need = Math.max(1, Math.ceil(guests / 2))
   const score = (x: Unit) => {
-    const over = adults > RATES[x.cat].max ? 1 : 0
+    const over = isOver(x, adults) ? 1 : 0
     const short = x.bedrooms < need ? 1 : 0
     const gap = Math.abs(x.bedrooms - need)
     return over * 100 + short * 50 + gap * 10 - (x.pool ? 2 : 0) - (x.beach ? 3 : 0)
@@ -64,12 +65,15 @@ function mailStay(p: Plan, x: Unit, q: ReturnType<typeof quote>) {
     `Party: ${p.adults} adult${p.adults > 1 ? 's' : ''}${p.kids ? `, ${p.kids} child${p.kids > 1 ? 'ren' : ''} 12 and under` : ''}`,
     `Meal plan: ${p.meals ? 'yes, please' : 'no'}`,
     p.acts.length ? `Interested in: ${p.acts.join(', ')}` : '',
-    `My estimate from your published rates: ${money(q.total)}`,
+    `My estimate from your published rates:`,
+    `  Rooms ${money(q.rooms)}, VAT ${money(q.vat)}, resort levy and VAT ${money(q.levy)}`,
+    `  Maid service ${money(q.maid)}, energy surcharge and VAT ${money(q.energy)}${p.meals ? `, meal plan ${money(q.mealPlan)}` : ''}`,
+    `  Total ${money(q.total)}${q.depN ? `, deposit ${q.depN} nights` : ''}`,
   ].filter(Boolean)
   return `mailto:${EMAIL}?subject=${encodeURIComponent(`Stay request: ${x.name}, ${nice(p.arrival)}, ${p.nights} nights`)}&body=${encodeURIComponent(`Hello,\n\n${lines.join('\n')}\n\nThank you.`)}`
 }
 function mailAir(p: Plan) {
-  return `mailto:${AIR}?cc=${EMAIL}&subject=${encodeURIComponent(`Flights to Stella Maris, ${nice(p.arrival)}`)}&body=${encodeURIComponent(`Hello,\n\nWe would like to fly from Nassau to Stella Maris on ${nice(p.arrival)} and back on ${nice(addDays(p.arrival, p.nights))}.\nParty: ${p.adults} adults${p.kids ? `, ${p.kids} children` : ''}.\nOur international flight arrives in Nassau at: \n\nThank you.`)}`
+  return `mailto:${AIR}?cc=${EMAIL}&subject=${encodeURIComponent(`Flights to Stella Maris, ${nice(p.arrival)}`)}&body=${encodeURIComponent(`Hello,\n\nWe would like to fly from Nassau to Stella Maris Airport (SML) on ${nice(p.arrival)} and back on ${nice(addDays(p.arrival, p.nights))}.\nParty: ${p.adults} adults${p.kids ? `, ${p.kids} children` : ''}.\nOur international flight arrives in Nassau at: \n\nThank you.`)}`
 }
 
 /* ---------- header ---------- */
@@ -155,19 +159,22 @@ export function Planner({ plan, h1 = true }: { plan: Plan; h1?: boolean }) {
           </label>
           <Stepper label="Nights" id="s-n" v={plan.nights} set={plan.setNights} min={1} max={28} />
           <Stepper label="Adults" id="s-a" v={plan.adults} set={plan.setAdults} min={1} max={10} />
-          <Stepper label="Children, 12 and under" id="s-k" v={plan.kids} set={plan.setKids} min={0} max={6} />
+          <Stepper label="Children" id="s-k" v={plan.kids} set={plan.setKids} min={0} max={6} />
         </div>
         <div className="sum" aria-live="polite">
           <p className="sum__place"><b>{unit.name}</b> <span>{nice(plan.arrival)} to {nice(addDays(plan.arrival, plan.nights))}</span></p>
           <ul className="sum__lines tnum">
             {lines.map(([l, v]) => <li key={l.split(',')[0]}><span>{l}</span><span>{money(v)}</span></li>)}
           </ul>
-          <label className="sum__meal"><input type="checkbox" checked={plan.meals} onChange={e => plan.setMeals(e.target.checked)} /> <span>Add the meal plan (breakfast and dinner, drinks not included)</span></label>
+          <label className="sum__meal"><input type="checkbox" checked={plan.meals} onChange={e => plan.setMeals(e.target.checked)} /> <span>Add the meal plan (MAP), drinks not included</span></label>
           <p className="sum__total"><span>Estimate, confirmed by reservations</span><Roll v={money(q.total)} /></p>
+          {isOver(unit, plan.adults) && <p className="sum__warn">{unit.name} has a published rate for up to {RATES[unit.cat].max} adults. For {plan.adults}, ask reservations or choose a house.</p>}
+          {plan.nights === 5 && plan.adults <= 2 && addDays(plan.arrival, 5) <= '2026-12-19' && <p className="sum__pkg">Or the Sun &amp; Sea all-inclusive for these five nights: {plan.adults === 1 ? '$1,867 single' : '$2,945 double'}, valid to 19 December 2026.</p>}
           <p className="sum__dep tnum">{q.depN ? `Deposit: ${q.depN} night${q.depN > 1 ? 's' : ''}, about ${money0(q.deposit)}.` : 'Deposit for 8 or 9 nights: ask reservations.'} Children 12 and under stay free.{q.unpublished ? ' Nights from 18 April 2027 are priced at winter rates until new rates are published.' : ''}</p>
           <div className="sum__acts">
             <a className="btn" href={mailStay(plan, unit, q)}>Send this stay to reservations</a>
             <a className="link" href={mailAir(plan)}>Add flights from Nassau</a>
+            <a className="link tnum" href={PHONES[0][1]}>{PHONES[0][0]}</a>
           </div>
         </div>
       </div>
@@ -175,18 +182,24 @@ export function Planner({ plan, h1 = true }: { plan: Plan; h1?: boolean }) {
         <Photo pic={IMG.hero} eager className="plan__hero" />
         <div className="strip" ref={stripRef} role="radiogroup" aria-label="Places to stay, best fit for your party first" onKeyDown={onKey}>
           {order.map(x => {
-            const R = RATES[x.cat], over = plan.adults > R.max
+            const R = RATES[x.cat], over = isOver(x, plan.adults)
             const nightly = quote(x, { ...plan, nights: 1, meals: false }).rooms
             return (
               <motion.button layout={!reduce} transition={{ duration: 0.45, ease }} key={x.id} ref={el => { refs.current[x.id] = el }} type="button" role="radio" aria-checked={x.id === unit.id} tabIndex={x.id === unit.id ? 0 : -1} className={'film' + (over ? ' is-over' : '')} onClick={() => plan.setUnitId(x.id)}>
                 <Photo pic={x.a} />
                 <span className="film__name">{x.name}</span>
-                <span className="film__meta tnum">{x.kind}, {money0(nightly)} a night{over ? ', with extra adults' : ''}</span>
+                <span className="film__meta tnum">{over ? `Rate published for up to ${R.max} adults` : `${x.kind}, ${money0(nightly)} a night`}</span>
               </motion.button>
             )
           })}
         </div>
+        <div className="strip__foot">
         <p className="strip__note">Best fit for {plan.adults} adult{plan.adults > 1 ? 's' : ''}{plan.kids ? ` and ${plan.kids} child${plan.kids > 1 ? 'ren' : ''}` : ''} first. Prices before tax and surcharges.</p>
+          <div className="strip__nav">
+            <button type="button" aria-label="Earlier places" onClick={() => stripRef.current?.scrollBy({ left: -380, behavior: 'smooth' })}>‹</button>
+            <button type="button" aria-label="More places" onClick={() => stripRef.current?.scrollBy({ left: 380, behavior: 'smooth' })}>›</button>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -207,6 +220,7 @@ export function PhoneBar({ plan }: { plan: Plan }) {
 export function Shores() {
   return (
     <section className="shores" aria-labelledby="sh-h">
+      <p className="shores__mark" aria-hidden="true">Stella Maris</p>
       <h2 id="sh-h" className="shores__h">“The turquoise or ink-blue of the two near&nbsp;shorelines.”</h2>
       <div className="shores__grid">
         <div className="shore shore--ink">
@@ -268,7 +282,7 @@ export function Water({ plan }: { plan: Plan }) {
       </section>
       <section className="water" id="water" aria-labelledby="wa-h">
         <div className="water__text">
-          <h2 id="wa-h">Dean's Blue Hole, and the bonefish<h2 id="wa-h">Some of the best water in the Out&nbsp;Islands.</h2>nbsp;bays.</h2>
+          <h2 id="wa-h">Dean's Blue Hole, and the bonefish&nbsp;bays.</h2>
           <p>Stella Maris Water Sports runs the diving: {DIVES.slice(0, 3).join(', ')} and {DIVES[3]}. Bonefishing is close by in Adderley's and Glenton's bays, and big game fishing waits off both shorelines.</p>
           <p className="water__k">Tick what you would like to do, and it goes into your stay request.</p>
           <div className="acts">{ACTIVITIES.map(a => <button key={a} type="button" className="act" aria-pressed={plan.acts.includes(a)} onClick={() => toggle(a)}>{a}</button>)}</div>
@@ -278,9 +292,9 @@ export function Water({ plan }: { plan: Plan }) {
       <section className="offers" aria-labelledby="of-h">
         <h2 id="of-h">Packages and specials.</h2>
         <div className="offers__grid">
-          <p><b>Sun &amp; Sea all-inclusive.</b> Five nights from $1,867 single or $2,945 double, with seven-night packages too, valid to 19 December 2026.</p>
+          <p><b>Sun &amp; Sea all-inclusive.</b> Five nights from $1,867 single or $2,945 double, valid to 19 December 2026. Seven-night packages on request.</p>
           <p><b>$250 air credit</b> on air-inclusive packages from the US, as listed on their specials page; blackout 3 to 6 July 2026.</p>
-          <p><b>Meal plan.</b> Breakfast and dinner, $83 a person a night plus 15% gratuity and 10% VAT; drinks not included.</p>
+          <p><b>Meal plan (MAP).</b> $83 a person a night plus 15% gratuity and 10% VAT; drinks not included.</p>
         </div>
       </section>
     </>
@@ -289,11 +303,12 @@ export function Water({ plan }: { plan: Plan }) {
 
 /* ---------- screen 5: getting here ---------- */
 export function Getting({ plan }: { plan: Plan }) {
-  const steps = [['Fly to Nassau', 'Your international flight lands at Nassau.'], ['On to Stella Maris', "The resort's own air service, or a scheduled flight to Stella Maris Airport (SML)."], ['A short drive', 'From the airport to the club on Ocean View Drive.'], ['You are here', 'Between the two shorelines of Long Island.']]
+  const steps = [['Fly to Nassau', 'Your international flight lands at Nassau.'], ['On to Stella Maris', "The resort's own air service, or a scheduled flight to Stella Maris Airport (SML)."], ['To the club', 'From the airport to the club on Ocean View Drive. Ask reservations to arrange it.'], ['You are here', 'Between the two shorelines of Long Island.']]
   return (
     <section className="route" id="getting-here" aria-labelledby="gh-h">
       <h2 id="gh-h">We can even fly you&nbsp;here.</h2>
       <ol className="route__steps">{steps.map(([t, d], i) => <li key={t}><span className="tnum">{i + 1}</span><b>{t}</b><span>{d}</span></li>)}</ol>
+      <p className="route__marina"><b>Coming by boat?</b> The club's name carries a marina; ask reservations about it and its services before you sail.</p>
       <a className="btn btn--line" href={mailAir(plan)}>Ask the air service for your dates</a>
     </section>
   )
@@ -331,10 +346,39 @@ export function Close({ plan }: { plan: Plan }) {
           <li className="tnum">{PHONES.map(([l, t]) => <a key={l} href={t}>{l}</a>)}<span>Fax 242-338-2052</span></li>
           <li><a href={`mailto:${AIR}`}>{AIR}</a><span>The air service</span></li>
           <li><a href="mailto:Jill@stellamarisresort.com">Jill@stellamarisresort.com</a><a href="mailto:info@stellamarisresort.com">info@stellamarisresort.com</a></li>
-          <li><span className="addr">Ocean View Drive, P.O. Box LI 30-105, Stella Maris, Long Island, Bahamas</span><a className="link" href={FB}>Facebook</a></li>
+          <li><span className="addr">Ocean View Drive, P.O. Box LI 30-105, Stella Maris, Long Island, Bahamas</span><a className="link" href="https://www.openstreetmap.org/search?query=Stella%20Maris%20Long%20Island%20Bahamas">Map</a><a className="link" href={FB}>Facebook</a></li>
         </ul>
         <p className="credit">Photography: Stella Maris Resort Club. Rates as published on stellamarisresort.com, updated 19 November 2026.</p>
       </footer>
     </>
+  )
+}
+
+/* ---------- the published rate tables (stay.html) ---------- */
+export function RateTable() {
+  const rows: [string, string, string][] = [
+    ['Hotel room or apartment', 'Single $190, double $230, triple $270', 'Single $210, double $250, triple $290'],
+    ['One-bedroom cottage', 'Single $240, double $280, triple $320', 'Single $260, double $290, triple $330'],
+    ['Sand Dollar or Sea La Vie Cottage', 'Double $360, triple $400, quad $440', 'Double $420, triple $460, quad $500'],
+    ["Gecko House, Carolyn's Favourite or Flamingo House", 'Six $660', 'Six $700'],
+    ['Rainbow Villa or Dolphin House, with pool', 'Six $770', 'Six $800'],
+  ]
+  return (
+    <section className="rates" id="rates" aria-labelledby="rt-h">
+      <h2 id="rt-h">The published rates.</h2>
+      <p className="lede">Per night, as on their rate page (updated 19 November 2026). Summer 2026: 20 April to 19 December 2026. Winter 2026-27: 19 December 2026 to 18 April 2027.</p>
+      <table className="rates__t tnum">
+        <thead><tr><th scope="col">Place</th><th scope="col">Summer 2026</th><th scope="col">Winter 2026-27</th></tr></thead>
+        <tbody>{rows.map(r => <tr key={r[0]}><th scope="row">{r[0]}</th><td>{r[1]}</td><td>{r[2]}</td></tr>)}</tbody>
+      </table>
+      <ul className="rates__s">
+        <li>VAT 10%.</li>
+        <li>Resort levy 6%, plus 10% VAT.</li>
+        <li>Maid service $6 per person per night.</li>
+        <li>Energy surcharge $4 per person per night in hotel rooms, $7 in cottages and villas, plus 10% VAT.</li>
+        <li>Additional adult $40 per night, subject to surcharges. Children 12 and under free.</li>
+      </ul>
+      <p className="small">The planner uses the double rate for one guest in the two-bedroom cottages, counts every guest for maid service and the energy surcharge, and reads the deposit table as 1 to 2 nights: one night, 3 to 4: two, 5 to 7: three, 10 or more: five. All to confirm with reservations.</p>
+    </section>
   )
 }
