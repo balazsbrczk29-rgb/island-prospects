@@ -20,9 +20,9 @@ const WHO: { id: Who; label: string; call: string; facts: string[] }[] = [
   { id: 'buyer', label: 'Buying or renting', call: 'Call about units', facts: [
     'Condominiums and townhouses on both the canal and the beach, overlooking the inlet.',
     'Pool, tennis, a limited number of storage garages, and a private marina for owners.',
-    'Units are sold and let privately by owners. The office can tell you who to talk to.'] },
+    'Owners’ units are sold and let privately. Ask the office.'] },
   { id: 'boat', label: 'Visiting by boat', call: 'Call about a slip', facts: [
-    'The marina is private, for owners. Slips go to owners first.',
+    'The marina is private, for owners.',
     'Call the office about availability before you come in through the cut.',
     'Slip count, depths and rates: ask the office.'] },
 ]
@@ -70,9 +70,11 @@ function Header() {
 }
 
 function Hero() {
+  const [phone, setPhone] = useState(false)
+  useEffect(() => { setPhone(matchMedia('(max-width: 900px)').matches) }, [])
   return (
     <section className="hero" aria-labelledby="hero-h">
-      <InletMap zoom={16} at={[0.68, 0.52]} className="hero__map" />
+      <InletMap zoom={16} at={phone ? [0.5, 0.55] : [0.68, 0.52]} className="hero__map" />
       <div className="card" id="card">
         <p className="coord num">{COORD}</p>
         <h1 id="hero-h" className="h1">Bell Channel Club &amp; Marina</h1>
@@ -169,7 +171,7 @@ function Home() {
       <a className="skip" href="#main">Skip to content</a>
       <Header />
       <main id="main"><Hero /><Club /><Marina /><Office /></main>
-      <footer className="foot field"><div className="wrap foot__row"><p>Bell Channel Club &amp; Marina, Lucaya, Grand Bahama, The Bahamas.</p><p>{MAP_CREDIT}. {CREDITS}</p></div></footer>
+      <footer className="foot field"><div className="wrap foot__row"><p>Bell Channel Club &amp; Marina, Lucaya, Grand Bahama, The Bahamas.</p><p>{MAP_CREDIT}.</p><p>{CREDITS}</p></div></footer>
       <CallBar />
     </>
   )

@@ -12,7 +12,7 @@ const tileXY = (lat: number, lon: number, z: number) => {
   return { x, y }
 }
 const url = (z: number, x: number, y: number) => `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`
-export const MAP_CREDIT = 'Imagery: Esri, Maxar, Earthstar Geographics'
+export const MAP_CREDIT = 'Imagery: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
 
 function Tile({ z, x, y, left, top }: { z: number; x: number; y: number; left: number; top: number }) {
   const [ok, setOk] = useState(false)
@@ -42,13 +42,16 @@ export function InletMap({ zoom, at = [0.5, 0.5], label = 'Bell Channel Club', c
   const nice = [100, 200, 250, 500, 1000, 2000].reverse().find(m => m / mpp <= 140) ?? 100
   return (
     <div ref={ref} className={`imap ${className}`} role="img" aria-label={`Satellite map of the Bell Channel inlet, Lucaya, Grand Bahama, with ${label} pinned at 26°30.9′ N, 78°38.2′ W`}>
+      <p className="imap__ghost num" aria-hidden="true" style={{ transform: `translate(${px}px, ${py + 48}px)` }}>26°30.9′ N · 78°38.2′ W</p>
       <div className="imap__tiles" aria-hidden="true">{tiles}</div>
       <div className={`pin ${px > w - 170 ? 'flip' : ''}`} style={{ transform: `translate(${px}px, ${py}px)` }} aria-hidden="true">
         <span className="pin__dot" />
         <span className="pin__label">{label}</span>
       </div>
+      <div className="imap__corner">
       <div className="imap__scale" aria-hidden="true"><i style={{ width: `${Math.round(nice / mpp)}px` }} /><span className="num">{nice >= 1000 ? `${nice / 1000} km` : `${nice} m`}</span></div>
       <p className="imap__credit">{MAP_CREDIT}</p>
+      </div>
     </div>
   )
 }

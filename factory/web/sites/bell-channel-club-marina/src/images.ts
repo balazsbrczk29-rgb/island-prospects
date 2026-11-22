@@ -7,8 +7,8 @@ const L = 'https://ip-assets-bell-channel-club-marina.lovable.app/assets/'
 
 export const IMG = {
   bay: {
-    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Port_Lucaya_Marina_-_panoramio.jpg/3840px-Port_Lucaya_Marina_-_panoramio.jpg',
-    w: 3840, h: 1920, source: 'commons',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Port_Lucaya_Marina_-_panoramio.jpg/1920px-Port_Lucaya_Marina_-_panoramio.jpg',
+    w: 1920, h: 960, source: 'commons',
     alt: 'Yachts moored along the docks of Port Lucaya Marina, Grand Bahama',
     caption: 'Inside the cut: Port Lucaya Marina, at the head of the inlet the club overlooks.',
   },
