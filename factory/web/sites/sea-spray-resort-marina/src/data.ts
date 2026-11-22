@@ -44,3 +44,10 @@ export const SPECS: [string, string][] = [
   ['Ashore', 'Restrooms and showers, trash pick-up, wifi at the marina office'],
   ['Radio', 'VHF channel 16'],
 ];
+
+// Residences, as published on seasprayresort.com (Sales Package 2026).
+export const HOMES: { name: string; spec: string; from: string; ocean?: string }[] = [
+  { name: 'Oceanfront home', spec: '6 bed, 6.5 bath, 3,879 sq ft, private pool', from: '$5,999,500' },
+  { name: 'Marina View Cottage, Plan A', spec: '3 bed, 3.5 bath, 2,264 sq ft', from: '$3,050,000', ocean: '$4,050,000' },
+  { name: 'Marina View Cottage, Plan B', spec: '3 bed (4-bed option), 3.5 bath, 2,492 sq ft', from: '$3,300,000', ocean: '$4,250,000' },
+]

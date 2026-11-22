@@ -4,7 +4,7 @@
  "name": "Sea Spray Resort & Marina",
  "batch": "07",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "history": [
   {
@@ -13,5 +13,30 @@
   }
  ],
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T13:24:29.710Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T13:30:36.636914+00:00",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/sea-spray-resort-marina/",
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "gate2": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion": 5,
+   "phone": 4
+  },
+  "note": "Final re-score: phone at 4 conditional on the bar-threshold fix and JSON-LD wording fix, both applied before publish."
+ },
+ "notes": [
+  "Job-spec rebuild from design.md: White Sound photo with a docked console on screen 1: length slider, draft, month, nights; live fit vs 20 to 130 ft and 7 ft; season and tier picked from the published rates; cost with formula; Request on WhatsApp (+1 242 577 4696 with country code), Call, VHF 16; Book your stay (Guesty), Order food (Revel), slip booking form.",
+  "Kept: Fraunces + Source Serif 4, harbour teal; full rate table with the chosen season lit; specs; Boaters Choice 2025 badge; events listed once; day strip of their photos; stay; residences with every published figure and the 2026 Sales Package; Albury/Dorian/2022 story; Instagram, Facebook.",
+  "Photos are the Webflow originals (very large files); swap in Webflow sized variants in production (could not verify variant URLs from the sandbox).",
+  "Event nights other than Thursday are not published: shown as ask the bar. Low-season 90-day rate not published: shown as Ask.",
+  "Stale Nov 21 wip branch not resumed; built fresh from main per the approved spec."
+ ]
 }
