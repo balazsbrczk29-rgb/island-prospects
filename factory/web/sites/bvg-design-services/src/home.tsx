@@ -19,7 +19,7 @@ const go = (id: string) => {
 function Nav() {
   return (
     <header className="nav wrap">
-      <a href="#top" className="nav__name">BVG Design Services</a>
+      <a href="#top" className="nav__name"><img className="logo" src="https://www.bvgdesign.com/logobvg5bb.jpg" alt="" height={32} />BVG Design Services</a>
       <nav aria-label="Sections" className="nav__links">
         <a href="#services">Services</a>
         <a href="#then-now">Since 1996</a>
@@ -83,6 +83,9 @@ function Builder({ req, setReq }: { req: Req; setReq: SetReq }) {
         <label className="fld fld--wide">
           <input aria-label="Business name, optional" value={req.name} onChange={e => setReq(r => ({ ...r, name: e.target.value }))} placeholder="Business name (optional)" autoComplete="organization" />
         </label>
+        <label className="fld fld--wide">
+          <textarea aria-label="Anything else, optional" rows={1} value={req.note} onChange={e => setReq(r => ({ ...r, note: e.target.value }))} placeholder="Anything else? Your current site, a deadline" />
+        </label>
       </div>
       <div className="ans" aria-live="polite">
         <p className="ans__h">What BVG does for this</p>
@@ -115,8 +118,8 @@ function Hero({ req, setReq }: { req: Req; setReq: SetReq }) {
         <p className="hero__lede t-lead">Bahamian-owned web design, hosting, search and advertising from Freeport, Grand Bahama, for businesses on every island. We started with our own site, the Bahamas Vacation Guide.</p>
         <p className="hero__proof">Offices in Freeport, Nassau and Abaco.</p>
         <a className="see" href="#then-now" onClick={e => { e.preventDefault(); go("then-now") }}>
-          <img src={IMG.williamsTown} alt="" width={900} height={398} />
-          <span><b>Bahamas Vacation Guide, 1996</b>See our first site rebuilt for 2026</span>
+          <span className="see__win"><EraWindow year={1996} /></span>
+          <span className="see__t"><b>The Bahamas Vacation Guide, 1996</b>See it rebuilt for 2026</span>
         </a>
       </div>
       <div className="hero__tool"><Builder req={req} setReq={setReq} /></div>
@@ -124,7 +127,9 @@ function Hero({ req, setReq }: { req: Req; setReq: SetReq }) {
   )
 }
 
-function ThenNow() {
+function ThenNow({ req }: { req: Req }) {
+  const m = useMemo(() => mail(req), [req])
+  const chosen = NEEDS.filter(n => req.needs.includes(n.id))
   const reduce = useReducedMotion()
   const ref = useRef<HTMLElement>(null)
   const [year, setYear] = useState<Year>(reduce ? 2026 : 1996)
@@ -152,6 +157,7 @@ function ThenNow() {
         <div className="tn__grid wrap">
           <div className="tn__say">
             <h2 id="tn-title" className="t-h2">Our first site, rebuilt for every era since.</h2>
+            <p className="tn__short">BVG's first site, 1996, rebuilt for each decade since.</p>
             <p className="tn__p">The Bahamas Vacation Guide went online in 1996 and reached the top of the search engines. Scroll through thirty years of how it would have been built. The words and island photographs are the guide's own.</p>
             <div className="rail" role="group" aria-label="Choose an era">
               {ERAS.map((e, i) => (
@@ -161,12 +167,19 @@ function ThenNow() {
                 </button>
               ))}
             </div>
-            <div className="tn__next" data-show={last}>
-              <p>Your site is next.</p>
-              <a className="quiet" href="#top" tabIndex={last ? 0 : -1} onClick={e => { e.preventDefault(); go("top") }}>Back to your request</a>
+          </div>
+          <div className="tn__win" data-phone={last}>
+            <EraWindow year={year} />
+            <div className="tn__next" data-show={last} aria-hidden={!last}>
+              <p className="tn__next-h">Your site is next.</p>
+              <p className="tn__next-p">Your request so far, ready to send to Freeport:</p>
+              <ul className="tn__chips">{chosen.length ? chosen.map(n => <li key={n.id}>{n.label}</li>) : <li>Advice on what I need</li>}<li>{req.island}</li></ul>
+              <div className="tn__act">
+                <a className="btn" href={m.href} tabIndex={last ? 0 : -1}>Send my request</a>
+                <a className="quiet" href="#top" tabIndex={last ? 0 : -1} onClick={e => { e.preventDefault(); go("top") }}>Edit my request</a>
+              </div>
             </div>
           </div>
-          <div className="tn__win"><EraWindow year={year} /></div>
         </div>
       </div>
     </section>
@@ -229,7 +242,7 @@ function Story() {
         <div className="story__text">
           <h2 id="story-title" className="t-h3">Two entrepreneurs in mid 1996: one took the graphics, the other the code.</h2>
           <p>Their first multi-page site, the Bahamas Vacation Guide, went to the top of the search engines. Businesses asked to be included, then asked for sites of their own.</p>
-          <p>The guide gave the studio its name: BVG stands for Bahamas Vacation Guide. It is still online, and still designed and maintained by BVG.</p>
+          <p>The guide gave the studio its name: BVG stands for Bahamas Vacation Guide. It is still online, its pages signed "Designed and Maintained by BVG Design".</p>
           <a className="quiet" href="http://www.bahamasvacationguide.com/" rel="noopener">Visit the Bahamas Vacation Guide</a>
         </div>
       </div>
@@ -256,12 +269,12 @@ function Offices() {
         <h2 id="off-title" className="t-h2 offices__title">Bahamian owned, with offices in Freeport, Nassau and Abaco.</h2>
         <div className="off">
           <h3 className="t-h3">Freeport</h3>
-          <p className="muted">Headquarters. Smith's Point, P.O. Box F-43652, Freeport, Grand Bahama</p>
+          <p className="muted">Headquarters. P.O. Box F-43652, Freeport, Grand Bahama</p>
           <a className="num" href={TEL}>{PHONE}</a>
         </div>
         <div className="off">
           <h3 className="t-h3">Nassau and Abaco</h3>
-          <p className="muted">Local offices. Start with Freeport and we connect you.</p>
+          <p className="muted">Local offices.</p>
         </div>
         <div className="off">
           <h3 className="t-h3">United States</h3>
@@ -288,7 +301,7 @@ function Contact({ req }: { req: Req }) {
         <p className="close__fine">From the US <a className="num" href={US_TEL}>{US_PHONE}</a>. Mail: P.O. Box F-43652, Freeport, Grand Bahama.</p>
       </div>
       <footer className="foot wrap">
-        <p>BVG Design Services, web design, hosting, search and advertising since 1996.</p>
+        <p className="foot__brand"><img className="logo logo--foot" src="https://www.bvgdesign.com/logobvg5bb.jpg" alt="BVG Design Services logo" height={48} />Web design, hosting, search and advertising since 1996.</p>
         <p>Island photographs from the Bahamas Vacation Guide. Lucayan Harbour: Jon Worth, Wikimedia Commons, CC BY-SA 2.0.</p>
       </footer>
     </section>
@@ -299,14 +312,18 @@ function Dock({ req }: { req: Req }) {
   const [show, setShow] = useState(false)
   const m = useMemo(() => mail(req), [req])
   useEffect(() => {
-    const hero = document.getElementById("top"), close = document.getElementById("contact")
-    if (!hero || !close) return
-    let past = false, atClose = false
+    const h1 = document.getElementById("hero-title"), act = document.querySelector(".bld__act"), close = document.getElementById("contact")
+    if (!h1 || !act || !close) return
+    let past = false, atAct = false, atClose = false
     const io = new IntersectionObserver(es => {
-      for (const e of es) { if (e.target === hero) past = !e.isIntersecting; if (e.target === close) atClose = e.isIntersecting }
-      setShow(past && !atClose)
+      for (const e of es) {
+        if (e.target === h1) past = !e.isIntersecting || e.boundingClientRect.top < 0
+        if (e.target === act) atAct = e.isIntersecting
+        if (e.target === close) atClose = e.isIntersecting
+      }
+      setShow(past && !atAct && !atClose)
     }, { threshold: 0 })
-    io.observe(hero); io.observe(close)
+    io.observe(h1); io.observe(act); io.observe(close)
     return () => io.disconnect()
   }, [])
   const n = req.needs.length
@@ -335,7 +352,7 @@ function Home() {
       <Nav />
       <main>
         <Hero req={req} setReq={setReq} />
-        <ThenNow />
+        <ThenNow req={req} />
         <Services req={req} setReq={setReq} />
         <Steps />
         <Story />

@@ -16,7 +16,6 @@ function Era1996() {
   return (
     <div className="e96">
       <h3>Bahamas Vacation Guide</h3>
-      <p className="e96__sub"><i>Bahamas Tourism Information Source</i></p>
       <hr />
       <table><tbody>
         {[0, 1, 2, 3, 4, 5].map(r => (
@@ -72,6 +71,7 @@ function Era2026() {
       <p className="e26__h">{GUIDE_LINE}</p>
       <div className="e26__search"><span>Where are you going?</span><b>Go</b></div>
       <div className="e26__chips">{["Grand Bahama", "Nassau", "Abaco", "Exuma", "Long Island"].map(c => <span key={c}>{c}</span>)}</div>
+      <p className="e26__fun">{GUIDE_FUN}</p>
       <div className="e26__bar"><span>Plan a trip</span></div>
     </div>
   )
