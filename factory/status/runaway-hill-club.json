@@ -4,8 +4,29 @@
  "name": "Runaway Hill Club",
  "batch": "12",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T14:13:37.018Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T14:24:34.253Z",
+ "scores": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion_clarity": 4,
+  "phone": 4
+ },
+ "notes": [
+  "Built from approved job spec + design.md (2026-11-22). Core tool on screen 1: dates, the twelve named rooms grouped by building with published rates, itemised total with 30% tax and gratuity (Room 7 computed at 30% with a to-confirm note; Infinity House by full weeks at 21,750), Book this room to direct-book, prefilled email enquiry.",
+  "Fonts self-hosted (Castoro + Be Vietnam Pro from @fontsource); the previous Google Fonts link removed.",
+  "Removed the finding about no getting-here guidance: their site has a /gettinghere/ page.",
+  "The cot/extra person charge ($150) is applied once per cot; their table does not say per night or per stay; to confirm.",
+  "Critic (fresh subagent): first pass gate 1 fail (house photo not leading, descent and IH weekly missing), wow 3, photo 3, type 4, comp 3, conv 4, phone 3; fixes applied; re-score gate 1 pass, all 4. Final small fixes applied after re-score: ledger clamp, strip width, phone dates spacing."
+ ]
 }
