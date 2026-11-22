@@ -4,8 +4,34 @@
  "name": "Donny's Boat Rentals & Marina",
  "batch": "04",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T11:55:38.181Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T12:14:02.053Z",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/donny-s-boat-rentals-marina/",
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "gate2": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion": 4,
+   "phone": 4
+  },
+  "note": "Re-score gave phone 3 only for a sticky-button containment bug; fixed (button now direct child of the Rent grid, verified pinned at 390x844 while the sheet is in view), which the critic said lifts every score to 4+."
+ },
+ "notes": [
+  "Job-spec rebuild from design.md: trip sheet on screen 1 (Rent a boat / Does my boat fit?), boats comparison table, schematic route card with travelling day clock, terms, marina rates, contact.",
+  "Kept Bricolage Grotesque + Figtree and the flats palette per Balazs approval note (keep this design individuality); spec benchmark of serif+sans deliberately not applied.",
+  "Route card is a labelled schematic (no coastline): coordinates for Manjack and No Name Cay could not be sourced within budget; only directions (Manjack NW, No Name SE) are shown.",
+  "Photo native sizes: only marina aerial (2000x1499) and two 4032x3024 files are known from file names; other Wix photos are requested as renditions at or below 1600 px and width/height attributes set to the rendition. Confirm originals.",
+  "fit(): beyond the published 50 ft LOA / 7 ft draft never says fits; mooring limits assumed same as published draft limit, phrased as ask Donny.",
+  "Assumptions to confirm with owner: prices current, WhatsApp to Taylor as booking channel."
+ ]
 }

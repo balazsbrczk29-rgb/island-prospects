@@ -81,7 +81,7 @@ export default function RouteCard() {
               </g>
             </svg>
             <p className="absolute left-4 bottom-4 md:left-5 md:bottom-5 rounded-[var(--radius-sm)] bg-ink text-white px-3 py-2 text-[0.875rem] font-semibold tnum" aria-hidden="true">{clock}<span className="font-normal text-[#b9cdc8]">, back by 5</span></p>
-            <figure className="absolute right-4 top-4 md:right-5 md:top-5 m-0 w-[34%] max-w-[240px] rounded-[var(--radius-md)] bg-surface p-1.5 shadow-[0_8px_24px_-8px_rgb(13_43_46/0.3)]">
+            <figure className="hidden md:block absolute right-4 top-4 md:right-5 md:top-5 m-0 w-[34%] max-w-[240px] rounded-[var(--radius-md)] bg-surface p-1.5 shadow-[0_8px_24px_-8px_rgb(13_43_46/0.3)]">
               <span className="ph block aspect-[4/3] rounded-[calc(var(--radius-md)-6px)]"><img src={wix(P.soundAir, 480)} width={480} height={360} loading="lazy" decoding="async" alt="Black Sound and Green Turtle Cay from the air, where every day out starts" /></span>
               <figcaption className="px-1.5 pt-1.5 pb-0.5 text-[0.8125rem] leading-tight text-muted">Every day starts here: Black Sound</figcaption>
             </figure>

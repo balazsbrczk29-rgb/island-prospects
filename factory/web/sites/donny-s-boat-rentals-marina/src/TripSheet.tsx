@@ -12,11 +12,11 @@ const today = () => new Date().toLocaleDateString('en-CA')
 
 function Figure({ value, label }: { value: string; label: string }) {
   return (
-    <div className="h-[3.75rem] md:h-[4.75rem] overflow-hidden" role="status" aria-live="polite">
+    <div className="h-[3.75rem] md:h-[4.25rem] overflow-hidden" role="status" aria-live="polite">
       <span className="sr-only">{label}</span>
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.p key={value} initial={{ y: '70%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: '-70%', opacity: 0 }} transition={{ duration: 0.28, ease }}
-          aria-hidden="true" className="font-sans font-bold text-[3.5rem] md:text-[4.5rem] leading-none tracking-[-0.04em] tnum">{value}</motion.p>
+          aria-hidden="true" className="font-sans font-bold text-[3.5rem] md:text-[4rem] leading-none tracking-[-0.04em] tnum">{value}</motion.p>
       </AnimatePresence>
     </div>
   )
@@ -47,7 +47,7 @@ function Rent() {
   const [people, setPeople] = useState(2)
   const [where, setWhere] = useState('')
   const [flash, setFlash] = useState(0)
-  const dateId = useId(), peopleId = useId(), whereId = useId()
+  const dateId = useId(), whereId = useId()
   const boat = FLEET.find(b => b.id === boatId)!
   const maxPeople = boat.id === 'whaler17' ? 3 : boat.id === 'whaler19' ? 4 : 6
   const group = useRef<HTMLDivElement>(null)
@@ -80,13 +80,13 @@ function Rent() {
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-3 md:gap-3.5">
       <div ref={group} role="radiogroup" aria-label="Boat" onKeyDown={onKey} className="grid grid-cols-2 gap-2">
         {FLEET.map(b => {
           const on = b.id === boatId
           return (
             <button key={b.id} type="button" role="radio" aria-checked={on} tabIndex={on ? 0 : -1} data-id={b.id} onClick={() => setBoatId(b.id)}
-              className={`relative flex items-center gap-3 min-h-[58px] p-[7px] pl-3 sm:pl-[7px] pr-3 rounded-[var(--radius-md)] text-left transition-[background-color,box-shadow] duration-200 active:scale-[0.98] ${on ? 'bg-surface shadow-[inset_0_0_0_2px_var(--color-channel)]' : 'bg-ground hover:bg-flats/45'}`}>
+              className={`relative flex items-center gap-3 min-h-[54px] p-[6px] pl-3 sm:pl-[7px] pr-3 rounded-[var(--radius-md)] text-left transition-[background-color,box-shadow] duration-200 active:scale-[0.98] ${on ? 'bg-surface shadow-[inset_0_0_0_2px_var(--color-channel)]' : 'bg-ground hover:bg-flats/45'}`}>
               {on && <motion.span key={flash} aria-hidden="true" className="absolute inset-0 rounded-[var(--radius-md)] shadow-[0_0_0_5px_var(--color-flats)]" initial={{ opacity: flash ? 1 : 0 }} animate={{ opacity: 0 }} transition={{ duration: 0.9, ease }} />}
               <span className="ph hidden sm:block size-11 shrink-0 rounded-[7px]"><img src={wix(b.cover, 120)} width={120} height={120} alt="" loading="lazy" decoding="async" style={{ objectPosition: b.pos }} /></span>
               <span className="leading-tight min-w-0">
@@ -107,33 +107,32 @@ function Rent() {
         </div>
       </div>
 
-      <div>
-        <label htmlFor={whereId} className="sr-only">Where you are staying on Green Turtle Cay (optional)</label>
-        <input id={whereId} type="text" value={where} onChange={e => setWhere(e.target.value)} placeholder="Where you're staying (optional)" autoComplete="off"
-          className="w-full h-11 px-3 rounded-[var(--radius-sm)] bg-ground text-ink text-[1rem] placeholder:text-muted" />
+      <div className="grid grid-cols-[1fr_auto] gap-3">
+        <div>
+          <label htmlFor={whereId} className="sr-only">Where you are staying on Green Turtle Cay (optional)</label>
+          <input id={whereId} type="text" value={where} onChange={e => setWhere(e.target.value)} placeholder="Where you're staying (optional)" autoComplete="off"
+            className="w-full h-11 px-3 rounded-[var(--radius-sm)] bg-ground text-ink text-[1rem] placeholder:text-muted" />
+        </div>
+        <label className="flex items-center gap-2 h-11 pl-3 pr-1 rounded-[var(--radius-sm)] bg-ground text-[0.9375rem] text-muted">People
+          <select value={people} onChange={e => setPeople(+e.target.value)} className="h-11 min-w-11 pr-1 bg-transparent text-ink font-semibold tnum">
+            {Array.from({ length: maxPeople }, (_, i) => i + 1).map(n => <option key={n} value={n}>{n}</option>)}
+          </select>
+        </label>
       </div>
 
       <div className="flex items-end justify-between gap-4 pt-1 border-t border-line">
-        <div className="pt-4 min-w-0">
+        <div className="pt-3 min-w-0">
           <p className="text-[0.9375rem] font-semibold">{boat.name}, {days} days</p>
           <Figure value={usd(total)} label={`Estimated total ${usd(total)}`} />
           <p className="text-[0.9375rem] text-muted tnum">{breakdown}{days >= 14 ? '. Longer? Ask Taylor.' : ''}</p>
         </div>
-        <div className="pb-1 shrink-0">
-          <label htmlFor={peopleId} className="block text-[0.875rem] text-muted mb-1">People</label>
-          <select id={peopleId} value={people} onChange={e => setPeople(+e.target.value)} className="h-11 pl-3 pr-2 rounded-[var(--radius-sm)] bg-ground text-ink font-semibold tnum">
-            {Array.from({ length: maxPeople }, (_, i) => i + 1).map(n => <option key={n} value={n}>{n}</option>)}
-          </select>
-        </div>
       </div>
 
-      <div className="grid gap-2">
-        <a className="btn btn-primary w-full max-lg:sticky max-lg:bottom-[88px] max-lg:z-10 max-lg:shadow-[0_8px_24px_rgb(13_43_46/0.25)]" href={wa(message)} target="_blank" rel="noopener"><WhatsAppGlyph />Send to Taylor on WhatsApp</a>
-        <p className="text-[0.875rem] text-muted text-center leading-snug">
-          Cash only, $100 deposit, 3-day minimum{boat.experience ? ', boating experience needed' : ''}. Nothing is booked here.<br />
-          <a className="inline-flex items-center min-h-11 font-semibold text-ink underline underline-offset-4 decoration-1 hover:decoration-2" href={mail(`Boat rental request: ${boat.name}, ${days} days`, message)}>Email Donny instead</a>
+      <a className="btn btn-primary w-full max-lg:sticky max-lg:bottom-[88px] max-lg:z-10 max-lg:shadow-[0_8px_24px_rgb(13_43_46/0.25)]" href={wa(message)} target="_blank" rel="noopener"><WhatsAppGlyph />Send to Taylor on WhatsApp</a>
+        <p className="-mb-2 text-[0.875rem] text-muted text-center leading-snug">
+          Cash only, $100 deposit, 3-day minimum{boat.experience ? ', experience needed' : ''}. Or{' '}
+          <a className="inline-flex items-center min-h-11 font-semibold text-ink underline underline-offset-4 decoration-1 hover:decoration-2" href={mail(`Boat rental request: ${boat.name}, ${days} days`, message)}>email Donny</a>
         </p>
-      </div>
     </div>
   )
 }
@@ -229,7 +228,7 @@ export default function TripSheet(): ReactNode {
           </button>
         ))}
       </div>
-      <div className="px-3.5 pt-5 pb-3.5 md:px-5 md:pt-6 md:pb-5">
+      <div className="px-3.5 pt-4 pb-3.5 md:px-5 md:pt-5 md:pb-4">
         {TABS.map(([t]) => (
           <motion.div key={t} id={ids[t]} role="tabpanel" aria-labelledby={`tab-${t}`} hidden={tab !== t}
             initial={false} animate={tab === t ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }} transition={{ duration: 0.24, ease }}>

@@ -27,7 +27,7 @@ export default function Hero() {
             Four 4-stroke boats from 17 to 23 ft, <span className="text-ink font-semibold tnum">from {usd(from)} a day</span>. Collect at 8, back at the dock by 5.
           </p>
         </motion.div>
-        <motion.div className="mt-6 lg:mt-7" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease, delay: 0.3 }}>
+        <motion.div className="mt-5 lg:mt-6" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease, delay: 0.3 }}>
           <TripSheet />
         </motion.div>
       </div>
