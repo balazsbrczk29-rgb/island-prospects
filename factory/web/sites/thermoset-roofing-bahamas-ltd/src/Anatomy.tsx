@@ -52,7 +52,7 @@ export default function Anatomy() {
   }
 
   return (
-    <section ref={section} className="anatomy" aria-label="How a Thermoset roof is built">
+    <section ref={section} id="build-up" className="anatomy" aria-label="How a Thermoset roof is built">
       <div className="anatomy__pin">
         <div ref={stage} className={`anatomy__stage${ready ? ' is-ready' : ''}`} aria-hidden="true">
           <picture className="anatomy__poster">
@@ -64,16 +64,6 @@ export default function Anatomy() {
 
         {/* ---------- first screen ---------- */}
         <div ref={hero} className="hero">
-          <header className="bar">
-            <a className="bar__name" href="./" aria-label={`${business.name}, home`}>Thermoset Roofing <span>Bahamas Ltd.</span></a>
-            <nav className="bar__nav" aria-label="Sections">
-              <a href="#clients">Clients</a><a href="#services">Services</a><a href="#radar">Maintenance</a>
-            </nav>
-            <div className="bar__act">
-              <a className="bar__tel" href={business.office.href}>{business.office.label}</a>
-              <a className="btn btn--small" href="#estimate">Free estimate</a>
-            </div>
-          </header>
           <ol className={`callouts${labels && chapter < 0 ? ' is-on' : ''}`} reversed aria-label="The layers of a single-ply roof, top to bottom">
             {[...layers].reverse().map((l, k) => {
               const i = layers.length - 1 - k
@@ -86,11 +76,11 @@ export default function Anatomy() {
             })}
           </ol>
           <div className="hero__text">
-          <h1 className="hero__title">The roof <br className="wide-only" />over the <br className="wide-only" />brands <br className="wide-only" />you know.</h1>
+          <h2 className="hero__title">How a Thermoset <br className="wide-only" />flat roof <br className="wide-only" />goes on.</h2>
           <div className="hero__copy">
-            <p>Roofing and waterproofing for Baha Mar, Atlantis, the airport and the U.S. Embassy, and for homes across New Providence. Bahamian owned, since 2002.</p>
+            <p>A single-ply roof, from the deck up: what each layer is for, and which part of the work Thermoset does. The building is a 3D model made for this page.</p>
             <div className="hero__act">
-              <a className="btn" href="#estimate">{business.cta}</a>
+              <a className="btn" href="#request">{business.cta}</a>
               <a className="hero__tel" href={business.office.href}>or call {business.office.label}</a>
             </div>
           </div>
