@@ -49,7 +49,7 @@ export const CHAPTERS = [
   { n: "3.3", time: "18:30", ink: "#fbf6ec", img: "street-dusk.jpg", alt: "The same Nassau shop at dusk, shutter down and the wall light on (illustrative)", title: "The shutter comes down. The alarm is set.",
     lines: ["From here a monitored alarm reports to Pro-Tech's central station.", "Set it as you leave, and it is watched until you open up."] },
   { n: "3.4", time: "3:00", ink: "#e9e4d8", img: "control-room.jpg", alt: "A quiet monitoring desk at night with two screens (illustrative)", title: "At 3 am, the central station is watching.",
-    lines: ["24/7 central station monitoring, weekends and holidays included.", "The one thing a camera on its own cannot do: notice."] },
+    lines: ["24/7 central station monitoring, around the clock, weekends included.", "The one thing a camera on its own cannot do: notice."] },
 ]
 
 export const PROPERTY = ["A home", "A shop or office", "A warehouse or yard", "A site or event"]

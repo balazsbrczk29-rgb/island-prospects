@@ -1,11 +1,130 @@
 {
  "slug": "pro-tech-security-service-ltd",
  "id": 90,
- "name": "Pro Tech Security Service Ltd",
+ "name": "Pro-Tech Security Service Ltd",
  "batch": "07",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
+ "pages": [
+  "index.html",
+  "security-plan.html"
+ ],
+ "primary_cta": "Call (242) 328-0653 from the planner read-out (request sentence to read out or copy)",
+ "brand_truth": "A 100% Bahamian-owned Nassau security company since 2004 whose office closes at 5 while its central station watches all night.",
+ "buyer": "Nassau homeowners, shop and office owners, property managers comparing security firms after a break-in or an insurance prompt.",
+ "direction": {
+  "archetype": "A03 Cinematic chapters",
+  "lane": "P05 Night harbour",
+  "type": "T03 Swiss grotesk",
+  "why": "The product is time (office hours vs 24/7 monitoring, guards on post), so the page is one film from morning to 3 am; night is genuinely the business's hour, with the title card and planner on a light ground."
+ },
+ "concept_type": "brochure: security services explained + call / survey request",
+ "tier_visual": "standard",
+ "tier_visual_why": "Photographic film with real-time crossfades; WebGL would not explain a service business better.",
+ "images": [
+  {
+   "src": "https://ip-assets-pro-tech-security.lovable.app/assets/street-day.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own (2752x1536)"
+  },
+  {
+   "src": "https://ip-assets-pro-tech-security.lovable.app/assets/street-dusk.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own (2752x1536)"
+  },
+  {
+   "src": "https://ip-assets-pro-tech-security.lovable.app/assets/street-night.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own (2752x1536)"
+  },
+  {
+   "src": "https://ip-assets-pro-tech-security.lovable.app/assets/cctv-closeup.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own (2752x1536)"
+  },
+  {
+   "src": "https://ip-assets-pro-tech-security.lovable.app/assets/guard-gate.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own (1856x2304)"
+  },
+  {
+   "src": "https://ip-assets-pro-tech-security.lovable.app/assets/control-room.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own (2752x1536)"
+  }
+ ],
+ "plan_gate": {
+  "verdict": "revise, then applied (one revision)",
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 5,
+  "references": 4
+ },
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 5,
+  "references": 4
+ },
+ "current_site_findings": [
+  "No website; directory listings only",
+  "Two addresses (Farrington Rd & Gregory St vs Jem's Plaza, Pitt Rd) and three phone numbers across directories",
+  "Name spelled four ways (Pro Tech, Pro-Tech, Protech, Pro-Tech Security & Alarms)",
+  "24/7 central station monitoring, the strongest asset, buried in one directory paragraph"
+ ],
+ "pitch_line": "At 3 am your competitors' websites are asleep; yours shows the street at the real Nassau hour and says your central station is watching.",
+ "assumptions": [
+  "Primary phone (242) 328-0653 from the BahamasLocal listing; (242) 325-3335 from older listings shown second",
+  "Address #2 Farrington Road & Gregory Street (BahamasLocal, FindYello); older listings say #10 Jem's Plaza, Pitt Road",
+  "Office hours Mon-Fri 9-5 from BahamasLocal; an older listing says 24 hours",
+  "Chapter copy restates the listed divisions; 'monitored alarm reports to the central station' is the category-standard meaning of central station monitoring",
+  "Planner property and need options are category lines to confirm",
+  "All photographs are generated illustrations, not Pro-Tech's premises, staff or control room",
+  "Proposed domain protechsecuritybahamas.com in canonical is a placeholder",
+  "Planner choices (property types, needs, New Providence area list) and the division one-liners are plain restatements of the listed divisions, to confirm.",
+  "Monitoring steps on 3.0 (alarm trips, central station receives, agreed call plan followed, keyholders contacted) are category-standard, no times claimed, to confirm."
+ ],
+ "sources": [
+  "https://www.bahamaslocal.com/showlisting/15726/Pro_Tech_Security_Service_Limited.html",
+  "https://bahamas.yabsta.com/listing/view/95510/pro-tech-security-service-limited",
+  "https://www.bahamasindex.com/company/424/Pro_Tech_Security_Services_Ltd",
+  "https://www.findyello.com/bahamas/pro-tech-security-and-alarms-services/profile/nassau/",
+  "https://www.youtube.com/channel/UCEjTWQDBBXZuJ8dRrmnYNJg"
+ ],
+ "notes": [
+  "Gen 2 rebuild by site worker. Track B (no site). BLIND sandbox: photos seen in the Lovable gallery (ip-assets-pro-tech-security, two rounds) and routed as crops into QA shots. Hero shows the street at the live Nassau time (day/dusk/night images of one scene, edited from the same frame) and a 24-hour scrubber. Plan gate asked for: larger photo and display-size status line, visible camera/keypad hardware (regenerated), chapters pinned full-bleed with captions at a fixed anchor, a CCTV close-up instead of repeating the street, dropping the lone text card; all applied. Captions sit on a solid night panel (not an image overlay) for legibility. Scores recorded are the plan-gate predictions after revision. No email published, so conversion is by phone plus a copyable request. Shared interact.mjs hung on this page (tall pinned stage; killed after 9 min); interactions verified with a custom Playwright script instead: hour stops and slider rewrite the status and crossfade frames, menu opens and closes on Escape, planner chips update the request, 0 JS errors. QA: 0 blockers; distinct OK (closest 70).",
+  "2026-11-22 rebuild to approved job spec: planner (property, needs, area) with live Covered-by read-out and request sentence moved onto the live-hour hero as a paper panel; previous composition kept (full-bleed Nassau hour, scrubber, pinned 24-hour film); new 2.0 six divisions, 3.0 monitoring steps on night field, 4.0 licensed. Critic gate 1 yes x3; scores wow 4, photo 4, type 4, comp 4, conversion 5, phone 4 after one composition-restoring fix pass."
+ ],
+ "built_at": "2026-11-22T12:18:23.273Z",
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T12:09:57.414Z"
+ "jobspec_built": true,
+ "gate1": {
+  "screen1_tool": true,
+  "job_easier": true,
+  "keep_present": true
+ },
+ "scores": {
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 5,
+  "phone": 4
+ },
+ "previous_scores": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 5,
+  "distinct": 5,
+  "references": 4
+ }
 }

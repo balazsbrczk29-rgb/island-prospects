@@ -108,7 +108,7 @@ function Monitoring() {
   return (
     <section className="night" id="monitoring" aria-labelledby="m-h">
       <div className="night-in">
-        <h2 id="m-h">When the alarm goes off at 3 am.</h2>
+        <div><span className="n num">3.0</span><h2 id="m-h">When the alarm goes off at 3 am.</h2></div>
         <div>
           <ol className="log">
             {STEPS.map(([h, p], i) => <li key={h}><span className="dn num">{i + 1}</span><div><h3>{h}</h3><p>{p}</p></div></li>)}

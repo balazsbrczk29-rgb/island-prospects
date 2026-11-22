@@ -330,3 +330,4 @@ img { display: block; max-width: 100%; }
 .pl .grp + .grp { margin-top: 6px; }
 @media (min-width: 961px) { .hero .strip { padding-right: calc(min(500px, 40vw) + var(--pad) * 2); } }
 @media (max-width: 960px) { .hdr .right a.num { display: inline-flex; min-width: 48px; justify-content: center; } }
+@media (min-width: 961px) { .hero .tool .chip { padding: 0 12px; } .hero .tool { width: min(530px, 40vw); } .hero .strip { padding-right: calc(min(530px, 40vw) + var(--pad) * 2); } }
