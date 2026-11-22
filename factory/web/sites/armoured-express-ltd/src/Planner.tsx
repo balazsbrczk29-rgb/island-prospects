@@ -32,7 +32,8 @@ export function summaryOf(p: Plan) {
   const names = SERVICES.filter(s => p.svcs.includes(s.id)).map(s => /^(ATM|Family)/.test(s.t) ? s.t : s.t.toLowerCase())
   const list = names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names.at(-1)}` : names[0]
   const u = p.svcs.some(s => s === "atm" || s === "atmm") ? (p.count === 1 ? "ATM" : "ATMs") : (p.count === 1 ? "site" : "sites")
-  return `Request for Armoured Express: ${list} for ${p.count} ${u} on ${islandName(p)}, ${freqText(p)}. Sector: ${p.sector.toLowerCase()}.`
+  const where = p.island === "fi" ? "from Nassau, flown to a Family Island" : `on ${islandName(p)}`
+  return `Request for Armoured Express: ${list} for ${p.count} ${u} ${where}, ${freqText(p)}. Sector: ${p.sector.toLowerCase()}.`
 }
 
 export function PlanProvider({ children }: { children: ReactNode }) {
@@ -44,9 +45,8 @@ export function PlanProvider({ children }: { children: ReactNode }) {
   })
   const toggle = (s: Svc) => setPlan(o => {
     const on = o.svcs.includes(s)
-    if (on && o.focus !== s) return { ...o, focus: s }
     const svcs = on ? o.svcs.filter(x => x !== s) : [...o.svcs, s]
-    return { ...o, svcs, focus: on ? (svcs.at(-1) ?? null) : s }
+    return { ...o, svcs, focus: on ? (o.focus === s ? (svcs.at(-1) ?? null) : o.focus) : s }
   })
   const summary = useMemo(() => summaryOf(plan), [plan])
   return <Ctx.Provider value={{ plan, set, toggle, summary }}>{children}</Ctx.Provider>
@@ -56,7 +56,9 @@ type Step = { t: string; place: string; safe: string }
 const GUARDS = "Highly trained, uniformed and armed guards."
 const BAG = "Secure, locked transit bags."
 const VAN = "Surveillance-enabled cash in transit. Public liability cover up to $2,000,000."
-const SUPPORT = "24-hour support for clients."
+const SUPPORT = "24-hour support."
+
+export const stageCount = (p: Plan) => Math.max(route(p).length, 1)
 
 function route(p: Plan): Step[] {
   const n = p.count, isl = p.island === "fi" ? "Nassau or Grand Bahama" : islandName(p)
@@ -94,8 +96,8 @@ function route(p: Plan): Step[] {
       { t: "Backed", place: "The Armoured Express team", safe: "Armoured Services Officers cross-trained in physical security, for business continuity." },
     ]
     case "avsec": return [
-      { t: "Assigned", place: "Security Services (Bah.) Ltd.", safe: "Aviation security from the sister company." },
-      { t: "On duty", place: `Your airport or aviation facility, ${isl}`, safe: "Two companies, one family, one mission." },
+      { t: "Assigned", place: "Security Services (Bah.) Ltd.", safe: "The sister company of Armoured Express." },
+      { t: "On duty", place: `Your airport or aviation facility, ${isl}`, safe: "Aviation security from Security Services (Bah.) Ltd." },
       { t: "Overseen", place: "Management", safe: "A seasoned management team of armoured security experts." },
     ]
     default: return []
@@ -134,7 +136,7 @@ function CustodyLine() {
                   <p className="text-[16px] leading-snug"><span className="tnum mr-2 text-[13px] font-medium text-muted">{String(i + 1).padStart(2, "0")}</span><span className="font-semibold">{s.t}</span><AnimatePresence mode="popLayout" initial={false}><motion.span key={s.place} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.16 }} className="tnum text-[15px] text-ink/75"> · {s.place}</motion.span></AnimatePresence></p>
                   <p className="serif mt-1 text-[14.5px] leading-snug text-muted">{s.safe}</p>
                 </div>
-                <motion.span className="stamp mt-0.5 h-fit self-start" initial={reduce ? false : { scale: 1.45, opacity: 0, rotate: -12 }} animate={{ scale: 1, opacity: 1, rotate: -4 }} transition={{ duration: 0.28, delay: 0.09 * i + 0.14, ease: out }}>Signed</motion.span>
+                <motion.span className="stamp mt-0.5 h-fit self-start max-sm:col-start-2 max-sm:mt-2 max-sm:justify-self-start" initial={reduce ? false : { scale: 1.45, opacity: 0, rotate: -12 }} animate={{ scale: 1, opacity: 1, rotate: -4 }} transition={{ duration: 0.28, delay: 0.09 * i + 0.14, ease: out }}>Signed</motion.span>
               </motion.li>
             ))}
           </motion.ol>
@@ -149,18 +151,18 @@ function Inputs() {
   const u = unit(plan)
   const clamp = (v: number) => Math.max(1, Math.min(99, v || 1))
   return (
-    <div className="space-y-4">
+    <div className="flex h-full flex-col gap-4">
       <fieldset>
         <legend className="field-label">What do you need?</legend>
-        <ul className="mt-2 border-t border-line">
+        <ul className="mt-2 grid grid-cols-2 gap-1.5 md:block md:border-t md:border-line">
           {SERVICES.map(s => {
             const on = plan.svcs.includes(s.id), focus = plan.focus === s.id
             return (
-              <li key={s.id} className="border-b border-line">
-                <button type="button" role="checkbox" aria-checked={on} onClick={() => toggle(s.id)} className="group flex min-h-11 w-full items-center gap-3 text-left lg:min-h-10">
+              <li key={s.id} className="md:border-b md:border-line">
+                <button type="button" role="checkbox" aria-checked={on} onClick={() => toggle(s.id)} className="group flex min-h-12 w-full items-center gap-2.5 border border-ink/20 px-2.5 text-left md:min-h-11 md:gap-3 md:border-0 md:px-0 lg:min-h-10">
                   <span className={`flex size-[18px] shrink-0 items-center justify-center border transition-colors duration-150 ${on ? "border-brass bg-brass text-surface" : "border-ink/35 group-hover:border-ink"}`}>{on && <Check className="size-3.5" strokeWidth={2.5} aria-hidden />}</span>
-                  <span className={`text-[15px] ${focus ? "font-semibold" : ""}`}>{s.t}</span>
-                  {s.co && <span className="ml-auto text-[12.5px] text-muted">{s.co}</span>}
+                  <span className={`text-[14px] leading-tight md:text-[15px] ${focus ? "font-semibold" : ""}`}>{s.t}</span>
+                  {s.co && <span className="ml-auto hidden text-[12.5px] text-muted md:inline">{s.co}</span>}
                 </button>
               </li>
             )
@@ -178,7 +180,7 @@ function Inputs() {
       </fieldset>
         <AnimatePresence initial={false}>
           {plan.freq === "days" && (
-            <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2, ease: out }} className="!mt-2 grid grid-cols-7 gap-1" aria-label="Days">
+            <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2, ease: out }} className="-mt-2 grid grid-cols-7 gap-1" aria-label="Days">
               {DAYS.map(d => { const on = plan.days.includes(d); return <button key={d} type="button" aria-pressed={on} onClick={() => set({ days: on ? plan.days.filter(x => x !== d) : DAYS.filter(x => x === d || plan.days.includes(x)) })} className={`min-h-10 text-[13px] font-medium transition-colors ${on ? "bg-ink text-surface" : "border border-ink/20 hover:border-ink"}`}>{d}</button> })}
             </motion.div>
           )}
@@ -197,6 +199,7 @@ function Inputs() {
           <select id="sector" value={plan.sector} onChange={e => set({ sector: e.target.value })} className="mt-2 h-11 w-full border border-ink/20 bg-transparent px-2.5 text-[15px] outline-none focus:border-ink">{SECTORS.map(s => <option key={s}>{s}</option>)}</select>
         </div>
       </div>
+      <p className="mt-auto border-t border-line pt-3 text-[13.5px] leading-snug text-muted max-md:hidden">Requests are taken by phone, Monday to Friday, 9:00 to 5:00. Also <a href={TEL2} className="tnum ulink text-ink">{PHONE2}</a>. No prices are quoted online.</p>
     </div>
   )
 }

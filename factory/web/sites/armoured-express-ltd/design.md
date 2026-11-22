@@ -19,11 +19,11 @@
   - t3 lead 21 / 1.45 / -0.005em
   - t4 h3 30 / 1.12 / -0.02em
   - t5 h2 48 / 1.02 / -0.03em
-  - t6 hero 76 / 0.96 / -0.035em (phone 40 / 1.02)
+  - t6 hero 60 to 64 / 0.98 / -0.035em (phone 42 / 1.0); year numerals 76
 - Tabular figures (`tnum`) on all phone numbers, step codes, counts, hours and years.
 
 **Colour (OKLCH).**
-- ground (stone) `oklch(0.955 0.006 95)`
+- ground (stone) `oklch(0.94 0.005 95)` (#ecebe7)
 - surface (manifest sheet) `oklch(0.985 0.004 95)`
 - field (stone 2, one section) `oklch(0.915 0.009 95)`
 - ink `oklch(0.21 0.012 260)`

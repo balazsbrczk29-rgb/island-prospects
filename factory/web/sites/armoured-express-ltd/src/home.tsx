@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from "motion/react"
 import { ArrowUpRight, Phone } from "lucide-react"
 import Truck, { TruckPlate, CALLOUTS } from "./Truck"
-import Manifest, { PlanProvider, usePlan, CopyButton, type Svc } from "./Planner"
+import Manifest, { PlanProvider, usePlan, CopyButton, stageCount, type Svc } from "./Planner"
 import { Page, mount, OfficeStatus, PHONE, TEL, PHONE2, TEL2, out } from "./site"
 
 function useSendToPlanner() {
@@ -18,6 +18,11 @@ function In({ children, className = "", delay = 0, as }: { children: React.React
   return <C className={className} initial={reduce ? false : { opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ duration: 0.5, delay, ease: out }}>{children}</C>
 }
 
+function HeroTruck() {
+  const { plan } = usePlan()
+  return <Truck className="block w-full" runKey={`${plan.focus}-${plan.island}-${plan.count}`} stages={stageCount(plan)} />
+}
+
 function Hero() {
   const reduce = useReducedMotion()
   return (
@@ -28,13 +33,14 @@ function Hero() {
           <motion.span className="block" initial={reduce ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: out }}>The Bahamas' armoured courier, since <span className="tnum">1961</span>.</motion.span>
         </h1>
         <motion.p initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.15 }} className="serif mt-5 max-w-[34ch] text-[18px] leading-[1.5] text-ink/85 md:text-[21px] md:leading-[1.45]">Cash in transit with armoured vehicles and armed, uniformed guards. ATM replenishment and first-line maintenance. Air courier to the Family Islands. 100% Bahamian owned and operated.</motion.p>
-        <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:hidden">
+        <div className="order-last mt-6 grid gap-2 sm:grid-cols-2 lg:hidden">
           <a href="#manifest" className="btn-primary whitespace-nowrap">Plan your request</a>
           <a href={TEL} className="btn-ghost tnum whitespace-nowrap"><Phone className="size-4" strokeWidth={1.75} aria-hidden />{PHONE}</a>
         </div>
-        <div className="mt-8 lg:mt-10">
-          <Truck className="block w-full" />
-          <p className="tnum mt-3 text-[14px] text-muted">Public liability cover up to $2,000,000 · 24-hour support for clients</p>
+        <div className="mt-6 lg:mt-12">
+          <HeroTruck />
+          <p className="tnum mt-3 text-[14px] text-muted">The truck drives each stage of the run you plan. Public liability cover up to $2,000,000.</p>
+          <p className="mt-1 text-[14px] text-muted max-lg:hidden"><OfficeStatus /></p>
         </div>
       </div>
       <div className="max-lg:-mx-[var(--pad)] lg:col-span-7"><Manifest /></div>
@@ -46,7 +52,7 @@ const LEDGER: { id: Svc; code: string; t: string; d: string; ready: string[] }[]
   { id: "cit", code: "01", t: "Cash in transit", d: "Cash collected by highly trained, uniformed and armed guards, carried in secure locked transit bags inside secure armoured vehicles, with surveillance-enabled cash in transit.", ready: ["Pickup and drop-off addresses", "How often, and on which days", "Typical consignment, roughly"] },
   { id: "atm", code: "02", t: "ATM services", d: "The first in The Bahamas to cater to the demand for ATM services. Replenishment of your machines and first-line maintenance.", ready: ["How many ATMs, and where", "Replenishment, maintenance or both", "Fill schedule you need"] },
   { id: "air", code: "03", t: "Family Island air courier", d: "Air courier solutions for consignments that need to reach the Family Islands securely.", ready: ["Which island and settlement", "Cash, valuables or documents", "Regular or one-off"] },
-  { id: "cit", code: "04", t: "24-hour support", d: "Clients have support around the clock, backed by a seasoned management team of armoured security experts.", ready: ["Your account or site name", "Who to call back"] },
+  { id: "cit", code: "04", t: "24-hour support", d: "24-hour support, backed by a seasoned management team of armoured security experts.", ready: ["Your account or site name", "Who to call back"] },
 ]
 
 function Services() {
@@ -55,7 +61,7 @@ function Services() {
     <section id="services" aria-labelledby="svc-title" className="wrap scroll-mt-6 py-[72px] md:py-32">
       <div className="grid gap-6 lg:grid-cols-12">
         <In className="lg:col-span-6"><h2 id="svc-title" className="h2">Four services from one armoured fleet.</h2></In>
-        <In delay={0.05} className="lg:col-span-5 lg:col-start-8"><p className="serif text-[18px] leading-[1.6] text-muted">From the daily bank run to an ATM on Grand Bahama or a consignment flown to a Family Island, Armoured Express handles the whole chain itself.</p></In>
+        <In delay={0.05} className="lg:col-span-5 lg:col-start-8"><p className="serif text-[18px] leading-[1.6] text-muted">Cash in transit, ATM services and air courier to the Family Islands, from a company that has moved Bahamian cash since 1961.</p></In>
       </div>
       <ol className="mt-12 border-t border-ink md:mt-16">
         {LEDGER.map((r, i) => (

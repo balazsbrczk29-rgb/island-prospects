@@ -40,7 +40,7 @@ export function OfficeStatus({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 ${className}`}>
       <span className={`size-2 rounded-full ${open ? "bg-[#33854a]" : "bg-muted"}`} aria-hidden />
-      {open ? "Office open now" : "Office closed · 24-hour support for clients"}
+      {open ? "Office open now" : "Office closed · 24-hour support"}
     </span>
   )
 }
@@ -111,7 +111,7 @@ function Footer() {
         <div className="text-[15px] md:col-span-3">
           <a href={TEL} className="tnum flex min-h-11 w-fit items-center text-[19px] font-semibold"><span className="ulink">{PHONE}</span></a>
           <a href={TEL2} className="tnum flex min-h-11 w-fit items-center"><span className="ulink">{PHONE2}</span></a>
-          <p className="mt-3 text-on-steel-muted">Office Mon to Fri, 9:00 to 5:00<br />24-hour support for clients</p>
+          <p className="mt-3 text-on-steel-muted">Office Mon to Fri, 9:00 to 5:00<br />24-hour support</p>
         </div>
         <nav aria-label="Footer" className="text-[15px] md:col-span-3">
           {NAV.map(n => <a key={n.href} href={n.href} className="flex min-h-11 w-fit items-center"><span className="ulink">{n.label}</span></a>)}
@@ -136,7 +136,7 @@ function ActionBar() {
     return () => { a.disconnect(); b.disconnect() }
   }, [])
   return (
-    <motion.nav aria-label="Quick actions" initial={false} animate={{ y: show ? 0 : "110%" }} transition={{ duration: 0.3, ease: out }} className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1.3fr] border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] md:hidden">
+    <motion.nav aria-label="Call or open your request" initial={false} animate={{ y: show ? 0 : "110%" }} transition={{ duration: 0.3, ease: out }} className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1.3fr] border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] md:hidden">
       <a href="#manifest" tabIndex={show ? 0 : -1} className="flex min-h-[60px] items-center justify-center text-[15px] font-semibold">Your request</a>
       <a href={TEL} tabIndex={show ? 0 : -1} className="tnum flex min-h-[60px] items-center justify-center gap-2 bg-brass text-[15px] font-semibold text-surface"><Phone className="size-4" strokeWidth={1.75} aria-hidden />Call {PHONE}</a>
     </motion.nav>

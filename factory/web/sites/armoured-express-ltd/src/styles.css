@@ -7,7 +7,7 @@
 @font-face { font-family: "Serif Fallback"; src: local("Georgia"); size-adjust: 96%; }
 
 @theme {
-  --color-ground: #f1f0ec;
+  --color-ground: #ecebe7;
   --color-surface: #fbfaf7;
   --color-field: #e5e3dc;
   --color-ink: #15181e;
