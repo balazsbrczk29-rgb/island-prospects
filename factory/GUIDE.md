@@ -43,23 +43,37 @@ Match that level, but every site gets its own individual design: its own type, p
 - Craft polish follows `art-director/references/craft-checklist.md` (A and B): spacing, type, contrast, tabular numbers, phone smoothness.
 - Hard rules stay: CLAUDE.md (truth only, concept label, noindex, no em dashes, the stack).
 
-## 3b. Lean mode (Nov 22: same quality, far fewer credits). These rules override every other document.
-Most credits went on looking at images and re-reading documents, not on building. So:
-1. **Read once per run.** Read GUIDE.md, the spec and the "Parallel workers" section of PROMPT.md. Open a skill or recipe only when you need one specific thing; use `grep -n` to jump to the section and read just that part.
-2. **No new research.** Approved specs are already sourced. Look something up only if the spec lacks a fact the page needs, and then make at most 2 calls.
-3. **Photos.** Use the photo URLs listed in the spec or brief. Don't open galleries or view each photo. Look at an existing Lovable gallery screenshot at most once, and only if you must choose between photos. Don't generate new images unless the spec has none of their own.
-4. **Screenshots: at most 3 images per site.**
-   - One desktop first-screen JPEG (1440x900 at device scale factor 1, quality 60).
-   - One phone first-screen JPEG (390x844, quality 60), both taken after the build.
-   - One optional extra screen if something looks wrong.
+## 3b. Quality by construction (Nov 22). The site is generated to 10/10 standard, not repaired into it.
+Overrides every other document.
+1. **design.md before code.** After reading the spec, write `factory/web/sites/<slug>/design.md` from `factory/DESIGN-TEMPLATE.md`, completely and exactly. Include:
+   - the idea and named inspirations;
+   - tokens in OKLCH with the type scale, spacing and motion;
+   - every screen on desktop and phone;
+   - the core tool's interaction spec with its states and formulas;
+   - 3 to 6 signature details;
+   - the photography plan with native sizes;
+   - a written self-review against craft checklist A1 to A20.
 
-   Don't take before screenshots, stitched full pages, routed photo crops or repeated hero iterations from images. Judge the rest of the page from the DOM: `qa.mjs` metrics, layout boxes and text. qa.mjs's own screenshots are not to be opened.
-5. **No critic subagent.** Do the GUIDE section 4 check yourself. For gate 1, compare against the spec's Keep list and the previous version's source (`git show HEAD~N:...`, text only). Use your 2 to 3 screenshots for gate 2. Make one fix pass at most. Record honest scores.
-6. **Quiet tools.** Pipe build, qa, interact and distinct output through `tail -15`. Never print whole files you've just written. Write each component in one go rather than in many small edits.
-7. **Checkpoints stay**, at the existing rhythm: after screen 1, and every ~15 minutes.
+   Fix every weak answer in the self-review before writing any code. Push it as a WIP checkpoint.
+2. **Generate from it.** Tokens first, as CSS variables in styles.css. Then the core tool as a real, working component. Then each screen exactly as design.md says.
+   - Use the skills as toolboxes, grep-ing only the exact section you need: art-director craft-checklist, the site-playbooks recipes (map, 3D, scroll stage, enquiry), emil-design-eng, animate, apple-design, and React Bits only through the craft-checklist E rules.
+   - Write each component in one go.
+3. **See the page as text, not pictures.** Run `node factory/tools/inspect.mjs <slug> [page]`. It prints:
+   - a screen-by-screen layout outline for desktop and phone (positions, type sizes, fonts, colours, images against their native size, CTAs, controls);
+   - automatic craft checks (contrast, upscaled photos, tap targets, tabular numbers, balanced headings, line length, em dashes, overflow, label and noindex).
+
+   Iterate until it reports 0 FAIL and every WARN is fixed or justified. Compare the outline against design.md screen by screen. Read your own source when something is unclear.
+4. **Then at most 2 images.** One desktop and one phone first-screen JPEG (device scale 1, quality 60), only to judge the overall impression.
+5. **No new research** unless the spec lacks a needed fact (at most 2 calls). Use the photo URLs from the spec or brief. Don't browse galleries. Pipe tool output through `tail`.
+6. **Independent critic, cheap.** Spawn ONE fresh critic subagent. Give it:
+   - the paths to the job spec, design.md and the source folder;
+   - the inspect.mjs output (saved to /tmp/shots/<slug>/inspect.txt);
+   - the 2 JPEGs.
+
+   It judges the page from the code and the outline as much as from the pictures, and may read any source file. It answers GUIDE section 4: gate 1 purpose, then gate 2 scores, with concrete fixes. Apply them, re-run inspect.mjs, and give it one re-score. Publish only when gate 1 passes and every gate 2 score is 4 or higher. Aim for 5.
 
 ## 4. The check (the critic sees old and new side by side)
-In lean mode the builder runs this check itself (3b.5). It uses the job spec, the previous version's source and Keep list, its own 2 to 3 screenshots, and a description of how the core tool behaves.
+The critic (3b.6) gets the job spec, design.md, the source, the inspect.mjs outline and craft report, the 2 JPEGs, and the previous version's source and Keep list.
 Gate 1 must pass before style is even scored. Answer each with yes or no:
 1. Does screen 1 show the product and put the core tool in reach?
 2. Is the one job easier than on their current site and on our previous version?
