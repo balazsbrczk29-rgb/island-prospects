@@ -4,8 +4,20 @@
  "name": "Island Marine Covering Ltd (IMC)",
  "batch": "01",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T11:51:31.632Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T12:02:30.141767Z",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/island-marine-covering-ltd/",
+ "scores": {
+  "gate1": "pass",
+  "wow": 4,
+  "photography": 5,
+  "typography": 5,
+  "composition": 4,
+  "conversion": 5,
+  "phone": 4
+ },
+ "notes": "Job-spec build 2026-11-22 from design.md: 'the cutting table' selector hero (House/Boat, job, size, where, when) with their own photo unrolling like an awning; composed WhatsApp message on every button. Bitter + Instrument Sans, canopy teal accent. Videos and Heat-Shields/Boat-Cover photos not used (no verified URLs/content); recorded in concept notes. Map kept as a link (no verified coordinates). Assumptions to confirm: shutter type, Cover Up = IMC trading name, visit hours."
 }

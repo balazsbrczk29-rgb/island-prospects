@@ -130,7 +130,7 @@ p, li { text-wrap: pretty; }
   .tool__ask, .tool__show { display: contents; }
   .hero, .tool__lede, .sides, .qs, .send, .answer { margin: 0 var(--inset); }
   .hero { order: 1; } .tool__lede { order: 2; } .sides { order: 3; } .jobs { order: 4; } .stage { order: 5; } .answer { order: 6; } .qs { order: 7; } .send { order: 8; }
-  .jobs { display: flex; gap: var(--s2); overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--inset); scrollbar-width: none; margin-top: calc(var(--s2) * -1); }
+  .jobs { display: flex; gap: var(--s2); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--inset); padding: 0 var(--inset); scrollbar-width: none; margin-top: calc(var(--s2) * -1); }
   .jobs::-webkit-scrollbar { display: none; }
   .jobs button { flex: none; scroll-snap-align: start; min-height: 44px; padding: 0 var(--s4); border: 1px solid var(--stitch); border-radius: var(--r); font-size: 17px; white-space: nowrap; }
   .jobs button::before { display: none; }
@@ -185,7 +185,7 @@ p, li { text-wrap: pretty; }
 @media (max-width: 900px) {
   .how { padding: var(--s8) var(--inset); }
   .beats { grid-template-columns: 1fr; gap: var(--s5); margin-bottom: var(--s6); }
-  .strip { grid-template-columns: repeat(3, 72%); overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--s3); margin: 0 calc(var(--inset) * -1); padding: 0 var(--inset); scrollbar-width: none; }
+  .strip { grid-template-columns: repeat(3, 72%); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--inset); gap: var(--s3); margin: 0 calc(var(--inset) * -1); padding: 0 var(--inset); scrollbar-width: none; }
   .strip li { scroll-snap-align: start; }
   .how__storm { font-size: 19px; margin-top: var(--s6); }
 }
