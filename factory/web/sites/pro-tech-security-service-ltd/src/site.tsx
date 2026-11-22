@@ -6,10 +6,10 @@ import { ADDRESS, FAX, INTL, PHONE, PHONE2, TEL, TEL2, TELINTL } from "./data"
 import "./styles.css"
 
 const MENU = [
-  ["1.0", "Who we are", "index.html#who"],
-  ["2.0", "Twenty-four hours", "index.html#hours"],
-  ["3.0", "Also from Pro-Tech", "index.html#also"],
-  ["4.0", "Plan your call", "security-plan.html"],
+  ["1.0", "Plan your call", "index.html#main"],
+  ["2.0", "Six services", "index.html#services"],
+  ["3.0", "Monitoring 24/7", "index.html#monitoring"],
+  ["4.0", "Licensed, since 2004", "index.html#who"],
   ["5.0", "Contact", "index.html#contact"],
 ]
 
@@ -54,7 +54,7 @@ export function Dock() {
       es.forEach(e => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)))
       el.dataset.hidden = seen.size ? "true" : "false"
     }, { threshold: 0.05 })
-    document.querySelectorAll("[data-hero], #who, #contact, .summary").forEach(t => io.observe(t))
+    document.querySelectorAll(window.innerWidth < 961 ? "#contact, .readout .acts" : "[data-hero], #contact, .readout .acts").forEach(t => io.observe(t))
     return () => io.disconnect()
   }, [])
   return <div className="dock" ref={ref} data-hidden="true"><a className="btn num" href={`tel:${TEL}`}>Call {PHONE}</a></div>
@@ -63,17 +63,18 @@ export function Dock() {
 export function Credits() {
   return (
     <footer className="credits" id="contact" aria-labelledby="credits-h">
+      <span className="n num">5.0</span>
       <h2 id="credits-h">One number, any weekday. The central station, every hour.</h2>
       <dl className="roll">
-        <div><dt>Call the office</dt><dd className="num"><a href={`tel:${TEL}`}>{PHONE}</a><br /><a href={`tel:${TEL2}`}>{PHONE2}</a></dd></div>
+        <div><dt>Call the office</dt><dd className="num"><a href={`tel:${TEL}`}>{PHONE}</a><br /><a href={`tel:${TEL2}`}>{PHONE2}</a> <span className="old">on older listings</span></dd></div>
         <div><dt>From abroad</dt><dd className="num"><a href={`tel:${TELINTL}`}>{INTL}</a></dd></div>
-        <div><dt>Office</dt><dd>#2 Farrington Road &amp; Gregory Street<br />P.O. Box CB-13083, Nassau</dd></div>
+        <div><dt>Office</dt><dd>#2 Farrington Road &amp; Gregory Street<br />P.O. Box CB-13083, Nassau<br /><a href="https://www.google.com/maps/search/?api=1&query=Farrington+Road+and+Gregory+Street+Nassau+Bahamas" target="_blank" rel="noopener">Directions</a><br /><span className="old">Older listings: #10 Jem's Plaza, Pitt Road</span></dd></div>
         <div><dt>Office hours</dt><dd className="num">Monday to Friday, 9 am to 5 pm</dd></div>
         <div><dt>Monitoring</dt><dd>Central station, 24 hours a day, 7 days a week</dd></div>
         <div><dt>Fax</dt><dd className="num">{FAX}</dd></div>
         <div><dt>Since</dt><dd className="num">2004, 100% Bahamian owned and operated</dd></div>
         <div><dt>Licensed by</dt><dd>The Ministry of National Security, as a security service contractor</dd></div>
-        <div><dt>Plan first</dt><dd><a href="security-plan.html">Prepare your call in a minute</a></dd></div>
+        <div><dt>Plan first</dt><dd><a href="index.html#main">Prepare your call in a minute</a></dd></div>
       </dl>
       <div className="fine">
         <span>Pro-Tech Security Service Limited, Nassau, The Bahamas.</span>
