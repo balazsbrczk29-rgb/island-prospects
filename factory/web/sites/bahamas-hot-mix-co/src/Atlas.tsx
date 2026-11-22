@@ -4,8 +4,9 @@ import { CATEGORIES, PROJECTS, type Cat } from "./data"
 import { ease } from "./site"
 
 // The project index: real categories from bhmgroup.com/projects, every row links to their project page.
-export default function Atlas({ limit, thumbs = false }: { limit?: number; thumbs?: boolean }) {
-  const [cat, setCat] = useState<Cat | "All">("All")
+export default function Atlas({ limit, thumbs = false, cat: catIn, setCat: setCatIn }: { limit?: number; thumbs?: boolean; cat?: Cat | "All"; setCat?: (c: Cat | "All") => void }) {
+  const [catOwn, setCatOwn] = useState<Cat | "All">("All")
+  const cat = catIn ?? catOwn, setCat = setCatIn ?? setCatOwn
   const [hover, setHover] = useState(0)
   const rows = useMemo(() => PROJECTS.filter(p => cat === "All" || p.cat === cat), [cat])
   const shown = limit ? rows.slice(0, limit) : rows
