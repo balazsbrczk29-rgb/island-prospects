@@ -125,7 +125,7 @@ function Contact() {
       <div className="wrap grid gap-10 md:grid-cols-12 md:gap-6">
         <div className="md:col-span-5">
           <h2 id="c-title" className="font-display text-[length:var(--text-h2)] leading-[1] tracking-[-0.02em]">One line for every job.</h2>
-          <p className="mt-6 max-w-[44ch] text-[17px] text-muted">Call or email the Copy Service and they will tell you which centre is closest and when your job will be ready.</p>
+          <p className="mt-6 max-w-[44ch] text-[17px] text-muted">Call or email the Copy Service and they will tell you where to collect and when your job will be ready.</p>
         </div>
         <div className="grid gap-px bg-line sm:grid-cols-2 md:col-span-7">
           {cells.map(c => (

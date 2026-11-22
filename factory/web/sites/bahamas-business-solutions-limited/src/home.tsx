@@ -19,14 +19,14 @@ function Hero() {
         {["var(--color-ink)", "var(--color-cyan)", "var(--color-toner)", "#373b3f", "#616467", "#909295", "#bcbebf", "#dddedf"].map(c => <span key={c} className="h-3 w-7" style={{ background: c }} />)}
       </motion.div>
 
-      <div className="wrap grid gap-10 pt-8 pb-14 md:grid-cols-12 md:gap-6 md:pt-20 md:pb-20">
-        <div className="md:col-span-5 md:pr-8">
+      <div className="wrap grid gap-7 pt-7 pb-14 md:grid-cols-12 md:gap-6 md:pt-20 md:pb-10">
+        <div className="md:col-span-5 md:flex md:flex-col md:justify-between md:pr-8">
           <div>
             <motion.h1 id="hero-title" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease }} className="font-display text-[length:var(--text-hero)] leading-[0.94] tracking-[-0.025em]">
-              Tell us what you need. The right BBSL desk answers.
+              <span className="block">Tell us what you need.</span><span className="block">The right BBSL desk answers.</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35, duration: 0.6 }} className="mt-6 hidden max-w-[44ch] text-[length:var(--text-lead)] leading-[1.5] text-muted md:block">
-              The Bahamas' Xerox company since 1966. Copiers, printers, ATMs and point of sale, sold, installed and serviced by our own engineers in Nassau and Freeport.
+              The Bahamas' Xerox company since 1966. Copiers, printers, ATMs and point of sale, sold and serviced from offices in Nassau and Freeport.
             </motion.p>
           </div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.6 }} className="mt-10 hidden md:block">
@@ -35,10 +35,10 @@ function Hero() {
         </div>
         <motion.div className="md:col-span-7" initial={{ clipPath: "inset(0 0 100% 0)" }} animate={{ clipPath: "inset(0 0 0% 0)" }} transition={{ delay: 0.15, duration: 0.9, ease: mask }}>
           <Counter />
-          <Offices2 />
+          <div className="md:hidden"><Offices2 /></div>
         </motion.div>
         <div className="md:hidden">
-          <p className="max-w-[44ch] text-[17px] text-muted">The Bahamas' Xerox company since 1966. Copiers, printers, ATMs and point of sale, sold, installed and serviced by our own engineers in Nassau and Freeport.</p>
+          <p className="max-w-[44ch] text-[17px] text-muted">The Bahamas' Xerox company since 1966. Copiers, printers, ATMs and point of sale, sold and serviced from offices in Nassau and Freeport.</p>
           <div className="mt-6"><Marks /></div>
         </div>
       </div>
@@ -51,7 +51,7 @@ function Marks() {
   return (
     <ul className="space-y-2 text-[15px]">
       {["Exclusive local Xerox distributor", "Authorised NCR dealer and service centre", "OnBase by Hyland local representative"].map(m => (
-        <li key={m} className="flex items-center gap-3"><Check className="size-4 text-cyan" aria-hidden />{m}</li>
+        <li key={m} className="flex items-center gap-3"><Check className="size-4 text-ink" aria-hidden />{m}</li>
       ))}
     </ul>
   )
@@ -74,9 +74,9 @@ const LINES: { kind: SheetKind; name: string; role: string; body: string; uses: 
   { kind: "proof", name: "Xerox", role: "Exclusive local distributor", body: "Multifunction devices, stand-alone printers, production devices and high-resolution scanners for a home office, a mid-sized firm or a large enterprise. Competitive pricing, local service support and a local warranty.", uses: ["Multifunction devices", "Production printing", "High-resolution scanners", "Authorised service centre"] },
   { kind: "receipt", name: "NCR", role: "Authorised dealer and service centre", body: "Hardware, software and service for financial institutions of any size: ATMs, payment solutions and point of sale, including mobile, plus table and guest management for restaurants.", uses: ["ATMs", "Payment solutions", "Point of sale", "ATM and financial equipment repair"] },
   { kind: "record", name: "OnBase by Hyland", role: "Local representative", body: "Software to manage critical business content in one central place, so the paper that comes in becomes a record your team can find.", uses: ["Content management", "Scanning and imaging"] },
-  { kind: "network", name: "Lenovo & HP", role: "PCs, servers, networking", body: "A full line of PCs, servers and networking, installed and supported by the same team that services your printers.", uses: ["PCs", "Servers", "Network installation", "Structured cabling"] },
+  { kind: "network", name: "Lenovo & HP", role: "PCs, servers, networking", body: "A full line of PCs, servers and networking, with network installation, structured cabling and IT consulting from BBSL's service team.", uses: ["PCs", "Servers", "Network installation", "Structured cabling"] },
   { kind: "letter", name: "Neopost", role: "Mailing systems", body: "High-speed sorters, folders and inserters, so key documents leave the building fast.", uses: ["Sorting", "Folding", "Inserting"] },
-  { kind: "access", name: "Security", role: "Video, access, theft prevention", body: "Video surveillance, access control and theft prevention for shops, offices and public buildings.", uses: ["Video surveillance", "Access control", "Theft prevention"] },
+  { kind: "access", name: "Security", role: "Video, access, theft prevention", body: "Video surveillance, access control and theft prevention.", uses: ["Video surveillance", "Access control", "Theft prevention"] },
 ]
 
 function useInView<T extends HTMLElement>() {
@@ -116,10 +116,10 @@ function Lines() {
                 <motion.div key={l.kind} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.25, ease }}>
                   <p className="max-w-[52ch] text-[16px] text-muted">{l.body}</p>
                   <p className="mt-4 text-[15px]">{l.uses.join(" · ")}</p>
-                  <button onClick={() => openDoor("equip", { "Interested in": l.kind === "proof" ? "Xerox printers and copiers" : l.kind === "receipt" ? "NCR ATMs" : l.kind === "record" ? "OnBase content management" : l.kind === "network" ? "Lenovo & HP PCs, servers, networking" : l.kind === "letter" ? "Neopost mailing" : "Security: video, access control" })} className="group mt-6 inline-flex min-h-11 items-center gap-2 text-[15px] text-cyan-deep underline-offset-4 hover:underline">Ask for a {l.name} quote <ArrowRight className="size-4 transition group-hover:translate-x-0.5" aria-hidden /></button>
+                  <button onClick={() => openDoor("equip", { "Interested in": l.kind === "proof" ? "Xerox printers and copiers" : l.kind === "receipt" ? "NCR ATMs" : l.kind === "record" ? "OnBase content management" : l.kind === "network" ? "Lenovo & HP PCs, servers, networking" : l.kind === "letter" ? "Neopost mailing" : "Security: video, access control" })} className="group mt-6 inline-flex min-h-11 items-center gap-2 text-[15px] text-ink underline underline-offset-4">Ask for a {l.name} quote <ArrowRight className="size-4 transition group-hover:translate-x-0.5" aria-hidden /></button>
                 </motion.div>
               </AnimatePresence>
-              <p className="mt-8 text-[13px] text-muted">Also on the BBSL vendor list: Riso and NCR Atleos.</p>
+              <p className="mt-8 border-t border-line pt-4 text-[15px]">Vendors: Xerox, NCR Atleos, Riso, Lenovo, HP.</p>
             </div>
           </div>
         </div>
@@ -153,9 +153,9 @@ function Service() {
       <div className="wrap">
         <ProofLine n="03" name="Service" light />
         <div className="mt-10 grid gap-12 md:grid-cols-12 md:gap-6">
-          <div className="md:col-span-5 md:pr-8">
+          <div className="md:col-span-5 md:flex md:flex-col md:justify-between md:pr-8">
             <h2 id="service-title" className="font-display text-[length:var(--text-h2)] leading-[1] tracking-[-0.02em]">We service everything we sell.</h2>
-            <p className="mt-6 max-w-[46ch] text-[17px] text-paper-mid">Factory-trained, industry-certified field service engineers, some with more than 25 years in the business, on New Providence and Grand Bahama. Or carry small equipment in to the service centre.</p>
+            <p className="mt-6 max-w-[46ch] text-[17px] text-paper-mid">Factory-trained, industry-certified field service engineers, some with more than 25 years in the business. Or carry equipment in to the service centre.</p>
             <p className="mt-8 flex items-center gap-3 text-[15px]"><Lamp open={desk.open} />{desk.text}</p>
             <div className="mt-5 flex flex-wrap gap-3">
               <a href={C.service.tel} className="inline-flex min-h-12 items-center gap-2 bg-cyan px-5 text-[15px] text-paper transition hover:bg-cyan-deep"><Phone className="size-4" aria-hidden /> Service helpdesk {C.service.phone}</a>
@@ -200,21 +200,35 @@ function Centre() {
       <div className="wrap">
         <ProofLine n="04" name="Document Centre" />
         <div className="mt-10 grid gap-12 md:grid-cols-12 md:gap-6">
-          <div className="md:col-span-5">
+          <div className="md:col-span-6">
             <h2 id="centre-title" className="font-display text-[length:var(--text-h2)] leading-[1] tracking-[-0.02em]">Send the file. Collect the job.</h2>
             <p className="mt-6 max-w-[46ch] text-[17px] text-muted">The BBSL Document Centre prints for architects, contractors, offices and events, powered by Xerox. Files can be sent in remotely and collected in Nassau or Freeport.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button onClick={() => openDoor("print")} className="inline-flex min-h-12 items-center gap-2 bg-cyan px-5 text-[15px] text-paper transition hover:bg-cyan-deep">Start a print job</button>
-              <a href="document-centre.html" className="inline-flex min-h-12 items-center gap-2 border border-ink px-5 text-[15px] transition hover:bg-ink hover:text-paper">The Document Centre <ArrowUpRight className="size-4" aria-hidden /></a>
-            </div>
-            <p className="mt-6 font-mono text-[14px]"><a href={C.copy.tel} className="hover:text-cyan">{C.copy.phone}</a> · <a href={`mailto:${C.copy.email}`} className="hover:text-cyan">{C.copy.email}</a></p>
-          </div>
-          <Feed className="md:col-span-6 md:col-start-7">
-            <ol className="grid border-t border-line sm:grid-cols-2 sm:gap-x-8">
+            <ol className="mt-10 grid border-t border-line sm:grid-cols-2 sm:gap-x-8">
               {DOC_JOBS.map((j, i) => (
                 <li key={j} className="flex min-h-14 items-center gap-4 border-b border-line text-[16px]"><span className="w-6 font-mono text-[13px] text-muted">{String(i + 1).padStart(2, "0")}</span>{j}</li>
               ))}
             </ol>
+          </div>
+          <Feed className="md:col-span-5 md:col-start-8 md:self-start">
+            <div className="relative bg-sheet p-7 shadow-[var(--shadow-sheet)] md:p-9">
+              <span className="crop -top-3.5 -left-3.5" aria-hidden /><span className="crop -right-3.5 -bottom-3.5" aria-hidden />
+              <p className="font-mono text-[15px] tracking-[0.04em]">PRINT JOB · DOCUMENT CENTRE</p>
+              <p className="mt-1 border-b border-dashed border-line pb-3 font-mono text-[12px] text-muted">To {C.copy.email}</p>
+              <ul className="mt-5 space-y-3">
+                {["Architectural & engineering prints", "Wide format colour", "Binding"].map(t => (
+                  <li key={t} className="flex items-center gap-3 font-display text-[22px] leading-tight"><span className="grid size-6 place-items-center bg-ink text-paper" aria-hidden><Check className="size-3.5" /></span>{t}</li>
+                ))}
+              </ul>
+              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-line pt-5 text-[14px]">
+                <div><dt className="text-muted">Files</dt><dd className="mt-1">Sent remotely</dd></div>
+                <div><dt className="text-muted">Rates</dt><dd className="mt-1">On request</dd></div>
+              </dl>
+              <button onClick={() => openDoor("print")} className="mt-7 flex min-h-12 w-full items-center justify-center gap-2 bg-cyan px-5 text-[15px] text-paper transition hover:bg-cyan-deep">Start a print job</button>
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-[14px]">
+                <a href={C.copy.tel} className="flex min-h-11 items-center font-mono hover:text-cyan">{C.copy.phone}</a>
+                <a href="document-centre.html" className="flex min-h-11 items-center gap-1 underline underline-offset-4">Full service list <ArrowUpRight className="size-3.5" aria-hidden /></a>
+              </div>
+            </div>
           </Feed>
         </div>
       </div>
@@ -239,6 +253,7 @@ function History() {
         <ol className="-mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:mx-0 md:grid md:grid-cols-5 md:gap-5 md:overflow-visible md:px-0">
           {YEARS.map((e, k) => (
             <motion.li key={e.y} initial={{ y: 24, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ delay: k * 0.06, duration: 0.6, ease }} className="relative w-[76vw] shrink-0 snap-start bg-sheet p-6 shadow-[var(--shadow-sheet)] md:w-auto">
+              <div className="mb-5 flex items-center justify-between border-b border-dashed border-line pb-3" aria-hidden><span className="flex">{["var(--color-ink)", "var(--color-cyan)", "var(--color-toner)", "#9a9c9f"].map(c => <span key={c} className="h-2 w-4" style={{ background: c }} />)}</span><span className="font-mono text-[11px] text-muted">REF {e.y === "Today" ? "2026" : e.y}</span></div>
               <p className="font-display text-[56px] leading-none tracking-[-0.03em]">{e.y}</p>
               <p className="mt-6 font-display text-[24px] leading-tight">{e.t}</p>
               <p className="mt-3 text-[15px] text-muted">{e.d}</p>
@@ -296,7 +311,7 @@ function Offices() {
             <motion.div key={o} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25, ease }} className="mt-px bg-sheet p-7">
               <a href={off.tel} className="flex min-h-12 items-center font-mono text-[30px] leading-none hover:text-cyan">{off.phone}</a>
               <p className="mt-4 text-[16px]">{off.address}{o === "nassau" ? `, ${C.nassau.box}` : ""}</p>
-              <p className="mt-2 text-[15px] text-muted">Service helpdesk Monday to Friday, 8:30 am to 5:00 pm.{o === "freeport" ? " Freeport street address to confirm." : ""}</p>
+              <p className="mt-2 text-[15px] text-muted">Service helpdesk Monday to Friday, 8:30 am to 5:00 pm.{o === "freeport" ? " Street address to confirm with BBSL." : ""}</p>
             </motion.div>
           </AnimatePresence>
           <p className="mt-6 text-[15px] text-muted">BBSL also serves the Turks and Caicos Islands. Anything else: <a className="text-ink underline underline-offset-4" href={`mailto:${C.info}`}>{C.info}</a></p>

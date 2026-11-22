@@ -74,7 +74,7 @@ export default function Counter() {
   const isl = island === "nassau" ? "Nassau" : "Freeport"
   const office = C[island]
   const fields: Record<Door, string[]> = {
-    down: ["Machine", "Make and model", "What is happening", "Details", "Business", "Your name", "Phone"],
+    down: ["Machine", "Make and model", "What is happening", "Details", "Location", "Business", "Your name", "Phone"],
     equip: ["Interested in", "Volume", "Plan preference", "Organisation", "Your name", "Phone"],
     print: ["Job type", "Size", "Quantity", "Needed by", "Files", "Your name", "Phone"],
   }
@@ -83,7 +83,8 @@ export default function Counter() {
   const href = D ? `mailto:${D.to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Hello BBSL,\n\n${lines.join("\n")}\n\nSent from the BBSL website counter.`)}` : "#"
   const call = door === "down" ? { k: "Call the helpdesk", v: C.service.phone, href: C.service.tel } : door === "print" ? { k: "Call the Document Centre", v: C.copy.phone, href: C.copy.tel } : { k: `Call ${isl} sales`, v: office.phone, href: office.tel }
   const canSend = !!(get("Your name") || get("Phone"))
-  const header = useMemo(() => D ? `${D.head.toUpperCase()} · ${isl.toUpperCase()}` : "WHAT DO YOU NEED?", [D, isl])
+  const xerox = door === "equip" && get("Interested in").startsWith("Xerox")
+  const header = useMemo(() => D ? `${xerox ? "XEROX QUOTE" : D.head.toUpperCase()} · ${isl.toUpperCase()}` : "WHAT DO YOU NEED?", [D, isl, xerox])
 
   const send = (e: React.MouseEvent) => {
     if (!canSend) { e.preventDefault(); setWarn(true); return }
@@ -96,7 +97,7 @@ export default function Counter() {
       <span className="crop -top-3.5 -left-3.5" aria-hidden /><span className="crop -right-3.5 -bottom-3.5" aria-hidden />
       {/* ticket head */}
       <div className="flex min-h-14 items-center justify-between gap-4 border-b border-line px-5 md:px-8">
-        <p className="font-mono text-[13px] tracking-[0.04em]" aria-live="polite"><Typed text={header} /></p>
+        <p className="font-mono text-[13px] tracking-[0.04em] md:text-[15px]" aria-live="polite"><Typed text={header} /></p>
         <div className="flex shrink-0 gap-px bg-line" role="radiogroup" aria-label="Your island">
           {(["nassau", "freeport"] as const).map(k => (
             <button key={k} role="radio" aria-checked={island === k} onClick={() => setIsland(k)} className={`min-h-11 px-3 text-[13px] transition duration-150 ${island === k ? "bg-ink text-paper" : "bg-sheet hover:bg-paper"}`}>{C[k].label}</button>
@@ -104,13 +105,18 @@ export default function Counter() {
         </div>
       </div>
 
+      <div className="hidden items-center justify-between gap-4 border-b border-dashed border-line px-5 py-2 font-mono md:flex text-[12px] text-muted md:px-8"><span>No. 0001 · BBSL Service Counter</span><span className="hidden sm:inline">Mon to Fri 8:30 to 5:00</span></div>
+      <div className="flex items-center justify-between gap-4 border-b border-line bg-paper px-5 py-2.5 md:hidden">
+        <span className="flex items-center gap-2.5 text-[13px]"><Lamp open={desk.open} />{desk.text}</span>
+        <a href={C.service.tel} className="flex min-h-11 items-center gap-2 font-mono text-[14px]"><Phone className="size-3.5" aria-hidden />{C.service.phone}</a>
+      </div>
       <LayoutGroup>
         <AnimatePresence mode="popLayout" initial={false}>
           {!door && (
             <motion.ol key="doors" exit={{ opacity: 0 }} transition={{ duration: 0.2 }} aria-label="Choose a desk">
               {DOORS.map(d => (
                 <li key={d.id} className="border-b border-line last:border-b-0">
-                  <motion.button layoutId={`door-${d.id}`} onClick={() => { setDoor(d.id); setSent(false) }} className="group grid min-h-[96px] w-full grid-cols-[1fr_auto] md:grid-cols-[2.25rem_1fr_auto] items-center gap-4 px-5 py-5 text-left transition-colors duration-150 hover:bg-paper md:min-h-[112px] md:px-8">
+                  <motion.button layoutId={`door-${d.id}`} onClick={() => { setDoor(d.id); setSent(false) }} className="group grid min-h-[96px] w-full grid-cols-[1fr_auto] md:grid-cols-[2.25rem_1fr_auto] items-center gap-4 px-5 py-4 md:py-5 text-left transition-colors duration-150 hover:bg-paper md:min-h-[112px] md:px-8">
                     <span className="hidden font-mono text-[13px] text-muted md:block">{d.n}</span>
                     <span>
                       <span className="block font-display text-[clamp(26px,2.5vw,34px)] leading-[1.05]">{d.t}</span>
@@ -120,7 +126,7 @@ export default function Counter() {
                   </motion.button>
                 </li>
               ))}
-              <li className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-line bg-paper px-5 py-3.5 md:px-8">
+              <li className="hidden flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-line bg-paper px-5 py-3.5 md:flex md:px-8">
                 <span className="flex items-center gap-3 text-[14px]"><Lamp open={desk.open} />{desk.text}</span>
                 <a href={C.service.tel} className="flex min-h-11 items-center gap-2 font-mono text-[14px] hover:text-cyan"><Phone className="size-3.5" aria-hidden />{C.service.phone}</a>
               </li>
@@ -151,17 +157,20 @@ export default function Counter() {
                 <div ref={first} className="px-5 py-6 md:px-8 md:py-7">
                   {D.id === "down" && (
                     <div className="mb-6 flex flex-wrap items-center gap-x-6 gap-y-3 border-b border-line pb-6">
-                      <p className="flex items-center gap-3 text-[15px]"><Lamp open={desk.open} />{desk.text}</p>
+                      <p className="flex w-full items-center gap-3 font-mono text-[18px] tracking-[0.02em] md:text-[22px]"><Lamp open={desk.open} />{desk.open === null ? "HELPDESK · MON TO FRI 8:30 TO 5:00" : desk.open ? "HELPDESK · OPEN · UNTIL 5:00 PM" : `HELPDESK · CLOSED · ${desk.text.split(", ")[1].replace("opens Monday", "OPENS MON").replace("opens tomorrow", "OPENS TOMORROW").replace("opens", "OPENS").replace("am", "AM")}`}</p>
                       <a href={C.service.tel} className="inline-flex min-h-12 items-center gap-2 bg-ink px-5 text-[15px] text-paper transition hover:bg-graphite"><Phone className="size-4" aria-hidden /> Call {C.service.phone}</a>
-                      <p className="w-full text-[14px] text-muted">Engineers on New Providence and Grand Bahama. Small equipment can also be carried in to the service centre.</p>
+                      <p className="w-full text-[14px] text-muted">BBSL engineers come to you. Small equipment can also be carried in to the service centre. Out of hours, email the ticket and the helpdesk picks it up when it opens.</p>
                     </div>
                   )}
                   <motion.div className="grid gap-x-6 gap-y-5 sm:grid-cols-2" initial="h" animate="s" variants={{ s: { transition: { staggerChildren: 0.04 } } }}>
                     {D.id === "down" && <>
+                      <Field label="Your name"><input className="field" autoComplete="name" value={get("Your name")} onChange={e => set("Your name")(e.target.value)} /></Field>
+                      <Field label="Phone"><input className="field" type="tel" autoComplete="tel" value={get("Phone")} onChange={e => set("Phone")(e.target.value)} /></Field>
                       <Chips label="Machine" opts={MACHINES} value={get("Machine")} onChange={set("Machine")} />
+                      <Chips label="What is happening" opts={SYMPTOMS} value={get("What is happening")} onChange={set("What is happening")} />
                       <Field label="Make and model, if you know it"><input className="field" value={get("Make and model")} onChange={e => set("Make and model")(e.target.value)} /></Field>
                       <Field label="Business"><input className="field" autoComplete="organization" value={get("Business")} onChange={e => set("Business")(e.target.value)} /></Field>
-                      <Chips label="What is happening" opts={SYMPTOMS} value={get("What is happening")} onChange={set("What is happening")} />
+                      <Field label="Where is the machine (building, street)" wide><input className="field" value={get("Location")} onChange={e => set("Location")(e.target.value)} /></Field>
                       <Field label="Error code or details" wide><input className="field" value={get("Details")} onChange={e => set("Details")(e.target.value)} /></Field>
                     </>}
                     {D.id === "equip" && <>
@@ -178,8 +187,11 @@ export default function Counter() {
                       <Field label="Needed by"><input type="date" className="field" value={get("Needed by")} onChange={e => set("Needed by")(e.target.value)} /></Field>
                       <Chips label="Your files" opts={["I will attach them to the email", "I will bring them in"]} value={get("Files")} onChange={set("Files")} />
                     </>}
-                    <Field label="Your name"><input className="field" autoComplete="name" value={get("Your name")} onChange={e => set("Your name")(e.target.value)} /></Field>
-                    <Field label="Phone"><input className="field" type="tel" autoComplete="tel" value={get("Phone")} onChange={e => set("Phone")(e.target.value)} /></Field>
+                    {D.id !== "down" && <>
+                      <Field label="Your name"><input className="field" autoComplete="name" value={get("Your name")} onChange={e => set("Your name")(e.target.value)} /></Field>
+                      <Field label="Phone"><input className="field" type="tel" autoComplete="tel" value={get("Phone")} onChange={e => set("Phone")(e.target.value)} /></Field>
+                    </>}
+                    {D.id === "equip" && get("Interested in").startsWith("Xerox") && <p className="text-[13px] text-muted sm:col-span-2">This goes to sales@bbsl.com as a Xerox quote request, BBSL's separate Xerox quote route.</p>}
                   </motion.div>
                   <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <a href={href} onClick={send} className="group inline-flex min-h-13 items-center justify-center gap-2 bg-cyan px-6 py-3.5 text-[16px] text-paper transition duration-150 hover:bg-cyan-deep active:scale-[0.98]"><Mail className="size-4" aria-hidden /> Email it to {D.to}</a>

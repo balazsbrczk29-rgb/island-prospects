@@ -4,8 +4,81 @@
  "name": "Bahamas Business Solutions Limited",
  "batch": "01",
  "tier": "A",
- "state": "building",
+ "state": "built",
+ "pages": [
+  "index.html",
+  "document-centre.html"
+ ],
+ "primary_cta": "Hero counter: three doors (machine down -> service@ / (242) 605-6006, equipment or contract -> sales@ incl. Xerox quote, print job -> copyservice@), each a short in-place form composing a mailto plus that desk's number for the chosen island",
+ "brand_truth": "The Bahamas' Xerox company since 1966: sixty years in the document business, with its own engineers on two islands.",
+ "buyer": "Office managers, procurement and IT leads at government, banks, utilities, healthcare and hotels in Grand Bahama and New Providence; plus walk-in print customers.",
+ "design": {
+  "display_font": "Instrument Serif 400",
+  "body_font": "Geist 400/500/600",
+  "palette": [
+   "#f2f0ea",
+   "#121417",
+   "#0a6d8c",
+   "#e3b505",
+   "#23272c",
+   "#5b5f63",
+   "#d3cec2"
+  ],
+  "hero_pattern": "print-proof-craft-closeup",
+  "signature": "R3F fanned stack of six documents BBSL produces (proof, plan, NCR receipt, Neopost letter, wide-format poster, OnBase record) with hover/tap hotspots; product-line index; service-plan coverage chooser; tabbed quote router to sales/service/copy inboxes; office switcher; Document Centre job-ticket builder"
+ },
+ "current_site_findings": [
+  "Every page of bbsl.com carries a noindex, nofollow tag, so Google is told not to list the site.",
+  "The homepage is a slogan and five vendor logos: no explanation of what you sell or service, or where.",
+  "No street address for the Freeport or Nassau office on the pages reviewed.",
+  "Service plans are buried in one paragraph and cannot be compared.",
+  "A leftover shop message, 'has been added to the cart', shows on every page."
+ ],
+ "pitch_line": "Your website has been telling Google not to list you, so when a Freeport office searches for a Xerox dealer they never find the company that has been the Xerox dealer since 1966; this version fixes that and puts your two office numbers, service plans and quote form on the first screens.",
+ "sources": [
+  "https://www.bbsl.com/",
+  "https://www.bbsl.com/about/",
+  "https://www.bbsl.com/sales/",
+  "https://www.bbsl.com/service/",
+  "https://www.bbsl.com/copy-service/",
+  "https://theorg.com/org/bahamas-business-solutions-ltd-bbsl",
+  "https://bahamas.yabsta.com/listing/view/91564/bahamas-business-solutions-limited",
+  "https://bs.linkedin.com/company/bahamas-business-solutions-ltd."
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 0
+ },
+ "track": "A",
+ "assumptions": [
+  "Freeport address shown as Queens Highway, Freeport (from LinkedIn snippet only), marked 'to confirm' in the office panel",
+  "Time & materials shown as 'billed per visit' (paraphrase)",
+  "Full-service plan toner/supplies shown as 'Ask us'",
+  "Turks and Caicos office address unknown",
+  "Whether the Xerox quote should stay a separate route (kept as its own subject line and header)",
+  "Whether the Document Centre accepts uploads online (concept uses email attachments)",
+  "No usable photos: ask for showroom, Document Centre and engineer photos"
+ ],
+ "notes": "Nov 22 job-spec rebuild (GUIDE 3b): router 'counter' moved to the hero with live helpdesk open/closed lamp (America/Nassau), typed ticket header, location and symptom fields; 3D document stack kept as screen 2 with six sheets mapped to the six product lines; service plan comparison table; Document Centre ticket preview; history sheets; office switcher with map. Fonts now self-hosted (@fontsource), Google Fonts links removed. Generation-1 patterns removed (Key information band, sticky blurred header, Reveal, 1440 container, eyebrows). inspect.mjs 0 FAIL 0 WARN on both pages. distinct.mjs timed out in this run (not run to completion).",
+ "built_at": "2026-11-22T15:10:58.411212Z",
  "generation": 2,
+ "claimed_at": "2026-11-22T14:54:09.749Z",
+ "jobspec_built": true,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T14:54:09.749Z"
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present": true
+  },
+  "gate2": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 5,
+   "composition": 4,
+   "conversion_clarity": 5,
+   "phone": 4
+  },
+  "rounds": 2
+ }
 }
