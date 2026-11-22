@@ -138,7 +138,7 @@ function Home() {
   const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   const layers: Layer[] = useMemo(() => [
-    { key: 'chart', node: <div className="chart-wrap"><p className="chart-cap">Tap an island to see what is listed there. Outlines: Natural Earth.</p><Chart search={search} onIsland={n => setSearch(s => ({ ...s, island: s.island === n ? 'any' : n }))} /></div> },
+    { key: 'chart', node: <div className="chart-wrap"><p className="chart-cap">Tap an island to see what is listed there. Outlines: Natural Earth.</p><Chart search={search} onIsland={n => setSearch(s => ({ ...s, island: s.island === n ? 'any' : n }))} /><figure className="chart-photo"><img src={PHOTO.harbour.src} alt={PHOTO.harbour.alt} width={PHOTO.harbour.w} height={PHOTO.harbour.h} fetchPriority="high" /><figcaption>Harbour Island, Eleuthera, from the Bahamas Choice collection</figcaption></figure></div> },
     ...LISTINGS.filter(l => l.photos.length).map(l => ({ key: `l${l.id}`, photo: l.photos[0], mode: (l.photos[0].h < 700 ? 'framed' : 'cover') as Layer['mode'], caption: l.photos[0].h < 700 ? `${l.title}, ${l.area}` : undefined })),
     { key: 'villa', photo: PHOTO.villa, pos: '58% 50%' },
     ...FILM.map((f, i) => ({ key: `c${i}`, photo: f.photo })),
@@ -237,8 +237,8 @@ function Home() {
           </section>
 
           <section id="words" className="section" data-win="villa2" aria-labelledby="words-h">
-            <h2 id="words-h" className="sr-only">In our clients&rsquo; words</h2>
-            <blockquote style={{ margin: 0 }}>
+            <h2 id="words-h" className="h2">Selling a family property from&nbsp;abroad.</h2>
+            <blockquote style={{ margin: '40px 0 0' }}>
               <p className="quote">&ldquo;Mrs. Basalyga sold the property within 4 months at the height of the pandemic, without Mom being present in the Bahamas.&rdquo;</p>
               <p className="quote-by">Jennifer Brice, on her mother&rsquo;s property</p>
             </blockquote>
@@ -246,6 +246,19 @@ function Home() {
               <p className="body">&ldquo;Your office was also excellent in keeping us informed, regularly checking in and providing updates on the progress of the sale.&rdquo;</p>
               <p className="quote-by">A family who sold their family property with Bahamas Choice</p>
             </blockquote>
+            <div className="actions">
+              <a className="btn btn-primary" href="#brief" onClick={() => setBrief(b => ({ mode: 'Sell', island: '', type: 'A family property', n: b.n + 1 }))}>Tell us about the property</a>
+            </div>
+            <div className="words-more">
+              <blockquote>
+                <p className="body">&ldquo;It was a pleasure having you guide me through the whole process of finding property.&rdquo;</p>
+                <p className="quote-by">Yasmine, buying</p>
+              </blockquote>
+              <blockquote>
+                <p className="body">&ldquo;I would gladly say you held my hand, and for that, my recommendation will always be you.&rdquo;</p>
+                <p className="quote-by">T. Johnson, on Sherry Morris</p>
+              </blockquote>
+            </div>
           </section>
 
           <section id="brief" className="section" data-win="villa2" aria-labelledby="brief-h">
