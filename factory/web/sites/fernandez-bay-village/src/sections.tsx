@@ -20,7 +20,7 @@ export function TopBar({ home = true }: { home?: boolean }) {
 }
 
 const special = (s: Stay) => {
-  const n = s.notes.filter(x => !/ocean view|180 degree|wrap-around|short walk/i.test(x))
+  const n = s.notes.filter(x => !/ocean view|180 degree|wrap-around|short walk|next to the clubhouse/i.test(x))
   return n.length ? n.join('. ') + '.' : s.pair ? `Opens into ${byId(s.pair).name} for families.` : ''
 }
 const meta = (s: Stay) => [s.kind === 'villa' ? s.bed : s.bed ? `${s.bed} bed` : 'Ask the front desk'].join('')
@@ -35,7 +35,7 @@ export function StaysTable() {
       <td>{meta(s)}</td>
       <td>{s.setting}</td>
       <td className="t-notes">{special(s)}</td>
-      <td>{s.pair ? byId(s.pair).name : <span className="muted">{'·'}</span>}</td>
+      <td>{s.pair ? byId(s.pair).name : ''}</td>
       <td><a className="t-go" href={BIZ.booking}>Check dates</a></td>
     </tr>
   )
