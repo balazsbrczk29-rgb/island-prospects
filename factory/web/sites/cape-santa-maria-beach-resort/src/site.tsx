@@ -35,7 +35,7 @@ export function Header({ home = true }: { home?: boolean }) {
         <a href="getting-here.html" aria-current={home ? undefined : 'page'}>Getting here</a>
         <a href="#contact">Contact</a>
       </nav>
-      <a className="btn btn--sm" href={BOOK}>Check availability</a>
+      <a className="btn btn--sm btn--line" href={BOOK}>Check availability</a>
     </header>
   )
 }
@@ -51,7 +51,7 @@ function curve(a: Pt, b: Pt, bow = 0.12): string {
   const c: Pt = [mx + nx * bow, my + ny * bow]
   return `M${x1} ${y1} Q${c[0].toFixed(1)} ${c[1].toFixed(1)} ${x2} ${y2}`
 }
-const CODE: Record<string, [string, number, number]> = { fxe: ['FXE', 14, 22], nas: ['NAS', -46, -10], ggt: ['GGT', -40, -14], sml: ['SML', 14, 26] }
+const CODE: Record<string, [string, number, number]> = { fxe: ['FXE', 14, 22], nas: ['NAS', -46, -10], ggt: ['GGT', -40, -14], sml: ['SML', 16, 30] }
 const ISLANDS: [string, string][] = [['Florida', 'florida'], ['Grand Bahama', 'grandbahama'], ['Abaco', 'abaco'], ['Andros', 'andros'], ['Eleuthera', 'eleuthera'], ['Cat Island', 'cat'], ['Exuma', 'exuma'], ['Long Island', 'long']]
 
 export function Chart({ route, postcard = true }: { route: Route; postcard?: boolean }) {
@@ -63,14 +63,18 @@ export function Chart({ route, postcard = true }: { route: Route; postcard?: boo
       <svg viewBox={`0 0 ${map.w} ${map.h}`} role="img" aria-label={`Chart of the Bahamas showing the route: ${route.line}`}>
         <rect width={map.w} height={map.h} className="chart__sea" />
         <g className="chart__grat">
-          {map.gx.map(([lo, x]) => <g key={'x' + lo}><line x1={x} x2={x} y1={0} y2={map.h} /><text x={x + 5} y={map.h - 10}>{Math.abs(lo)}°W</text></g>)}
-          {map.gy.map(([la, y]) => <g key={'y' + la}><line y1={y} y2={y} x1={0} x2={map.w} /><text x={8} y={y - 6}>{la}°N</text></g>)}
+          {map.gx.map(([lo, x]) => <line key={'x' + lo} x1={x} x2={x} y1={0} y2={map.h} />)}
+          {map.gy.map(([la, y]) => <line key={'y' + la} y1={y} y2={y} x1={0} x2={map.w} />)}
         </g>
         <path d={map.land} className="chart__land" />
+        <g className="chart__deg">
+          {map.gx.map(([lo, x]) => <text key={'x' + lo} x={x + 5} y={map.h - 10}>{Math.abs(lo)}°W</text>)}
+          {map.gy.filter(([, y]) => y > 20).map(([la, y]) => <text key={'y' + la} x={map.w - 8} y={y - 6} textAnchor="end">{la}°N</text>)}
+        </g>
         <g className="chart__isl">
           {ISLANDS.map(([n, k]) => <text key={k} x={pts[k][0]} y={pts[k][1]} textAnchor={k === 'florida' ? 'start' : 'middle'}>{n}</text>)}
         </g>
-        {postcard && <line className="chart__tie" x1={790} y1={236} x2={cape[0]} y2={cape[1] - 8} />}
+        {postcard && <line className="chart__tie" x1={800} y1={200} x2={cape[0]} y2={cape[1] - 8} />}
         <AnimatePresence initial={true}>
           <motion.g key={route.k} initial={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.18 } }}>
             {route.legs.map((l, i) => {
@@ -92,7 +96,7 @@ export function Chart({ route, postcard = true }: { route: Route; postcard?: boo
                 </motion.g>
               )
             })}
-            {route.k === 'own' && <motion.text x={pts.own[0] + 10} y={pts.own[1] + 30} className="chart__code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>FROM YOUR FIELD</motion.text>}
+            {route.k === 'own' && <motion.text x={pts.own[0] + 10} y={pts.own[1] + 30} className="chart__note" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>from your field</motion.text>}
           </motion.g>
         </AnimatePresence>
         <g className="chart__cape">
@@ -172,13 +176,13 @@ export function Opening({ plan }: { plan: Plan }) {
       </div>
       <div className="open__map">
         <Chart route={route} />
-      </div>
       <div className="open__book">
         <RoomChips room={plan.room} setRoom={plan.setRoom} />
         <div className="open__acts">
           <a className="btn" href={BOOK}>Check availability</a>
           <a className="ul" href={mailPlan(route, rooms[plan.room].name)}>Email us this plan</a>
         </div>
+      </div>
       </div>
     </section>
   )
@@ -202,7 +206,7 @@ export function Rooms({ plan }: { plan: Plan }) {
       </figure>
       <div className="rooms__text">
         <h2 id="rooms-h">Three ways to sleep on the&nbsp;beach.</h2>
-        <p className="rooms__lede">Every room lines the sand beside the Beach House. Choose one and check your dates.</p>
+        <p className="rooms__lede">The bungalows line the sand beside the Beach House, and the villas look west over the water. Choose one and check your dates.</p>
         <div className="rtable" role="table" aria-label="The three beachfront room types">
           <div className="rtable__row rtable__head" role="row">
             <span role="columnheader" className="rtable__k" />
@@ -235,10 +239,14 @@ export function Beach() {
   return (
     <>
       <section className="beach" aria-label="The beach">
-        <figure>
-          <div className="ph ph--wide"><Img k="beach" /></div>
-          <figcaption>The beach at Cape Santa Maria, the bungalows behind the palms.</figcaption>
+        <figure className="beach__plate">
+          <div className="ph ph--wide"><Img k="aerial" /></div>
+          <figcaption>The bungalows from the air, a few steps from the water.</figcaption>
         </figure>
+        <div className="beach__story">
+          <p className="dropcap">Cape Santa Maria sits at the far northern tip of Long Island, where the beach runs long and white and the water turns every shade of turquoise. The bungalows line the sand beside the Beach House, so the walk from your door to the sea is a few barefoot steps.</p>
+          <figure><div className="ph ph--32"><Img k="beach" /></div><figcaption>The beach at Cape Santa Maria, the bungalows behind the palms.</figcaption></figure>
+        </div>
       </section>
       <section className="bh" id="beach-house" aria-labelledby="bh-h">
         <figure className="bh__pic"><div className="ph ph--45"><Img k="bar" /></div><figcaption>The bar, a few steps from the water.</figcaption></figure>
@@ -246,7 +254,7 @@ export function Beach() {
           <h2 id="bh-h">The Beach House.</h2>
           <p>The resort's restaurant and bar sits on the sand with the bungalows on either side, so dinner is a short barefoot walk from your veranda.</p>
           <p>Ask for the menu and dinner times when you book, and tell the team about any dietary needs before you arrive.</p>
-          <figure className="bh__small"><div className="ph ph--32"><Img k="salad" /></div><figcaption>Lunch at the Beach House.</figcaption></figure>
+          <figure className="bh__small"><div className="ph ph--32"><Img k="salad" /></div><figcaption>At the Beach House.</figcaption></figure>
         </div>
       </section>
     </>
@@ -259,13 +267,15 @@ export function Days() {
     <section className="days" id="days" aria-labelledby="days-h">
       <div className="days__head">
         <h2 id="days-h">Days here are as busy as you make&nbsp;them.</h2>
-        <p className="lede">Scuba diving, snorkelling and a nature cruise, fishing the flats, kayaking and paddleboarding straight off the beach. The resort hosts weddings on the sand too, or you can do nothing at all.</p>
+        <div className="days__copy">
+          <p className="lede">Scuba diving, snorkelling and a nature cruise, fishing, kayaking and paddleboarding straight off the beach, or nothing at all.</p>
+          <p className="days__wed"><b>Weddings.</b> The resort hosts weddings on the beach. Write to <a href={`mailto:${contact.email}?subject=${encodeURIComponent('A wedding at Cape Santa Maria')}`}>{contact.email}</a> with your date and the number of guests.</p>
+        </div>
       </div>
       <div className="days__grid">
         <figure className="d1"><div className="ph ph--32"><Img k="paddle" /></div><figcaption>Paddleboarding off the beach, dog aboard.</figcaption></figure>
-        <figure className="d2"><div className="ph ph--45"><Img k="fishing" /></div><figcaption>Casting from the bow on the flats.</figcaption></figure>
+        <figure className="d2"><div className="ph ph--45"><Img k="fishing" /></div><figcaption>Fishing off Long Island.</figcaption></figure>
         <figure className="d3"><div className="ph ph--32"><Img k="scuba" /></div><figcaption>On the reef with the dive team.</figcaption></figure>
-        <p className="d4">Weddings: write to <a href={`mailto:${contact.email}?subject=${encodeURIComponent('A wedding at Cape Santa Maria')}`}>{contact.email}</a> with your date and the number of guests.</p>
       </div>
     </section>
   )
@@ -283,7 +293,7 @@ export function Timetable({ onPick, active, home = true }: { onPick?: (k: string
         <div className="tt__row tt__th" role="row">{['From', 'Carrier', 'Days', 'Lands at', 'Then'].map(h => <span role="columnheader" key={h}>{h}</span>)}</div>
         {TIMETABLE.map((t, i) => (
           <div role="row" key={i} className={'tt__row' + (active === t.r ? ' is-on' : '')} onClick={onPick ? () => onPick(t.r) : undefined}>
-            <span role="cell" className="tt__from">{t.from}</span>
+            <span role="cell" className="tt__from">{onPick ? <button type="button" onClick={() => onPick(t.r)} aria-pressed={active === t.r}>{t.from}</button> : t.from}</span>
             <span role="cell">{t.carrier}</span>
             <span role="cell" className="tt__days">{t.days}</span>
             <span role="cell">{t.lands}</span>

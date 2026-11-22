@@ -30,7 +30,7 @@ export type Room = { k: string; name: string; short: string; size: string; bedro
 export const rooms: Room[] = [
   { k: 'bungalow', name: 'Beachfront Bungalow', short: 'Bungalow', size: '400 sq ft', bedrooms: 'One', beds: '1 king', kitchen: 'Small fridge', outside: 'Private veranda for the sunsets', extra: 'Italian tile, ceiling fans, safe.', pic: 'bungalow', cap: 'A Beachfront Bungalow bedroom.' },
   { k: 'two', name: 'Two-Bedroom Beachfront Bungalow', short: 'Two-bedroom bungalow', size: '580 sq ft', bedrooms: 'Two', beds: '1 king or 2 queens, plus 2 twins', kitchen: 'Fridge', outside: 'Furnished veranda', extra: 'Room for a family on the sand.', pic: 'bungalow', cap: 'A Beachfront Bungalow bedroom.' },
-  { k: 'villa', name: 'Beachfront Villa', short: 'Villa', size: '1,800 sq ft', bedrooms: 'Two', beds: '1 king and 2 queens', kitchen: 'Full kitchen, washer and dryer', outside: 'West-facing windows', extra: 'Jetted tubs, smart TV, sleeper sofa in select units.', pic: 'villa', cap: 'A Beachfront Villa living room.' },
+  { k: 'villa', name: 'Beachfront Villa', short: 'Villa', size: '1,800 sq ft', bedrooms: 'Two', beds: '1 king and 2 queens', kitchen: 'Full kitchen, washer and dryer', outside: 'On the beach', extra: 'West-facing windows, jetted tubs, smart TV, sleeper sofa in select units.', pic: 'villa', cap: 'A Beachfront Villa living room.' },
 ]
 export const allRooms = 'Every room: air conditioning, coffee and tea, safe, fridge and daily housekeeping. Rates and dates on the booking page.'
 
@@ -57,10 +57,10 @@ export const ROUTES: Route[] = [
 
 export const TIMETABLE = [
   { from: 'Fort Lauderdale Executive (FXE)', carrier: 'Makers Air, nonstop', days: 'Sun, Tue, Thu', lands: 'Stella Maris (SML)', then: 'Taxi arranged by the resort', r: 'fll' },
-  { from: 'Nassau (NAS)', carrier: 'Bahamasair', days: 'Scheduled', lands: 'Stella Maris (SML)', then: 'Taxi arranged by the resort', r: 'nas' },
+  { from: 'Nassau (NAS)', carrier: 'Bahamasair (also to Deadman\'s Cay)', days: 'Scheduled', lands: 'Stella Maris (SML)', then: 'Taxi arranged by the resort', r: 'nas' },
   { from: 'Nassau (NAS)', carrier: 'Stella Maris Air Service, (242) 338-2050', days: 'Per seat or charter', lands: 'Stella Maris (SML)', then: 'Taxi arranged by the resort', r: 'nas' },
   { from: 'George Town, Exuma (GGT)', carrier: 'Island Wings charter, (242) 472-8888', days: 'On request', lands: 'Stella Maris (SML)', then: 'Taxi arranged by the resort', r: 'ggt' },
   { from: 'George Town, Exuma', carrier: 'Sheep Runner ferry', days: 'Mon, Wed, Fri', lands: 'Long Island Harbour Club', then: 'Taxi on Long Island', r: 'ggt' },
   { from: 'Nassau', carrier: 'Seaplane Safaris', days: 'On request', lands: 'Cape Santa Maria beach', then: 'Step ashore', r: 'sea' },
-  { from: 'Your own field', carrier: 'Private aircraft', days: 'Any day', lands: 'Stella Maris (SML), fuel and customs', then: '15% off accommodation by phone, blackouts apply', r: 'own' },
+  { from: 'Your own field', carrier: 'Private aircraft', days: 'Your schedule', lands: 'Stella Maris (SML), fuel and customs', then: '15% off accommodation by phone, blackouts apply', r: 'own' },
 ]
