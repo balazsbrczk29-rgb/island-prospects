@@ -4,7 +4,7 @@
  "name": "Bahamas Choice Real Estate",
  "batch": "03",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "history": [
   {
@@ -13,5 +13,27 @@
   }
  ],
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T13:57:24.465Z"
+ "claimed_at": "2026-11-22T13:57:24.465Z",
+ "jobspec_built": true,
+ "built_at": "2026-11-22T14:15:08.692030Z",
+ "scores": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_better": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 4,
+  "phone": 4
+ },
+ "notes": [
+  "Built to the approved job spec: screen 1 = island chart (Natural Earth 10m outlines, public domain) in the fixed window + finder (Buy/Rent, island, type, price) with live photo cards and 'Ask for a viewing' (call, WhatsApp, email with MLS number). Kept from previous version: fixed split, 5 Bayview Drive walk-through, listing rows (now grid/list), islands index, team lines, brief builder, property pages.",
+  "Research this session: /active/ (same 4 listings, Nov 22) and /testimonials/ (Yasmine and T. Johnson quotes added verbatim; the family quote is unattributed on their site, kept anonymous).",
+  "Critic: first pass gate 2 had 3s (photo on screen 1, phone order, card CTA, selling chapter); fixed; second re-score still 3 on wow/photography/phone; fixed again and a third check scored all 4s. Deviation from 'one re-score' recorded here.",
+  "Assumptions to confirm with owner: Lana answers viewing requests for every listing (per-listing agents not published); Lana's 242 357 7698 is on WhatsApp; end-to-end step wording paraphrases 'discovering listings, viewings, closing and beyond'; developments not tied to islands because their site does not say.",
+  "Listing photos and Harbour Island photo are hotlinked from their own site/IDX (pix.idxre.com); verify they load on the live page."
+ ]
 }
