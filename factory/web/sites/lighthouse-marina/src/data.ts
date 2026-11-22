@@ -44,6 +44,20 @@ export const pano = {
   alt: 'Panorama from the gallery of the Elbow Reef Lighthouse over Hope Town Harbour, moored boats, the settlement and the lantern room rail',
 }
 
+export const sheet: [string, [string, string][]][] = [
+  ['Hauling and launching', [['Single hull, haul', '$5.50 /ft'], ['Single hull, launch', '$5.50 /ft'], ['Single hull, blocking', '$50.00'], ['Round trip, same day', '$8.00 /ft'], ['Twin hull, haul', '$7.00 /ft'], ['Twin hull, launch', '$7.00 /ft'], ['Twin hull, blocking', '$60.00']]],
+  ['Dry storage, per month', [['Single hull up to 25 ft', '$200.00'], ['Single hull 25 to 30 ft', '$8.50 /ft'], ['Single hull over 30 ft', '$9.00 /ft'], ['Twin hull', '$9.00 /ft']]],
+  ['Yard work', [['Pressure cleaning, single hull', '$6.00 /ft'], ['Pressure cleaning, twin hull', '$8.00 /ft'], ['Bottom painting', '$50 /hr'], ['Storage prep', '$60 /hr'], ['Launch prep', '$60 /hr'], ['Fiberglass', '$150 /hr'], ['Compound and waxing', '$50 /hr'], ['Brite work', '$40 /hr'], ['Cleaning', '$40 /hr'], ['Do it yourself', '$50 /day']]],
+  ['Engines and equipment', [['Mechanic', '$110 /hr'], ['Forklift', '$90 /hr'], ['Engine fogging, 2 / 3 / 4 and 6 cyl', '$50 / $65 / $85'], ['Engine flush', '$40 / $55']]],
+]
+
+export const hours: [string, string][] = [
+  ['Ship\u2019s store', 'Monday to Saturday, 8:00 to 4:00'],
+  ['Boatyard', 'Monday to Friday, 8:00 to 4:00, closed weekends and holidays'],
+  ['Mechanic', 'Monday to Friday'],
+  ['Laundry', 'Every day, 8:00 to 6:00'],
+]
+
 export const rates = {
   vat: 0.1,
   single: { haul: 5.5, launch: 5.5, blocking: 50, roundTrip: 8, pressure: 6 },
