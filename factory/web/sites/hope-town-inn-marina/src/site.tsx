@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode, type KeyboardEvent } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { IMG, RATES, DOCKWA, contact, stays, marina, pics, type Pic } from './data'
+import { IMG, RATES, DOCKWA, contact, stays, marina, pics, type Pic, type Stay } from './data'
 
 // Fixed half: shows the photo of whichever section is in view (or a hovered row's photo).
 export function useActivePic(ids: string[], initial: string) {
@@ -17,15 +17,22 @@ export function useActivePic(ids: string[], initial: string) {
   return [pic, sec] as const
 }
 
-export function Fixed({ pic, hover }: { pic: string; hover?: string | null }) {
-  const key = hover || pic
-  const p: Pic = pics[key]
+export function Fixed({ pic, card }: { pic: string; card?: Stay | null }) {
+  const p: Pic = pics[pic]
   return (
     <div className="fixed" aria-hidden="true">
       <AnimatePresence initial={false}>
-        <motion.figure key={key} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.9, delay: 0.25 } }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
-          <img src={IMG + p.src} alt="" width={1920} height={1080} style={{ objectPosition: p.pos }} fetchPriority={key === 'harbour' ? 'high' : undefined} />
+        <motion.figure key={p.src} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.9, delay: 0.25 } }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
+          <motion.img src={IMG + p.src} alt="" width={1920} height={1080} initial={false} animate={{ objectPosition: p.pos || '50% 50%', scale: pic === 'docks' ? 1.12 : 1 }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }} style={{ transformOrigin: p.pos || '50% 50%' }} fetchPriority={pic === 'harbour' ? 'high' : undefined} />
         </motion.figure>
+      </AnimatePresence>
+      <AnimatePresence mode="wait">
+        {card && (
+          <motion.figure key={card.name} className="stay-card" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6, transition: { duration: 0.18 } }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
+            <img src={card.thumb} alt="" width={395} height={300} />
+            <figcaption><b>{card.name}</b><span className="tnum">Up to {card.guests} guests · {card.ft.toLocaleString('en-US')} ft² · {card.m} m²</span></figcaption>
+          </motion.figure>
+        )}
       </AnimatePresence>
     </div>
   )
@@ -51,35 +58,22 @@ export function Nav({ base = '' }: { base?: string }) {
   )
 }
 
-export function StayFinder({ onHover }: { onHover?: (k: string | null) => void }) {
-  const [n, setN] = useState(4)
-  const fit = useMemo(() => stays.filter(s => s.guests >= n), [n])
-  const hov = (s: typeof stays[number]) => onHover?.(s.kind === 'Villa' ? (s.guests >= 8 ? 'porch' : 'living') : 'kitchen')
+export function StaysList() {
   return (
-    <div>
-      <p className="small" id="party-l">How many of you?</p>
-      <div className="seg" role="group" aria-labelledby="party-l">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map(i => <button key={i} type="button" aria-pressed={i === n} onClick={() => setN(i)}>{i}</button>)}
-      </div>
-      <p className="count" aria-live="polite">{fit.length} of 9 stays sleep {n} {n === 1 ? 'guest' : 'guests'}.</p>
-      <ul className="stays" onMouseLeave={() => onHover?.(null)}>
-        <AnimatePresence initial={false}>
-          {fit.map(s => (
-            <motion.li key={s.name} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} onMouseEnter={() => hov(s)}>
-              <img src={s.thumb} alt="" width={395} height={300} loading="lazy" />
-              <b>{s.name}</b>
-              <span>Up to {s.guests}</span>
-              <span>{s.ft.toLocaleString('en-US')} ft&sup2; &middot; {s.m} m&sup2;</span>
-            </motion.li>
-          ))}
-        </AnimatePresence>
-      </ul>
-      <div className="acts"><a className="btn btn-ink" href={RATES}>Check room rates</a><span className="small">Live rates and booking on the inn's reservation system.</span></div>
-    </div>
+    <ul className="stays">
+      {stays.map(st => (
+        <li key={st.name}>
+          <img src={st.thumb} alt={`${st.name} at Hope Town Inn & Marina`} width={395} height={300} loading="lazy" />
+          <b>{st.name}</b>
+          <span>Up to {st.guests}</span>
+          <span>{st.ft.toLocaleString('en-US')} ft&sup2; &middot; {st.m} m&sup2;</span>
+        </li>
+      ))}
+    </ul>
   )
 }
 
-export function SlipCheck() {
+export function SlipCheck({ idp = 'boat' }: { idp?: string }) {
   const [loa, setLoa] = useState('')
   const v = parseFloat(loa)
   let verdict: ReactNode = <>Enter your length overall in feet.</>
@@ -90,9 +84,9 @@ export function SlipCheck() {
   }
   return (
     <div className="check">
-      <label htmlFor="loa">Your boat's length overall</label>
-      <div className="loa"><input id="loa" inputMode="decimal" value={loa} onChange={e => setLoa(e.target.value.replace(/[^\d.]/g, ''))} placeholder="62" aria-describedby="verdict" /><span>ft</span></div>
-      <p className="verdict" id="verdict" aria-live="polite">{verdict}</p>
+      <label htmlFor={idp + '-loa'}>Your boat's length overall</label>
+      <div className="loa"><input id={idp + '-loa'} inputMode="decimal" value={loa} onChange={e => setLoa(e.target.value.replace(/[^\d.]/g, ''))} placeholder="62" aria-describedby={idp + '-verdict'} /><span>ft</span></div>
+      <p className="verdict" id={idp + '-verdict'} aria-live="polite">{verdict}</p>
       <div className="acts" style={{ marginTop: 0 }}><a className="btn btn-ink" href={DOCKWA}>Book a slip on Dockwa</a></div>
     </div>
   )
@@ -144,10 +138,8 @@ export function Foot() {
 }
 
 /** Screen 1: the switch by ferry or by boat, each ending in its own booking engine. */
-const smallestFit = (n: number) => [...stays].filter(s => s.guests >= n).sort((a, b) => a.guests - b.guests || a.ft - b.ft)[0]?.name ?? stays[0].name
-export function Arrive({ mode, setMode }: { mode: 'ferry' | 'boat'; setMode: (m: 'ferry' | 'boat') => void }) {
-  const [n, setN] = useState(2)
-  const [sel, setSel] = useState(() => smallestFit(2))
+export const smallestFit = (n: number) => [...stays].filter(s => s.guests >= n).sort((a, b) => a.guests - b.guests || a.ft - b.ft)[0]?.name ?? stays[0].name
+export function Arrive({ mode, setMode, n, setN, sel, setSel }: { mode: 'ferry' | 'boat'; setMode: (m: 'ferry' | 'boat') => void; n: number; setN: (n: number) => void; sel: string; setSel: (s: string) => void }) {
   const fitN = stays.filter(s => s.guests >= n).length
   const setCount = (i: number) => { setN(i); const cur = stays.find(s => s.name === sel); if (!cur || cur.guests < i) setSel(smallestFit(i)) }
   const tabs: ['ferry' | 'boat', string, string][] = [['ferry', 'By ferry', 'Rooms and villas, 1 to 8 guests'], ['boat', 'By boat', 'Slips to 125 ft, moorings to 45 ft']]
@@ -162,8 +154,7 @@ export function Arrive({ mode, setMode }: { mode: 'ferry' | 'boat'; setMode: (m:
           </button>
         ))}
       </div>
-      {mode === 'ferry' ? (
-        <div id="panel-ferry" role="tabpanel" aria-labelledby="tab-ferry" className="panel">
+      <div id="panel-ferry" role="tabpanel" aria-labelledby="tab-ferry" className="panel" hidden={mode !== 'ferry'}>
           <div className="party">
             <p className="small" id="party-h">How many of you are coming?</p>
             <div className="seg seg--tight" role="group" aria-labelledby="party-h">
@@ -178,21 +169,20 @@ export function Arrive({ mode, setMode }: { mode: 'ferry' | 'boat'; setMode: (m:
                 <li key={s.name}>
                   <button type="button" className={`tile ${ok ? '' : 'tile--no'} ${on ? 'tile--on' : ''}`} aria-pressed={on} aria-disabled={!ok} onClick={() => ok && setSel(s.name)}>
                     <span className="tile__pic"><img src={s.thumb} alt="" width={395} height={300} loading="lazy" /></span>
-                    <b>{s.name.replace(' Hotel', '').replace(' Villa', '')}{s.kind === 'Villa' ? <span className="kind"> villa</span> : null}</b>
-                    <span className="tnum">Up to {s.guests} guests<br />{s.ft.toLocaleString('en-US')} ft²</span>
+                    <b>{s.short}</b>
+                    <span className="tnum">{s.kind} · up to {s.guests}<br />{s.ft.toLocaleString('en-US')} ft²</span>
                   </button>
                 </li>
               )
             })}
           </ul>
-          <div className="acts acts--tool"><a className="btn btn-ink" href={RATES}>Check rates for {sel}</a><span className="small">Live rates on the inn's own reservation system.</span></div>
+          <figure className="stay-inline">{(() => { const c = stays.find(x => x.name === sel)!; return <><img src={c.thumb} alt={`${c.name} at Hope Town Inn & Marina`} width={395} height={300} /><figcaption className="tnum">{c.name} · up to {c.guests} guests · {c.ft.toLocaleString('en-US')} ft²</figcaption></> })()}</figure>
+          <div className="acts acts--tool"><a className="btn btn-ink" href={RATES}>Check rates for {sel}</a><span className="small">Opens the inn's reservation system: choose {sel} there.</span></div>
         </div>
-      ) : (
-        <div id="panel-boat" role="tabpanel" aria-labelledby="tab-boat" className="panel">
-          <SlipCheck />
-          <Specs />
-        </div>
-      )}
+      <div id="panel-boat" role="tabpanel" aria-labelledby="tab-boat" className="panel" hidden={mode !== 'boat'}>
+        <SlipCheck idp="hero" />
+        <Specs />
+      </div>
     </div>
   )
 }
