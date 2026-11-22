@@ -62,11 +62,13 @@ function useRoute(hero: React.RefObject<HTMLElement | null>, key: string) {
     const t = tick.getBoundingClientRect(), p = pf.getBoundingClientRect(), q = pin.getBoundingClientRect()
     const A = rel(t.right + 6, t.top + t.height / 2)
     const B = rel(p.left - 2, p.top + p.height / 2)
-    const Bt = rel(p.left + p.width / 2, p.top - 2)
+    const card = pf.closest(".ans")!.getBoundingClientRect()
     const C = rel(q.left + q.width / 2, q.bottom + 2)
+    const bx = Math.min(Math.max(C.x, card.left - r0.left + 24), card.right - r0.left - 24)
+    const Bt = { x: bx, y: card.top - r0.top - 1 }
     const mx = (A.x + B.x) / 2
     const leg1 = `M${A.x},${A.y} C${mx},${A.y} ${mx},${B.y} ${B.x},${B.y}`
-    const leg2 = `M${Bt.x},${Bt.y} C${Bt.x},${Bt.y - 70} ${C.x},${C.y + 90} ${C.x},${C.y}`
+    const leg2 = `M${Bt.x},${Bt.y} C${Bt.x},${Bt.y - 60} ${C.x},${C.y + 60} ${C.x},${C.y}`
     setD(`${leg1} ${leg2}`)
   }, [hero])
   useLayoutEffect(() => { measure() }, [measure, key])
@@ -102,10 +104,11 @@ export function Hero({ m, setM, o, setO }: { m: Matter; setM: (m: Matter) => voi
               <button type="button" data-m={x.id} aria-pressed={x.id === m.id} onClick={() => setM(x)}>
                 <span>{x.label}</span><span className="tick" aria-hidden="true" />
               </button>
-              {x.id === m.id && <div className="answer-inline"><Answer m={m} o={o} setO={setO} inline /></div>}
             </motion.li>
           ))}
         </ul>
+        <p className="courts-l">Practising in all courts of the Commonwealth of The Bahamas.</p>
+        <div className="answer-inline"><Answer m={m} o={o} setO={setO} inline /></div>
       </div>
       <div className="hero-side">
         <motion.figure className="chartbox" initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, ease: EASE }}>
