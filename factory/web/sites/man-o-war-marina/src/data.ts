@@ -12,7 +12,7 @@ export const BIZ = {
 }
 
 // Rate sheet PDF linked from /services (Nov 2026).
-export const DOCKAGE = { dayStop: 40, power: 0.75, water: 0.5, laundry: 20, tiers: [[14, 2.5], [30, 2.0], [60, 1.5], [Infinity, 1.0]] as [number, number][] }
+export const DOCKAGE = { dayStop: 40, power: 0.75, water: 0.5, laundry: 20, tiers: [[14, 2.5], [30, 2.0], [59, 1.5], [Infinity, 1.0]] as [number, number][] }
 export const MAP = 'https://www.google.com/maps/search/?api=1&query=Man-O-War+Marina+Man-O-War+Cay+Abaco'
 export const LIMITS = { loa: 120, beam: 20, draft: 7 }
 

@@ -5,8 +5,8 @@ import { PLACES, headline, line, nassauNow } from './hours'
 import { Colophon, Masthead, MobileStrip, Photo, mount } from './site'
 
 function useNow() {
-  const [now, setNow] = useState(() => nassauNow())
-  useEffect(() => { const t = setInterval(() => setNow(nassauNow()), 30_000); return () => clearInterval(t) }, [])
+  const [now, setNow] = useState<{ day: number; min: number } | null>(null)
+  useEffect(() => { setNow(nassauNow()); const t = setInterval(() => setNow(nassauNow()), 30_000); return () => clearInterval(t) }, [])
   return now
 }
 
@@ -23,9 +23,10 @@ function verdict(b: Boat) {
     b.beam > LIMITS.beam && `her beam is ${b.beam} ft, over the ${LIMITS.beam} ft listed`,
     b.draft > LIMITS.draft && `she draws ${b.draft} ft, more than the ${LIMITS.draft} ft at low tide`,
   ].filter(Boolean) as string[]
-  if (over.length) return { ok: false, title: 'Talk to the dockmaster first.', body: `As entered, ${over.join(', and ')}. Call ${BIZ.phone} before you plan on a slip here.` }
+  if (over.length) return { ok: false, tight: false, title: 'Talk to the dockmaster first.', body: `As entered, ${over.join(', and ')}. Call ${BIZ.phone} before you plan on a slip here.` }
   const spare = LIMITS.draft - b.draft
-  return { ok: true, title: 'She fits.', body: `${b.loa} by ${b.beam} ft, drawing ${b.draft} ft: inside every limit, with ${spare} ft to spare at low tide.` }
+  if (spare <= 0) return { ok: true, tight: true, title: 'Right at the limit.', body: `She draws the full ${LIMITS.draft} ft the marina has at low tide. Call ahead and time your arrival with the tide.` }
+  return { ok: true, tight: false, title: 'She fits.', body: `${b.loa} by ${b.beam} ft, drawing ${b.draft} ft: inside every limit, with ${spare} ft to spare at low tide.` }
 }
 
 export function estimate(b: Boat, nights: number) {
@@ -83,21 +84,22 @@ function Check({ boat, setBoat, trip, setTrip }: { boat: Boat; setBoat: (b: Boat
             )
           })}
         </div>
-        {v.ok && <p className="est tab"><b>{money(est.total)}</b> <span>{trip.nights > 0 ? `dockage, ${est.line}, from the marina’s rate sheet. Power and water metered.` : est.line}</span></p>}
+        {v.ok && <p className="est tab"><b>{money(est.total)}</b> <span>{trip.nights > 0 ? `dockage, ${est.line}, from their rate sheet; less per foot from 15 nights. Metered power and water extra.` : est.line}</span></p>}
       </div>
       <div className="check-act">
-        {v.ok
+        <label className="arrive"><span>Arriving</span><input type="date" min={iso(new Date())} value={trip.arrive} onChange={e => setTrip({ ...trip, arrive: e.target.value })} /></label>
+        {v.ok && !v.tight
           ? <a className="btn" href="#request">Request a slip for her</a>
           : <a className="btn" href={`tel:${BIZ.tel}`}>Call the dockmaster</a>}
-        <p className="alt tab">{v.ok && <a className="lnk" href={`tel:${BIZ.tel}`}>Call {BIZ.phone}</a>}<span>VHF 16 on arrival</span></p>
+        <p className="alt tab">{v.ok && v.tight && <a className="lnk" href="#request">Request a slip</a>}{v.ok && !v.tight && <a className="lnk" href={`tel:${BIZ.tel}`}>Call {BIZ.phone}</a>}<span>VHF 16 on arrival</span></p>
       </div>
     </div>
   )
 }
 
-function Hero({ now, boat, setBoat, trip, setTrip }: { now: { day: number; min: number }; boat: Boat; setBoat: (b: Boat) => void; trip: Trip; setTrip: (t: Trip) => void }) {
+function Hero({ live, now, boat, setBoat, trip, setTrip }: { live: boolean; now: { day: number; min: number }; boat: Boat; setBoat: (b: Boat) => void; trip: Trip; setTrip: (t: Trip) => void }) {
   const reduce = useReducedMotion()
-  const h = headline(now.day, now.min)
+  const h = live ? headline(now.day, now.min) : { when: 'Monday to Saturday on Man‑O‑War Cay.', what: 'The fuel dock opens at eight: the only fuel on the cay.', open: false }
   return (
     <section aria-labelledby="live" className="hero" data-hero>
       <div className="wrap hero-grid">
@@ -114,7 +116,7 @@ function Hero({ now, boat, setBoat, trip, setTrip }: { now: { day: number; min: 
             <span className="what"><span className={h.open ? 'dot' : 'dot off'} aria-hidden="true" />{h.what}</span>
           </p>
           <p className="board" aria-label="Open now, Bahamas time">
-            {PLACES.slice(1).map(p => { const l = line(p, now.day, now.min); return <span key={p.key} className={l.open ? 'o' : 'c'}><b>{p.name}</b> {l.text}</span> })}
+            {PLACES.slice(1).map(p => { const l = live ? line(p, now.day, now.min) : { open: false, text: p.key === 'office' ? '8 to 12 and 1 to 4' : p.key === 'road' ? '9 to 12 and 2 to 4' : '11 to 3' }; return <span key={p.key} className={l.open ? 'o' : 'c'}><b>{p.name}</b> {l.text}</span> })}
           </p>
           <Check boat={boat} setBoat={setBoat} trip={trip} setTrip={setTrip} />
         </div>
@@ -173,8 +175,8 @@ function Docks() {
 }
 
 const DAYBAR = { from: 6 * 60, to: 18 * 60 }
-function Fuel({ now }: { now: { day: number; min: number } }) {
-  const working = now.day >= 1 && now.day <= 6
+function Fuel({ live, now }: { live: boolean; now: { day: number; min: number } }) {
+  const working = live && now.day >= 1 && now.day <= 6
   const pct = (m: number) => ((m - DAYBAR.from) / (DAYBAR.to - DAYBAR.from)) * 100
   const nowPct = Math.min(100, Math.max(0, pct(now.min)))
   return (
@@ -189,8 +191,8 @@ function Fuel({ now }: { now: { day: number; min: number } }) {
               return (
                 <div className="pump" key={p.key}>
                   <h3 className="h3">{p.key === 'fuel' ? 'Dockside' : 'Roadside pump'}</h3>
-                  <p className="tab hrs">{p.spans.map(([a, b]) => `${a / 60 > 12 ? a / 60 - 12 : a / 60} to ${b / 60 > 12 ? b / 60 - 12 : b / 60}`).join(' and ')}</p>
-                  <p className={`state ${l.open ? 'o' : 'c'}`}>{l.open ? 'Open now, ' : 'Closed, '}{l.text}</p>
+                  <p className="tab hrs">Mon to Sat, {p.key === 'fuel' ? '8 am to noon and 1 to 4 pm' : '9 am to noon and 2 to 4 pm'}</p>
+                  <p className={`state ${l.open ? 'o' : 'c'}`}>{live ? <>{l.open ? 'Open now, ' : 'Closed, '}{l.text}</> : 'Live status in Bahamas time'}</p>
                   <div className="daybar" aria-hidden="true">
                     {p.spans.map(([a, b]) => <span key={a} className="span" style={{ left: `${pct(a)}%`, width: `${pct(b) - pct(a)}%` }} />)}
                     {working && <span className="tick" style={{ left: `${nowPct}%` }} />}
@@ -224,7 +226,7 @@ function Request({ boat, trip, setTrip }: { boat: Boat; trip: Trip; setTrip: (t:
     fits ? `Your rate sheet suggests about ${money(est.total)} in dockage before power and water; please confirm.` : '',
     f.note ? `\n${f.note}` : '', '',
     `${f.name || ''}${f.phone ? `, ${f.phone}` : ''}`,
-  ].join('\n'), [f, boat])
+  ].join('\n'), [f, boat, trip, leave, est.total, fits])
   const href = `mailto:${BIZ.email}?subject=${encodeURIComponent(`Slip request${f.boat ? `: ${f.boat}` : ''}${trip.arrive ? `, ${longDate(trip.arrive)}` : ''}`)}&body=${encodeURIComponent(body)}`
   return (
     <section id="request" className="request" aria-labelledby="req-h">
@@ -263,7 +265,7 @@ function Request({ boat, trip, setTrip }: { boat: Boat; trip: Trip; setTrip: (t:
 const DAY: { at: number; t: string; d: string }[] = [
   { at: 480, t: '8:00', d: 'The fuel dock and the office open. Gasoline and diesel alongside; the office and gift shop share one room.' },
   { at: 540, t: '9:00', d: 'The roadside pump opens for drivers on the island.' },
-  { at: 660, t: '11:00', d: 'Dock N’ Dine starts lunch, local and international cooking on the water.' },
+  { at: 660, t: '11:00', d: 'Dock N’ Dine starts lunch on the water.' },
   { at: 720, t: '12:00', d: 'The office and both pumps break for lunch.' },
   { at: 780, t: '1:00', d: 'The fuel dock and the office reopen.' },
   { at: 840, t: '2:00', d: 'The roadside pump reopens.' },
@@ -272,8 +274,8 @@ const DAY: { at: number; t: string; d: string }[] = [
   { at: 1020, t: 'Evening', d: 'For marina guests: showers and restrooms, laundry, the grill area and the pool.' },
 ]
 
-function Day({ now }: { now: { day: number; min: number } }) {
-  const working = now.day >= 1 && now.day <= 6
+function Day({ live, now }: { live: boolean; now: { day: number; min: number } }) {
+  const working = live && now.day >= 1 && now.day <= 6
   let cur = -1
   DAY.forEach((r, i) => { if (now.min >= r.at) cur = i })
   return (
@@ -310,7 +312,7 @@ function Ashore() {
         </figure>
         <div className="a-side">
           <h2 id="ashore-h" className="h2">Everything ashore is a short walk down the boardwalk.</h2>
-          <p>Dock N&rsquo; Dine serves lunch, dinner and ice cream with the harbour in front of you, to marina guests, islanders and off-island visitors. The office doubles as the gift shop: custom t-shirts, local art and marine grade dive gear.</p>
+          <p>Dock N&rsquo; Dine serves lunch with the harbour in front of you, Monday to Saturday, to marina guests, islanders and off-island visitors. The office doubles as the gift shop: custom t-shirts, local art and marine grade dive gear.</p>
           <figure className="a-small">
             <Photo p={PHOTO.shop} w={800} h={1000} sizes="(max-width: 860px) 70vw, 360px" />
             <figcaption>Inside the office and gift shop.</figcaption>
@@ -341,11 +343,11 @@ function Home() {
     <>
       <Masthead home />
       <main id="main">
-        <Hero now={now} boat={boat} setBoat={setBoat} trip={trip} setTrip={setTrip} />
+        <Hero live={!!now} now={now ?? { day: 1, min: 0 }} boat={boat} setBoat={setBoat} trip={trip} setTrip={setTrip} />
         <Docks />
-        <Fuel now={now} />
+        <Fuel live={!!now} now={now ?? { day: 1, min: 0 }} />
         <Request boat={boat} trip={trip} setTrip={setTrip} />
-        <Day now={now} />
+        <Day live={!!now} now={now ?? { day: 0, min: 0 }} />
         <Ashore />
         <Cay />
       </main>

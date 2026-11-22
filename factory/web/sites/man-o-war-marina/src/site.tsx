@@ -93,7 +93,7 @@ export function Colophon() {
 export function MobileStrip() {
   useEffect(() => {
     const root = document.documentElement
-    const hero = document.querySelector('[data-hero], .page-head')
+    const hero = document.querySelector('#request, .page-head')
     const colo = document.querySelector('[data-colophon]')
     const seen = new Map<Element, boolean>()
     const io = new IntersectionObserver(es => {
@@ -119,6 +119,5 @@ export function mount(node: ReactNode) {
     requestAnimationFrame(raf)
   }
   const el = document.getElementById('root')!
-  el.innerHTML = ''
   createRoot(el).render(<StrictMode>{node}</StrictMode>)
 }
