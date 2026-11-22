@@ -1,21 +1,19 @@
 // The first screen and the scroll stage are one pinned scene: the hero shows the roof hanging apart over the
 // building, then six chapters lower it into place, and the last screen lets the visitor change the roof system.
-import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { business, layers, systems, pitched } from './data'
 import { CH } from './stage'
 import type { Anchor, SceneApi } from './RoofScene'
 
-const RoofScene = lazy(() => import('./RoofScene'))
+import Sequence from './Sequence'
 const clamp = (x: number) => Math.max(0, Math.min(1, x))
 const ss = (a: number, b: number, x: number) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t) }
 
-function canWebGL() { try { const c = document.createElement('canvas'); return !!c.getContext('webgl2') } catch { return false } }
 
 export default function Anatomy() {
   const section = useRef<HTMLElement>(null), hero = useRef<HTMLDivElement>(null), stage = useRef<HTMLDivElement>(null)
   const progress = useRef(0), api = useRef<SceneApi | null>(null)
   const rows = useRef<(HTMLLIElement | null)[]>([])
-  const [gl, setGl] = useState<boolean | null>(null)
   const [ready, setReady] = useState(false)
   const [wide, setWide] = useState(true)
   const [still, setStill] = useState(false)
@@ -27,7 +25,6 @@ export default function Anatomy() {
     const q = new URLSearchParams(location.search)
     setStill(matchMedia('(prefers-reduced-motion: reduce)').matches || q.has('still'))
     const mq = matchMedia('(min-width: 1024px)'); const on = () => setWide(mq.matches); on(); mq.addEventListener('change', on)
-    setGl(canWebGL())
     const scroll = () => {
       const el = section.current; if (!el) return
       const r = el.getBoundingClientRect(), p = q.has('p') ? +q.get('p')! : clamp(-r.top / Math.max(1, r.height - innerHeight))
@@ -39,8 +36,9 @@ export default function Anatomy() {
     scroll(); addEventListener('scroll', scroll, { passive: true }); addEventListener('resize', scroll)
     return () => { mq.removeEventListener('change', on); removeEventListener('scroll', scroll); removeEventListener('resize', scroll) }
   }, [])
-  useEffect(() => { if (!ready) return; const t = setTimeout(() => setLabels(true), still ? 0 : 1900); return () => clearTimeout(t) }, [ready, still])
+  useEffect(() => { if (!ready) return; const t = setTimeout(() => setLabels(true), still ? 0 : 500); return () => clearTimeout(t) }, [ready, still])
 
+  const onReady = useCallback(() => setReady(true), [])
   const onAnchors = useCallback((pts: Anchor[]) => {
     const w = stage.current?.clientWidth ?? 0
     pts.forEach((p, i) => { const el = rows.current[i]; if (!el) return; el.style.transform = `translate3d(0, ${p.y.toFixed(1)}px, 0)`; el.style.setProperty('--lead', `${Math.max(0, w - p.x).toFixed(1)}px`) })
@@ -59,7 +57,7 @@ export default function Anatomy() {
             <source media="(max-width: 1023px)" srcSet="./poster-tall.jpg" />
             <img src="./poster-wide.jpg" alt="" />
           </picture>
-          {gl && <Suspense fallback={null}><RoofScene className="anatomy__canvas" progress={progress} finish={finish} still={still} api={api} onAnchors={wide ? onAnchors : undefined} onReady={() => setReady(true)} /></Suspense>}
+          <Sequence className="anatomy__canvas" progress={progress} finish={finish} api={api} onAnchors={wide ? onAnchors : undefined} onReady={onReady} />
         </div>
 
         {/* ---------- first screen ---------- */}

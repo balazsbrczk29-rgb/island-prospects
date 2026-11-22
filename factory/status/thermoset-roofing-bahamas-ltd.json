@@ -60,6 +60,8 @@
   "Kept Hanken Grotesk only and the limestone/sea-glass palette per Balazs approval note (keep this design individuality).",
   "Client grouping by building type is ours (stated on the page).",
   "Wording to confirm with owner: leak line for homes (report what the rest of the roof needs), Thermoset looks at the roof first then recommends the system; layer descriptions for vapour retarder, insulation, cover board.",
-  "Squarespace photo native sizes unknown: requested as format=1500w and shown at or below that width."
- ]
+  "Squarespace photo native sizes unknown: requested as format=1500w and shown at or below that width.",
+  "2026-11-22 (Balazs): 3D roof build-up baked into AVIF frame sequences (public/seq: wide 181 frames 1920x1200, tall 121 frames 800x1600, plus 3 finish sets each for the system picker), played on a canvas by src/Sequence.tsx; three.js no longer ships (JS bundle about 400 KB). Re-bake steps in tools/README.md."
+ ],
+ "updated_at": "2026-11-22T13:46:46.736Z"
 }
