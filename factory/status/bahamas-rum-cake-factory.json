@@ -4,8 +4,103 @@
  "name": "Bahamas Rum Cake Factory",
  "batch": "09",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T15:13:22.097Z"
+ "claimed_at": "2026-11-22T15:13:22.097Z",
+ "pages": [
+  "index.html",
+  "shop.html"
+ ],
+ "primary_cta": "Add to bag (cart drawer) then 'Checkout on thebahamasrumcakefactory.com' via a real Shopify cart permalink with their variant IDs; six-pack builder; visit the East Bay Street shop",
+ "brand_truth": "One recipe, one downtown Nassau shop since 2000, now the Official Rum Cake of The Bahamas.",
+ "buyer": "Cruise passengers deciding today on a phone downtown, and US gift buyers reordering online.",
+ "direction": {
+  "archetype": "A09 Colour poster",
+  "lane": "P11 Straw market",
+  "type": "T11 Neo-grotesk display (Bricolage Grotesque + Figtree)",
+  "why": "Their own studio photos give every flavour its own colour; a colour poster that changes with the flavour is the product truth and the most appetising thing they own."
+ },
+ "big_idea": "Pick a flavour and the whole first screen turns that flavour's colour, with their own studio photo, the real price and Add to bag.",
+ "concept_type": "webshop: catalogue + six-pack builder + cart drawer + checkout hand-off to their Shopify",
+ "tier_visual": "standard",
+ "tier_why": "Their own product photography and colour does the work; no 3D.",
+ "images": [
+  {
+   "src": "https://cdn.shopify.com/s/files/1/0584/6748/3722/files/20oz_bundt_<flavour>.png (14)",
+   "source": "own",
+   "credit": "Bahamas Rum Cake Factory Shopify store"
+  },
+  {
+   "src": "https://cdn.shopify.com/s/files/1/0584/6748/3722/files/Six_Pack_Mixed.png",
+   "source": "own",
+   "credit": "Bahamas Rum Cake Factory Shopify store"
+  },
+  {
+   "src": "https://cdn.shopify.com/s/files/1/0584/6748/3722/files/IMG_5409.jpg",
+   "source": "own",
+   "credit": "Bahamas Rum Cake Factory Shopify store"
+  },
+  {
+   "src": "https://cdn.shopify.com/s/files/1/0584/6748/3722/files/Carnival_3_smiling__customers_six_packs.jpg",
+   "source": "own",
+   "credit": "Bahamas Rum Cake Factory Shopify store"
+  },
+  {
+   "src": "https://cdn.shopify.com/s/files/1/0584/6748/3722/files/product images from products.json (shop page)",
+   "source": "own",
+   "credit": "Bahamas Rum Cake Factory Shopify store"
+  }
+ ],
+ "plan_gate": {
+  "verdict": "revise x5, applied (phone chip rail directly under the photo, wider soft edge fade and phone edge masks, desktop chips in two centred rows, six-pack packshot and tinted dashed slots, flavour name in display type in the price card)",
+  "predicted": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 5,
+   "fit": 5,
+   "distinct": 5,
+   "references": 4
+  }
+ },
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present": true
+  },
+  "gate2": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion_clarity": 5,
+   "phone": 4
+  },
+  "rounds": 2
+ },
+ "current_site_findings": [
+  "Old listings still point to bacardirumcake.com",
+  "Shop address and opening times are not prominent",
+  "Stock-named (AdobeStock) images used as product photos",
+  "Long repeated product grids on mobile"
+ ],
+ "pitch_line": "Your studio photos already give every flavour its own colour; this shop lets a cruise passenger pick one, watch the page turn Key Lime green, and check out in your existing Shopify cart.",
+ "assumptions": [
+  "Street address 602 East Bay Street and phone (242) 328-3750 from Yelp; the record says McPherson St",
+  "Opening times (7:30 am Mon to Sat, 8 am Sun) from Yelp; closing time unknown",
+  "Cart permalink note parameter carries the six-pack flavours; confirm the Mix and Match product accepts flavours by note",
+  "Ground colours sampled from their photos"
+ ],
+ "sources": [
+  "https://thebahamasrumcakefactory.com/products.json (scraped 2026-11-21)",
+  "https://thebahamasrumcakefactory.com/",
+  "https://thebahamasrumcakefactory.com/pages/about",
+  "https://m.yelp.com/biz/bahamas-rum-cake-factory-nassau"
+ ],
+ "notes": "Gen-2 rebuild by scheduled site worker 2026-11-21. Audit filled: real Shopify webshop (priority C), so the concept is a shop with a real cart hand-off. Every product, price and sold-out state comes from products.json. Photos viewed through a Lovable viewer project (ip-assets-rum-cake-factory, 3 rounds: flavours, shop photos, catalogue thumbnails); beauty products carry the Emporium de Coconut brand as sold in their store. BLIND: screenshots used crops of the viewer screenshots. Plan-gate critic asked for 5 revisions, applied; scores are its predicted post-fix scores. qa: 0 blockers (tap warning is the shared concept-label button). distinct: distinct (closest 55).",
+ "built_at": "2026-11-22T15:29:54.054152+00:00",
+ "jobspec_built": true,
+ "jobspec_notes": "Nov 22 job-spec build on top of the Nov 21 gen 2 site: added 'In Nassau today' hero mode (open now in Nassau time incl. holiday closures, walking-route Google Maps embed from Prince George Wharf, shopfront inset, airport counters, carry-on), 'Make it a six pack' prefill, free-shipping meter in the bag, Travels well section, visit section with full hours, holiday closures, samples, email, 48h large orders and map, FAQ accordion, Etsy route for buyers outside the US and Canada (etsy.com/shop/BahamasRumCake, found Nov 22), sold-out chip states. Assumptions: alt texts of Carnival_3 and IMG_5409 photos to check against the real images; Simon Smith title and downtown resellers left out."
 }

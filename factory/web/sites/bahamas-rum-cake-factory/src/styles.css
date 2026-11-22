@@ -294,3 +294,5 @@ a { color: inherit; }
 }
 .hero__photo .hero__inset { inset: auto; left: 1rem; bottom: 1rem; width: 32%; height: auto; aspect-ratio: 3 / 2; z-index: 2; }
 @media (min-width: 901px) { .is-nassau .hero__photo { top: clamp(18rem, 38vh, 22rem); } }
+@media (min-width: 901px) { .chips { padding-left: max(var(--pad), 28rem); scroll-padding-left: 28rem; } }
+.hero__photo .hero__inset { left: auto; right: 1rem; bottom: 1rem; }

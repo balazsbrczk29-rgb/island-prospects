@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { flavours, img, mix, twopacks, sixpacks, other, shop, shopNow, money, STORE, ETSY, CDN, type Flavour } from './data'
 import { useCart, BagButton } from './cart'
@@ -23,6 +23,8 @@ export function Hero() {
   const buy = (v: typeof v20) => { add({ id: v.id, name: `${f.name} Rum Cake`.replace('Kentucky Bourbon Rum Cake', 'Kentucky Bourbon Cake'), size: v.t, price: v.p, img: img(f.img, 200) }); setOpen(true) }
   const six = () => { window.dispatchEvent(new CustomEvent('brcf:six', { detail: f.name })); document.getElementById('six')?.scrollIntoView({ behavior: 'smooth' }) }
   const nassau = mode === 'nassau'
+  const firstF = useRef(true)
+  useEffect(() => { if (firstF.current) { firstF.current = false; return } document.querySelector('.chips [aria-checked="true"]')?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }) }, [f])
   return (
     <section className={'hero' + (f.dark && !nassau ? ' is-dark' : '') + (nassau ? ' is-nassau' : '')} style={{ background: nassau ? TURQ : f.ground }} aria-labelledby="h1">
       <div className="hero__photo">
