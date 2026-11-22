@@ -1,17 +1,17 @@
 import { createRoot } from 'react-dom/client'
 import './styles.css'
-import XrayStage from './XrayStage'
-import { Parts, Night, WorkOrder, Contact, Dock } from './site'
+import Composer from './Composer'
+import { Parts, Night, Clients, Contact, Dock } from './site'
 
 function Home() {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
       <main id="main">
-        <XrayStage />
+        <Composer />
         <Parts />
         <Night />
-        <WorkOrder />
+        <Clients />
       </main>
       <Contact />
       <Dock />
