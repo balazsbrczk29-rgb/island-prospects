@@ -4,8 +4,34 @@
  "name": "Fernandez Bay Village",
  "batch": "10",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T12:53:11.358Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T13:07:23.366015Z",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/fernandez-bay-village/",
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "gate2": {
+   "wow": 5,
+   "photography": 4,
+   "typography": 5,
+   "composition": 4,
+   "conversion": 5,
+   "phone": 4
+  },
+  "note": "Re-score passed; its last composition fix (sheet bottom padding clear of the concept label) applied afterwards."
+ },
+ "notes": [
+  "Job-spec rebuild from design.md: Who is coming? tool on screen 1 beside their bay photo; matching cottages rise on the sand (adjoining pairs stitched), meal counter at published prices, route picker, innRoad Check dates and prefilled WhatsApp.",
+  "Kept: all ten stays (now a comparison table that marks rows fitting your party), dining prices, three routes with Makers Air 10% and PILOT 15%, weddings/groups WhatsApp enquiry, the day film (now 6 frames after the tool).",
+  "New type pairing Petrona + Commissioner (self-hosted); pale sea-grape paper with casuarina pine actions.",
+  "Front desk shown as (954) 302-7422 from their contact page (footer says 518-4500): confirm with owner. Previous concept showed 518-4500; corrected.",
+  "Breakfast and mahi photos requested at 1000w (native size unconfirmed in sandbox); replace with larger originals if available.",
+  "Stale wip branch from Nov 21 (old film build) was not resumed; built fresh from main per the approved spec."
+ ]
 }
