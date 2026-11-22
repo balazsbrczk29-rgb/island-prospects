@@ -40,13 +40,14 @@ const LABEL: Record<string, [number, number, 'start' | 'middle' | 'end']> = {
   'Berry Islands': [178, 176, 'start'], Andros: [104, 300, 'end'], 'New Providence and Paradise Island': [196, 224, 'middle'],
   Eleuthera: [334, 226, 'start'], 'Great Exuma and Little Exuma': [312, 402, 'end'], 'Cat Island and Cat Cay': [392, 300, 'start'],
   'San Salvador': [482, 342, 'start'], 'Rum Cay': [448, 382, 'start'], 'Long Island': [430, 432, 'start'],
-  'Acklins and Crooked Island': [512, 540, 'end'], Mayaguana: [604, 534, 'middle'], Inagua: [530, 642, 'end'], 'Ragged Island': [336, 526, 'end'],
+  'Acklins and Crooked Island': [548, 556, 'middle'], Mayaguana: [604, 534, 'middle'], Inagua: [530, 642, 'end'], 'Ragged Island': [366, 530, 'start'],
 };
 
 /** The chart: Natural Earth outlines, every island group they serve. Pointer-only; the Island select is its keyboard twin. */
 export function Chart({ search, onIsland, compact = false }: { search: Search; onIsland: (n: string) => void; compact?: boolean }) {
   const ref = useRef<SVGSVGElement>(null);
   const counts = useMemo(() => countsFor(search), [search]);
+  const sig = Object.entries(counts).map(e => e.join(':')).join('|') + search.mode + search.kind + search.band;
   const pick = (e: MouseEvent<SVGSVGElement>) => {
     const hit = (e.target as Element).closest('[data-g]');
     if (hit) return onIsland(hit.getAttribute('data-g')!);
@@ -62,6 +63,9 @@ export function Chart({ search, onIsland, compact = false }: { search: Search; o
       {MAP_GROUPS.map(g => (
         <path key={g.name} data-g={g.name} d={g.d} className={`isle ${search.island === g.name ? 'on' : ''} ${counts[g.name] ? 'has' : ''}`} />
       ))}
+      <g key={sig} className="glow" aria-hidden="true">
+        {MAP_GROUPS.filter(g => counts[g.name]).map(g => <path key={g.name} d={g.d} />)}
+      </g>
       {MAP_GROUPS.map(g => {
         const [x, y, a] = LABEL[g.name]; const n = counts[g.name] || 0; const on = search.island === g.name;
         return (
