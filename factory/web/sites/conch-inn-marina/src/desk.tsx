@@ -211,7 +211,7 @@ export function Desk() {
             ))}
           </div>
         )}
-        <p className="desk-fine">{mode === 'room' ? 'Live rates and availability are in the inn’s own booking system.' : 'Rated on length overall, bow pulpit to swim platform. Cancel within 48 hours and the first night is charged.'}</p>
+        <p className="desk-fine">{mode === 'room' ? 'Live rates and availability are in the inn’s own booking system.' : mode === 'mooring' ? 'Mooring balls: $30 a night or $500 a month, plus VAT. First come, first served.' : 'Rated on length overall, bow pulpit to swim platform. Cancel within 48 hours and the first night is charged.'}</p>
         <p className="desk-alt num">The dock office answers every day, 8:00 to 5:30: <a href={`tel:${BIZ.tel}`}>{BIZ.phone}</a> or VHF 16.</p>
         <button type="submit" hidden aria-hidden="true" tabIndex={-1} />
       </motion.form>
