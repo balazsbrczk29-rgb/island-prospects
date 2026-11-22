@@ -3,8 +3,9 @@ import { AnimatePresence, motion, useInView, useScroll, useTransform } from "mot
 import { Masthead, Footer, mount, ease } from "./site"
 import { IMG, PHONE, TEL, EMAIL, OFFICES, PROJECTS } from "./data"
 import Atlas from "./Atlas"
+import MapAtlas, { WORK, ROUTER_ISLANDS as ISLANDS, type Sel } from "./MapAtlas"
 
-function Hero() {
+function Approach() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] })
   const lg = typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches
@@ -14,15 +15,15 @@ function Hero() {
   const capX = useTransform(p, v => `${v < 0.45 ? 120 : Math.max(0, 120 - (v - 0.45) * 480)}%`)
 
   return (
-    <section ref={ref} aria-labelledby="h1" className="relative lg:h-[230vh]">
+    <section ref={ref} aria-labelledby="approach-h" className="relative lg:h-[230vh]">
       <div className="lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden">
         <div className="relative h-[42vh] min-h-[320px] overflow-hidden lg:absolute lg:inset-0 lg:h-auto">
           <motion.div className="absolute inset-0 origin-[52%_56%] will-change-transform" style={lg ? { scale, y } : undefined}>
             <motion.img
               src={IMG.hogcayA.src} width={IMG.hogcayA.w} height={IMG.hogcayA.h}
               alt="Aerial view of the Hog Cay airstrip in the Exumas: a new asphalt runway and apron along a narrow cay between turquoise shallows and deep water"
-              className="photo object-[50%_55%]" fetchPriority="high"
-              initial={{ scale: 1.08 }} animate={{ scale: 1 }} transition={{ duration: 2.2, ease }}
+              className="photo object-[50%_55%]" loading="lazy"
+              initial={{ scale: 1.08 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ duration: 2.2, ease }}
             />
           </motion.div>
           <motion.p className="hidden lg:block absolute right-[calc(var(--pad)+20px)] bottom-[8vh] max-w-[300px] bg-[var(--color-salt)] px-4 py-3 text-sm leading-snug"
@@ -33,9 +34,9 @@ function Hero() {
 
         <motion.div style={lg ? { y: slabY } : undefined}
           className="relative bg-[var(--color-salt)] lg:absolute lg:left-[var(--pad)] lg:top-0 lg:w-[min(700px,50vw)]">
-          <motion.div initial={{ clipPath: "inset(0 0 100% 0)" }} animate={{ clipPath: "inset(0 0 0% 0)" }} transition={{ duration: 1.1, ease, delay: 0.25 }}
+          <motion.div initial={{ clipPath: "inset(0 0 100% 0)" }} whileInView={{ clipPath: "inset(0 0 0% 0)" }} viewport={{ once: true }} transition={{ duration: 1.1, ease, delay: 0.25 }}
             className="px-[var(--pad)] pt-6 pb-8 lg:px-10 lg:pt-9 lg:pb-10">
-            <h1 id="h1" className="text-[clamp(2.6rem,1.4rem+3.6vw,5rem)] max-w-[13ch]">We pave the runways <br className="hidden sm:block" />you land on.</h1>
+            <h2 id="approach-h" className="text-[clamp(2.6rem,1.4rem+3.6vw,5rem)] max-w-[13ch]">We pave the runways <br className="hidden sm:block" />you land on.</h2>
             <p className="mt-5 max-w-[46ch] text-base lg:text-[1.125rem] leading-[1.5] text-[var(--color-ink)]">
               Lynden Pindling, Grand Bahama, Marsh Harbour, Bimini, Hog Cay and Norman's Cay, in asphalt from our own plants.<span className="hidden sm:inline"> Then the roads, ports and water works on the islands between.</span>
             </p>
@@ -260,12 +261,10 @@ function Projects() {
   )
 }
 
-const WORK = ["Paving or resurfacing", "Runway or apron", "Road construction", "Port, marine or sea defence", "Water, RO or utilities", "Site development", "Hot mix asphalt supply", "Ready mix concrete supply"]
-const ISLANDS = ["New Providence", "Grand Bahama", "Abaco", "Exuma", "Eleuthera", "Andros", "Bimini", "Another island"]
 
-function QuoteDesk() {
-  const [work, setWork] = useState("")
-  const [island, setIsland] = useState("")
+function QuoteDesk({ sel, set }: { sel: Sel; set: (s: Partial<Sel>) => void }) {
+  const work = sel.work, island = sel.island
+  const setWork = (w: string) => set({ work: w }), setIsland = (i: string) => set({ island: i })
   const [f, setF] = useState({ scope: "", name: "", org: "", reply: "" })
   const office = island === "Grand Bahama" ? OFFICES[1] : island === "Abaco" ? OFFICES[2] : OFFICES[0]
   const body = useMemo(() => [
@@ -358,17 +357,20 @@ function Dock() {
 }
 
 function Home() {
+  const [sel, setSel] = useState<Sel>({ cat: "All", island: "", work: "" })
+  const set = (s: Partial<Sel>) => setSel(v => ({ ...v, ...s }))
   return (
     <>
       <Masthead />
       <main id="main">
-        <Hero />
+        <MapAtlas sel={sel} set={set} />
+        <Approach />
         <Runways />
         <Inward />
         <Materials />
         <Certified />
         <Projects />
-        <QuoteDesk />
+        <QuoteDesk sel={sel} set={set} />
       </main>
       <Footer />
       <Dock />

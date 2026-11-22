@@ -72,3 +72,6 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 .grid > * { min-width: 0; }
 p, figcaption { max-width: 72ch; }
+
+/* map labels grow on phones (SVG user units) */
+@media (max-width: 640px) { .map-label { font-size: 34px; } .map-coord { display: none; } }
