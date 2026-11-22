@@ -1,6 +1,6 @@
 import { useRef, type ReactNode } from "react"
 import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "motion/react"
-import { WA, WHATSAPP, IMG, Photo, ease, type Img } from "./site"
+import { WA, WHATSAPP, IMG, Photo, ease, nativeW, type Img } from "./site"
 
 const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
 
@@ -10,7 +10,7 @@ export function Hero({ img, alt, title, children }: { img: Img; alt: string; tit
   return (
     <section className="frame" aria-labelledby="hero-title">
       <div aria-hidden />
-      <div className="relative min-h-[30svh] overflow-hidden md:min-h-[40svh]">
+      <div className="relative mx-auto min-h-[30svh] w-full overflow-hidden md:min-h-[40svh]" style={{ maxWidth: Math.floor(nativeW(img) / 1.1) }}>
         <motion.div className="absolute inset-0" initial={reduce ? false : { scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 2.6, ease }}>
           <Photo img={img} alt={alt} eager className="h-full w-full" />
         </motion.div>
@@ -83,7 +83,7 @@ function Shot({ p, i, n, ch }: { p: MotionValue<number>; i: number; n: number; c
   })
   return (
     <motion.div className="absolute inset-0 will-change-[opacity]" style={{ opacity, zIndex: i }}>
-      <motion.div className="absolute inset-0 will-change-transform" style={{ transform }}>
+      <motion.div className="absolute inset-y-0 inset-x-0 mx-auto will-change-transform" style={{ transform, maxWidth: Math.floor(nativeW(ch.img) / 1.07) }}>
         <Photo img={ch.img} alt={ch.alt} className="h-full w-full" />
       </motion.div>
     </motion.div>
@@ -131,7 +131,7 @@ export function FilmStage() {
           </div>
           <motion.div aria-hidden className="absolute inset-x-0 bottom-0 h-px origin-left bg-ink" style={{ scaleX: scrollYProgress }} />
         </div>
-        <div className="relative mx-auto w-full max-w-[1100px] overflow-hidden">
+        <div className="relative mx-auto w-full max-w-[956px] overflow-hidden">
           {CHAPTERS.map((c, i) => <Shot key={c.word} p={scrollYProgress} i={i} n={n} ch={c} />)}
         </div>
         <div className="relative">

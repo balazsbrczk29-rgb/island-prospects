@@ -32,6 +32,8 @@ export const IMG = {
   poolDive: { src: U + "GOPR7892-768x576.jpg", ratio: 1.33 },
   reefDivers: { src: U + "The-nursery-Dive-site-768x473.jpg", ratio: 1.62 },
 }
+/** Native pixel width, read from the WordPress size suffix in the file name. */
+export const nativeW = (img: { src: string }) => { const m = img.src.match(/-(\d+)x\d+\.(?:jpe?g|png|webp)$/); return m ? +m[1] : 1024 }
 export type Img = { src: string; fallback?: string; ratio: number; pos?: string; posM?: string }
 
 export const ROOMS = [
@@ -63,9 +65,10 @@ export const ease = [0.22, 1, 0.36, 1] as const
 /* ---------- photo with reserved space, tinted placeholder and a fallback size ---------- */
 export function Photo({ img, alt, className = "", eager = false, style }: { img: Img; alt: string; className?: string; eager?: boolean; style?: React.CSSProperties }) {
   const [src, setSrc] = useState(img.src)
+  const m = img.src.match(/-(\d+)x(\d+)\.(?:jpe?g|png|webp)$/)
   return (
     <div className={`photo ${className}`} style={{ ...style, ...(img.pos ? { ["--pos" as string]: img.pos } : {}), ...(img.posM ? { ["--pos-m" as string]: img.posM } : {}) }}>
-      <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} decoding="async" fetchPriority={eager ? "high" : "auto"}
+      <img src={src} alt={alt} width={m ? +m[1] : undefined} height={m ? +m[2] : undefined} loading={eager ? "eager" : "lazy"} decoding="async" fetchPriority={eager ? "high" : "auto"}
         onError={() => { if (img.fallback && src !== img.fallback) setSrc(img.fallback) }} />
     </div>
   )
@@ -137,7 +140,7 @@ function Header() {
                         <div className="mt-10 flex flex-col gap-4 text-[length:var(--t-sm)] md:flex-row md:items-center md:gap-10">
                           <a href={BOOK} className="btn self-start">Check dates and book</a>
                           <a href={WA} className="link num self-start">WhatsApp {WHATSAPP}</a>
-                          <a href={`mailto:${EMAIL}`} className="link self-start">{EMAIL}</a>
+                          <a href={`mailto:${EMAIL}`} className="link inline-flex min-h-11 items-center self-start break-all">{EMAIL}</a>
                         </div>
                       </nav>
                     </motion.div>
@@ -188,7 +191,7 @@ function Footer() {
         <address className="grid content-start gap-6 not-italic md:col-span-3 md:col-start-7">
           <a href={WA} className="num text-[length:var(--t-lg)]"><span className="block text-[length:var(--t-xs)] italic text-muted">WhatsApp</span>{WHATSAPP}</a>
           <a href={TEL2} className="num text-[length:var(--t-lg)]"><span className="block text-[length:var(--t-xs)] italic text-muted">Telephone</span>{PHONE2}</a>
-          <a href={`mailto:${EMAIL}`} className="text-[length:var(--t-lg)] break-words">{EMAIL}</a>
+          <a href={`mailto:${EMAIL}`} className="inline-flex min-h-11 items-center text-[length:var(--t-lg)] break-all">{EMAIL}</a>
         </address>
         <div className="grid content-start gap-6 md:col-span-3">
           <a href={MAP} className="text-[length:var(--t-lg)]">1 Ocean Drive<br />Port Howe, Cat Island<br />The Bahamas</a>

@@ -89,7 +89,7 @@ export function EndCredits() {
           <p className="mono-word !text-[clamp(56px,9vw,140px)]">Then, the beach.</p>
           <div className="flex flex-col items-center gap-5 sm:flex-row sm:gap-8">
             <a href="#dates" className="btn btn-paper btn-xl">Check dates and book</a>
-            <a href="getting-here.html" className="link">Flights, taxis and car rentals in full</a>
+            <a href="getting-here.html" className="link inline-flex min-h-11 items-center">Flights, taxis and car rentals in full</a>
           </div>
         </div>
       </div>

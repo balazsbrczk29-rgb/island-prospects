@@ -55,7 +55,7 @@ function PackageEnquiry() {
 
 export function Whitetips() {
   return (
-    <section id="whitetips" className="on-glass bg-glass text-on-glass" aria-labelledby="wt-title">
+    <section id="whitetips" className="on-glass bg-deep text-on-glass" aria-labelledby="wt-title">
       <div className="px-[var(--gutter)] pt-[var(--s-12)] md:pt-[var(--s-16)]">
         <h2 id="wt-title" className="mono-word">
           <span className="block">March</span>
