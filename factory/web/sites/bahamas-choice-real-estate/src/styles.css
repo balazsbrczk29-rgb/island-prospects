@@ -310,3 +310,25 @@ a { color: inherit; }
 .card-who { margin-top: auto; padding-top: var(--s2); }
 .card-title, .card-place { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .track > div, .card { min-width: 0; max-width: 100%; } .track > div { overflow: hidden; }
+
+.glow path { fill: var(--accent); stroke: none; opacity: 0; pointer-events: none; animation: glow 1400ms var(--ease) 300ms both; }
+@keyframes glow { 0% { opacity: 0; } 35% { opacity: .55; } 100% { opacity: .14; } }
+@media (prefers-reduced-motion: reduce) { .glow path { animation: none; opacity: .14; } }
+.card-title, .card-place { white-space: normal; overflow: hidden; text-overflow: clip; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.card-title { min-height: 2.7em; }
+.chart-photo { bottom: 150px; left: var(--s4); width: 300px; }
+.chart-photo img { width: 300px; height: 225px; }
+@media (max-width: 1023px) {
+  .hero h1 { font-size: 1.875rem; }
+  .finder-top + .selects, .selects { margin-top: var(--s3); }
+  .card-photo { aspect-ratio: 1 / 1; }
+  .card-title { min-height: 0; }
+}
+.chart-photo { bottom: 120px; width: 280px; }
+.chart-photo img { width: 280px; height: 210px; }
+@media (min-width: 1024px) {
+  .card-photo { aspect-ratio: 4 / 4.4; }
+  .hero { padding-top: var(--s4); }
+  .hero-body h1 { font-size: 2.625rem; }
+  .card-price { margin-top: var(--s2); }
+}
