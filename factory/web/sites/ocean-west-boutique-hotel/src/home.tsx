@@ -1,6 +1,6 @@
 import { StrictMode, useEffect, useRef, useState } from "react"
 import { createRoot } from "react-dom/client"
-import { AnimatePresence, motion } from "motion/react"
+import { AnimatePresence, motion, useScroll, useTransform, useReducedMotion } from "motion/react"
 import Lenis from "lenis"
 import { ArrowUpRight, Phone } from "lucide-react"
 import { BOOK, EMAIL, PHONE, PHONE2, TEL, TEL2, PIC, ROOMS, floorName, type Pic, type Room } from "./data"
@@ -51,8 +51,8 @@ function Index({ t }: { t: Tool }) {
       <a href="index.html" className="inline-flex min-h-11 items-center self-start no-underline">
         <span className="font-display text-[1.5rem] leading-none">Ocean West</span>
       </a>
-      <p className="label text-muted">Ten rooms on West Bay Street, Nassau</p>
-      <h1 className="mt-[min(3vh,26px)] max-w-[12ch] font-display text-[clamp(2.3rem,3.45vw,3.3rem)] leading-[1.02]">Seventy feet above the sea.</h1>
+      <p className="label text-muted [@media(max-height:800px)]:hidden">Ten rooms on West Bay Street, Nassau</p>
+      <h1 className="mt-[min(3vh,26px)] max-w-[12ch] font-display text-[clamp(2.3rem,3.45vw,3.3rem)] [@media(max-height:800px)]:max-w-none [@media(max-height:800px)]:text-[2rem] leading-[1.02]">Seventy feet above the sea.</h1>
       <p className="tnum mt-2 text-small">{FACTS}</p>
       <Filters t={t} className="mt-[min(2.2vh,20px)]" />
       <nav aria-label="The rooms" className="mt-1">
@@ -63,7 +63,7 @@ function Index({ t }: { t: Tool }) {
               <li key={r.key} className="relative">
                 <span className={`absolute top-1/2 -left-[calc(var(--pad)-6px)] h-px w-[calc(var(--pad)-14px)] bg-rose transition-transform duration-300 origin-left ${sel === i ? "scale-x-100" : "scale-x-0"}`} aria-hidden />
                 <button type="button" onMouseEnter={() => on && t.setPreview(i)} onFocus={() => on && t.setSel(i)} onClick={() => pick(i)} aria-pressed={sel === i} tabIndex={on ? 0 : -1}
-                  className={`group flex h-[clamp(36px,4.3vh,44px)] w-full items-center justify-between gap-4 border-b border-line text-left transition-opacity duration-300 ${on ? "opacity-100" : "opacity-30"}`}>
+                  className={`group flex h-[clamp(33px,4.4vh,44px)] w-full items-center justify-between gap-4 border-b border-line text-left transition-opacity duration-300 ${on ? "opacity-100" : "opacity-30"}`}>
                   <span className={`font-display text-[clamp(1.25rem,1.7vw,1.7rem)] leading-[1.15] transition-colors duration-300 ${sel === i ? "text-rose" : "group-hover:text-rose"}`}>{r.name}</span>
                   <span className="tnum shrink-0 text-cap text-muted">{short(r)}</span>
                 </button>
@@ -72,10 +72,10 @@ function Index({ t }: { t: Tool }) {
           })}
         </ol>
       </nav>
-      <nav aria-label="Sections" className="mt-auto flex flex-wrap gap-x-4 pt-3 [@media(max-height:820px)]:hidden">
+      <nav aria-label="Sections" className="mt-auto flex flex-wrap gap-x-4 pt-3 [@media(max-height:940px)]:hidden">
         {SECTIONS.map(([id, l]) => <a key={id} href={`#${id}`} className="tlink text-small">{l}</a>)}
       </nav>
-      <div className="mt-auto flex items-center justify-between gap-4 border-t border-line pt-4 [@media(min-height:821px)]:mt-3">
+      <div className="mt-auto flex items-center justify-between gap-4 border-t border-line pt-4 [@media(min-height:941px)]:mt-3">
         <a href={TEL} className="tnum text-small no-underline hover:text-rose">{PHONE}</a>
         <a href={BOOK} target="_blank" rel="noopener" className="book">Check dates</a>
       </div>
@@ -90,8 +90,8 @@ function Stage({ t }: { t: Tool }) {
   const r = ROOMS[shown]
   const pic = r.pic
   const rail = useRef<HTMLDivElement>(null)
-  useEffect(() => { const first = f === "all" ? sel : Math.min(sel, ROOMS.findIndex(x => fits(x, f))); const el = rail.current?.children[first] as HTMLElement | undefined; const box = rail.current; if (el && box) box.scrollTo({ left: Math.max(0, el.offsetLeft - 20), behavior: "smooth" }) }, [sel, f])
-  useEffect(() => { const id = (window as any).requestIdleCallback?.(() => ROOMS.forEach(x => { const im = new Image(); im.src = x.pic.src })); return () => { if (id) (window as any).cancelIdleCallback?.(id) } }, [])
+  useEffect(() => { const el = rail.current?.children[sel] as HTMLElement | undefined; const box = rail.current; if (el && box) box.scrollTo({ left: Math.max(0, el.offsetLeft - 20), behavior: "smooth" }) }, [sel, f])
+  useEffect(() => { const load = () => ROOMS.forEach(x => { const im = new Image(); im.src = x.pic.src }); const w = window as any; const id = w.requestIdleCallback ? w.requestIdleCallback(load) : setTimeout(load, 1500); return () => { w.cancelIdleCallback ? w.cancelIdleCallback(id) : clearTimeout(id) } }, [])
   return (
     <section id="stage" aria-label="The rooms, one at a time" className="relative bg-conch lg:min-h-svh lg:px-[var(--pad)] lg:pt-[clamp(56px,8vh,96px)] lg:pb-14">
       {/* phone header + title (the index column is hidden on phones) */}
@@ -108,7 +108,7 @@ function Stage({ t }: { t: Tool }) {
       {/* phone: the register collapses into a chip row */}
       <div ref={rail} className="mt-2 flex snap-x scroll-px-5 gap-5 overflow-x-auto border-y border-line px-5 py-1 [scrollbar-width:none] lg:hidden" role="group" aria-label="Choose a room">
         {ROOMS.map((x, i) => (
-          <button key={x.key} type="button" aria-pressed={sel === i} onClick={() => choose(t, i)} className={`min-h-12 shrink-0 snap-start border-b-2 font-display text-[1.6rem] leading-none transition-[color,opacity] ${sel === i ? "border-rose text-rose" : "border-transparent"} ${fits(x, f) ? "" : "opacity-30"}`}>{x.name}</button>
+          <button key={x.key} type="button" aria-pressed={sel === i} onClick={() => choose(t, i)} className={`min-h-12 shrink-0 snap-start border-b-2 font-display text-[1.6rem] leading-none transition-[color,opacity] ${sel === i ? "border-rose text-rose" : "border-transparent"} ${fits(x, f) ? "" : "hidden"}`}>{x.name}</button>
         ))}
       </div>
       <div className="w-full px-5 pt-4 lg:px-0 lg:pt-0">
@@ -122,7 +122,8 @@ function Stage({ t }: { t: Tool }) {
           </AnimatePresence>
         </div>
         </div>
-        <div className="mx-auto mt-4 flex min-h-[88px] pb-6 lg:pb-0 lg:pl-3 w-full flex-wrap items-end justify-between gap-x-8 gap-y-3 lg:w-[min(728px,calc((100svh-clamp(56px,8vh,96px)-250px)*1.333))]" aria-live="polite">
+        <div className="mx-auto mt-4 flex min-h-[88px] pb-6 lg:pb-0 lg:pl-3 w-full flex-wrap items-end justify-between gap-x-8 gap-y-3 lg:w-[min(728px,calc((100svh-clamp(56px,8vh,96px)-250px)*1.333))]">
+          <p className="sr-only" aria-live="polite">{ROOMS[sel].name} selected</p>
           <div>
             <h2 className="font-display text-[clamp(1.9rem,2.8vw,2.6rem)] leading-none">{r.name}</h2>
             <p className="tnum mt-2 text-small text-muted-2">{shortFacts(r)}</p>
@@ -138,13 +139,23 @@ function Stage({ t }: { t: Tool }) {
 }
 
 function Ridge() {
+  const ref = useRef<HTMLDivElement>(null)
+  const reduce = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] })
+  const x = useTransform(scrollYProgress, v => reduce ? "0%" : `${(0.5 - v) * 3}%`)
+  const pic = PIC.viewDown
   return (
-    <section id="ridge" aria-labelledby="ridge-h" className="px-[var(--pad)] py-[clamp(72px,10vw,140px)]">
-      <p className="label text-muted">Seventy feet above sea level</p>
-      <h2 id="ridge-h" className="mt-4 max-w-[18ch] text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">Lake Killarney to the south. The Atlantic to the north.</h2>
-      <Photo pic={PIC.viewDown} className="mt-10 w-full" maxW={920} />
-      <div className="mt-8 grid max-w-[920px] gap-x-10 gap-y-4 md:grid-cols-2">
-        <p className="text-body">The hotel stands on a ridge in western New Providence, with views of the lake on one side and the ocean on the other. A quiet spot in western New Providence.</p>
+    <section id="ridge" aria-labelledby="ridge-h" className="py-[clamp(72px,10vw,140px)]">
+      <div className="px-[var(--pad)]">
+        <p className="label text-muted">Seventy feet above sea level</p>
+        <h2 id="ridge-h" className="mt-4 max-w-[18ch] text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">Lake Killarney to the south. The Atlantic to the north.</h2>
+      </div>
+      <div ref={ref} className="pic mt-10 w-full max-w-[1200px]" style={{ aspectRatio: `${pic.w} / ${pic.h}` }}>
+        <motion.img style={{ x, scale: 1.04 }} src={pic.src} alt={pic.alt} width={pic.w} height={pic.h} loading="lazy" decoding="async" />
+      </div>
+      <div className="mt-3 flex max-w-[1200px] justify-between px-[var(--pad)] text-cap text-muted"><span>South: Lake Killarney</span><span>North: the Atlantic</span></div>
+      <div className="mt-10 grid max-w-[920px] gap-x-10 gap-y-4 px-[var(--pad)] md:grid-cols-2">
+        <p className="text-body">The hotel stands on a ridge in western New Providence, seventy feet above sea level, with the lake on one side and the ocean on the other.</p>
         <p className="text-body">Lynden Pindling International is a five minute drive. Cable Beach is a few minutes east.</p>
       </div>
     </section>
@@ -157,7 +168,7 @@ function Compare({ t }: { t: Tool }) {
     <section id="rooms" aria-labelledby="rooms-h" className="border-t border-line px-[var(--pad)] py-[clamp(72px,10vw,140px)]">
       <p className="label text-muted">All ten, side by side</p>
       <h2 id="rooms-h" className="mt-4 max-w-[18ch] text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">Three with a balcony. Seven straight at the sea.</h2>
-      <p className="mt-5 max-w-[40rem] text-body text-muted">Every room has a fridge and a microwave; free Wi-Fi throughout. Single or double occupancy, children under 12 free. Every Check dates opens the hotel's own booking page.</p>
+      <p className="mt-5 max-w-[40rem] text-body text-muted">Every room has a fridge and a microwave; free Wi-Fi throughout. Single or double occupancy, children under 12 free. Each Check dates opens Ocean West's own booking page.</p>
       <table className="mt-10 w-full max-w-[1000px] border-collapse text-left">
         <thead className="max-md:sr-only"><tr className="border-b border-line text-cap text-muted">{["Room", "Bed", "Floor", "View", "Outside", ""].map((h, i) => <th key={i} scope="col" className="py-3 pr-4 font-normal">{h}</th>)}</tr></thead>
         <tbody>
@@ -184,10 +195,12 @@ function Days() {
     <section id="days" aria-labelledby="days-h" className="bg-conch-2 px-[var(--pad)] py-[clamp(72px,10vw,140px)]">
       <p className="label text-muted">Days here</p>
       <h2 id="days-h" className="mt-4 max-w-[16ch] text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">The pool at sunset, the gym on the roof.</h2>
-      <Photo pic={PIC.sunsetPool} className="mt-10 w-full" maxW={920} />
-      <ul className="mt-10 grid max-w-[920px] gap-x-10 md:grid-cols-2">
-        {items.map(t => <li key={t} className="border-b border-line py-3.5 text-body">{t}</li>)}
-      </ul>
+      <div className="mt-10 grid items-start gap-x-12 gap-y-10 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+        <Photo pic={PIC.sunsetPool} className="w-full" maxW={920} />
+        <ul className="border-t border-line">
+          {items.map(t => <li key={t} className="border-b border-line py-3 text-small">{t}</li>)}
+        </ul>
+      </div>
     </section>
   )
 }
