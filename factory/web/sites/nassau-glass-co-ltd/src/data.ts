@@ -16,8 +16,8 @@ export type Tint = { id: string; name: string; face: string; edge: string; alpha
 
 // face = the colour seen through the sheet, edge = the colour of the cut edge, alpha = how much it holds back.
 const clear: Tint = { id: "clear", name: "Clear", face: "#bfe9dc", edge: "#58b89d", alpha: 0.07 }
-const gray: Tint = { id: "gray", name: "Gray", face: "#34393d", edge: "#6d787d", alpha: 0.62 }
-const bronze: Tint = { id: "bronze", name: "Bronze", face: "#7d4a1c", edge: "#a1723f", alpha: 0.7 }
+const gray: Tint = { id: "gray", name: "Gray", face: "#34393d", edge: "#6d787d", alpha: 0.48 }
+const bronze: Tint = { id: "bronze", name: "Bronze", face: "#7d4a1c", edge: "#a1723f", alpha: 0.5 }
 const green: Tint = { id: "green", name: "Green", face: "#1d7a52", edge: "#3fae84", alpha: 0.5 }
 
 export const STOCK: Record<Kind, { label: string; thick: string[]; thickNote?: string; tints: Tint[] }> = {

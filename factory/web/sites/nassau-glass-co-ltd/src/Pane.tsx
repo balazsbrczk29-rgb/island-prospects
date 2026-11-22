@@ -1,10 +1,10 @@
 // The sheet of glass. One studio-lit pane whose thickness and tint follow the visitor's pick, and which
-// separates into the two plies and interlayer of laminated safety glass as the page scrolls.
+// separates into the two plies and interlayer of laminated safety glass when laminated is picked.
 // No transmission pass: a tint layer plus an additive reflection layer over a transparent canvas, so the
 // headline behind it is really seen through the glass and a phone renders it without effort.
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { Environment, PerformanceMonitor } from "@react-three/drei"
+import { ContactShadows, Environment, PerformanceMonitor } from "@react-three/drei"
 import * as THREE from "three"
 import { STOCK, inches, type Pick, type Tint } from "./data"
 
@@ -189,6 +189,7 @@ export default function Pane({ pick, aspect, active, phone, onReady }: { pick: P
       <Studio />
       <directionalLight position={[3, 4, 5]} intensity={1.2} />
       <Sheet pick={pick} aspect={aspect} phone={phone} still={still} />
+      <ContactShadows position={[0, -1.12, 0]} opacity={0.22} blur={2.8} far={1.2} scale={4} resolution={phone ? 256 : 512} frames={1} />
     </Canvas>
   )
 }

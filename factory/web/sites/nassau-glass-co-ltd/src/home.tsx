@@ -15,7 +15,7 @@ export function parseInches(v: string) {
 type Order = { use: string; pick: Pick; frame: string; door: string; w: string; h: string; qty: number; fit: boolean }
 const START: Order = { use: "window", pick: { kind: "glass", thick: "1/4", tint: "clear" }, frame: "Frameless", door: "Swing door", w: "", h: "", qty: 1, fit: false }
 
-function Radios<T extends string>({ label, value, options, onPick, render }: { label: string; value: T; options: T[]; onPick: (v: T) => void; render?: (v: T) => React.ReactNode }) {
+function Radios<T extends string>({ label, value, options, onPick, render, className }: { label: string; value: T; options: T[]; onPick: (v: T) => void; render?: (v: T) => React.ReactNode; className?: string }) {
   const key = (e: React.KeyboardEvent) => {
     const d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0
     if (!d) return
@@ -25,7 +25,7 @@ function Radios<T extends string>({ label, value, options, onPick, render }: { l
   }
   const id = `l-${label.replace(/\W+/g, "-")}`
   return (
-    <div className="row">
+    <div className={`row ${className ?? ""}`}>
       <span className="row__l" id={id}>{label}</span>
       <div className="opts" role="radiogroup" aria-labelledby={id} onKeyDown={key}>
         {options.map(o => <button key={o} type="button" role="radio" data-v={o} aria-checked={o === value} tabIndex={o === value ? 0 : -1} className="opt num" onClick={() => onPick(o)}>{render ? render(o) : o}</button>)}
@@ -51,6 +51,19 @@ function OpenNow() {
   return <p className="open" data-open={s?.open ?? false} aria-live="polite">{s ? <><i aria-hidden />{s.text}</> : <>&nbsp;</>}</p>
 }
 
+export function summaryOf(o: Order) {
+  const use = USES.find(u => u.id === o.use)!
+  const shower = use.kind === "shower"
+  const s = shower ? null : STOCK[use.kind as Kind]
+  const tint = s?.tints.find(t => t.id === o.pick.tint)
+  const w = parseInches(o.w), h = parseInches(o.h)
+  const sized = w > 0 && h > 0
+  const area = sized ? (w * h / 144) * o.qty : 0
+  const what = shower ? `a ${o.frame.toLowerCase()} shower enclosure with a ${o.door.toLowerCase()}`
+    : `${use.kind === "laminated" ? "" : o.pick.thick + " in "}${tint?.name.toLowerCase()} ${use.kind === "laminated" ? "laminated safety glass" : use.kind}${use.say ? " " + use.say : ""}`
+  return `Quote request for Nassau Glass: ${shower ? "" : `${o.qty} ${o.qty === 1 ? "piece" : "pieces"} of `}${what}${sized ? `, ${o.w.trim()} x ${o.h.trim()} in${o.qty > 1 && !shower ? " each" : ""} (${area.toFixed(1)} sq ft)` : ", size to be measured"}, ${o.fit ? "measure and fit please" : "to pick up at the counter"}.`
+}
+
 function Builder({ o, set }: { o: Order; set: (p: Partial<Order>) => void }) {
   const use = USES.find(u => u.id === o.use)!
   const shower = use.kind === "shower"
@@ -60,9 +73,7 @@ function Builder({ o, set }: { o: Order; set: (p: Partial<Order>) => void }) {
   const sized = w > 0 && h > 0
   const area = sized ? (w * h / 144) * o.qty : 0
   const tint = s?.tints.find(t => t.id === o.pick.tint)
-  const what = shower ? `a ${o.frame.toLowerCase()} shower enclosure with a ${o.door.toLowerCase()}`
-    : `${use.kind === "laminated" ? "" : o.pick.thick + " in "}${tint?.name.toLowerCase()} ${use.kind === "laminated" ? "laminated safety glass" : use.kind}${use.say ? " " + use.say : ""}`
-  const summary = `Quote request for Nassau Glass: ${shower ? "" : `${o.qty} ${o.qty === 1 ? "piece" : "pieces"} of `}${what}${sized ? `, ${o.w.trim()} x ${o.h.trim()} in${o.qty > 1 && !shower ? " each" : ""} (${area.toFixed(1)} sq ft)` : ", size to be measured"}, ${o.fit ? "measure and fit please" : "to pick up at the counter"}.`
+  const summary = summaryOf(o)
   const pickUse = (id: string) => {
     const u = USES.find(x => x.id === id)!
     if (u.kind === "shower") return set({ use: id })
@@ -81,7 +92,7 @@ function Builder({ o, set }: { o: Order; set: (p: Partial<Order>) => void }) {
         <Radios label="Frame" value={o.frame} options={["Frameless", "Semi-frameless"]} onPick={v => set({ frame: v })} />
         <Radios label="Door" value={o.door} options={["Swing door", "Sliding door"]} onPick={v => set({ door: v })} />
       </> : <>
-        {s!.thick.length ? <Radios label="Thickness, in" value={o.pick.thick} options={s!.thick} onPick={v => set({ pick: { ...o.pick, thick: v } })} />
+        {s!.thick.length ? <Radios className="row--thick" label="Thickness, in" value={o.pick.thick} options={s!.thick} onPick={v => set({ pick: { ...o.pick, thick: v } })} />
           : <div className="row"><span className="row__l">Thickness</span><p className="row__note">{s!.thickNote}, chosen with you at the counter</p></div>}
         <Radios label="Tint" value={o.pick.tint} options={s!.tints.map(t => t.id)} onPick={v => set({ pick: { ...o.pick, tint: v } })} render={v => { const t = s!.tints.find(x => x.id === v)!; return <><i className="dot" style={{ background: t.edge }} aria-hidden />{t.name}</> }} />
       </>}
@@ -240,13 +251,31 @@ function Since() {
             </li>
           ))}
         </ol>
-        <p className="founded__sis">Windows, doors and railings are made by the sister company, <a href={ALUMINUM} rel="noopener">Bahamas Aluminum Manufacturing Co. Ltd.</a></p>
+        <p className="founded__sis">Aluminum windows, doors and railings are made locally by the sister company, <a href={ALUMINUM} rel="noopener">Bahamas Aluminum Manufacturing Co. Ltd.</a></p>
       </div>
     </section>
   )
 }
 
-function Visit() {
+function Write({ o }: { o: Order }) {
+  const [msg, setMsg] = useState("")
+  const [sent, setSent] = useState(false)
+  const summary = summaryOf(o)
+  const touched = useRef(false)
+  useEffect(() => { if (!touched.current) setMsg(summary) }, [summary])
+  return (
+    <form className="write" onSubmit={e => { e.preventDefault(); setSent(true) }} aria-labelledby="write-h">
+      <h3 id="write-h">Or write to the counter</h3>
+      <label><span>Your name</span><input name="name" autoComplete="name" required /></label>
+      <label><span>Phone or email</span><input name="contact" autoComplete="email" required /></label>
+      <label><span>Message</span><textarea name="message" rows={4} value={msg} onChange={e => { touched.current = true; setMsg(e.target.value) }} /></label>
+      <button type="submit" className="btn btn--primary">Send to the counter</button>
+      {sent && <p className="write__sent" role="status">Thank you. On the live site this goes straight to the Nassau Glass inbox, through the form on their current site.</p>}
+    </form>
+  )
+}
+
+function Visit({ o }: { o: Order }) {
   return (
     <section className="sec visit" id="visit" data-quiet aria-labelledby="visit-h">
       <div className="wrap visit__grid">
@@ -265,6 +294,7 @@ function Visit() {
             <tr><th scope="row">Fax</th><td>{FAX}</td></tr>
           </tbody>
         </table>
+        <Write o={o} />
         <figure className="visit__photo">
           <img src={`${IMG}2020/05/ng_gallery.jpg`} alt="The Nassau Glass building on Mackey Street, painted green with white trim" width={400} height={234} loading="lazy" decoding="async" />
           <figcaption className="small">Photograph: Nassau Glass.</figcaption>
@@ -303,7 +333,7 @@ function Home() {
         <Showers quote={() => { set({ use: "shower" }); go("quote") }} />
         <WalkIn />
         <Since />
-        <Visit />
+        <Visit o={o} />
       </main>
       <Footer />
       <Bars after="#quote" home />
