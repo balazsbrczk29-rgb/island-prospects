@@ -27,12 +27,13 @@ Scale (desktop/phone): cap 12/12, small 14/14, body 17/16 (1.6), lede 21/19, h2 
 6. **What guests say.** Five reviews from the feed on their site, named and dated, complete texts only.
 7. **Getting here and offers.** Fly to Nassau, then on to Mangrove Cay by air or Bahamas Ferries; transfers included in packages. Offers each once with book-by, travel and blackout dates.
 8. **Contact.** Phones, fish@, Mangrove Cay Settlement, Facebook; photo credits.
-fishing.html: 1, 2, 3. lodge.html: 4, 5, 7. All end with 6 and 8.
+fishing.html: page head, 1, 2, spearfishing (their spear-fishing image, ask link), the rest of their gallery (photos 6 to 8, staggered 7/5/6 cols), 3, questions anglers ask (their FAQ as a dl, FAQPage JSON-LD), 6, 8. lodge.html: 4, 5, 7, 6, 8.
 
 ## 5. Core tool spec
 - Inputs: anglers 2 (1 to 12), non-anglers 0 (0 to 8), nights 6 (2 to 14), guided days 5 (0 to nights), waters: home flat + Middle Bight preselected.
 - Boats = ceil(anglers / 2). Guide days = boats x guided days. Guide gratuity = 125 x boats x guided days. Staff gratuity = 35 x (anglers + non-anglers) x nights. Day-trip reference = 975 x boats x guided days (shown as "if booked as day trips without the lodge"). Non-angler rate $450 shown as published. No package total invented: "Package price per person from the season sheet; the lodge confirms."
 - States: always filled; guided days clamp to nights; zero anglers disables guide lines and shows "a beach week".
+- Field card: the photograph pinned on the chart's open water (36% wide, bottom-left) shows the lodge beach at first; adding a water crossfades it (450 ms) to that water's gallery photo with name, method and species; removing it falls back to the last water still in the week. Phone: the card sits under the chart as a photo + caption row.
 - Chart: water zones are SVG shapes on the baked coastline; tapping a zone toggles it, same as the list; selected zones fill with accent at 22% and their label turns accent; the reef line dash flows when selected.
 - Hand-off: mailto fish@swainscaylodge.com with party, nights, guided days, waters, boats and the gratuity sums; Book a room = https://www.swainscaylodge.com/#booking; tel +12424225018.
 
@@ -45,3 +46,5 @@ swainscaylodge-header.jpg (set 1920x1080, inset ~300 px); welcome-landscape.jpg 
 ## 8. Self-review
 Screen 1 shows the water and the working planner with Send above the fold. A1-A20: no badges (Orvis as words, it is a fact), no labels, italic for species, no mono, tokens only, real product (the waters), planner largest, spacing groups, specific H1, one filled button per screen, accent on Send and active waters, no icons, no ornaments, 4 px radii, contrast 6.3:1 muted, balanced headings, tabular figures, sized photo boxes, motion only for selection and sums. Unmistakably this lodge: the two bights and the home flat.
 Assumptions: the lodge pin is approximate on a 1:10m coastline; whether the non-angler rate is per night or per package is unclear (shown as published); room photo native heights from filenames.
+
+Revision 2026-11-22 (resume after critic 3/3/3): field card ties photography to the tool; full fishing gallery (1-5 in the waters rows, 6-8 in the gallery), spearfishing block and FAQ on fishing.html; gallery 6-8 and the spearfishing png have unpublished native sizes, declared 1024x683 and 800x600 and displayed no wider than about 760 px and 420 px.

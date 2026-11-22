@@ -30,7 +30,7 @@ export function usePlan() {
   return { arrival, setArrival, anglers, setAnglers, others, setOthers, nights, setNights, days, setDays, waters, toggle, focus }
 }
 export function week(p: Plan) {
-  const boats = Math.ceil(p.anglers / 2), guests = p.anglers + p.others
+  const boats = p.anglers ? Math.ceil(p.anglers / 2) : 0, guests = p.anglers + p.others
   const guideDays = p.anglers ? boats * p.days : 0
   const tipGuides = 125 * guideDays, tipStaff = 35 * guests * p.nights
   return { boats, guests, guideDays, tipGuides, tipStaff, tips: tipGuides + tipStaff, dayTrips: 975 * guideDays }
@@ -41,13 +41,13 @@ function mail(p: Plan) {
     'Hello,', '',
     `We would like to plan a fishing week at Swain's Cay Lodge.`,
     `Anglers: ${p.anglers}. Non-anglers: ${p.others}.`,
-    `Nights: ${p.nights}. Guided days: ${p.days} (${w.boats} boat${w.boats > 1 ? 's' : ''}, ${w.guideDays} guide days).`,
+    p.anglers ? `Nights: ${p.nights}. Guided days: ${p.days} (${w.boats} boat${w.boats > 1 ? 's' : ''}, ${w.guideDays} guide days).` : `Nights: ${p.nights}. No guided fishing, a beach week.`,
     `Waters we would like: ${p.waters.map(k => WATERS.find(x => x.k === k)!.name).join(', ') || 'your advice'}.`,
     `Arrival: ${p.arrival ? new Date(p.arrival + 'T12:00:00Z').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) : 'flexible, please advise on tides'}`,
     `We have budgeted the recommended gratuities: ${money(w.tipGuides)} for guides and ${money(w.tipStaff)} for the lodge staff.`,
     '', 'Please send the package price from your 2026-2027 season sheet.', '', 'Thank you.',
   ].join('\n')
-  return `mailto:${EMAIL}?subject=${encodeURIComponent(`Fishing week: ${p.anglers} anglers, ${p.nights} nights`)}&body=${encodeURIComponent(body)}`
+  return `mailto:${EMAIL}?subject=${encodeURIComponent(p.anglers ? `Fishing week: ${p.anglers} angler${p.anglers > 1 ? 's' : ''}, ${p.nights} nights` : `Stay: ${w.guests} guest${w.guests === 1 ? '' : 's'}, ${p.nights} nights`)}&body=${encodeURIComponent(body)}`
 }
 
 /* ---------- header ---------- */
@@ -57,6 +57,7 @@ export function Header({ current }: { current?: string }) {
     <header className="hd">
       <a className="hd__mark" href="./">Swain's Cay Lodge</a>
       <nav className="hd__nav" aria-label="Site">{nav.map(([l, h]) => <a key={l} href={h} aria-current={current === l ? 'page' : undefined}>{l}</a>)}</nav>
+      <details className="hd__menu"><summary>Menu</summary><nav aria-label="Site, phone">{nav.map(([l, h]) => <a key={l} href={h}>{l}</a>)}<a className="tnum" href={PHONES[0][1]}>{PHONES[0][0]}</a></nav></details>
       <a className="hd__tel tnum" href={PHONES[0][1]}>{PHONES[0][0]}</a>
       <a className="btn btn--line btn--sm" href={BOOK}>Book a room</a>
     </header>
@@ -104,10 +105,13 @@ export function Chart({ plan, photo = true }: { plan: Plan; photo?: boolean }) {
           {map.gx.map(([lo, x]) => <line key={'x' + lo} x1={x} x2={x} y1={0} y2={map.h} />)}
           {map.gy.map(([la, y]) => <line key={'y' + la} y1={y} y2={y} x1={0} x2={map.w} />)}
         </g>
+        <defs><clipPath id="sea"><path clipRule="evenodd" d={`M0 0H${map.w}V${map.h}H0Z ` + map.land} /></clipPath></defs>
         {zone('deep', <path d={deepD} className="z__fill z__fill--deep" />, 'Outside the reef')}
-        {zone('middle', <ellipse cx={455} cy={338} rx={160} ry={40} transform="rotate(-8 455 338)" className="z__fill" />, 'The Middle Bight')}
-        {zone('south', <ellipse cx={575} cy={772} rx={140} ry={34} transform="rotate(-14 575 772)" className="z__fill" />, 'The South Bight')}
-        {zone('home', <ellipse cx={712} cy={424} rx={26} ry={48} className="z__fill" />, 'The home flat')}
+        <g clipPath="url(#sea)">
+          {zone('middle', <ellipse cx={455} cy={338} rx={170} ry={46} transform="rotate(-8 455 338)" className="z__fill" />, 'The Middle Bight')}
+          {zone('south', <ellipse cx={575} cy={772} rx={150} ry={40} transform="rotate(-14 575 772)" className="z__fill" />, 'The South Bight')}
+          {zone('home', <ellipse cx={694} cy={424} rx={20} ry={58} className="z__fill" />, 'The home flat')}
+        </g>
         <path d={map.land} className="chart__land" />
         {zone('reef', <><path d={reefD} className="z__hit" /><path d={reefD} className="chart__reef" /></>, 'The Andros Barrier Reef')}
         <g className="chart__deg">
@@ -128,6 +132,7 @@ export function Chart({ plan, photo = true }: { plan: Plan; photo?: boolean }) {
           <text x={P.lodge[0] - 16} y={P.lodge[1] - 8} textAnchor="end" className="small">and its home flat</text>
         </g>
       </svg>
+      <figcaption className="chart__hint">Tap a water to add it to your week.</figcaption>
       {photo && <FieldCard k={plan.focus} />}
     </figure>
   )
@@ -147,7 +152,7 @@ function FieldCard({ k }: { k: string | null }) {
       </div>
       <AnimatePresence mode="wait" initial={false}>
         <motion.div key={k ?? 'lodge'} className="cp__t" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.22, ease }}>
-          {w ? <><b>{w.name}</b><span>{w.method}.</span><i>{w.species}</i></> : <><b>The lodge beach, Mangrove Cay</b><span>The home flat starts at the waterline.</span></>}
+          {w ? <><b>{w.name}</b><span>{w.method}.</span><i>{w.species}</i></> : <><b>The lodge beach, Mangrove Cay</b><span>A wadeable bonefish flat right off the beach.</span></>}
         </motion.div>
       </AnimatePresence>
     </div>
@@ -185,12 +190,12 @@ export function Planner({ plan, h1 = true }: { plan: Plan; h1?: boolean }) {
             <li><span>Lodge staff, $35 a guest a night, recommended</span><Num v={money(w.tipStaff)} /></li>
           </ul>
           <p className="wk__sum"><span>Gratuities to budget</span><Num v={money(w.tips)} /></p>
-          <p className="wk__note">Package price per person from the lodge's 2026-2027 season sheet: guide and boat, room, all meals and transfers included. Booked as day trips instead (guide, boat, lunch and transport, no room), $975 a boat a day comes to {money(w.dayTrips)}.</p>
           <div className="wk__acts">
             <a className="btn" href={mail(plan)}>Send my week to the lodge</a>
             <a className="link" href={BOOK}>Book a room</a>
             <a className="link tnum" href={PHONES[0][1]}>{PHONES[0][0]}</a>
           </div>
+          <p className="wk__note">Package price per person from the lodge's 2026-2027 season sheet, with guide and boat, room, meals and transfers. As day trips with no room, $975 a boat a day comes to {money(w.dayTrips)}.</p>
         </div>
       </div>
       <div className="plan__map"><Chart plan={plan} /></div>
@@ -202,7 +207,7 @@ export function PhoneBar({ plan }: { plan: Plan }) {
   const w = week(plan)
   return (
     <div className="pbar">
-      <a href="#plan" className="pbar__t"><span className="pbar__n">{plan.anglers} anglers, {plan.nights} nights</span><span className="tnum">{w.boats} boat{w.boats > 1 ? 's' : ''}, gratuities {money(w.tips)}</span></a>
+      <a href="#plan" className="pbar__t"><span className="pbar__n">{plan.anglers ? `${plan.anglers} angler${plan.anglers > 1 ? 's' : ''}` : `${w.guests} guest${w.guests === 1 ? '' : 's'}`}, {plan.nights} nights</span><span className="tnum">{w.boats ? `${w.boats} boat${w.boats > 1 ? 's' : ''}` : 'A beach week'}, gratuities {money(w.tips)}</span></a>
       <a className="btn" href={mail(plan)}>Send</a>
     </div>
   )
@@ -215,7 +220,7 @@ export function Waters({ plan }: { plan: Plan }) {
       <h2 id="wl-h">Where you'll&nbsp;fish.</h2>
       <ol>
         {WATERS.map((x, i) => (
-          <li key={x.k} className={'wl__row' + (i % 2 ? ' is-alt' : '')}>
+          <li key={x.k} className={'wl__row' + (i === 0 ? ' is-lead' : '')}>
             <Photo pic={x.pic} className="wl__pic" />
             <div className="wl__text">
               <h3>{x.name}</h3>
