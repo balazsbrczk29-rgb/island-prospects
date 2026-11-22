@@ -309,3 +309,4 @@ a { color: inherit; }
 .card { display: flex; flex-direction: column; width: 100%; }
 .card-who { margin-top: auto; padding-top: var(--s2); }
 .card-title, .card-place { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track > div, .card { min-width: 0; max-width: 100%; } .track > div { overflow: hidden; }
