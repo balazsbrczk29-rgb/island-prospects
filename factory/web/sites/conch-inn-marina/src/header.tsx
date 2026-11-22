@@ -11,6 +11,7 @@ export function Header({ base = '' }: { base?: string }) {
         <a href={base + '#town'}>Town</a>
         <a href={base + '#office'}>Office</a>
       </nav>
+      <a className="hd-book" href={BIZ.bookRooms}>Book a room</a>
       <a className="hd-tel num" href={`tel:${BIZ.tel}`}><span className="hd-tel-l">Dock office{'\u00a0'}</span>{BIZ.phone}</a>
     </header>
   )

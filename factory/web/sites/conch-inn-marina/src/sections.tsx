@@ -100,7 +100,7 @@ export function Town() {
   return (
     <section id="town" className="town wrap" aria-labelledby="town-h">
       <h2 id="town-h" className="h2">Tie up and walk to town.</h2>
-      <p className="lede muted">The inn is on the Marsh Harbour waterfront, a walk from restaurants, groceries, liquor and shops. No taxi needed for supper or the grocery run.</p>
+      <p className="lede muted">The inn is on the Marsh Harbour waterfront, a walk from restaurants, groceries, liquor and shops.</p>
       <ol ref={ref} className="route">
         <motion.span className="route-line" aria-hidden="true" initial={false} animate={{ scaleX: seen || reduce ? 1 : 0 }} transition={{ duration: reduce ? 0 : 1.4, ease: EASE }} />
         {STOPS.map((s, i) => (
@@ -144,7 +144,7 @@ export function Office() {
         </dl>
       </div>
       <div className="office-b">
-        <p className="office-q">Crossing soon? Send your boat's details now and the office will reply with a slip.</p>
+        <p className="office-q">Crossing soon? Send your boat's details now and the office will reply about a slip.</p>
         <div className="acts">
           <a className="btn" href="#desk">Request a slip</a>
           <a className="textlink" href={BIZ.bookRooms}>Book a room online</a>
@@ -167,7 +167,7 @@ export function Footer() {
 export function Dock() {
   const [on, setOn] = useState(false)
   useEffect(() => {
-    const quiet = [document.getElementById('desk'), document.getElementById('office')].filter(Boolean) as Element[]
+    const quiet = [document.querySelector('.desk-bill'), document.querySelector('.desk-head'), document.getElementById('office')].filter(Boolean) as Element[]
     const vis = new Set<Element>()
     const io = new IntersectionObserver(es => { es.forEach(e => (e.isIntersecting ? vis.add(e.target) : vis.delete(e.target))); setOn(vis.size === 0) })
     quiet.forEach(q => io.observe(q))
@@ -175,7 +175,7 @@ export function Dock() {
   }, [])
   useEffect(() => { document.documentElement.style.setProperty('--concept-offset', on && matchMedia('(max-width: 900px)').matches ? '76px' : '0px') }, [on])
   return (
-    <div className={`dockbar ${on ? 'on' : ''}`}>
+    <div className={`dockbar ${on ? 'on' : ''}`} aria-hidden={!on} {...(on ? {} : { inert: '' as any })}>
       <a className="btn-2 num" href={`tel:${BIZ.tel}`} tabIndex={on ? 0 : -1}>Call</a>
       <a className="btn" href="#desk" tabIndex={on ? 0 : -1}>Request a slip</a>
     </div>
