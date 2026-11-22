@@ -15,17 +15,20 @@ export function Photo({ pic, eager, className = '', ratio }: { pic: Pic; eager?:
 /* ---------- plan state ---------- */
 export type Plan = ReturnType<typeof usePlan>
 export function usePlan() {
-  const [room, setRoom] = useState(0)
+  const [room, setRoomRaw] = useState(0)
+  const [touched, setTouched] = useState(false)
+  const setRoom = (n: number) => { setRoomRaw(n); setTouched(true) }
   const [arrival, setArrival] = useState('')
   const [nights, setNights] = useState(3)
   const [guests, setGuests] = useState(2)
   const [extra, setExtra] = useState(0)
-  return { room, setRoom, arrival, setArrival, nights, setNights, guests, setGuests, extra, setExtra }
+  return { room, setRoom, touched, arrival, setArrival, nights, setNights, guests, setGuests, extra, setExtra }
 }
 const fmtDate = (iso: string, add = 0) => { const d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + add); return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) }
 export function totals(r: Room, nights: number, extra: number) {
-  const sub = r.rate * nights, ten = Math.round(sub * 10) / 100
-  return { sub, ten, extras: extra * 150, total: sub + ten * 3 + extra * 150 }
+  const weeks = r.n === 'IH' ? Math.floor(nights / 7) : 0
+  const sub = Math.round((weeks * 21750 + (nights - weeks * 7) * r.rate) * 100) / 100, ten = Math.round(sub * 10) / 100
+  return { sub, ten, weeks, extras: extra * 150, total: sub + ten * 3 + extra * 150 }
 }
 function mailto(plan: Plan) {
   const r = ROOMS[plan.room], t = totals(r, plan.nights, plan.extra)
@@ -85,6 +88,7 @@ const FILTERS: [string, (r: Room) => boolean][] = [['All rooms', () => true], ['
 export function Register({ plan, h1 = 'Twelve rooms, each with a name.', level = 1 }: { plan: Plan; h1?: string; level?: 1 | 2 }) {
   const [f, setF] = useState(0)
   const r = ROOMS[plan.room]
+  const shown = plan.touched ? r.pic : IMG.hero
   const t = totals(r, plan.nights, plan.extra)
   const list = ROOMS.map((x, i) => ({ x, i })).filter(({ x }) => FILTERS[f][1](x))
   const hidden = !FILTERS[f][1](r)
@@ -111,11 +115,19 @@ export function Register({ plan, h1 = 'Twelve rooms, each with a name.', level =
       <figure className="reg__pic">
         <div className="reg__frame">
           <AnimatePresence initial={false}>
-            <motion.img key={r.n} src={r.pic.src} width={r.pic.w} height={r.pic.h} alt={r.pic.alt} fetchPriority="high"
+            <motion.img key={shown.src} src={shown.src} width={shown.w} height={shown.h} alt={shown.alt} fetchPriority="high"
               initial={{ opacity: 0, scale: 1.03 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.52, ease }} />
           </AnimatePresence>
         </div>
-        <figcaption><em>{r.n === 'IH' ? 'The Infinity House' : `Room ${r.n}, ${r.name}`}.</em> {r.house === 'Infinity House' ? 'Five bedrooms on the ocean.' : `${r.house}. ${r.bed}.`}</figcaption>
+        <figcaption>{plan.touched ? <><em>{r.n === 'IH' ? 'The Infinity House' : `Room ${r.n}, ${r.name}`}.</em> {r.house === 'Infinity House' ? 'Five bedrooms on the ocean.' : `${r.house}. ${r.bed}.`}</> : <em>The inn, 1946, on the hill above Pink Sands Beach.</em>}</figcaption>
+        <div className="where" aria-label="Where your room sits">
+          {HOUSES.map(({ h }) => (
+            <span key={h} className={'where__b' + (h === r.house ? ' is-on' : '')}>
+              {h}{h === r.house && <motion.span layoutId={'where-' + level} className="where__u" transition={{ duration: 0.3, ease }} />}
+            </span>
+          ))}
+          <a className="where__map" href={MAP_PDF}>Property map</a>
+        </div>
       </figure>
       <div className="reg__tool">
         <p className="kicker">Harbour Island, The Bahamas</p>
@@ -126,11 +138,11 @@ export function Register({ plan, h1 = 'Twelve rooms, each with a name.', level =
             <span className="step__l">Arrival</span>
             <input type="date" value={plan.arrival} min={new Date().toISOString().slice(0, 10)} onChange={e => plan.setArrival(e.target.value)} aria-describedby="dep" />
           </label>
-          <Stepper label="Nights" id="st-n" v={plan.nights} set={plan.setNights} min={3} max={28} />
+          <Stepper label="Nights, 3 minimum" id="st-n" v={plan.nights} set={plan.setNights} min={3} max={28} />
           <Stepper label="Guests" id="st-g" v={plan.guests} set={plan.setGuests} min={1} max={10} />
           <Stepper label="Cot or extra, $150" id="st-x" v={plan.extra} set={plan.setExtra} min={0} max={3} />
         </div>
-        <p className="dates__note" id="dep">{plan.arrival ? <>Leaving {fmtDate(plan.arrival, plan.nights)}. </> : null}Three-night minimum.</p>
+        <p className="dates__note" id="dep">{plan.arrival ? <>Leaving {fmtDate(plan.arrival, plan.nights)}. </> : <>Choose your arrival, or leave it open and ask. </>}{plan.guests > 2 && !r.three ? <>For a third guest, look at the rooms for three or more, or add a cot.</> : null}</p>
         <div className="filters" role="group" aria-label="Filter rooms">
           {FILTERS.map(([l], i) => <button key={l} type="button" className="fchip" aria-pressed={f === i} onClick={() => setF(i)}>{l}</button>)}
         </div>
@@ -156,7 +168,7 @@ export function Register({ plan, h1 = 'Twelve rooms, each with a name.', level =
         {hidden && <p className="dates__note">Your room is hidden by this filter. <button type="button" className="link" onClick={() => setF(0)}>Show all rooms</button></p>}
         <div className="total" aria-live="polite">
           <div className="total__sum">
-            <p className="total__lines tnum">{plan.nights} nights at {money0(r.rate)}, {money(t.sub)}<br />Room gratuity, VAT and resort levy, 10% each, {money(t.ten * 3)}{plan.extra ? <><br />{plan.extra} {plan.extra > 1 ? 'cots or extra persons' : 'cot or extra person'} over 10, {money(t.extras)}</> : null}</p>
+            <p className="total__lines tnum">{t.weeks ? <>{t.weeks} {t.weeks > 1 ? 'weeks' : 'week'} at $21,750{plan.nights - t.weeks * 7 ? <> and {plan.nights - t.weeks * 7} nights at {money0(r.rate)}</> : null}</> : <>{plan.nights} nights at {money0(r.rate)}</>}, {money(t.sub)}<br />Room gratuity, VAT and resort levy, 10% each, {money(t.ten * 3)}{plan.extra ? <><br />{plan.extra} {plan.extra > 1 ? 'cots or extra persons' : 'cot or extra person'} over 10, {money(t.extras)}</> : null}</p>
             <p className="total__big"><span>Your stay</span><Roll v={money(t.total)} /></p>
           </div>
           {r.check && <p className="total__check">{r.check}</p>}
@@ -191,23 +203,28 @@ export function Descent() {
     refs.current.forEach(el => el && io.observe(el))
     return () => io.disconnect()
   }, [])
+  const pic = DESCENT[on].pic
   return (
     <section className="descent" id="house" aria-labelledby="desc-h">
       <div className="descent__text">
         <h2 id="desc-h">From the house to the&nbsp;sand.</h2>
         <ol className="descent__steps">
           {DESCENT.map((s, i) => (
-            <li key={s.t} className={i === on ? 'is-on' : ''}><b>{s.t}</b><span>{s.d}</span></li>
+            <li key={s.t} data-i={i} ref={el => { refs.current[i] = el }} className={i === on ? 'is-on' : ''}>
+              <span className="descent__n tnum">{i + 1}</span>
+              <b>{s.t}</b><span>{s.d}</span>
+              <span className="descent__mob"><Photo pic={s.pic} /></span>
+            </li>
           ))}
         </ol>
       </div>
-      <div className="descent__pics">
-        {DESCENT.map((s, i) => (
-          <figure key={s.t} data-i={i} ref={el => { refs.current[i] = el }}>
-            <p className="descent__mob"><b>{s.t}.</b> {s.d}</p>
-            <Photo pic={s.pic} />
-          </figure>
-        ))}
+      <div className="descent__stage" aria-hidden="true">
+        <div className="descent__frame">
+          <AnimatePresence initial={false}>
+            <motion.img key={pic.src} src={pic.src} width={pic.w} height={pic.h} alt="" loading="lazy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} transition={{ duration: 0.6, ease }} />
+          </AnimatePresence>
+        </div>
+        <div className="descent__rule"><motion.span animate={{ scaleY: (on + 1) / DESCENT.length }} transition={{ duration: 0.6, ease }} /></div>
       </div>
     </section>
   )
@@ -232,7 +249,7 @@ export function Ledger({ plan }: { plan: Plan }) {
                 <Photo pic={x.pic} className="lf__thumb" ratio="1 / 1" />
                 <span className="lf__n tnum">{x.n}</span>
                 <span className="lf__name"><b>{x.name}</b><span>{x.bed}. {x.note}</span></span>
-                <span className="lf__rate tnum"><b>{money0(x.rate)}</b><span>{money(x.withTax)} with tax</span></span>
+                <span className="lf__rate tnum"><b>{money0(x.rate)}</b><span>{money(x.withTax)} with tax</span>{x.check && <span className="lf__check">To confirm: their table shows $550.00</span>}</span>
                 <button type="button" className="link" onClick={() => choose(i)}>Choose<span className="sr"> {x.name}</span></button>
               </li>
             ))}
@@ -284,7 +301,7 @@ export function Dining() {
         <figure><Photo pic={IMG.yoga} /></figure>
         <div>
           <h3>Days on the island.</h3>
-          <p>Unwind on one of the world’s most beautiful beaches, below the house. Water sports, boutique shops, and a massage, yoga or fitness class when you book one.</p>
+          <p>Unwind on one of the world’s most beautiful beaches, below the house. Enjoy water sports, explore boutique shops, or book a massage, yoga or fitness class.</p>
         </div>
       </div>
     </section>

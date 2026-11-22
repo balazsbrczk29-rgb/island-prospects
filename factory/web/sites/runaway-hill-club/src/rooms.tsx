@@ -9,7 +9,7 @@ function Rooms() {
       <a className="skip" href="#main">Skip to content</a>
       <Header current="Rooms" />
       <main id="main">
-        <Register plan={plan} h1="The rooms at Runaway Hill." />
+        <Register plan={plan} />
         <Ledger plan={plan} />
       </main>
       <Contact plan={plan} />
