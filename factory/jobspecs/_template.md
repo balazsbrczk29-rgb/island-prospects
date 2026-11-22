@@ -1,4 +1,4 @@
-Status: approved
+Status: draft
 
 # <Business name>: job spec
 Current site: <url or none> (<platform, booking engine>) · Previous concept: <url> · Kind of site: <booking / shop / brochure + enquiry / one page>
@@ -15,5 +15,3 @@ Current site: <url or none> (<platform, booking engine>) · Previous concept: <u
 8. **Look and feel:** <mood for these customers, type, palette, photography plan, the wow moment>
 
 Notes from Balazs:
-
-Approved by Balazs 2026-11-22: "approve all, keep this beautiful design composition and individuality". Match the craft and composition level of the first five job-spec sites (Pigeon Cay, Cheryl's, Orange Creek, Anna's, Abaco) while giving this business its own individual design.
