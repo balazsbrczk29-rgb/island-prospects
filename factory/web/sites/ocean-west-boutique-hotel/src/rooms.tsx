@@ -38,7 +38,7 @@ function Rooms() {
           <header className="pt-[clamp(40px,8vh,96px)] pb-6">
             <p className="label text-muted">Ten rooms, from $215 a night</p>
             <h1 className="mt-4 max-w-[16ch] text-[clamp(2.6rem,4.8vw,4.6rem)] leading-[1.04]">Every room has a name, and its own view.</h1>
-            <p className="mt-5 max-w-[36rem] text-body text-muted">All rooms have a fridge, a microwave, cable TV, a hair dryer and free Wi-Fi. Single or double occupancy; children under 12 stay free.</p>
+            <p className="mt-5 max-w-[36rem] text-body text-muted">Every room has a fridge and a microwave; free Wi-Fi throughout. Single or double occupancy; children under 12 stay free.</p>
           </header>
           {ROOMS.map(r => (
             <article key={r.key} id={r.key} aria-labelledby={`${r.key}-h`} className="scroll-mt-20 border-t border-line py-[clamp(48px,7vw,96px)]">
