@@ -4,112 +4,14 @@
  "name": "Sea Spray Resort & Marina",
  "batch": "07",
  "tier": "A",
- "state": "built",
+ "state": "building",
  "generation": 2,
- "pages": [
-  "index.html"
- ],
- "primary_cta": "Request this slip",
- "brand_truth": "An Albury boat-building name at the head of White Sound, rebuilt after Dorian by four friends who boat: 62 slips to 130 ft, 7 ft of draft.",
- "buyer": "US East Coast sportfish owners and captains planning Abaco runs on a phone; villa guests; residence buyers.",
- "direction": {
-  "archetype": "A03 Cinematic chapters",
-  "lane": "P02 Shallow flats (salt ground, ink field, channel accent)",
-  "type": "T01 Monumental serif (Fraunces + Source Serif 4)",
-  "nav": "N3",
-  "motion": "Ken Burns hero, scroll-scrubbed chapter crossfades",
-  "why": "Their own photography is film-grade; a captain's question (fit and cost) answered on the second screen, then a day at Sea Spray as a film."
- },
- "concept_type": "booking-site (marina-first: slip check and request, Guesty stays, Revel ordering)",
- "tier_visual": "standard",
- "big_idea": "White Sound at rest, then 'Will she fit, and what will it cost?': a length rule and published rates give yes/no and an estimate, carried into a WhatsApp slip request; then a day at Sea Spray as a pinned film of their own photographs.",
- "images": [
-  {
-   "src": "https://cdn.prod.website-files.com/69b32130352088b69e1d25ba/69fcb812342041920a0f7e5c_CR2A2252.jpg",
-   "source": "own",
-   "credit": "seasprayresort.com"
-  },
-  {
-   "src": "https://cdn.prod.website-files.com/69b32130352088b69e1d25ba/69fcfb6445a534945cb78c65_CR2A4342.jpg",
-   "source": "own",
-   "credit": "seasprayresort.com"
-  },
-  {
-   "src": "https://cdn.prod.website-files.com/69b32130352088b69e1d25ba/69fcfd9590d809d698b7dd0a_G65A0686.jpg",
-   "source": "own",
-   "credit": "seasprayresort.com"
-  },
-  {
-   "src": "https://cdn.prod.website-files.com/69b32130352088b69e1d25ba/69fcfb9d1bc1fbaab017e899_G65A0914.jpg",
-   "source": "own",
-   "credit": "seasprayresort.com"
-  },
-  {
-   "src": "https://cdn.prod.website-files.com/69b32130352088b69e1d25c2/6a26e5ae99ba0cb51c988dd1_G65A5816.jpg",
-   "source": "own",
-   "credit": "seasprayresort.com"
-  },
-  {
-   "src": "https://cdn.prod.website-files.com/69b32130352088b69e1d25c2/6a26e4f80b8c22026f56c249_CR2A5845.jpg",
-   "source": "own",
-   "credit": "seasprayresort.com"
-  }
- ],
- "plan_gate": {
-  "first": {
-   "photography": 4,
-   "typography": 4,
-   "composition": 3,
-   "colour": 3,
-   "fit": 4,
-   "distinct": 3,
-   "references": 3,
-   "verdict": "revise (5 changes)"
-  },
-  "after_revision": {
-   "photography": 4,
-   "typography": 4,
-   "composition": 4,
-   "colour": 4,
-   "fit": 4,
-   "distinct": 4,
-   "references": 4,
-   "verdict": "approved"
-  }
- },
- "critic": {
-  "photography": 4,
-  "typography": 4,
-  "composition": 4,
-  "colour": 4,
-  "fit": 4,
-  "distinct": 4,
-  "references": 4
- },
- "current_site_findings": [
-  "Header phone link dials a US number (606-706-9411) instead of +1 242 577 4696",
-  "Homepage leads with 'Own a Piece of Paradise' before telling a boater where the marina is or whether they fit",
-  "Event cards read 'Button Button' and the four events repeat three times",
-  "Specs and rates only on an inner page",
-  "WhatsApp link has no country code"
- ],
- "pitch_line": "A captain can tell from the cockpit whether his boat fits White Sound and what three nights will cost, and send the slip request in one tap.",
- "assumptions": [
-  "Low season 90+ day rate not published: calculator uses the 30+ rate and says to ask",
-  "Beach photo location not captioned (not confirmed as Elbow Cay)",
-  "WhatsApp on +1 242 577 4696 (own site links WhatsApp to this number)"
- ],
- "sources": [
-  "https://seasprayresort.com/",
-  "https://seasprayresort.com/marina",
-  "https://www.allatsea.net/sea-spray-resort-marina-rebirth-of-a-bahamian-icon-in-elbow-cay/"
- ],
- "notes": "Gen-2 rebuild 2026-11-21 by scheduled site worker. BLIND: sandbox blocks outside images and look.mjs; photos seen via Lovable gallery ip-assets-sea-spray-resort-marina and routed as crops into QA. Own site now says 62 slips (brief had 68 from All At Sea); 62 used. marina.html and residences.html from gen 1 removed: single marina-first page. interact.mjs 'dead input' is the length range slider (it cannot type text into a range); mobile tap-target warning is the shared concept label. Plan gate: revise (hero below fold, aqua too close to White Sound neighbours, calculator card, captions, empty request column), all applied, approved on re-score.",
  "history": [
   {
    "generation": 1,
    "built_at": null
   }
  ],
- "built_at": "2026-11-21T16:11:32Z"
+ "rebuild_of": 1,
+ "claimed_at": "2026-11-22T13:24:29.710Z"
 }
