@@ -26,7 +26,7 @@ The site is a pool builder's drawing table. On screen 1 the visitor sees one of 
 - Numbers: `font-variant-numeric: tabular-nums` on every dimension, gallon figure, phone number and the sample report.
 
 **Colour (OKLCH)**
-- ground (limestone): `oklch(0.968 0.008 85)`
+- ground (limestone): `oklch(0.962 0.005 115)` (rgb 242 243 239), a cooler limestone than the generation-1 cream
 - surface (white plaster): `oklch(0.993 0.003 85)`
 - ink (deep shell grey): `oklch(0.25 0.012 235)`
 - muted ink: `oklch(0.47 0.012 235)` (about 7:1 on ground)
