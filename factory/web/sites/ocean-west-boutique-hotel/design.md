@@ -62,3 +62,12 @@ Note: the terrace default is cropped from 1200x535 to 4:3 at 704x528, i.e. scale
 - Screen 1 answers room, price and airport, and Check dates is one tap: yes, desktop and phone.
 - A1 one idea (the jewel tray) yes; A2 two faces yes; A3 scale defined; A4 display tracking -0.01em (Didone needs little); A5 measure 68ch; A6 tabular numbers for rates, floors, phones, steps; A7 contrast: muted 6.2:1 on shell, check muted on conch stage (care); A8 one accent (deep pink) for actions only, shutter green for quiet links; A9 4/8 spacing; A10 left column aligned to pad; A11 photos at or below native; A12 no overlays; A13 credits in footer; A14 44 px targets (filters need min-h 44, care); A15 focus outline; A16 reduced motion; A17 stage has fixed 4:3 box, caption min-height (no shift); A18 phone: no pinning, native scroll; A19 facts sourced, no em dashes; A20 close: rates then calling card with Check dates.
 - Unmistakably Ocean West: the gem names are theirs, the pink house is theirs; no other site in the repo uses a catalogue-index register.
+
+## 9. Changes after the critic (round 1)
+- Hover previews a stone on the stage without committing it; leaving the tray restores the chosen room; room photos preload when idle.
+- Choosing a dimmed stone clears the filter first; any filter selects its first matching room; the phone chip row scrolls to the first match.
+- The stage opens on Diamond (the product, not the terrace), the photo sits in a shell-white "jewel case" mat with a "No. 5 of 10" tag, the room name is an h2, the stage top padding is reduced.
+- Register rows are 44 px tall with names that clear the rules; section links hide below 820 px of height.
+- Phone: a visible h1, tighter header so Check dates for the room is above the fold.
+- Facts trimmed to the brief (no "guests-only access", no casino, in-room list limited to fridge and microwave); "Travelers' Choice" spelled as theirs and shown with Clean and Pristine as their own row; a directions link to the hotel's map pin.
+- Two h1 elements in the DOM, one per layout (the other is display:none): inspect WARN accepted.

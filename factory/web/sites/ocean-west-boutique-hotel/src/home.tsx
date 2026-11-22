@@ -26,8 +26,12 @@ const fits = (r: Room, f: F) => f === "all" || (f === "balcony" ? r.balcony : f 
 const countLine = (f: F) => { const n = ROOMS.filter(r => fits(r, f)).length; return f === "all" ? "Ten rooms, all with a fridge and microwave" : f === "ocean" ? `${n} rooms look straight at the ocean` : f === "balcony" ? `${n} rooms with a balcony` : `${n} rooms with a king bed` }
 const ask = (r: Room) => `mailto:${EMAIL}?subject=${encodeURIComponent(`${r.name} room`)}&body=${encodeURIComponent(`Hello Ocean West,\n\nI would like to stay in ${r.name}. My dates are:\nGuests:\n\nThank you.`)}`
 const FACTS = "$215 to $600 a night · 5 minutes from the airport"
-type Tool = { sel: number; setSel: (i: number) => void; f: F; setF: (f: F) => void }
-const chooseFilter = (t: Tool, k: F) => { t.setF(k); if (t.sel >= 0 && !fits(ROOMS[t.sel], k)) t.setSel(ROOMS.findIndex(r => fits(r, k))) }
+type Tool = { sel: number; setSel: (i: number) => void; f: F; setF: (f: F) => void; preview: number | null; setPreview: (i: number | null) => void }
+const chooseFilter = (t: Tool, k: F) => { t.setF(k); if (k !== "all" && (t.sel < 0 || !fits(ROOMS[t.sel], k))) t.setSel(ROOMS.findIndex(r => fits(r, k))) }
+/** Choosing a stone the filter dims clears the filter first, so the stage never shows a room the tray says does not fit. */
+const choose = (t: Tool, i: number) => { if (!fits(ROOMS[i], t.f)) t.setF("all"); t.setSel(i) }
+const scrollToEl = (el: HTMLElement | null) => { if (!el) return; const l = (window as any).__lenis; l ? l.scrollTo(el, { duration: 1.1 }) : el.scrollIntoView({ behavior: "smooth" }) }
+const shortFacts = (r: Room) => [r.bed, `${["", "1st", "2nd", "3rd"][r.floor]} floor`, r.view, r.balcony ? "Balcony" : ""].filter(Boolean).join(" · ")
 function Filters({ t, className = "" }: { t: Tool; className?: string }) {
   return (
     <div className={className}>
@@ -40,27 +44,27 @@ function Filters({ t, className = "" }: { t: Tool; className?: string }) {
 }
 
 function Index({ t }: { t: Tool }) {
-  const { sel, setSel, f } = t
-  const pick = (i: number) => { setSel(i); const s = document.getElementById("stage"); if (s && s.getBoundingClientRect().top < -40) s.scrollIntoView({ behavior: "smooth" }) }
+  const { sel, f } = t
+  const pick = (i: number) => { choose(t, i); const s = document.getElementById("stage"); if (s && s.getBoundingClientRect().top < -40) scrollToEl(s) }
   return (
-    <aside className="sticky top-0 hidden h-svh flex-col border-r border-line px-[var(--pad)] pt-7 pb-[84px] lg:flex" aria-label="Ocean West">
+    <aside className="sticky top-0 hidden h-svh flex-col overflow-y-auto border-r border-line px-[var(--pad)] pt-7 pb-[84px] lg:flex" aria-label="Ocean West">
       <a href="index.html" className="inline-flex min-h-11 items-center self-start no-underline">
         <span className="font-display text-[1.5rem] leading-none">Ocean West</span>
       </a>
       <p className="label text-muted">Ten rooms on West Bay Street, Nassau</p>
-      <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, ease }} className="mt-[min(3vh,26px)] max-w-[12ch] text-[clamp(2.3rem,3.45vw,3.3rem)] leading-[1.02]">Seventy feet above the sea.</motion.h1>
+      <h1 className="mt-[min(3vh,26px)] max-w-[12ch] font-display text-[clamp(2.3rem,3.45vw,3.3rem)] leading-[1.02]">Seventy feet above the sea.</h1>
       <p className="tnum mt-2 text-small">{FACTS}</p>
       <Filters t={t} className="mt-[min(2.2vh,20px)]" />
       <nav aria-label="The rooms" className="mt-1">
-        <ol className="border-t border-line">
+        <ol className="border-t border-line" onMouseLeave={() => t.setPreview(null)}>
           {ROOMS.map((r, i) => {
             const on = fits(r, f)
             return (
               <li key={r.key} className="relative">
                 <span className={`absolute top-1/2 -left-[calc(var(--pad)-6px)] h-px w-[calc(var(--pad)-14px)] bg-rose transition-transform duration-300 origin-left ${sel === i ? "scale-x-100" : "scale-x-0"}`} aria-hidden />
-                <button type="button" onMouseEnter={() => on && setSel(i)} onFocus={() => setSel(i)} onClick={() => pick(i)} aria-pressed={sel === i} tabIndex={on ? 0 : -1}
-                  className={`group flex h-[clamp(30px,3.6vh,38px)] w-full items-center justify-between gap-4 border-b border-line text-left transition-opacity duration-300 ${on ? "opacity-100" : "opacity-30"}`}>
-                  <span className={`font-display text-[clamp(1.35rem,1.95vw,1.85rem)] leading-none transition-colors duration-300 ${sel === i ? "text-rose" : "group-hover:text-rose"}`}>{r.name}</span>
+                <button type="button" onMouseEnter={() => on && t.setPreview(i)} onFocus={() => on && t.setSel(i)} onClick={() => pick(i)} aria-pressed={sel === i} tabIndex={on ? 0 : -1}
+                  className={`group flex h-[clamp(36px,4.3vh,44px)] w-full items-center justify-between gap-4 border-b border-line text-left transition-opacity duration-300 ${on ? "opacity-100" : "opacity-30"}`}>
+                  <span className={`font-display text-[clamp(1.25rem,1.7vw,1.7rem)] leading-[1.15] transition-colors duration-300 ${sel === i ? "text-rose" : "group-hover:text-rose"}`}>{r.name}</span>
                   <span className="tnum shrink-0 text-cap text-muted">{short(r)}</span>
                 </button>
               </li>
@@ -68,10 +72,10 @@ function Index({ t }: { t: Tool }) {
           })}
         </ol>
       </nav>
-      <nav aria-label="Sections" className="mt-auto flex flex-wrap gap-x-4 pt-3">
+      <nav aria-label="Sections" className="mt-auto flex flex-wrap gap-x-4 pt-3 [@media(max-height:820px)]:hidden">
         {SECTIONS.map(([id, l]) => <a key={id} href={`#${id}`} className="tlink text-small">{l}</a>)}
       </nav>
-      <div className="mt-3 flex items-center justify-between gap-4 border-t border-line pt-4">
+      <div className="mt-auto flex items-center justify-between gap-4 border-t border-line pt-4 [@media(min-height:821px)]:mt-3">
         <a href={TEL} className="tnum text-small no-underline hover:text-rose">{PHONE}</a>
         <a href={BOOK} target="_blank" rel="noopener" className="book">Check dates</a>
       </div>
@@ -81,45 +85,49 @@ function Index({ t }: { t: Tool }) {
 
 /** The stage: the chosen room, or the terrace before anything is chosen. */
 function Stage({ t }: { t: Tool }) {
-  const { sel, setSel, f } = t
-  const r = sel >= 0 ? ROOMS[sel] : null
-  const pic = r ? r.pic : PIC.terrace
+  const { sel, f } = t
+  const shown = t.preview ?? sel
+  const r = ROOMS[shown]
+  const pic = r.pic
   const rail = useRef<HTMLDivElement>(null)
-  useEffect(() => { if (sel >= 0) (rail.current?.children[sel + 1] as HTMLElement | undefined)?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" }) }, [sel])
+  useEffect(() => { const first = f === "all" ? sel : Math.min(sel, ROOMS.findIndex(x => fits(x, f))); const el = rail.current?.children[first] as HTMLElement | undefined; const box = rail.current; if (el && box) box.scrollTo({ left: Math.max(0, el.offsetLeft - 20), behavior: "smooth" }) }, [sel, f])
+  useEffect(() => { const id = (window as any).requestIdleCallback?.(() => ROOMS.forEach(x => { const im = new Image(); im.src = x.pic.src })); return () => { if (id) (window as any).cancelIdleCallback?.(id) } }, [])
   return (
-    <section id="stage" aria-label="The rooms, one at a time" className="relative bg-conch lg:min-h-svh lg:px-[var(--pad)] lg:pt-[clamp(110px,15vh,150px)] lg:pb-14">
+    <section id="stage" aria-label="The rooms, one at a time" className="relative bg-conch lg:min-h-svh lg:px-[var(--pad)] lg:pt-[clamp(56px,8vh,96px)] lg:pb-14">
       {/* phone header + title (the index column is hidden on phones) */}
       <div className="px-5 pt-5 lg:hidden">
         <div className="flex items-center justify-between">
           <a href="index.html" className="inline-flex min-h-11 items-center font-display text-[1.45rem] no-underline">Ocean West</a>
           <a href={BOOK} target="_blank" rel="noopener" className="book min-h-11 px-4">Check dates</a>
         </div>
-        <p className="label mt-5 text-muted-2">Ten rooms on West Bay Street, Nassau</p>
-        <p className="mt-3 font-display text-[2.6rem] leading-[1.04]">Seventy feet above the sea.</p>
-        <p className="tnum mt-2 text-small">{FACTS}</p>
-        <Filters t={t} className="mt-3" />
+        <p className="label mt-3 text-muted-2">Ten rooms on West Bay Street, Nassau</p>
+        <h1 className="mt-2 font-display text-[2.15rem] leading-[1.04]">Seventy feet above the sea.</h1>
+        <p className="tnum mt-1 text-small">{FACTS}</p>
+        <Filters t={t} className="mt-1" />
       </div>
       {/* phone: the register collapses into a chip row */}
       <div ref={rail} className="mt-2 flex snap-x scroll-px-5 gap-5 overflow-x-auto border-y border-line px-5 py-1 [scrollbar-width:none] lg:hidden" role="group" aria-label="Choose a room">
-        <button type="button" aria-pressed={sel === -1} onClick={() => setSel(-1)} className={`min-h-12 shrink-0 snap-start border-b-2 font-display text-[1.6rem] leading-none transition-colors ${sel === -1 ? "border-rose text-rose" : "border-transparent"}`}>Terrace</button>
         {ROOMS.map((x, i) => (
-          <button key={x.key} type="button" aria-pressed={sel === i} onClick={() => setSel(i)} className={`min-h-12 shrink-0 snap-start border-b-2 font-display text-[1.6rem] leading-none transition-[color,opacity] ${sel === i ? "border-rose text-rose" : "border-transparent"} ${fits(x, f) ? "" : "opacity-30"}`}>{x.name}</button>
+          <button key={x.key} type="button" aria-pressed={sel === i} onClick={() => choose(t, i)} className={`min-h-12 shrink-0 snap-start border-b-2 font-display text-[1.6rem] leading-none transition-[color,opacity] ${sel === i ? "border-rose text-rose" : "border-transparent"} ${fits(x, f) ? "" : "opacity-30"}`}>{x.name}</button>
         ))}
       </div>
       <div className="w-full px-5 pt-4 lg:px-0 lg:pt-0">
-        <div className="relative mx-auto w-full lg:w-[min(704px,calc((100svh-clamp(110px,15vh,150px)-150px)*1.333))]" style={{ aspectRatio: "4 / 3" }}>
+        <p className="tnum mx-auto mb-2 hidden max-w-none pl-3 text-cap text-muted-2 lg:block lg:w-[min(728px,calc((100svh-clamp(56px,8vh,96px)-250px)*1.333))]">No. {shown + 1} of 10 · {floorName(r.floor)}</p>
+        <div className="mx-auto w-full border border-ink/15 bg-shell p-2 sm:p-3 lg:w-[min(728px,calc((100svh-clamp(56px,8vh,96px)-250px)*1.333))]">
+        <div className="relative w-full overflow-hidden" style={{ aspectRatio: "4 / 3" }}>
           <AnimatePresence initial={false}>
             <motion.img key={pic.src} src={pic.src} alt={pic.alt} width={pic.w} height={pic.h}
               initial={{ opacity: 0, scale: 1.015 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.7, ease }}
               className="absolute inset-0 h-full w-full bg-conch-2 object-cover" />
           </AnimatePresence>
         </div>
-        <div className="mx-auto mt-5 flex min-h-[88px] w-full flex-wrap items-end justify-between gap-x-8 gap-y-3 lg:w-[min(704px,calc((100svh-clamp(110px,15vh,150px)-150px)*1.333))]" aria-live="polite">
+        </div>
+        <div className="mx-auto mt-4 flex min-h-[88px] pb-6 lg:pb-0 lg:pl-3 w-full flex-wrap items-end justify-between gap-x-8 gap-y-3 lg:w-[min(728px,calc((100svh-clamp(56px,8vh,96px)-250px)*1.333))]" aria-live="polite">
           <div>
-            <p className="font-display text-[clamp(1.9rem,2.8vw,2.6rem)] leading-none">{r ? r.name : "The terrace"}</p>
-            <p className="tnum mt-2 text-small text-muted-2">{r ? [r.bed, floorName(r.floor), r.view, r.note].filter(Boolean).join(" · ") : "Ten rooms, a pool on the terrace, the sea beyond the balustrade. Choose a room."}</p>
+            <h2 className="font-display text-[clamp(1.9rem,2.8vw,2.6rem)] leading-none">{r.name}</h2>
+            <p className="tnum mt-2 text-small text-muted-2">{shortFacts(r)}</p>
           </div>
-          {r && <div className="flex flex-wrap items-center gap-x-6">
+          {<div className="flex flex-wrap items-center gap-x-6">
             <a href={BOOK} target="_blank" rel="noopener" className="book">Check dates for {r.name}</a>
             <a href={ask(r)} className="tlink text-small text-shutter">Ask about {r.name}</a>
           </div>}
@@ -136,31 +144,31 @@ function Ridge() {
       <h2 id="ridge-h" className="mt-4 max-w-[18ch] text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">Lake Killarney to the south. The Atlantic to the north.</h2>
       <Photo pic={PIC.viewDown} className="mt-10 w-full" maxW={920} />
       <div className="mt-8 grid max-w-[920px] gap-x-10 gap-y-4 md:grid-cols-2">
-        <p className="text-body">The hotel stands on a ridge in western New Providence, with views of the lake on one side and the ocean on the other. Access is for hotel guests only.</p>
-        <p className="text-body">Lynden Pindling International is a five minute drive. The Cable Beach strip, with its restaurants and casino, is a few minutes east.</p>
+        <p className="text-body">The hotel stands on a ridge in western New Providence, with views of the lake on one side and the ocean on the other. A quiet spot in western New Providence.</p>
+        <p className="text-body">Lynden Pindling International is a five minute drive. Cable Beach is a few minutes east.</p>
       </div>
     </section>
   )
 }
 
 function Compare({ t }: { t: Tool }) {
-  const pick = (i: number) => { t.setSel(i); document.getElementById("stage")?.scrollIntoView({ behavior: "smooth" }) }
+  const pick = (i: number) => { choose(t, i); scrollToEl(document.getElementById("stage")) }
   return (
     <section id="rooms" aria-labelledby="rooms-h" className="border-t border-line px-[var(--pad)] py-[clamp(72px,10vw,140px)]">
       <p className="label text-muted">All ten, side by side</p>
       <h2 id="rooms-h" className="mt-4 max-w-[18ch] text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1.05]">Three with a balcony. Seven straight at the sea.</h2>
-      <p className="mt-5 max-w-[40rem] text-body text-muted">Every room has a fridge, a microwave, cable TV, a hair dryer and free Wi-Fi. Single or double occupancy, children under 12 free.</p>
+      <p className="mt-5 max-w-[40rem] text-body text-muted">Every room has a fridge and a microwave; free Wi-Fi throughout. Single or double occupancy, children under 12 free. Every Check dates opens the hotel's own booking page.</p>
       <table className="mt-10 w-full max-w-[1000px] border-collapse text-left">
         <thead className="max-md:sr-only"><tr className="border-b border-line text-cap text-muted">{["Room", "Bed", "Floor", "View", "Outside", ""].map((h, i) => <th key={i} scope="col" className="py-3 pr-4 font-normal">{h}</th>)}</tr></thead>
         <tbody>
           {ROOMS.map((r, i) => (
-            <tr key={r.key} className={`border-b border-line transition-colors max-md:grid max-md:grid-cols-[1fr_auto] max-md:py-3 ${t.sel === i ? "bg-conch-2" : ""}`}>
+            <tr key={r.key} className={`border-b border-line transition-[background-color,opacity] duration-300 ${fits(r, t.f) ? "" : "opacity-50"} max-md:grid max-md:grid-cols-[1fr_auto] max-md:py-3 ${t.sel === i ? "bg-conch-2" : ""}`}>
               <th scope="row" className="py-3 pr-4 font-normal max-md:py-0"><button type="button" onClick={() => pick(i)} className="min-h-11 font-display text-[1.6rem] leading-none hover:text-rose" aria-label={`Show ${r.name} above`}>{r.name}</button></th>
               <td className="tnum py-3 pr-4 text-small max-md:order-3 max-md:col-span-2 max-md:py-0">{r.bed}<span className="md:hidden"> · {floorName(r.floor)} · {r.view}{r.balcony ? " · balcony" : ""}</span></td>
               <td className="tnum py-3 pr-4 text-small max-md:hidden">{floorName(r.floor)}</td>
               <td className="py-3 pr-4 text-small max-md:hidden">{r.view}</td>
               <td className="py-3 pr-4 text-small max-md:hidden">{r.balcony ? "Balcony" : "None"}</td>
-              <td className="py-3 text-right max-md:py-0"><a href={BOOK} target="_blank" rel="noopener" className="tlink text-small text-rose">Check dates<span className="sr-only"> for {r.name}</span></a></td>
+              <td className="py-3 text-right max-md:py-0"><a href={BOOK} target="_blank" rel="noopener" className={`tlink text-small ${t.sel === i ? "text-rose-deep" : "text-rose"}`}>Check dates<span className="sr-only"> for {r.name}</span></a></td>
             </tr>
           ))}
         </tbody>
@@ -224,10 +232,15 @@ function Arrive() {
           <a href={TEL} className="tnum flex min-h-11 items-center gap-2 no-underline hover:text-conch"><Phone className="size-4" strokeWidth={1.5} aria-hidden />{PHONE}</a>
           <a href={TEL2} className="tnum flex min-h-11 items-center pl-6 no-underline hover:text-conch">{PHONE2}</a>
           <a href={`mailto:${EMAIL}?subject=${encodeURIComponent("Room enquiry")}`} className="flex min-h-11 items-center pl-6 no-underline hover:text-conch">{EMAIL}</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=25.069827,-77.443689" target="_blank" rel="noopener" className="flex min-h-11 items-center pl-6 underline underline-offset-4">Directions from where you are</a>
           <a href={BOOK} target="_blank" rel="noopener" className="book mt-4">Check dates</a>
         </div>
       </div>
-      <p className="mt-16 text-cap text-shell-2">Photographs from oceanwestbahamas.com. Travellers' Choice 2023 on Tripadvisor; Clean and Pristine certified by the Bahamas Ministry of Tourism.</p>
+      <div className="mt-14 grid max-w-[920px] gap-6 border-t border-shell/20 pt-8 md:grid-cols-2">
+        <p className="font-display text-[1.35rem] leading-snug">Tripadvisor Travelers' Choice 2023</p>
+        <p className="font-display text-[1.35rem] leading-snug">Clean and Pristine certified by the Bahamas Ministry of Tourism</p>
+      </div>
+      <p className="mt-10 text-cap text-shell-2">Photographs from oceanwestbahamas.com.</p>
     </section>
   )
 }
@@ -235,7 +248,7 @@ function Arrive() {
 function useLenis() {
   useEffect(() => {
     if (matchMedia("(pointer: coarse)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const l = new Lenis({ duration: 1.1 }); let id = 0
+    const l = new Lenis({ duration: 1.1 }); (window as any).__lenis = l; let id = 0
     const f = (t: number) => { l.raf(t); id = requestAnimationFrame(f) }; id = requestAnimationFrame(f)
     return () => { cancelAnimationFrame(id); l.destroy() }
   }, [])
@@ -243,9 +256,10 @@ function useLenis() {
 
 function Home() {
   useLenis()
-  const [sel, setSel] = useState(-1)
+  const [sel, setSel] = useState(0)
   const [f, setF] = useState<F>("all")
-  const t: Tool = { sel, setSel, f, setF }
+  const [preview, setPreview] = useState<number | null>(null)
+  const t: Tool = { sel, setSel, f, setF, preview, setPreview }
   return (
     <>
       <a href="#main" className="skip">Skip to content</a>
