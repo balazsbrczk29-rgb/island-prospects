@@ -1,8 +1,10 @@
 import { useMemo } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { CATEGORIES, PROJECTS, ISLANDS_ON_MAP, islandOf, officeFor, PHONE, TEL, EMAIL, type Cat } from "./data"
-import { BAHAMAS, NEIGHBOURS, ISLAND_XY, MAP_W, MAP_H } from "./map"
+import { BAHAMAS, NEIGHBOURS, ISLAND_XY, MAP_W } from "./map"
 import { ease } from "./site"
+
+const VIEW_H = 690 // the northern and central islands, where every listed project sits
 
 export const WORK = ["Paving or resurfacing", "Runway or apron", "Road construction", "Port, marine or sea defence", "Water, RO or utilities", "Site development", "Hot mix asphalt supply", "Ready mix concrete supply"]
 export const ROUTER_ISLANDS = ["New Providence", "Grand Bahama", "Abaco", "Exuma", "Eleuthera", "Andros", "Bimini", "Another island"] as const
@@ -35,9 +37,9 @@ export default function MapAtlas({ sel, set }: { sel: Sel; set: (s: Partial<Sel>
             })}
           </div>
           <figure className="mt-4 relative bg-[var(--color-white)] border border-[var(--color-line)] rounded-[var(--r)] overflow-hidden">
-            <svg viewBox={`0 0 ${MAP_W} ${MAP_H}`} className="block w-full h-auto" role="group" aria-label="Map of The Bahamas with BHM projects counted by island">
+            <svg viewBox={`0 0 ${MAP_W} ${VIEW_H}`} className="block w-full h-auto" role="group" aria-label="Map of The Bahamas with BHM projects counted by island">
               <defs><pattern id="grid" width="62.5" height="62.5" patternUnits="userSpaceOnUse"><path d="M62.5 0H0V62.5" fill="none" stroke="#CFCFCB" strokeWidth="0.8" opacity="0.6" /></pattern></defs>
-              <rect width={MAP_W} height={MAP_H} fill="url(#grid)" />
+              <rect width={MAP_W} height={VIEW_H} fill="url(#grid)" />
               <path d={NEIGHBOURS} fill="#DCDCD8" />
               <path d={BAHAMAS} fill="#2F3135" fillOpacity={0.86} stroke="#2F3135" strokeWidth={0.6} />
               {ISLANDS_ON_MAP.map(isl => {
@@ -45,12 +47,13 @@ export default function MapAtlas({ sel, set }: { sel: Sel; set: (s: Partial<Sel>
                 const [x, y] = ISLAND_XY[isl]
                 const on = sel.island === isl
                 const r = n ? 7 + 2.6 * Math.sqrt(n) : 5
-                const right = isl !== "Bimini" && isl !== "Grand Bahama" && isl !== "Andros"
+                const above = isl === "Bimini" || isl === "Grand Bahama"
+                const right = !above && isl !== "Andros"
                 return (
                   <g key={isl}>
                     <motion.circle cx={x} cy={y} initial={false} animate={{ r, opacity: n ? 0.92 : 0.35 }} transition={{ duration: 0.3, ease }} fill={n ? "#0B5D73" : "#5E6268"} />
                     {on && <circle cx={x} cy={y} r={r + 7} fill="none" stroke="#0B5D73" strokeWidth={2.5} />}
-                    <text x={right ? x + r + 12 : x - r - 14} y={y + 6} textAnchor={right ? "start" : "end"} className="mono map-label" fontSize={20} fill="#1D2023" paintOrder="stroke" stroke="#F8F8F6" strokeWidth={5}>
+                    <text x={above ? x : right ? x + r + 12 : x - r - 14} y={above ? y - r - 14 : y + 6} textAnchor={above ? "middle" : right ? "start" : "end"} className="mono map-label" fontSize={20} fill="#1D2023" paintOrder="stroke" stroke="#F8F8F6" strokeWidth={5}>
                       {isl} <tspan fontWeight={500}>{n}</tspan>
                     </text>
                     <circle cx={x} cy={y} r={58} fill="transparent" className="cursor-pointer" role="button" tabIndex={0}
@@ -59,7 +62,7 @@ export default function MapAtlas({ sel, set }: { sel: Sel; set: (s: Partial<Sel>
                   </g>
                 )
               })}
-              <text x={MAP_W - 16} y={MAP_H - 16} textAnchor="end" className="mono map-coord" fontSize={16} fill="#5E6268">27°N to 21°N, 79°W to 73°W</text>
+              <text x={MAP_W - 16} y={VIEW_H - 16} textAnchor="end" className="mono map-coord" fontSize={16} fill="#5E6268">27°N to 22°N, 79°W to 73°W</text>
             </svg>
             <figcaption className="px-3 py-2 border-t border-[var(--color-line)] text-xs text-[var(--color-muted)] mono">
               {(byIsland["Across the islands"]?.length ?? 0)} more across the islands, location not listed
@@ -99,7 +102,7 @@ export default function MapAtlas({ sel, set }: { sel: Sel; set: (s: Partial<Sel>
                 )}
               </>
             ) : (
-              <p className="text-sm text-[var(--color-muted)]">Tap an island to see what BHM built there. Most work: {top.map((t, i) => <span key={t}><button type="button" className="link text-[var(--color-ink)] min-h-[44px]" onClick={() => set({ island: t })}>{t}</button>{i < top.length - 1 ? ", " : "."}</span>)}</p>
+              <p className="text-sm text-[var(--color-muted)]">Tap an island to see what BHM built there. Most work: {top.map((t, i) => <span key={t}><button type="button" className="underline underline-offset-4 text-[var(--color-ink)] hover:text-[var(--color-petrol)]" onClick={() => set({ island: t })}>{t}</button>{i < top.length - 1 ? ", " : "."}</span>)}</p>
             )}
           </div>
 
