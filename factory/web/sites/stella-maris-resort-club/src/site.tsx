@@ -1,139 +1,340 @@
-import { useEffect, useState, type ReactNode } from "react"
-import { createRoot } from "react-dom/client"
-import Lenis from "lenis"
-import { motion, useScroll, useSpring } from "motion/react"
-import { Menu, Phone, Mail } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
-import "./styles.css"
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { IMG, EMAIL, AIR, PHONES, FB, RATES, UNITS, WINTER_START, WINTER_END, ACTIVITIES, INCLUDED, DIVES, money, money0, type Pic, type Unit } from './data'
 
-const U = "https://www.stellamarisresort.com/wp-content/uploads/"
-export const IMG = { hero: U + "2021/11/7.jpg", resort: U + "2021/11/3-1.jpg", stay: U + "2021/11/2ba.jpg", g1: U + "2021/11/Resize1-1170x780.jpg", g2: U + "2021/11/Resize2-1170x780.jpg", g0: U + "2021/11/Resize_1-1170x878.jpg" }
-export const U2 = U
-export const PHONE = "(242) 338-2050"
-export const TEL = "tel:+12423382050"
-export const EMAIL = "Reservations@stellamarisresort.com"
-export const AIR = "Stellamarisresortairservice@gmail.com"
+const ease = [0.22, 1, 0.36, 1] as const
 
-const NAV = [
-  { href: "stay.html", label: "Rooms & houses" },
-  { href: "island.html", label: "Dive, fish, explore" },
-  { href: "island.html#weddings", label: "Weddings" },
-  { href: "island.html#getting-here", label: "Getting here" },
-]
-
-export function Star({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 100 100" className={className} aria-hidden>
-      <motion.path d="M50 4 L57 43 L96 50 L57 57 L50 96 L43 57 L4 50 L43 43 Z" fill="none" stroke="currentColor" strokeWidth="1.2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }} />
-      <motion.path d="M50 22 L53 47 L78 50 L53 53 L50 78 L47 53 L22 50 L47 47 Z" fill="currentColor" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 1, duration: 1, ease: [0.16, 1, 0.3, 1] }} style={{ transformOrigin: "50px 50px" }} />
-    </svg>
-  )
+export function Photo({ pic, eager, className = '' }: { pic: Pic; eager?: boolean; className?: string }) {
+  return <span className={'ph ' + className}><img src={pic.src} width={pic.w} height={pic.h} alt={pic.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchPriority={eager ? 'high' : undefined} /></span>
 }
 
-function useLenis() {
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const lenis = new Lenis({ duration: 1.15, smoothWheel: true })
-    let id = 0
-    const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
-    id = requestAnimationFrame(raf)
-    return () => { cancelAnimationFrame(id); lenis.destroy() }
-  }, [])
+/* ---------- plan ---------- */
+const iso = (d: Date) => d.toISOString().slice(0, 10)
+const addDays = (s: string, n: number) => { const d = new Date(s + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return iso(d) }
+const nice = (s: string) => new Date(s + 'T12:00:00Z').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' })
+export type Plan = ReturnType<typeof usePlan>
+export function usePlan() {
+  const [arrival, setArrival] = useState(() => addDays(iso(new Date()), 30))
+  const [nights, setNights] = useState(7)
+  const [adults, setAdults] = useState(2)
+  const [kids, setKids] = useState(0)
+  const [unitId, setUnitId] = useState<string | null>(null)
+  const [meals, setMeals] = useState(false)
+  const [acts, setActs] = useState<string[]>([])
+  return { arrival, setArrival, nights, setNights, adults, setAdults, kids, setKids, unitId, setUnitId, meals, setMeals, acts, setActs }
 }
 
-function Header({ current }: { current: string }) {
-  const [open, setOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
+export function fitOrder(adults: number, kids: number) {
+  const guests = adults + kids, need = Math.max(1, Math.ceil(guests / 2))
+  const score = (x: Unit) => {
+    const over = adults > RATES[x.cat].max ? 1 : 0
+    const short = x.bedrooms < need ? 1 : 0
+    const gap = Math.abs(x.bedrooms - need)
+    return over * 100 + short * 50 + gap * 10 - (x.pool ? 2 : 0) - (x.beach ? 3 : 0)
+  }
+  return [...UNITS].sort((a, b) => score(a) - score(b) || UNITS.indexOf(a) - UNITS.indexOf(b))
+}
+
+export function quote(x: Unit, p: { arrival: string; nights: number; adults: number; kids: number; meals: boolean }) {
+  const R = RATES[x.cat], guests = p.adults + p.kids
+  const occ = Math.min(p.adults, R.max), extraAdults = Math.max(0, p.adults - R.max)
+  let rooms = 0, sN = 0, wN = 0, unpublished = 0
+  for (let i = 0; i < p.nights; i++) {
+    const d = addDays(p.arrival, i)
+    const winter = d >= WINTER_START
+    if (d >= WINTER_END) unpublished++
+    if (winter) wN++; else sN++
+    rooms += (winter ? R.w : R.s)[Math.max(1, occ)] + extraAdults * 40
+  }
+  const vat = rooms * 0.1, levy = rooms * 0.066
+  const maid = 6 * guests * p.nights
+  const energy = R.energy * guests * p.nights * 1.1
+  const mealPlan = p.meals ? 83 * guests * p.nights * 1.25 : 0
+  const total = rooms + vat + levy + maid + energy + mealPlan
+  const depN = p.nights <= 2 ? 1 : p.nights <= 4 ? 2 : p.nights <= 7 ? 3 : p.nights <= 9 ? 0 : 5
+  return { rooms, vat, levy, maid, energy, mealPlan, total, sN, wN, unpublished, extraAdults, depN, deposit: depN ? (total / p.nights) * depN : 0, energyRate: R.energy }
+}
+const seasonLine = (q: ReturnType<typeof quote>) =>
+  q.sN && q.wN ? `${q.sN} summer and ${q.wN} winter nights` : q.wN ? 'Winter 2026-27 rates' : 'Summer 2026 rates'
+
+function mailStay(p: Plan, x: Unit, q: ReturnType<typeof quote>) {
+  const lines = [
+    `Place: ${x.name} (${x.kind})`,
+    `Arrival: ${nice(p.arrival)}, ${p.nights} nights, leaving ${nice(addDays(p.arrival, p.nights))}`,
+    `Party: ${p.adults} adult${p.adults > 1 ? 's' : ''}${p.kids ? `, ${p.kids} child${p.kids > 1 ? 'ren' : ''} 12 and under` : ''}`,
+    `Meal plan: ${p.meals ? 'yes, please' : 'no'}`,
+    p.acts.length ? `Interested in: ${p.acts.join(', ')}` : '',
+    `My estimate from your published rates: ${money(q.total)}`,
+  ].filter(Boolean)
+  return `mailto:${EMAIL}?subject=${encodeURIComponent(`Stay request: ${x.name}, ${nice(p.arrival)}, ${p.nights} nights`)}&body=${encodeURIComponent(`Hello,\n\n${lines.join('\n')}\n\nThank you.`)}`
+}
+function mailAir(p: Plan) {
+  return `mailto:${AIR}?cc=${EMAIL}&subject=${encodeURIComponent(`Flights to Stella Maris, ${nice(p.arrival)}`)}&body=${encodeURIComponent(`Hello,\n\nWe would like to fly from Nassau to Stella Maris on ${nice(p.arrival)} and back on ${nice(addDays(p.arrival, p.nights))}.\nParty: ${p.adults} adults${p.kids ? `, ${p.kids} children` : ''}.\nOur international flight arrives in Nassau at: \n\nThank you.`)}`
+}
+
+/* ---------- header ---------- */
+export function Header({ current }: { current?: string }) {
+  const nav: [string, string][] = [['Places to stay', 'stay.html'], ['The island', 'island.html'], ['Getting here', 'island.html#getting-here'], ['Weddings', 'island.html#weddings']]
   return (
-    <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-3 md:px-10">
-        <a href="index.html" className="flex items-center gap-3" aria-label="Stella Maris Resort Club, home">
-          <svg viewBox="0 0 100 100" className="size-8 text-lagoon" aria-hidden><path d="M50 4 L57 43 L96 50 L57 57 L50 96 L43 57 L4 50 L43 43 Z" fill="currentColor" /></svg>
-          <span className="leading-none"><span className="font-display text-[1.45rem]">Stella Maris</span><span className="mt-0.5 block text-[12px] text-muted">Resort Club &amp; Marina, Long Island</span></span>
-        </a>
-        <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
-          {NAV.map(n => <a key={n.href} href={n.href} className={`ulink text-[15px] ${current === n.label ? "is-on" : ""}`}>{n.label}</a>)}
-          <a href="index.html#plan" className="pill pill-solid">Plan your stay</a>
-        </nav>
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className="inline-flex size-11 items-center justify-center rounded-full border border-line lg:hidden" aria-label="Open menu"><Menu className="size-5" /></SheetTrigger>
-          <SheetContent side="right" className="w-full border-l-0 bg-paper sm:max-w-sm">
-            <SheetTitle className="sr-only">Menu</SheetTitle>
-            <nav className="mt-16 flex flex-col px-6" aria-label="Mobile">
-              {NAV.map((n, i) => <motion.a key={n.href} href={n.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i, duration: 0.5, ease }} className="border-b border-line py-4 font-display text-3xl">{n.label}</motion.a>)}
-              <a href="index.html#plan" onClick={() => setOpen(false)} className="pill pill-solid mt-8">Plan your stay</a>
-              <a href={TEL} className="mt-4 text-center text-muted">Call {PHONE}</a>
-            </nav>
-          </SheetContent>
-        </Sheet>
-      </div>
-      <motion.div style={{ scaleX: progress }} className="h-[2px] origin-left bg-gradient-to-r from-shallows via-lagoon to-atlantic" aria-hidden />
+    <header className="hd">
+      <a className="hd__mark" href="./">Stella Maris<span>Resort Club</span></a>
+      <nav className="hd__nav" aria-label="Site">
+        {nav.map(([l, h]) => <a key={l} href={h} aria-current={current === l ? 'page' : undefined}>{l}</a>)}
+      </nav>
+      <a className="hd__tel tnum" href={PHONES[0][1]}>{PHONES[0][0]}</a>
+      <a className="hd__plan" href="./#plan">Plan your stay</a>
     </header>
   )
 }
 
-function Footer() {
+function Roll({ v }: { v: string }) {
+  const reduce = useReducedMotion()
   return (
-    <footer className="bg-atlantic text-paper pb-28 lg:pb-0">
-      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 md:grid-cols-[1.5fr_1fr_1fr] md:px-10">
-        <div>
-          <p className="font-display text-3xl">Stella Maris Resort Club &amp; Marina</p>
-          <p className="mt-3 max-w-sm text-paper/75">Ocean View Drive, P.O. Box LI 30-105, Stella Maris, Long Island, The Bahamas.</p>
+    <span className="roll tnum" aria-label={v}>
+      {v.split('').map((c, i) => (
+        <span key={i} className="roll__c" aria-hidden="true">
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.span key={c} initial={reduce ? { opacity: 0 } : { y: '0.6em', opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={reduce ? { opacity: 0 } : { y: '-0.6em', opacity: 0 }} transition={{ duration: 0.28, ease, delay: i * 0.012 }}>{c}</motion.span>
+          </AnimatePresence>
+        </span>
+      ))}
+    </span>
+  )
+}
+function Stepper({ label, v, set, min, max, id }: { label: string; v: number; set: (n: number) => void; min: number; max: number; id: string }) {
+  return (
+    <div className="step" role="group" aria-labelledby={id}>
+      <span className="lbl" id={id}>{label}</span>
+      <div className="step__c">
+        <button type="button" aria-label={`Fewer: ${label}`} disabled={v <= min} onClick={() => set(Math.max(min, v - 1))}>−</button>
+        <span className="tnum" aria-live="polite">{v}</span>
+        <button type="button" aria-label={`More: ${label}`} disabled={v >= max} onClick={() => set(Math.min(max, v + 1))}>+</button>
+      </div>
+    </div>
+  )
+}
+
+/* ---------- screen 1: the planner ---------- */
+export function Planner({ plan, h1 = true }: { plan: Plan; h1?: boolean }) {
+  const order = useMemo(() => fitOrder(plan.adults, plan.kids), [plan.adults, plan.kids])
+  const unit = UNITS.find(x => x.id === plan.unitId) ?? order[0]
+  const q = quote(unit, plan)
+  const reduce = useReducedMotion()
+  const stripRef = useRef<HTMLDivElement>(null)
+  const refs = useRef<Record<string, HTMLButtonElement | null>>({})
+  useEffect(() => {
+    const box = stripRef.current, el = refs.current[unit.id]
+    if (!box || !el) return
+    const l = el.offsetLeft - box.offsetLeft
+    if (l < box.scrollLeft || l + el.offsetWidth > box.scrollLeft + box.clientWidth) box.scrollTo({ left: l - 16, behavior: reduce ? 'auto' : 'smooth' })
+  }, [unit.id, order, reduce])
+  const onKey = (e: React.KeyboardEvent) => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0
+    if (!d) return
+    e.preventDefault()
+    const i = order.findIndex(x => x.id === unit.id), n = order[Math.min(order.length - 1, Math.max(0, i + d))]
+    plan.setUnitId(n.id); refs.current[n.id]?.focus()
+  }
+  const H = h1 ? 'h1' : 'h2'
+  const lines: [string, number, string?][] = [
+    [`${plan.nights} nights, ${seasonLine(q)}${q.extraAdults ? `, ${q.extraAdults} extra adult${q.extraAdults > 1 ? 's' : ''} at $40` : ''}`, q.rooms],
+    ['VAT, 10%', q.vat],
+    ['Resort levy, 6%, and its VAT', q.levy],
+    [`Maid service, $6 a guest a night`, q.maid],
+    [`Energy surcharge, $${q.energyRate} a guest a night, and its VAT`, q.energy],
+  ]
+  if (plan.meals) lines.push(['Meal plan, $83 a guest a night, gratuity and VAT', q.mealPlan])
+  return (
+    <section className="plan" id="plan" aria-labelledby="plan-h">
+      <div className="plan__tool">
+        <p className="kicker">Stella Maris, Long Island, The Bahamas</p>
+        <H id="plan-h">Ten places to stay. Your week, added&nbsp;up.</H>
+        <div className="ctl">
+          <label className="ctl__date"><span className="lbl">Arrival</span>
+            <input type="date" value={plan.arrival} min={iso(new Date())} onChange={e => e.target.value && plan.setArrival(e.target.value)} />
+          </label>
+          <Stepper label="Nights" id="s-n" v={plan.nights} set={plan.setNights} min={1} max={28} />
+          <Stepper label="Adults" id="s-a" v={plan.adults} set={plan.setAdults} min={1} max={10} />
+          <Stepper label="Children, 12 and under" id="s-k" v={plan.kids} set={plan.setKids} min={0} max={6} />
         </div>
-        <div className="text-[15px]">
-          <p className="kicker !text-shallows">Reservations</p>
-          <a href={TEL} className="mt-3 block hover:text-shallows">{PHONE}, also 2051 and 2027</a>
-          <a href={`mailto:${EMAIL}`} className="ulink mt-1 inline-block break-all">{EMAIL}</a>
-          <a href={`mailto:${AIR}`} className="ulink mt-1 inline-block break-all">Flights: {AIR}</a>
-        </div>
-        <div className="text-[15px]">
-          <p className="kicker !text-shallows">Pages</p>
-          {NAV.map(n => <a key={n.href} href={n.href} className="mt-2 block hover:text-shallows">{n.label}</a>)}
-          <a href="https://www.facebook.com/StellaMarisResort" className="mt-2 block hover:text-shallows">Facebook</a>
+        <div className="sum" aria-live="polite">
+          <p className="sum__place"><b>{unit.name}</b> <span>{nice(plan.arrival)} to {nice(addDays(plan.arrival, plan.nights))}</span></p>
+          <ul className="sum__lines tnum">
+            {lines.map(([l, v]) => <li key={l.split(',')[0]}><span>{l}</span><span>{money(v)}</span></li>)}
+          </ul>
+          <label className="sum__meal"><input type="checkbox" checked={plan.meals} onChange={e => plan.setMeals(e.target.checked)} /> <span>Add the meal plan (breakfast and dinner, drinks not included)</span></label>
+          <p className="sum__total"><span>Estimate, confirmed by reservations</span><Roll v={money(q.total)} /></p>
+          <p className="sum__dep tnum">{q.depN ? `Deposit: ${q.depN} night${q.depN > 1 ? 's' : ''}, about ${money0(q.deposit)}.` : 'Deposit for 8 or 9 nights: ask reservations.'} Children 12 and under stay free.{q.unpublished ? ' Nights from 18 April 2027 are priced at winter rates until new rates are published.' : ''}</p>
+          <div className="sum__acts">
+            <a className="btn" href={mailStay(plan, unit, q)}>Send this stay to reservations</a>
+            <a className="link" href={mailAir(plan)}>Add flights from Nassau</a>
+          </div>
         </div>
       </div>
-      <p className="mx-auto max-w-[1440px] border-t border-paper/15 px-5 py-6 text-xs text-paper/60 md:px-10">Concept by ESTATIQ AI Solutions. Details from stellamarisresort.com and public listings, to be confirmed with the resort. Bookings by credit card (Visa, Mastercard, American Express).</p>
-    </footer>
+      <div className="plan__view">
+        <Photo pic={IMG.hero} eager className="plan__hero" />
+        <div className="strip" ref={stripRef} role="radiogroup" aria-label="Places to stay, best fit for your party first" onKeyDown={onKey}>
+          {order.map(x => {
+            const R = RATES[x.cat], over = plan.adults > R.max
+            const nightly = quote(x, { ...plan, nights: 1, meals: false }).rooms
+            return (
+              <motion.button layout={!reduce} transition={{ duration: 0.45, ease }} key={x.id} ref={el => { refs.current[x.id] = el }} type="button" role="radio" aria-checked={x.id === unit.id} tabIndex={x.id === unit.id ? 0 : -1} className={'film' + (over ? ' is-over' : '')} onClick={() => plan.setUnitId(x.id)}>
+                <Photo pic={x.a} />
+                <span className="film__name">{x.name}</span>
+                <span className="film__meta tnum">{x.kind}, {money0(nightly)} a night{over ? ', with extra adults' : ''}</span>
+              </motion.button>
+            )
+          })}
+        </div>
+        <p className="strip__note">Best fit for {plan.adults} adult{plan.adults > 1 ? 's' : ''}{plan.kids ? ` and ${plan.kids} child${plan.kids > 1 ? 'ren' : ''}` : ''} first. Prices before tax and surcharges.</p>
+      </div>
+    </section>
   )
 }
 
-function ActionBar() {
+export function PhoneBar({ plan }: { plan: Plan }) {
+  const order = fitOrder(plan.adults, plan.kids)
+  const unit = UNITS.find(x => x.id === plan.unitId) ?? order[0], q = quote(unit, plan)
   return (
-    <nav aria-label="Quick actions" className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1fr_1.5fr] border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
-      <a href={TEL} className="flex min-h-14 items-center justify-center gap-1.5 text-[15px]"><Phone className="size-4" aria-hidden /> Call</a>
-      <a href={`mailto:${EMAIL}`} className="flex min-h-14 items-center justify-center gap-1.5 border-l border-line text-[15px]"><Mail className="size-4" aria-hidden /> Email</a>
-      <a href="index.html#plan" className="flex min-h-14 items-center justify-center bg-lagoon text-[15px] font-semibold text-white">Plan your stay</a>
-    </nav>
+    <div className="pbar">
+      <a href="#plan" className="pbar__t"><span className="pbar__n">{unit.name}</span><span className="tnum">{plan.nights} nights, {money0(q.total)}</span></a>
+      <a className="btn" href={mailStay(plan, unit, q)}>Send</a>
+    </div>
   )
 }
 
-export function Page({ current, children }: { current: string; children: ReactNode }) {
-  useLenis()
-  return (<><a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-paper focus:p-3">Skip to content</a><Header current={current} /><main id="main">{children}</main><Footer /><ActionBar /></>)
-}
-export function mount(node: ReactNode) {
-  document.documentElement.classList.add("js-anim")
-  createRoot(document.getElementById("root")!).render(node)
-}
-export const ease = [0.16, 1, 0.3, 1] as const
-export const reveal = [0.77, 0, 0.175, 1] as const
-export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
-  return <motion.div className={className} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10% 0px" }} transition={{ duration: 0.9, delay, ease }}>{children}</motion.div>
-}
-export function Title({ n, k, id, children, intro, light = false }: { n: string; k: string; id: string; children: ReactNode; intro?: ReactNode; light?: boolean }) {
+/* ---------- screen 2: two shorelines ---------- */
+export function Shores() {
   return (
-    <Reveal>
-      <p className={`kicker ${light ? "!text-shallows" : ""}`}><span className={light ? "" : "text-lagoon"}>{n}</span>&ensp;{k}</p>
-      <h2 id={id} className="mt-4 font-display text-[clamp(2.5rem,5vw,4.8rem)] leading-[0.98] tracking-[-0.015em]">{children}</h2>
-      {intro && <div className={`mt-6 max-w-md text-[17px] leading-relaxed ${light ? "text-paper/80" : "text-muted"}`}>{intro}</div>}
-    </Reveal>
+    <section className="shores" aria-labelledby="sh-h">
+      <h2 id="sh-h" className="shores__h">“The turquoise or ink-blue of the two near&nbsp;shorelines.”</h2>
+      <div className="shores__grid">
+        <div className="shore shore--ink">
+          <p className="shore__k">The Atlantic side</p>
+          <p>Porches and pools over the Atlantic at Sand Dollar, Sea La Vie, Carolyn's Favourite, Rainbow Villa and Flamingo House, with Gecko House right on the beach. Big game fishing off the shore.</p>
+        </div>
+        <Photo pic={IMG.resort} className="shores__pic" />
+        <div className="shore shore--calm">
+          <p className="shore__k">The calm side</p>
+          <p>Bonefishing in Adderley's and Glenton's bays, the Moonshine beach bar and grill on the shore, kayaks and paddle boards, and the weekday morning trips to Cape Santa Maria Beach and Columbus Harbour.</p>
+        </div>
+      </div>
+    </section>
   )
 }
-export function Img({ src, alt, className = "", w = 1200, h = 800 }: { src: string; alt: string; className?: string; w?: number; h?: number }) {
+
+/* ---------- screen 3: the places ---------- */
+export function Places({ plan }: { plan: Plan }) {
+  const choose = (id: string) => { plan.setUnitId(id); document.getElementById('plan')?.scrollIntoView({ behavior: 'smooth' }) }
   return (
-    <motion.div className={`overflow-hidden bg-paper-2 ${className}`} initial={{ clipPath: "inset(10% 10% 10% 10% round 24px)" }} whileInView={{ clipPath: "inset(0% 0% 0% 0% round 24px)" }} viewport={{ once: true, margin: "-8% 0px" }} transition={{ duration: 1.3, ease: reveal }}>
-      <img src={src} alt={alt} width={w} height={h} loading="lazy" className="size-full object-cover" />
-    </motion.div>
+    <section className="places" id="places" aria-labelledby="pl-h">
+      <div className="places__head">
+        <h2 id="pl-h">Every place, priced for your&nbsp;party.</h2>
+        <p className="lede">For {plan.adults} adult{plan.adults > 1 ? 's' : ''}{plan.kids ? ` and ${plan.kids} child${plan.kids > 1 ? 'ren' : ''}` : ''}, a night, before tax and surcharges. Change the party above and every price follows.</p>
+      </div>
+      <ol className="places__list">
+        {UNITS.map(x => {
+          const R = RATES[x.cat], occ = Math.max(1, Math.min(plan.adults, R.max)), extra = Math.max(0, plan.adults - R.max) * 40
+          const feats = [x.pool && 'Pool', x.beach && 'On the beach', x.kitchen && 'Kitchen', x.atlantic && 'Atlantic view'].filter(Boolean).join(', ')
+          return (
+            <li key={x.id} className="place">
+              <div className="place__pics"><Photo pic={x.a} /><Photo pic={x.b} /></div>
+              <div className="place__text">
+                <h3>{x.name}</h3>
+                <p className="place__kind">{x.kind}{feats ? `. ${feats}.` : '.'}</p>
+                <p>{x.desc}</p>
+              </div>
+              <dl className="place__rates tnum">
+                <div><dt>Summer 2026</dt><dd>{money0(R.s[occ] + extra)}</dd></div>
+                <div><dt>Winter 2026-27</dt><dd>{money0(R.w[occ] + extra)}</dd></div>
+                <button type="button" className="link" onClick={() => choose(x.id)}>Plan this one<span className="sr"> : {x.name}</span></button>
+              </dl>
+            </li>
+          )
+        })}
+      </ol>
+    </section>
+  )
+}
+
+/* ---------- screen 4: included and the water ---------- */
+export function Water({ plan }: { plan: Plan }) {
+  const toggle = (a: string) => plan.setActs(plan.acts.includes(a) ? plan.acts.filter(x => x !== a) : [...plan.acts, a])
+  return (
+    <>
+      <section className="incl" aria-labelledby="in-h">
+        <h2 id="in-h">Included with your&nbsp;room.</h2>
+        <ul>{INCLUDED.map(i => <li key={i}>{i}</li>)}</ul>
+      </section>
+      <section className="water" id="water" aria-labelledby="wa-h">
+        <div className="water__text">
+          <h2 id="wa-h">Dean's Blue Hole, and the bonefish<h2 id="wa-h">Some of the best water in the Out&nbsp;Islands.</h2>nbsp;bays.</h2>
+          <p>Stella Maris Water Sports runs the diving: {DIVES.slice(0, 3).join(', ')} and {DIVES[3]}. Bonefishing is close by in Adderley's and Glenton's bays, and big game fishing waits off both shorelines.</p>
+          <p className="water__k">Tick what you would like to do, and it goes into your stay request.</p>
+          <div className="acts">{ACTIVITIES.map(a => <button key={a} type="button" className="act" aria-pressed={plan.acts.includes(a)} onClick={() => toggle(a)}>{a}</button>)}</div>
+        </div>
+        <div className="water__pics"><Photo pic={IMG.g1} /><Photo pic={IMG.g2} /></div>
+      </section>
+      <section className="offers" aria-labelledby="of-h">
+        <h2 id="of-h">Packages and specials.</h2>
+        <div className="offers__grid">
+          <p><b>Sun &amp; Sea all-inclusive.</b> Five nights from $1,867 single or $2,945 double, with seven-night packages too, valid to 19 December 2026.</p>
+          <p><b>$250 air credit</b> on air-inclusive packages from the US, as listed on their specials page; blackout 3 to 6 July 2026.</p>
+          <p><b>Meal plan.</b> Breakfast and dinner, $83 a person a night plus 15% gratuity and 10% VAT; drinks not included.</p>
+        </div>
+      </section>
+    </>
+  )
+}
+
+/* ---------- screen 5: getting here ---------- */
+export function Getting({ plan }: { plan: Plan }) {
+  const steps = [['Fly to Nassau', 'Your international flight lands at Nassau.'], ['On to Stella Maris', "The resort's own air service, or a scheduled flight to Stella Maris Airport (SML)."], ['A short drive', 'From the airport to the club on Ocean View Drive.'], ['You are here', 'Between the two shorelines of Long Island.']]
+  return (
+    <section className="route" id="getting-here" aria-labelledby="gh-h">
+      <h2 id="gh-h">We can even fly you&nbsp;here.</h2>
+      <ol className="route__steps">{steps.map(([t, d], i) => <li key={t}><span className="tnum">{i + 1}</span><b>{t}</b><span>{d}</span></li>)}</ol>
+      <a className="btn btn--line" href={mailAir(plan)}>Ask the air service for your dates</a>
+    </section>
+  )
+}
+
+/* ---------- screen 6: weddings, policies, contact ---------- */
+export function Close({ plan }: { plan: Plan }) {
+  const order = fitOrder(plan.adults, plan.kids)
+  const unit = UNITS.find(x => x.id === plan.unitId) ?? order[0], q = quote(unit, plan)
+  return (
+    <>
+      <section className="wed" id="weddings" aria-labelledby="we-h">
+        <h2 id="we-h">Weddings, barefoot or&nbsp;elegant.</h2>
+        <p>Weddings and anniversaries on Long Island, with the club's houses for the whole party. Write with your date and the number of guests.</p>
+        <a className="link" href={`mailto:${EMAIL}?subject=${encodeURIComponent('A wedding at Stella Maris')}`}>Write about a wedding</a>
+      </section>
+      <section className="policy" aria-labelledby="po-h">
+        <h2 id="po-h">The small print, in plain&nbsp;words.</h2>
+        <dl>
+          <div><dt>Deposits</dt><dd>1 to 3 nights: one night. 3 to 5 nights: two. 5 to 7 nights: three. 10 nights or more: five. Packages: $750.</dd></div>
+          <div><dt>Cancelling</dt><dd>$75 plus VAT. Inside 14 days of arrival the deposit is kept (21 days at Christmas and New Year).</dd></div>
+          <div><dt>Paying</dt><dd>Credit card only: Visa, Mastercard or American Express.</dd></div>
+          <div><dt>Children</dt><dd>12 and under stay free. Each additional adult is $40 a night, plus surcharges.</dd></div>
+        </dl>
+      </section>
+      <footer className="contact" id="contact">
+        <div>
+          <h2>Write or call the&nbsp;club.</h2>
+          <div className="contact__acts">
+            <a className="btn" href={mailStay(plan, unit, q)}>Send this stay to reservations</a>
+          </div>
+        </div>
+        <ul className="contact__list">
+          <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a><span>Reservations</span></li>
+          <li className="tnum">{PHONES.map(([l, t]) => <a key={l} href={t}>{l}</a>)}<span>Fax 242-338-2052</span></li>
+          <li><a href={`mailto:${AIR}`}>{AIR}</a><span>The air service</span></li>
+          <li><a href="mailto:Jill@stellamarisresort.com">Jill@stellamarisresort.com</a><a href="mailto:info@stellamarisresort.com">info@stellamarisresort.com</a></li>
+          <li><span className="addr">Ocean View Drive, P.O. Box LI 30-105, Stella Maris, Long Island, Bahamas</span><a className="link" href={FB}>Facebook</a></li>
+        </ul>
+        <p className="credit">Photography: Stella Maris Resort Club. Rates as published on stellamarisresort.com, updated 19 November 2026.</p>
+      </footer>
+    </>
   )
 }
