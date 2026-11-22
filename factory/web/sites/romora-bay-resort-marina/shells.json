@@ -3,7 +3,7 @@
  "domain": "https://www.romorabay.com/",
  "ogImage": "https://www.romorabay.com/assets/hero-drone-CEdSqdKD.jpg",
  "theme": "#fbf6f1",
- "fonts": "https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@300;400;500&display=swap",
+ "fonts": "self-hosted: @fontsource-variable/bodoni-moda, @fontsource-variable/outfit (src/fonts)",
  "pages": [
   {
    "file": "index.html",
@@ -12,20 +12,6 @@
    "faq": true,
    "title": "Harbour Island Resort & Marina | Romora Bay, Eleuthera",
    "desc": "Romora Bay, Harbour Island: 17 waterview rooms and a full-service marina for yachts to 190 ft, an official port of entry with customs on site."
-  },
-  {
-   "file": "marina.html",
-   "entry": "marina",
-   "path": "marina",
-   "title": "Harbour Island Marina, Port of Entry | Romora Bay Marina",
-   "desc": "Romora Bay Marina, Harbour Island: 40+ slips for yachts to 190 ft, customs on site, 30/50 amp to 3-phase power, RO water, pumpout and 24/7 yacht assistance."
-  },
-  {
-   "file": "stay.html",
-   "entry": "stay",
-   "path": "stay",
-   "title": "Harbour Island Rooms, Suites & Villa | Romora Bay Resort",
-   "desc": "Romora Bay, Harbour Island: King Waterfront rooms with balconies, suites under vaulted ceilings, and The House, a villa with a full kitchen."
   }
  ],
  "graph": [
