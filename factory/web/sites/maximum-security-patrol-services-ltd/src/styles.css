@@ -17,7 +17,7 @@
   --inset: clamp(20px, 4vw, 64px); --gap: 32px; --max: 1360px; --bar: 64px; --r: 3px;
   --ease: cubic-bezier(.22, 1, .36, 1); --fast: 160ms; --draw: 700ms;
 }
-@media (max-width: 900px) { :root { --concept-offset: 72px; --t-body: 16px; --t-lead: 18px; --t-h3: 22px; --t-h2: 34px; --t-hero: 38px; --gap: 16px; --bar: 56px; } }
+@media (max-width: 900px) { :root { --t-body: 16px; --t-lead: 18px; --t-h3: 22px; --t-h2: 34px; --t-hero: 38px; --gap: 16px; --bar: 56px; } }
 
 html { background: var(--ground); color: var(--ink); -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--ground); font: 400 var(--t-body)/1.55 var(--text); -webkit-font-smoothing: antialiased; }
