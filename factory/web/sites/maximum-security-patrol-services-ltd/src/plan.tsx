@@ -34,6 +34,7 @@ export function Plan({ p, on, posts, hours, reduced }: { p: Premises; on: SvcId[
       </g>
 
       <g key={p.id} className="sheet-in">
+        <rect x={sx} y={sy} width={sw} height={sh} className={`night${hours === "Nights" || hours === "Around the clock" ? " is-on" : ""}`} />
         <rect x={sx} y={sy} width={sw} height={sh} className="site" />
         <text x={p.street.at[0]} y={p.street.at[1] + 16} className="lbl lbl--street" textAnchor="middle">{p.street.label}</text>
         <line x1={sx} x2={sx + sw} y1={sy + sh + 20} y2={sy + sh + 20} className="street" />
@@ -54,14 +55,14 @@ export function Plan({ p, on, posts, hours, reduced }: { p: Premises; on: SvcId[
           <g className="layer">
             <path d={route} className="route" mask={`url(#m-route-${p.id})`} />
             {!reduced && <circle r={5} className="walker"><animateMotion dur="14s" repeatCount="indefinite" path={route} /></circle>}
-            <text x={sx + sw - 24} y={sy + sh - 24} className="lbl lbl--acc" textAnchor="end">Patrol route</text>
+            <text x={sx + 24} y={sy + 34} className="lbl lbl--acc">Patrol route</text>
           </g>
         )}
 
         {has("alarm") && (
           <g className="layer">
             <path d={`M${b0[0] + b0[2]} ${ctrlY} H640`} className="ctrl" />
-            <text x={636} y={ctrlY - 6} className="lbl lbl--acc" textAnchor="end">To Carib Road control</text>
+            <text x={636} y={ctrlY + 16} className="lbl lbl--acc" textAnchor="end">To Carib Road control</text>
             {p.sensors.map(([x, y], i) => (
               <g key={i} className="sensor" style={{ animationDelay: `${i * 40}ms` }}>
                 <circle cx={x} cy={y} r={9} className="sensor__ring" style={{ animationDelay: `${i * 300}ms` }} />
