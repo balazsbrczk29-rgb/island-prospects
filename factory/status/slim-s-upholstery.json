@@ -4,8 +4,20 @@
  "name": "Slim's Upholstery",
  "batch": "07",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T12:13:31.802Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T12:19:32.305632+00:00",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/slim-s-upholstery/",
+ "scores": {
+  "gate1": "pass",
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 5,
+  "phone": 4
+ },
+ "notes": "Job-spec build 2026-11-22 from design.md: quote starter on screen 1 (piece, how many, same look or new, note) writes the WhatsApp message to 814-5451; the illustrative chair rebuilds one layer per answer. Kept: specialities list (now with what to photograph), the scroll layer study, Gloock + Mulish, navy accent, Claridge Road visit. Illustrative Lovable photos labelled. Assumptions in concept notes."
 }
