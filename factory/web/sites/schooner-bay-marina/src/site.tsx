@@ -74,7 +74,7 @@ function ActionBar() {
   return (
     <nav aria-label="Quick actions" className="abar">
       <a href={HM_TEL} className="tnum">Call {HM}</a>
-      <a href="#request" className="go">Request a slip</a>
+      <a href="#request" className="go" onClick={e => { const a = document.querySelector<HTMLAnchorElement>(".act-b a.btn-harbour"); if (a) { e.preventDefault(); location.href = a.href } }}>Request a slip</a>
     </nav>
   )
 }

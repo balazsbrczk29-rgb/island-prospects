@@ -15,7 +15,7 @@ export function verdict(t: Trip) {
 }
 export function slipMail(t: Trip, extra = "") {
   const v = verdict(t)
-  const body = `Hello Harbour Master,\n\nI would like a slip at Schooner Bay.\n\nVessel:\nLength overall: ${t.loa} ft\nDraft: ${t.draft} ft\nArriving: ${t.date || "to confirm"}\nNights: ${t.nights}\nPower: ${t.power || "none"}\nFuel: ${t.fuel || "none"}\n${v.ok ? `Estimate from the site: $${v.est.toLocaleString("en-US")} at the daily rate, before power and fuel\n` : ""}${extra}\nName:\nPhone or email:\n`
+  const body = `Hello Harbour Master,\n\nI would like a slip at Schooner Bay.\n\nVessel name:\nLength overall: ${t.loa} ft\nDraft: ${t.draft} ft\nArriving: ${t.date || "to confirm"}\nNights: ${t.nights}\nPower: ${t.power || "none"}\nFuel: ${t.fuel || "none"}\n${v.ok ? `Estimate from the site: $${v.est.toLocaleString("en-US")} at the daily rate, before power and fuel\n` : ""}${extra}\nName:\nPhone or email:\n`
   return `mailto:${EMAIL}?subject=${encodeURIComponent(`Slip request: ${t.loa} ft${t.date ? ", " + t.date : ""}`)}&body=${encodeURIComponent(body)}`
 }
 const money = (n: number) => "$" + Math.round(n).toLocaleString("en-US")

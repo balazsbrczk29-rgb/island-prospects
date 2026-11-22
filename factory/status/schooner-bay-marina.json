@@ -4,8 +4,30 @@
  "name": "Schooner Bay Marina",
  "batch": "12",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T14:15:19.902Z"
+ "claimed_at": "2026-11-22T14:15:19.902Z",
+ "jobspec_built": true,
+ "built_at": "2026-11-22T14:24:31.733984+00:00",
+ "scores": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_better": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 5,
+  "phone": 4
+ },
+ "notes": [
+  "Built to the approved job spec as one page: panorama + 'Can I come in?' instrument panel (LOA/draft vs 80 ft / 8 ft MLW with limit ticks, nights, date, fuel, power, estimate at $3.00/ft/day) + crop of a Natural Earth chart; one-tap pre-filled email to the Harbour Master. Then Hole in the Wall chart with route, the numbers table, ashore, Discovery Stay, request tabs Slip / Fuel / Discovery Stay, contact sheet with each number labelled by role.",
+  "marina.html and village.html removed: their content (numbers, By sea / By air, village, three steps, Discovery Stay) now lives on index. Gen-1 key-information band and blurred sticky header removed (banned patterns). Fonts self-hosted from @fontsource (were Google Fonts).",
+  "No new research this session. Facebook link removed (not in the brief).",
+  "Critic: first pass wow/photo/phone 3; fixes applied; re-score all >= 4, no blockers.",
+  "Assumptions to confirm: 80 ft (marina page) over 70 ft (Abaco page); Discovery Stay enquiries go to the only published email (harbourmaster@) addressed to June Russell; route on the chart is illustrative; bait and tackle and golf carts from the 2023 Abaco page."
+ ]
 }

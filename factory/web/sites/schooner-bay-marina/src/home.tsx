@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, useReducedMotion } from "motion/react"
 import { Page, mount, IMG, HM, HM_TEL, EMAIL, MAIN, MAIN_TEL, SALES, SALES_TEL, HANDOUT } from "./site"
 import { Tool, Chart, START, verdict, type Trip } from "./tool"
@@ -8,8 +8,14 @@ type Tab = "slip" | "fuel" | "stay"
 
 function Hero({ t, set, onRequest, pulse }: { t: Trip; set: (p: Partial<Trip>) => void; onRequest: () => void; pulse: number }) {
   const reduce = useReducedMotion()
+  const ref = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const el = ref.current; if (!el) return
+    const io = new IntersectionObserver(([e]) => el.classList.toggle("off", !e.isIntersecting))
+    io.observe(el); return () => io.disconnect()
+  }, [])
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section ref={ref} className="hero" aria-labelledby="hero-title">
       <motion.figure className="pano" initial={reduce ? false : { clipPath: "inset(0 50% 0 50%)" }} animate={{ clipPath: "inset(0 0% 0 0%)" }} transition={{ duration: 1.3, ease: reveal }}>
         <img src={IMG.pano} alt="The protected harbour basin at Schooner Bay, Great Abaco" width={1600} height={480} fetchPriority="high" />
         <figcaption className="tnum">N 26° 09.529′ W 077° 10.633′</figcaption>
