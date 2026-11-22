@@ -4,7 +4,27 @@
  "name": "Swain's Cay Lodge",
  "batch": "13",
  "tier": "A",
- "state": "building",
+ "state": "needs-review",
  "generation": 2,
- "claimed_at": "2026-11-22T16:52:14.655Z"
+ "rebuild_of": 1,
+ "claimed_at": "2026-11-22T14:37:11.751Z",
+ "jobspec_built": false,
+ "scores": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present": false
+  },
+  "wow": 3,
+  "photography": 3,
+  "typography": 4,
+  "composition": 3,
+  "conversion_clarity": 4,
+  "phone": 4
+ },
+ "notes": [
+  "WIP only (not published to main): built from approved spec + design.md 2026-11-22 on branch wip/swain-s-cay-lodge. Core tool: anglers, non-anglers, nights, guided days, arrival, waters toggled on a baked Natural Earth chart of Mangrove Cay; boats, guide days, recommended gratuities; email to fish@; Book a room.",
+  "Critic re-score failed (keep: rooms picker, FAQ, fishing gallery 6-8 and spearfishing photo; wow 3, photo 3, composition 3). After the re-score these were applied: dawn photo moved to bottom-left open water, Orvis set as its own small-caps line, rooms picker restored (list + crossfading photo), concept offset 96px on phone. Still to do: FAQ dl on fishing.html, gallery 6-8 and spearfishing image (filenames and sizes not yet sourced), then a fresh critic.",
+  "Assumptions: lodge pin approximate on a 1:10m coastline; non-angler $450 unit unclear; six offer blocks merged into four with all dates kept."
+ ]
 }
