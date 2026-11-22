@@ -43,11 +43,23 @@ export function shopNow(d = new Date()) {
   const md = `${g('month')}/${g('day')}`
   const m = Number(g('hour')) * 60 + Number(g('minute'))
   const [o, c] = day === 0 ? [480, 840] : [450, 960]
-  const holiday = ['12/25', '12/26', '1/1'].includes(md)
+  const hol = (mo: number, dd: number) => ['12/25', '12/26', '1/1'].includes(`${mo}/${dd}`)
+  const mo = Number(g('month')), dd = Number(g('day'))
+  const holiday = hol(mo, dd)
   const open = !holiday && m >= o && m < c
   const closes = day === 0 ? '2:00 pm' : '4:00 pm'
-  const text = holiday ? 'Closed today for the holiday' : open ? `Open now, until ${closes}` : m < o ? `Opens today at ${day === 0 ? '8:00' : '7:30'} am` : `Closed now, opens ${day === 6 ? 'Sunday 8:00' : 'tomorrow 7:30'} am`
-  return { open, text }
+  const today = holiday ? 'Closed today for the holiday' : day === 0 ? 'Today 8:00 am to 2:00 pm' : 'Today 7:30 am to 4:00 pm'
+  // next opening day, skipping the published holiday closures
+  const names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  let next = ''
+  for (let k = 1; k <= 4; k++) {
+    const dt = new Date(Date.UTC(new Date().getFullYear(), mo - 1, dd + k))
+    if (hol(dt.getUTCMonth() + 1, dt.getUTCDate())) continue
+    const wd = (day + k) % 7
+    next = `opens ${k === 1 ? 'tomorrow' : names[wd]} ${wd === 0 ? '8:00' : '7:30'} am`; break
+  }
+  const text = open ? `Open now, until ${closes}` : !holiday && m < o ? `Opens today at ${day === 0 ? '8:00' : '7:30'} am` : `Closed now, ${next}`
+  return { open, text, today }
 }
 
 export const money = (n: number) => '$' + n.toFixed(2)

@@ -9,7 +9,7 @@ const SHOPFRONT = CDN + 'Carnival_3_smiling__customers_six_packs.jpg'
 const TURQ = '#7fc8c6'
 
 function useShopNow() {
-  const [s, setS] = useState<{ open: boolean | null; text: string }>({ open: null, text: shop.hours })
+  const [s, setS] = useState<{ open: boolean | null; text: string; today?: string }>({ open: null, text: shop.hours })
   useEffect(() => { const t = () => setS(shopNow()); t(); const id = setInterval(t, 60000); return () => clearInterval(id) }, [])
   return s
 }
@@ -28,7 +28,11 @@ export function Hero() {
       <div className="hero__photo">
         <AnimatePresence initial={false}>
           {nassau
-            ? <motion.img key="shopfront" className="hero__shopfront" src={SHOPFRONT + '?width=2400'} alt="Customers outside the Rum Cake Factory's turquoise shopfront on East Bay Street, holding six packs" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5, ease }} width={2400} height={1600} />
+            ? <motion.div key="map" className="hero__map" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45, ease }}>
+                <p className="hero__mapph">Walking route: Prince George Wharf to 602 East Bay Street</p>
+                <iframe title="Walking route from Prince George Wharf to 602 East Bay Street" loading="lazy" src={shop.embed} />
+                <img className="hero__inset" src={SHOPFRONT + '?width=800'} alt="Customers outside the Rum Cake Factory's shopfront holding six packs" width={800} height={533} />
+              </motion.div>
             : <motion.img key={f.handle} src={img(f.img, 2400)} alt={`${f.name} rum cake, a 20 oz bundt, on a ${f.name.toLowerCase()} coloured ground`}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, ease }} fetchPriority="high" width={2718} height={2048} />}
         </AnimatePresence>
@@ -55,6 +59,7 @@ export function Hero() {
           {nassau ? (
             <motion.div key="nassau" className="visitnow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.22 }}>
               <p className="now"><i data-open={String(now.open)} aria-hidden="true" />{now.text}</p>
+              {now.today && <p className="visitnow__today tnum">{now.today}</p>}
               <p className="visitnow__addr">{shop.address}</p>
               <p className="visitnow__walk">About 10 minutes' walk from the cruise dock, along Bay Street towards the Paradise Island bridge.</p>
               <a className="btn btn-ink wide" href={shop.walk} target="_blank" rel="noopener">Walking route from the ship</a>
@@ -66,14 +71,14 @@ export function Hero() {
               <AnimatePresence mode="wait" initial={false}>
                 <motion.p key={f.handle} className="price__name" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.22 }}>{f.name}</motion.p>
               </AnimatePresence>
-              <div className="price__rows">
+              {!v20.ok && !v4.ok ? <p className="price__soldall">Sold out on the factory's store right now. Pick another flavour.</p> : <div className="price__rows">
                 {[v20, v4].map(v => (
                   <div className="price__row" key={v.t}>
                     <span><b>{v.t}</b><em className="tnum">{money(v.p)}</em></span>
                     {v.ok ? <button type="button" className="btn btn-ink" onClick={() => buy(v)}>Add to bag</button> : <span className="sold">Sold out</span>}
                   </div>
                 ))}
-              </div>
+              </div>}
               {v4.ok && <button type="button" className="price__six" onClick={six}>Make it a six pack of 4 oz, {money(mix.v[0].p)}</button>}
               <p className="price__note">Shelf stable, no refrigeration. Free US ground shipping over $55.</p>
             </motion.div>
@@ -82,8 +87,8 @@ export function Hero() {
       </motion.div>
       <div className="chips" role="radiogroup" aria-label="Flavour" data-hidden={nassau}>
         {flavours.map(x => (
-          <button key={x.handle} type="button" role="radio" aria-checked={x.handle === f.handle} tabIndex={nassau ? -1 : 0} onClick={() => setF(x)}>
-            <i style={{ background: x.ground }} aria-hidden="true" />{x.name}
+          <button key={x.handle} type="button" role="radio" aria-checked={x.handle === f.handle} data-sold={!x.v.some(v => v.ok)} tabIndex={nassau ? -1 : 0} onClick={() => setF(x)}>
+            <i style={{ background: x.ground }} aria-hidden="true" />{x.name}{!x.v.some(v => v.ok) && <span className="sr-only"> (sold out)</span>}
           </button>
         ))}
       </div>
@@ -169,7 +174,7 @@ export function Travel() {
       <dl className="travel__grid">
         {facts.map(([t, d]) => <div key={t}><dt>{t}</dt><dd>{d}</dd></div>)}
       </dl>
-      <p className="travel__etsy">Sending a gift outside the US? <a className="ul" href={ETSY}>Order through their Etsy shop</a></p>
+      <p className="travel__etsy">Sending a gift outside the US and Canada? <a className="ul" href={ETSY}>Order through their Etsy shop</a></p>
     </section>
   )
 }
@@ -193,6 +198,7 @@ export function Visit() {
         <p><a className="tel tnum" href={`tel:${shop.phone.tel}`}>{shop.phone.label}</a> · <a href={`mailto:${shop.email}`}>{shop.email}</a></p>
         <p className="fine">Ordering more than 50 cakes? Give the bakery 48 hours' notice.</p>
       </div>
+      <div className="visit__map"><p className="hero__mapph">Walking route: Prince George Wharf to 602 East Bay Street</p><iframe title="Map: walking route from Prince George Wharf to the bakery" loading="lazy" src={shop.embed} /></div>
     </section>
   )
 }
@@ -202,7 +208,7 @@ const FAQ = [
   ['Can I take them on a cruise ship or a plane?', 'Yes. They are cruise ship and airport approved, and you can carry them on. The bakery cannot deliver to the ships.'],
   ['What allergens do they contain?', 'Egg, wheat, soy and milk. Pecans are only in the Original with Pecans.'],
   ['Are they sugar-free, gluten-free, organic or kosher?', 'No, none of these.'],
-  ['Can I taste before I buy?', 'Yes, free samples are offered at the bakery on East Bay Street. Samples are not mailed.'],
+  ['Can I taste before I buy?', 'Yes. Free samples are offered at the bakery only, on East Bay Street.'],
   ['How is shipping charged?', 'By USPS, UPS or FedEx, Ground, Priority or Express, priced by dimensional weight at checkout. Ground shipping is free on US orders over $55.'],
   ['I need a lot of cakes. How much notice?', 'For orders of more than 50 cakes, give 48 hours\' notice. Call (242) 328-3750 or email bahamasrumcake@gmail.com.'],
 ]
@@ -241,7 +247,7 @@ export function Foot() {
     <footer className="foot">
       <p><b>Bahamas Rum Cake Factory</b> · {shop.address} · <a href={`tel:${shop.phone.tel}`} className="tnum">{shop.phone.label}</a></p>
       <p>{shop.hours}. <a href={`mailto:${shop.email}`}>{shop.email}</a></p>
-      <p>Free shipping on US orders over $55. <a href={STORE}>The factory's online store</a> · <a href={ETSY}>Etsy, outside the US</a></p>
+      <p>Free shipping on US orders over $55. <a href={STORE}>The factory's online store</a> · <a href={ETSY}>Etsy, outside the US and Canada</a></p>
       <p className="fine">Photography: Bahamas Rum Cake Factory.</p>
     </footer>
   )
