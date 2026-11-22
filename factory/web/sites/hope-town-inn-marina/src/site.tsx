@@ -115,13 +115,13 @@ export function Contact() {
   )
 }
 
-export function Strip({ mode = 'both', quiet = false }: { mode?: 'both' | 'room' | 'slip'; quiet?: boolean }) {
+export function Strip({ mode = 'both', quiet = false, stay }: { mode?: 'both' | 'room' | 'slip'; quiet?: boolean; stay?: string }) {
   return (
     <div className={`strip ${quiet ? 'strip--quiet' : ''}`}>
       <span className="small">Hope Town, Elbow Cay, Abaco</span>
       <span className="strip__acts">
         {mode !== 'room' && <a className={'btn ' + (mode === 'slip' ? 'btn-ink' : 'btn-line')} href={DOCKWA}>Book a slip</a>}
-        {mode !== 'slip' && <a className="btn btn-ink" href={RATES}>Check room rates</a>}
+        {mode !== 'slip' && <a className="btn btn-ink" href={RATES}>{stay ? `Check rates for ${stay}` : 'Check room rates'}</a>}
       </span>
     </div>
   )

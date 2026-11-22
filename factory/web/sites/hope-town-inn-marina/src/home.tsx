@@ -80,7 +80,7 @@ function Home() {
             </section>
           </main>
           <Foot />
-          <Strip mode={mode} quiet={sec === 'top'} />
+          <Strip mode={mode} quiet={sec === 'top'} stay={sec === 'top' && way === 'ferry' ? stays.find(x => x.name === sel)?.short : undefined} />
         </div>
       </div>
     </>

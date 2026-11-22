@@ -4,8 +4,107 @@
  "name": "Hope Town Inn & Marina",
  "batch": "05",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T13:24:13.361Z"
+ "claimed_at": "2026-11-22T13:24:13.361Z",
+ "pages": [
+  "index.html",
+  "stay.html",
+  "marina.html"
+ ],
+ "primary_cta": "Check room rates (Vertical Booking hand-off); Book a slip (Dockwa hand-off) for boaters; sticky strip switches with the section",
+ "brand_truth": "The harbourside estate beside the Elbow Reef Lighthouse, where boats and guests arrive at the same dock.",
+ "buyer": "US East Coast couples and families planning an Abaco trip months ahead on a phone; yacht and sportfish owners and captains crossing from Florida checking slip limits and power.",
+ "direction": {
+  "archetype": "A08 Fixed split",
+  "lane": "P12 Inagua salt",
+  "type": "T01 Monumental serif (Fraunces + Newsreader)",
+  "why": "Two arrivals, one harbour: the split makes the brand truth literal and keeps their own photography full height; salt white with slate ink and a flamingo accent echoes Hope Town's pastel cottages and striped lighthouse."
+ },
+ "big_idea": "Two ways in: screen 1 switches By ferry (party size 1 to 8 lights the nine stays that fit, the chosen stay appears as a photo card on the harbour half, Check rates for it on Vertical Booking) or By boat (LOA verdict against slips to 125 ft and moorings to 45 ft, specs, Book a slip on Dockwa).",
+ "concept_type": "booking: stay finder by party size handing off to Vertical Booking, slip check handing off to Dockwa, bar, Johnny's Cay, getting here",
+ "tier_visual": "standard",
+ "tier_why": "Their own aerial of the harbour says more than a 3D ocean; fixed split with crossfades.",
+ "images": [
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/a.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/b.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/c.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/e.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/f.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/g.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/i.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  },
+  {
+   "src": "https://ip-assets-hope-town-inn-marina.lovable.app/assets/j.jpg",
+   "source": "own",
+   "credit": "Hope Town Inn & Marina (hopetownmarina.com), rehosted in Lovable project ip-assets-hope-town-inn-marina"
+  }
+ ],
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion_clarity": 5,
+  "phone": 4
+ },
+ "current_site_findings": [
+  "Out-of-service 242.366.0003 listed first",
+  "30+ menu links",
+  "No party-size filter across 9 stays",
+  "120 vs 125 ft conflict",
+  "2021/2022 Covid badges",
+  "Generic copy (Welcome to, Nestled, paradise)"
+ ],
+ "pitch_line": "Your booking engines are good; your site makes guests and captains dig for them. This one asks 'by ferry or by boat?' and gets each to the right booking in two taps.",
+ "assumptions": [
+  "Vertical Booking opens on the property; the guest picks the stay there (no room deep link known)",
+  "Stay thumbnails are their 395x300 Wix images seen on /abacos-bahamas-resort; full-resolution photos to request at launch",
+  "Out-of-service 242.366.0003 deliberately not shown"
+ ],
+ "sources": [
+  "https://www.hopetownmarina.com/",
+  "https://www.hopetownmarina.com/marina-abacos-bahamas",
+  "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-hotel-rooms",
+  "https://www.hopetownmarina.com/abacos-bahamas-resort/hope-town-inn-villas",
+  "https://www.hopetownmarina.com/the-abacos-bahamas/getting-here"
+ ],
+ "notes": "Gen-2 rebuild by scheduled site worker 2026-11-21 (claimed after another worker released it out of budget; reused its audit and the own-photo gallery). No new research calls. BLIND: screenshots used crops of the Lovable gallery screenshot. qa.mjs 'dead space' blocker on the left 720 px is a false positive: the left half is a sticky full-height photograph (A08 fixed split) that a single full-page screenshot only paints once; stitched viewport captures show it on every screen. Remaining tap-target warning is the shared concept-label button. Plan-gate critic asked for 5 revisions, all applied; scores are its predicted post-fix scores. distinct.mjs: distinct; ground tinted to salt grey after its cream warning.",
+ "built_at": "2026-11-22T13:34:20.967Z",
+ "jobspec_built": true,
+ "design_doc": "factory/web/sites/hope-town-inn-marina/design.md",
+ "critic_note": "Independent critic, three rounds. Fixed: duplicate slip-check ids, stays too small (added a native-size stay card), tile wraps, section 2 filter conflicting with screen 1 (now a static comparison), harbour/docks crossfade to itself (now a pan), phone fold, honest helper line, Elbow Reef Classic wording, single strip button on stay and marina pages."
 }
