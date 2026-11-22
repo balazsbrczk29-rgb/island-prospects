@@ -24,6 +24,8 @@
 **S5 Contact (5.0).** Address #2 Farrington Road & Gregory Street (older listings: #10 Jem's Plaza, Pitt Road, flagged), P.O. Box CB-13083; phones: (242) 328-0653 main, (242) 325-3335 on older listings, international +1 (954) 237-1017, fax (242) 325-3350; office hours Mon to Fri 9 to 5, monitoring 24/7; directions link; brass Call.
 **security-plan.html:** keep, using the same planner, plus the FAQ.
 
+**Critic pass (applied):** the approved composition is restored: S1 is the previous full-bleed live-hour photograph with the status as the display line over the sky and the 24-hour scrubber (9:00, 14:00, 18:30, 3:00, Now) on the night strip; the planner sits on it as a solid paper panel on the right (desktop) or directly under the status (phone, Call in the header and in the panel). The pinned 24-hour chapter film (3.1 to 3.4) returns before the monitoring steps, which now sit on the night field without a second photo. The status plate described above is replaced by this.
+
 ## 5. Core tool: interaction spec
 - Inputs/defaults: property "A shop or office"; needs ["Alarm", "Monitoring"]; area "" (optional select).
 - Read-out formula: rows = unique divisions for chosen needs (Alarm and Cameras both map to "CCTV and alarm sales and service", Monitoring to "24/7 central station monitoring", Guards to "Security guard services", Not sure to "Consulting and investigations"); the line under each row is fixed, plain, from the listed division names. Request = "Pro-Tech request: <property> in <area>. Needs: <list>." Empty state (no needs): "Choose at least one thing you need, or Not sure." with the call button still active.
