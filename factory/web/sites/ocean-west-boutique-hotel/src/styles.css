@@ -16,6 +16,8 @@
   --color-rose: #a84d60;
   --color-rose-deep: #8c3a4d;
   --color-shutter: #2e5e5a;
+  --color-muted-2: #5f4140; /* oklch(41.5% 0.04 22), muted on the conch stage */
+  --color-shell-2: #dcc8c2; /* oklch(84% 0.025 35), quiet text on ink */
   --font-display: "Prata", "Prata Fallback", Georgia, serif;
   --font-body: "Jost", "Jost Fallback", Arial, sans-serif;
   --text-label: 0.75rem;
