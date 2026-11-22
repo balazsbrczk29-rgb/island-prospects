@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { animate, motion, AnimatePresence, useInView, useReducedMotion } from "motion/react"
 import { CHART } from "./chart-data"
-import { LIMIT, HM_TEL, HM } from "./site"
+import { LIMIT, HM_TEL, HM, EMAIL } from "./site"
 
 export type Trip = { loa: number; draft: number; nights: number; date: string; fuel: "" | "Diesel" | "Gas"; power: "" | "30 amp" | "50 amp" }
 export const START: Trip = { loa: 48, draft: 5, nights: 3, date: "", fuel: "", power: "" }
@@ -12,6 +12,11 @@ export function verdict(t: Trip) {
   const ok = fitsL && fitsD
   const tight = ok && (t.loa > 74 || t.draft > 7)
   return { ok, tight, fitsL, fitsD, est: t.loa * LIMIT.rate * t.nights }
+}
+export function slipMail(t: Trip, extra = "") {
+  const v = verdict(t)
+  const body = `Hello Harbour Master,\n\nI would like a slip at Schooner Bay.\n\nVessel:\nLength overall: ${t.loa} ft\nDraft: ${t.draft} ft\nArriving: ${t.date || "to confirm"}\nNights: ${t.nights}\nPower: ${t.power || "none"}\nFuel: ${t.fuel || "none"}\n${v.ok ? `Estimate from the site: $${v.est.toLocaleString("en-US")} at the daily rate, before power and fuel\n` : ""}${extra}\nName:\nPhone or email:\n`
+  return `mailto:${EMAIL}?subject=${encodeURIComponent(`Slip request: ${t.loa} ft${t.date ? ", " + t.date : ""}`)}&body=${encodeURIComponent(body)}`
 }
 const money = (n: number) => "$" + Math.round(n).toLocaleString("en-US")
 
@@ -30,17 +35,22 @@ function Num({ value, format = (n: number) => String(Math.round(n)) }: { value: 
   return <span ref={ref} className="tnum">{format(value)}</span>
 }
 
-function Stepper({ label, value, min, max, step = 1, unit, onChange, fmt = (n: number) => String(n) }: { label: string; value: number; min: number; max: number; step?: number; unit: string; onChange: (n: number) => void; fmt?: (n: number) => string }) {
+function Stepper({ label, value, min, max, step = 1, unit, onChange, limit, limitLabel, fmt = (n: number) => String(n) }: { label: string; value: number; min: number; max: number; step?: number; unit: string; onChange: (n: number) => void; limit: number; limitLabel: string; fmt?: (n: number) => string }) {
+  const at = (limit - min) / (max - min)
   return (
     <label className="dial">
       <span className="lab">{label}</span>
       <span className="dial-v"><Num value={value} format={fmt} /><small> {unit}</small></span>
-      <input className="range" type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(+e.target.value)} aria-label={`${label} in ${unit}`} />
+      <span className="rng">
+        <input className="range" type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(+e.target.value)} aria-label={`${label} in ${unit}`} />
+        <span className={`limit ${value > limit ? "over" : ""}`} style={{ left: `calc(11px + ${at} * (100% - 22px))` }} aria-hidden="true"><i />{limitLabel}</span>
+      </span>
     </label>
   )
 }
 
 export function Tool({ t, set, onRequest }: { t: Trip; set: (p: Partial<Trip>) => void; onRequest: () => void }) {
+  void onRequest
   const v = verdict(t)
   const weekly = t.nights >= 7
   const line = !v.ok
@@ -49,15 +59,8 @@ export function Tool({ t, set, onRequest }: { t: Trip; set: (p: Partial<Trip>) =
   return (
     <div className="tool" role="group" aria-label="Can I come in?">
       <div className="dials">
-        <Stepper label="Length overall" value={t.loa} min={20} max={110} unit="ft" onChange={loa => set({ loa })} />
-        <div className="dial-wrap">
-          <Stepper label="Draft" value={t.draft} min={2} max={12} step={0.5} unit="ft" fmt={n => n.toFixed(1)} onChange={draft => set({ draft })} />
-          <svg className="gauge" viewBox="0 0 14 120" aria-hidden="true">
-            <rect x="0" y="0" width="14" height={(8 / 12) * 120} fill="var(--color-bank)" />
-            <motion.rect x="4" y="0" width="6" initial={false} animate={{ height: (t.draft / 12) * 120 }} transition={{ duration: 0.45, ease }} fill={v.fitsD ? "var(--color-harbour)" : "var(--color-brass)"} />
-            <line x1="0" x2="14" y1={(8 / 12) * 120} y2={(8 / 12) * 120} stroke="var(--color-ink)" />
-          </svg>
-        </div>
+        <Stepper label="Length overall" value={t.loa} min={20} max={110} unit="ft" limit={80} limitLabel="80" onChange={loa => set({ loa })} />
+        <Stepper label="Draft" value={t.draft} min={2} max={12} step={0.5} unit="ft" limit={8} limitLabel="8 MLW" fmt={n => n.toFixed(1)} onChange={draft => set({ draft })} />
       </div>
       <p className="caveat">Published limits: 80 ft, 8 ft at mean low water. Plan with the tide.</p>
       <div className="row2">
@@ -87,7 +90,7 @@ export function Tool({ t, set, onRequest }: { t: Trip; set: (p: Partial<Trip>) =
         {v.ok && <p className="est"><Num value={v.est} format={money} /><small>{weekly ? " at the daily rate" : ""}</small></p>}
         <div className="act-b">
           {v.ok
-            ? <button type="button" className="btn btn-harbour" onClick={onRequest}>Request a slip</button>
+            ? <a className="btn btn-harbour" href={slipMail(t)}>Request a slip</a>
             : <a className="btn btn-harbour" href={HM_TEL}>Call the Harbour Master</a>}
           <a className="btn btn-line tnum" href={HM_TEL}>Call {HM}</a>
         </div>
