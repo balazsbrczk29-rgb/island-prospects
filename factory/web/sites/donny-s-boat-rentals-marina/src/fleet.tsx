@@ -23,9 +23,9 @@ function BoatSection({ b, i }: { b: Boat; i: number }) {
     <section id={b.id} aria-labelledby={`t-${b.id}`} className="px-5 md:px-[4vw] py-16 md:py-24 border-t border-line scroll-mt-4">
       <div className={`grid gap-10 lg:gap-[4vw] lg:grid-cols-[1.35fr_1fr] items-start ${flip ? 'lg:[&>*:first-child]:order-2' : ''}`}>
         <div className="grid grid-cols-2 gap-3">
-          <div className="ph col-span-2 aspect-[3/2] rounded-[var(--radius-md)]"><img src={wix(a, 1600)} alt={`Donny's ${b.name}`} style={{ objectPosition: b.pos }} loading={i ? 'lazy' : 'eager'} decoding="async" /></div>
-          <div className={`ph rounded-[var(--radius-md)] ${d ? 'aspect-[4/3]' : 'col-span-2 aspect-[2/1]'}`}><img src={wix(c, d ? 800 : 1400)} alt={`On board the ${b.name}`} loading="lazy" decoding="async" /></div>
-          {d && <div className="ph aspect-[4/3] rounded-[var(--radius-md)]"><img src={wix(d, 800)} alt={`The ${b.name}, another view`} loading="lazy" decoding="async" /></div>}
+          <div className="ph col-span-2 aspect-[3/2] rounded-[var(--radius-md)]"><img src={wix(a, 1200)} width={1200} height={900} alt={`Donny's ${b.name}`} style={{ objectPosition: b.pos }} loading={i ? 'lazy' : 'eager'} decoding="async" /></div>
+          <div className={`ph rounded-[var(--radius-md)] ${d ? 'aspect-[4/3]' : 'col-span-2 aspect-[2/1]'}`}><img src={wix(c, d ? 800 : 1400)} width={d ? 800 : 1400} height={d ? 600 : 1050} alt={`On board the ${b.name}`} loading="lazy" decoding="async" /></div>
+          {d && <div className="ph aspect-[4/3] rounded-[var(--radius-md)]"><img src={wix(d, 800)} width={800} height={600} alt={`The ${b.name}, another view`} loading="lazy" decoding="async" /></div>}
         </div>
         <div className="lg:sticky lg:top-10">
           <h2 id={`t-${b.id}`} className="text-[2.75rem] md:text-[4.25rem] tracking-[-0.045em]">{b.name}</h2>
@@ -37,7 +37,7 @@ function BoatSection({ b, i }: { b: Boat; i: number }) {
           <p className="mt-4 text-muted">Three days minimum{b.experience ? '. Boating experience needed.' : '.'}</p>
           <p className="mt-8 font-semibold">On board</p>
           <ul className="mt-3 flex flex-wrap gap-2 list-none p-0">
-            {b.kit.map(k => <li key={k} className="px-3.5 py-1.5 rounded-full bg-flats/70 text-[0.9375rem]">{k}</li>)}
+            {b.kit.map(k => <li key={k} className="px-3.5 py-1.5 rounded-full bg-flats text-[0.9375rem]">{k}</li>)}
           </ul>
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
             <a className="btn btn-primary" href={`index.html?boat=${b.id}#plan`}>Plan this boat<ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" /></a>

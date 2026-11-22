@@ -18,8 +18,8 @@ void main() {
 }`
 const vert = `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }`
 
-export default function LivingPhoto({ src, srcSet, sizes = '100vw', alt, strength = 0.028, focus = [0.5, 0.5], className = '' }: {
-  src: string; srcSet?: string; sizes?: string; alt: string; strength?: number; focus?: [number, number]; className?: string
+export default function LivingPhoto({ src, srcSet, sizes = '100vw', alt, strength = 0.028, focus = [0.5, 0.5], className = '', width = 2000, height = 1499 }: {
+  width?: number; height?: number; src: string; srcSet?: string; sizes?: string; alt: string; strength?: number; focus?: [number, number]; className?: string
 }) {
   const box = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function LivingPhoto({ src, srcSet, sizes = '100vw', alt, strengt
   }
   return (
     <div ref={box} className={`ph ${className}`}>
-      <img src={src} srcSet={srcSet} sizes={sizes} alt={alt} fetchPriority="high" style={{ objectPosition: `${focus[0] * 100}% ${(1 - focus[1]) * 100}%` }} />
+      <img src={src} srcSet={srcSet} sizes={sizes} alt={alt} width={width} height={height} fetchPriority="high" style={{ objectPosition: `${focus[0] * 100}% ${(1 - focus[1]) * 100}%` }} />
     </div>
   )
 }

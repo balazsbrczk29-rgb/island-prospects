@@ -9,26 +9,28 @@
 
 /* P02 Shallow flats, refined from their own photos: the water at Donny's dock, Abaco sand, the channel */
 @theme {
-  --color-ground: #f2f6f3;
-  --color-flats: #bfe3dc;
-  --color-flats-deep: #9fd3ca;
-  --color-sand: #f4efe4;
-  --color-ink: #0d2b2e;
-  --color-channel: #1e6b72;
-  --color-channel-dark: #154f55;
-  --color-muted: #47605f;
-  --color-line: #cfdcd6;
+  --color-ground: #f2f6f3; /* oklch(97.4% 0.006 165) */
+  --color-surface: #ffffff;
+  --color-sand: #f4efe4; /* oklch(95.6% 0.014 85) */
+  --color-flats: #bfe3dc; /* oklch(88.6% 0.045 180) */
+  --color-flats-deep: #a9d8cf; /* oklch(84% 0.055 182) */
+  --color-ink: #0d2b2e; /* oklch(27.5% 0.035 205) */
+  --color-channel: #1e6b72; /* oklch(47.5% 0.075 205) */
+  --color-channel-dark: #154f55; /* oklch(39.5% 0.065 205) */
+  --color-muted: #47605f; /* oklch(44.5% 0.03 190) */
+  --color-line: #cfdcd6; /* oklch(88.5% 0.015 165) */
   --font-display: "Bricolage Grotesque", "Bricolage fallback", sans-serif;
   --font-sans: "Figtree", "Figtree fallback", sans-serif;
-  /* type scale: 15 / 18 / 22 / 32 / 48 / 80 / clamp hero */
-  --text-xs: 0.9375rem; --text-base: 1.125rem; --text-lg: 1.375rem; --text-2xl: 2rem; --text-4xl: 3rem; --text-6xl: 5rem;
+  /* type scale: 14 / 15 / 18 / 22 / 40-56 / hero clamp, figure 56-72 */
+  --text-xs: 0.875rem; --text-sm: 0.9375rem; --text-base: 1.125rem; --text-lg: 1.375rem; --text-2xl: 2rem; --text-4xl: 3rem; --text-6xl: 5rem;
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
-  --radius-sm: 6px; --radius-md: 14px; --radius-lg: 22px;
+  --radius-sm: 8px; --radius-md: 14px; --radius-lg: 24px;
+  --shadow-sheet: 0 1px 2px rgb(13 43 46 / 0.06), 0 18px 48px -16px rgb(13 43 46 / 0.22);
 }
 :root { --dur-fast: 180ms; --dur-slow: 900ms; }
 
 html { background: var(--color-ground); color: var(--color-ink); }
-body { font-family: var(--font-sans); font-size: var(--text-base); line-height: 1.55; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.55; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 h1, h2, h3, .display { font-family: var(--font-display); font-optical-sizing: auto; text-wrap: balance; letter-spacing: -0.035em; line-height: 0.98; font-weight: 600; }
 p { text-wrap: pretty; }
 html.lenis, html.lenis body { height: auto; }
@@ -61,3 +63,8 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+@media (min-width: 768px) { body { font-size: var(--text-base); } }
+.h2 { font-size: 2.5rem; letter-spacing: -0.04em; line-height: 1; }
+@media (min-width: 768px) { .h2 { font-size: 3.5rem; } }
+.graticule { background-image: linear-gradient(var(--color-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-line) 1px, transparent 1px); background-size: 56px 56px; background-position: -1px -1px; }

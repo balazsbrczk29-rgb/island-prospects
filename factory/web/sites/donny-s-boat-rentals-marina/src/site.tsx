@@ -33,10 +33,10 @@ export const WA_DEFAULT = wa("Hello Taylor, I'm staying on Green Turtle Cay and 
 function Header({ current }: { current: 'home' | 'fleet' | 'marina' }) {
   const link = (href: string, label: string, key: string) => (
     <a href={href} aria-current={current === key ? 'page' : undefined}
-      className={`relative py-3 text-[1.0625rem] font-medium after:absolute after:left-0 after:right-0 after:bottom-1.5 after:h-[2px] after:origin-left after:bg-current after:transition-transform after:duration-300 ${current === key ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`}>{label}</a>
+      className={`relative py-3 px-1 min-w-11 text-center text-[1.0625rem] font-medium after:absolute after:left-0 after:right-0 after:bottom-1.5 after:h-[2px] after:origin-left after:bg-current after:transition-transform after:duration-300 ${current === key ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`}>{label}</a>
   )
   return (
-    <header className="relative z-20 flex items-center justify-between gap-4 px-5 md:px-[4vw] h-[68px] md:h-[84px]">
+    <header className="relative z-20 flex items-center justify-between gap-4 px-5 lg:px-[max(24px,3vw)] h-[64px] lg:h-[76px]">
       <a href="index.html" className="flex items-baseline gap-3 min-h-11 items-center" aria-label="Donny's Boat Rentals and Marina, home">
         <span className="font-display font-bold text-[1.75rem] md:text-[2rem] tracking-[-0.045em] leading-none">Donny&rsquo;s</span>
         <span className="hidden sm:block text-[0.9375rem] text-muted leading-tight">Boat Rentals &amp; Marina<br />Green Turtle Cay</span>
@@ -61,20 +61,20 @@ function Footer() {
         </div>
         <div>
           <p className="font-semibold text-white mb-2">Rentals</p>
-          <a className="block py-1.5 hover:text-white" href={WA_DEFAULT} target="_blank" rel="noopener">WhatsApp Taylor, {WA_NUMBER}</a>
-          <a className="block py-1.5 hover:text-white" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <a className="flex items-center min-h-11 hover:text-white" href={WA_DEFAULT} target="_blank" rel="noopener">WhatsApp Taylor, {WA_NUMBER}</a>
+          <a className="flex items-center min-h-11 hover:text-white" href={`mailto:${EMAIL}`}>{EMAIL}</a>
         </div>
         <div>
           <p className="font-semibold text-white mb-2">The dock</p>
-          <a className="block py-1.5 hover:text-white tnum" href={TEL}>{PHONE}</a>
-          <a className="block py-1.5 hover:text-white tnum" href={TEL_US}>US {PHONE_US}</a>
-          <p className="py-1.5">VHF 16, working 10</p>
+          <a className="flex items-center min-h-11 hover:text-white tnum" href={TEL}>{PHONE}</a>
+          <a className="flex items-center min-h-11 hover:text-white tnum" href={TEL_US}>US {PHONE_US}</a>
+          <p className="flex items-center min-h-11">VHF 16, working 10</p>
         </div>
         <div>
           <p className="font-semibold text-white mb-2">Pages</p>
-          <a className="block py-1.5 hover:text-white" href="index.html">Rent a boat</a>
-          <a className="block py-1.5 hover:text-white" href="fleet.html">The fleet</a>
-          <a className="block py-1.5 hover:text-white" href="marina.html">Dockage and moorings</a>
+          <a className="flex items-center min-h-11 hover:text-white" href="index.html">Rent a boat</a>
+          <a className="flex items-center min-h-11 hover:text-white" href="fleet.html">The fleet</a>
+          <a className="flex items-center min-h-11 hover:text-white" href="marina.html">Dockage and moorings</a>
         </div>
       </div>
       <p className="mt-14 text-[0.875rem] text-[#9fb7b1]">Photographs: Donny&rsquo;s Boat Rentals &amp; Marina. Prices as published by Donny&rsquo;s; confirm when you book.</p>

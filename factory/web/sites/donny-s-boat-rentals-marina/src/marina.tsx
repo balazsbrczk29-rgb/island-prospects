@@ -46,7 +46,7 @@ function Marina() {
     <Page current="marina">
       <section aria-labelledby="m-h1" className="relative">
         <div className="ph h-[44svh] md:h-[min(60vh,560px)]">
-          <img src={wix(P.dockAir, 2000)} srcSet={srcSet(P.dockAir, [900, 1600, 2000])} sizes="100vw" fetchPriority="high"
+          <img src={wix(P.dockAir, 1600)} srcSet={srcSet(P.dockAir, [900, 1600])} width={1600} height={1200} sizes="100vw" fetchPriority="high"
             alt="Donny's dock from the air: sailboats and trawlers on the moorings and at the dock in Black Sound" className="max-md:scale-[1.5] max-md:origin-[50%_15%]" style={{ objectPosition: '50% 30%' }} />
         </div>
         <div className="px-5 md:px-[4vw] pt-10 md:pt-14 pb-16 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-[5vw] items-end">
@@ -100,7 +100,7 @@ function Marina() {
           <div className="px-5 md:px-[4vw] pb-16 lg:py-24 flex items-center">
             <figure className="m-0 w-full max-w-[640px]">
               <div className="relative aspect-[12/5] overflow-hidden rounded-[var(--radius-md)] bg-flats-deep">
-                <img src={wix(P.soundAir, 1280)} loading="lazy" decoding="async" alt="Black Sound and Green Turtle Cay from the air, with the Sea of Abaco beyond"
+                <img src={wix(P.soundAir, 1280)} width={1280} height={960} loading="lazy" decoding="async" alt="Black Sound and Green Turtle Cay from the air, with the Sea of Abaco beyond"
                   className="absolute inset-0 size-full object-cover" style={{ objectPosition: '50% 0%' }} />
               </div>
               <figcaption className="mt-3 text-[0.9375rem] text-ink/80 max-w-[52ch]">
@@ -113,7 +113,7 @@ function Marina() {
 
       <section aria-labelledby="note-h" className="px-5 md:px-[4vw] py-16 md:py-20">
         <h2 id="note-h" className="sr-only">Liability notice</h2>
-        <p className="max-w-[80ch] text-[0.9375rem] text-muted">Donny&rsquo;s Boat Rentals is not liable for damage to boats or injury to owners, operators or guests caused by theft, failure of the mooring system, vandalism, accidents, storms, flood, fire or fireworks, or any other cause.</p>
+        <p className="max-w-[60ch] text-[0.9375rem] text-muted">Donny&rsquo;s Boat Rentals is not liable for damage to boats or injury to owners, operators or guests caused by theft, failure of the mooring system, vandalism, accidents, storms, flood, fire or fireworks, or any other cause.</p>
       </section>
     </Page>
   )
