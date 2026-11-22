@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { X } from 'lucide-react'
-import { STORE, money } from './data'
+import { STORE, ETSY, money } from './data'
 
 export type Line = { id: number; name: string; size: string; price: number; img: string; qty: number; note?: string }
 type Cart = { lines: Line[]; add: (l: Omit<Line, 'qty'>) => void; remove: (id: number, note?: string) => void; count: number; total: number; open: boolean; setOpen: (b: boolean) => void; bump: number }
@@ -59,7 +59,11 @@ function Drawer() {
             )}
             <footer>
               <p className="sum"><span>Subtotal</span><b className="tnum">{money(total)}</b></p>
-              <p className="fine">Free shipping on US orders over $55. Shipping and tax are added at checkout on the factory's own store.</p>
+              <div className="meter" aria-live="polite">
+                <div className="meter__bar"><motion.i initial={false} animate={{ scaleX: Math.min(1, total / 55) }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} /></div>
+                <p className="tnum">{total >= 55 ? 'Free ground shipping unlocked (US orders)' : `${money(55 - total)} to free ground shipping`}</p>
+              </div>
+              <p className="fine">USPS, UPS or FedEx: Ground, Priority or Express, priced at checkout on the factory's own store. Outside the US? <a href={ETSY}>Order on Etsy</a>.</p>
               <a className="btn btn-ink wide" href={checkoutUrl(lines)} aria-disabled={!lines.length}>Checkout on thebahamasrumcakefactory.com</a>
             </footer>
           </motion.aside>

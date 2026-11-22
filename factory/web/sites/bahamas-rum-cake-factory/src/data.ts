@@ -25,10 +25,29 @@ export const twopacks = cat.twopacks as Item[]
 export const mix = cat.mix as Item
 export const other = cat.other as Item[]
 
+export const ETSY = 'https://www.etsy.com/shop/BahamasRumCake'
 export const shop = {
   address: '602 East Bay Street, Nassau',
   phone: { label: '(242) 328-3750', tel: '+12423283750' },
-  hours: 'Opens 7:30 am Monday to Saturday, 8 am Sunday',
+  email: 'bahamasrumcake@gmail.com',
+  hours: 'Monday to Saturday 7:30 am to 4:00 pm, Sunday 8:00 am to 2:00 pm',
+  walk: 'https://www.google.com/maps/dir/?api=1&origin=Prince+George+Wharf,+Nassau,+Bahamas&destination=602+East+Bay+Street,+Nassau,+Bahamas&travelmode=walking',
+  embed: 'https://www.google.com/maps?saddr=Prince+George+Wharf,+Nassau,+Bahamas&daddr=602+East+Bay+Street,+Nassau,+Bahamas&dirflg=w&output=embed',
+}
+
+/** Open now, in Nassau time. Mon to Sat 7:30 to 16:00, Sun 8:00 to 14:00; closed Christmas Day, Boxing Day, New Year's Day. */
+export function shopNow(d = new Date()) {
+  const p = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Nassau', weekday: 'short', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' }).formatToParts(d)
+  const g = (t: string) => p.find(x => x.type === t)?.value ?? ''
+  const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(g('weekday'))
+  const md = `${g('month')}/${g('day')}`
+  const m = Number(g('hour')) * 60 + Number(g('minute'))
+  const [o, c] = day === 0 ? [480, 840] : [450, 960]
+  const holiday = ['12/25', '12/26', '1/1'].includes(md)
+  const open = !holiday && m >= o && m < c
+  const closes = day === 0 ? '2:00 pm' : '4:00 pm'
+  const text = holiday ? 'Closed today for the holiday' : open ? `Open now, until ${closes}` : m < o ? `Opens today at ${day === 0 ? '8:00' : '7:30'} am` : `Closed now, opens ${day === 6 ? 'Sunday 8:00' : 'tomorrow 7:30'} am`
+  return { open, text }
 }
 
 export const money = (n: number) => '$' + n.toFixed(2)

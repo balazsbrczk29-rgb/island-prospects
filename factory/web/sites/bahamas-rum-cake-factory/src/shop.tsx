@@ -23,7 +23,7 @@ function Card({ p }: { p: P }) {
   const sized = p.v.length > 1
   return (
     <li className="prod">
-      <div className={'prod__img' + (p.contain ? ' contain' : '')}><img src={img(p.img, 600)} alt={p.name} loading="lazy" width={300} height={300} /></div>
+      <div className={'prod__img' + (p.contain ? ' contain' : '')}><img src={img(p.img, 600)} alt={p.name} loading="lazy" width={600} height={600} /></div>
       <b>{p.name}</b>
       <div className="row">
         {sized ? (
