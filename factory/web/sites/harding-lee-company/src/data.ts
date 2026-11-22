@@ -80,7 +80,7 @@ export const OFFICES = {
 
 export type OKey = keyof typeof OFFICES
 
-export function letter(m: Matter | null, to: AKey, name = "", reply = "", note = "") {
+export function letter(m: Matter | null, to: AKey, office: OKey | null = null, name = "", reply = "", note = "") {
   const a = ATTORNEYS[to]
   const others = m ? m.who.filter(k => k !== to).map(k => ATTORNEYS[k].email) : []
   const subject = m ? `Enquiry: ${m.label.toLowerCase()}` : "Enquiry"
@@ -88,6 +88,7 @@ export function letter(m: Matter | null, to: AKey, name = "", reply = "", note =
     `Dear ${a.short},`,
     "",
     m ? `I would like to discuss a matter concerning ${m.label.charAt(0).toLowerCase() + m.label.slice(1)}.` : "I would like to discuss a matter with you.",
+    office ? `I would prefer to meet at the ${OFFICES[office].name}${office === "longisland" ? " in Salt Pond" : ""}.` : "",
     note ? `\n${note}` : "",
     "",
     `Name: ${name}`,
