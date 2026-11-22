@@ -14,7 +14,7 @@ function Services() {
       <main id="main" className="wrap">
         <div className="svc-hero">
           <h1>The till, the network, the servers and the backup.</h1>
-          <p>Affordable IT consultancy in The Bahamas: four services from one team in Centreville, Nassau, delivered as a turn-key project and supported after installation.</p>
+          <p>Affordable IT consultancy in The Bahamas: four services from one team in Centreville, Nassau, supported after installation.</p>
         </div>
         {services.map((s, i) => (
           <section className="svc" id={s.id} key={s.id} aria-labelledby={`${s.id}-h`}>
