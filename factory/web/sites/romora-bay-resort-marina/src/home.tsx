@@ -1,194 +1,353 @@
-import { useState } from "react"
-import { AnimatePresence, motion } from "motion/react"
-import { Anchor, ArrowRight, ArrowUpRight, Plane, Phone } from "lucide-react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Page, mount, Reveal, Label, Photo, ease, PHONE, TEL, BOOK, SLIP, A, MARINA_EMAIL } from "./site"
+import { StrictMode, useEffect, useMemo, useState } from "react"
+import { createRoot } from "react-dom/client"
+import { AnimatePresence, motion, useReducedMotion } from "motion/react"
+import Lenis from "lenis"
+import { BOOK, fmtDate, IMG, inClosure, LOGO, MAP_PDF, MAPS, MARINA_EMAIL, MARINA_PHONE, MARINA_TEL, MAX_LOA, PHONE, POWER, ROOMS, SLIP, SPECS, TEL } from "./data"
+import "./styles.css"
 
-const MODES = {
-  sea: {
-    tab: "By sea", Icon: Anchor, line1: "Clear customs", line2: "at the dock.",
-    text: "Romora Bay Marina is an official port of entry on Harbour Island, with slips for yachts up to 190 feet, shore power, fresh water and a crew that handles the rest.",
-    facts: [["Port of entry", "Customs on site"], ["Yachts to", "190 ft"], ["Slips", "40+"]],
-    cta: ["Reserve a slip", SLIP], second: ["The marina", "marina.html"], img: A + "marina-aerial-BLMR27zt.jpg", alt: "Aerial view of Romora Bay Marina on Harbour Island",
-  },
-  air: {
-    tab: "By air", Icon: Plane, line1: "Seventeen rooms", line2: "on the harbour.",
-    text: "A small resort on Harbour Island: waterview rooms with private patios, suites under vaulted wood ceilings, a standalone house, and lunch at Sip Sip on the water.",
-    facts: [["Rooms", "17"], ["Restaurants", "2"], ["Pink sand", "Steps away"]],
-    cta: ["Reserve a stay", BOOK], second: ["Rooms & The House", "stay.html"], img: A + "hero-drone-CEdSqdKD.jpg", alt: "Aerial view of Romora Bay Resort & Marina, Harbour Island",
-  },
-} as const
-type M = keyof typeof MODES
+const ease = [0.16, 1, 0.3, 1] as const
+type Mode = "boat" | "air"
+
+function Nav() {
+  return (
+    <header className="nav wrap">
+      <a href="#top" className="nav__brand" aria-label="Romora Bay Resort and Marina, top of page">
+        <img src={LOGO} alt="" width={36} height={36} />
+        <span>Romora Bay</span>
+      </a>
+      <nav className="nav__links" aria-label="Sections">
+        <a href="#marina">Marina</a><a href="#rooms">Rooms</a><a href="#day">A day here</a><a href="#here">Getting here</a>
+      </nav>
+      <a className="nav__tel num" href={TEL}>{PHONE}</a>
+    </header>
+  )
+}
+
+function BoatTool() {
+  const [loa, setLoa] = useState(80)
+  const [power, setPower] = useState("50 amp")
+  const [abroad, setAbroad] = useState(true)
+  const [arr, setArr] = useState("")
+  const [dep, setDep] = useState("")
+  const fits = loa <= MAX_LOA
+  const href = useMemo(() => {
+    const body = [
+      "Hello Romora Bay Marina,", "",
+      `Slip request for a ${loa} ft vessel.`,
+      `Power: ${power}`,
+      `Clearing in from abroad: ${abroad ? "yes" : "no"}`,
+      `Arrival: ${arr || "(date)"}`, `Departure: ${dep || "(date)"}`,
+      "Boat name:", "Captain and phone:", "", "Thank you",
+    ].join("\n")
+    const subject = `Slip request, ${loa} ft${arr ? `, arriving ${arr}` : ""}`
+    return `mailto:${MARINA_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  }, [loa, power, abroad, arr, dep])
+  const clamp = (v: number) => Math.max(20, Math.min(240, Math.round(v || 0)))
+  return (
+    <div className="tool">
+      <div className="loa">
+        <label htmlFor="loa-n" className="cap">Length overall</label>
+        <div className="loa__row">
+          <span className="loa__track">
+            <input id="loa-r" type="range" min={20} max={240} value={loa} onChange={e => setLoa(+e.target.value)} aria-label="Length overall in feet" />
+            <span className="fit__mark" aria-hidden="true" style={{ left: `calc(10px + (100% - 20px) * ${(MAX_LOA - 20) / 220})` }}><i className="num">190 ft</i></span>
+          </span>
+          <span className="loa__num"><input id="loa-n" className="num" type="number" inputMode="numeric" min={20} max={240} value={loa} onChange={e => setLoa(clamp(+e.target.value))} /> ft</span>
+        </div>
+      </div>
+      <fieldset className="grp">
+        <legend className="cap">Power</legend>
+        <div className="chips">
+          {[...POWER, "Not sure"].map(p => <button key={p} type="button" className="chip" aria-pressed={power === p} onClick={() => setPower(p)}>{p}</button>)}
+        </div>
+      </fieldset>
+      <div className="two">
+        <fieldset className="grp">
+          <legend className="cap">Clearing in from abroad?</legend>
+          <div className="yn">
+            <button type="button" className="chip" aria-pressed={abroad} onClick={() => setAbroad(true)}>Yes</button>
+            <button type="button" className="chip" aria-pressed={!abroad} onClick={() => setAbroad(false)}>No</button>
+          </div>
+        </fieldset>
+        <div className="dates">
+          <label><span className="cap">Arrive</span><input type="date" value={arr} onChange={e => setArr(e.target.value)} /></label>
+          <label><span className="cap">Leave</span><input type="date" value={dep} min={arr || undefined} onChange={e => setDep(e.target.value)} /></label>
+        </div>
+      </div>
+      <ul className="res" aria-live="polite">
+        <li data-ok={fits}><span className="num">{loa} ft</span>{fits ? ": within the 190 ft the marina welcomes." : ": over the published 190 ft. Ask the Dockmaster."}</li>
+        <li data-ok={power !== "Not sure"}>{power === "Not sure" ? "The Dockmaster will match your shore power." : `${power} is on the marina's published power list.`}</li>
+        {abroad && <li data-ok>Official port of entry: customs and immigration at the dock.</li>}
+      </ul>
+      <div className="act">
+        <a className="btn" href={href}>Request this slip</a>
+        <p className="act__who">Answered by Rodney Diegue, Dockmaster</p>
+      </div>
+      <p className="tool__more"><a href={SLIP}>Slip reservations page</a><a href={MAP_PDF}>Marina Map (PDF)</a></p>
+    </div>
+  )
+}
+
+function AirTool() {
+  const [date, setDate] = useState("")
+  const [nights, setNights] = useState(4)
+  const [room, setRoom] = useState(0)
+  const start = date ? new Date(date + "T12:00:00") : null
+  const closed = start ? inClosure(start, nights) : false
+  const r = ROOMS[room]
+  return (
+    <div className="tool">
+      <div className="two">
+        <label className="fld"><span className="cap">Arrive</span><input type="date" value={date} onChange={e => setDate(e.target.value)} /></label>
+        <div className="fld">
+          <span className="cap" id="n-l">Nights</span>
+          <div className="step" role="group" aria-labelledby="n-l">
+            <button type="button" aria-label="One night fewer" onClick={() => setNights(n => Math.max(1, n - 1))} disabled={nights <= 1}>−</button>
+            <span className="num" aria-live="polite">{nights}</span>
+            <button type="button" aria-label="One night more" onClick={() => setNights(n => Math.min(21, n + 1))} disabled={nights >= 21}>+</button>
+          </div>
+        </div>
+      </div>
+      <fieldset className="grp">
+        <legend className="cap">Room</legend>
+        <div className="rstrip" role="radiogroup" aria-label="Room type">
+          {ROOMS.map((x, i) => (
+            <button key={x.key} type="button" role="radio" aria-checked={room === i} className="rstrip__b" onClick={() => setRoom(i)}>
+              <img src={x.imgs[0]} alt="" width={1200} height={800} loading="lazy" decoding="async" />
+              <span>{x.short}</span>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+      <ul className="res" aria-live="polite">
+        {start ? <li data-ok={!closed}><span className="num">{nights} night{nights > 1 ? "s" : ""} from {fmtDate(start)}</span>, {r.name}.</li> : <li>Pick a date to check {r.name}.</li>}
+        {closed && <li className="warn">The resort is closed for the season from 17 August to 12 November. Choose dates outside it.</li>}
+      </ul>
+      <div className="act">
+        <a className="btn" href={BOOK} target="_blank" rel="noopener">{closed ? "See open dates" : "Check availability"}</a>
+        <p className="act__who">Or call reservations <a className="num" href={TEL}>{PHONE}</a></p>
+      </div>
+      <p className="tool__more"><span>From North Eleuthera airport: a short taxi to the dock, then about ten minutes by water taxi.</span></p>
+    </div>
+  )
+}
 
 function Hero() {
-  const [m, setM] = useState<M>("sea")
-  const c = MODES[m]
+  const [mode, setMode] = useState<Mode>("boat")
+  const reduce = useReducedMotion()
+  const key = (e: React.KeyboardEvent) => { if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) { e.preventDefault(); setMode(m => (m === "boat" ? "air" : "boat")) } }
+  const photo = mode === "boat"
+    ? { src: IMG.marinaAerial, alt: "The slips of Romora Bay Marina from above, Harbour Island" }
+    : { src: IMG.drone, alt: "Romora Bay Resort and Marina from the air, Harbour Island" }
   return (
-    <section aria-labelledby="hero-title" className="relative">
-      <div className="relative mx-auto max-w-[1440px] md:px-10 md:pt-8">
-        <div className="relative overflow-hidden md:rounded-[28px]">
-          <AnimatePresence mode="wait">
-            <motion.div key={c.img} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1.1, ease }} className="aspect-[5/4] sm:aspect-[16/10] md:aspect-[16/8]">
-              <Photo priority src={c.img} alt={c.alt} className="size-full" />
-            </motion.div>
-          </AnimatePresence>
-          <div className="absolute top-4 left-4 flex gap-1 rounded-full bg-paper p-1 shadow-sm md:top-6 md:left-6" role="tablist" aria-label="How are you arriving?">
-            {(Object.keys(MODES) as M[]).map(k => {
-              const I = MODES[k].Icon
-              return <button key={k} role="tab" type="button" aria-selected={m === k} onClick={() => setM(k)} className={`inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-[15px] transition ${m === k ? "bg-ink text-paper" : "hover:bg-sand"}`}><I className="size-4" aria-hidden /> {MODES[k].tab}</button>
-            })}
-          </div>
+    <section className="hero" id="top" aria-labelledby="h1">
+      <div className="hero__photo">
+        <AnimatePresence initial={false}>
+          <motion.img key={photo.src} src={photo.src} alt={photo.alt} width={1920} height={1280} fetchPriority="high"
+            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduce ? 0 : 0.9, ease }} />
+        </AnimatePresence>
+      </div>
+      <div className="hero__panel">
+        <div className="hero__head">
+        <p className="cap hero__where">Harbour Island, Eleuthera, The Bahamas</p>
+        <h1 id="h1" className="t-hero">One dock for the yacht <em>and the room.</em></h1>
+        <p className="hero__lede">Seventeen rooms and a full-service marina, an official port of entry. How are you arriving?</p>
+        <div className="sw" role="radiogroup" aria-label="How are you arriving?" onKeyDown={key}>
+          {(["boat", "air"] as Mode[]).map(m => (
+            <button key={m} type="button" role="radio" aria-checked={mode === m} tabIndex={mode === m ? 0 : -1} className="sw__b" onClick={() => setMode(m)}>
+              {mode === m && <motion.span layoutId="sw" className="sw__on" transition={{ duration: reduce ? 0 : 0.3, ease }} />}
+              <span className="sw__t">{m === "boat" ? "I'm arriving by boat" : "I'm staying with you"}</span>
+            </button>
+          ))}
         </div>
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 1.1, ease }} className="relative z-10 mx-5 -mt-12 rounded-[22px] bg-paper p-6 shadow-[0_30px_80px_-40px_rgba(30,35,49,.45)] md:absolute md:right-16 md:bottom-10 md:mx-0 md:mt-0 md:w-[520px] md:p-10">
-          <p className="text-[11px] tracking-[0.3em] text-harbour uppercase">Harbour Island · Eleuthera · The Bahamas</p>
-          <h1 id="hero-title" className="mt-4 font-display text-[clamp(2.6rem,4.6vw,4.4rem)] leading-[0.98] tracking-[-0.01em]">
-            <span className="sr-only">Romora Bay Resort & Marina, Harbour Island: </span>
-            <AnimatePresence mode="wait">
-              <motion.span key={m} className="block" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.5, ease }}>
-                {c.line1}<br /><em className="text-harbour">{c.line2}</em>
-              </motion.span>
-            </AnimatePresence>
-          </h1>
-          <p className="mt-5 text-[16px] leading-relaxed text-muted">{c.text}</p>
-          <dl className="mt-6 grid grid-cols-3 border-y border-line">
-            {c.facts.map(([k, v]) => <div key={k} className="border-r border-line py-3 pr-2 last:border-r-0 [&:not(:first-child)]:pl-3"><dt className="text-[10px] tracking-[0.2em] text-muted uppercase">{k}</dt><dd className="font-display text-xl">{v}</dd></div>)}
+        </div>
+        <div className="hero__tool">
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div key={mode} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: reduce ? 0 : 0.3, ease }}>
+            {mode === "boat" ? <BoatTool /> : <AirTool />}
+          </motion.div>
+        </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Marina() {
+  return (
+    <section className="marina" id="marina" aria-labelledby="m-h">
+      <figure className="band">
+        <img src={IMG.dock} alt="A sailboat alongside the dock at Romora Bay Marina" width={1920} height={1280} loading="lazy" decoding="async" />
+      </figure>
+      <div className="marina__grid wrap">
+        <div className="marina__say">
+          <h2 id="m-h" className="t-h2">Forty-plus slips and a port of entry, <em>with a resort behind them.</em></h2>
+          <dl className="people">
+            <div><dt>Dockmaster</dt><dd>Rodney Diegue</dd></div>
+            <div><dt>Marina Manager</dt><dd>Beriska Moss</dd></div>
           </dl>
-          <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-            <a href={c.cta[1]} className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-harbour px-6 text-paper transition hover:-translate-y-px hover:bg-harbour-deep">{c.cta[0]} <ArrowUpRight className="size-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden /></a>
-            <a href={c.second[1]} className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-ink/20 px-6 transition hover:-translate-y-px hover:border-ink">{c.second[0]} <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden /></a>
-          </div>
-        </motion.div>
+          <p className="people__c"><a href={`mailto:${MARINA_EMAIL}`}>{MARINA_EMAIL}</a><a className="num" href={MARINA_TEL}>{MARINA_PHONE}</a><a href={MAP_PDF}>Marina Map (PDF)</a></p>
+          <p className="muted small">Association of Bahamas Marinas, Platinum Member. Listed on Snag-A-Slip by Marinalife.</p>
+        </div>
+        <dl className="specs">
+          {SPECS.map(([k, v]) => <div key={k}><dt>{k}</dt><dd className="num">{v}</dd></div>)}
+        </dl>
       </div>
     </section>
   )
 }
 
-function KeyInfo() {
-  const items: [string, string, string][] = [
-    ["Reservations", PHONE, TEL],
-    ["Marina team", MARINA_EMAIL, `mailto:${MARINA_EMAIL}`],
-    ["Sip Sip", "Lunch 11:30am to 4pm, closed Tuesdays", "#dining"],
-    ["Season", "Closed Aug 17 to Nov 12", "stay.html"],
-  ]
+function Rooms() {
+  const [pick, setPick] = useState<number[]>([0, 0, 0])
   return (
-    <section className="mt-12 md:mt-16" aria-label="Key information">
-      <ul className="mx-auto grid max-w-[1440px] border-y border-line sm:grid-cols-2 lg:grid-cols-4 md:px-10">
-        {items.map(([k, v, href], i) => (
-          <motion.li key={k} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.8, ease }} className="border-line border-b last:border-b-0 sm:odd:border-r lg:border-b-0 lg:border-l lg:odd:border-r-0 lg:first:border-l-0">
-            <a href={href} className="group block px-5 py-7 transition hover:bg-sand/60 md:px-8">
-              <span className="text-[10.5px] tracking-[0.24em] text-harbour uppercase">{k}</span>
-              <span className={`mt-2 block font-display leading-tight break-words ${i === 0 ? "text-[2rem]" : "text-[1.25rem]"}`}>{v}</span>
-            </a>
-          </motion.li>
-        ))}
-      </ul>
-    </section>
-  )
-}
-
-function Two() {
-  return (
-    <section className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-36" aria-labelledby="two-title">
-      <Reveal className="max-w-3xl">
-        <Label n="01">One dock, two arrivals</Label>
-        <h2 id="two-title" className="mt-5 font-display text-[clamp(2.4rem,4.6vw,4.6rem)] leading-[1]">The yacht and the room <em className="text-harbour">share one address.</em></h2>
-      </Reveal>
-      <div className="mt-14 grid gap-6 md:grid-cols-12">
-        <Reveal className="md:col-span-7">
-          <a href="marina.html" className="group block">
-            <Photo src={A + "marina-dock-sailboat-DrtEkZ-S.jpg"} alt="A sailboat at the dock at Romora Bay Marina" className="aspect-[4/3] rounded-[22px]" />
-            <div className="mt-5 flex items-baseline justify-between gap-4"><p className="font-display text-3xl">The marina</p><span className="inline-flex items-center gap-1 text-[14px] text-harbour">Specs and power <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden /></span></div>
-            <p className="mt-2 max-w-lg text-[16px] leading-relaxed text-muted">Customs and immigration on site, 24/7 yacht assistance, provisioning and round-the-clock security.</p>
-          </a>
-        </Reveal>
-        <Reveal delay={0.1} className="md:col-span-5 md:mt-28">
-          <a href="stay.html" className="group block">
-            <Photo src={A + "room1-5-GeiL2ZYS.jpg"} alt="A waterview room at Romora Bay" className="aspect-[4/5] rounded-[22px]" />
-            <div className="mt-5 flex items-baseline justify-between gap-4"><p className="font-display text-3xl">The rooms</p><span className="inline-flex items-center gap-1 text-[14px] text-harbour">Rooms & The House <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden /></span></div>
-            <p className="mt-2 text-[16px] leading-relaxed text-muted">Waterview kings with private patios, garden suites and a standalone house with a full kitchen.</p>
-          </a>
-        </Reveal>
-      </div>
-    </section>
-  )
-}
-
-function Dining() {
-  return (
-    <section id="dining" className="bg-harbour-deep text-paper" aria-labelledby="dine-title">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:grid-cols-12 md:px-10 md:py-36">
-        <Reveal className="md:col-span-5">
-          <Label n="02" light>Dining</Label>
-          <h2 id="dine-title" className="mt-5 font-display text-[clamp(2.4rem,4.4vw,4.2rem)] leading-[1]">Lunch at Sip Sip. <em className="text-conch">Dinner upstairs.</em></h2>
-          <div className="mt-10 space-y-0">
-            {[["Sip Sip", "The waterfront restaurant: fresh-caught seafood, local ingredients, sunset cocktails.", "Lunch 11:30am to 4pm · closed Tuesdays"], ["Upstairs @ Romora", "Breakfast and dinner with panoramic harbour views and a serious wine list.", "Breakfast · Dinner · Special events"], ["Catering & events", "From intimate beach dinners to grand celebrations.", "On request"]].map(([t, d, h]) => (
-              <div key={t} className="group border-t border-paper/15 py-6">
-                <p className="font-display text-2xl transition group-hover:translate-x-1">{t}</p>
-                <p className="mt-1 text-[15px] leading-relaxed text-paper/70">{d}</p>
-                <p className="mt-2 text-[12px] tracking-[0.16em] text-conch uppercase">{h}</p>
+    <section className="rooms" id="rooms" aria-labelledby="r-h">
+      <div className="wrap">
+        <h2 id="r-h" className="t-h2">Seventeen rooms, <em>three ways to stay.</em></h2>
+        <ul className="rooms__row">
+          {ROOMS.map((r, i) => (
+            <li key={r.key} className="room">
+              <div className="room__ph">
+                <AnimatePresence initial={false}>
+                  <motion.img key={r.imgs[pick[i]]} src={r.imgs[pick[i]]} alt={`${r.name} at Romora Bay, photo ${pick[i] + 1} of 4`} width={1200} height={800} loading="lazy" decoding="async"
+                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} />
+                </AnimatePresence>
               </div>
-            ))}
+              <div className="room__th" role="group" aria-label={`${r.name} photos`}>
+                {r.imgs.map((s, j) => (
+                  <button key={s} type="button" aria-label={`Photo ${j + 1}`} aria-pressed={pick[i] === j} onClick={() => setPick(p => p.map((v, k) => (k === i ? j : v)))}>
+                    <img src={s} alt="" width={1200} height={800} loading="lazy" decoding="async" />
+                  </button>
+                ))}
+              </div>
+              <h3 className="t-h3">{r.name}</h3>
+              <p className="room__t">{r.text}</p>
+              <p className="room__f">{r.feats.join(" · ")}</p>
+              <a className="btn btn--line" href={BOOK} target="_blank" rel="noopener">Check availability</a>
+            </li>
+          ))}
+        </ul>
+        <p className="rooms__note">Rates on the booking page or by phone. The resort closes for the season from 17 August to 12 November.</p>
+      </div>
+    </section>
+  )
+}
+
+function Day() {
+  return (
+    <section className="day" id="day" aria-labelledby="d-h">
+      <div className="wrap">
+        <h2 id="d-h" className="t-h2">Lunch on the water, <em>dinner upstairs.</em></h2>
+        <div className="day__a">
+          <img src={IMG.sipsip} alt="Tables on the Sip Sip deck over the harbour" width={1600} height={1067} loading="lazy" decoding="async" />
+          <div>
+            <h3 className="t-h3">Sip Sip</h3>
+            <p>The waterfront restaurant: fresh-caught seafood, local ingredients and sunset cocktails.</p>
+            <p className="day__h num">Lunch 11:30am to 4pm. Closed Tuesdays.</p>
           </div>
-        </Reveal>
-        <div className="grid grid-cols-2 gap-4 md:col-span-6 md:col-start-7">
-          <Reveal className="col-span-2"><Photo src={A + "sipsip-deck-dining-DYk9esoQ.jpg"} alt="The deck at Sip Sip on the water" className="aspect-[16/10] rounded-[22px]" /></Reveal>
-          <Reveal delay={0.1}><Photo src={A + "upstairs-patio-3-DUfXOeak.jpg"} alt="The patio at Upstairs @ Romora" className="aspect-square rounded-[22px]" /></Reveal>
-          <Reveal delay={0.15}><Photo src={A + "kayaking-Dza3TEe0.webp"} alt="Kayaking off Harbour Island" className="aspect-square rounded-[22px]" /></Reveal>
+        </div>
+        <div className="day__b">
+          <div className="day__c">
+            <img src={IMG.upstairs} alt="The patio at Upstairs at Romora, looking over the harbour" width={1200} height={800} loading="lazy" decoding="async" />
+            <h3 className="t-h3">Upstairs @ Romora</h3>
+            <p>Breakfast and dinner with harbour views and a serious wine list. Catering and events on request.</p>
+          </div>
+          <div className="day__c">
+            <img src={IMG.kayak} alt="Kayaking in clear water off Harbour Island" width={1200} height={800} loading="lazy" decoding="async" />
+            <h3 className="t-h3">The water and the pink sand</h3>
+            <p>Kayaking, snorkelling and fishing from the resort, and the pink sand beaches a short walk away.</p>
+          </div>
+          <div className="day__c">
+            <img src={IMG.pickle} alt="A pickleball game on the Romora Bay courts" width={1200} height={800} loading="lazy" decoding="async" />
+            <h3 className="t-h3">The pickleball club</h3>
+            <p>Courts on site, with clinics and social play through the season.</p>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-function Play() {
+function Here() {
   return (
-    <section className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:grid-cols-12 md:items-center md:px-10 md:py-32" aria-labelledby="play-title">
-      <Reveal className="md:col-span-6"><Photo src={A + "pickleball-action-CJFBzUTN.jpg"} alt="Pickleball on the Romora Bay courts" className="aspect-[4/3] rounded-[22px]" /></Reveal>
-      <Reveal delay={0.1} className="md:col-span-5 md:col-start-8">
-        <Label n="03">Days here</Label>
-        <h2 id="play-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-[1]">Courts, kayaks and the pink sand.</h2>
-        <p className="mt-6 text-[17px] leading-relaxed text-muted">Snorkelling, kayaking and fishing from the resort, the beach a short walk away, and the island’s pickleball club on site with clinics and social play.</p>
-        <p className="mt-6 border-l-2 border-conch pl-4 text-[15px] leading-relaxed">Pickleball Bootcamp, November 20 and 21, 2026: $350 members, $500 non-members. Call <a href="tel:+12425530092" className="underline underline-offset-4">242-553-0092</a>.</p>
-      </Reveal>
-    </section>
-  )
-}
-
-const FAQ: [string, string][] = [
-  ["Can I clear customs at Romora Bay Marina?", "Yes. The marina is an official port of entry, and boats can clear customs and immigration directly at the marina."],
-  ["How big a yacht can Romora Bay take?", "Vessels up to 190 feet are welcome in the marina's slips."],
-  ["When is the resort closed?", "The resort closes seasonally from August 17 to November 12."],
-  ["When is Sip Sip open?", "Sip Sip serves lunch from 11:30am to 4pm and is closed on Tuesdays."],
-  ["How do I reserve?", "Book rooms online or call 833.717.6499. Reserve slips through the marina reservations page or email marina@romorabay.com."],
-]
-
-function Faq() {
-  return (
-    <section className="bg-sand" aria-labelledby="faq-title">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-24 md:grid-cols-12 md:px-10 md:py-32">
-        <Reveal className="md:col-span-4"><Label n="04">Questions</Label><h2 id="faq-title" className="mt-5 font-display text-[clamp(2.2rem,4vw,3.6rem)] leading-[1.02]">Good to know.</h2>
-          <a href={TEL} className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 text-paper transition hover:-translate-y-px"><Phone className="size-4" aria-hidden /> {PHONE}</a></Reveal>
-        <Reveal delay={0.1} className="md:col-span-7 md:col-start-6">
-          <Accordion type="single" collapsible className="border-t border-line">
-            {FAQ.map(([q, a], i) => (
-              <AccordionItem key={q} value={`q${i}`} className="border-line">
-                <AccordionTrigger className="py-6 text-left text-[18px] font-normal hover:no-underline">{q}</AccordionTrigger>
-                <AccordionContent className="pb-6 text-[16px] leading-relaxed text-muted">{a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </Reveal>
+    <section className="here" id="here" aria-labelledby="g-h">
+      <div className="wrap">
+        <h2 id="g-h" className="t-h2">Getting here.</h2>
+        <div className="here__cols">
+          <div>
+            <h3 className="t-h3">By sea</h3>
+            <p>Romora Bay Marina is an official port of entry: clear customs and immigration at the dock. Send your length, power and dates to the marina before you leave.</p>
+            <p className="here__c"><a href={`mailto:${MARINA_EMAIL}`}>{MARINA_EMAIL}</a><a className="num" href={MARINA_TEL}>{MARINA_PHONE}</a><a href={MAP_PDF}>Marina Map (PDF)</a></p>
+          </div>
+          <div>
+            <h3 className="t-h3">By air</h3>
+            <p>Fly into North Eleuthera airport. From there it is a short taxi ride to the North Eleuthera dock, then about ten minutes by water taxi across to Harbour Island.</p>
+            <p className="here__c"><a className="num" href={TEL}>Reservations {PHONE}</a><a href={MAPS} target="_blank" rel="noopener">Open in Maps</a></p>
+          </div>
+        </div>
       </div>
+      <figure className="here__ph wrap">
+        <img src={IMG.harbourView} alt="The harbour at Romora Bay seen from the resort" width={1600} height={900} loading="lazy" decoding="async" />
+      </figure>
     </section>
   )
 }
 
-function Map() {
+function Contact() {
   return (
-    <section className="mx-auto max-w-[1440px] px-5 py-20 md:px-10 md:py-24" aria-label="Map">
-      <iframe title="Map of Romora Bay Resort & Marina, Harbour Island" loading="lazy" className="aspect-[4/3] w-full rounded-[22px] border border-line md:aspect-[21/8]" src="https://www.google.com/maps?q=Romora+Bay+Resort+%26+Marina+Harbour+Island+Bahamas&output=embed" />
+    <section className="close wrap" aria-labelledby="c-h">
+      <h2 id="c-h" className="t-h2">Call reservations, <em>or write to the marina.</em></h2>
+      <a className="close__tel num" href={TEL}>{PHONE}</a>
+      <p className="close__c"><a href={`mailto:${MARINA_EMAIL}`}>{MARINA_EMAIL}</a><a className="num" href={MARINA_TEL}>Marina {MARINA_PHONE}</a><span>Harbour Island, Eleuthera, The Bahamas</span></p>
+      <div className="close__act">
+        <a className="btn" href={BOOK} target="_blank" rel="noopener">Check availability</a>
+        <a className="btn btn--line" href="#top">Request a slip</a>
+      </div>
+      <footer className="foot">
+        <p>Romora Bay Resort & Marina, Harbour Island. Seventeen rooms and a full-service marina.</p>
+        <p>Photographs from romorabay.com.</p>
+      </footer>
     </section>
   )
 }
 
-mount(<Page current="Home"><Hero /><KeyInfo /><Two /><Dining /><Play /><Faq /><Map /></Page>)
+function Dock() {
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const top = document.getElementById("top"), close = document.getElementById("c-h")
+    if (!top || !close) return
+    let past = false, atClose = false
+    const io = new IntersectionObserver(es => {
+      for (const e of es) { if (e.target === top) past = !e.isIntersecting; if (e.target === close) atClose = e.isIntersecting }
+      setShow(past && !atClose)
+    })
+    io.observe(top); io.observe(close)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <div className="dock" data-show={show} aria-hidden={!show}>
+      <a className="btn btn--line" href="#top" tabIndex={show ? 0 : -1}>Request a slip</a>
+      <a className="btn" href={BOOK} target="_blank" rel="noopener" tabIndex={show ? 0 : -1}>Check availability</a>
+    </div>
+  )
+}
+
+function Home() {
+  useEffect(() => {
+    if (matchMedia("(pointer: coarse)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const l = new Lenis({ duration: 1.1 })
+    let id = 0
+    const raf = (t: number) => { l.raf(t); id = requestAnimationFrame(raf) }
+    id = requestAnimationFrame(raf)
+    return () => { cancelAnimationFrame(id); l.destroy() }
+  }, [])
+  return (
+    <>
+      <a className="skip" href="#top">Skip to the arrival planner</a>
+      <Nav />
+      <main><Hero /><Marina /><Rooms /><Day /><Here /><Contact /></main>
+      <Dock />
+    </>
+  )
+}
+
+createRoot(document.getElementById("root")!).render(<StrictMode><Home /></StrictMode>)
