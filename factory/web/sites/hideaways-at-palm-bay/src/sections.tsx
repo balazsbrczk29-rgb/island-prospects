@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react'
 import { BIZ, PHOTOS, SPECIALS, WHO, openToday, fmt, SPLASH, NEARBY, ACTIVITIES, GATEWAYS, AIRLINES, type Who } from './data'
+import { usePlan, setPlan } from './store'
 
 export function Harbour() {
   const ref = useRef<HTMLDivElement>(null)
@@ -24,7 +25,9 @@ export function Harbour() {
 }
 
 export function Offers() {
-  const [who, setWho] = useState<Who>('usca')
+  const p = usePlan()
+  const who: Who = p.who ?? 'usca'
+  const setWho = (w: Who) => setPlan({ who: w })
   const [copied, setCopied] = useState('')
   const list = SPECIALS.filter(s => s.who.includes(who) && openToday(s))
   const copy = (c: string) => { navigator.clipboard?.writeText(c).then(() => { setCopied(c); setTimeout(() => setCopied(''), 1600) }) }
@@ -131,6 +134,7 @@ export function GettingHere() {
 }
 
 export function Contact() {
+  const p = usePlan()
   return (
     <section id="contact" className="contact" aria-labelledby="contact-h">
       <div className="wrap contact-grid">
@@ -145,14 +149,14 @@ export function Contact() {
         </div>
         <form className="enquiry" data-enquiry data-business={BIZ.name} data-whatsapp="" data-email={BIZ.email} action={`mailto:${BIZ.email}`} method="post" encType="text/plain">
           <div className="two">
-            <label>Arriving<input type="date" name="Arrival" /></label>
-            <label>Leaving<input type="date" name="Departure" /></label>
+            <label>Arriving<input type="date" name="Arrival" value={p.arrive} onChange={e => setPlan({ arrive: e.target.value })} /></label>
+            <label>Leaving<input type="date" name="Departure" value={p.leave} min={p.arrive || undefined} onChange={e => setPlan({ leave: e.target.value })} /></label>
           </div>
           <div className="two">
-            <label>Guests<input type="number" name="Guests" min={1} max={12} defaultValue={2} inputMode="numeric" /></label>
+            <label>Guests<input type="number" name="Guests" min={1} max={12} value={p.guests} inputMode="numeric" onChange={e => setPlan({ guests: Math.max(1, Number(e.target.value) || 1) })} /></label>
             <label>Where
-              <select name="Preference" defaultValue="Either">
-                <option>Either</option><option>Ocean Side, by the beach</option><option>Island Time, on the hill</option>
+              <select name="Preference" value={p.side ?? ''} onChange={e => setPlan({ side: (e.target.value || null) as any })}>
+                <option value="">Either</option><option value="ocean">Ocean Side, by the beach</option><option value="hill">Island Time, on the hill</option>
               </select>
             </label>
           </div>
