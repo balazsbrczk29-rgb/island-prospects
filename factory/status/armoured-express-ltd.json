@@ -4,8 +4,37 @@
  "name": "Armoured Express (Bahamas) Ltd",
  "batch": "08",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T14:56:45.854Z"
+ "claimed_at": "2026-11-22T14:56:45.854Z",
+ "jobspec_built": true,
+ "finished_at": "2026-11-22T15:25:26.078544Z",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/armoured-express-ltd/",
+ "pages": [
+  "index.html"
+ ],
+ "scores": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 4,
+  "phone": 4
+ },
+ "tier_visual": "standard (SVG technical elevation + motion; no 3D)",
+ "notes": [
+  "Built from the approved job spec and design.md (generation 2, quality by construction). One page: services.html folded into the services ledger on index (spec screens 1-6).",
+  "Core tool on screen 1: service request sheet (services, island, count, frequency, sector) beside a chain-of-custody line that redraws per run and stamps each hand-off with its stated safeguard; hero truck drives stage ticks 01..N in step; summary hands off to Call 242-323-4430, copy, print. No prices, no email (none published).",
+  "Fonts: Libre Franklin (kept from previous version, display/UI) + Source Serif 4 (running text), self-hosted. Palette stone/ink/brass/steel; brass reserved for primary action. OKLCH tokens in design.md, hex equivalents in CSS (inspect.mjs cannot parse oklch).",
+  "Imagery: no usable photos (no site, empty Facebook, directory uploads not allowed). The spec's Keep item, the technical line drawing of the truck, redrawn as a cab-over (Hino L-series type) elevation; illustrative, replace with real fleet photos. Previous drawing faced backwards and had invented gun ports/camera dome, removed.",
+  "Assumptions to confirm with the owner: chain-of-custody step wording ('Signed', 'Delivered where you direct', 'Signed back') is category-standard and the same for every service; canonical/JSON-LD domain armouredexpressbahamas.com is a PROPOSED domain; email address; Grand Bahama office; Family Island air courier coverage; crew/vehicle/vault photos; whether Security Services (Bah.) Ltd. wants to share the site.",
+  "Critic: 3 passes (initial wow 3/imagery 3/phone 3 -> truck redraw, phone chips, fact fixes; second pass wow 3 -> hero truck tied to the tool); final all 4/5, gate 1 yes x3. inspect 0 FAIL 0 WARN; distinct exit 0.",
+  "Worker note: local main had diverged from origin (reset was refused), so work was done on a branch tracking origin/main and pushed to main directly."
+ ]
 }

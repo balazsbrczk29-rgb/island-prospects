@@ -39,8 +39,7 @@ function Hero() {
         </div>
         <div className="mt-6 lg:mt-12">
           <HeroTruck />
-          <p className="tnum mt-3 text-[14px] text-muted">The truck drives each stage of the run you plan. Public liability cover up to $2,000,000.</p>
-          <p className="mt-1 text-[14px] text-muted max-lg:hidden"><OfficeStatus /></p>
+          <p className="tnum mt-3 text-[14px] text-muted">Each stage of your run, signed. Public liability cover up to $2,000,000.</p>
         </div>
       </div>
       <div className="max-lg:-mx-[var(--pad)] lg:col-span-7"><Manifest /></div>
