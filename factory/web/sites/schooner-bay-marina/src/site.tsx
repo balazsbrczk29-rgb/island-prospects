@@ -1,9 +1,7 @@
-import { useEffect, useState, type ReactNode } from "react"
+import { useEffect, type ReactNode } from "react"
 import { createRoot } from "react-dom/client"
 import Lenis from "lenis"
-import { motion, useScroll, useSpring } from "motion/react"
-import { Menu, Phone, Radio } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
+import { motion } from "motion/react"
 import "./styles.css"
 
 const U = "https://schoonerbaybahamas.com/wp-content/uploads/"
@@ -26,10 +24,10 @@ export const HANDOUT = U + "2017/10/Marina-Handout.pdf"
 export const LIMIT = { loa: 80, draft: 8, rate: 3 }
 
 const NAV = [
-  { href: "marina.html", label: "Marina" },
-  { href: "index.html#fit", label: "Will she fit?" },
-  { href: "village.html", label: "Village" },
-  { href: "marina.html#arrive", label: "Arriving" },
+  { href: "#why", label: "Hole in the Wall" },
+  { href: "#numbers", label: "The numbers" },
+  { href: "#live", label: "Discovery Stay" },
+  { href: "#request", label: "Request" },
 ]
 
 function useLenis() {
@@ -44,78 +42,39 @@ function useLenis() {
 }
 
 function Header({ current }: { current: string }) {
-  const [open, setOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-3 md:px-10">
-        <a href="index.html" className="leading-none" aria-label="Schooner Bay Marina, home">
-          <span className="font-display text-[1.5rem] tracking-[-0.01em]">Schooner Bay</span>
-          <span className="mt-1 block text-[12px] tracking-[0.06em] text-muted">Marina · Great Abaco</span>
-        </a>
-        <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
-          {NAV.map(n => <a key={n.href} href={n.href} className={`ulink text-[15px] ${current === n.label ? "is-on" : ""}`}>{n.label}</a>)}
-          <span className="flex items-center gap-1.5 text-[14px] text-muted"><Radio className="size-4 text-brass" aria-hidden /> VHF 16 / 77</span>
-          <a href="index.html#request" className="btn btn-ink">Request a slip</a>
+    <header className="bar">
+      <div className="wrap bar-in">
+        <a href="index.html" className="wm" aria-label="Schooner Bay Marina, home"><span>Schooner <em>Bay</em></span><small>Marina, Great Abaco</small></a>
+        <nav aria-label="Main" className="bar-nav">
+          {NAV.map(n => <a key={n.href} href={n.href} aria-current={current === n.label ? "page" : undefined}>{n.label}</a>)}
+          <span className="tnum vhf">VHF 16 / 77</span>
+          <a href={HM_TEL} className="tnum hm">{HM}</a>
         </nav>
-        <div className="flex items-center gap-2 lg:hidden">
-          <a href={HM_TEL} className="inline-flex size-11 items-center justify-center rounded border border-line" aria-label={`Call the Harbour Master ${HM}`}><Phone className="size-5" /></a>
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger className="inline-flex size-11 items-center justify-center rounded border border-line" aria-label="Open menu"><Menu className="size-5" /></SheetTrigger>
-            <SheetContent side="right" className="w-full border-l-0 bg-paper sm:max-w-sm">
-              <SheetTitle className="sr-only">Menu</SheetTitle>
-              <nav className="mt-16 flex flex-col px-6" aria-label="Mobile">
-                {NAV.map((n, i) => (
-                  <motion.a key={n.href} href={n.href} onClick={() => setOpen(false)} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i, duration: 0.5, ease }} className="border-b border-line py-4 font-display text-3xl">{n.label}</motion.a>
-                ))}
-                <a href="index.html#request" onClick={() => setOpen(false)} className="btn btn-ink mt-8">Request a slip</a>
-                <p className="mt-4 text-center text-muted">Harbour Master on VHF 16 / 77</p>
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
+        <a href={HM_TEL} className="bar-call">Call</a>
       </div>
-      <motion.div style={{ scaleX: progress }} className="h-px origin-left bg-brass" aria-hidden />
     </header>
   )
 }
 
 function Footer() {
   return (
-    <footer className="bg-ink text-paper pb-28 lg:pb-0">
-      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:px-10">
-        <div>
-          <p className="font-display text-3xl">Schooner Bay Marina</p>
-          <p className="mt-3 max-w-xs text-paper/70">Schooner Bay, Great Abaco, The Bahamas. Open daily 7:30 am to 4:30 pm.</p>
-        </div>
-        <div className="text-[15px]">
-          <p className="cap !text-paper/55">Harbour Master</p>
-          <a href={HM_TEL} className="mt-3 block hover:text-foam">{HM}</a>
-          <a href={`mailto:${EMAIL}`} className="ulink mt-1 inline-block break-all">{EMAIL}</a>
-          <p className="mt-1 text-paper/70">VHF 16, working 77</p>
-        </div>
-        <div className="text-[15px]">
-          <p className="cap !text-paper/55">Village and sales</p>
-          <a href={MAIN_TEL} className="mt-3 block hover:text-foam">Main line {MAIN}</a>
-          <a href={SALES_TEL} className="mt-1 block hover:text-foam">Sales, June Russell {SALES}</a>
-          <a href="https://www.facebook.com/schoonerbay" className="ulink mt-1 inline-block">Facebook</a>
-        </div>
-        <div className="text-[15px]">
-          <p className="cap !text-paper/55">Pages</p>
-          {NAV.map(n => <a key={n.href} href={n.href} className="mt-2 block hover:text-foam">{n.label}</a>)}
-        </div>
+    <footer className="foot">
+      <div className="wrap foot-in">
+        <p className="foot-name">Schooner Bay Marina</p>
+        <p>Schooner Bay, Great Abaco, The Bahamas. <span className="tnum">N 26° 09.529′ W 077° 10.633′</span></p>
+        <p className="tnum"><a href={HM_TEL}>Harbour Master {HM}</a> · <a href={MAIN_TEL}>Main line {MAIN}</a> · <a href={SALES_TEL}>Sales {SALES}</a> · <a href="https://www.facebook.com/schoonerbay">Facebook</a></p>
+        <p className="foot-small">Concept by ESTATIQ AI Solutions. Specs and photographs from schoonerbaybahamas.com; confirm with the Harbour Master before passage. Nothing here is for navigation.</p>
       </div>
-      <p className="mx-auto max-w-[1440px] border-t border-paper/15 px-5 py-6 text-xs text-paper/55 md:px-10">Concept by ESTATIQ AI Solutions. Specs from schoonerbaybahamas.com; confirm with the Harbour Master before passage. Nothing here is for navigation.</p>
     </footer>
   )
 }
 
 function ActionBar() {
   return (
-    <nav aria-label="Quick actions" className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-[1fr_1.4fr] border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
-      <a href={HM_TEL} className="flex min-h-14 items-center justify-center gap-2 text-[15px]"><Phone className="size-4" aria-hidden /> Harbour Master</a>
-      <a href="index.html#request" className="flex min-h-14 items-center justify-center bg-ink text-[15px] text-paper">Request a slip</a>
+    <nav aria-label="Quick actions" className="abar">
+      <a href={HM_TEL}>Call the Harbour Master</a>
+      <a href="#request" className="go">Request a slip</a>
     </nav>
   )
 }
