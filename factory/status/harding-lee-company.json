@@ -4,8 +4,31 @@
  "name": "Harding-Lee & Company",
  "batch": "05",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T11:57:31.637Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T12:09:41.854Z",
+ "primary_cta": "Write to <attorney> (prepared email naming the chosen office), or call the chosen office",
+ "gate1": {
+  "screen1_tool": true,
+  "job_easier": true,
+  "keep_present": true
+ },
+ "scores": {
+  "wow": 4,
+  "photography": 4,
+  "typography": 5,
+  "composition": 5,
+  "conversion": 5,
+  "phone": 4
+ },
+ "fonts": "Newsreader (opsz) + Instrument Sans 400-700",
+ "assumptions": [
+  "Consultation steps on screen 6 (write, attorney replies to arrange a meeting in Nassau or Salt Pond, bring papers, terms agreed before work) are category-standard, to confirm with the firm.",
+  "Which attorney meets clients at Salt Pond is not published; the office choice is passed as a preference in the prepared email."
+ ],
+ "notes": [
+  "2026-11-22 rebuild to approved job spec: kept previous composition (router, office switcher, record band); added real Natural Earth 1:10m chart of New Providence and Long Island with a drawn route matter -> attorney -> office pin; office choice drives call number and email; consultation screen; serif+sans pairing. Critic: gate 1 yes x3; scores wow 4, photo 4, type 5, comp 5, conversion 5, phone 4 after two fix passes."
+ ]
 }

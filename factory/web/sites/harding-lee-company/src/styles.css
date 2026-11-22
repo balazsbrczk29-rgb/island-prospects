@@ -366,3 +366,21 @@ img { display: block; max-width: 100%; }
   .ans .acts .link { display: inline-flex; align-items: center; min-height: 44px; }
 }
 @media (min-width: 961px) { .hero h1 { max-width: 15ch; font-size: clamp(2.25rem, 3.7vw, 3.375rem); } .matters button { min-height: 54px; } }
+/* re-score pass */
+@media (min-width: 961px) { .hero h1 { max-width: none; } }
+@media (max-width: 960px) {
+  .lede-x, .answer-inline .with { display: none; }
+  .answer-inline .ans { display: flex; flex-direction: column; }
+  .answer-inline .who > .pf { width: 56px; height: 66px; }
+  .answer-inline .acts { order: 2; margin-top: var(--s2); }
+  .answer-inline .otog { order: 3; margin-top: var(--s2); }
+}
+@media (max-width: 960px) {
+  .hero { padding-top: var(--s2); }
+  .hero h1 { font-size: 2rem; }
+  .hero .lede { margin-top: 12px; }
+  .matters { margin-top: var(--s2); }
+  .answer-inline { padding-top: 12px; }
+  .answer-inline .acts { margin-top: 12px; }
+}
+@media (min-width: 961px) { .hero h1 { font-size: clamp(2.25rem, 3.4vw, 3rem); } }

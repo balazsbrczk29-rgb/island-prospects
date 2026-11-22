@@ -32,7 +32,7 @@ function Answer({ m, o, setO, inline = false }: { m: Matter; o: OKey; setO: (o: 
         <span className="pf" data-portrait={inline ? undefined : ""}><img src={lead.portrait} alt={lead.name} width={962} height={1142} /></span>
         <div>
           <p className="names">{lead.name}</p>
-          <p className="role">{lead.role}{also.length ? `, with ${also.join(", ")}` : ""}</p>
+          <p className="role">{lead.role}<span className="with">{also.length ? `, with ${also.join(", ")}` : ""}</span></p>
         </div>
       </div>
       <p className="why">{m.why}</p>
@@ -96,8 +96,8 @@ export function Hero({ m, setM, o, setO }: { m: Matter; setM: (m: Matter) => voi
   return (
     <section className="wrap hero" data-hero aria-labelledby="h1" ref={ref}>
       <div className="hero-q">
-        <h1 id="h1">What are you dealing with? We will tell you who handles it.</h1>
-        <p className="lede">Attorneys at law in Nassau and Salt Pond, Long Island, since 1996, led by a senior partner called to The Bahamas Bar in 1982.</p>
+        <h1 id="h1">What are you dealing with?<br /> We will tell you<br /> who handles it.</h1>
+        <p className="lede">Attorneys at law in Nassau and Salt Pond, Long Island, since 1996<span className="lede-x">, led by a senior partner called to The Bahamas Bar in 1982</span>.</p>
         <ul className="matters" aria-label="Choose your matter" onKeyDown={onKey}>
           {MATTERS.map((x, i) => (
             <motion.li key={x.id} initial={reduce ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 + i * 0.04, ease: EASE }}>
