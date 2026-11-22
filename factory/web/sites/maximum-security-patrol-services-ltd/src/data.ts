@@ -15,7 +15,7 @@ export const biz = {
 export type SvcId = "officers" | "patrols" | "alarm" | "investigations" | "consultancy"
 export const SERVICES: { id: SvcId; n: string; name: string; key: string; words: string; who: string; say: string; photo?: { src: string; alt: string } }[] = [
   { id: "officers", n: "01", name: "Security officers", key: "Officers on post", say: "trained officers on post",
-    words: "Trained security officers for diverse and special applications, on post at your door, desk or gate.",
+    words: "Trained security officers for diverse and special applications.",
     who: "Banks, offices, retail, government buildings, residences",
     photo: { src: IMG + "h06-post.jpg", alt: "A security officer seen from behind at the glass doors of a pastel office building at dawn (illustrative photograph)" } },
   { id: "patrols", n: "02", name: "Patrols", key: "Patrol route", say: "patrols of the perimeter",
@@ -23,7 +23,7 @@ export const SERVICES: { id: SvcId; n: string; name: string; key: string; words:
     who: "Yards, plazas and gated properties after hours",
     photo: { src: IMG + "h18-patrol.jpg", alt: "An unmarked patrol truck beside a pink colonial building at dusk, an officer walking the wall with a torch (illustrative photograph)" } },
   { id: "alarm", n: "03", name: "Alarm monitoring", key: "Alarm sensors", say: "alarm monitoring",
-    words: "Alarm monitoring, so a signal at any hour reaches someone who acts on it.",
+    words: "Alarm monitoring for your premises, arranged from the office on Carib Road.",
     who: "Premises with an alarm system",
     photo: { src: IMG + "h03-watch.jpg", alt: "An alarm monitoring desk lit only by screens in a dark room (illustrative photograph)" } },
   { id: "investigations", n: "04", name: "Investigations", key: "Case file", say: "an investigation",
@@ -72,7 +72,7 @@ export const PREMISES: Premises[] = [
     site: [70, 40, 500, 340], street: { at: [320, 404], label: "Road" },
     buildings: [{ r: [170, 100, 230, 150], label: "House" }, { r: [400, 160, 90, 90], label: "Garage" }],
     areas: [{ r: [200, 290, 130, 50], label: "Pool" }],
-    posts: [[470, 380], [285, 250], [285, 100], [130, 320]],
+    posts: [[470, 340], [285, 250], [285, 100], [130, 320]],
     sensors: [[170, 150], [170, 210], [400, 120], [230, 100], [340, 100], [230, 250], [445, 250]],
     caseAt: [330, 140], survey: [150, 80, 360, 190] },
   { id: "yard", name: "Yard or warehouse", noun: "yard or warehouse",

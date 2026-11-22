@@ -118,14 +118,14 @@ function Services({ st, add }: { st: State; add: (id: SvcId) => void }) {
             <div className="lane__body">
               <p>{s.words}</p>
               <p className="lane__who">For {s.who.charAt(0).toLowerCase() + s.who.slice(1)}.</p>
-              {s.photo && (
-                <figure className="lane__photo">
-                  <div className="frame"><img src={s.photo.src} alt={s.photo.alt} width={1920} height={1080} loading="lazy" decoding="async" data-source="generated" /></div>
-                  <figcaption>Illustrative photograph</figcaption>
-                </figure>
-              )}
             </div>
             <button type="button" className="lane__act" aria-pressed={st.svc.includes(s.id)} onClick={() => add(s.id)}>{st.svc.includes(s.id) ? "In your proposal" : "Add to my proposal"}</button>
+            {s.photo && s.id !== "patrols" && (
+              <figure className="lane__photo">
+                <div className="frame"><img src={s.photo.src} alt={s.photo.alt} width={1920} height={1080} loading="lazy" decoding="async" data-source="generated" /></div>
+                <figcaption>Illustrative photograph</figcaption>
+              </figure>
+            )}
           </li>
         ))}
       </ol>
@@ -215,11 +215,11 @@ function Home() {
     return () => { cancelAnimationFrame(id); lenis.destroy() }
   }, [])
   useEffect(() => {
-    const a = callRef.current, b = document.getElementById("call")
-    if (!a || !b) return
-    let va = true, vb = false
-    const io = new IntersectionObserver(es => { es.forEach(e => { if (e.target === a) va = e.isIntersecting; else vb = e.isIntersecting }); setDock(!va && !vb) })
-    io.observe(a); io.observe(b)
+    const a = callRef.current, b = document.getElementById("call"), c = document.querySelector(".legend")
+    if (!a || !b || !c) return
+    const vis = new Map<Element, boolean>([[a, true], [b, false], [c, true]])
+    const io = new IntersectionObserver(es => { es.forEach(e => vis.set(e.target, e.isIntersecting || (e.target === c && e.boundingClientRect.top > 0))); setDock(![...vis.values()].some(Boolean)) })
+    io.observe(a); io.observe(b); io.observe(c)
     return () => io.disconnect()
   }, [])
 
@@ -235,6 +235,10 @@ function Home() {
       <main>
         <Builder st={st} set={set} callRef={callRef} />
         <Services st={st} add={add} />
+        <figure className="band">
+          <div className="frame"><img src={SERVICES[1].photo!.src} alt={SERVICES[1].photo!.alt} width={1920} height={1080} loading="lazy" decoding="async" data-source="generated" /></div>
+          <figcaption>Patrols after closing. Illustrative photograph.</figcaption>
+        </figure>
         <Sectors />
         <Since />
         <How />
