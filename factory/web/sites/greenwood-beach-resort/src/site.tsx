@@ -138,7 +138,7 @@ function Header() {
                           ))}
                         </ul>
                         <div className="mt-10 flex flex-col gap-4 text-[length:var(--t-sm)] md:flex-row md:items-center md:gap-10">
-                          <a href={BOOK} className="btn self-start">Check dates and book</a>
+                          <a href="index.html#dates" className="btn self-start">Check dates and book</a>
                           <a href={WA} className="link num self-start">WhatsApp {WHATSAPP}</a>
                           <a href={`mailto:${EMAIL}`} className="link inline-flex min-h-11 items-center self-start break-all">{EMAIL}</a>
                         </div>

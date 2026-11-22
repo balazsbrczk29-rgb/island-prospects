@@ -51,7 +51,7 @@ function Meals() {
 
 mount(
   <Page>
-    <Hero img={IMG.roomKing} alt="The Executive King Room at Greenwood: king bed, ceiling fan, garden windows"
+    <Hero img={IMG.roomKing} alt="The Executive King Room at Greenwood Beach Resort"
       title={<>Two rooms, a few steps from the water.</>}>
       <p className="max-w-[44ch] text-muted">The Executive King Room sleeps two; the Executive Family Room sleeps three. Both sit among the gardens at Greenwood, Port Howe.</p>
       <div><a href="#dates" className="btn">Check your dates</a></div>
