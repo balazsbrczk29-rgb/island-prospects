@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { photos, pano, sheet } from './data'
 import { Img } from './ui'
 import { Counter } from './counter'
@@ -53,7 +54,7 @@ export function Yard() {
           <div className="yard__text">
             <h2 id="yard-h" className="t56">Haul-out and dry storage to 10 tons.</h2>
             <p className="t22 muted">Factory-trained technicians for engines, bottom paint, fiberglass, brite work and detailing, and Mercury Outboard sales and service. The yard is open Monday to Friday, 8:00 to 4:00.</p>
-            <p><a className="link" href="#counter">Estimate your haul-out at the top of the page</a></p>
+            <p><a className="link" href="boatyard.html">Estimate your haul-out</a></p>
           </div>
           <figure className="yard__photo"><Img p={photos.yard} sizes="(max-width: 900px) 100vw, 45vw" max={2000} /></figure>
         </div>
@@ -78,13 +79,23 @@ export function RateSheet() {
 }
 
 export function Harbour() {
+  const band = useRef<HTMLDivElement>(null)
+  // mouse drag to pan (touch keeps native momentum scrolling)
+  const down = (e: React.PointerEvent) => {
+    const el = band.current; if (!el || e.pointerType !== 'mouse') return
+    const x0 = e.clientX, s0 = el.scrollLeft
+    el.classList.add('drag')
+    const move = (ev: PointerEvent) => { el.scrollLeft = s0 - (ev.clientX - x0) }
+    const up = () => { el.classList.remove('drag'); removeEventListener('pointermove', move); removeEventListener('pointerup', up) }
+    addEventListener('pointermove', move); addEventListener('pointerup', up)
+  }
   return (
     <section id="harbour" className="harbour" aria-labelledby="harbour-h">
       <div className="wrap harbour__head">
         <h2 id="harbour-h" className="t56">The view from the gallery.</h2>
         <p className="t18 muted">Hope Town Harbour from the Elbow Reef Lighthouse. The fuel dock is at its foot. Drag or swipe to look across.</p>
       </div>
-      <div className="harbour__band" tabIndex={0} role="region" aria-label="Panorama of Hope Town Harbour, scroll sideways">
+      <div className="harbour__band" ref={band} onPointerDown={down} tabIndex={0} role="region" aria-label="Panorama of Hope Town Harbour, scroll sideways">
         <img src={pano.src3840} srcSet={`${pano.src1920} 1920w, ${pano.src3840} 3840w`} sizes="(max-width: 900px) 1600px, 2450px"
           width={3840} height={880} alt={pano.alt} loading="lazy" decoding="async" referrerPolicy="no-referrer" />
       </div>

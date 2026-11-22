@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { animate, useReducedMotion } from 'motion/react'
 import { biz, rates } from './data'
 
 export const money = (n: number) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-const EASE = [0.22, 1, 0.36, 1] as const
 type Hull = 'single' | 'twin'
 type Opt = { haul: boolean; blocking: boolean; launch: boolean; pressure: boolean }
 
@@ -14,26 +12,13 @@ export function estimate(ft: number, hull: Hull, months: number, opt: Opt) {
   if (opt.haul) lines.push([`Haul, ${ft} ft at ${money(r.haul)}`, r.haul * ft])
   if (opt.blocking) lines.push(['Blocking', r.blocking])
   if (opt.pressure) lines.push([`Pressure clean at ${money(r.pressure)}/ft`, r.pressure * ft])
-  if (months > 0) lines.push([`Storage, ${months} ${months === 1 ? 'month' : 'months'} at ${money(monthly)}`, monthly * months])
+  if (months > 0) lines.push([`Storage, ${months} ${months === 1 ? 'month' : 'months'} at ${money(monthly)}/month`, monthly * months])
   if (opt.launch) lines.push([`Launch, ${ft} ft at ${money(r.launch)}`, r.launch * ft])
   const sub = lines.reduce((a, l) => a + l[1], 0)
   const vat = Math.round(sub * rates.vat * 100) / 100
   return { lines, sub, vat, total: sub + vat }
 }
 
-function Ticker({ value }: { value: number }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const prev = useRef(value)
-  const reduce = useReducedMotion()
-  useEffect(() => {
-    const el = ref.current; if (!el) return
-    if (reduce) { el.textContent = money(value); prev.current = value; return }
-    const c = animate(prev.current, value, { duration: 0.4, ease: EASE, onUpdate: v => { el.textContent = money(v) } })
-    prev.current = value
-    return () => c.stop()
-  }, [value, reduce])
-  return <span ref={ref} className="num">{money(value)}</span>
-}
 
 function Stepper({ label, value, min, max, step, unit, onChange, fmt = (v: number) => String(v) }: { label: string; value: number; min: number; max: number; step: number; unit: string; onChange: (v: number) => void; fmt?: (v: number) => string }) {
   const set = (v: number) => onChange(Math.min(max, Math.max(min, Math.round(v / step) * step)))
@@ -73,7 +58,8 @@ export function Counter({ mode = 'both' }: { mode?: 'both' | 'yard' }) {
   const verdict = fits ? 'She fits a slip.' : loa > 60 ? 'Too long for our slips (60 ft max). Call the dockmaster.' : 'Too deep at low water (6 ft max). Call the dockmaster.'
   const boat = `${loa} ft ${hull} hull, ${draft} ft draft`
   const wantSlip = mode === 'both' && fits
-  const subject = wantSlip ? `Slip request: ${boat}` : `Haul-out request: ${boat}`
+  const subject = `Haul-out request: ${boat}`
+  const slipMail = `mailto:${biz.email}?subject=${encodeURIComponent(`Slip request: ${boat}`)}&body=${encodeURIComponent(`Boat: ${boat}.\nArriving: \nNights: \nName: \n\nPlease send your dockage rates.`)}`
   const body = [`Boat: ${boat}.`, ...(months ? [`Dry storage: ${months} month(s).`] : []), '', 'Estimate from your website (November 2024 rates):', ...e.lines.map(([l, v]) => `${l}: ${money(v)}`), `VAT 10%: ${money(e.vat)}`, `Total: ${money(e.total)}`, '', 'Arriving: ', 'Name: '].join('\n')
   const mail = `mailto:${biz.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   const fill = () => {
@@ -103,6 +89,11 @@ export function Counter({ mode = 'both' }: { mode?: 'both' | 'yard' }) {
           </div>
           <Stepper label="Months on the hard" value={months} min={0} max={12} step={1} unit="" onChange={setMonths} />
         </div>
+        <div className="panel__opts" role="group" aria-label="Yard services in the estimate">
+          {([['haul', 'Haul'], ['blocking', 'Blocking'], ['pressure', 'Pressure clean'], ['launch', 'Launch']] as const).map(([k, l]) => (
+            <label key={k} className="chip"><input type="checkbox" checked={opt[k]} onChange={() => setOpt(o => ({ ...o, [k]: !o[k] }))} /><span>{l}</span></label>
+          ))}
+        </div>
         {mode === 'both' && (
           <div className="fitbox">
             <p className={`verdict ${fits ? '' : 'no'}`} aria-live="polite">{verdict}</p>
@@ -112,24 +103,20 @@ export function Counter({ mode = 'both' }: { mode?: 'both' | 'yard' }) {
         )}
       </div>
       <div className="panel__out">
-        <div className="panel__opts" role="group" aria-label="Yard services in the estimate">
-          {([['haul', 'Haul'], ['blocking', 'Blocking'], ['pressure', 'Pressure clean'], ['launch', 'Launch']] as const).map(([k, l]) => (
-            <label key={k} className="chip"><input type="checkbox" checked={opt[k]} onChange={() => setOpt(o => ({ ...o, [k]: !o[k] }))} /><span>{l}</span></label>
-          ))}
-        </div>
         <div className="ticket" aria-live="polite">
+          <p className="ticket__h">{mode === 'both' ? 'If you haul out: yard estimate' : 'Yard estimate'}</p>
           <ul className="ticket__lines t14">
             {e.lines.map(([l, v]) => <li key={l.split(',')[0]}><span>{l}</span><i aria-hidden="true" /><span className="num">{money(v)}</span></li>)}
             <li><span>VAT 10%</span><i aria-hidden="true" /><span className="num">{money(e.vat)}</span></li>
           </ul>
-          <p className="ticket__total"><span className="t14 p-muted">Yard estimate</span><Ticker value={e.total} /></p>
+          <p className="ticket__total"><span className="t14 p-muted">Haul-out total</span><span className="num">{money(e.total)}</span></p>
           <p className="t14 p-muted">November 2024 rates. The yard lifts boats to 10 tons and confirms the final price.</p>
         </div>
         <div className="panel__acts">
-          <a className="btn" href={mail}>{wantSlip ? 'Request this slip' : 'Request this haul-out'}</a>
-          <a className="plink num" href={`tel:${biz.phones[0].tel}`}>Call {biz.phones[0].label}</a>
-          <span className="plink plink--static">VHF {biz.vhf}</span>
-          <a className="plink plink--small" href="#contact" onClick={fill}>Full form</a>
+          {mode === 'both' && fits && <a className="btn" href={slipMail}>Request a slip</a>}
+          {mode === 'both' && fits && <p className="t14 p-muted">Dockage rates on request.</p>}
+          <a className={mode === 'both' && fits ? 'btn btn--ghost' : 'btn'} href={mail}>Request this haul-out</a>
+          <p className="panel__links"><a className="plink num" href={`tel:${biz.phones[0].tel}`}>Call {biz.phones[0].label}</a><span className="plink plink--static">VHF {biz.vhf}</span><a className="plink plink--small" href="#contact" onClick={fill}>Full form</a></p>
         </div>
       </div>
     </div>
