@@ -28,7 +28,7 @@ export type House = 'Main House' | 'Courtyard' | 'Villas' | 'Infinity House'
 export const HOUSES: { h: House; d: string }[] = [
   { h: 'Main House', d: 'Five rooms in the converted 1946 English manor, beside the lobby, bar and restaurant.' },
   { h: 'Courtyard', d: 'Three rooms that can connect, for families and friends travelling together.' },
-  { h: 'Villas', d: 'Rooms set apart from the house, including Lyon Holland with its own kitchen and deck.' },
+  { h: 'Villas', d: 'The villa rooms, including Lyon Holland with its own kitchen, living room and deck.' },
   { h: 'Infinity House', d: 'The five-bedroom oceanfront home next to the inn, by the day or by the week.' },
 ]
 export type Room = { n: string; name: string; house: House; bed: string; king: boolean; three: boolean; rate: number; withTax: number; note: string; pic: Pic; check?: string }
@@ -43,9 +43,9 @@ export const ROOMS: Room[] = [
   r('5', 'Kathleen Jane', 'Main House', 'Queen', 580, 754, '2018/02/Room-5-thumbnail-1-705x595.jpg', 705, 595, 'A queen room in the manor house.'),
   r('6', 'Matteo Douglas', 'Courtyard', 'Queen', 495, 643.5, '2018/02/Room-6-RH-529x705.jpg', 529, 705, 'One of the three Courtyard rooms that can connect.'),
   r('7', 'Mark Umberto', 'Courtyard', 'King', 500, 650, '2018/02/Runaway-Hill-Pink-Room-7-thumbnail-update-RD-705x618.jpg', 705, 618, 'A Courtyard king that can connect to its neighbours.', { check: 'Their rate table shows $550.00 after tax for this room; at 30% it is $650.00. To confirm with the inn.' }),
-  r('8', 'Luke Francesco', 'Courtyard', 'King', 555, 721.5, '2018/02/Room-8-529x705.jpg', 529, 705, 'A Courtyard king that can connect to rooms 6 and 7.'),
-  r('9', 'Douglas Paul', 'Villas', 'King', 690, 897, '2018/02/IMG_2421-1-705x470.jpg', 705, 470, 'A villa room, set apart from the house.'),
-  r('10', 'Tyler Frank', 'Villas', 'King', 690, 897, '2018/02/Room-10-blue-thumbnail-705x570.jpg', 705, 570, 'A villa room, set apart from the house.'),
+  r('8', 'Luke Francesco', 'Courtyard', 'King', 555, 721.5, '2018/02/Room-8-529x705.jpg', 529, 705, 'One of the three Courtyard rooms that can connect.'),
+  r('9', 'Douglas Paul', 'Villas', 'King', 690, 897, '2018/02/IMG_2421-1-705x470.jpg', 705, 470, 'A king room in the Villas.'),
+  r('10', 'Tyler Frank', 'Villas', 'King', 690, 897, '2018/02/Room-10-blue-thumbnail-705x570.jpg', 705, 570, 'A king room in the Villas.'),
   r('11', 'Lyon Holland', 'Villas', 'King, and two twin trundles', 1425, 1852.5, '2021/05/Runaway-hill-Room-11-thumbnail-705x571.jpg', 705, 571, 'Two full baths, a kitchen, a living room, a barbecue and a large outdoor deck with bay water views.', { three: true }),
   r('IH', 'Infinity House', 'Infinity House', 'Three kings, and two rooms of two twins', 3107.14, 4039.28, '2018/02/infinity-house-thumbnail-705x570.jpg', 705, 570, 'Five bedrooms on the ocean: 2½ baths, kitchen, living room, outdoor shower, barbecue, washer and dryer, a large courtyard and an oceanfront deck. Weekly $21,750 ($28,275 with tax and gratuity).', { three: true }),
 ]
