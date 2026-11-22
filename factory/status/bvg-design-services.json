@@ -1,77 +1,11 @@
 {
-  "slug": "bvg-design-services",
-  "id": 53,
-  "name": "BVG Design Services",
-  "batch": "01",
-  "tier": "A",
-  "state": "built",
-  "generation": 2,
-  "pages": [
-    "index.html"
-  ],
-  "primary_cta": "Start a website request (builder writes an email to info@bvgdesign.com); secondary: call Freeport (242) 602-0658",
-  "brand_truth": "They were getting Bahamian businesses found online in 1996, starting with their own Bahamas Vacation Guide, before most of the Bahamas was online.",
-  "buyer": "Owners of 2-30 person Bahamian businesses (guesthouses, charters, retailers) who fear paying for a site nobody finds and having nobody local to call.",
-  "direction": {
-    "archetype": "A04 Swiss information grid",
-    "lane": "P01 Limestone",
-    "type": "T03 Swiss grotesk (Instrument Sans only)",
-    "why": "A web studio is judged on precision: a visible 12-column hairline grid on limestone, one grotesk and the real product (a working page) is the most direct proof of craft, the opposite of their bold-text GIF site. No section numbers, to avoid the paperwork look of the previous spec-sheet version."
-  },
-  "concept_type": "brochure: one page with a live era demo of their own first site, services, story, offices, steps and an email request builder",
-  "tier_visual": "standard",
-  "images": [
-    {
-      "src": "https://ip-assets-bvg-design-services.lovable.app/assets/guide-*.jpg (hope-town, treasure-cay, nassau-light, deadmans-reef, williams-town, exumas, lochabar)",
-      "source": "own",
-      "credit": "Bahamas Vacation Guide (BVG's own site), re-hosted in the Lovable gallery, 900x398"
-    },
-    {
-      "src": "https://ip-assets-bvg-design-services.lovable.app/assets/lucayan-harbour.jpg",
-      "source": "commons",
-      "credit": "Jon Worth, Wikimedia Commons, CC BY-SA 2.0"
-    }
-  ],
-  "plan_gate": {
-    "verdict": "approved after one revision",
-    "photography": 4,
-    "typography": 4,
-    "composition": 4,
-    "colour": 4,
-    "fit": 5,
-    "distinct": 5,
-    "references": 4
-  },
-  "critic": {
-    "photography": 4,
-    "typography": 4,
-    "composition": 4,
-    "colour": 4,
-    "fit": 5,
-    "distinct": 5,
-    "references": 4,
-    "note": "plan-gate predicted scores after revision"
-  },
-  "current_site_findings": [
-    "Footer says 'Last Updated on 30 May, 2014'",
-    "Advertising agency page link is dead (404)",
-    "All-bold text, GIF buttons, no mobile layout",
-    "Two phone numbers and two emails in public",
-    "Best proof (1996, the Bahamas Vacation Guide) buried in a jokey paragraph"
-  ],
-  "pitch_line": "Your own first site, the Bahamas Vacation Guide, rebuilds itself from 1996 to a 2026 phone page on the first screen: thirty years of getting Bahamian businesses found, shown instead of told.",
-  "assumptions": [
-    "Nassau and Abaco offices are listed on bvgdesign.com without addresses or numbers; the concept routes them through Freeport",
-    "The 2006, 2016 and 2026 layouts of the guide are recreations, labelled as such on the page"
-  ],
-  "sources": [
-    "https://www.bvgdesign.com/",
-    "https://www.bvgdesign.com/faqs.html",
-    "https://www.bvgdesign.com/promo.html",
-    "http://www.bahamasvacationguide.com/",
-    "https://bahamas.yabsta.com/listing/view/92035/bvg-design-services"
-  ],
-  "notes": "Generation 2 rebuild round 2, 2026-11-21 (site worker). Replaced the A10 navy spec sheet (paperwork) with A04/P01/T03. BLIND: sandbox blocks outside images and look.mjs; photos viewed through Lovable gallery d03b708e (existing, no new credits) and QA screenshots use crops of it. References (linear.app, stripe.com) judged from knowledge. Plan gate (CRITIC mode 1): revise (make 2026 a real phone, fill the 1996 frame, break four-up rows, drop generated service photos, proof line by CTA), all applied, then approved with predicted 4/4/4/4/5/5/4. services.html dropped: one page carries everything (brochure). Generated studio photos no longer used. qa.mjs 0 blockers (1 warning: the shared concept button under 40 px); interact.mjs 0 dead, 0 JS errors; distinct.mjs: distinct (closest fernandez-bay-village 67). Pitch with care: BVG is also a web studio (competitor).",
-  "built_at": "2026-11-21T13:47:31.788262+00:00",
-  "claimed_at": "2026-11-21T13:33:34.942Z"
+ "slug": "bvg-design-services",
+ "id": 53,
+ "name": "BVG Design Services",
+ "batch": "01",
+ "tier": "A",
+ "state": "building",
+ "generation": 2,
+ "rebuild_of": 1,
+ "claimed_at": "2026-11-22T13:55:28.552Z"
 }
