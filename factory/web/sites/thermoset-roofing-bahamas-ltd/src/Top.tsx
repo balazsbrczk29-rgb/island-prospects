@@ -103,15 +103,16 @@ export default function Top() {
             <img src={sqw(hero.src, 1500)} width={1500} height={1125} alt={hero.alt} fetchPriority="high" />
             <figcaption>{hero.cap}. Photograph: Thermoset.</figcaption>
           </figure>
-          <div className="wo__card" id="wo-card">
-              <motion.div aria-live="polite" key={rec.name + kind} initial={{ opacity: 0.4, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, ease }}>
+          <div className="wo__card" id="wo-card" aria-live="polite">
+              <motion.div key={rec.name + kind} initial={{ opacity: 0.4, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.22, ease }}>
                 <p className="wo__label">{kindLabel}, {island}: {probLabel.charAt(0).toLowerCase() + probLabel.slice(1)}</p>
                 <h2 className="wo__rec">{rec.name}</h2>
                 <p className="wo__line">{rec.line}</p>
-                <p className="wo__label wo__label--names">Thermoset has roofed {count} {plural.toLowerCase()}, including <a href="#clients" className="wo__all" onClick={() => dispatchEvent(new CustomEvent('tr:type', { detail: kind }))}>see them all</a></p>
+                <p className="wo__label wo__label--names">{plural} on Thermoset&rsquo;s client list include</p>
                 <ul className="wo__names">
                   {names.map((n, i) => <motion.li key={n} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, ease, delay: 0.05 + i * 0.04 }}>{n}</motion.li>)}
                 </ul>
+                <a href="#clients" className="wo__all" onClick={() => dispatchEvent(new CustomEvent('tr:type', { detail: kind }))}>See all {count}</a>
               </motion.div>
             <div className="wo__you">
               <label><span className="sr-only">Your name</span><input value={who} onChange={e => setWho(e.target.value)} placeholder="Your name" autoComplete="name" /></label>

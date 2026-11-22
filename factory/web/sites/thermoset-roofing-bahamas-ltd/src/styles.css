@@ -319,7 +319,7 @@ h3 { font: 600 18px/1.35 var(--f); text-wrap: balance; }
   .contact__grid { grid-template-columns: minmax(0, 1fr); }
 }
 
-.wo__all { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
+.wo__all { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
 .wo__you { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
 .wo__you input { width: 100%; box-sizing: border-box; font: 400 16px var(--f); color: var(--ink); min-height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 3px; background: #fff; }
 .wo__you input::placeholder { color: var(--muted); }

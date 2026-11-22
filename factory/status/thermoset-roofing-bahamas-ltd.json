@@ -4,7 +4,7 @@
  "name": "Thermoset Roofing Bahamas Ltd",
  "batch": "08",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "history": [
   {
@@ -36,5 +36,30 @@
   }
  ],
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T12:14:13.401Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T12:37:03.250Z",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/thermoset-roofing-bahamas-ltd/",
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "gate2": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion": 4,
+   "phone": 4
+  },
+  "note": "Re-score passed; its one remaining wording fix (card names line, no invented building count) and the aria-live move were applied afterwards."
+ },
+ "notes": [
+  "Job-spec rebuild from design.md: roof request work order on screen 1 (building, need, roof, island) recommends a service or R.A.D.A.R. plan, shows comparable clients by type and emails the GM (cc owner) with name and phone; filterable/searchable client index; kept 3D roof build-up below; R.A.D.A.R.; certified manufacturers; contact with both Culmers.",
+  "Kept Hanken Grotesk only and the limestone/sea-glass palette per Balazs approval note (keep this design individuality).",
+  "Client grouping by building type is ours (stated on the page).",
+  "Wording to confirm with owner: leak line for homes (report what the rest of the roof needs), Thermoset looks at the roof first then recommends the system; layer descriptions for vapour retarder, insulation, cover board.",
+  "Squarespace photo native sizes unknown: requested as format=1500w and shown at or below that width."
+ ]
 }
