@@ -22,7 +22,7 @@ function Marina() {
             <section className="sec" id="check" data-pic="harbour" aria-labelledby="k-h">
               <SecPic k="harbour" />
               <h2 id="k-h" className="mid">Will she fit?</h2>
-              <SlipCheck />
+              <SlipCheck idp="m" />
             </section>
             <section className="sec" id="contact" data-pic="cay" aria-labelledby="c-h">
               <h2 id="c-h" className="mid">The marina office.</h2>
@@ -30,7 +30,7 @@ function Marina() {
             </section>
           </main>
           <Foot />
-          <Strip />
+          <Strip mode="slip" />
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 import { IMG, pics } from './data'
-import { useActivePic, Fixed, SecPic, Nav, StayFinder, Contact, Strip, Foot } from './site'
+import { useActivePic, Fixed, SecPic, Nav, StaysList, Contact, Strip, Foot } from './site'
 
 function Stay() {
   const [pic] = useActivePic(['top', 'rooms', 'contact'], 'cottage')
@@ -22,7 +22,7 @@ function Stay() {
             <section className="sec" id="rooms" data-pic="living" aria-labelledby="r-h">
               <SecPic k="living" />
               <h2 id="r-h" className="mid">Find the one that fits your party.</h2>
-              <div style={{ marginTop: 'var(--s-4)' }}><StayFinder /></div>
+              <StaysList />
               <img className="inline-pic" src={IMG + pics.porch.src} alt={pics.porch.alt} loading="lazy" width={640} height={480} />
             </section>
             <section className="sec" id="contact" data-pic="cottage" aria-labelledby="c-h">
@@ -31,7 +31,7 @@ function Stay() {
             </section>
           </main>
           <Foot />
-          <Strip />
+          <Strip mode="room" />
         </div>
       </div>
     </>

@@ -200,8 +200,24 @@ a { color: inherit; }
 .tile .kind { font-family: var(--text); font-style: italic; color: var(--muted); }
 @media (min-width: 901px) { .strip { transition: transform var(--d-med) var(--ease), opacity var(--d-med); } .strip--quiet { transform: translateY(100%); opacity: 0; pointer-events: none; } }
 @media (max-width: 900px) {
-  .sec--hero .sec__pic { aspect-ratio: 16 / 9; margin-bottom: var(--s-3); }
+  .sec--hero .sec__pic { aspect-ratio: 4 / 3; margin-bottom: var(--s-3); }
   .seg--tight { flex-wrap: nowrap; gap: 4px; width: 100%; }
   .seg--tight button { flex: 1 1 0; min-width: 0; height: 48px; }
   .tab span { font-size: .8125rem; }
 }
+.tile { min-height: 64px; }
+.fixed .stay-card { position: absolute; inset: auto var(--s-4) 104px auto; margin: 0; width: min(395px, 52%); background: var(--ground); padding: 10px 10px 14px; border-radius: var(--r); box-shadow: 0 18px 40px -24px rgb(22 41 58 / .55); }
+.fixed .stay-card img { width: 100%; aspect-ratio: 395 / 300; height: auto; object-fit: cover; border-radius: 2px; background: var(--ground-2); }
+.fixed .stay-card figcaption { position: static; display: grid; gap: .15rem; margin-top: .6rem; padding: 0 .2rem; background: none; font: 400 var(--t-1)/1.3 var(--text); }
+.stay-card b { font: 400 1.35rem/1.1 var(--display); letter-spacing: -0.02em; font-variation-settings: "opsz" 48; }
+.stay-card span { font-size: var(--t-1); color: var(--muted); }
+.stay-inline { display: none; }
+@media (max-width: 900px) {
+  .stay-inline { display: block; margin: var(--s-3) 0 0; max-width: 395px; }
+  .stay-inline img { width: 100%; height: auto; aspect-ratio: 395 / 300; object-fit: cover; border-radius: var(--r); background: var(--ground-2); }
+  .stay-inline figcaption { margin-top: .4rem; font-size: var(--t-1); color: var(--muted); }
+  .sec--hero .nav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--pad)) var(--s-2); padding: 0 var(--pad); }
+  .sec--hero .nav a { min-height: 44px; }
+  .sec--hero .brand { margin-top: 0; }
+}
+@media (max-width: 400px) { .tab span { display: none; } }

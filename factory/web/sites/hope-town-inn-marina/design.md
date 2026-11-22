@@ -63,3 +63,12 @@ Scale: 14 small / 19 body / clamp(22, 30) lead and tile names / clamp(38, 64) h2
 - Screen 1 does the job for both visitors without scrolling on desktop: yes (switch, count, nine tiles, Check rates; or LOA, verdict, Book a slip). Phone: switch and count above the fold, grid partly, strip carries the button.
 - A1 one idea (two ways in) yes; A2 Fraunces + Newsreader; A3 scale set; A4 display tracking -0.04em; A5 measure 36rem; A6 tabular for counts, sizes, LOA, phones; A7 contrast muted 6.1:1, check dimmed tile text stays >= 4.5 by dimming the photo only (care); A8 one accent harbour blue; red only as a rule; A9 8 px scale; A10 left edge of the column aligned; A11 thumbnails at or below 395; A12 no overlays; A13 photo credit in footer; A14 44 px targets (segments 48); A15 focus ring; A16 reduced motion; A17 grid fixed size, verdict min-height; A18 phone: no fixed half, native scroll; A19 facts from the brief and the resort page; no em dashes; A20 contact with working numbers only.
 - Distinct: the only site in the repo that splits its booking tool by how you arrive.
+
+## 9. Changes after the critic (round 1)
+- The selected stay appears as a paper card (its own 395x300 photo at native size, name, guests, ft², m²) on the fixed half, above the concept label; on phone inline above the Check rates button.
+- Tiles use short names (King Room, Double Room, Garden, 2-bed, Hummingbird...) with "Villa · up to 6" so nothing wraps to three lines.
+- Section 2 is a static comparison of all nine (thumb, guests, ft², m²); the ferry sentence restored; "three room types and six villas".
+- The boat panel renders once per page id (hero/boat/m prefixes); both tab panels stay in the DOM with hidden.
+- Harbour and docks share a.jpg: the photo now pans and zooms to the docks instead of crossfading to itself.
+- Phone: 4:3 harbour photo, a scrolling nav row, tab descriptions dropped under 400 px.
+- Marina section on the field colour; Getting here uses the aerial; honest helper line under Check rates; Elbow Reef Classic wording from the brief; stay and marina pages show only their own strip button.

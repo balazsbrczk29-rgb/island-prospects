@@ -2,45 +2,49 @@ import { createRoot } from 'react-dom/client'
 import './styles.css'
 import { IMG, RATES, DOCKWA, pics } from './data'
 import { useState } from 'react'
-import { useActivePic, Fixed, SecPic, Nav, StayFinder, SlipCheck, Specs, Contact, Strip, Foot, Arrive } from './site'
+import { useActivePic, Fixed, SecPic, Nav, StaysList, SlipCheck, Specs, Contact, Strip, Foot, Arrive, smallestFit } from './site'
+import { stays } from './data'
 
 const IDS = ['top', 'ferry', 'boat', 'bar', 'cay', 'here', 'contact']
 
 function Home() {
   const [pic, sec] = useActivePic(IDS, 'harbour')
   const [way, setWay] = useState<'ferry' | 'boat'>('ferry')
+  const [n, setN] = useState(2)
+  const [sel, setSel] = useState(() => smallestFit(2))
+  const setCount = (i: number) => { setN(i); const cur = stays.find(x => x.name === sel); if (!cur || cur.guests < i) setSel(smallestFit(i)) }
   const mode = sec === 'top' ? (way === 'boat' ? 'slip' : 'room') : sec === 'boat' || sec === 'here' ? 'slip' : 'room'
   const shown = sec === 'top' && way === 'boat' ? 'docks' : pic
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
       <div className="split">
-        <Fixed pic={shown} />
+        <Fixed pic={shown} card={sec === 'top' && way === 'ferry' ? stays.find(x => x.name === sel) : null} />
         <div className="col">
           <main id="main">
             <section className="sec sec--hero" id="top" data-pic="harbour" aria-labelledby="h">
               <SecPic k="harbour" eager />
               <p className="brand">Hope Town Inn &amp; Marina &middot; Elbow Cay, Abaco</p>
-              <div className="hide-sm"><Nav /></div>
+              <Nav />
               <h1 id="h" className="hero-h">Two ways in.</h1>
               <p className="lede lede--hero">A 15-acre estate beside the Elbow Reef Lighthouse on Hope Town Harbour, where guests and boats arrive at the same dock.</p>
-              <Arrive mode={way} setMode={setWay} />
+              <Arrive mode={way} setMode={setWay} n={n} setN={setCount} sel={sel} setSel={setSel} />
             </section>
 
             <section className="sec" id="ferry" data-pic="cottage" aria-labelledby="ferry-h">
               <SecPic k="cottage" />
               <p className="kicker">Rooms and villas</p>
               <h2 id="ferry-h" className="big">By ferry.</h2>
-              <p className="body">All nine, side by side: three hotel rooms and six villas, from a king room for two to the eight-guest villas.</p>
-              <div style={{ marginTop: 'var(--s-4)' }}><StayFinder /></div>
+              <p className="body">The ferry brings you across from Marsh Harbour. All nine, side by side: three room types and six villas, from a king room for two to the eight-guest villas.</p>
+              <StaysList />
             </section>
 
-            <section className="sec" id="boat" data-pic="docks" aria-labelledby="boat-h">
+            <section className="sec field" id="boat" data-pic="docks" aria-labelledby="boat-h">
               <SecPic k="docks" />
               <p className="kicker">The marina</p>
               <h2 id="boat-h" className="big">By boat.</h2>
               <p className="body">The inn anchors the west side of Hope Town Harbour, with dockage up to 125 ft and moorings for smaller boats. Check your length, then book the slip on Dockwa.</p>
-              <SlipCheck />
+              <SlipCheck idp="boat" />
               <Specs />
             </section>
 
@@ -60,8 +64,8 @@ function Home() {
               <div className="acts"><a className="ul" href="#contact">Ask about Johnny's Cay</a></div>
             </section>
 
-            <section className="sec" id="here" data-pic="cottage" aria-labelledby="here-h">
-              <SecPic k="porch" />
+            <section className="sec" id="here" data-pic="harbour" aria-labelledby="here-h">
+              <SecPic k="harbour" />
               <p className="kicker">Getting here</p>
               <h2 id="here-h" className="mid">Fly to Marsh Harbour, then the ferry to Hope Town.</h2>
               <p className="body">GNL Ferry and The Ferry Limited run from Marsh Harbour to Hope Town. You can also fly into Treasure Cay and come over by boat. Arriving on your own boat, book the slip ahead on Dockwa.</p>
@@ -72,7 +76,7 @@ function Home() {
               <p className="kicker">The office</p>
               <h2 id="c-h" className="mid">Write or call before you cross.</h2>
               <Contact />
-              <p className="body">Every year the inn hosts the Elbow Reef Classic, four days with proceeds to the Elbow Reef Lighthouse. Marinalife 2024 Readers' Choice. Dockwa Elite Fleet 2024.</p>
+              <p className="body">The Elbow Reef Classic runs every year: four days, with proceeds to the Elbow Reef Lighthouse. Marinalife 2024 Readers' Choice. Dockwa Elite Fleet 2024.</p>
             </section>
           </main>
           <Foot />
