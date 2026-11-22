@@ -1,11 +1,48 @@
 {
  "slug": "gunite-pools-bahamas",
  "id": 73,
- "name": "Gunite Pools Bahamas",
+ "name": "Gunite Pools of Nassau",
  "batch": "14",
  "tier": "B",
- "state": "building",
+ "state": "built",
  "generation": 2,
- "history": null,
- "claimed_at": "2026-11-22T14:51:20.210Z"
+ "jobspec_built": true,
+ "pages": ["index.html"],
+ "primary_cta": "Send my request (two-door quote builder: build or renovate / service my pool)",
+ "brand_truth": "A third-generation Bahamian family firm, since 1972, that builds high-end residential and large commercial gunite pools and services them with monthly reports and GPS-tracked visits.",
+ "buyer": "Homeowners and second-home owners in New Providence and Great Exuma, often away; architects, developers and hotel managers looking for a pool contractor.",
+ "direction": {"archetype": "A11", "lane": "P09", "type": "T08", "why": "Dealt by direction.mjs; per GUIDE.md the design follows design.md: a pool builder's drawing table (plan sheet with live dimensions and water) beside their own finished pool, then a 3D anatomy of a gunite pool. Instrument Sans + Newsreader, limestone ground, pool-water accent."},
+ "concept_type": "trade brochure + quote request",
+ "images": [
+  {"src": "https://static.wixstatic.com/media/9bfda6_e527856dbc984ae495f3beedf614b251~mv2.jpg", "source": "own", "credit": "Gunite Pools of Nassau"},
+  {"src": "https://static.wixstatic.com/media/9bfda6_f1f2204f4da5433688973d6dc46af464~mv2.jpg", "source": "own", "credit": "Gunite Pools of Nassau"},
+  {"src": "https://static.wixstatic.com/media/9bfda6_901a45dda1b04d489590b8b7fec19a17~mv2.jpg", "source": "own", "credit": "Gunite Pools of Nassau"},
+  {"src": "https://static.wixstatic.com/media/9bfda6_c167d0652a034a8b9438af04fceed5d2~mv2.jpg", "source": "own", "credit": "Gunite Pools of Nassau"},
+  {"src": "https://static.wixstatic.com/media/9bfda6_7c930183e5054c3288f6bd84808f2138~mv2.jpg", "source": "own", "credit": "Gunite Pools of Nassau"},
+  {"src": "https://static.wixstatic.com/media/9bfda6_4e1c0cb9f4894a78a8cfeafb7e61221a~mv2.jpg", "source": "own", "credit": "Gunite Pools of Nassau"},
+  {"src": "https://static.wixstatic.com/media/9bfda6_d8dbe7a374174a66816250b058d67ee4~mv2.jpg", "source": "own", "credit": "Gunite Pools of Nassau"},
+  {"src": "https://static.wixstatic.com/media/9bfda6_dab0b309b23541cf978c3e1a0ea96a8e~mv2.jpeg", "source": "own", "credit": "Gunite Pools of Nassau"},
+  {"src": "https://static.wixstatic.com/media/9bfda6_23760d4236cb48a989560ebbbd3d9ca1~mv2.jpg", "source": "own", "credit": "Gunite Pools of Nassau"},
+  {"src": "https://static.wixstatic.com/media/9bfda6_7d0d168c6d754855bb497e42fd3c32ee~mv2.jpg", "source": "own", "credit": "Gunite Pools of Nassau"}
+ ],
+ "critic": {"gate1": "pass (3/3)", "wow": 4, "photography": 4, "typography": 4, "composition": 4, "conversion_clarity": 4, "phone": 4, "rounds": 2},
+ "current_site_findings": [
+  "Every page ends in the same generic contact form; enquiries arrive without pool type, size, island or stage.",
+  "GPS-tracked visits and the monthly report are a short paragraph on an inner page.",
+  "1972 and the family story are hidden on About; the homepage has no year and no phone.",
+  "The Store tile opens a Google Maps search; stock photos and file names are mixed into their work.",
+  "Three different names across title, company and domain."
+ ],
+ "pitch_line": "Your customers draw the pool they want on your first screen, and your first call starts with the size, shape, island and stage already in hand.",
+ "assumptions": [
+  "No email or WhatsApp was found: the request is composed and copied, with Call (242) 397 1050; the live site would post to the office inbox (address to confirm).",
+  "Store hours not published: shown as 'Hours on request'.",
+  "Build door offers New Providence, Paradise Island, Great Exuma and Another island; confirm whether construction (not only service) is taken in Great Exuma.",
+  "Gallon and area figures are computed planning estimates (average 5 ft depth), labelled as rough.",
+  "The monthly report sheet is a labelled sample layout, not a real report; confirm the fields they report.",
+  "Photo captions do not name projects or islands; confirm which portfolio projects may be named."
+ ],
+ "sources": ["https://www.gunitepoolsbahamas.com/", "https://www.gunitepoolsbahamas.com/newpool", "factory/jobspecs/gunite-pools-bahamas.md"],
+ "notes": "Built Nov 22 from the approved job spec and design.md. Deviations: no yard photo of theirs exists, so the outline is drawn on a plan sheet and over the visitor's own yard photo if added; the construction sequence is a procedural 3D section (R3F, lazy, paused off-screen, still in reduced motion) because their site has no labelled construction photos. No Lovable images used. Repo main was diverged locally; worked on a branch from origin/main renamed to main.",
+ "built_at": "2026-11-22T15:30:00Z"
 }

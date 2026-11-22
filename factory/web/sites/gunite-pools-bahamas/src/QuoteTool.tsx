@@ -89,8 +89,8 @@ export function QuoteTool() {
     : `Service in ${serviceIsland}, ${size === 'Not sure' ? 'pool size to confirm' : size.split(',')[0].toLowerCase() + ' pool'}, ${onIsland.toLowerCase()}`
   const step2 = (
     <motion.div key="s2" className="tool" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.32, ease }}>
-      <div className="promise-mini"><p className="cap muted">Your request</p><p className="small">{summary}{door === 'build' && yard ? ', with a yard photo' : ''}.</p>
-        <button type="button" className="link" style={{ background: 'none', border: 0, padding: 0, cursor: 'pointer', alignSelf: 'flex-start', fontSize: 14.5, minHeight: 32 }} onClick={() => setStep(1)}>Change</button></div>
+      <div className="promise-mini sumrow">{door === 'build' && <div className="mini" aria-hidden="true"><PlanSheet shape={shape} len={len} yard={yard} active={false} /></div>}<div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}><p className="cap muted">Your request</p><p className="small">{summary}{door === 'build' && yard ? ', with a yard photo' : ''}.</p>
+        <button type="button" className="link" style={{ background: 'none', border: 0, padding: 0, cursor: 'pointer', alignSelf: 'flex-start', fontSize: 14.5, minHeight: 32 }} onClick={() => setStep(1)}>Change</button></div></div>
       {contact}
       <div className="sendrow"><button className="btn btn-primary" type="submit">Send my request</button><span className="cap muted">{door === 'build' ? 'Your quote follows a site visit.' : 'We reply to arrange the first visit.'}</span></div>
     </motion.div>
@@ -134,13 +134,10 @@ export function QuoteTool() {
               <label className="lbl" style={{ flex: 1 }}><span>Length <span className="num">{len}</span> ft</span><input className="range" type="range" min={16} max={60} step={1} value={len} onChange={e => setLen(+e.target.value)} aria-valuetext={`${len} feet long, ${w} feet wide`} /></label>
               <label className="upload"><ImagePlus size={18} strokeWidth={1.75} aria-hidden="true" />{yard ? 'Change yard photo' : 'Add your yard photo'}<input type="file" accept="image/*" onChange={e => onYard(e.target.files?.[0])} /></label>
             </div>
-            <div className="two">
+            <div className="selrow">
               <label className="lbl">Island<select className="select" value={island} onChange={e => setIsland(e.target.value)}>{ISLANDS_BUILD.map(i => <option key={i}>{i}</option>)}</select></label>
               <label className="lbl">Where you are<select className="select" value={stage} onChange={e => setStage(e.target.value)}>{STAGES.map(i => <option key={i}>{i}</option>)}</select></label>
-            </div>
-            <div className="sendrow">
               <button className="btn btn-primary" type="submit">Next: your details</button>
-              <span className="cap muted">Rough figures for planning only.</span>
             </div>
             </> : step2}
           </motion.form>

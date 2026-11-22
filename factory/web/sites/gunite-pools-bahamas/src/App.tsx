@@ -20,7 +20,7 @@ function Header() {
       <div className="top-in" style={{ paddingLeft: 'var(--margin)', paddingRight: 'var(--margin)' }}>
         <a className="mark" href="#top" aria-label="Gunite Pools of Nassau, home"><b>Gunite Pools of Nassau</b><span className="cap">Since 1972</span></a>
         <nav className="nav" aria-label="Main">
-          <a href="#work">Work</a><a href="#build">How we build</a><a href="#service">Service</a><a href="#repairs">Repairs and store</a><a href="#family">About</a>
+          <a href="#work">Work</a><a href="#build">How it is built</a><a href="#service">Service</a><a href="#repairs">Repairs</a><a href="#family">Family</a>
           <a className="tel num" href={TEL}>{PHONE}</a>
         </nav>
         <a className="mtel num" href={TEL}><Phone size={16} strokeWidth={1.75} aria-hidden="true" />Call</a>
@@ -38,7 +38,7 @@ function Hero() {
       </figure>
       <div className="hero-left">
         <h1 id="h1">Tell us about the pool you have in mind.</h1>
-        <p className="lead">Built and serviced by three generations of the Whitehead family since 1972.</p>
+        <p className="lead">Built and serviced by the Whitehead family since 1972.</p>
         <QuoteTool />
       </div>
     </section>
@@ -68,7 +68,6 @@ function Work() {
         {work.map((p, k) => (
           <figure key={p.src}>
             <img src={p.src} width={p.w} height={p.h} alt={p.alt} loading="lazy" decoding="async" style={{ aspectRatio: `${p.w} / ${p.h}` }} />
-            <figcaption className="cap num">{String(k + 1).padStart(2, '0')}</figcaption>
           </figure>
         ))}
       </div>
@@ -182,7 +181,7 @@ function Close() {
           <a className="btn btn-quiet num" href={TEL}><Phone size={18} strokeWidth={1.75} aria-hidden="true" />Call {PHONE}</a>
         </div>
         <div className="close-info small">
-          <span><a className="link" href={MAPS}>{ADDRESS}</a></span>
+          <span>Store and office: <a className="link" href={MAPS}>{ADDRESS}</a>. Hours on request.</span>
           <a className="link" href={STORE}>Shop online</a>
           <a className="link" href="https://www.instagram.com/gunitepoolsofnassau/">Instagram</a>
           <a className="link" href="https://www.facebook.com/gunitepoolsofnassau/">Facebook</a>
