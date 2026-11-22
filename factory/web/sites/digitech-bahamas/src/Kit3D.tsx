@@ -138,18 +138,18 @@ function Rig({ s }: { s: KitState }) {
   const last = xs(s.count, s.count - 1), first = xs(s.count, 0)
   // network corner: beside the tills on a wide stage, in a row behind them on a narrow one
   const net = compact
-    ? { kp: [-0.95, 0, -0.85], router: [0.05, 0, -0.85], server: [0.62, 0, -0.85], backup: [s.managed ? 1.02 : 0.62, 0, -0.85] }
+    ? { kp: [first - 0.7, 0, -0.3], router: [-0.55, 0, 0.9], server: [0.25, 0, 0.88], backup: [s.managed ? 0.7 : 0.25, 0, 0.88] }
     : { kp: [first - 0.75, 0, -0.35], router: [last + 1.0, 0, -0.3], server: [last + 1.55, 0, -0.3], backup: [last + (s.managed ? 1.95 : 1.55), 0, -0.3] }
-  const left = compact ? Math.min(first - 0.4, -1.2) : first - (s.kind === 'fnb' ? 1.0 : 0.4)
+  const left = compact ? Math.min(first - (s.kind === 'fnb' ? 0.95 : 0.4), -0.8) : first - (s.kind === 'fnb' ? 1.0 : 0.4)
   const right = compact ? Math.max(last + 0.65, 1.25) : last + (s.managed && s.backup ? 2.15 : 1.75)
   const span = right - left + 0.3, mid = (left + right) / 2
   const camTarget = useRef(new THREE.Vector3())
   const lookAt = useRef(new THREE.Vector3(0, 0.5, 0.1))
   useFrame(() => {
     const aspect = size.width / size.height
-    const dist = Math.max(2.3, ((span / 2) / (Math.tan((15 * Math.PI) / 180) * aspect)) * (compact ? 0.7 : 0.9) + (compact ? 0.1 : 0.2))
-    camTarget.current.set(mid, 0.6 + dist * 0.3, dist)
-    lookAt.current.lerp(new THREE.Vector3(mid, 0.34, 0.1), reduce ? 1 : 0.06)
+    const dist = Math.max(2.3, ((span / 2) / (Math.tan((15 * Math.PI) / 180) * aspect)) * (compact ? 0.8 : 0.8) + 0.2)
+    camTarget.current.set(mid, compact ? 0.8 + dist * 0.36 : 0.45 + dist * 0.22, dist + (compact ? 0.6 : 0))
+    lookAt.current.lerp(new THREE.Vector3(mid, compact ? 0.2 : 0.3, compact ? 0.35 : 0.1), reduce ? 1 : 0.06)
     camera.position.lerp(camTarget.current, reduce ? 1 : 0.06)
     camera.lookAt(lookAt.current)
     if (camera.position.distanceTo(camTarget.current) > 0.002) invalidate()
@@ -199,7 +199,8 @@ export default function Kit3D({ s, onReady }: { s: KitState; onReady?: () => voi
           <Lightformer form="ring" intensity={0.8} color="#ffffff" position={[0, 6, -6]} scale={4} target={[0, 0, 0]} />
         </Environment>
         <directionalLight position={[3, 6, 4]} intensity={1.0} />
-        <ContactShadows position={[0, 0.002, 0]} opacity={0.5} scale={16} blur={2.4} far={1.2} resolution={512} />
+        <ContactShadows position={[0, 0.002, 0]} opacity={0.75} scale={16} blur={1.8} far={0.6} resolution={512} />
+        <ContactShadows position={[0, 0.003, 0]} opacity={0.5} scale={16} blur={0.6} far={0.15} resolution={1024} />
       </Canvas>
     </div>
   )
