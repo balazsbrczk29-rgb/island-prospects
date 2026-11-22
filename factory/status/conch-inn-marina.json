@@ -4,8 +4,30 @@
  "name": "Conch Inn & Marina",
  "batch": "10",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T12:51:11.209Z"
+ "claimed_at": "2026-11-22T12:51:11.209Z",
+ "jobspec_built": true,
+ "built_at": "2026-11-22",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/conch-inn-marina/",
+ "critic": {
+  "gate1": "pass",
+  "scores": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion": 5,
+   "phone": 4
+  }
+ },
+ "notes": [
+  "Rebuilt from the approved job spec: screen 1 is a slip desk (Slip / Mooring ball / Room ashore) with a to-scale harbour plan that draws the visitor's boat in a slip, a live tiered estimate from published rates, the 30 ft beam check and a prefilled email to info@conchinn.com (visible and copyable), call and VHF 16.",
+  "Kept: RezExpert hand-off, all published rates and rules, six rooms, Snappa's, both phones, VHF 16, office hours; the previous self-filling letter is now the visible email under the estimate.",
+  "Decisions: monthly dockage computed as $2.25/ft per night for 30+ nights with 'the office confirms monthly totals'; mooring 30+ nights = $500 per month plus $30/night remainder capped at $500, plus VAT; dockage VAT unknown so not added; plan is a schematic (no north arrow, depths or real slip layout).",
+  "Steppers for LOA/beam/draft skipped (native numeric keyboard, Arrow keys work); design.md updated note.",
+  "Sandbox blocked the Wix photo host, so photos were checked by id and native size only (BLIND).",
+  "Assumptions to confirm: street number 700, which photo shows which room, dockage VAT."
+ ]
 }

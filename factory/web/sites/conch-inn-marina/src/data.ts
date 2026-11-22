@@ -7,12 +7,13 @@ export const wix = (id: string, w: number, h: number) => `${W}${id}/v1/fill/w_${
 export const BIZ = {
   name: 'The Conch Inn & Marina',
   short: 'Conch Inn',
-  street: 'Bay Street, Marsh Harbour, Abaco, Bahamas',
+  street: '700 Bay Street, Marsh Harbour, Abaco, Bahamas',
   phone: '242-367-4000', tel: '+12423674000',
   phone2: '242-577-7000', tel2: '+12425777000',
   email: 'info@conchinn.com',
   vhf: 'VHF 16',
   hours: 'Every day, 8:00 am to 5:30 pm',
+  hoursShort: '8:00 to 5:30',
   bookRooms: 'https://online.rezexpert.com/book?business_code=303844',
   instagram: 'https://www.instagram.com/theconchinn/',
   snappas: 'https://snappasbarandgrill.com/',
@@ -38,7 +39,7 @@ export const ROOMS: Room[] = [
 export const RATE = { one: 3.75, daily: 3.25, monthly: 2.25, short: 1.0, power: 0.75, water: 0.1, mooringNight: 30, mooringMonth: 500, beamMax: 30 }
 
 export const LEDGER: { group: string; rows: [string, string][] }[] = [
-  { group: 'Dockage, per foot of length', rows: [['One night', '$3.75'], ['Two nights or more, per night', '$3.25'], ['Thirty nights or more, monthly rate', '$2.25'], ['Pick-up, drop-off or provisioning, up to 3 hours', '$1.00']] },
+  { group: 'Dockage, per foot of length', rows: [['One night', '$3.75'], ['Two nights or more, per night', '$3.25'], ['Thirty nights or more, monthly rate, per night', '$2.25'], ['Pick-up, drop-off or provisioning, up to 3 hours', '$1.00']] },
   { group: 'At the slip', rows: [['Electric, 30 and 50 amp, per kWh', '$0.75'], ['Water, per gallon', '$0.10'], ['High-speed WiFi, showers and restrooms', 'Free'], ['Washers and dryers', 'Tokens']] },
   { group: 'Mooring balls, first come first served', rows: [['Per night, plus VAT', '$30'], ['Per month, plus VAT', '$500'], ['WiFi, dinghy dock, showers, laundry access', 'Included']] },
 ]
