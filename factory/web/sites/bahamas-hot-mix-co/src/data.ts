@@ -28,15 +28,6 @@ export const OFFICES = [
   { island: "Abaco", town: "Marsh Harbour", entity: "BHM Co. Ltd.", line: "Airport Roundabout, Ernest Dean Highway", po: "PO Box AB-20184" },
 ]
 
-export const AIRPORTS = [
-  { name: "Lynden Pindling International", place: "Nassau", work: "Runway 10-28 rehabilitation", img: "lpia" },
-  { name: "Grand Bahama International", place: "Freeport", work: "Runway works", img: "gbia" },
-  { name: "Hog Cay", place: "Exuma", work: "Main contractor, runway and apron", img: "hogcayB" },
-  { name: "Norman's Cay", place: "Exuma", work: "Runway chip coat", img: "normans" },
-  { name: "Marsh Harbour International", place: "Abaco", work: "Runway works", img: "lpia" },
-  { name: "Bimini Airport", place: "Bimini", work: "Runway works", img: "lpia" },
-] as const
-
 export const CATEGORIES = ["Road Construction", "Airports and Runways", "Ports", "Coastal & Marine", "Reverse Osmosis", "Utility Infrastructure", "Site Development", "Buildings", "Drilling"] as const
 export type Cat = (typeof CATEGORIES)[number]
 
@@ -103,7 +94,6 @@ export const PROJECTS: { name: string; cat: Cat; thumb: string; url: string }[] 
   ["Shirley Street Water & Sewage Rehabilitation", "Utility Infrastructure", "2024/02/40-400x284.jpg", "shirley-street"],
   ["Borco", "Site Development", "2023/03/BHM-borco-400x284.jpg", "borco"],
   ["BEC Substation & Generator Facility, Baha Mar", "Utility Infrastructure", "2024/02/baha-mar-400x284.jpg", "bec-substation"],
-  ["Wells Capability", "Drilling", "2024/02/43-400x284.jpg", "wells-capability-data-sheet"],
   ["Albany Cottage", "Buildings", "2024/02/46-400x284.jpg", "albany-cottage"],
   ["Endauld Building", "Buildings", "2023/01/BHM-Endauld-1-400x284.jpg", "endauld"],
   ["East Bay Marina", "Coastal & Marine", "2023/05/BHM-Bay-Street-Marina-002-400x284.jpg", "east-bay-marina"],
@@ -122,6 +112,7 @@ const ISL: Record<string, Isl> = {
   "Western New Providence Wastewater Treatment Plant": "New Providence", "Bay Street Marina": "New Providence", "Bay Street Sea Wall": "New Providence",
   "Atlantis Paradise Island": "New Providence", "Atlantis Chilled Water Line for Dolphin Cay": "New Providence", "Western New Providence Water Improvement Upgrade": "New Providence",
   "Nassau Road Improvement Project": "New Providence", "BEC Substation & Generator Facility, Baha Mar": "New Providence", "Lyford Cay High School": "New Providence", "Lyford Cay Rehabilitation": "New Providence",
+  "Harrold Road": "New Providence", "Baillou Hill": "New Providence", "Shirley Street Water & Sewage Rehabilitation": "New Providence", "National Stadium": "New Providence", "NPWDCo": "New Providence",
   "Grand Bahama Roads": "Grand Bahama", "Grand Bahama International Airport": "Grand Bahama", "Freeport Container Port Phase 1": "Grand Bahama",
   "Freeport Container Port: Delta 2-4 & GS6": "Grand Bahama", "Grand Bahama Well Field 1": "Grand Bahama",
   "North Abaco Roads": "Abaco", "Marsh Harbour International Airport": "Abaco", "Marsh Harbour Port & Customs Facility": "Abaco", "Winding Bay Abaco": "Abaco",

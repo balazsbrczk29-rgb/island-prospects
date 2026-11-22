@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { AnimatePresence, motion, useInView, useScroll, useTransform } from "motion/react"
 import { Masthead, Footer, mount, ease } from "./site"
-import { IMG, PHONE, TEL, EMAIL, OFFICES, PROJECTS } from "./data"
+import { IMG, PHONE, TEL, EMAIL, OFFICES, PROJECTS, officeFor } from "./data"
 import Atlas from "./Atlas"
 import MapAtlas, { WORK, ROUTER_ISLANDS as ISLANDS, type Sel } from "./MapAtlas"
 
 function Approach() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] })
-  const lg = typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches
+  const [lg, setLg] = useState(false)
+  useEffect(() => { const q = matchMedia("(min-width: 1024px)"); const on = () => setLg(q.matches); on(); q.addEventListener("change", on); return () => q.removeEventListener("change", on) }, [])
   const scale = useTransform(p, v => 1 + v * 0.42)
   const y = useTransform(p, v => `${v * -4}%`)
   const slabY = useTransform(p, v => `${v < 0.12 ? 0 : Math.max(-105, (v - 0.12) * -600)}%`)
@@ -96,7 +97,7 @@ function Runways() {
 
       <div className="wrap pt-10 pb-28 lg:pt-20 lg:pb-40 grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <p className="max-w-[52ch] text-base lg:text-[1.125rem]">Over three decades of airport construction, on time and within budget, to the standards of the airport authority's own engineers. A Family Island runway means shipping in plant, aggregate and a laboratory, then leaving a strip that takes jets.</p>
+          <p className="max-w-[52ch] text-base lg:text-[1.125rem]">Over three decades of airport construction: Lynden Pindling runway 10-28 and the terminal, Grand Bahama, Marsh Harbour, Bimini, Hog Cay as main contractor, Norman's Cay and both Odyssey FBOs. Asphalt from their own plants, two of them fully mobile, with mobile labs.</p>
           <ol className="mt-12 border-t border-[var(--color-line)]">
             {RUNWAYS.map((r, k) => (
               <li key={r.name} className="border-b border-[var(--color-line)]">
@@ -213,7 +214,7 @@ function Materials() {
 }
 
 const ISO = [
-  { std: "ISO 9001:2015", what: "Quality: QA/QC procedures, held separately for concrete, asphalt and civil engineering.", by: "Bureau Veritas" },
+  { std: "ISO 9001:2015", what: "Quality management (QA/QC).", by: "Bureau Veritas" },
   { std: "ISO 14001:2015", what: "Environmental management on every site.", by: "Bureau Veritas" },
   { std: "ISO 45001:2018", what: "Occupational health and safety for crews and the public.", by: "Bureau Veritas" },
   { std: "ISO/IEC 17025:2017", what: "Testing laboratories: the results on your mix design and cores.", by: "IAS" },
@@ -246,7 +247,7 @@ function Certified() {
   )
 }
 
-function Projects() {
+function Projects({ sel, set }: { sel: Sel; set: (s: Partial<Sel>) => void }) {
   return (
     <section id="projects" aria-labelledby="proj-h" className="bg-[var(--color-white)]">
       <div className="wrap py-24 lg:py-36">
@@ -254,7 +255,7 @@ function Projects() {
           <h2 id="proj-h" className="lg:col-span-7 text-2xl max-w-[14ch]">{PROJECTS.length} projects, on the record.</h2>
           <p className="lg:col-span-4 lg:col-start-9 max-w-[42ch]">From a high school to a cruise port. Choose a kind of work; each project opens its page on bhmgroup.com.</p>
         </div>
-        <Atlas limit={14} />
+        <Atlas limit={14} cat={sel.cat} setCat={c => set({ cat: c })} />
         <a href="projects.html" className="link mt-8 font-medium">See all {PROJECTS.length} projects</a>
       </div>
     </section>
@@ -266,7 +267,7 @@ function QuoteDesk({ sel, set }: { sel: Sel; set: (s: Partial<Sel>) => void }) {
   const work = sel.work, island = sel.island
   const setWork = (w: string) => set({ work: w }), setIsland = (i: string) => set({ island: i })
   const [f, setF] = useState({ scope: "", name: "", org: "", reply: "" })
-  const office = island === "Grand Bahama" ? OFFICES[1] : island === "Abaco" ? OFFICES[2] : OFFICES[0]
+  const office = officeFor(island)
   const body = useMemo(() => [
     `Work: ${work || "(not chosen)"}`, `Island: ${island || "(not chosen)"}`, f.scope && `Scope: ${f.scope}`,
     f.name && `Name: ${f.name}`, f.org && `Company: ${f.org}`, f.reply && `Reply to: ${f.reply}`,
@@ -324,6 +325,7 @@ function QuoteDesk({ sel, set }: { sel: Sel; set: (s: Partial<Sel>) => void }) {
               )
             })}
             <p className="pt-6"><a className="mono link" href={`tel:${TEL}`}>{PHONE}</a></p>
+            <p className="pt-6 text-sm">Careers: BHM is hiring graduate civil engineers and equipment operators. <a className="link" href="https://bhmgroup.com/about/careers/">Apply on bhmgroup.com</a></p>
             <p><a className="mono link" href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
           </div>
         </div>
@@ -369,7 +371,7 @@ function Home() {
         <Inward />
         <Materials />
         <Certified />
-        <Projects />
+        <Projects sel={sel} set={set} />
         <QuoteDesk sel={sel} set={set} />
       </main>
       <Footer />
