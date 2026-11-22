@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { BIZ, VILLAS, WHOLE } from './data'
-import { quote, money, addDays, nice, defaultArrival, iso } from './price'
+import { quote, money, addDays, nice, defaultArrival, iso, inSeasonMonth } from './price'
 
 /** Ask the tool to select a villa (or the whole resort) and bring it into view. */
 export function priceVilla(id: string) {
@@ -17,8 +17,8 @@ function Rolling({ text }: { text: string }) {
   return (
     <span className="roll num" aria-hidden="true">
       {text.split('').map((ch, i) => /\d/.test(ch)
-        ? <span className="roll-col" key={i}><span className="roll-size">{ch}</span><motion.span className="roll-strip" initial={false} animate={{ y: `-${+ch * 10}%` }} transition={reduce ? { duration: 0 } : { duration: 0.45, ease }}>{'0123456789'.split('').map(d => <span key={d}>{d}</span>)}</motion.span></span>
-        : <span key={i + ch}>{ch}</span>)}
+        ? <span className="roll-col" key={text.length - i}><span className="roll-size">{ch}</span><motion.span className="roll-strip" initial={false} animate={{ y: `-${+ch * 10}%` }} transition={reduce ? { duration: 0 } : { duration: 0.45, ease }}>{'0123456789'.split('').map(d => <span key={d}>{d}</span>)}</motion.span></span>
+        : <span key={`s${text.length - i}`}>{ch}</span>)}
     </span>
   )
 }
@@ -43,6 +43,8 @@ export function PriceTool() {
   const [guests, setGuests] = useState(2)
   const [flash, setFlash] = useState(0)
   const [glow, setGlow] = useState(false)
+  const lastVilla = useRef('mint')
+  useEffect(() => { if (id !== 'whole') lastVilla.current = id }, [id])
   useEffect(() => { if (!flash) return; setGlow(true); const t = setTimeout(() => setGlow(false), 700); return () => clearTimeout(t) }, [flash])
   const listRef = useRef<HTMLDivElement>(null)
   const whole = id === 'whole'
@@ -63,7 +65,8 @@ export function PriceTool() {
   const est = q.kind === 'total' ? `Estimate shown: ${money(q.total)} including 10% VAT.` : q.kind === 'whole' && q.pick ? `Published rate: ${money(WHOLE[q.pick])} including VAT.` : ''
   const mail = `mailto:${BIZ.email}?subject=${encodeURIComponent(`Villa request: ${whole ? 'Whole resort' : v.name}${arrive ? `, ${nice(arrive)} to ${nice(leave)}` : ''}`)}&body=${encodeURIComponent(`Hello Firefly,\n\nI would like to request ${name}.\nArrival: ${arrive ? nice(arrive) : ''}\nDeparture: ${leave ? nice(leave) : ''}\nNights: ${nights}\nGuests: ${guests}\n${est}\n\nSent from the Firefly website.`)}`
   const book = `${v.book}?${new URLSearchParams(arrive ? { checkIn: arrive, checkOut: leave, minOccupancy: String(guests) } : { minOccupancy: String(guests) })}`
-  const emailFirst = whole || q.kind === 'ask'
+  const emailFirst = whole || q.kind === 'ask' || q.kind === 'min'
+  const inS = arrive ? inSeasonMonth(new Date(arrive + 'T12:00').getMonth()) : false
 
   const options = VILLAS.map(x => x.id)
   const onKey = (e: KeyboardEvent) => {
@@ -82,7 +85,7 @@ export function PriceTool() {
           <button key={x.id} data-id={x.id} type="button" role="radio" aria-checked={x.id === id} tabIndex={x.id === id || (whole && x.id === 'mint') ? 0 : -1} className="v-opt" onClick={() => setId(x.id)}>
             {x.id === id && <motion.span layoutId="marker" className="marker" transition={{ type: 'spring', duration: 0.3, bounce: 0 }} />}
             <span className="v-n">{x.name}</span>
-            <span className="v-b num">{x.beds}{x.offDay ? `, from ${money(x.offDay)}` : ''}</span>
+            <span className="v-b num"><span className="bd">{x.beds}</span>{(inS ? x.inDay : x.offDay) ? <span className="pr">{money((inS ? x.inDay : x.offDay)!)} a night</span> : <span className="pr ask">rates on request</span>}</span>
           </button>
         ))}
       </div>
@@ -115,7 +118,7 @@ export function PriceTool() {
           : <><a className="btn" href={book}>Request to book {v.name}</a><a className="textlink" href={mail}>or email the resort</a></>}
       </div>
       <div className="whole-switch">
-        <button type="button" role="switch" aria-checked={whole} onClick={() => setId(whole ? 'mint' : 'whole')}><span className="sw" aria-hidden="true"><span /></span>Whole resort, for groups and weddings</button>
+        <button type="button" role="switch" aria-checked={whole} onClick={() => setId(whole ? lastVilla.current : 'whole')}><span className="sw" aria-hidden="true"><span /></span>Whole resort, for groups and weddings</button>
       </div>
     </div>
   )

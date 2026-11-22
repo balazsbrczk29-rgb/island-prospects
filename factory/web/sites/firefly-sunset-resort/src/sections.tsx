@@ -106,7 +106,7 @@ export function Groups() {
       </div>
       <div className="g-b">
         <h3 className="h3">Weddings and events</h3>
-        <p>Weddings and events on the beach and the decks. Tell the resort your date and your numbers.</p>
+        <p>Weddings and events at the resort. Tell us your date and your numbers.</p>
         <h3 className="h3">Concierge</h3>
         <ul className="plain"><li>Golf carts</li><li>Boats</li><li>Charters</li><li>Provisions before you arrive</li></ul>
       </div>
@@ -124,7 +124,7 @@ export function Night() {
         <p className="mail"><a href={`mailto:${BIZ.email}`}>{BIZ.email}</a></p>
         <p className="num"><a href={`tel:${BIZ.tel}`}>{BIZ.phone}</a>, Bar &amp; Grill</p>
         <p className="cap">Island lines can drop with the power; email always reaches us.</p>
-        <button type="button" className="btn" onClick={() => priceVilla('mint')}>Request a villa</button>
+        <button type="button" className="btn" onClick={() => priceVilla('')}>Request a villa</button>
       </div>
     </section>
   )

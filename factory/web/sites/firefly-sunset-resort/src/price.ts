@@ -4,7 +4,7 @@ export const money = (n: number) => '$' + Math.round(n).toLocaleString('en-US')
 export const iso = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 export const addDays = (s: string, n: number) => { const d = new Date(s + 'T12:00'); d.setDate(d.getDate() + n); return iso(d) }
 export const nice = (s: string) => new Date(s + 'T12:00').toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })
-const inSeasonMonth = (m: number) => m >= 1 && m <= 7   // February to August
+export const inSeasonMonth = (m: number) => m >= 1 && m <= 7   // February to August
 
 /** First Saturday of March of the coming season, or two weeks out when we are already in season. */
 export function defaultArrival(now = new Date()) {
@@ -34,7 +34,7 @@ export function quote(v: Villa | 'whole', arrive: string, n: number): Quote {
   const m = new Date(arrive + 'T12:00').getMonth()
   const inS = inSeasonMonth(m)
   if (v === 'whole') {
-    const pick = n >= 3 && n <= 6 ? 'three' : n === 7 ? 'week' : null
+    const pick = n === 3 ? 'three' : n === 7 ? 'week' : null
     return { kind: 'whole', pick, line: pick ? `${n} nights for the whole resort, VAT included.` : `Ask the resort for ${n} nights; the published group rates are three days and one week.` }
   }
   const day = inS ? v.inDay : v.offDay, week = inS ? v.inWeek : v.offWeek
