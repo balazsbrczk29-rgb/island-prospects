@@ -98,3 +98,25 @@ export const radar = {
 }
 
 export const makers = ['Carlisle', 'Elevate', 'Englert', 'Sika', 'Siplast', 'Tremco']
+
+// Our grouping of the names on Thermoset's portfolio page by type of building (stated on the page as ours).
+export type Kind = 'home' | 'commercial' | 'industrial' | 'institution' | 'resort'
+export const KINDS: [Kind, string, string][] = [
+  ['commercial', 'Commercial', 'Commercial'],
+  ['resort', 'Resort, hotel', 'Resorts and hotels'],
+  ['institution', 'Church, public', 'Churches and institutions'],
+  ['industrial', 'Industrial', 'Industrial'],
+  ['home', 'Home', 'Homes'],
+]
+const K: Record<Kind, string[]> = {
+  resort: ['Baha Mar', 'Atlantis', 'Albany', 'Sandals Royal Bahamian', 'Goldwynn Resort', 'Harborside Resort', 'Breezes Resort', 'The British Colonial Hotel', 'The Pointe and Margaritaville', 'Four Seasons Resort (now Ocean Club)', 'Aquilina Resort'],
+  institution: ['Lynden Pindling International Airport', 'U.S. Embassy, Nassau', 'Christ Church Cathedral', 'The Church of the Most Holy Trinity', 'Hillview Seventh Day Adventist Church', 'The Princess Margaret Hospital', 'St. George’s Anglican Church', 'Epiphany Church', 'Grants Town Seventh Day Adventist Church', 'Saint Martin de Porres Convent', 'The Bahamas Jewish Center', 'Loyola Hall', 'Mount Moriah Community Center', 'B.C.P.O.U. Hall', 'The Paradise Island Police Station'],
+  industrial: ['Sysco Bahamas', 'Tropic Seafood', 'Asa H. Pritchard Ltd.', 'Sunryse Shredding', 'Bahamas Medical and Surgical Supplies'],
+  home: ['Villa Lyla', 'Caves Heights'],
+  commercial: [],
+}
+export const clientIndex: { name: string; kind: Kind }[] = [...clients.lead, ...clients.more].map(name => ({
+  name, kind: (Object.keys(K) as Kind[]).find(k => K[k].includes(name)) ?? 'commercial',
+}))
+export const likeYours = (k: Kind, n = 4) => clientIndex.filter(c => c.kind === k).slice(0, n).map(c => c.name)
+export const sqw = (url: string, w: number) => `${url}?format=${w}w`

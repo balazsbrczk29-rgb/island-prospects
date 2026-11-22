@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client'
 import Lenis from 'lenis'
 import './styles.css'
 import Anatomy from './Anatomy'
-import { Clients, Work, Services, Radar, Estimate, Footer, Dock } from './Sections'
+import Top from './Top'
+import { Clients, Work, Services, Radar, Certified, Contact, Footer, Dock } from './Sections'
 
 function Home() {
   useEffect(() => {
@@ -14,8 +15,9 @@ function Home() {
   }, [])
   return (
     <>
-      <a className="skip" href="#clients">Skip to content</a>
-      <main id="main"><Anatomy /><Clients /><Work /><Services /><Radar /><Estimate /></main>
+      <a className="skip" href="#main">Skip to content</a>
+      <Top />
+      <main id="main"><Clients /><Anatomy /><Work /><Services /><Radar /><Certified /><Contact /></main>
       <Footer /><Dock />
     </>
   )
