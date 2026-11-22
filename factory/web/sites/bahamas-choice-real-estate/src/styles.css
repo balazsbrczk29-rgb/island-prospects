@@ -223,9 +223,9 @@ a { color: inherit; }
 .count { font-size: var(--t-l); display: flex; align-items: baseline; gap: var(--s2); flex-wrap: wrap; }
 .count .n { color: var(--accent); font-weight: 600; }
 .count .clear { all: unset; cursor: pointer; font-size: var(--t-s); color: var(--muted); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--sand); margin-left: var(--s2); padding: 8px 4px; }
-.track { display: flex; gap: var(--s3); overflow-x: auto; scroll-snap-type: x mandatory; margin-top: var(--s4); margin-inline: calc(var(--col-pad) * -1); padding: 0 var(--col-pad) var(--s2); scrollbar-width: none; min-height: 420px; }
+.track { display: flex; gap: var(--s3); overflow-x: auto; scroll-snap-type: x mandatory; margin-top: var(--s4); margin-inline: calc(var(--col-pad) * -1); padding: 0 var(--col-pad) var(--s2); scrollbar-width: none; min-height: 420px; scroll-padding-inline: var(--col-pad); }
 .chart { overflow: visible; }
-@media (min-width: 1024px) { .track { margin-inline: 0 calc(var(--col-pad) * -1); padding-left: 0; } }
+@media (min-width: 1024px) { .track { margin-inline: 0 calc(var(--col-pad) * -1); padding-left: 0; scroll-padding-inline: 0; } }
 .track::-webkit-scrollbar { display: none; }
 .track > div { flex: 0 0 200px; scroll-snap-align: start; }
 .track > .empty { flex: 1 1 auto; max-width: 30rem; padding-top: var(--s4); }
