@@ -1,12 +1,11 @@
 // The sheet of glass. One studio-lit pane whose thickness and tint follow the visitor's pick, and which
-// separates into the two plies and interlayer of laminated safety glass as the page scrolls.
+// separates into the two plies and interlayer of laminated safety glass when laminated is picked.
 // No transmission pass: a tint layer plus an additive reflection layer over a transparent canvas, so the
 // headline behind it is really seen through the glass and a phone renders it without effort.
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
-import { Environment, PerformanceMonitor } from "@react-three/drei"
+import { ContactShadows, Environment, PerformanceMonitor } from "@react-three/drei"
 import * as THREE from "three"
-import type { MotionValue } from "motion/react"
 import { STOCK, inches, type Pick, type Tint } from "./data"
 
 const W = 1.5, H = 2.0
@@ -77,13 +76,13 @@ function Studio() {
 
 type Mats = { edge: THREE.MeshStandardMaterial; tint: THREE.MeshBasicMaterial; shine: THREE.MeshBasicMaterial; rim: THREE.LineBasicMaterial; silver: THREE.MeshBasicMaterial; inter: THREE.MeshBasicMaterial; none: THREE.MeshBasicMaterial }
 
-function Sheet({ pick, progress, phone, still }: { pick: Pick; progress: MotionValue<number>; phone: boolean; still: boolean }) {
+function Sheet({ pick, aspect, phone, still }: { pick: Pick; aspect: number; phone: boolean; still: boolean }) {
   const rig = useRef<THREE.Group>(null!)
   const front = useRef<THREE.Group>(null!), back = useRef<THREE.Group>(null!)
   const fBox = useRef<THREE.Mesh>(null!), bBox = useRef<THREE.Mesh>(null!)
   const fShine = useRef<THREE.Mesh>(null!), bShine = useRef<THREE.Mesh>(null!)
   const inter = useRef<THREE.Mesh>(null!), mirror = useRef<THREE.Mesh>(null!)
-  const cur = useRef({ ply: 0.0125, alpha: 0.07, sep: 0, yaw: -0.6, mirror: 0, inter: 0 })
+  const cur = useRef({ ply: 0.0125, alpha: 0.07, sep: 0, yaw: -0.6, mirror: 0, inter: 0, sx: 1, sy: 1 })
   const look = useRef({ x: 0, drag: 0, down: false, last: 0 })
 
   const m = useMemo<Mats>(() => {
@@ -115,24 +114,24 @@ function Sheet({ pick, progress, phone, still }: { pick: Pick; progress: MotionV
   }, [])
 
   useFrame((state, dt) => {
-    const p = progress.get(), c = cur.current, l = look.current
-    const k = 1 - Math.exp(-dt * 5)
-    // what the sheet should be right now: the visitor's pick, or the laminated study once the page scrolls
-    const study = ss(0.12, 0.2, p)
-    let kind = pick.kind, tint: Tint = STOCK[pick.kind].tints.find(t => t.id === pick.tint) ?? STOCK[pick.kind].tints[0]
-    let total = pick.kind === "laminated" ? 0.62 : inches(pick.thick)
-    if (study > 0.5) {
-      kind = "laminated"; total = 0.62
-      const lt = STOCK.laminated.tints
-      tint = p < 0.62 ? lt[0] : p < 0.71 ? lt[1] : p < 0.8 ? lt[2] : lt[3]
-    }
-    const sepT = ss(0.2, 0.4, p) * (1 - ss(0.88, 0.98, p)) * 0.42
+    const c = cur.current, l = look.current
+    const k = still ? 1 : 1 - Math.exp(-dt * 5)
+    // the sheet is exactly the visitor's pick: kind, thickness, tint and the proportions of their width and height
+    const kind = pick.kind
+    const tint: Tint = STOCK[kind].tints.find(t => t.id === pick.tint) ?? STOCK[kind].tints[0]
+    const total = kind === "laminated" ? 0.62 : inches(pick.thick || "1/4")
     const isMirror = kind === "mirror" ? 1 : 0, isLam = kind === "laminated" ? 1 : 0
+    const sepT = isLam ? 0.16 : 0
     const plyT = (total / 10) * (isLam ? 0.42 : 0.5)
     c.ply += (plyT - c.ply) * k; c.sep += (sepT - c.sep) * k
     c.mirror += (isMirror - c.mirror) * k; c.inter += (isLam - c.inter) * k
-    const a = isMirror ? 0.06 : Math.min(0.62, tint.alpha * (0.6 + total * 0.9))
-    c.alpha += (a - c.alpha) * k
+    // proportions: fit the requested shape inside a 1.9 x 2.1 box (base sheet is W x H)
+    const a = Math.min(4, Math.max(0.25, aspect))
+    const bw = 1.9, bh = 2.1
+    const w = a > bw / bh ? bw : bh * a, h = w / a
+    c.sx += (w / W - c.sx) * k; c.sy += (h / H - c.sy) * k
+    const al = isMirror ? 0.06 : Math.min(0.62, tint.alpha * (0.6 + total * 0.9))
+    c.alpha += (al - c.alpha) * k
     target.face.set(isMirror ? "#bfe9dc" : tint.face); target.edge.set(tint.edge)
     m.tint.color.lerp(target.face, k); m.tint.opacity = c.alpha * 0.5
     m.edge.color.lerp(target.edge, k); m.edge.emissive.copy(m.edge.color)
@@ -145,24 +144,22 @@ function Sheet({ pick, progress, phone, still }: { pick: Pick; progress: MotionV
     fShine.current.position.z = c.ply / 2 + 0.0008; bShine.current.position.z = c.ply / 2 + 0.0008
     bShine.current.visible = c.sep > 0.02
     inter.current.scale.z = Math.max(0.0005, gap); inter.current.visible = c.inter > 0.02
-    m.inter.opacity = 0.16 * c.inter * (1 - study) + 0.62 * ss(0.4, 0.48, p) * (1 - ss(0.58, 0.64, p)) + 0.5 * ss(0.6, 0.66, p)
-    m.inter.color.lerp(target.edge.set(study > 0.5 && p >= 0.62 ? tint.edge : study > 0.5 ? "#f6eed6" : "#e8fff6"), k)
+    m.inter.opacity = 0.55 * c.inter
+    m.inter.color.lerp(target.edge.set("#f6eed6"), k)
     mirror.current.position.z = -(c.ply + gap / 2) - 0.001
-    // pose: three-quarter view in the hero, nearer edge-on while the plies are apart
+    // pose: three-quarter view, turned nearer edge-on while the laminated plies are apart
     if (!l.down) l.drag *= 1 - k * 0.6
     const sway = still ? 0 : Math.sin(state.clock.elapsedTime * 0.45) * 0.07
-    const open = c.sep / 0.42
-    const yawT = THREE.MathUtils.lerp(-0.62 + l.x * 0.22 + l.drag + sway, -1.02 + sway * 0.4, Math.max(study * 0.25, open))
+    const open = c.sep / 0.16
+    const yawT = THREE.MathUtils.lerp(-0.62 + l.x * 0.22 + l.drag + sway, -0.95 + sway * 0.4, open * 0.7)
     c.yaw += (yawT - c.yaw) * k
     m.shine.map!.offset.x = c.yaw * 0.55 + c.sep
     m.silver.map!.offset.x = c.yaw * 0.4
     m.shine.color.setScalar((0.75 + Math.abs(Math.sin(c.yaw)) * 0.7) * (1 - c.mirror * 0.6))
     m.rim.color.copy(m.edge.color).lerp(target.face.set("#ffffff"), 0.55)
-    rig.current.rotation.set(0.15 + open * 0.06, c.yaw, phone ? Math.PI / 2 : 0)
-    // phone: the sheet sits in the top of a taller canvas for the hero, then grows into all of it for the study
-    const grow = ss(0.08, 0.22, p)
-    rig.current.position.y = phone ? THREE.MathUtils.lerp(0.34, 0, grow) : 0
-    rig.current.scale.setScalar(phone ? THREE.MathUtils.lerp(0.6, 0.86, grow) : 1 - open * 0.12)
+    rig.current.rotation.set(0.12 + open * 0.05, c.yaw, 0)
+    const sc = phone ? 0.9 : 1
+    rig.current.scale.set(c.sx * sc, c.sy * sc, 1)
   })
 
   return (
@@ -181,17 +178,18 @@ function Sheet({ pick, progress, phone, still }: { pick: Pick; progress: MotionV
   )
 }
 
-export default function Pane({ pick, progress, active, phone, onReady }: { pick: Pick; progress: MotionValue<number>; active: boolean; phone: boolean; onReady?: () => void }) {
+export default function Pane({ pick, aspect, active, phone, onReady }: { pick: Pick; aspect: number; active: boolean; phone: boolean; onReady?: () => void }) {
   const [dpr, setDpr] = useState(phone ? 1.25 : 1.5)
   const still = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   return (
-    <Canvas dpr={dpr} frameloop={active ? "always" : "never"} camera={{ position: [0, 0, phone ? 4.2 : 5.7], fov: 26 }}
+    <Canvas dpr={dpr} frameloop={active ? "always" : "never"} camera={{ position: [0, 0, phone ? 5.3 : 5.9], fov: 26 }}
       gl={{ alpha: true, antialias: !phone, powerPreference: "high-performance" }} onCreated={() => onReady?.()}
       style={{ touchAction: "pan-y" }} aria-hidden>
       <PerformanceMonitor onDecline={() => setDpr(1)} />
       <Studio />
       <directionalLight position={[3, 4, 5]} intensity={1.2} />
-      <Sheet pick={pick} progress={progress} phone={phone} still={still} />
+      <Sheet pick={pick} aspect={aspect} phone={phone} still={still} />
+      <ContactShadows position={[0, -1.12, 0]} opacity={0.22} blur={2.8} far={1.2} scale={4} resolution={phone ? 256 : 512} frames={1} />
     </Canvas>
   )
 }

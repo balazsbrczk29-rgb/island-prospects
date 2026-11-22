@@ -16,8 +16,8 @@ export type Tint = { id: string; name: string; face: string; edge: string; alpha
 
 // face = the colour seen through the sheet, edge = the colour of the cut edge, alpha = how much it holds back.
 const clear: Tint = { id: "clear", name: "Clear", face: "#bfe9dc", edge: "#58b89d", alpha: 0.07 }
-const gray: Tint = { id: "gray", name: "Gray", face: "#34393d", edge: "#6d787d", alpha: 0.62 }
-const bronze: Tint = { id: "bronze", name: "Bronze", face: "#7d4a1c", edge: "#a1723f", alpha: 0.7 }
+const gray: Tint = { id: "gray", name: "Gray", face: "#34393d", edge: "#6d787d", alpha: 0.48 }
+const bronze: Tint = { id: "bronze", name: "Bronze", face: "#7d4a1c", edge: "#a1723f", alpha: 0.4 }
 const green: Tint = { id: "green", name: "Green", face: "#1d7a52", edge: "#3fae84", alpha: 0.5 }
 
 export const STOCK: Record<Kind, { label: string; thick: string[]; thickNote?: string; tints: Tint[] }> = {
@@ -85,3 +85,16 @@ export const DEPTS = [
 ]
 
 export const JOBS = ["Mirror", "Tabletop", "Shower enclosure", "Window or door glass", "Storefront", "Boat windshield", "Something else"]
+
+// What the visitor is quoting, mapped onto the stock list above.
+export type Use = { id: string; label: string; kind: Kind | "shower"; say: string }
+export const USES: Use[] = [
+  { id: "window", label: "Window glass", kind: "glass", say: "for a window" },
+  { id: "mirror", label: "Mirror", kind: "mirror", say: "" },
+  { id: "table", label: "Table top", kind: "glass", say: "for a table top" },
+  { id: "shower", label: "Shower enclosure", kind: "shower", say: "" },
+  { id: "laminated", label: "Laminated or impact", kind: "laminated", say: "" },
+]
+export const HOURS = { week: "9:00 am to 4:30 pm", sat: "9:00 am to 1:00 pm" }
+export const MAP = "https://www.google.com/maps/search/?api=1&query=Nassau+Glass+46+Mackey+Street+Nassau+Bahamas"
+export const ALUMINUM = "http://www.bahamasaluminum.com/"

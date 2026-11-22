@@ -46,16 +46,21 @@ export function Toolbar({ home }: { home?: boolean }) {
 export function Bars({ after, home }: { after: string; home?: boolean }) {
   const [past, setPast] = useState(false)
   const [quiet, setQuiet] = useState(false)
+  const [out, setOut] = useState(false)
   useEffect(() => {
     const first = document.querySelector(after)
     const io = first && new IntersectionObserver(([e]) => setPast(!e.isIntersecting && e.boundingClientRect.top < 0), { threshold: 0 })
     if (first && io) io.observe(first)
+    // phone: the call dock shows whenever the quote ticket (with its own Call button) is off screen
+    const ticket = document.querySelector(".ticket")
+    const io3 = ticket && window.matchMedia("(max-width: 899px)").matches ? new IntersectionObserver(([e]) => setOut(!e.isIntersecting), { threshold: 0 }) : null
+    if (ticket && io3) io3.observe(ticket)
     const seen = new Set<Element>()
     const io2 = new IntersectionObserver(es => { es.forEach(e => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target))); setQuiet(seen.size > 0) }, { threshold: 0.12 })
     document.querySelectorAll("[data-quiet]").forEach(el => io2.observe(el))
-    return () => { io?.disconnect(); io2.disconnect() }
+    return () => { io?.disconnect(); io2.disconnect(); io3?.disconnect() }
   }, [after])
-  const dock = past && !quiet
+  const dock = (past || out) && !quiet
   useEffect(() => {
     const phone = window.matchMedia("(max-width: 899px)").matches
     document.documentElement.style.setProperty("--concept-offset", dock && phone ? "57px" : "0px")
@@ -80,7 +85,7 @@ export function Footer() {
   return (
     <footer className="foot">
       <div className="wrap">
-        <p>Nassau Glass Co Ltd, #46 Mackey Street (top of the hill), Nassau, Bahamas.<br />Windows, doors and shutters are made by the sister company, <a href="http://www.bahamasaluminum.com/" rel="noopener">Bahamas Aluminum Manufacturing Co. Ltd.</a></p>
+        <p>Nassau Glass Co Ltd, #46 Mackey Street (top of the hill), Nassau, Bahamas.<br />Aluminum windows, doors and railings are made locally by the sister company, <a href="http://www.bahamasaluminum.com/" rel="noopener">Bahamas Aluminum Manufacturing Co. Ltd.</a></p>
         <p className="small">Shower and building photographs: Nassau Glass. The sheet of glass is a rendered sample.</p>
       </div>
     </footer>

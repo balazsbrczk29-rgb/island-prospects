@@ -1,332 +1,342 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react"
-import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react"
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react"
 import { Bars, Footer, Toolbar, mount, usePhone, useWheelSmoothing } from "./shell"
-import { IMG, JOBS, PHONE, PHONE2, PHONE_INTL, FAX, RACK, SHOWERS, SHOWER_ALT, STOCK, SWATCH, TEL, TEL2, TEL_INTL, YEARS, describe, type Kind, type Pick } from "./data"
+import { ALUMINUM, DEPTS, FAX, HOURS, IMG, MAP, PHONE, PHONE2, PHONE_INTL, RACK, SHOWERS, SHOWER_ALT, STOCK, SWATCH, TEL, TEL2, TEL_INTL, USES, YEARS, type Kind, type Pick } from "./data"
 
 const Pane = lazy(() => import("./Pane"))
-const ss = (a: number, b: number, v: number) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t) }
-const band = (a: number, b: number, f = 0.035) => (v: number) => ss(a - f, a + f, v) * (1 - ss(b - f, b + f, v))
 const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
 
-function Picker({ pick, setPick }: { pick: Pick; setPick: (p: Pick) => void }) {
-  const s = STOCK[pick.kind]
-  const kind = (k: Kind) => { const n = STOCK[k]; setPick({ kind: k, thick: n.thick.includes(pick.thick) ? pick.thick : n.thick[Math.min(1, n.thick.length - 1)] ?? "", tint: n.tints.some(t => t.id === pick.tint) ? pick.tint : n.tints[0].id }) }
+/** "24", "24.5", "24 1/2" or "1/2" -> inches; anything else -> NaN */
+export function parseInches(v: string) {
+  const t = v.trim().replace(/["”]|in$/g, "").trim(); if (!t) return NaN
+  const m = /^(\d+(?:\.\d+)?)?(?:\s*(\d+)\/(\d+))?$/.exec(t); if (!m || (!m[1] && !m[2])) return NaN
+  return (m[1] ? parseFloat(m[1]) : 0) + (m[2] ? +m[2] / +m[3] : 0)
+}
+
+type Order = { use: string; pick: Pick; frame: string; door: string; w: string; h: string; qty: number; fit: boolean }
+const START: Order = { use: "window", pick: { kind: "glass", thick: "1/4", tint: "clear" }, frame: "Frameless", door: "Swing door", w: "", h: "", qty: 1, fit: false }
+
+function Radios<T extends string>({ label, value, options, onPick, render, className }: { label: string; value: T; options: T[]; onPick: (v: T) => void; render?: (v: T) => React.ReactNode; className?: string }) {
+  const key = (e: React.KeyboardEvent) => {
+    const d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0
+    if (!d) return
+    e.preventDefault()
+    const n = options[(options.indexOf(value) + d + options.length) % options.length]
+    onPick(n); (e.currentTarget.querySelector(`[data-v="${CSS.escape(n)}"]`) as HTMLElement | null)?.focus()
+  }
+  const id = `l-${label.replace(/\W+/g, "-")}`
   return (
-    <div className="picker">
-      <fieldset>
-        <legend>Sheet</legend>
-        <div className="opts">{(Object.keys(STOCK) as Kind[]).map(k => <button key={k} type="button" className="opt" aria-pressed={pick.kind === k} onClick={() => kind(k)}>{STOCK[k].label}</button>)}</div>
-      </fieldset>
-      <fieldset>
-        <legend>Thickness</legend>
-        {s.thick.length ? <div className="opts">{s.thick.map(t => <button key={t} type="button" className="opt num" aria-pressed={pick.thick === t} aria-label={`${t} of an inch`} onClick={() => setPick({ ...pick, thick: t })}>{t}</button>)}</div> : <span className="thick-note">{s.thickNote}</span>}
-      </fieldset>
-      <fieldset>
-        <legend>Tint</legend>
-        <div className="opts">{s.tints.map(t => <button key={t.id} type="button" className="opt" aria-pressed={pick.tint === t.id} onClick={() => setPick({ ...pick, tint: t.id })}><i className="dot" style={{ background: t.edge }} aria-hidden />{t.name}</button>)}</div>
-      </fieldset>
+    <div className={`row ${className ?? ""}`}>
+      <span className="row__l" id={id}>{label}</span>
+      <div className="opts" role="radiogroup" aria-labelledby={id} onKeyDown={key}>
+        {options.map(o => <button key={o} type="button" role="radio" data-v={o} aria-checked={o === value} tabIndex={o === value ? 0 : -1} className="opt num" onClick={() => onPick(o)}>{render ? render(o) : o}</button>)}
+      </div>
     </div>
   )
 }
 
-function Chapter({ p, at, step, title, children }: { p: MotionValue<number>; at: [number, number]; step: string; title: string; children: React.ReactNode }) {
-  const f = band(at[0], at[1])
-  const opacity = useTransform(p, v => f(v))
-  const y = useTransform(p, v => (1 - f(v)) * 18)
+function OpenNow() {
+  const [s, set] = useState<{ open: boolean; text: string } | null>(null)
+  useEffect(() => {
+    const tick = () => {
+      const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Nassau", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date())
+      const g = (t: string) => parts.find(x => x.type === t)?.value ?? ""
+      const day = g("weekday"), mins = (parseInt(g("hour")) % 24) * 60 + parseInt(g("minute"))
+      const close = day === "Sun" ? 0 : day === "Sat" ? 13 * 60 : 16 * 60 + 30
+      const open = close > 0 && mins >= 9 * 60 && mins < close
+      const next = day === "Sun" || (day === "Sat" && mins >= close) ? "Monday" : mins >= close ? "tomorrow" : "today"
+      set({ open, text: open ? `Open now on Mackey Street, until ${day === "Sat" ? "1:00 pm" : "4:30 pm"}` : `Closed now. Opens 9:00 am ${next}` })
+    }
+    tick(); const id = setInterval(tick, 60000); return () => clearInterval(id)
+  }, [])
+  return <p className="open" data-open={s?.open ?? false} aria-live="polite">{s ? <><i aria-hidden />{s.text}</> : <>&nbsp;</>}</p>
+}
+
+export function summaryOf(o: Order) {
+  const use = USES.find(u => u.id === o.use)!
+  const shower = use.kind === "shower"
+  const s = shower ? null : STOCK[use.kind as Kind]
+  const tint = s?.tints.find(t => t.id === o.pick.tint)
+  const w = parseInches(o.w), h = parseInches(o.h)
+  const sized = w > 0 && h > 0
+  const area = sized ? (w * h / 144) * o.qty : 0
+  const what = shower ? `a ${o.frame.toLowerCase()} shower enclosure with a ${o.door.toLowerCase()}`
+    : `${use.kind === "laminated" ? "" : o.pick.thick + " in "}${tint?.name.toLowerCase()} ${use.kind === "laminated" ? "laminated safety glass" : use.kind}${use.say ? " " + use.say : ""}`
+  return `Quote request for Nassau Glass: ${shower ? "" : `${o.qty} ${o.qty === 1 ? "piece" : "pieces"} of `}${what}${sized ? `, ${o.w.trim()} x ${o.h.trim()} in${o.qty > 1 && !shower ? " each" : ""} (${area.toFixed(1)} sq ft)` : ", size to be measured"}, ${o.fit ? "measure and fit please" : "to pick up at the counter"}.`
+}
+
+function Builder({ o, set }: { o: Order; set: (p: Partial<Order>) => void }) {
+  const use = USES.find(u => u.id === o.use)!
+  const shower = use.kind === "shower"
+  const s = shower ? null : STOCK[use.kind as Kind]
+  const [copied, setCopied] = useState(false)
+  const w = parseInches(o.w), h = parseInches(o.h)
+  const sized = w > 0 && h > 0
+  const area = sized ? (w * h / 144) * o.qty : 0
+  const tint = s?.tints.find(t => t.id === o.pick.tint)
+  const summary = summaryOf(o)
+  const pickUse = (id: string) => {
+    const u = USES.find(x => x.id === id)!
+    if (u.kind === "shower") return set({ use: id })
+    const n = STOCK[u.kind]
+    set({ use: id, pick: { kind: u.kind, thick: n.thick.includes(o.pick.thick) ? o.pick.thick : n.thick[Math.min(2, n.thick.length - 1)] ?? "", tint: n.tints.some(t => t.id === o.pick.tint) ? o.pick.tint : n.tints[0].id } })
+  }
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(summary) } catch { /* blocked: the summary stays on screen to read out */ }
+    setCopied(true); setTimeout(() => setCopied(false), 1800)
+  }
+  const bad = (v: string) => v.trim() !== "" && !(parseInches(v) > 0)
   return (
-    <motion.div className="chapter" style={{ opacity, y }}>
-      <p className="step num">{step}</p>
-      <h2>{title}</h2>
-      {children}
-    </motion.div>
+    <form className="builder" onSubmit={e => e.preventDefault()} aria-label="Quote builder">
+      <Radios label="What it is" value={o.use} options={USES.map(u => u.id)} onPick={pickUse} render={v => USES.find(u => u.id === v)!.label} />
+      {shower ? <>
+        <Radios label="Frame" value={o.frame} options={["Frameless", "Semi-frameless"]} onPick={v => set({ frame: v })} />
+        <Radios label="Door" value={o.door} options={["Swing door", "Sliding door"]} onPick={v => set({ door: v })} />
+      </> : <>
+        {s!.thick.length ? <Radios className="row--thick" label="Thickness, in" value={o.pick.thick} options={s!.thick} onPick={v => set({ pick: { ...o.pick, thick: v } })} />
+          : <div className="row"><span className="row__l">Thickness</span><p className="row__note">{s!.thickNote}, chosen with you at the counter</p></div>}
+        <Radios label="Tint" value={o.pick.tint} options={s!.tints.map(t => t.id)} onPick={v => set({ pick: { ...o.pick, tint: v } })} render={v => { const t = s!.tints.find(x => x.id === v)!; return <><i className="dot" style={{ background: t.edge }} aria-hidden />{t.name}</> }} />
+      </>}
+      <div className="row size">
+        <span className="row__l">Size, in</span>
+        <div className="size__in">
+          <label><span className="vh">Width in inches</span><input className="num" inputMode="decimal" value={o.w} onChange={e => set({ w: e.target.value })} placeholder="Width" aria-invalid={bad(o.w)} /></label>
+          <span aria-hidden className="x">×</span>
+          <label><span className="vh">Height in inches</span><input className="num" inputMode="decimal" value={o.h} onChange={e => set({ h: e.target.value })} placeholder="Height" aria-invalid={bad(o.h)} /></label>
+          <div className="qty" role="group" aria-label="Pieces">
+            <button type="button" onClick={() => set({ qty: Math.max(1, o.qty - 1) })} aria-label="One piece fewer">−</button>
+            <span className="num" aria-live="polite">{o.qty} {o.qty === 1 ? "piece" : "pieces"}</span>
+            <button type="button" onClick={() => set({ qty: Math.min(99, o.qty + 1) })} aria-label="One piece more">+</button>
+          </div>
+        </div>
+        {(bad(o.w) || bad(o.h)) && <p className="row__note">Inches, for example 24 1/2</p>}
+      </div>
+      <Radios label="Fitting" value={o.fit ? "fit" : "pick"} options={["pick", "fit"]} onPick={v => set({ fit: v === "fit" })} render={v => (v === "fit" ? "Measure and fit" : "Pick up at the counter")} />
+      <div className="ticket" aria-live="polite">
+        <p className="ticket__area num"><span key={sized ? area.toFixed(1) : "none"} className="tick">{sized ? area.toFixed(1) : "Enter your size"}</span>{sized && <span className="ticket__u"> sq ft</span>}</p>
+        <p className="ticket__sum">{summary}</p>
+        <div className="ticket__acts">
+          <a className="btn btn--primary num" href={TEL}>Call {PHONE}</a>
+          <button type="button" className="link" onClick={copy}>{copied ? "Copied" : "Copy summary"}</button>
+        </div>
+        <OpenNow />
+      </div>
+    </form>
   )
 }
 
-function Study({ pick, setPick }: { pick: Pick; setPick: (p: Pick) => void }) {
-  const ref = useRef<HTMLElement>(null)
+function Stage({ o }: { o: Order }) {
+  const ref = useRef<HTMLDivElement>(null)
   const phone = usePhone()
-  const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] })
-  const [phase, setPhase] = useState(0)
   const [active, setActive] = useState(true)
   const [ready, setReady] = useState(false)
-  const [show3d, setShow3d] = useState(false)
-  useMotionValueEvent(p, "change", v => { const n = v < 0.1 ? 0 : v < 0.62 ? 1 : 2; if (n !== phase) setPhase(n) })
+  const [show, setShow] = useState(false)
   useEffect(() => {
-    setShow3d(true)
+    setShow(true)
     const io = new IntersectionObserver(([e]) => setActive(e.isIntersecting), { threshold: 0 })
     if (ref.current) io.observe(ref.current)
     return () => io.disconnect()
   }, [])
-  const heroOpacity = useTransform(p, v => 1 - ss(0.03, 0.12, v))
-  const heroY = useTransform(p, v => -ss(0.03, 0.12, v) * 28)
-  const lam = () => { setPick({ kind: "laminated", thick: "", tint: "clear" }); go("quote") }
+  const w = parseInches(o.w), h = parseInches(o.h)
+  const sized = w > 0 && h > 0
+  const aspect = sized ? w / h : 24 / 36
+  const use = USES.find(u => u.id === o.use)!
+  const pick: Pick = use.kind === "shower" ? { kind: "glass", thick: "3/8", tint: "clear" } : o.pick
   return (
-    <section ref={ref} className="study" data-stage id="top" aria-label="Glass in stock, and how laminated safety glass is built">
-      <div className="study-pin">
-        <Toolbar home />
-        <div className="pane-wrap">
-          <div className="poster" style={{ backgroundImage: `url(${phone ? "pane-phone.png" : "pane.png"})`, opacity: ready ? 0 : 1 }} />
-          <div style={{ position: "absolute", inset: 0 }}>
-            {show3d && <Suspense fallback={null}><Pane pick={pick} progress={p} active={active} phone={phone} onReady={() => setReady(true)} /></Suspense>}
-          </div>
-        </div>
-        <motion.div className="hero" style={{ opacity: heroOpacity, y: heroY, pointerEvents: phase === 0 ? "auto" : "none" }} inert={phase !== 0}>
-          <div>
-            <h1>Glass from <span className="frac num">1/16</span> to <span className="frac num">3/4</span> of an inch, cut to any shape on Mackey Street.</h1>
-            <p className="sub">The Bahamas' first fabricating glass company, at #46 since 1959. Choose a sheet and see what is on the rack.</p>
-          </div>
-          <div>
-            <Picker pick={pick} setPick={setPick} />
-            <div className="hero-cta">
-              <button type="button" className="btn btn-glass" onClick={() => go("quote")}>Quote this glass</button>
-              <span className="shown" aria-live="polite">Shown: {describe(pick)}</span>
-            </div>
-          </div>
-        </motion.div>
-        <motion.p className="pane-note small" style={{ opacity: heroOpacity }}>A rendered sample. The real sheet is at the counter.</motion.p>
-        <div className="chapters">
-          <Chapter p={p} at={[0.2, 0.41]} step="Laminated safety glass, 1 of 3" title="It starts as two sheets of glass.">
-            <p>This is what goes into a hurricane impact window, or a replacement boat windshield.</p>
-          </Chapter>
-          <Chapter p={p} at={[0.41, 0.62]} step="2 of 3" title="An interlayer is bonded between them.">
-            <p>If the glass breaks, the pieces hold to the interlayer instead of falling out of the frame.</p>
-          </Chapter>
-          <Chapter p={p} at={[0.62, 1.2]} step="3 of 3" title="Stocked in clear, bronze, gray and green.">
-            <p>In a large selection of thicknesses, at #46 Mackey Street.</p>
-            <button type="button" className="link" style={{ pointerEvents: phase === 2 ? "auto" : "none" }} tabIndex={phase === 2 ? 0 : -1} onClick={lam}>Quote laminated glass</button>
-          </Chapter>
+    <div className="stage" ref={ref}>
+      <div className="stage__box">
+        <div className="poster" style={{ backgroundImage: `url(${phone ? "pane-phone.png" : "pane.png"})`, opacity: ready ? 0 : 1 }} aria-hidden />
+        {show && <Suspense fallback={null}><Pane pick={pick} aspect={aspect} active={active} phone={phone} onReady={() => setReady(true)} /></Suspense>}
+      </div>
+      <p className="stage__dims num"><i aria-hidden /><span>{sized ? `${o.w.trim()} in wide, ${o.h.trim()} in high${use.kind !== "shower" && use.kind !== "laminated" ? `, ${o.pick.thick} in thick` : ""}` : "Type a width and height: the sheet takes its shape"}</span><i aria-hidden /></p>
+      <p className="stage__note">{use.kind === "laminated" ? "Laminated safety glass: two sheets bonded to an interlayer, so a broken pane holds together. " : ""}A rendered sample. The real sheet is at the counter.</p>
+    </div>
+  )
+}
+
+function Hero({ o, set }: { o: Order; set: (p: Partial<Order>) => void }) {
+  return (
+    <section className="hero" id="quote" aria-labelledby="h1">
+      <Toolbar home />
+      <div className="wrap hero__grid">
+        <Stage o={o} />
+        <div className="hero__side">
+          <h1 id="h1">Glass and mirror cut to your size, on Mackey Street since 1959.</h1>
+          <Builder o={o} set={set} />
         </div>
       </div>
     </section>
   )
 }
 
-function Showers({ onQuote }: { onQuote: (s: string) => void }) {
-  const [frame, setFrame] = useState("Frameless")
-  const [door, setDoor] = useState("Swing door")
-  const label = `${frame.toLowerCase()}, ${door.toLowerCase()}`
-  return (
-    <section className="sec showers" id="showers" aria-labelledby="showers-h">
-      <div className="wrap sec-head">
-        <h2 id="showers-h">Shower enclosures are made here, not shipped in.</h2>
-        <p>Nassau Glass manufactures its own enclosures: frameless and semi-frameless systems, with swing or sliding doors, in a choice of finishes and glass.</p>
-      </div>
-      <div className="strip" tabIndex={0} role="group" aria-label="Six shower enclosures by Nassau Glass">
-        {SHOWERS.map((s, i) => (
-          <figure key={s.n}>
-            <img src={s.src} alt={SHOWER_ALT[i]} width={750} height={1000} loading="lazy" decoding="async" />
-          </figure>
-        ))}
-      </div>
-      <div className="wrap build">
-        <div className="rows">
-          <div className="row"><span>Frame</span><div className="seg">{["Frameless", "Semi-frameless"].map(v => <button key={v} type="button" aria-pressed={frame === v} onClick={() => setFrame(v)}>{v}</button>)}</div></div>
-          <div className="row"><span>Door</span><div className="seg">{["Swing door", "Sliding door"].map(v => <button key={v} type="button" aria-pressed={door === v} onClick={() => setDoor(v)}>{v}</button>)}</div></div>
-        </div>
-        <button type="button" className="btn btn-ink" onClick={() => onQuote(label)}>Quote a {label} enclosure</button>
-      </div>
-    </section>
-  )
-}
-
-function Rack({ onQuote }: { onQuote: (k: Kind) => void }) {
+function Rack({ quote }: { quote: (k: Kind) => void }) {
   return (
     <section className="sec" id="rack" aria-labelledby="rack-h">
       <div className="wrap">
-        <div className="sec-head">
-          <h2 id="rack-h">What is on the rack today.</h2>
-          <p>The sheet goods the Glass Division keeps in stock, cut to size by factory-trained staff.</p>
+        <div className="head">
+          <h2 id="rack-h">Everything on the rack, in one table.</h2>
+          <p>The sheet goods the Glass Division keeps in stock, cut to any shape or size by factory-trained staff.</p>
         </div>
-        <div className="rack">
-          {RACK.map(r => (
-            <div className="rack-row" key={r.name}>
-              <h3>{r.name}</h3>
-              <span className="num">{r.thick}</span>
-              <span className="tints">{r.tints.map(t => <span key={t}>{SWATCH[t] && <i style={{ background: SWATCH[t] }} aria-hidden />}{t}</span>)}</span>
-              <span className="use">{r.use}</span>
-              {r.kind ? <button type="button" className="link" onClick={() => onQuote(r.kind as Kind)} aria-label={`Quote ${r.name.toLowerCase()}`}>Quote it</button> : <a className="link num" href={TEL} aria-label={`Call about ${r.name.toLowerCase()}`}>Call</a>}
-            </div>
+        <table className="rack">
+          <thead><tr><th scope="col">Sheet</th><th scope="col">Thickness</th><th scope="col">Tints</th><th scope="col">Used for</th><th scope="col"><span className="vh">Action</span></th></tr></thead>
+          <tbody>
+            {RACK.map(r => (
+              <tr key={r.name} data-rise>
+                <th scope="row">{r.name}</th>
+                <td className="num" data-l="Thickness">{r.thick}</td>
+                <td data-l="Tints"><span className="tints">{r.tints.length ? r.tints.map(t => <span key={t}>{SWATCH[t] && <i style={{ background: SWATCH[t] }} aria-hidden />}{t}</span>) : "Ask at the counter"}</span></td>
+                <td data-l="Used for">{r.use}</td>
+                <td>{r.kind ? <button type="button" className="link" onClick={() => quote(r.kind as Kind)}>Quote it</button> : <a className="link num" href={TEL}>Call</a>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
+}
+
+function Showers({ quote }: { quote: () => void }) {
+  return (
+    <section className="sec showers" id="showers" aria-labelledby="showers-h">
+      <div className="wrap head">
+        <h2 id="showers-h">Shower enclosures are made here, not shipped in.</h2>
+        <p>Nassau Glass manufactures its own: frameless and semi-frameless systems, with swing or sliding doors, in a choice of models, finishes and glass.</p>
+        <button type="button" className="btn btn--line" onClick={quote}>Quote an enclosure</button>
+      </div>
+      <div className="strip" tabIndex={0} role="group" aria-label="Six shower enclosures by Nassau Glass, scroll sideways">
+        {SHOWERS.map((s, i) => (
+          <figure key={s.n}><img src={s.src} alt={SHOWER_ALT[i]} width={750} height={1000} loading="lazy" decoding="async" /></figure>
+        ))}
+      </div>
+      <p className="wrap small showers__credit">Photographs: Nassau Glass.</p>
+    </section>
+  )
+}
+
+function WalkIn() {
+  const show = ["bulbs", "fans", "framing", "decor", "metals", "service"]
+  const list = show.map(id => DEPTS.find(d => d.id === id)!)
+  return (
+    <section className="sec" id="departments" aria-labelledby="dept-h">
+      <div className="wrap">
+        <div className="head">
+          <h2 id="dept-h">Bulbs, Hunter fans, framing and lamps, at the same counter.</h2>
+          <p>Walk in for the showroom, or have the shop make and fit. <a className="link" href="departments.html">All nine departments</a></p>
+        </div>
+        <ul className="depts">
+          {list.map(d => (
+            <li key={d.id} data-rise>
+              <h3>{d.name}</h3>
+              {d.since && <p className="small num">Since {d.since}</p>}
+              <p>{d.d}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )
 }
 
-function Metals({ onQuote }: { onQuote: () => void }) {
+function Since() {
   return (
-    <section className="sec metals" aria-labelledby="metals-h">
+    <section className="sec founded" aria-labelledby="since-h">
       <div className="wrap">
-        <h2 id="metals-h">A single storefront entrance, or a six-story curtain wall.</h2>
-        <div className="cols">
-          <div>
-            <h3>Architectural Metals</h3>
-            <p>Residential and commercial. The division can help design a system or write a scope of work. No job is considered too small or too large.</p>
-            <button type="button" className="link" onClick={onQuote} style={{ marginTop: 16 }}>Quote a storefront</button>
-          </div>
-          <div>
-            <h3>Service Department</h3>
-            <p>Installation, repairs and replacements for glass, windows and doors, in homes and in office buildings. The same shop does the whole job, start to finish.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function Hill() {
-  return (
-    <section className="sec" aria-labelledby="hill-h">
-      <div className="wrap">
-        <div className="sec-head">
-          <h2 id="hill-h">Glass, and a whole lot more, added one department at a time.</h2>
-          <p>Five dates from the same address at the top of the hill. <a className="link" href="departments.html">See all nine departments</a></p>
-        </div>
-        <div className="hill">
+        <h2 id="since-h">The Bahamas' first glass fabricator, at the top of Mackey Street since 1959.</h2>
+        <ol className="years">
           {YEARS.map(y => (
-            <article key={y.y}>
-              <div className="y num">{y.y}</div>
+            <li key={y.y} data-rise>
+              <span className="years__y num">{y.y}</span>
               <h3>{y.t}</h3>
               <p>{y.d}</p>
-            </article>
+            </li>
           ))}
-        </div>
+        </ol>
+        <p className="founded__sis">Aluminum windows, doors and railings are made locally by the sister company, <a href={ALUMINUM} rel="noopener">Bahamas Aluminum Manufacturing Co. Ltd.</a></p>
       </div>
     </section>
   )
 }
 
-type Order = { job: string; w: string; h: string; qty: string; name: string; enclosure: string }
-function Quote({ pick, setPick, order, setOrder }: { pick: Pick; setPick: (p: Pick) => void; order: Order; setOrder: (o: Order) => void }) {
-  const [copied, setCopied] = useState(false)
-  const s = STOCK[pick.kind]
-  const w = parseFloat(order.w), h = parseFloat(order.h), q = Math.max(1, parseInt(order.qty) || 1)
-  const sized = w > 0 && h > 0
-  const area = sized ? ((w * h) / 144) * q : 0
-  const set = (k: keyof Order) => (e: React.ChangeEvent<HTMLInputElement>) => setOrder({ ...order, [k]: e.target.value })
-  const lines: [string, string][] = [
-    ["Job", order.job],
-    ["Glass", describe(pick)],
-    ...(order.job === "Shower enclosure" && order.enclosure ? [["Enclosure", order.enclosure] as [string, string]] : []),
-    ["Size", sized ? `${order.w} x ${order.h} in, ${q} ${q === 1 ? "piece" : "pieces"}` : "To be measured"],
-    ...(sized ? [["Area", `${area.toFixed(1)} sq ft`] as [string, string]] : []),
-    ...(order.name ? [["For", order.name] as [string, string]] : []),
-  ]
-  const copy = async () => {
-    const text = `Quote request for Nassau Glass\n${lines.map(l => `${l[0]}: ${l[1]}`).join("\n")}`
-    try { await navigator.clipboard.writeText(text) } catch { /* clipboard blocked: the summary stays on screen to read out */ }
-    setCopied(true); setTimeout(() => setCopied(false), 1800)
-  }
-  const kind = (k: Kind) => { const n = STOCK[k]; setPick({ kind: k, thick: n.thick.includes(pick.thick) ? pick.thick : n.thick[Math.min(1, n.thick.length - 1)] ?? "", tint: n.tints.some(t => t.id === pick.tint) ? pick.tint : n.tints[0].id }) }
+function Write({ o }: { o: Order }) {
+  const [msg, setMsg] = useState("")
+  const [sent, setSent] = useState(false)
+  const summary = summaryOf(o)
+  const touched = useRef(false)
+  useEffect(() => { if (!touched.current) setMsg(summary) }, [summary])
   return (
-    <section className="sec" id="quote" data-quiet aria-labelledby="quote-h">
-      <div className="wrap">
-        <div className="sec-head">
-          <h2 id="quote-h">Tell the shop what you need before you call.</h2>
-          <p>Four answers make a summary the counter can price. Not sure of the size? Leave it blank and ask for a measure.</p>
-        </div>
-        <div className="order">
-          <form onSubmit={e => e.preventDefault()} aria-label="Quote request">
-            <div className="field">
-              <span className="lab" id="job-l">What is it for</span>
-              <div className="chips" role="group" aria-labelledby="job-l">{JOBS.map(j => <button key={j} type="button" className="chip" aria-pressed={order.job === j} onClick={() => setOrder({ ...order, job: j })}>{j}</button>)}</div>
-            </div>
-            <div className="field">
-              <span className="lab" id="kind-l">Sheet</span>
-              <div className="chips" role="group" aria-labelledby="kind-l">
-                {(Object.keys(STOCK) as Kind[]).map(k => <button key={k} type="button" className="chip" aria-pressed={pick.kind === k} onClick={() => kind(k)}>{STOCK[k].label}</button>)}
-              </div>
-              {s.thick.length > 0 && <div className="chips" role="group" aria-label="Thickness">
-                {s.thick.map(t => <button key={t} type="button" className="chip num" aria-pressed={pick.thick === t} aria-label={`${t} of an inch`} onClick={() => setPick({ ...pick, thick: t })}>{t} in</button>)}
-              </div>}
-              <div className="chips" role="group" aria-label="Tint">
-                {s.tints.map(t => <button key={t.id} type="button" className="chip" aria-pressed={pick.tint === t.id} onClick={() => setPick({ ...pick, tint: t.id })}>{t.name}</button>)}
-              </div>
-            </div>
-            <div className="size">
-              <div className="field"><label htmlFor="q-w">Width, inches</label><input id="q-w" className="inp" inputMode="decimal" value={order.w} onChange={set("w")} placeholder="24" /></div>
-              <span className="x" aria-hidden>x</span>
-              <div className="field"><label htmlFor="q-h">Height, inches</label><input id="q-h" className="inp" inputMode="decimal" value={order.h} onChange={set("h")} placeholder="36" /></div>
-              <div className="field"><label htmlFor="q-q">Pieces</label><input id="q-q" className="inp" inputMode="numeric" value={order.qty} onChange={set("qty")} /></div>
-            </div>
-            <div className="field"><label htmlFor="q-n">Your name</label><input id="q-n" className="inp" autoComplete="name" value={order.name} onChange={set("name")} /></div>
-          </form>
-          <aside className="ticket" aria-live="polite" aria-label="Your summary">
-            <h3>Read this to the counter</h3>
-            <dl className="num">{lines.map(l => <div key={l[0]} style={{ display: "contents" }}><dt>{l[0]}</dt><dd>{l[1]}</dd></div>)}</dl>
-            <div className="acts">
-              <a className="btn btn-glass num" href={TEL}>Call {PHONE}</a>
-              <button type="button" className="link" onClick={copy}>{copied ? "Copied" : "Copy the summary"}</button>
-            </div>
-            <p className="small">Prices come from the shop, not from this page.</p>
-          </aside>
-        </div>
-      </div>
-    </section>
+    <form className="write" onSubmit={e => { e.preventDefault(); setSent(true) }} aria-labelledby="write-h">
+      <h3 id="write-h">Or write to the counter</h3>
+      <label><span>Your name</span><input name="name" autoComplete="name" required /></label>
+      <label><span>Phone or email</span><input name="contact" autoComplete="email" required /></label>
+      <label><span>Message</span><textarea name="message" rows={4} value={msg} onChange={e => { touched.current = true; setMsg(e.target.value) }} /></label>
+      <button type="submit" className="btn btn--primary">Send to the counter</button>
+      {sent && <p className="write__sent" role="status">Thank you. On the live site this goes straight to the Nassau Glass inbox, through the form on their current site.</p>}
+    </form>
   )
 }
 
-function OpenNow() {
-  const [state, setState] = useState<{ open: boolean; text: string } | null>(null)
-  useEffect(() => {
-    const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Nassau", weekday: "short", hour: "numeric", minute: "numeric", hour12: false }).formatToParts(new Date())
-    const get = (t: string) => parts.find(x => x.type === t)?.value ?? ""
-    const day = get("weekday"), mins = (parseInt(get("hour")) % 24) * 60 + parseInt(get("minute"))
-    const close = day === "Sun" ? 0 : day === "Sat" ? 13 * 60 : 16 * 60 + 30
-    const open = close > 0 && mins >= 9 * 60 && mins < close
-    setState({ open, text: open ? `Open now, until ${day === "Sat" ? "1:00 pm" : "4:30 pm"}` : "Closed now, opens 9:00 am" + (day === "Sat" && mins >= close || day === "Sun" ? " Monday" : "") })
-  }, [])
-  return <p className="open-now" data-open={state?.open ?? true}>{state && <><i aria-hidden />{state.text}</>}</p>
-}
-
-function Visit() {
+function Visit({ o }: { o: Order }) {
   return (
     <section className="sec visit" id="visit" data-quiet aria-labelledby="visit-h">
-      <div className="wrap visit-grid">
+      <div className="wrap visit__grid">
         <div>
           <h2 id="visit-h">The green building at the top of the hill.</h2>
-          <p className="way">#46 Mackey Street, Nassau, half a mile south of the Paradise Island Bridge. The same address since 1959.</p>
-          <div className="phones num">
-            <a href={TEL}>{PHONE}</a>
-            <a href={TEL2}>{PHONE2}</a>
-          </div>
-        </div>
-        <div>
+          <p className="lead">#46 Mackey Street, Nassau, half a mile south of the Paradise Island Bridge. The same address since 1959.</p>
           <OpenNow />
-          <table className="num">
-            <tbody>
-              <tr><td>Monday to Friday</td><td>9:00 am to 4:30 pm</td></tr>
-              <tr><td>Saturday</td><td>9:00 am to 1:00 pm</td></tr>
-              <tr><td>Calling from abroad</td><td><a href={TEL_INTL}>{PHONE_INTL}</a></td></tr>
-              <tr><td>Fax</td><td>{FAX}</td></tr>
-            </tbody>
-          </table>
+          <p className="visit__acts"><a className="btn btn--primary num" href={TEL}>Call {PHONE}</a><a className="link" href={MAP} rel="noopener">Open in Google Maps</a></p>
         </div>
-        <img src={`${IMG}2020/05/ng_gallery.jpg`} alt="The Nassau Glass building on Mackey Street, painted green with white trim" width={400} height={234} loading="lazy" decoding="async" />
+        <table className="hours num">
+          <tbody>
+            <tr><th scope="row">Monday to Friday</th><td>{HOURS.week}</td></tr>
+            <tr><th scope="row">Saturday</th><td>{HOURS.sat}</td></tr>
+            <tr><th scope="row">Second line</th><td><a href={TEL2}>{PHONE2}</a></td></tr>
+            <tr><th scope="row">Calling from abroad</th><td><a href={TEL_INTL}>{PHONE_INTL}</a></td></tr>
+            <tr><th scope="row">Fax</th><td>{FAX}</td></tr>
+          </tbody>
+        </table>
+        <Write o={o} />
+        <figure className="visit__photo">
+          <img src={`${IMG}2020/05/ng_gallery.jpg`} alt="The Nassau Glass building on Mackey Street, painted green with white trim" width={400} height={234} loading="lazy" decoding="async" />
+          <figcaption className="small">Photograph: Nassau Glass.</figcaption>
+        </figure>
       </div>
     </section>
   )
+}
+
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>("[data-rise]")
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach(e => (e.dataset.rise = "in")); return }
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { (e.target as HTMLElement).dataset.rise = "in"; io.unobserve(e.target) } }), { rootMargin: "0px 0px -10% 0px" })
+    els.forEach((e, i) => { e.style.transitionDelay = `${(i % 6) * 60}ms`; io.observe(e) })
+    return () => io.disconnect()
+  }, [])
 }
 
 function Home() {
   useWheelSmoothing()
-  const [pick, setPick] = useState<Pick>({ kind: "glass", thick: "1/4", tint: "clear" })
-  const [order, setOrder] = useState<Order>({ job: "Tabletop", w: "", h: "", qty: "1", name: "", enclosure: "" })
-  const quoteKind = (k: Kind) => { const n = STOCK[k]; setPick({ kind: k, thick: n.thick[Math.min(1, n.thick.length - 1)] ?? "", tint: n.tints[0].id }); if (k === "mirror") setOrder({ ...order, job: "Mirror" }); go("quote") }
+  useReveal()
+  const [o, setO] = useState<Order>(START)
+  const set = useMemo(() => (p: Partial<Order>) => setO(s => ({ ...s, ...p })), [])
+  const quoteKind = (k: Kind) => {
+    const u = USES.find(x => x.kind === k)!
+    const n = STOCK[k]
+    set({ use: u.id, pick: { kind: k, thick: n.thick[Math.min(2, n.thick.length - 1)] ?? "", tint: n.tints[0].id } }); go("quote")
+  }
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
       <main id="main">
-        <Study pick={pick} setPick={setPick} />
-        <Showers onQuote={s => { setOrder({ ...order, job: "Shower enclosure", enclosure: s }); go("quote") }} />
-        <Rack onQuote={quoteKind} />
-        <Metals onQuote={() => { setOrder({ ...order, job: "Storefront" }); go("quote") }} />
-        <Hill />
-        <Quote pick={pick} setPick={setPick} order={order} setOrder={setOrder} />
-        <Visit />
+        <Hero o={o} set={set} />
+        <Rack quote={quoteKind} />
+        <Showers quote={() => { set({ use: "shower" }); go("quote") }} />
+        <WalkIn />
+        <Since />
+        <Visit o={o} />
       </main>
       <Footer />
-      <Bars after="#top" home />
+      <Bars after="#quote" home />
     </>
   )
 }
