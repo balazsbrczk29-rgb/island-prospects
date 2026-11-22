@@ -22,7 +22,7 @@ Scale (px, desktop / phone):
 CSS: --t-cap .8125rem; --t-sm .9375rem; --t-body 1.125rem; --t-lede clamp(1.25rem,1rem+.7vw,1.5rem); --t-h2 clamp(2.25rem,1.4rem+2.4vw,3.25rem); --t-h1 clamp(2.75rem,1.2rem+4.2vw,5.25rem).
 
 **Colour (OKLCH).**
-- ground (sand) `oklch(0.968 0.014 86)`; surface (paler sand for the table) `oklch(0.985 0.008 86)`;
+- ground (sand) `oklch(0.958 0.026 88)`; surface (paler sand for the table) `oklch(0.985 0.008 86)`;
 - ink (deep channel) `oklch(0.26 0.045 225)`; muted ink `oklch(0.45 0.035 225)` (7.4:1 on ground); line `oklch(0.86 0.02 86)`;
 - field (flats aqua, the chart's water and the Beach House band) `oklch(0.9 0.045 192)`; field-deep (water at the chart edge) `oklch(0.84 0.06 200)`;
 - land on the chart `oklch(0.95 0.03 88)` with coast stroke ink at 35%;
