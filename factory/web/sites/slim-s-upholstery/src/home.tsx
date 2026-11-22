@@ -4,9 +4,9 @@ import { ArrowUpRight, MessageCircle, Minus, Phone, Plus } from "lucide-react"
 import { C, Page, Photo, chairSet, ease, img, mount, waLink } from "./site"
 
 /* ---------- 1. The quote starter: the chair rebuilds with every answer ---------- */
-const PIECES = ["Sofa", "Dining chairs", "Car seats", "Boat cushions", "Aircraft seats", "Church pews", "Something else"]
-const ONE: Record<string, string> = { "Sofa": "sofa", "Dining chairs": "dining chair", "Car seats": "car seat", "Boat cushions": "boat cushion", "Aircraft seats": "aircraft seat", "Church pews": "church pew", "Something else": "piece" }
-const MANY: Record<string, string> = { "Sofa": "sofas", "Something else": "pieces" }
+const PIECES = ["Sofa", "Dining chairs", "Car seats", "Boat cushions", "Aircraft seats", "Church pews", "Other"]
+const ONE: Record<string, string> = { "Sofa": "sofa", "Dining chairs": "dining chair", "Car seats": "car seat", "Boat cushions": "boat cushion", "Aircraft seats": "aircraft seat", "Church pews": "church pew", "Other": "piece" }
+const MANY: Record<string, string> = { "Sofa": "sofas", "Other": "pieces" }
 const pieceText = (p: string, n: number) => (n === 1 ? `1 ${ONE[p]}` : `${n} ${MANY[p] ?? p.toLowerCase()}`)
 
 function radioKeys(e: React.KeyboardEvent<HTMLElement>) {
@@ -23,6 +23,9 @@ function radioKeys(e: React.KeyboardEvent<HTMLElement>) {
 function ChairStage({ step }: { step: number }) {
   const [layers, setLayers] = useState([{ k: 0, i: 0 }])
   const seq = useRef(0)
+  useEffect(() => {
+    LAYERS.slice(1).forEach((l) => { const im = new Image(); im.sizes = "(min-width: 900px) 520px, 100vw"; im.srcset = chairSet(l.key); im.src = img(`chair-${l.key}-900`) })
+  }, [])
   useEffect(() => {
     setLayers((l) => (l[l.length - 1].i === step ? l : [...l.slice(-1), { k: ++seq.current, i: step }]))
   }, [step])
@@ -59,7 +62,7 @@ function QuoteHero() {
   const msg = `Hi Slim Upholstery, I would like a free quote for ${pieceText(piece, qty)}. ${look === "same" ? "Same look, just new." : "I would like a new look."}${note.trim() ? ` ${note.trim()}` : ""} I am attaching photos.`
   const book = `${msg} Can I book an appointment to bring it in?`
   return (
-    <section className="bg-cream px-5 pb-20 pt-5 md:px-12 md:pb-28 md:pt-4" aria-labelledby="hero-title">
+    <section id="quote" className="scroll-mt-4 bg-cream px-5 pb-20 pt-5 md:px-12 md:pb-28 md:pt-4" aria-labelledby="hero-title">
       <div className="mx-auto grid max-w-[1320px] gap-x-12 md:grid-cols-12">
         <div className="flex items-center justify-between md:col-span-12">
           <p className="display text-[1.35rem]">Slim Upholstery</p>
@@ -77,19 +80,19 @@ function QuoteHero() {
           <p className="mt-3 max-w-[44rem] text-ink/85 md:text-[1.1rem]">Home, auto, marine, aircraft and church upholstery at {C.street}, Nassau. Free quotes.</p>
         </div>
 
-        <div className="mt-8 md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-2 md:mt-5">
+        <div className="mt-5 md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-2 md:mt-5">
           <ChairStage step={step} />
         </div>
 
-        <div className="mt-8 md:col-span-7 md:mt-5">
+        <div className="mt-5 md:col-span-7 md:mt-5">
           <div className="rounded-[26px] bg-cream-2 p-2">
             <div className="grid gap-4 rounded-[18px] p-4">
               <div>
                 <p className="t-small font-bold" id="q-piece">What needs doing</p>
-                <div className="mt-2.5 flex flex-wrap gap-2" role="radiogroup" aria-labelledby="q-piece" onKeyDown={radioKeys}>
+                <div className="mt-2.5 flex flex-wrap gap-1.5" role="radiogroup" aria-labelledby="q-piece" onKeyDown={radioKeys}>
                   {PIECES.map((p) => (
                     <button key={p} type="button" role="radio" aria-checked={piece === p} tabIndex={piece === p ? 0 : -1} onClick={() => { setPiece(p); touch("piece") }}
-                      className={`min-h-[44px] rounded-full px-4 t-small transition-colors duration-200 ${piece === p ? "bg-ink text-cream" : "bg-cream text-ink hover:bg-straw"}`}>{p}</button>
+                      className={`min-h-[44px] rounded-full px-3.5 t-small transition-colors duration-200 ${piece === p ? "bg-ink text-cream" : "bg-cream text-ink hover:bg-straw"}`}>{p}</button>
                   ))}
                 </div>
               </div>
@@ -258,8 +261,10 @@ function Areas() {
                 <Photo src={img(A.photo)} alt={A.alt} className="h-full w-full" />
               </motion.div>
             </AnimatePresence>
+            <p className="t-cap absolute bottom-3 right-3 rounded-full bg-cream px-3 py-1.5 text-ink">Illustrative photograph</p>
           </div>
         </div>
+        <p className="t-cap mt-6 text-muted md:hidden">Illustrative photographs, to be replaced with Slim Upholstery's own work.</p>
         <a href="what-we-upholster.html" className="mt-12 inline-flex min-h-[44px] items-center gap-2 font-bold underline decoration-line decoration-2 underline-offset-[6px] hover:decoration-ink">More on each kind of job <ArrowUpRight className="size-[18px]" strokeWidth={1.9} aria-hidden /></a>
       </div>
     </section>
@@ -271,7 +276,7 @@ function HowItWorks() {
   const steps = [
     ["Send photos", `WhatsApp 2 or 3 pictures of the piece to ${C.phone}. A tape measure in the shot helps.`],
     ["Get a free quote", "Slim Upholstery replies with a price for the job. Quotes cost nothing."],
-    ["Book an appointment", "Appointments are available. Bring the piece in, or arrange how larger pieces reach the workshop."],
+    ["Book an appointment", "Appointments are available. Bring the piece in, or ask about larger pieces."],
     ["Collect your piece", "From worn to wow: same frame, new life."],
   ]
   return (
@@ -306,7 +311,7 @@ function Visit() {
       <div className="mx-auto grid max-w-[1320px] gap-14 md:grid-cols-[1.3fr_1fr]">
         <div>
           <h2 id="visit-title" className="display t-h2">{C.street},<br />Nassau.</h2>
-          <p className="t-lead mt-6 max-w-[30rem] text-cream-mute">The workshop is on Claridge Road. Come with photos or with the piece itself; cloth samples are there to touch.</p>
+          <p className="t-lead mt-6 max-w-[30rem] text-cream-mute">The workshop is on Claridge Road. Come with photos or with the piece itself.</p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a href={C.map} className="btn text-cream shadow-[inset_0_0_0_1.5px_var(--color-cream)] hover:bg-cream hover:text-ink">Directions <ArrowUpRight className="size-[17px]" strokeWidth={1.9} aria-hidden /></a>
             <a href={C.tel} className="btn tnum text-cream shadow-[inset_0_0_0_1.5px_rgba(247,240,224,.4)] hover:shadow-[inset_0_0_0_1.5px_var(--color-cream)]"><Phone className="size-[17px]" strokeWidth={1.9} aria-hidden /> {C.phone}</a>
@@ -314,7 +319,7 @@ function Visit() {
         </div>
         <dl className="tnum grid grid-cols-[auto_1fr] gap-x-8 gap-y-2 items-center self-end text-cream">
           <dt className="text-cream-mute">Monday to Friday</dt><dd>9:00am to 5:30pm</dd>
-          <dt className="text-cream-mute">Saturday</dt><dd>Shorter hours, call ahead</dd>
+          <dt className="text-cream-mute">Saturday</dt><dd>Shorter hours, call to confirm</dd>
           <dt className="text-cream-mute">Sunday</dt><dd>Closed</dd>
           <dt className="pt-6 text-cream-mute">Call or WhatsApp</dt><dd className="pt-6"><a className="inline-flex min-h-[44px] items-center underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tel}>{C.phone}</a></dd>
           <dt className="text-cream-mute">Shop line</dt><dd><a className="inline-flex min-h-[44px] items-center underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tel2}>{C.phone2}</a></dd>
