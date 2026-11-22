@@ -21,7 +21,6 @@
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 :root {
-  --concept-offset: 96px;
   /* type scale */
   --t-cap: 0.8125rem;
   --t-small: 0.9375rem;
@@ -30,7 +29,7 @@
   --t-h3: clamp(1.55rem, 2.3vw, 2.05rem);
   --t-h2: clamp(2.3rem, 4.4vw, 4.1rem);
   --t-h1: clamp(2.9rem, 6.2vw, 6.1rem);
-  --t-hero: clamp(2.75rem, 4.6vw, 4.75rem);
+  --t-hero: clamp(2.75rem, 4vw, 4rem);
   /* durations */
   --dur-fast: 180ms;
   --dur-mid: 420ms;
@@ -65,7 +64,7 @@ html.lenis, html.lenis body { height: auto; }
 @keyframes wipe-up-inner { from { transform: translateY(-100%); } }
 @keyframes seam { 0%, 85% { opacity: 1; } 100% { opacity: 0; } }
 .chair__rail { display: flex; align-items: center; gap: 14px; margin-top: 12px; }
-@media (max-width: 767px) { .chair__frame { aspect-ratio: 1 / 1; } }
+@media (max-width: 767px) { .chair__frame { aspect-ratio: 5 / 4; } }
 .ph { background-color: var(--color-cream-2); }
 .skip { position: absolute; left: 12px; top: -80px; z-index: 100; background: var(--color-ink); color: var(--color-cream); padding: 12px 18px; border-radius: 12px; }
 .skip:focus { top: 12px; }

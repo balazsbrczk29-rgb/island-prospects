@@ -59,14 +59,14 @@ function QuoteHero() {
   const msg = `Hi Slim Upholstery, I would like a free quote for ${pieceText(piece, qty)}. ${look === "same" ? "Same look, just new." : "I would like a new look."}${note.trim() ? ` ${note.trim()}` : ""} I am attaching photos.`
   const book = `${msg} Can I book an appointment to bring it in?`
   return (
-    <section className="bg-cream px-5 pb-20 pt-5 md:px-12 md:pb-28 md:pt-7" aria-labelledby="hero-title">
+    <section className="bg-cream px-5 pb-20 pt-5 md:px-12 md:pb-28 md:pt-4" aria-labelledby="hero-title">
       <div className="mx-auto grid max-w-[1320px] gap-x-12 md:grid-cols-12">
         <div className="flex items-center justify-between md:col-span-12">
           <p className="display text-[1.35rem]">Slim Upholstery</p>
           <a href={C.tel} className="tnum t-small inline-flex min-h-[44px] items-center font-bold underline decoration-ink/30 underline-offset-[5px] hover:decoration-ink">{C.phone}</a>
         </div>
 
-        <div className="mt-6 md:col-span-7 md:mt-8">
+        <div className="mt-6 md:col-span-7 md:mt-5">
           <h1 id="hero-title" className="display t-hero">
             {["From worn to wow,", "one stitch at a time."].map((l, i) => (
               <span key={l} className="block overflow-hidden pb-[0.08em]">
@@ -74,16 +74,16 @@ function QuoteHero() {
               </span>
             ))}
           </h1>
-          <p className="mt-4 max-w-[36rem] text-ink/85 md:text-[1.1rem]">Home, auto, marine, aircraft and church upholstery at {C.street}, Nassau. Free quotes.</p>
+          <p className="mt-3 max-w-[44rem] text-ink/85 md:text-[1.1rem]">Home, auto, marine, aircraft and church upholstery at {C.street}, Nassau. Free quotes.</p>
         </div>
 
-        <div className="mt-8 md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-2 md:mt-8">
+        <div className="mt-8 md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-2 md:mt-5">
           <ChairStage step={step} />
         </div>
 
-        <div className="mt-8 md:col-span-7 md:mt-6">
+        <div className="mt-8 md:col-span-7 md:mt-5">
           <div className="rounded-[26px] bg-cream-2 p-2">
-            <div className="grid gap-5 rounded-[18px] p-4 md:p-5">
+            <div className="grid gap-4 rounded-[18px] p-4">
               <div>
                 <p className="t-small font-bold" id="q-piece">What needs doing</p>
                 <div className="mt-2.5 flex flex-wrap gap-2" role="radiogroup" aria-labelledby="q-piece" onKeyDown={radioKeys}>
@@ -119,9 +119,9 @@ function QuoteHero() {
             </div>
           </div>
 
-          <p className="bubble mt-5" aria-live="polite">{msg}</p>
+          <p className="bubble mt-4" aria-live="polite">{msg}</p>
           <p className="t-cap mt-2 text-muted">Attach 2 or 3 photos when WhatsApp opens. A tape measure in the shot helps.</p>
-          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2">
             <a href={waLink(msg)} target="_blank" rel="noopener" className="btn btn-primary min-h-[54px] text-[1rem]"><MessageCircle className="size-[19px]" strokeWidth={1.9} aria-hidden /> Send on WhatsApp</a>
             <a href={C.tel} className="tnum inline-flex min-h-[44px] items-center gap-2 font-bold underline decoration-ink/30 decoration-2 underline-offset-[6px] hover:decoration-ink"><Phone className="size-[16px]" strokeWidth={1.9} aria-hidden /> Call {C.phone}</a>
             <a href={waLink(book)} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center font-bold underline decoration-ink/30 decoration-2 underline-offset-[6px] hover:decoration-ink">Book an appointment</a>
