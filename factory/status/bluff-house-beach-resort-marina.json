@@ -4,7 +4,7 @@
  "name": "Bluff House Beach Resort & Marina",
  "batch": "09",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "history": [
   {
@@ -13,5 +13,36 @@
   }
  ],
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T13:51:59.945Z"
+ "claimed_at": "2026-11-22T13:51:59.945Z",
+ "jobspec_built": true,
+ "built_at": "2026-11-22T14:06:10.757865Z",
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "Book on Cloudbeds with dates filled in (air) or Reserve on Dockwa (sea), from the sentence planner on screen 1; phone strip carries the live total",
+ "brand_truth": "The Out Islands' first resort, still a house on a bluff above White Sound that writes in guests by plane and by boat.",
+ "buyer": "US couples, families and returning guests planning months ahead on phones; boaters crossing from Florida and the Carolinas checking draft against the 7 ft channel.",
+ "direction": {
+  "type": "Libre Caslon Display + Rethink Sans (Caslon Text italic captions)",
+  "palette": "paper #f7f4ed, Abaco navy ink #101e2d, Abaco blue accent #1b5c8f, White Sound field #d0ecf6",
+  "why": "A guest register: a literary Caslon sentence beside their own photograph, unhurried and nautical."
+ },
+ "big_idea": "The register: screen 1 is a two-page spread, their photograph beside one Caslon sentence the visitor fills in (arrival, nights, by air or sea, suite or cottage, or boat length and draft). It prices suites night by night at published season rates, or dockage per foot with VAT and a 7 ft MLW fit gauge, then hands off to Cloudbeds or Dockwa; the photo wipes from bluff to docks when you choose sea.",
+ "concept_type": "booking: rooms (Cloudbeds) and slips (Dockwa)",
+ "critic_scores": {
+  "gate1": "pass",
+  "wow": 4,
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "conversion": 5,
+  "phone": 4
+ },
+ "notes": [
+  "Built from approved job spec 2026-11-22 by an unattended worker; design.md in the source folder.",
+  "Research this session: /marina-rates and /private-cottages (2 calls). Rates shown as last published; dockage labelled 2024 to 2025 seasons.",
+  "Photographs hotlinked from bluffhouse.com Wix media at requested sizes; the sandbox could not load them, so the critic judged photography from code and plan.",
+  "Cloudbeds hand-off uses #checkin/#checkout hash params; confirm the engine honours them.",
+  "Assumption: cottage rows link to each cottage's page on bluffhouse.com; no per-cottage rates are published, so quotes are by email."
+ ]
 }
