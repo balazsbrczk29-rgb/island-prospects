@@ -53,7 +53,7 @@ function Stage({ j }: { j: Job }) {
         <div key={l.key} className={`stage__layer${i > 0 && l.key > 0 ? " is-in" : ""}`}
           onAnimationEnd={e => { if (e.target === e.currentTarget) setLayers(ls => ls.slice(-1)) }}>
           <div className="stage__inner">
-            {l.job.photo ? <Img p={l.job.photo} eager={l.key === 0} className="stage__img" /> : (
+            {l.job.photo ? <Img p={l.job.photo} eager className="stage__img" /> : (
               <div className="plate">
                 <p className="plate__name">{l.job.name}</p>
                 <p className="plate__note">{l.job.line} Send us a photo of the {l.job.side === "house" ? "opening" : "boat"} and we come to measure.</p>
@@ -68,7 +68,7 @@ function Stage({ j }: { j: Job }) {
 }
 
 type Pick = { side: Side; jobId: string }
-function Tool({ pick, setPick, sendRef }: { pick: Pick; setPick: (p: Pick) => void; sendRef: React.RefObject<HTMLAnchorElement | null> }) {
+function Tool({ pick, setPick, sendRef, onMsg }: { pick: Pick; setPick: (p: Pick) => void; sendRef: React.RefObject<HTMLAnchorElement | null>; onMsg: (m: string) => void }) {
   const j = job(pick.jobId)
   const sizes = SIZES[j.size]
   const whens = j.storm ? [WHEN_STORM, ...WHEN] : WHEN
@@ -77,12 +77,13 @@ function Tool({ pick, setPick, sendRef }: { pick: Pick; setPick: (p: Pick) => vo
   const [when, setWhen] = useState(WHEN[0])
   useEffect(() => { setSize("Not sure"); if (!whens.includes(when)) setWhen(WHEN[0]) }, [j.size, j.storm]) // eslint-disable-line react-hooks/exhaustive-deps
   const msg = useMemo(() => message(j, size, where, when), [j, size, where, when])
+  useEffect(() => onMsg(msg), [msg, onMsg])
   const sides: [Side, string][] = [["house", "House"], ["boat", "Boat"]]
   return (
     <section className="tool" id="tool" aria-labelledby="title">
       <div className="tool__ask">
         <h1 id="title" className="hero">Shade and shelter, cut and sewn in Nassau.</h1>
-        <p className="tool__lede">Awnings for the house, tops and upholstery for the boat, made at our Airport Industrial Park workshop since 1992. What needs covering?</p>
+        <p className="tool__lede">Awnings for the house, tops and upholstery for the boat, made in the Airport Industrial Park since 1992. WhatsApp us for an immediate response.</p>
 
         <div className="sides" role="radiogroup" aria-label="What needs covering" onKeyDown={radioKeys} data-side={pick.side}>
           {sides.map(([s, label]) => (
@@ -248,7 +249,14 @@ function Home() {
   const sendRef = useRef<HTMLAnchorElement>(null)
   const [dock, setDock] = useState(false)
   const j = job(pick.jobId)
-  const generic = waLink(`Hello Cover Up, I'd like a measure for ${j.noun} for my ${j.side}. I can send photos.`)
+  const [msg, setMsg] = useState("")
+  const generic = waLink(msg || `Hello Cover Up, I'd like a measure for ${j.noun} for my ${j.side}. I can send photos.`)
+
+  useEffect(() => {
+    const pre = () => JOBS.forEach(x => { if (x.photo) new Image().src = x.photo.src })
+    const w = window as Window & { requestIdleCallback?: (f: () => void) => number }
+    if (w.requestIdleCallback) w.requestIdleCallback(pre); else setTimeout(pre, 1500)
+  }, [])
 
   useEffect(() => {
     if (matchMedia("(pointer: coarse)").matches || reduced()) return
@@ -282,7 +290,7 @@ function Home() {
       <a className="skip" href="#tool">Skip to the measure request</a>
       <Bar />
       <main>
-        <Tool pick={pick} setPick={setPick} sendRef={sendRef} />
+        <Tool pick={pick} setPick={setPick} sendRef={sendRef} onMsg={setMsg} />
         <Ledger side="house" onAsk={ask} />
         <Ledger side="boat" onAsk={ask} />
         <How />
