@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { ATTORNEYS, MATTERS, OFFICES, IMG, letter, type AKey, type Matter, type OKey } from "./data"
+import { Chart } from "./chartview"
 
 function Record() {
   return (
@@ -51,8 +52,7 @@ function Attorneys() {
   )
 }
 
-function Offices() {
-  const [o, setO] = useState<OKey>("nassau")
+function Offices({ o, setO }: { o: OKey; setO: (o: OKey) => void }) {
   const keys = Object.keys(OFFICES) as OKey[]
   const x = OFFICES[o]
   return (
@@ -78,6 +78,7 @@ function Offices() {
               <p className="fax num">Fax {x.fax}</p>
             </div>
             <p className="dir"><a className="link" href={x.map} target="_blank" rel="noopener">Directions in Google Maps</a></p>
+            <div className="mini"><Chart office={o} onPick={setO} id="off-chart" view={o === "nassau" ? "130 110 400 240" : "570 560 420 300"} /></div>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -106,7 +107,7 @@ function Practice() {
   )
 }
 
-function Write({ m }: { m: Matter }) {
+function Write({ m, o }: { m: Matter; o: OKey }) {
   const [mid, setMid] = useState(m.id)
   const [to, setTo] = useState<AKey>(m.who[0])
   const [name, setName] = useState("")
@@ -114,7 +115,7 @@ function Write({ m }: { m: Matter }) {
   const [note, setNote] = useState("")
   useEffect(() => { setMid(m.id); setTo(m.who[0]) }, [m])
   const matter = MATTERS.find(x => x.id === mid) ?? null
-  const submit = (e: FormEvent) => { e.preventDefault(); window.location.href = letter(matter, to, name, reply, note) }
+  const submit = (e: FormEvent) => { e.preventDefault(); window.location.href = letter(matter, to, o, name, reply, note) }
   return (
     <section className="wrap sec" id="write" aria-labelledby="w-h">
       <div className="sec-head">
@@ -171,14 +172,41 @@ function Write({ m }: { m: Matter }) {
   )
 }
 
-export function Rest({ m }: { m: Matter }) {
+const STEPS = [
+  ["You write or call", "Tell us the kind of matter and how to reach you. A line is enough; keep confidential details for the meeting."],
+  ["Your attorney replies", "The attorney who handles that kind of matter contacts you to arrange a first meeting, in Nassau or in Salt Pond."],
+  ["Bring what you have", "Deeds, company papers, letters or contracts: whatever you already hold about the matter."],
+  ["Terms before work", "How the matter will be handled and charged is agreed with you before the work begins."],
+]
+
+function Consult() {
+  return (
+    <section className="wrap sec consult" aria-labelledby="c-h">
+      <figure className="cphoto">
+        <img src={`${IMG}louvre-desk.jpg`} alt="Morning light through louvred shutters across a desk and a ribboned deed (illustrative)" width={1920} height={1088} loading="lazy" />
+      </figure>
+      <div>
+        <h2 id="c-h">What happens after you write.</h2>
+        <ol className="steps">
+          {STEPS.map(([h, p], i) => (
+            <li key={h}><span className="n num">{i + 1}</span><div><h3>{h}</h3><p>{p}</p></div></li>
+          ))}
+        </ol>
+        <p className="cnote"><a className="link" href="#write">Write to us</a></p>
+      </div>
+    </section>
+  )
+}
+
+export function Rest({ m, o, setO }: { m: Matter; o: OKey; setO: (o: OKey) => void }) {
   return (
     <>
+      <Practice />
       <Record />
       <Attorneys />
-      <Offices />
-      <Practice />
-      <Write m={m} />
+      <Offices o={o} setO={setO} />
+      <Consult />
+      <Write m={m} o={o} />
     </>
   )
 }
