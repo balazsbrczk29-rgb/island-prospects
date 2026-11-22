@@ -16,7 +16,7 @@ const has = (b: Boat, test: (k: string) => boolean) => b.kit.some(test)
 const plan = (id: string) => window.dispatchEvent(new CustomEvent('donny:boat', { detail: id }))
 
 const ROWS: [string, (b: Boat) => string][] = [
-  ['Seats', b => b.people],
+  ['Takes', b => b.people],
   ['Engine', b => `${b.hp}, 4-stroke`],
   ['A day', b => usd(b.day)],
   ['7 days', b => usd(b.week)],
@@ -25,7 +25,7 @@ const ROWS: [string, (b: Boat) => string][] = [
 
 function Mark({ on }: { on: boolean }) {
   return on
-    ? <span className="inline-block size-2.5 rounded-full bg-channel" role="img" aria-label="Listed" />
+    ? <span className="inline-block size-3 rounded-full bg-channel" role="img" aria-label="Listed" />
     : <span className="inline-block w-3 h-[2px] bg-ink/25 align-middle" role="img" aria-label="Not listed" />
 }
 
@@ -88,7 +88,7 @@ export default function Compare() {
       </div>
 
       {/* phone: four stacked blocks */}
-      <ul className="md:hidden mt-10 grid gap-14 list-none p-0 m-0">
+      <div className="md:hidden"><ul className="track-ul mt-10 -mx-5 !px-5 !gap-4">
         {FLEET.map(b => (
           <li key={b.id}>
             <Photo b={b} w={800} />
@@ -105,7 +105,7 @@ export default function Compare() {
             <button type="button" onClick={() => plan(b.id)} className="btn btn-ghost w-full mt-5">Plan this boat</button>
           </li>
         ))}
-      </ul>
+      </ul></div>
       <p className="mt-8 text-[0.875rem] text-muted">A dash means the item is not listed on Donny&rsquo;s fleet page. Block ice is for sale at the dock. <a href="fleet.html" className="font-semibold text-ink underline underline-offset-4 decoration-1 hover:decoration-2">Every boat, with more photos</a></p>
     </section>
   )

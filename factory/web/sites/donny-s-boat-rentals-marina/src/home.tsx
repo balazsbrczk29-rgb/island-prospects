@@ -18,7 +18,7 @@ function Terms() {
         </div>
         <dl className="lg:col-span-7 grid gap-x-12 gap-y-9 sm:grid-cols-2 m-0">
           {TERMS.map(([t, d]) => (
-            <div key={t}>
+            <div key={t} className="sm:last:col-span-2">
               <dt className="font-display font-semibold text-[1.375rem] tracking-[-0.03em] leading-tight">{t}</dt>
               <dd className="m-0 mt-2 text-muted max-w-[40ch]">{d}</dd>
             </div>
@@ -40,7 +40,7 @@ function Marina() {
         </div>
         <div className="lg:col-span-6 lg:pl-[3vw]">
           <h2 id="marina-title" className="h2 max-w-[15ch]">Coming in on your own boat? Dockage to 50 ft, 7 ft draft.</h2>
-          <p className="mt-5 max-w-[46ch] text-ink/80">Fixed-price dockage, moorings with plenty of swing room, and Donny living on site. New Plymouth is a ten-minute walk for Customs, restaurants and groceries.</p>
+          <p className="mt-5 max-w-[46ch] text-ink/80">Fixed-price dockage, moorings with plenty of swing room, and Donny living on site. Shower and bathroom, trash, dinghy dock, electric, water and ice, with the fuel dock and boat yard close by. New Plymouth is a ten-minute walk for Customs, restaurants and groceries.</p>
           <table className="mt-9 w-full max-w-[560px] border-collapse tnum text-[0.9375rem] md:text-[1.0625rem]">
             <caption className="sr-only">Donny's published dockage and mooring rates</caption>
             <thead><tr className="text-left text-ink/75"><th scope="col" className="font-normal pb-2" /><th scope="col" className="font-normal pb-2">A day</th><th scope="col" className="font-normal pb-2">A week</th><th scope="col" className="font-normal pb-2">A month</th></tr></thead>
@@ -48,7 +48,7 @@ function Marina() {
               {MARINA.rates.map(r => (
                 <tr key={r.label} className="border-t border-ink/15">
                   <th scope="row" className="text-left font-semibold py-3 pr-3">{r.label}</th>
-                  <td className="py-3">{usd(r.day)}</td><td className="py-3">{usd(r.week)}</td><td className="py-3">{usd(r.month.valueOf())}</td>
+                  <td className="py-3">{usd(r.day)}</td><td className="py-3">{usd(r.week)}</td><td className="py-3">{usd(r.month)}</td>
                 </tr>
               ))}
             </tbody>
@@ -84,7 +84,7 @@ function Contact() {
             <div><dt className="text-muted">Position</dt><dd className="m-0 mt-1 font-semibold text-[1.0625rem] tnum">N 26&deg; 45.460&prime; W 077&deg; 19.301&prime;</dd></div>
           </dl>
         </div>
-        <div className="lg:col-span-5 ph aspect-[4/5] rounded-[var(--radius-lg)]">
+        <div className="lg:col-span-5 ph aspect-[4/3] rounded-[var(--radius-lg)]">
           <img src={wix(P.donnysBoat, 1200)} width={1200} height={900} alt="A Donny's Boat Rentals boat on calm turquoise water off Green Turtle Cay" loading="lazy" decoding="async" />
         </div>
       </div>

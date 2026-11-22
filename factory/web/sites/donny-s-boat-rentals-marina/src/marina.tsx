@@ -1,42 +1,12 @@
-import { useId, useState } from 'react'
-import { Check, X } from 'lucide-react'
+import { Fits } from './TripSheet'
 import { Page, mount } from './site'
 import { MARINA, P, wix, srcSet, usd, mail, PHONE, TEL } from './data'
 
 function SlipCheck() {
-  const [loa, setLoa] = useState('')
-  const [draft, setDraft] = useState('')
-  const a = useId(), b = useId()
-  const L = parseFloat(loa.replace(',', '.')), D = parseFloat(draft.replace(',', '.'))
-  const done = L > 0 && D > 0
-  const fits = done && L <= MARINA.loa && D <= MARINA.draft
-  const rate = done ? (L >= 46 ? MARINA.rates[2] : MARINA.rates[1]) : null
   return (
-    <div className="bg-white rounded-[var(--radius-lg)] p-6 md:p-10">
+    <div id="fit" className="bg-white rounded-[var(--radius-lg)] p-6 md:p-10 scroll-mt-6">
       <h2 className="text-[2rem] md:text-[2.75rem] tracking-[-0.04em]">Will my boat fit?</h2>
-      <div className="mt-6 grid grid-cols-2 gap-4 items-end">
-        <div><label htmlFor={a} className="block font-semibold mb-2">Length overall (ft)</label>
-          <input id={a} inputMode="decimal" value={loa} onChange={e => setLoa(e.target.value)} placeholder="42" className="w-full h-12 px-4 rounded-[var(--radius-sm)] bg-ground text-[1.25rem] tnum shadow-[inset_0_0_0_1px_var(--color-line)]" /></div>
-        <div><label htmlFor={b} className="block font-semibold mb-2">Draft (ft)</label>
-          <input id={b} inputMode="decimal" value={draft} onChange={e => setDraft(e.target.value)} placeholder="5.5" className="w-full h-12 px-4 rounded-[var(--radius-sm)] bg-ground text-[1.25rem] tnum shadow-[inset_0_0_0_1px_var(--color-line)]" /></div>
-      </div>
-      <div aria-live="polite" className="mt-6 min-h-[132px]">
-        {!done && <p className="text-muted">Enter your length and draft. Donny&rsquo;s takes up to {MARINA.loa} ft LOA and {MARINA.draft} ft draft at fixed prices.</p>}
-        {done && fits && rate && (
-          <div>
-            <p className="flex items-center gap-3 font-display font-semibold text-[1.75rem] tracking-[-0.03em]"><span className="grid place-items-center size-9 rounded-full bg-channel text-white"><Check size={18} strokeWidth={2.25} /></span>Within Donny&rsquo;s limits</p>
-            <p className="mt-3 tnum">{rate.label}: {usd(rate.day)} a day, {usd(rate.week)} a week, {usd(rate.month)} a month. {rate.note}.</p>
-            {D >= 6 && <p className="mt-2 text-muted">With {D} ft draft, come in on the tide: a 6 ft draft enters Black Sound when the tide is 2 ft above low water.</p>}
-            <a className="btn btn-primary mt-5" href={mail(`Dockage request: ${L} ft LOA, ${D} ft draft`, `Hello Donny, we'd like dockage for a ${L} ft boat with ${D} ft draft. Arrival date: \nNights: \nBoat name: `)}>Ask Donny for a slip</a>
-          </div>
-        )}
-        {done && !fits && (
-          <div>
-            <p className="flex items-center gap-3 font-display font-semibold text-[1.75rem] tracking-[-0.03em]"><span className="grid place-items-center size-9 rounded-full bg-ink text-white"><X size={18} strokeWidth={2.25} /></span>Beyond the published limits</p>
-            <p className="mt-3">The dock takes up to {MARINA.loa} ft LOA and {MARINA.draft} ft draft. A mooring may still work: ask Donny on VHF 16 or call <a className="font-semibold tnum underline" href={TEL}>{PHONE}</a>.</p>
-          </div>
-        )}
-      </div>
+      <div className="mt-6"><Fits /></div>
     </div>
   )
 }

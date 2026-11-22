@@ -93,8 +93,9 @@ export function stayCost(r: Rate, nights: number) {
 }
 export const AMP30: Rate = { day: 5, week: 20, month: 100 }
 export function fit(loa: number, draft: number, berth: Berth) {
-  if (berth === 'dock' && (loa > MARINA.loa || draft > MARINA.draft)) return { ok: false as const, rate: null, label: 'Over the published dock limits' }
+  // the published limits (50 ft LOA, 7 ft draft) are the only sourced numbers, so beyond them we never say "fits"
+  if (loa > MARINA.loa || draft > MARINA.draft) return { ok: false as const, rate: null, label: 'Beyond the published limits: ask Donny' }
   const rate = berth === 'mooring' ? MARINA.rates[0] : loa <= 45 ? MARINA.rates[1] : MARINA.rates[2]
-  return { ok: true as const, rate, label: berth === 'mooring' ? 'Fits: a mooring' : loa <= 45 ? 'Fits: dock, 45 ft and under' : 'Fits: dock, 46 to 50 ft' }
+  return { ok: true as const, rate, label: berth === 'mooring' ? 'Within the limits: a mooring' : loa <= 45 ? 'Within the limits: dock, 45 ft and under' : 'Within the limits: dock, 46 to 50 ft' }
 }
 export const ENTRY_NOTE = 'A 6 ft draft can enter at a tide 2 ft above low water. Stay close to the last red marker, then aim for the middle of the sound.'
