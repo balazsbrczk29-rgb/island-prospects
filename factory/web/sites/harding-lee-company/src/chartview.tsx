@@ -3,7 +3,7 @@ import { CHART } from "./chart"
 import type { OKey } from "./data"
 
 const PINS: Record<OKey, { x: number; y: number; label: string; coord: string; dx: number; dy: number; anchor: "start" | "end" }> = {
-  nassau: { x: CHART.nassau[0], y: CHART.nassau[1], label: "Nassau", coord: "25.07° N  77.34° W", dx: 18, dy: -40, anchor: "start" },
+  nassau: { x: CHART.nassau[0], y: CHART.nassau[1], label: "Nassau", coord: "25.07° N  77.34° W", dx: 18, dy: 34, anchor: "start" },
   longisland: { x: CHART.saltpond[0], y: CHART.saltpond[1], label: "Salt Pond, Long Island", coord: "23.35° N  75.13° W", dx: -30, dy: 4, anchor: "end" },
 }
 

@@ -341,3 +341,28 @@ img { display: block; max-width: 100%; }
 .answer .ans .acts { flex-wrap: nowrap; }
 @media (max-width: 1180px) { .answer .ans .acts { flex-wrap: wrap; } }
 .hero-side .chart { max-height: 400px; }
+/* critic pass */
+.hero h1 { max-width: 13ch; }
+.courts-l { margin-top: var(--s3); font-family: var(--sans); font-size: var(--t-ui); color: var(--muted); }
+:is(.answer, .answer-inline) .who > .pf { width: 104px; height: 124px; }
+.ans .pf img { filter: none; }
+.matters button { min-height: 58px; }
+.hero-side .chart { max-height: 360px; }
+@media (max-width: 960px) {
+  .hero { padding-bottom: 72px; }
+  .hero h1 { max-width: 13ch; font-size: 2.125rem; }
+  .matters { margin-top: var(--s3); }
+  .matters button { min-height: 44px; font-size: 1.1875rem; padding: 6px 0; }
+  .courts-l { display: none; }
+  .answer-inline { border-bottom: 0; padding-top: var(--s3); }
+  :is(.answer, .answer-inline) .who > .pf { width: 72px; height: 86px; }
+  .hero-side .chart { max-height: 280px; }
+}
+@media (max-width: 960px) {
+  .hero { padding-top: var(--s3); }
+  .answer-inline .why { display: none; }
+  .answer-inline { padding-top: var(--s2); }
+  .answer-inline .otog { margin-top: 12px; }
+  .ans .acts .link { display: inline-flex; align-items: center; min-height: 44px; }
+}
+@media (min-width: 961px) { .hero h1 { max-width: 15ch; font-size: clamp(2.25rem, 3.7vw, 3.375rem); } .matters button { min-height: 54px; } }
