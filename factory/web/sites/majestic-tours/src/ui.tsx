@@ -109,24 +109,24 @@ export function Footer() {
       <div className="grid gap-12 md:grid-cols-12">
         <div className="md:col-span-5">
           <p className="font-display text-[2.6rem] leading-none tracking-[-0.03em]">Majestic Tours</p>
-          <p className="mt-4 max-w-sm text-small text-ground/75 italic">Service is our Profession. A Bahamian family company since June 1959.</p>
+          <p className="mt-4 max-w-sm text-small text-[#cfc9bc] italic">Service is our Profession. A Bahamian family company since June 1959.</p>
         </div>
         <div className="text-small md:col-span-3">
-          <p className="text-ground/60 italic">Tours</p>
-          <a href={TEL} className="tnum mt-1 block no-underline hover:text-field">{PHONE}</a>
-          <p className="mt-5 text-ground/60 italic">Head office</p>
-          <a href={OFFICE_TEL} className="tnum mt-1 block no-underline hover:text-field">{OFFICE}</a>
-          <a href={`mailto:${EMAIL}`} className="mt-1 block break-all no-underline hover:text-field">{EMAIL}</a>
+          <p className="text-[#b8b1a4] italic">Tours</p>
+          <a href={TEL} className="tnum mt-1 flex min-h-11 items-center no-underline hover:text-field">{PHONE}</a>
+          <p className="mt-5 text-[#b8b1a4] italic">Head office</p>
+          <a href={OFFICE_TEL} className="tnum mt-1 flex min-h-11 items-center no-underline hover:text-field">{OFFICE}</a>
+          <a href={`mailto:${EMAIL}`} className="mt-1 flex min-h-11 items-center break-all no-underline hover:text-field">{EMAIL}</a>
         </div>
         <div className="text-small md:col-span-4">
-          <p className="text-ground/60 italic">Find us</p>
+          <p className="text-[#b8b1a4] italic">Find us</p>
           <p className="mt-1">Hillside Manor, Cumberland Street<br />P.O. Box N-1401, Nassau, The Bahamas</p>
           <nav aria-label="Footer" className="mt-5 flex flex-wrap gap-x-5">
             {NAV.map(n => <a key={n.href} href={n.href} className="link">{n.label}</a>)}
           </nav>
         </div>
       </div>
-      <p className="mt-16 max-w-3xl text-cap text-ground/55">Photographs from majestictoursbahamas.com. Sister companies: Majestic Holidays, Majestic Travel, Bahama Fantasies. Member of ASTA, CHA and IATA.</p>
+      <p className="mt-16 max-w-3xl text-cap text-[#b0a99c]">Photographs from majestictoursbahamas.com. Sister companies: Majestic Holidays, Majestic Travel, Bahama Fantasies. Member of ASTA, CHA and IATA.</p>
     </footer>
   )
 }

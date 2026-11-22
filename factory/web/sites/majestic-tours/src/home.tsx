@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { mount, useLenis, Footer, STOPS_FOR_FORM } from "./ui"
+import { Finder } from "./Finder"
 import { JourneyDesktop, JourneyPhone } from "./Journey"
 import { Story, Arrival, Desks, Faq, FloatingActions } from "./sections"
 
@@ -10,6 +11,7 @@ function Home() {
     <>
       <a href="#main" className="skip">Skip to content</a>
       <main id="main">
+        <Finder />
         <JourneyDesktop where={where} setWhere={setWhere} />
         <JourneyPhone where={where} setWhere={setWhere} />
         <Story />

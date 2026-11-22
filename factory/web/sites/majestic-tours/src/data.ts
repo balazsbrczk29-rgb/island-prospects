@@ -90,3 +90,27 @@ export const MODES = {
   },
 } as const
 
+
+/* ---------- the trip finder (generation 2, job spec) ---------- */
+export type Len = "half" | "full" | "evening"
+/** Length only where the tour's own name or line says it; others are "on the tour page". */
+export const LEN: Record<string, Len> = {
+  "84": "half", "05": "half", "41": "half", "38": "half", "26": "half", "25": "half",
+  "08": "full", "04": "full", "37": "full", "35": "full", "30": "full", "60": "full", "82": "full",
+  "09": "evening", "42": "evening", "06": "evening", "27": "evening",
+}
+export const LEN_LABEL: Record<Len, string> = { half: "Half day", full: "Full day", evening: "Evening" }
+/** Trips that do not need a swim: on land, on deck at dusk, the pirate ship, the fishing charters. */
+export const DRY = new Set(["09", "42", "06", "68", "37", "38", "43", "49", "81", "73", "10", "75", "03"])
+/** Published facts shown on the cards, from the tour pages. */
+export const FACTS: Record<string, string> = {
+  "09": "Pickups 5:00 to 5:30 pm · $137.50 adult, $68.75 child under 11",
+  "35": "Hotel transfer included · from $328.90 adult, $209.00 child",
+}
+export type What = "all" | "sail" | "islands" | "dive" | "fishing" | "land"
+export const WHAT: { id: What; label: string }[] = [
+  { id: "all", label: "All trips" }, { id: "sail", label: "Sails and evenings" }, { id: "islands", label: "Islands and animals" },
+  { id: "dive", label: "Dive and snorkel" }, { id: "fishing", label: "Fishing" }, { id: "land", label: "On the island" },
+]
+export const whatOf = (t: Tour): What => t.kind === "Sail and evening" ? "sail" : t.kind === "Dive and snorkel" ? "dive" : t.kind === "Fishing" ? "fishing" : t.place === "land" ? "land" : t.id === "68" ? "sail" : "islands"
+export const PLACE_NAME: Record<Place, string> = { harbour: "Nassau Harbour", lagoon: "Blue Lagoon Island", rose: "Rose Island", reefs: "Southwest reefs", exuma: "Exuma Cays", harbourisland: "Harbour Island", land: "Nassau, on land" }

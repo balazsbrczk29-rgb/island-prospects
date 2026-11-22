@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react"
 import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "motion/react"
 import { ArrowRight, Phone } from "lucide-react"
 import { PIC, PHONE, TEL, TOURS, tourUrl, type Place } from "./data"
-import { Img, NAV, Wordmark, EnquiryForm, STOPS_FOR_FORM } from "./ui"
+import { Img, EnquiryForm, STOPS_FOR_FORM } from "./ui"
 
 type Stop = { place: Place; tab: string; name: string; kicker: string; form: string; ask: string }
 export const STOPS: Stop[] = [
@@ -160,32 +160,22 @@ function Passage({ place }: { place: Place }) {
 /** The title frame: the first screen of the journey. */
 function Title({ onPlan }: { onPlan: () => void }) {
   return (
-    <div className="relative flex h-full flex-col bg-field">
-      <header className="flex items-center justify-between gap-6 px-[var(--pad)] pt-7">
-        <Wordmark />
-        <nav aria-label="Main" className="flex items-center gap-8">
-          {NAV.map(n => <a key={n.href} href={n.href} className="py-3 text-small no-underline hover:text-green">{n.label}</a>)}
-        </nav>
-        <a href={TEL} className="tnum text-small no-underline hover:text-green">{PHONE}</a>
-      </header>
-      <div className="grid flex-1 grid-cols-[minmax(0,1fr)_auto] items-end gap-[4vw] px-[var(--pad)] pb-[min(7vh,60px)]">
+    <div className="relative flex h-full flex-col justify-end bg-ground">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-[4vw] px-[var(--pad)] pb-[min(7vh,60px)]">
         <div>
-          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }} className="display text-[clamp(5rem,14vw,15rem)] leading-[0.88]">
-            Out of<br />Nassau.
-          </motion.h1>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45, duration: 0.9 }}>
-            <p className="mt-10 max-w-[32ch] text-lead leading-snug">Sails, islands, reefs and airport transfers, from the Bahamian family company that has met Nassau's guests since 1959.</p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-2">
-              <button type="button" onClick={onPlan} className="btn">Plan my excursion</button>
-              <a href={TEL} className="link tnum text-small"><Phone className="size-4" strokeWidth={1.5} aria-hidden />Call {PHONE}</a>
-            </div>
-          </motion.div>
+          <p className="text-small text-muted">Browse by place</p>
+          <h2 className="display mt-3 text-[clamp(3.5rem,7vw,7rem)] leading-[0.92]">Stop by stop,<br />out of Nassau.</h2>
+          <p className="mt-8 max-w-[34ch] text-lead leading-snug">From the harbour at sunset to Harbour Island, every place a Majestic boat goes, with the real trips from each.</p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-2">
+            <button type="button" onClick={onPlan} className="btn-quiet">Skip to the booking form</button>
+            <a href={TEL} className="link tnum text-small"><Phone className="size-4" strokeWidth={1.5} aria-hidden />Call {PHONE}</a>
+          </div>
         </div>
-        <motion.figure initial={{ opacity: 0, clipPath: "inset(0 0 0 100%)" }} animate={{ opacity: 1, clipPath: "inset(0 0 0 0%)" }} transition={{ delay: 0.2, duration: 1.4, ease: [0.77, 0, 0.175, 1] }} className="w-[min(41vw,600px,calc((100svh-var(--tl)-260px)*1.43))]">
-          <Img pic={PIC.flyingCloud} className="w-full" eager />
+        <figure className="w-[min(41vw,600px,calc((100svh-var(--tl)-260px)*1.43))]">
+          <Img pic={PIC.flyingCloud} className="w-full" />
           <figcaption className="mt-3 text-cap text-muted italic">The Flying Cloud leaving Nassau Harbour at sunset, Atlantis on the horizon.</figcaption>
-          <p className="mt-6 flex items-center gap-2 text-small italic">Scroll, and the boat leaves the harbour <ArrowRight className="size-4 text-green" strokeWidth={1.5} aria-hidden /></p>
-        </motion.figure>
+          <p className="mt-6 flex items-center gap-2 text-small">Scroll, and the boat leaves the harbour <ArrowRight className="size-4 text-green" strokeWidth={1.5} aria-hidden /></p>
+        </figure>
       </div>
     </div>
   )
@@ -291,32 +281,13 @@ export function JourneyPhone({ where, setWhere }: { where: string; setWhere: (v:
   useEffect(() => { const h = (e: Event) => goTo((e as CustomEvent<number>).detail); window.addEventListener("mt-stop", h); return () => window.removeEventListener("mt-stop", h) })
   return (
     <div className="md:hidden">
-      <section className="bg-field pb-10">
-        <header className="flex items-center justify-between px-5 pt-5">
-          <Wordmark />
-          <a href={TEL} className="grid size-11 place-items-center" aria-label={`Call ${PHONE}`}><Phone className="size-5" strokeWidth={1.5} aria-hidden /></a>
-        </header>
-        <div className="px-5 pt-8">
-          <p className="display text-[clamp(4.2rem,21vw,5.6rem)] leading-[0.9]">Out of<br />Nassau.</p>
-          <p className="mt-6 text-[1.2rem] leading-snug">Sails, islands, reefs and airport transfers, from the Bahamian family company that has met Nassau's guests since 1959.</p>
-          <div className="mt-6 flex flex-col items-start gap-1">
-            <a href="#book-phone" className="btn w-full">Plan my excursion</a>
-            <a href={TEL} className="link tnum text-small"><Phone className="size-4" strokeWidth={1.5} aria-hidden />Call {PHONE}</a>
-          </div>
+      <section className="pt-14 pb-4">
+        <div className="px-5">
+          <p className="text-small text-muted">Browse by place</p>
+          <h2 className="display mt-2 text-[2.75rem] leading-[0.95]">Stop by stop, out of Nassau.</h2>
         </div>
-        <nav aria-label="Where the day goes" className="mt-5 border-t border-ink/15 pt-4">
-          <p className="px-5 text-cap text-muted italic">Where the boat goes</p>
-          <ol className="mt-1 flex gap-1 overflow-x-auto px-3 [scrollbar-width:none]">
-            {STOPS.map((s, i) => (
-              <li key={s.place} className="flex shrink-0 items-center">
-                <a href="#stops" onClick={() => setTimeout(() => window.dispatchEvent(new CustomEvent("mt-stop", { detail: i })), 0)} className="flex min-h-11 items-center px-2 text-small whitespace-nowrap no-underline">{s.tab}{s.place === "exuma" ? <span className="tnum ml-1 text-green">38 nm</span> : null}</a>
-                {i < STOPS.length - 1 && <span className="h-px w-4 bg-ink/30" aria-hidden />}
-              </li>
-            ))}
-          </ol>
-        </nav>
-        <figure className="mt-5 px-5">
-          <Img pic={PIC.flyingCloud} className="w-full" eager />
+        <figure className="mt-6 px-5">
+          <Img pic={PIC.flyingCloud} className="w-full" />
           <figcaption className="mt-2 text-cap text-muted italic">The Flying Cloud leaving Nassau Harbour at sunset.</figcaption>
         </figure>
       </section>
@@ -334,7 +305,7 @@ export function JourneyPhone({ where, setWhere }: { where: string; setWhere: (v:
         </ul>
       </section>
       <section id="book-phone" className="bg-field px-5 pt-12 pb-14"><span id="book" className="block" />
-        <h2 className="display text-[3.4rem]">Where to?</h2>
+        <h2 className="display text-[3rem]">Where to?</h2>
         <p className="mt-4 text-body leading-snug">Tell us the day and where you are staying. A Majestic agent writes back with times and the pickup.</p>
         <div className="mt-7"><EnquiryForm where={where} onWhere={setWhere} compact idp="m" /></div>
       </section>
