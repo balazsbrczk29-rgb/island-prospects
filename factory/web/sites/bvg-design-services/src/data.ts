@@ -34,11 +34,11 @@ export const GUIDE_FUN = "Fun and unspoiled beauty await you in the Bahamas."
 
 export type NeedId = "site" | "redesign" | "found" | "hosting" | "ads"
 export const NEEDS: { id: NeedId; label: string }[] = [
-  { id: "site", label: "A new website" },
-  { id: "redesign", label: "Redesign or take over my site" },
-  { id: "found", label: "Get found on Google" },
-  { id: "hosting", label: "Hosting and a domain" },
-  { id: "ads", label: "Print and video advertising" },
+  { id: "site", label: "New website" },
+  { id: "redesign", label: "Redesign or takeover" },
+  { id: "found", label: "Get found in search" },
+  { id: "hosting", label: "Hosting and domain" },
+  { id: "ads", label: "Print and video ads" },
 ]
 
 export type Service = { id: string; need: NeedId; name: string; line: string; facts: string[] }
@@ -66,13 +66,13 @@ export const STEPS: [string, string][] = [
 ]
 export const PAY = "Pay by cash, US or B$ cheque, bank deposit, or card through PayPal."
 
-export const PAGES = ["1 page", "2 to 10", "11 to 99", "100 or more"] as const
+export const PAGES = ["1 page", "2 to 10", "11 to 99", "100+"] as const
 export type Pages = (typeof PAGES)[number]
 export const BIZ = ["Guesthouse or hotel", "Charter, tours or rentals", "Restaurant or bar", "Shop or retail", "Office or practice", "Something else"]
 export const ISLANDS = ["Grand Bahama", "New Providence", "Abaco", "Another Bahamian island", "Outside the Bahamas"]
 
-export type Req = { needs: NeedId[]; pages: Pages; biz: string; island: string; name: string }
-export const DEFAULT_REQ: Req = { needs: ["site"], pages: "2 to 10", biz: BIZ[0], island: ISLANDS[0], name: "" }
+export type Req = { needs: NeedId[]; pages: Pages; biz: string; island: string; name: string; note: string }
+export const DEFAULT_REQ: Req = { needs: ["site"], pages: "2 to 10", biz: BIZ[0], island: ISLANDS[0], name: "", note: "" }
 
 /** What BVG does for this request, in its own published terms (bvgdesign.com, /faqs.html, /promo.html). */
 export function answer(r: Req): { id: string; text: string; tier?: boolean }[] {
@@ -84,7 +84,7 @@ export function answer(r: Req): { id: string; text: string; tier?: boolean }[] {
   }
   if (has("site") || has("redesign")) {
     if (r.pages === "11 to 99") out.push({ id: "t1", text: "Sites over 10 pages are discounted.", tier: true })
-    if (r.pages === "100 or more") out.push({ id: "t2", text: "Sites of hundreds of pages get a larger discount.", tier: true })
+    if (r.pages === "100+") out.push({ id: "t2", text: "Sites of hundreds of pages get a larger discount.", tier: true })
   }
   if (has("redesign")) out.push({ id: "rd", text: "Small changes are billed by the hour, or BVG takes the site over, redesigns it and keeps it up to date." })
   if (has("found")) out.push({ id: "fd", text: "A free first consultation: a brief overview of the key phrases you rank for today." })
@@ -109,6 +109,7 @@ export function mail(r: Req) {
     `Island: ${r.island}`,
     `What I need: ${needs.length ? needs.join(", ") : "advice on what I need"}`,
     ...(r.needs.includes("site") || r.needs.includes("redesign") ? [`Size: ${r.pages}${r.pages === "1 page" ? "" : " pages"}`] : []),
+    ...(r.note.trim() ? [`Notes: ${r.note.trim()}`] : []),
     "", "Please call or email me back.",
   ]
   const subject = `Website request: ${r.name.trim() || r.biz}`
