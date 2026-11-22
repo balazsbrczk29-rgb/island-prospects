@@ -135,7 +135,7 @@ body { font-variant-numeric: lining-nums tabular-nums; }
 .hero-facts { margin-top: 22px; display: grid; max-width: 44ch; }
 .hero-facts div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 12px; padding: 8px 0; border-top: 1px solid var(--color-line); font-size: var(--t-sm); }
 .hero-facts dt { color: var(--color-muted); }
-.hero-facts .link { display: inline-flex; min-height: 0; }
+
 .hero-line .link { color: var(--color-ink); }
 .bk { display: grid; gap: 14px; }
 .bk-rooms { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -164,9 +164,9 @@ body { font-variant-numeric: lining-nums tabular-nums; }
 .bk-btn { min-height: 56px; padding: 0 28px; }
 .bk-note { font-size: var(--t-xs); color: var(--color-muted); max-width: 34ch; }
 .season { display: grid; gap: 8px; margin-top: 4px; }
-.season-strip { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); height: 34px; align-items: end; border-bottom: 1px solid var(--color-line); }
-.season-band { position: absolute; top: 0; height: 14px; background: var(--color-deep); color: #eef1ea; font-size: 11px; line-height: 14px; letter-spacing: .04em; padding-left: 6px; }
-.season-m { text-align: center; font-size: 13px; color: var(--color-muted); padding-bottom: 3px; font-variant-numeric: tabular-nums; }
+.season-strip { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); height: 48px; align-items: end; border-bottom: 1px solid var(--color-line); }
+.season-band { position: absolute; top: 0; height: 22px; background: var(--color-deep); color: #eef1ea; font-size: 13px; line-height: 22px; letter-spacing: .02em; padding-left: 8px; white-space: nowrap; }
+.season-m { text-align: center; font-size: 14px; color: var(--color-muted); padding-bottom: 3px; font-variant-numeric: tabular-nums; }
 .season-m.is-on { color: var(--color-ink); font-weight: 700; }
 .season-mark { position: absolute; bottom: -4px; width: 7px; height: 7px; margin-left: -3.5px; border-radius: 50%; background: var(--color-glass); }
 .season-t { font-size: var(--t-sm); line-height: 1.45; }
@@ -181,12 +181,15 @@ body { font-variant-numeric: lining-nums tabular-nums; }
 .cmp-dl dt { font-size: var(--t-sm); color: var(--color-muted); }
 .cmp-line { max-width: 52ch; }
 @media (max-width: 900px) {
-  .hero-photo { height: auto; aspect-ratio: 4 / 3; }
+  .hero-photo { height: auto; aspect-ratio: 16 / 9; }
+  .hero-name { display: contents; }
+  .hero-cap { order: 1; } .hero-h1 { order: 2; } .hero-book { order: 3; } .hero-line { order: 4; margin-top: 0; }
+  .hero-bar { display: flex; flex-direction: column; gap: 14px; }
   .hero-bar { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 18px var(--gutter) 40px; }
-  .hero-h1 { font-size: 19vw !important; }
+  .hero-h1 { font-size: 15vw !important; margin-top: 0; }
   .hero-facts { display: none; }
-  .bk-room { grid-template-columns: 1fr; padding: 6px; gap: 6px; }
-  .bk-thumb { width: 100%; height: auto; aspect-ratio: 3 / 2; }
+  .bk-room { grid-template-columns: 56px 1fr; padding: 6px; gap: 8px; }
+  .bk-thumb { width: 56px; height: 40px; }
   .bk-room-n { font-size: 19px; }
   .bk-row { grid-template-columns: 1fr 1fr; }
   .bk-date { grid-column: 1 / -1; border-right: 0; border-bottom: 1px solid var(--color-line); padding-left: 0; }

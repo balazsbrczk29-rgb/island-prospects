@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { IMG, ROOMS, Photo, BOOK, WA, WHATSAPP, bookingUrl, ease } from "./site"
 
@@ -52,6 +52,10 @@ export function BookStrip({ idp = "h" }: { idp?: string }) {
   const [nights, setNights] = useState(4)
   const [adults, setAdults] = useState(2)
   const r = ROOMS.find(x => x.id === room)!
+  useEffect(() => {
+    const h = (e: Event) => { const id = (e as CustomEvent<RoomId>).detail; const x = ROOMS.find(y => y.id === id); if (!x) return; setRoom(id); setAdults(v => Math.min(v, x.guests)); document.getElementById("dates")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" }) }
+    window.addEventListener("gw-room", h); return () => window.removeEventListener("gw-room", h)
+  }, [reduce])
   const a = Math.min(adults, r.guests)
   const month = arrive ? new Date(arrive + "T12:00:00").getMonth() : new Date().getMonth()
   const href = arrive ? bookingUrl({ roomTypeId: r.roomTypeId, arrive, nights, adults: a }) : BOOK
@@ -61,9 +65,9 @@ export function BookStrip({ idp = "h" }: { idp?: string }) {
         {ROOMS.map(x => {
           const on = x.id === room
           return (
-            <button key={x.id} type="button" role="radio" aria-checked={on} className={`bk-room ${on ? "is-on" : ""}`} onClick={() => setRoom(x.id)}>
+            <button key={x.id} type="button" role="radio" aria-checked={on} className={`bk-room ${on ? "is-on" : ""}`} onClick={() => { setRoom(x.id); setAdults(v => Math.min(v, x.guests)) }}>
               <span className="bk-thumb"><Photo img={x.img} alt="" className="h-full w-full" /></span>
-              <span className="bk-room-t"><span className="bk-room-n">{x.name.replace("Executive ", "")}</span><span className="bk-room-s num">Sleeps {x.guests}. {x.beds}.</span></span>
+              <span className="bk-room-t"><span className="bk-room-n">{x.name.replace("Executive ", "")}</span><span className="bk-room-s num">Sleeps {x.guests}. {x.short}.</span></span>
             </button>
           )
         })}
@@ -74,18 +78,17 @@ export function BookStrip({ idp = "h" }: { idp?: string }) {
           <span className="bk-v num" aria-hidden>{arrive ? short(arrive) : "Choose"}</span>
           <input id={`${idp}-arrive`} type="date" aria-label="Arrival date" min={iso(new Date())} value={arrive}
             onClick={e => { try { (e.currentTarget as HTMLInputElement & { showPicker?: () => void }).showPicker?.() } catch { /* unsupported */ } }}
-            onChange={e => setArrive(e.target.value)} />
+            onChange={e => { const v = e.target.value; setArrive(v && v < iso(new Date()) ? iso(new Date()) : v) }} />
         </label>
         <Step label="Nights" value={nights} min={1} max={28} set={setNights} unit={nights === 1 ? "night" : "nights"} />
         <Step label="Adults" value={a} min={1} max={r.guests} set={setAdults} unit={a === 1 ? "adult" : "adults"} />
       </div>
       <div className="bk-go">
         <a href={href} className="btn bk-btn num">{arrive ? `Check dates, ${short(arrive)} to ${short(arrive, nights)}` : "Check dates and book"}</a>
-        <p className="bk-note">Opens Greenwood's own booking page with live rates. {a < adults ? `The ${r.name.replace("Executive ", "")} sleeps ${r.guests}.` : ""}</p>
+        <p className="bk-note">Opens Greenwood's own booking page with live rates.</p>
       </div>
       <Season month={month} />
-      {!reduce && null}
-    </div>
+          </div>
   )
 }
 
@@ -122,12 +125,11 @@ export function HomeHero() {
 
 /** Screen 2: both rooms side by side, so the choice is obvious. */
 export function RoomsCompare() {
-  const FOR: Record<string, string> = { king: "Couples and solo divers.", family: "A family of three, or friends sharing." }
   return (
     <section id="rooms" aria-labelledby="rooms-title" className="cmp">
       <div className="cmp-head">
         <h2 id="rooms-title" className="display text-[length:var(--t-2xl)]">Two rooms, a few steps from the sand.</h2>
-        <p className="text-muted">Both are Executive rooms with a private bathroom and a patio onto the garden. Breakfast, lunch and dinner are served on the beachfront terrace. <a href="rooms.html" className="link text-ink">Rooms and meal times</a></p>
+        <p className="text-muted">Both are Executive rooms in the garden, each with a private bathroom. Breakfast, lunch and dinner are served on the beachfront terrace. <a href="rooms.html" className="link text-ink">Rooms and meal times</a></p>
       </div>
       <div className="cmp-grid">
         {ROOMS.map(r => (
@@ -137,10 +139,9 @@ export function RoomsCompare() {
             <dl className="cmp-dl num">
               <div><dt>Sleeps</dt><dd>{r.guests}</dd></div>
               <div><dt>Beds</dt><dd>{r.beds}</dd></div>
-              <div><dt>Suits</dt><dd>{FOR[r.id]}</dd></div>
             </dl>
             <p className="cmp-line">{r.line}</p>
-            <a href={bookingUrl({ roomTypeId: r.roomTypeId, arrive: (() => { const d = new Date(); d.setDate(d.getDate() + 30); return iso(d) })(), nights: 4, adults: Math.min(2, r.guests) })} className="btn-line btn">Check dates for this room</a>
+            <button type="button" onClick={() => window.dispatchEvent(new CustomEvent("gw-room", { detail: r.id }))} className="btn-line btn">Choose this room and dates</button>
           </article>
         ))}
       </div>

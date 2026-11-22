@@ -35,7 +35,7 @@ export function DatesComposer({ room }: { room?: RoomId }) {
   const max = r ? r.guests : 3
   const a = Math.min(adults, max)
   const href = bookingUrl({ roomTypeId: r?.roomTypeId, arrive, nights, adults: a })
-  const today = new Date().toISOString().slice(0, 10)
+  const t0 = new Date(), today = `${t0.getFullYear()}-${String(t0.getMonth() + 1).padStart(2, "0")}-${String(t0.getDate()).padStart(2, "0")}`
   return (
     <div className="grid gap-4">
       <div className="strip">

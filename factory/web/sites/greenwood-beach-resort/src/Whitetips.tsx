@@ -28,7 +28,7 @@ function PackageEnquiry() {
   return (
     <form className="grid gap-6" onSubmit={(e) => { e.preventDefault(); window.location.href = href }}>
       <div className="grid grid-cols-2 gap-x-8 gap-y-5">
-        <Count label="Nights" value={nights} set={setNights} min={1} max={28} />
+        <Count label="Nights" value={nights} set={(v) => { setNights(v); setDays((d) => Math.min(d, v)) }} min={1} max={28} />
         <Count label="Whitetip dive days" value={days} set={setDays} min={1} max={nights} />
         <Count label="Divers" value={divers} set={setDivers} min={1} />
         <Count label="Non-divers" value={others} set={setOthers} />
