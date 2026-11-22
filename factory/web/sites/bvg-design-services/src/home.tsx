@@ -1,67 +1,215 @@
-import { StrictMode, useEffect, useMemo, useRef, useState } from "react"
+import { StrictMode, useEffect, useMemo, useRef, useState, type Dispatch, type SetStateAction } from "react"
 import { createRoot } from "react-dom/client"
-import { AnimatePresence, motion } from "motion/react"
+import { AnimatePresence, LayoutGroup, motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react"
 import Lenis from "lenis"
-import EraBrowser from "./browser"
-import { EMAIL, IMG, ISLANDS, NEEDS, PAY, PHONE, SERVICES, SIZES, STEPS, TEL, US_PHONE, US_TEL } from "./data"
+import { EraWindow, ERAS, type Year } from "./browser"
+import { answer, BIZ, DEFAULT_REQ, EMAIL, IMG, ISLANDS, mail, NEEDS, PAGES, PAY, PHONE, SERVICES, STEPS, TEL, US_PHONE, US_TEL, type NeedId, type Req } from "./data"
 import "./styles.css"
 
 const ease = [0.22, 1, 0.36, 1] as const
+type SetReq = Dispatch<SetStateAction<Req>>
+let lenis: Lenis | null = null
+const go = (id: string) => {
+  const el = document.getElementById(id)
+  if (!el) return
+  if (lenis) lenis.scrollTo(el, { offset: -8 })
+  else el.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })
+}
 
 function Nav() {
   return (
-    <header className="nav grid12">
+    <header className="nav wrap">
       <a href="#top" className="nav__name">BVG Design Services</a>
       <nav aria-label="Sections" className="nav__links">
         <a href="#services">Services</a>
-        <a href="#story">Since 1996</a>
+        <a href="#then-now">Since 1996</a>
         <a href="#offices">Offices</a>
-        <a href="#request">Request</a>
       </nav>
       <a href={TEL} className="nav__tel num">{PHONE}</a>
     </header>
   )
 }
 
-function Hero() {
+function Builder({ req, setReq }: { req: Req; setReq: SetReq }) {
+  const reduce = useReducedMotion()
+  const lines = useMemo(() => answer(req), [req])
+  const m = useMemo(() => mail(req), [req])
+  const showPages = req.needs.includes("site") || req.needs.includes("redesign")
+  const toggle = (id: NeedId) => setReq(r => ({ ...r, needs: r.needs.includes(id) ? r.needs.filter(n => n !== id) : [...r.needs, id] }))
+  const segKey = (e: React.KeyboardEvent, i: number) => {
+    const d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0
+    if (!d) return
+    e.preventDefault()
+    const n = (i + d + PAGES.length) % PAGES.length
+    setReq(r => ({ ...r, pages: PAGES[n] }))
+    ;(e.currentTarget.parentElement?.children[n] as HTMLElement | undefined)?.focus()
+  }
   return (
-    <section className="hero grid12" id="top" aria-labelledby="hero-title">
-      <div className="hero__say">
-        <h1 id="hero-title" className="t-56">Bahamian websites, built and found since&nbsp;1996.</h1>
-        <p className="hero__lede t-18">Web design, hosting, search and advertising from Freeport, Grand Bahama, for businesses on every island. We started with our own: the Bahamas Vacation Guide.</p>
-        <div className="hero__act">
-          <a className="btn" href="#request">Start a website request</a>
-          <a className="quiet num" href={TEL}>Call Freeport {PHONE}</a>
+    <div className="bld" id="request" aria-labelledby="bld-title">
+      <h2 id="bld-title" className="bld__title">Start your request</h2>
+      <fieldset className="bld__group">
+        <legend>What do you need?</legend>
+        <div className="chips">
+          {NEEDS.map(n => <button key={n.id} type="button" className="chip" aria-pressed={req.needs.includes(n.id)} onClick={() => toggle(n.id)}>{n.label}</button>)}
         </div>
-        <p className="hero__proof">Offices in Freeport, Nassau and Abaco. Simple pages are usually ready within 24 hours.</p>
+      </fieldset>
+      <AnimatePresence initial={false}>
+        {showPages && (
+          <motion.fieldset key="pages" className="bld__group bld__pages" initial={reduce ? false : { opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.28, ease }}>
+            <legend>How many pages?</legend>
+            <LayoutGroup id="seg">
+              <div className="seg" role="radiogroup" aria-label="How many pages">
+                {PAGES.map((p, i) => {
+                  const on = req.pages === p
+                  return (
+                    <button key={p} type="button" role="radio" aria-checked={on} tabIndex={on ? 0 : -1} className="seg__opt num" onClick={() => setReq(r => ({ ...r, pages: p }))} onKeyDown={e => segKey(e, i)}>
+                      {on && <motion.span layoutId="seg-on" className="seg__on" transition={{ duration: reduce ? 0 : 0.28, ease }} />}
+                      <span className="seg__t">{p}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </LayoutGroup>
+          </motion.fieldset>
+        )}
+      </AnimatePresence>
+      <div className="bld__row">
+        <label className="fld"><span>Business</span>
+          <select value={req.biz} onChange={e => setReq(r => ({ ...r, biz: e.target.value }))}>{BIZ.map(b => <option key={b}>{b}</option>)}</select>
+        </label>
+        <label className="fld"><span>Island</span>
+          <select value={req.island} onChange={e => setReq(r => ({ ...r, island: e.target.value }))}>{ISLANDS.map(i => <option key={i}>{i}</option>)}</select>
+        </label>
+        <label className="fld fld--wide">
+          <input aria-label="Business name, optional" value={req.name} onChange={e => setReq(r => ({ ...r, name: e.target.value }))} placeholder="Business name (optional)" autoComplete="organization" />
+        </label>
       </div>
-      <div className="hero__demo"><EraBrowser /></div>
+      <div className="ans" aria-live="polite">
+        <p className="ans__h">What BVG does for this</p>
+        <ul className="ans__list">
+          <AnimatePresence initial={false} mode="popLayout">
+            {lines.length === 0 && (
+              <motion.li key="empty" className="ans__empty" layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>Choose what you need and this fills in.</motion.li>
+            )}
+            {lines.map(l => (
+              <motion.li key={l.id} layout={!reduce} data-tier={l.tier || undefined} initial={reduce ? { opacity: 0 } : { opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.28, ease }}>{l.text}</motion.li>
+            ))}
+          </AnimatePresence>
+        </ul>
+        <p className="ans__pay">{PAY}</p>
+      </div>
+      <div className="bld__act">
+        <a className="btn" href={m.href}>Send my request</a>
+        <a className="quiet num" href={TEL}>Call Freeport {PHONE}</a>
+      </div>
+      <p className="bld__fine">Writes an email to <span className="sel">{EMAIL}</span>. From the US: <a className="num" href={US_TEL}>{US_PHONE}</a>.</p>
+    </div>
+  )
+}
+
+function Hero({ req, setReq }: { req: Req; setReq: SetReq }) {
+  return (
+    <section className="hero wrap" id="top" aria-labelledby="hero-title">
+      <div className="hero__say">
+        <h1 id="hero-title" className="t-hero">Built and found since&nbsp;1996.</h1>
+        <p className="hero__lede t-lead">Bahamian-owned web design, hosting, search and advertising from Freeport, Grand Bahama, for businesses on every island. We started with our own site, the Bahamas Vacation Guide.</p>
+        <p className="hero__proof">Offices in Freeport, Nassau and Abaco.</p>
+        <a className="see" href="#then-now" onClick={e => { e.preventDefault(); go("then-now") }}>
+          <img src={IMG.williamsTown} alt="" width={900} height={398} />
+          <span><b>Bahamas Vacation Guide, 1996</b>See our first site rebuilt for 2026</span>
+        </a>
+      </div>
+      <div className="hero__tool"><Builder req={req} setReq={setReq} /></div>
     </section>
   )
 }
 
-function Services() {
-  const [on, setOn] = useState(SERVICES[0].id)
+function ThenNow() {
+  const reduce = useReducedMotion()
+  const ref = useRef<HTMLElement>(null)
+  const [year, setYear] = useState<Year>(reduce ? 2026 : 1996)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] })
+  useMotionValueEvent(scrollYProgress, "change", v => {
+    if (reduce) return
+    const i = Math.min(ERAS.length - 1, Math.max(0, Math.floor(v * ERAS.length * 0.999 + 0.0001)))
+    const y = ERAS[i].year
+    setYear(p => (p === y ? p : y))
+  })
+  const pick = (i: number) => {
+    setYear(ERAS[i].year)
+    const el = ref.current
+    if (!el || reduce) return
+    const top = el.getBoundingClientRect().top + window.scrollY
+    const span = el.offsetHeight - window.innerHeight
+    const y = top + span * ((i + 0.5) / ERAS.length)
+    if (lenis) lenis.scrollTo(y)
+    else window.scrollTo({ top: y, behavior: "smooth" })
+  }
+  const last = year === 2026
   return (
-    <section className="svc grid12" id="services" aria-labelledby="svc-title">
-      <h2 id="svc-title" className="svc__title t-56">Everything a Bahamian business needs to be online, from one Freeport studio.</h2>
-      <div className="svc__list">
-        {SERVICES.map(s => (
-          <article key={s.id} className="svc__row" data-on={on === s.id} onMouseEnter={() => setOn(s.id)}>
-            <h3>
-              <button type="button" aria-expanded={on === s.id} aria-controls={`svc-${s.id}`} onClick={() => setOn(s.id)} className="t-28">{s.name}</button>
-            </h3>
-            <p className="svc__line">{s.line}</p>
-            <AnimatePresence initial={false}>
-              {on === s.id && (
-                <motion.div id={`svc-${s.id}`} className="svc__more" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.32, ease }}>
-                  <ul>{s.facts.map(f => <li key={f}>{f}</li>)}</ul>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </article>
-        ))}
+    <section className="tn" id="then-now" ref={ref} aria-labelledby="tn-title" data-reduce={reduce || undefined}>
+      <div className="tn__pin">
+        <div className="tn__grid wrap">
+          <div className="tn__say">
+            <h2 id="tn-title" className="t-h2">Our first site, rebuilt for every era since.</h2>
+            <p className="tn__p">The Bahamas Vacation Guide went online in 1996 and reached the top of the search engines. Scroll through thirty years of how it would have been built. The words and island photographs are the guide's own.</p>
+            <div className="rail" role="group" aria-label="Choose an era">
+              {ERAS.map((e, i) => (
+                <button key={e.year} type="button" className="rail__b" aria-pressed={year === e.year} onClick={() => pick(i)}>
+                  <span className="rail__y num">{e.year}</span>
+                  <span className="rail__l">{e.label}</span>
+                </button>
+              ))}
+            </div>
+            <div className="tn__next" data-show={last}>
+              <p>Your site is next.</p>
+              <a className="quiet" href="#top" tabIndex={last ? 0 : -1} onClick={e => { e.preventDefault(); go("top") }}>Back to your request</a>
+            </div>
+          </div>
+          <div className="tn__win"><EraWindow year={year} /></div>
+        </div>
       </div>
+    </section>
+  )
+}
+
+function Services({ req, setReq }: { req: Req; setReq: SetReq }) {
+  const toggle = (id: NeedId) => setReq(r => ({ ...r, needs: r.needs.includes(id) ? r.needs.filter(n => n !== id) : [...r.needs, id] }))
+  return (
+    <section className="svc wrap" id="services" aria-labelledby="svc-title">
+      <div className="svc__head">
+        <h2 id="svc-title" className="t-h2">Everything a Bahamian business needs online, from one Freeport studio.</h2>
+      </div>
+      <ul className="svc__list">
+        {SERVICES.map(s => {
+          const on = req.needs.includes(s.need)
+          return (
+            <li key={s.id} className="svc__row">
+              <h3 className="t-h3">{s.name}</h3>
+              <p className="svc__line">{s.line}</p>
+              <p className="svc__facts">{s.facts.join(" · ")}</p>
+              <button type="button" className="add" aria-pressed={on} onClick={() => toggle(s.need)}>
+                <span className="add__box" aria-hidden="true" />{on ? "In your request" : "Add to my request"}
+              </button>
+            </li>
+          )
+        })}
+      </ul>
+    </section>
+  )
+}
+
+function Steps() {
+  return (
+    <section className="steps wrap" aria-labelledby="steps-title">
+      <h2 id="steps-title" className="t-h2 steps__title">How a site with BVG goes.</h2>
+      <ol className="steps__list">
+        {STEPS.map(([h, p], i) => (
+          <li key={h}><span className="steps__n num">{i + 1}</span><h3 className="t-h3">{h}</h3><p>{p}</p></li>
+        ))}
+      </ol>
+      <p className="steps__fast t-lead">Simple pages are normally ready within 24 hours of the order.</p>
+      <p className="steps__pay">{PAY}</p>
     </section>
   )
 }
@@ -76,20 +224,20 @@ const STRIP: [string, string, string][] = [
 function Story() {
   return (
     <section className="story" id="story" aria-labelledby="story-title">
-      <div className="grid12">
-        <p className="story__year t-120 num" aria-hidden="true">1996</p>
+      <div className="story__grid wrap">
+        <p className="story__year t-hero num" aria-hidden="true">1996</p>
         <div className="story__text">
-          <h2 id="story-title" className="t-28">Two entrepreneurs, one afternoon in mid 1996.</h2>
-          <p>One took the graphics, the other the code. A month later their multi-page Bahamas Vacation Guide went straight to the top of the search engines, ahead of the established Bahamas guides.</p>
-          <p>Businesses started asking to be included and for pages of their own. The guide gave the studio its name: BVG stands for Bahamas Vacation Guide. It is still online, still designed and maintained by BVG.</p>
+          <h2 id="story-title" className="t-h3">Two entrepreneurs in mid 1996: one took the graphics, the other the code.</h2>
+          <p>Their first multi-page site, the Bahamas Vacation Guide, went to the top of the search engines. Businesses asked to be included, then asked for sites of their own.</p>
+          <p>The guide gave the studio its name: BVG stands for Bahamas Vacation Guide. It is still online, and still designed and maintained by BVG.</p>
           <a className="quiet" href="http://www.bahamasvacationguide.com/" rel="noopener">Visit the Bahamas Vacation Guide</a>
         </div>
       </div>
-      <ul className="strip" aria-label="Photographs from the Bahamas Vacation Guide">
+      <ul className="strip wrap" aria-label="Photographs from the Bahamas Vacation Guide">
         {STRIP.map(([src, cap, alt]) => (
           <li key={cap}>
             <img src={src} alt={alt} width={900} height={398} loading="lazy" decoding="async" />
-            <span className="t-14">{cap}</span>
+            <span>{cap}</span>
           </li>
         ))}
       </ul>
@@ -101,163 +249,100 @@ function Offices() {
   return (
     <section className="offices" id="offices" aria-labelledby="off-title">
       <figure className="offices__photo">
-        <img src={IMG.harbour} alt="Lucayan Harbour, Freeport, from above: palms, green roofs of the market and the harbour beyond" width={2400} height={1600} loading="lazy" decoding="async" />
-        <figcaption className="t-14">Lucayan Harbour, Freeport. Photo: Jon Worth, Wikimedia Commons, CC BY-SA 2.0.</figcaption>
+        <img src={IMG.harbour} alt="Lucayan Harbour, Freeport, from above: palms, the green roofs of the market and the harbour beyond" width={2400} height={1600} loading="lazy" decoding="async" />
+        <figcaption className="wrap">Lucayan Harbour, Freeport. Photo: Jon Worth, Wikimedia Commons, CC BY-SA 2.0.</figcaption>
       </figure>
-      <div className="grid12 offices__grid">
-        <h2 id="off-title" className="t-56 offices__title">Bahamian owned, with offices in Freeport, Nassau and Abaco.</h2>
-        <div className="off off--hq">
-          <h3 className="t-18">Freeport, headquarters</h3>
-          <p className="muted">Smith's Point, P.O. Box F-43652<br />Freeport, Grand Bahama</p>
+      <div className="offices__grid wrap">
+        <h2 id="off-title" className="t-h2 offices__title">Bahamian owned, with offices in Freeport, Nassau and Abaco.</h2>
+        <div className="off">
+          <h3 className="t-h3">Freeport</h3>
+          <p className="muted">Headquarters. Smith's Point, P.O. Box F-43652, Freeport, Grand Bahama</p>
           <a className="num" href={TEL}>{PHONE}</a>
-          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
         </div>
         <div className="off">
-          <h3 className="t-18">Nassau and Abaco</h3>
+          <h3 className="t-h3">Nassau and Abaco</h3>
           <p className="muted">Local offices. Start with Freeport and we connect you.</p>
         </div>
         <div className="off">
-          <h3 className="t-18">From the United States</h3>
+          <h3 className="t-h3">United States</h3>
+          <p className="muted">Staff and affiliates. 5115 NW 17th Terrace, Hangar 39a, Fort Lauderdale, FL 33309</p>
           <a className="num" href={US_TEL}>{US_PHONE}</a>
-          <p className="muted">5115 NW 17th Terrace, Hangar 39a<br />Fort Lauderdale, FL 33309</p>
         </div>
       </div>
     </section>
   )
 }
 
-function Steps() {
+function Contact({ req }: { req: Req }) {
+  const m = useMemo(() => mail(req), [req])
   return (
-    <section className="steps grid12" aria-labelledby="steps-title">
-      <h2 id="steps-title" className="t-28 steps__title">How a site with BVG goes.</h2>
-      <ol className="steps__list">
-        {STEPS.map(([h, p], i) => (
-          <li key={h}><span className="num t-14 muted">{i + 1}</span><h3 className="t-18">{h}</h3><p>{p}</p></li>
-        ))}
-      </ol>
-      <p className="steps__pay muted">{PAY} No account is too small or too large.</p>
+    <section className="close" id="contact" aria-labelledby="close-title">
+      <div className="close__grid wrap">
+        <h2 id="close-title" className="close__h">Talk to Freeport.</h2>
+        <a className="close__tel num" href={TEL}>{PHONE}</a>
+        <a className="close__mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <div className="close__act">
+          <a className="btn" href={m.href}>Send my request</a>
+          <a className="quiet" href="#top" onClick={e => { e.preventDefault(); go("top") }}>Edit my request</a>
+        </div>
+        <p className="close__fine">From the US <a className="num" href={US_TEL}>{US_PHONE}</a>. Mail: P.O. Box F-43652, Freeport, Grand Bahama.</p>
+      </div>
+      <footer className="foot wrap">
+        <p>BVG Design Services, web design, hosting, search and advertising since 1996.</p>
+        <p>Island photographs from the Bahamas Vacation Guide. Lucayan Harbour: Jon Worth, Wikimedia Commons, CC BY-SA 2.0.</p>
+      </footer>
     </section>
   )
 }
 
-function Request() {
-  const [needs, setNeeds] = useState<string[]>([NEEDS[0]])
-  const [biz, setBiz] = useState("")
-  const [island, setIsland] = useState(ISLANDS[0])
-  const [size, setSize] = useState(SIZES[1])
-  const [note, setNote] = useState("")
-  const toggle = (n: string) => setNeeds(s => (s.includes(n) ? s.filter(x => x !== n) : [...s, n]))
-  const body = useMemo(() => [
-    `Hello BVG Design,`,
-    ``,
-    `Business: ${biz.trim() || "(your business name)"}`,
-    `Island: ${island}`,
-    `What we need: ${needs.length ? needs.join(", ") : "(choose above)"}`,
-    `Size: ${size}`,
-    note.trim() ? `Notes: ${note.trim()}` : "",
-    ``,
-    `Please call or email me back.`,
-  ].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n"), [needs, biz, island, size, note])
-  const subject = `Website request: ${biz.trim() || "new client"}`
-  const href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-  return (
-    <section className="req grid12" id="request" aria-labelledby="req-title">
-      <div className="req__form">
-        <h2 id="req-title" className="t-56">Tell us what you need.</h2>
-        <p className="t-18 muted req__lede">Four quick choices write the email for you. We answer from Freeport.</p>
-        <fieldset>
-          <legend className="t-14">What do you need?</legend>
-          <div className="chips">
-            {NEEDS.map(n => <button key={n} type="button" aria-pressed={needs.includes(n)} onClick={() => toggle(n)}>{n}</button>)}
-          </div>
-        </fieldset>
-        <div className="req__row">
-          <label><span className="t-14">Business name</span><input value={biz} onChange={e => setBiz(e.target.value)} placeholder="e.g. your guesthouse in Lucaya" autoComplete="organization" /></label>
-          <label><span className="t-14">Island</span><select value={island} onChange={e => setIsland(e.target.value)}>{ISLANDS.map(i => <option key={i}>{i}</option>)}</select></label>
-        </div>
-        <fieldset>
-          <legend className="t-14">How big?</legend>
-          <div className="chips chips--one">
-            {SIZES.map(s => <button key={s} type="button" aria-pressed={size === s} onClick={() => setSize(s)}>{s}</button>)}
-          </div>
-        </fieldset>
-        <label className="req__note"><span className="t-14">Anything else (optional)</span><textarea rows={2} value={note} onChange={e => setNote(e.target.value)} placeholder="Your current website, a deadline, what is not working" /></label>
-      </div>
-      <div className="req__out">
-        <div className="mail">
-          <p className="mail__to t-14">To {EMAIL}</p>
-          <p className="mail__sub">{subject}</p>
-          <pre className="mail__body">{body}</pre>
-        </div>
-        <a className="btn btn--light" href={href}>Email the request</a>
-        <a className="quiet quiet--light num" href={TEL}>Or call Freeport {PHONE}</a>
-      </div>
-    </section>
-  )
-}
-
-function Footer() {
-  return (
-    <footer className="foot grid12">
-      <p className="foot__name t-28">BVG Design Services</p>
-      <div className="foot__c">
-        <a className="num" href={TEL}>{PHONE}</a>
-        <a className="num" href={US_TEL}>US {US_PHONE}</a>
-        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-        <p className="muted">P.O. Box F-43652, Freeport, Grand Bahama</p>
-      </div>
-      <p className="foot__fine t-14 muted">Island photographs from the Bahamas Vacation Guide. Lucayan Harbour: Jon Worth, Wikimedia Commons, CC BY-SA 2.0.</p>
-    </footer>
-  )
-}
-
-function Dock() {
+function Dock({ req }: { req: Req }) {
   const [show, setShow] = useState(false)
+  const m = useMemo(() => mail(req), [req])
   useEffect(() => {
-    const hero = document.getElementById("top"), req = document.getElementById("request")
-    if (!hero || !req) return
-    let past = false, atReq = false
+    const hero = document.getElementById("top"), close = document.getElementById("contact")
+    if (!hero || !close) return
+    let past = false, atClose = false
     const io = new IntersectionObserver(es => {
-      for (const e of es) { if (e.target === hero) past = !e.isIntersecting; if (e.target === req) atReq = e.isIntersecting }
-      setShow(past && !atReq)
-      document.documentElement.dataset.dock = String(past && !atReq)
+      for (const e of es) { if (e.target === hero) past = !e.isIntersecting; if (e.target === close) atClose = e.isIntersecting }
+      setShow(past && !atClose)
     }, { threshold: 0 })
-    io.observe(hero); io.observe(req)
+    io.observe(hero); io.observe(close)
     return () => io.disconnect()
   }, [])
+  const n = req.needs.length
   return (
     <div className="dock" data-show={show} aria-hidden={!show}>
-      <a href="#request" className="btn" tabIndex={show ? 0 : -1}>Start a website request</a>
+      <a href={m.href} className="btn" tabIndex={show ? 0 : -1}>Send my request{n > 0 && <span className="dock__n num">{n}</span>}</a>
       <a href={TEL} className="dock__tel" aria-label={`Call Freeport ${PHONE}`} tabIndex={show ? 0 : -1}>Call</a>
     </div>
   )
 }
 
 function Home() {
-  const started = useRef(false)
+  const [req, setReq] = useState<Req>(DEFAULT_REQ)
   useEffect(() => {
-    if (started.current || matchMedia("(pointer: coarse)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    started.current = true
-    const lenis = new Lenis({ duration: 1.05 })
+    if (lenis || matchMedia("(pointer: coarse)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const l = new Lenis({ duration: 1.05 })
+    lenis = l
     let id = 0
-    const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
+    const raf = (t: number) => { l.raf(t); id = requestAnimationFrame(raf) }
     id = requestAnimationFrame(raf)
-    return () => { cancelAnimationFrame(id); lenis.destroy() }
+    return () => { cancelAnimationFrame(id); l.destroy(); lenis = null }
   }, [])
   return (
     <>
       <a className="skip" href="#request">Skip to the website request</a>
       <Nav />
       <main>
-        <Hero />
-        <Services />
+        <Hero req={req} setReq={setReq} />
+        <ThenNow />
+        <Services req={req} setReq={setReq} />
+        <Steps />
         <Story />
         <Offices />
-        <Steps />
-        <Request />
+        <Contact req={req} />
       </main>
-      <Footer />
-      <Dock />
+      <Dock req={req} />
     </>
   )
 }
