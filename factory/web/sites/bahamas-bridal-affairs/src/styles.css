@@ -29,7 +29,7 @@
   --t-h3: 28px;
   --t-h2: 48px;
   --t-hero: 64px;
-  --t-names: 56px;
+  --t-names: 52px;
   /* space */
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px; --s10: 128px;
   --section: var(--s10);
@@ -98,12 +98,18 @@ a { color: inherit; }
 @media (max-width: 520px) { .top__nav > a:first-child { display: none; } .top__name { font-size: 18px; } }
 
 /* screen 1: the composer */
-.hero { padding: var(--s5) 0 var(--section); }
+.hero { padding: var(--s5) 0 var(--section); overflow-x: clip; }
 .hero__grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--gutter); align-items: start; }
-.hero__copy { grid-column: 1 / span 5; padding-top: var(--s4); }
-.hero__copy h1 { max-width: 12ch; }
-.hero__copy .lead { margin-top: var(--s5); }
-.hero__paper { grid-column: 7 / span 6; display: grid; gap: var(--s4); justify-items: center; }
+.hero__copy { grid-column: 1 / span 6; padding-top: var(--s4); }
+.hero__copy h1 { max-width: 15ch; }
+.hero__copy .lead { margin-top: var(--s5); max-width: 44ch; }
+.narrow, .hero__write, .card__names--write { display: none !important; }
+.hero__paper { grid-column: 7 / span 6; position: relative; display: grid; gap: var(--s4); justify-items: center; margin-top: calc(-1 * var(--s5)); padding: var(--s6) 0 var(--s5); }
+.hero__photo { position: absolute; top: 0; bottom: 0; left: 0; right: calc(-1 * (var(--side) + max(0px, (100vw - var(--max) - 2 * var(--side)) / 2))); margin: 0; background: var(--field); overflow: hidden; }
+.hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 46%; filter: saturate(.85) sepia(.12); }
+.hero__photo figcaption { position: absolute; left: var(--s4); right: var(--s4); bottom: var(--s3); font-size: 12px; line-height: 1.4; color: var(--muted); background: var(--surface); padding: var(--s2) var(--s3); border-radius: var(--r-in); max-width: 46ch; }
+.hero__paper .card, .hero__paper .say { position: relative; }
+.hero__paper .say { background: var(--surface); padding: var(--s4) var(--s5) var(--s5); border-radius: var(--r-card); box-sizing: border-box; margin-bottom: var(--s7); }
 
 .fields { margin-top: var(--s6); display: grid; gap: var(--s5); }
 .field input:not([type="number"]) { width: 100%; }
@@ -127,8 +133,9 @@ a { color: inherit; }
 .seg button[aria-checked="true"], .chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 
 /* the invitation card */
-.card { margin: 0; width: min(100%, 470px); aspect-ratio: 6 / 7; background: var(--surface); box-shadow: var(--shadow-card); border-radius: var(--r-card); padding: 14px; position: relative; }
-.card__in { height: 100%; border: 1px solid var(--gilt); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: var(--s5) var(--s6); text-align: center; transform: translateY(-1%); font: 340 22px/1.35 var(--serif); font-variation-settings: "opsz" 24; color: var(--ink); }
+.card { margin: 0; width: min(100%, 460px); background: var(--surface); box-shadow: var(--shadow-card); border-radius: var(--r-card); padding: 14px; position: relative; }
+.card__in { height: 100%; border: 1px solid var(--gilt); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: var(--s5) var(--s6); text-align: center; transform: translateY(-1%); font: 340 22px/1.35 var(--serif); font-variation-settings: "opsz" 24; color: var(--ink); }
+.nw { white-space: nowrap; }
 .card__line { display: block; text-wrap: balance; animation: set var(--set) var(--ease) both; }
 .card__cap { font: 500 12px/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 .card__names { display: flex; flex-direction: column; align-items: center; gap: 2px; font: 400 var(--t-names)/1.05 var(--script); max-width: 100%; }
@@ -141,8 +148,8 @@ a { color: inherit; }
 .ph { color: var(--muted); }
 @keyframes set { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-.say { width: min(100%, 470px); display: grid; gap: var(--s2); }
-.say__text { font: 340 19px/1.45 var(--serif); }
+.say { width: min(100%, 460px); display: grid; gap: var(--s2); }
+.say__text { font: 340 17px/1.5 var(--serif); }
 .say__calls { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: var(--s3); margin-top: var(--s2); }
 .say__calls .link { grid-column: 1 / -1; justify-self: start; }
 .btn--two { flex-direction: column; align-items: flex-start; gap: 6px; min-height: 64px; padding: 0 var(--s4); }
@@ -163,8 +170,8 @@ a { color: inherit; }
   .hero__copy h1 { order: 1; }
   .hero__copy .lead { order: 2; margin-top: var(--s4); font-size: 17px; }
   .hero__paper { order: 3; margin-top: var(--s5); display: contents; }
-  .card { order: 3; margin: var(--s5) auto 0; aspect-ratio: auto; }
-  .card__in { gap: 12px; padding: var(--s6) var(--s4); font-size: 18px; }
+  .card { order: 3; margin: var(--s3) auto 0; aspect-ratio: auto; }
+  .card__in { gap: 10px; padding: var(--s5) var(--s4); font-size: 18px; }
   .card__amp { font-size: 17px; }
   .fields { order: 4; margin-top: var(--s7); }
   .say { order: 5; margin-top: var(--s7); }
@@ -172,6 +179,17 @@ a { color: inherit; }
   .names span { display: none; }
   .field--row { grid-template-columns: 1fr; gap: var(--s5); }
   .say__calls { grid-template-columns: 1fr; }
+  .wide, .hero__photo, .field--names { display: none !important; }
+  .narrow, .hero__write { display: block !important; }
+  .hero__write { order: 3; margin-top: var(--s5); }
+  .card__names--write { display: flex !important; }
+  .card__names--read { display: none !important; }
+  .card__names--write input { width: 100%; text-align: center; border: 0; border-bottom: 1px solid transparent; background: transparent; font: 400 var(--t-names)/1.15 var(--script); color: var(--ink); padding: 0; border-radius: 0; }
+  .card__names--write input::placeholder { color: var(--muted); opacity: 1; }
+  .card__names--write input:focus { outline: none; border-bottom-color: var(--gilt); }
+  .hero__paper { padding: 0; margin: 0; }
+  .hero__paper .say { padding: 0; margin-bottom: 0; background: none; }
+  html:has(.callbar[data-show="true"]) .top__call { visibility: hidden; }
 }
 
 /* screen 2: where she plans */

@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react"
+import { createContext, useContext, useMemo, useRef, useState, type ReactNode } from "react"
 import { HELP, PHONE, PHONE_US, TEL, TEL_US, VENUES } from "./content"
 
 /* ---------- the shared wedding (one store for the card, the venues screen and the closing call) ---------- */
@@ -26,7 +26,7 @@ export function parseDate(v: string) {
   const today = new Date(); today.setHours(0, 0, 0, 0)
   return { d, past: d < today }
 }
-export const cardDate = (d: Date) => [`${DAYS[d.getDay()]}, the ${ordinal(d.getDate())} of ${MONTHS[d.getMonth()]}`, `two thousand ${words(d.getFullYear() - 2000)}`]
+export const cardDate = (d: Date) => [`${DAYS[d.getDay()]},`, `the ${ordinal(d.getDate())} of ${MONTHS[d.getMonth()]}`, `two thousand ${words(d.getFullYear() - 2000)}`]
 const shortDate = (d: Date) => `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`
 const list = (xs: string[]) => xs.length > 1 ? `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}` : xs[0] ?? ""
 
@@ -54,21 +54,32 @@ export function Card() {
   const w = useWedding()
   const v = VENUES.find(x => x.id === w.venue)!
   const pd = parseDate(w.date)
-  const [d1, d2] = pd && !pd.past ? cardDate(pd.d) : ["on a day", "still to be chosen"]
+  // a past date never reaches the card: it keeps the last future date the couple chose
+  const last = useRef<Date | null>(null)
+  if (pd && !pd.past) last.current = pd.d
+  if (!w.date) last.current = null
+  const shown = last.current
+  const [wd, dm, yr] = shown ? cardDate(shown) : ["", "on a day", "still to be chosen"]
+  const ph = shown ? "" : "ph"
   const a = w.a.trim(), b = w.b.trim()
   return (
     <figure className="card" aria-label="Your invitation, as it would read">
       <div className="card__in">
         <Line key="fam" k="fam" className="card__cap">Together with their families</Line>
-        <span className="card__names">
+        <span className="card__names card__names--read" aria-hidden>
           <span className={a ? "" : "ph"}>{a || "Your name"}</span>
           <span className="card__amp">and</span>
           <span className={b ? "" : "ph"}>{b || "your partner"}</span>
         </span>
+        <span className="card__names card__names--write">
+          <input value={w.a} onChange={e => w.set({ a: e.target.value })} placeholder="Your name" aria-label="Your name" autoComplete="given-name" maxLength={28} />
+          <span className="card__amp">and</span>
+          <input value={w.b} onChange={e => w.set({ b: e.target.value })} placeholder="your partner" aria-label="Your partner's name" autoComplete="off" maxLength={28} />
+        </span>
         <Line key="wm" k="wm">will be married</Line>
         <span className="card__date">
-          <Line key={"d1" + d1} k={"d1" + d1} className={pd ? "" : "ph"}>{d1}</Line>
-          <Line key={"d2" + d2} k={"d2" + d2} className={pd ? "" : "ph"}>{d2}</Line>
+          <Line key={"d1" + wd + dm} k={"d1" + wd + dm} className={ph}>{wd && <>{wd} </>}<span className="nw">{dm}</span></Line>
+          <Line key={"d2" + yr} k={"d2" + yr} className={ph}>{yr}</Line>
         </span>
         <span className="card__venue">
           <Line key={"v" + v.id} k={"v" + v.id} className="card__sc">{v.card}</Line>
@@ -103,7 +114,7 @@ export function Fields() {
         <div className="names">
           <input id="name-a" value={w.a} onChange={e => w.set({ a: e.target.value })} placeholder="Your name" autoComplete="given-name" maxLength={28} />
           <span aria-hidden>and</span>
-          <input aria-label="Your partner's name" value={w.b} onChange={e => w.set({ b: e.target.value })} placeholder="Your partner" autoComplete="off" maxLength={28} />
+          <input aria-label="Partner's name" value={w.b} onChange={e => w.set({ b: e.target.value })} placeholder="Your partner" autoComplete="off" maxLength={28} />
         </div>
       </div>
       <div className="field field--row">

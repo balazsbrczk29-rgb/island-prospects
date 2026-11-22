@@ -17,7 +17,7 @@ Scale (px, desktop / phone):
 - h3 28 / 23, Fraunces 360 opsz 36, leading 1.2, tracking -0.01em
 - h2 48 / 34, Fraunces 330 opsz 96, leading 1.08, tracking -0.025em
 - hero 64 / 42, Fraunces 320 opsz 144, leading 1.02, tracking -0.035em
-- card script names 56 / 44 Pinyon Script.
+- card script names 52 / 44 Pinyon Script.
 
 **Colour (OKLCH).**
 - --ground oklch(97.6% 0.009 84) warm ivory paper
@@ -41,7 +41,7 @@ Scale (px, desktop / phone):
 - Grid: columns 1 to 5 the copy and inputs; columns 6 to 12 the card on the paper.
 - Left: hero h1 "Check your wedding date with Dr. Bernadette Burrows." Lead under it: "Weddings in Nassau and Paradise Island for more than 26 years, with the owner herself at your side. A preferred planner with the One&Only Ocean Club and Atlantis for many years."
 - Inputs (stacked, underlined fields, 48 px tall): Your names (two fields side by side with "and" between), Date (native date input), Guests (number with minus/plus steppers, step 10, default 80, range 2 to 400), Venue idea (four choices as a segmented row: Ocean Club, Atlantis, Lyford Cay, Not sure yet). Help chips sit under the inputs as "We would like help with" toggles.
-- Right: the invitation card 470 x 548 (6:7) on --surface, centred lines, with a 1 px gilt rule inset 14 px. Below the card: the read-back sentence (lead size, muted label "Say this when you call") and the two call buttons: primary filled accent "Call Nassau 242-326-4029", secondary outline "From the US and Canada 1-954-892-6969", and a text button "Copy the sentence".
+- Right: the invitation card 460 wide, height from its lines, on the French Cloisters photograph (right half, full bleed to the edge), with the read-back on a paper reply card under it on --surface, centred lines, with a 1 px gilt rule inset 14 px. Below the card: the read-back sentence (lead size, muted label "Say this when you call") and the two call buttons: primary filled accent "Call Nassau 242-326-4029", secondary outline "From the US and Canada 1-954-892-6969", and a text button "Copy the sentence".
 - Primary action: Call Nassau.
 - Phone (390x844): top line collapses to name + "Call" link; h1 at 42 px over 3 lines; lead 2 lines; then the card at full width (aspect 4:5, script 44 px) so the card is visible on screen 1; then the inputs, then chips, sentence and call buttons, which stick as a bottom bar ("Call Nassau" + "US") once the card scrolls off.
 

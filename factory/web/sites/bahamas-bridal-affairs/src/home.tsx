@@ -8,11 +8,16 @@ function Compose() {
     <section className="hero" id="compose" aria-labelledby="h1">
       <div className="wrap hero__grid">
         <div className="hero__copy">
-          <h1 id="h1">Check your wedding date with Dr. Bernadette Burrows.</h1>
-          <p className="lead">Weddings in Nassau and on Paradise Island for more than 26 years, with the owner herself at your side. A preferred planner with the One&amp;Only Ocean Club and Atlantis for many years.</p>
+          <h1 id="h1">Check your wedding date with Dr.&nbsp;Bernadette&nbsp;Burrows.</h1>
+          <p className="lead"><span className="wide">Weddings in Nassau and on Paradise Island for more than 26 years, with the owner herself at your side. A preferred planner with the One&amp;Only Ocean Club and Atlantis for many years.</span><span className="narrow">Nassau and Paradise Island weddings for more than 26 years, planned by the owner herself.</span></p>
+          <p className="cap hero__write">Write your names on the card.</p>
           <Fields />
         </div>
         <div className="hero__paper">
+          <figure className="hero__photo">
+            <img src={VENUES[0].img} alt={VENUES[0].alt} width={VENUES[0].w} height={VENUES[0].h} fetchPriority="high" decoding="async" />
+            <figcaption>The French Cloisters, Paradise Island, where her Weddingbells couple said their vows. Photograph: Art davis, Wikimedia Commons, CC BY-SA 4.0</figcaption>
+          </figure>
           <Card />
           <Say />
         </div>
