@@ -1,136 +1,196 @@
-import { StrictMode, useEffect, useMemo, useState } from "react"
+import { StrictMode, useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react"
 import { createRoot } from "react-dom/client"
 import Lenis from "lenis"
-import { EMAIL, ITEMS, MAP, NEEDS, P, PHONE, TEL, WHERE, waLink, type Item } from "./data"
+import { ADDRESS, DEFAULT_JOB, EMAIL, JOBS, MAP, P, PHONE, SIZES, TEL, WHEN, WHEN_STORM, message, waLink, type Job, type Photo, type Side } from "./data"
 import "./styles.css"
 
-const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+const job = (id: string) => JOBS.find(j => j.id === id)!
+const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches
+
+/* arrow-key radio group: moves focus and selection like native radios */
+function radioKeys(e: KeyboardEvent<HTMLElement>) {
+  const keys = ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"]
+  if (!keys.includes(e.key)) return
+  const items = [...e.currentTarget.querySelectorAll<HTMLButtonElement>("[role=radio]")]
+  const i = items.indexOf(document.activeElement as HTMLButtonElement)
+  if (i < 0) return
+  e.preventDefault()
+  const n = items[(i + (keys.indexOf(e.key) < 2 ? 1 : -1) + items.length) % items.length]
+  n.focus(); n.click()
+}
+
+function Img({ p, eager, className }: { p: Photo; eager?: boolean; className?: string }) {
+  return <img className={className} src={p.src} alt={p.alt} width={p.w} height={p.h} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} decoding="async" />
+}
 
 function Bar() {
   return (
     <header className="bar">
-      <a href="#top" className="bar__name"><b>Cover Up</b><span>Island Marine Covering Ltd</span></a>
+      <a href="#tool" className="bar__name"><b>Cover Up</b><span>Island Marine Covering Ltd</span></a>
       <nav className="bar__nav" aria-label="Sections">
-        <a href="#workshop">Workshop</a>
+        <a href="#house">House</a>
+        <a href="#boat">Boat</a>
+        <a href="#how">How a job runs</a>
         <a href="#family">Since 1992</a>
-        <a href="#measure">Get a measure</a>
+        <a href="#visit">Visit</a>
       </nav>
       <a className="bar__tel num" href={TEL}>{PHONE}</a>
     </header>
   )
 }
 
-function Index({ active }: { active: string }) {
-  const dept = (d: Item["dept"], label: string) => (
-    <div className="idx__dept">
-      <p className="idx__label">{label}</p>
-      <ul>
-        {ITEMS.filter(i => i.dept === d).map(i => (
-          <li key={i.id}>
-            <a href={`#${i.id}`} aria-current={active === i.id ? "true" : undefined} onClick={e => { e.preventDefault(); go(i.id) }}>{i.name}</a>
-          </li>
-        ))}
-      </ul>
+/* the stage: the chosen job's own photograph unrolls over the last one like an awning coming down */
+type Layer = { key: number; job: Job }
+function Stage({ j }: { j: Job }) {
+  const [layers, setLayers] = useState<Layer[]>([{ key: 0, job: j }])
+  const n = useRef(0)
+  useEffect(() => {
+    setLayers(l => (l[l.length - 1].job.id === j.id ? l : [...l.slice(-1), { key: ++n.current, job: j }]))
+  }, [j])
+  return (
+    <div className="stage" aria-live="polite">
+      {layers.map((l, i) => (
+        <div key={l.key} className={`stage__layer${i > 0 && l.key > 0 ? " is-in" : ""}`}
+          onAnimationEnd={e => { if (e.target === e.currentTarget) setLayers(ls => ls.slice(-1)) }}>
+          <div className="stage__inner">
+            {l.job.photo ? <Img p={l.job.photo} eager={l.key === 0} className="stage__img" /> : (
+              <div className="plate">
+                <p className="plate__name">{l.job.name}</p>
+                <p className="plate__note">{l.job.line} Send us a photo of the {l.job.side === "house" ? "opening" : "boat"} and we come to measure.</p>
+              </div>
+            )}
+          </div>
+          <span className="stage__valance" aria-hidden="true" />
+        </div>
+      ))}
     </div>
   )
-  return (
-    <nav className="idx" aria-label="What we make">
-      {dept("house", "For the house")}
-      {dept("boat", "For the boat")}
-    </nav>
-  )
 }
 
-function Chips({ active }: { active: string }) {
+type Pick = { side: Side; jobId: string }
+function Tool({ pick, setPick, sendRef }: { pick: Pick; setPick: (p: Pick) => void; sendRef: React.RefObject<HTMLAnchorElement | null> }) {
+  const j = job(pick.jobId)
+  const sizes = SIZES[j.size]
+  const whens = j.storm ? [WHEN_STORM, ...WHEN] : WHEN
+  const [size, setSize] = useState("Not sure")
+  const [where, setWhere] = useState("")
+  const [when, setWhen] = useState(WHEN[0])
+  useEffect(() => { setSize("Not sure"); if (!whens.includes(when)) setWhen(WHEN[0]) }, [j.size, j.storm]) // eslint-disable-line react-hooks/exhaustive-deps
+  const msg = useMemo(() => message(j, size, where, when), [j, size, where, when])
+  const sides: [Side, string][] = [["house", "House"], ["boat", "Boat"]]
   return (
-    <nav className="chips" aria-label="What we make">
-      {ITEMS.map(i => (
-        <a key={i.id} href={`#${i.id}`} aria-current={active === i.id ? "true" : undefined} onClick={e => { e.preventDefault(); go(i.id) }}>{i.name}</a>
-      ))}
-    </nav>
-  )
-}
+    <section className="tool" id="tool" aria-labelledby="title">
+      <div className="tool__ask">
+        <h1 id="title" className="hero">Shade and shelter, cut and sewn in Nassau.</h1>
+        <p className="tool__lede">Awnings for the house, tops and upholstery for the boat, made at our Airport Industrial Park workshop since 1992. What needs covering?</p>
 
-function Row({ item, first }: { item: Item; first: boolean }) {
-  const ph = item.photo
-  return (
-    <article className={`row${ph ? "" : " row--type"}`} id={item.id} data-row>
-      {ph && (
-        <figure className="row__photo" style={{ maxWidth: ph.w, aspectRatio: `${ph.w} / ${ph.h}` }}>
-          <img src={ph.src} alt={ph.alt} width={ph.w} height={ph.h} loading={first ? "eager" : "lazy"} fetchPriority={first ? "high" : "auto"} decoding="async" />
-        </figure>
-      )}
-      <div className="row__text">
-        <h2 className="row__name">{item.name}</h2>
-        <p className="row__line">{item.line}</p>
-        {!ph && <p className="row__spec">{item.facts[0]}</p>}
-        <ul className="row__facts">{(ph ? item.facts : item.facts.slice(1)).map(f => <li key={f}>{f}</li>)}</ul>
-        <a className="link" href={waLink(`Hello Cover Up, I'd like a measure for ${item.name.toLowerCase()}. `)}>Ask for a measure on WhatsApp</a>
+        <div className="sides" role="radiogroup" aria-label="What needs covering" onKeyDown={radioKeys} data-side={pick.side}>
+          {sides.map(([s, label]) => (
+            <button key={s} type="button" role="radio" aria-checked={pick.side === s} tabIndex={pick.side === s ? 0 : -1}
+              onClick={() => setPick({ side: s, jobId: pick.side === s ? pick.jobId : DEFAULT_JOB[s] })}>{label}</button>
+          ))}
+          <span className="sides__mark" aria-hidden="true" />
+        </div>
+
+        <div className="jobs" role="radiogroup" aria-label={`Jobs for the ${pick.side}`} onKeyDown={radioKeys} key={pick.side}>
+          {JOBS.filter(x => x.side === pick.side).map(x => (
+            <button key={x.id} type="button" role="radio" aria-checked={x.id === j.id} tabIndex={x.id === j.id ? 0 : -1}
+              onClick={() => setPick({ side: pick.side, jobId: x.id })}>{x.name}</button>
+          ))}
+        </div>
+
+        <div className="qs">
+          <div className="q">
+            <p className="q__label" id="q-size">{sizes.label}</p>
+            <div className="chips" role="radiogroup" aria-labelledby="q-size" onKeyDown={radioKeys}>
+              {sizes.opts.map(o => <button key={o} type="button" role="radio" aria-checked={size === o} tabIndex={size === o ? 0 : -1} onClick={() => setSize(o)}>{o}</button>)}
+            </div>
+          </div>
+          <label className="q">
+            <span className="q__label">Where</span>
+            <input value={where} onChange={e => setWhere(e.target.value)} placeholder="e.g. Lyford Cay, Nassau Harbour, Abaco" autoComplete="address-level2" />
+          </label>
+          <div className="q">
+            <p className="q__label" id="q-when">When</p>
+            <div className="chips" role="radiogroup" aria-labelledby="q-when" onKeyDown={radioKeys}>
+              {whens.map(o => <button key={o} type="button" role="radio" aria-checked={when === o} tabIndex={when === o ? 0 : -1} onClick={() => setWhen(o)}>{o}</button>)}
+            </div>
+          </div>
+        </div>
+
+        <div className="send">
+          <p className="send__msg"><span className="answer__to num">To {PHONE} on WhatsApp</span><q>{msg}</q></p>
+          <a ref={sendRef} className="btn" href={waLink(msg)} target="_blank" rel="noopener">Send on WhatsApp</a>
+          <a className="link num" href={TEL}>or call {PHONE}</a>
+        </div>
       </div>
-    </article>
-  )
-}
 
-function Catalogue() {
-  const [active, setActive] = useState(ITEMS[0].id)
-  useEffect(() => {
-    const rows = [...document.querySelectorAll<HTMLElement>("[data-row]")]
-    const io = new IntersectionObserver(es => {
-      const vis = es.filter(e => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-      if (vis[0]) setActive(vis[0].target.id)
-    }, { rootMargin: "-35% 0px -55% 0px" })
-    rows.forEach(r => io.observe(r))
-    return () => io.disconnect()
-  }, [])
-  return (
-    <section className="cat" id="top" aria-labelledby="title">
-      <aside className="cat__side">
-        <div className="cat__sticky">
-          <h1 id="title" className="cat__title">Shade and shelter, cut and sewn in Nassau.</h1>
-          <p className="cat__lede">Awnings for the house, tops and upholstery for the boat. Measured on site, made at our workshop in the Airport Industrial Park.</p>
-          <div className="cat__act">
-            <a className="btn" href={waLink("Hello Cover Up, I'd like a measure. Here is a photo of the job: ")}>WhatsApp a photo for a measure</a>
-            <a className="link num" href={TEL}>Call {PHONE}</a>
+      <div className="tool__show">
+        <Stage j={j} />
+        <div className="answer">
+          <div className="answer__job">
+            <p className="answer__name">{j.name}</p>
+            <p className="answer__line">{j.line}</p>
           </div>
+          <ul className="answer__facts">{j.facts.map(f => <li key={f}>{f}</li>)}</ul>
+          <p className="answer__msg"><span className="answer__to num">To {PHONE} on WhatsApp</span><q>{msg}</q></p>
         </div>
-        <div className="cat__pin">
-          <Index active={active} />
-          <a className="btn btn--small" href={waLink("Hello Cover Up, I'd like a measure. Here is a photo of the job: ")}>WhatsApp for a measure</a>
-        </div>
-      </aside>
-      <Chips active={active} />
-      <div className="cat__rows">
-        {ITEMS.map((it, i) => (
-          <div key={it.id}>
-            {(i === 0 || ITEMS[i - 1].dept !== it.dept) && <p className="cat__dept" aria-hidden="true">{it.dept === "house" ? "For the house" : "For the boat"}</p>}
-            <Row item={it} first={i === 0} />
-          </div>
-        ))}
       </div>
     </section>
   )
 }
 
-function Workshop() {
-  const strip = [
-    [P.cutting, "Patterns cut on the long table"],
-    [P.sewing, "Sewn by hand at the machine"],
-    [P.seat, "A finished helm seat"],
-  ] as const
+function Ledger({ side, onAsk }: { side: Side; onAsk: (j: Job) => void }) {
+  const house = side === "house"
   return (
-    <section className="shop" id="workshop" aria-labelledby="shop-title">
-      <div className="shop__head">
-        <h2 id="shop-title" className="h2">Every job is made at Raphia Close.</h2>
-        <p>Our products are 100% made in the Bahamas. Come to the workshop in the Airport Industrial Park to see the canvas and vinyl colours before you choose.</p>
+    <section className={`ledger ledger--${side}`} id={side} aria-labelledby={`${side}-title`}>
+      <div className="ledger__head">
+        <h2 id={`${side}-title`} className="h2">{house ? "For the house" : "For the boat"}</h2>
+        <p>{house
+          ? "Awnings, weather curtains, hurricane shutters and sun shades, measured at your house and made at Raphia Close."
+          : "From a Bimini top on a 10 ft inflatable to an isinglass enclosure on a mega yacht, plus upholstery for boats and ferries."}</p>
       </div>
-      <ul className="shop__strip">
-        {strip.map(([ph, cap]) => (
-          <li key={cap}>
-            <img src={ph.src} alt={ph.alt} width={ph.w} height={ph.h} loading="lazy" decoding="async" />
-            <span>{cap}</span>
-          </li>
+      {JOBS.filter(j => j.side === side).map(j => (
+        <article key={j.id} className={`entry${j.photo ? "" : " entry--type"}`} id={`job-${j.id}`}>
+          <div className="entry__text">
+            <h3 className="h3">{j.name}</h3>
+            <p>{j.line}</p>
+            <ul className="spec">{j.facts.map(f => <li key={f}>{f}</li>)}</ul>
+            <button type="button" className="link" onClick={() => onAsk(j)}>Ask for a measure for this</button>
+          </div>
+          {j.photo && (
+            <figure className="entry__photo" style={{ maxWidth: j.photo.w }}>
+              <div className="frame" style={{ aspectRatio: `${j.photo.w} / ${j.photo.h}` }}><Img p={j.photo} /></div>
+              {j.photo.cap && <figcaption>{j.photo.cap}</figcaption>}
+            </figure>
+          )}
+        </article>
+      ))}
+    </section>
+  )
+}
+
+function How() {
+  const beats = [
+    ["1", "Measure", "Send a photo on WhatsApp, then we come to the house, the dock or the boat yard to measure."],
+    ["2", "Cut and sew in Nassau", "Patterns are cut and sewn at Raphia Close. Products are 100% made in the Bahamas."],
+    ["3", "Fit", "We fit the finished awning, curtain, top or cushion where it lives."],
+  ]
+  const strip: [Photo, string][] = [[P.cutting, "Patterns laid out on the long table"], [P.sewing, "Vinyl fed through the machine by hand"], [P.seat, "A finished helm seat"]]
+  return (
+    <section className="how" id="how" aria-labelledby="how-title">
+      <h2 id="how-title" className="h2 how__title">How a job runs, from your photo to the fitting.</h2>
+      <ol className="beats">
+        {beats.map(([n, t, d]) => (
+          <li key={n}><span className="beats__n num">{n}</span><h3 className="h3">{t}</h3><p>{d}</p></li>
+        ))}
+      </ol>
+      <ul className="strip">
+        {strip.map(([p, c]) => (
+          <li key={c}><div className="frame" style={{ aspectRatio: "3 / 4" }}><Img p={p} /></div><span>{c}</span></li>
         ))}
       </ul>
+      <p className="how__storm">Hurricane shutters are made to each opening, so ask for your measure well before the season.</p>
     </section>
   )
 }
@@ -138,46 +198,36 @@ function Workshop() {
 function Family() {
   return (
     <section className="fam" id="family" aria-labelledby="fam-title">
-      <figure className="fam__photo">
-        <img src={P.workshop.src} alt={P.workshop.alt} width={P.workshop.w} height={P.workshop.h} loading="lazy" decoding="async" />
+      <figure className="fam__photo" style={{ maxWidth: P.workshop.w }}>
+        <div className="frame" style={{ aspectRatio: "4 / 3" }}><Img p={P.workshop} /></div>
         <figcaption>The workshop today, Raphia Close, Airport Industrial Park.</figcaption>
       </figure>
       <div className="fam__text">
         <p className="fam__year num" aria-hidden="true">1992</p>
-        <h2 id="fam-title" className="h2">One sewing machine and one roll of canvas, in an old cottage in Montagu village.</h2>
-        <p>That is how Island Marine Covering began in 1992. The trade came from the family: Henry Nixon founded Nixon's Upholstery Services and, with his wife Viola, upholstered for Nassau hotels including The Montague, The British Colonial and The Royal Victorian.</p>
-        <p>The family's work reached Abaco with Kirk Nixon. Today the company trades as Cover Up and still goes to awning and marine canvas seminars in North and South America to keep learning the craft.</p>
+        <h2 id="fam-title" className="fam__quote">"I started with one sewing machine and one roll of canvas, working in an old cottage in Montagu village."</h2>
+        <p>That is how Island Marine Covering began, with Ricky Nixon and what he learned from his father. Henry Nixon founded Nixon's Upholstery Services and, with his wife Viola, upholstered for Nassau hotels including The Montague, The British Colonial and The Royal Victorian.</p>
+        <p>The family's work reached Abaco with Ricky's brother Kirk. Today the company trades as Cover Up and still goes to awning and marine canvas seminars in North and South America.</p>
       </div>
     </section>
   )
 }
 
-function Measure() {
-  const [need, setNeed] = useState(NEEDS[0])
-  const [where, setWhere] = useState(WHERE[0])
-  const [area, setArea] = useState("")
-  const msg = useMemo(() => `Hello Cover Up, I'd like a measure for ${need.toLowerCase()} for ${where.toLowerCase()}${area.trim() ? ` in ${area.trim()}` : ""}. I'll send a photo of the space.`, [need, where, area])
+function Visit({ onWhatsApp }: { onWhatsApp: string }) {
   return (
-    <section className="msr" id="measure" aria-labelledby="msr-title">
-      <div className="msr__form">
-        <h2 id="msr-title" className="h2">Send us a photo. We come to measure.</h2>
-        <label><span>What do you need?</span>
-          <select value={need} onChange={e => setNeed(e.target.value)}>{NEEDS.map(n => <option key={n}>{n}</option>)}</select>
-        </label>
-        <fieldset>
-          <legend>For</legend>
-          <div className="seg">{WHERE.map(w => <button key={w} type="button" aria-pressed={where === w} onClick={() => setWhere(w)}>{w}</button>)}</div>
-        </fieldset>
-        <label><span>Where in the Bahamas (optional)</span><input value={area} onChange={e => setArea(e.target.value)} placeholder="e.g. Lyford Cay, Nassau Harbour, Abaco" /></label>
-      </div>
-      <div className="msr__out">
-        <p className="msr__msg">{msg}</p>
-        <a className="btn btn--sun" href={waLink(msg)}>Send on WhatsApp</a>
-        <div className="msr__alt">
-          <a className="link num" href={TEL}>Call {PHONE}</a>
-          <a className="link" href={`mailto:${EMAIL}?subject=${encodeURIComponent("Measure request")}&body=${encodeURIComponent(msg)}`}>{EMAIL}</a>
+    <section className="visit" id="visit" aria-labelledby="visit-title">
+      <h2 id="visit-title" className="h2 visit__title">Bring a photo to Raphia Close, or send it.</h2>
+      <div className="visit__grid">
+        <address className="visit__addr">
+          <p className="h3">{ADDRESS}</p>
+          <p>P.O. Box SP 62402, Nassau, New Providence</p>
+          <p className="visit__note">Come to the workshop to see the canvas and vinyl colours before you choose.</p>
+          <a className="link" href={MAP} target="_blank" rel="noopener">Open in Maps</a>
+        </address>
+        <div className="visit__reach">
+          <a className="btn" href={onWhatsApp} target="_blank" rel="noopener">WhatsApp {PHONE}</a>
+          <a className="reach num" href={TEL}><span>Call</span>{PHONE}</a>
+          <a className="reach" href={`mailto:${EMAIL}?subject=${encodeURIComponent("Measure request")}`}><span>Email</span>{EMAIL}</a>
         </div>
-        <p className="msr__visit">Raphia Close, Suite 13/14, Airport Industrial Park, P.O. Box SP 62402, Nassau. <a className="link" href={MAP} rel="noopener">Map</a></p>
       </div>
     </section>
   )
@@ -186,33 +236,64 @@ function Measure() {
 function Footer() {
   return (
     <footer className="foot">
-      <p className="foot__name"><b>Cover Up</b> Island Marine Covering Ltd</p>
-      <p>Raphia Close, Suite 13/14, Airport Industrial Park, Nassau. <a href={TEL} className="num">{PHONE}</a></p>
+      <p className="foot__name"><b>Cover Up</b> Island Marine Covering Ltd, since 1992</p>
+      <p>{ADDRESS}, Nassau. <a href={TEL} className="num">{PHONE}</a></p>
       <p className="foot__fine">All photographs are Cover Up's own work, from coverupbahamas.com.</p>
     </footer>
   )
 }
 
 function Home() {
+  const [pick, setPick] = useState<Pick>({ side: "house", jobId: "awnings" })
+  const sendRef = useRef<HTMLAnchorElement>(null)
+  const [dock, setDock] = useState(false)
+  const j = job(pick.jobId)
+  const generic = waLink(`Hello Cover Up, I'd like a measure for ${j.noun} for my ${j.side}. I can send photos.`)
+
   useEffect(() => {
-    if (matchMedia("(pointer: coarse)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    if (matchMedia("(pointer: coarse)").matches || reduced()) return
     const lenis = new Lenis({ duration: 1.05 })
     let id = 0
     const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
     id = requestAnimationFrame(raf)
     return () => { cancelAnimationFrame(id); lenis.destroy() }
   }, [])
+
+  useEffect(() => {
+    const el = sendRef.current, end = document.getElementById("visit")
+    if (!el || !end) return
+    let a = true, b = false
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.target === el) a = e.isIntersecting; else b = e.isIntersecting })
+      setDock(!a && !b)
+    })
+    io.observe(el); io.observe(end)
+    return () => io.disconnect()
+  }, [])
+
+  const ask = (x: Job) => {
+    setPick({ side: x.side, jobId: x.id })
+    document.getElementById("tool")?.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "start" })
+    setTimeout(() => sendRef.current?.focus({ preventScroll: true }), 700)
+  }
+
   return (
     <>
-      <a className="skip" href="#measure">Skip to get a measure</a>
+      <a className="skip" href="#tool">Skip to the measure request</a>
       <Bar />
       <main>
-        <Catalogue />
-        <Workshop />
+        <Tool pick={pick} setPick={setPick} sendRef={sendRef} />
+        <Ledger side="house" onAsk={ask} />
+        <Ledger side="boat" onAsk={ask} />
+        <How />
         <Family />
-        <Measure />
+        <Visit onWhatsApp={generic} />
       </main>
       <Footer />
+      <div className={`dock${dock ? " is-on" : ""}`} aria-hidden={!dock}>
+        <span className="dock__job">{j.name}</span>
+        <a className="btn" href={generic} target="_blank" rel="noopener" tabIndex={dock ? 0 : -1}>Send on WhatsApp</a>
+      </div>
     </>
   )
 }
