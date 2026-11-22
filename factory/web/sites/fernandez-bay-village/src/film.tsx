@@ -1,67 +1,52 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent, useReducedMotion, type MotionValue } from 'motion/react'
-import { BIZ, FILM, sq } from './data'
+import { FILM, sq } from './data'
 
 const N = FILM.length
+const clamp = (v: number) => Math.min(1, Math.max(0, v))
 
 function FrameImg({ i, p, reduce }: { i: number; p: MotionValue<number>; reduce: boolean | null }) {
   const f = FILM[i]
-  // frames stack in order; each later frame fades in over the half-step before its stop and covers the one below
-  const opacity = useTransform(p, v => i === 0 ? 1 : Math.min(1, Math.max(0, (v * (N - 1) - (i - 0.6)) / 0.5)))
-  const scale = useTransform(p, v => reduce ? 1 : 1.02 + 0.07 * Math.min(1, Math.max(0, (v * (N - 1) - i + 0.6) / 1.6)))
+  // each later frame fades in over the half step before its stop and covers the frame below (opacity and scale only)
+  const opacity = useTransform(p, v => (i === 0 ? 1 : clamp((v * (N - 1) - (i - 0.55)) / 0.45)))
+  const scale = useTransform(p, v => (reduce ? 1 : 1.04 - 0.04 * clamp((v * (N - 1) - i + 0.55) / 1.2)))
+  const w = Math.min(f.w, 1500)
   return (
-    <motion.img className="frame-img" style={{ opacity, scale, objectPosition: f.pos }}
-      src={sq(f.img, 2500)} srcSet={`${sq(f.img, 1000)} 1000w, ${sq(f.img, 1500)} 1500w, ${sq(f.img, 2500)} 2500w`} sizes="100vw"
-      alt={f.alt} width={2500} height={1667} loading={i < 2 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : undefined} />
+    <motion.img className="day-img" style={{ opacity, scale, objectPosition: f.pos }}
+      src={sq(f.img, w)} srcSet={f.w > 1000 ? `${sq(f.img, 1000)} 1000w, ${sq(f.img, w)} ${w}w` : undefined} sizes="(max-width: 900px) 100vw, 75vw"
+      alt={f.alt} width={w} height={Math.round((w * f.h) / f.w)} loading="lazy" />
   )
 }
 
-export function Film() {
+export function DayFilm() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const [k, setK] = useState(0)
   useMotionValueEvent(scrollYProgress, 'change', v => { const n = Math.min(N - 1, Math.max(0, Math.round(v * (N - 1)))); if (n !== k) setK(n) })
-  const bar = useTransform(scrollYProgress, v => v)
   const go = (i: number) => {
     const el = ref.current; if (!el) return
     const top = el.getBoundingClientRect().top + scrollY
-    window.scrollTo({ top: top + (i / (N - 1)) * (el.offsetHeight - innerHeight) + 1, behavior: reduce ? 'auto' : 'smooth' })
+    window.scrollTo({ top: top + (i / (N - 1)) * (el.offsetHeight - innerHeight) + 2, behavior: reduce ? 'auto' : 'smooth' })
   }
-  const pinned = useRef(true)
-  const setOffset = (on: boolean) => { if (on === pinned.current) return; pinned.current = on; document.documentElement.style.setProperty('--concept-offset', on ? 'calc(var(--bar-bottom) + 4px)' : '0px') }
-  useEffect(() => { pinned.current = false; setOffset(true) }, [])
-  useMotionValueEvent(scrollYProgress, 'change', v => setOffset(v < 0.999))
   const f = FILM[k]
   return (
-    <section ref={ref} className="film" data-stage aria-label="A day at Fernandez Bay Village" style={{ height: `${N * 75}svh` }}>
-      <div className="film-pin">
-        <header className="bar-top">
-          <a className="name" href="./">Fernandez Bay Village</a>
-          <nav className="chapters" aria-label="Chapters of the day">
-            {FILM.slice(1).map((x, i) => (
-              <button key={x.id} type="button" className={k === i + 1 ? 'on' : ''} onClick={() => go(i + 1)}>{x.chapter}</button>
-            ))}
-          </nav>
-          <a className="top-book" href="stay.html">Cottages &amp; villas</a>
-        </header>
-        <div className="frame">
+    <section id="day" ref={ref} className="day field" aria-labelledby="day-h" style={{ height: `${N * 65}svh` }}>
+      <div className="day-pin">
+        <div className="day-frame">
           {FILM.map((_, i) => <FrameImg key={i} i={i} p={scrollYProgress} reduce={reduce} />)}
-          <motion.span className="frame-progress" style={{ scaleX: bar }} aria-hidden="true" />
         </div>
-        <div className="bar-bottom">
-          <div className="sub" aria-live="polite">
-            {k === 0 && <h1 className="sub-h1">A beach view from every room<span className="sr-only">: Fernandez Bay Village, Cat Island, Bahamas</span></h1>}
+        <div className="day-side">
+          <h2 id="day-h" className="h2">A day in the bay.</h2>
+          <ol className="day-list" aria-label="Chapters of the day">
+            {FILM.map((x, i) => (
+              <li key={x.id}><button type="button" className={k === i ? 'on' : ''} aria-current={k === i ? 'step' : undefined} onClick={() => go(i)}><span className="num">{i + 1}</span>{x.chapter}</button></li>
+            ))}
+          </ol>
+          <div className="day-cap" aria-live="polite">
             <AnimatePresence mode="wait" initial={false}>
-              <motion.div key={f.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.45, ease: [0.22, 0.61, 0.24, 1] }}>
-                {k > 0 && <p className="sub-k"><span className="num">{k}</span> {f.chapter}</p>}
-                <p className="sub-line">{k === 0 ? 'On a mile of white sand in Fernandez Bay, Cat Island. Five minutes from New Bight airport.' : f.line}{f.id === 'porch' && <> <a href="stay.html">See the cottages</a></>}</p>
-              </motion.div>
+              <motion.p key={f.id} className="lead" initial={reduce ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}>{f.line}</motion.p>
             </AnimatePresence>
-          </div>
-          <div className="bar-acts">
-            <a className="btn" href={BIZ.booking}>Check availability</a>
-            <a className="wa" href={`https://wa.me/${BIZ.wa}`}>WhatsApp<span className="wa-us">{'\u00a0'}us</span></a>
           </div>
         </div>
       </div>
