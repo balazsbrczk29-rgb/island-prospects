@@ -226,3 +226,30 @@ p { text-wrap: pretty; }
 .abar a.go { background: var(--color-harbour); color: #f7f9f8; }
 @media (min-width: 1024px) { .abar { display: none; } }
 @media (max-width: 1023px) { :root { --concept-offset: 56px; } }
+
+.rng { position: relative; display: block; }
+.limit { position: absolute; top: 12px; transform: translateX(-50%); font-size: 11px; color: var(--color-muted); pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 2px; padding-top: 0; }
+.limit i { display: block; width: 1px; height: 20px; background: var(--color-ink); }
+.limit { top: 12px; }
+.limit.over { color: var(--color-brass); }
+.limit.over i { background: var(--color-brass); }
+.dial .rng { margin-bottom: 14px; }
+.pano img { animation: drift 24s ease-in-out infinite alternate; transform-origin: 60% 50%; }
+@keyframes drift { from { transform: scale(1.06) translateX(-1.5%); } to { transform: scale(1.0) translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .pano img { animation: none; } }
+.band { margin: 0 0 72px; }
+.band img { width: 100%; max-width: 1200px; height: auto; display: block; margin-inline: auto; aspect-ratio: 1200 / 520; object-fit: cover; background: var(--color-paper-2); }
+.band figcaption { max-width: 1200px; margin: 8px auto 0; padding-inline: var(--pad); font-size: 13px; color: var(--color-muted); }
+.abar a { text-align: center; white-space: nowrap; }
+@media (max-width: 1023px) {
+  .intro .lede { font-size: 15px; }
+  .dial-v { font-size: 28px; }
+  .chips { margin-top: 10px; }
+  .chips button { min-height: 44px; }
+  .verdict { min-height: 60px; margin-top: 12px; padding-top: 10px; }
+  .verdict-h { font-size: 20px; }
+  .row2 { margin-top: 8px; }
+  .caveat { font-size: 12px; }
+  .est { font-size: 32px; }
+}
+@media (max-width: 430px) { .intro .lede { display: none; } }

@@ -63,7 +63,7 @@ function Footer() {
       <div className="wrap foot-in">
         <p className="foot-name">Schooner Bay Marina</p>
         <p>Schooner Bay, Great Abaco, The Bahamas. <span className="tnum">N 26° 09.529′ W 077° 10.633′</span></p>
-        <p className="tnum"><a href={HM_TEL}>Harbour Master {HM}</a> · <a href={MAIN_TEL}>Main line {MAIN}</a> · <a href={SALES_TEL}>Sales {SALES}</a> · <a href="https://www.facebook.com/schoonerbay">Facebook</a></p>
+        <p className="tnum"><a href={HM_TEL}>Harbour Master {HM}</a> · <a href={MAIN_TEL}>Main line {MAIN}</a> · <a href={SALES_TEL}>Sales {SALES}</a></p>
         <p className="foot-small">Concept by ESTATIQ AI Solutions. Specs and photographs from schoonerbaybahamas.com; confirm with the Harbour Master before passage. Nothing here is for navigation.</p>
       </div>
     </footer>
@@ -73,7 +73,7 @@ function Footer() {
 function ActionBar() {
   return (
     <nav aria-label="Quick actions" className="abar">
-      <a href={HM_TEL}>Call the Harbour Master</a>
+      <a href={HM_TEL} className="tnum">Call {HM}</a>
       <a href="#request" className="go">Request a slip</a>
     </nav>
   )

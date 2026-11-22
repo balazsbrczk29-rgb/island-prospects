@@ -18,7 +18,7 @@ function Hero({ t, set, onRequest, pulse }: { t: Trip; set: (p: Partial<Trip>) =
         <div className="intro">
           <h1 id="hero-title" className="display">Can I come&nbsp;in?</h1>
           <p className="lede">A protected harbour on Great Abaco&rsquo;s south-east shore, the closest marina to Hole in the Wall. Tell the Harbour Master your boat and your dates.</p>
-          <p className="hours">Harbour Master Albert Russel, daily 7:30am to 4:30pm. <span className="tnum">VHF 16, working 77.</span></p>
+          <p className="hours">Harbour Master Albert Russel, daily 7:30am to 4:30pm. <span className="tnum">VHF 16, working 77.</span> &ldquo;Request a slip&rdquo; opens an email with your boat already written in.</p>
         </div>
         <Tool t={t} set={set} onRequest={onRequest} />
         <div className="mini"><Chart crop pulse={pulse} /><p className="cap-s">Simplified chart. Not for navigation.</p></div>
@@ -75,6 +75,7 @@ function Ashore() {
   const list = ["The General Store: ice, marine supplies, snacks", "Laundry delivery", "Bait and tackle", "Golf carts and help with local transport", "Pet friendly", "Blackfly Lodge, in the village"]
   return (
     <section className="ashore" aria-labelledby="ashore-title">
+      <figure className="band"><img src={IMG.community} alt="The Schooner Bay village around its harbour" width={1200} height={900} loading="lazy" decoding="async" /><figcaption>The village around the harbour, Schooner Bay</figcaption></figure>
       <div className="wrap ashore-grid">
         <img className="a1" src={IMG.amenities} alt="Harbour amenities at Schooner Bay" width={1600} height={1067} loading="lazy" decoding="async" />
         <div className="ashore-text">
