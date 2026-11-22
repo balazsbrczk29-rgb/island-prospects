@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useState, type ReactNode, type KeyboardEvent } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { IMG, RATES, DOCKWA, contact, stays, marina, pics, type Pic } from './data'
 
@@ -24,7 +24,7 @@ export function Fixed({ pic, hover }: { pic: string; hover?: string | null }) {
     <div className="fixed" aria-hidden="true">
       <AnimatePresence initial={false}>
         <motion.figure key={key} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.9, delay: 0.25 } }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
-          <img src={IMG + p.src} alt="" style={{ objectPosition: p.pos }} fetchPriority={key === 'harbour' ? 'high' : undefined} />
+          <img src={IMG + p.src} alt="" width={1920} height={1080} style={{ objectPosition: p.pos }} fetchPriority={key === 'harbour' ? 'high' : undefined} />
         </motion.figure>
       </AnimatePresence>
     </div>
@@ -66,6 +66,7 @@ export function StayFinder({ onHover }: { onHover?: (k: string | null) => void }
         <AnimatePresence initial={false}>
           {fit.map(s => (
             <motion.li key={s.name} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} onMouseEnter={() => hov(s)}>
+              <img src={s.thumb} alt="" width={395} height={300} loading="lazy" />
               <b>{s.name}</b>
               <span>Up to {s.guests}</span>
               <span>{s.ft.toLocaleString('en-US')} ft&sup2; &middot; {s.m} m&sup2;</span>
@@ -120,9 +121,9 @@ export function Contact() {
   )
 }
 
-export function Strip({ mode = 'both' }: { mode?: 'both' | 'room' | 'slip' }) {
+export function Strip({ mode = 'both', quiet = false }: { mode?: 'both' | 'room' | 'slip'; quiet?: boolean }) {
   return (
-    <div className="strip">
+    <div className={`strip ${quiet ? 'strip--quiet' : ''}`}>
       <span className="small">Hope Town, Elbow Cay, Abaco</span>
       <span className="strip__acts">
         {mode !== 'room' && <a className={'btn ' + (mode === 'slip' ? 'btn-ink' : 'btn-line')} href={DOCKWA}>Book a slip</a>}
@@ -139,5 +140,59 @@ export function Foot() {
       <span>Photography: Hope Town Inn &amp; Marina.</span>
       <a href="stay.html">All stays</a><a href="marina.html">Marina</a>
     </footer>
+  )
+}
+
+/** Screen 1: the switch by ferry or by boat, each ending in its own booking engine. */
+const smallestFit = (n: number) => [...stays].filter(s => s.guests >= n).sort((a, b) => a.guests - b.guests || a.ft - b.ft)[0]?.name ?? stays[0].name
+export function Arrive({ mode, setMode }: { mode: 'ferry' | 'boat'; setMode: (m: 'ferry' | 'boat') => void }) {
+  const [n, setN] = useState(2)
+  const [sel, setSel] = useState(() => smallestFit(2))
+  const fitN = stays.filter(s => s.guests >= n).length
+  const setCount = (i: number) => { setN(i); const cur = stays.find(s => s.name === sel); if (!cur || cur.guests < i) setSel(smallestFit(i)) }
+  const tabs: ['ferry' | 'boat', string, string][] = [['ferry', 'By ferry', 'Rooms and villas, 1 to 8 guests'], ['boat', 'By boat', 'Slips to 125 ft, moorings to 45 ft']]
+  const key = (e: KeyboardEvent) => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); const m = mode === 'ferry' ? 'boat' : 'ferry'; setMode(m); document.getElementById('tab-' + m)?.focus() } }
+  return (
+    <div className="arrive">
+      <div className="tabs" role="tablist" aria-label="How you arrive" onKeyDown={key}>
+        {tabs.map(([k, l, d]) => (
+          <button key={k} id={'tab-' + k} type="button" role="tab" aria-selected={mode === k} aria-controls={'panel-' + k} tabIndex={mode === k ? 0 : -1} onClick={() => setMode(k)} className="tab">
+            <b>{l}</b><span>{d}</span>
+            {mode === k && <motion.i className="tab__rule" layoutId="tabrule" transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }} />}
+          </button>
+        ))}
+      </div>
+      {mode === 'ferry' ? (
+        <div id="panel-ferry" role="tabpanel" aria-labelledby="tab-ferry" className="panel">
+          <div className="party">
+            <p className="small" id="party-h">How many of you are coming?</p>
+            <div className="seg seg--tight" role="group" aria-labelledby="party-h">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map(i => <button key={i} type="button" aria-pressed={i === n} onClick={() => setCount(i)}>{i}</button>)}
+            </div>
+            <p className="count tnum" aria-live="polite">{fitN} of 9 stays sleep {n}</p>
+          </div>
+          <ul className="tiles" aria-label="The nine stays">
+            {stays.map(s => {
+              const ok = s.guests >= n, on = sel === s.name
+              return (
+                <li key={s.name}>
+                  <button type="button" className={`tile ${ok ? '' : 'tile--no'} ${on ? 'tile--on' : ''}`} aria-pressed={on} aria-disabled={!ok} onClick={() => ok && setSel(s.name)}>
+                    <span className="tile__pic"><img src={s.thumb} alt="" width={395} height={300} loading="lazy" /></span>
+                    <b>{s.name.replace(' Hotel', '').replace(' Villa', '')}{s.kind === 'Villa' ? <span className="kind"> villa</span> : null}</b>
+                    <span className="tnum">Up to {s.guests} guests<br />{s.ft.toLocaleString('en-US')} ft²</span>
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+          <div className="acts acts--tool"><a className="btn btn-ink" href={RATES}>Check rates for {sel}</a><span className="small">Live rates on the inn's own reservation system.</span></div>
+        </div>
+      ) : (
+        <div id="panel-boat" role="tabpanel" aria-labelledby="tab-boat" className="panel">
+          <SlipCheck />
+          <Specs />
+        </div>
+      )}
+    </div>
   )
 }
