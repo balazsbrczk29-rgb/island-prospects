@@ -98,7 +98,7 @@ export function Tool({ t, set, onRequest }: { t: Trip; set: (p: Partial<Trip>) =
 
 const LABELS: [keyof typeof CHART.places, string, number, number, "start" | "end" | "middle"][] = [
   ["marsh", "Marsh Harbour", 12, 4, "start"], ["harbour", "Schooner Bay", 14, 5, "start"], ["hole", "Hole in the Wall", 12, 5, "start"],
-  ["sandy", "Sandy Point, MYAS", -10, 4, "end"], ["nassau", "Nassau", 12, 5, "start"],
+  ["sandy", "Sandy Point, MYAS", 10, 4, "start"], ["nassau", "Nassau", 12, 5, "start"],
 ]
 
 /** The chart: south-east Abaco to Nassau. crop = the screen 1 detail around the harbour. */
