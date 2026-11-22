@@ -76,3 +76,25 @@ export const MARINA = {
   ],
   extras: [['Shower', '$3'], ['Washer', '$4 a load'], ['Dryer', '$4 a load'], ['Water', '$0.20 a gallon']] as [string, string][],
 }
+
+/** Slip check from the published dockage rates (services-3) and limits (noonsite): cheapest reading of day, week and month rates. */
+export type Berth = 'dock' | 'mooring'
+export type Rate = { day: number; week: number; month: number }
+export function stayCost(r: Rate, nights: number) {
+  const mixed = Math.floor(nights / 7) * r.week + (nights % 7) * r.day
+  const weeksUp = Math.ceil(nights / 7) * r.week
+  const months = nights >= 28 ? Math.ceil(nights / 30) * r.month : Infinity
+  const best = Math.min(mixed, weeksUp, months)
+  const w = Math.floor(nights / 7), d = nights % 7
+  const how = best === months ? `${Math.ceil(nights / 30) === 1 ? 'the monthly rate' : `${Math.ceil(nights / 30)} months`} at ${usd(r.month)}`
+    : best === mixed ? [w ? `${w === 1 ? '1 week' : `${w} weeks`} at ${usd(r.week)}` : '', d ? `${d} ${d === 1 ? 'night' : 'nights'} at ${usd(r.day)}` : ''].filter(Boolean).join(' + ')
+    : `${Math.ceil(nights / 7) === 1 ? 'the weekly rate' : `${Math.ceil(nights / 7)} weeks`} at ${usd(r.week)}`
+  return { total: best, how }
+}
+export const AMP30: Rate = { day: 5, week: 20, month: 100 }
+export function fit(loa: number, draft: number, berth: Berth) {
+  if (berth === 'dock' && (loa > MARINA.loa || draft > MARINA.draft)) return { ok: false as const, rate: null, label: 'Over the published dock limits' }
+  const rate = berth === 'mooring' ? MARINA.rates[0] : loa <= 45 ? MARINA.rates[1] : MARINA.rates[2]
+  return { ok: true as const, rate, label: berth === 'mooring' ? 'Fits: a mooring' : loa <= 45 ? 'Fits: dock, 45 ft and under' : 'Fits: dock, 46 to 50 ft' }
+}
+export const ENTRY_NOTE = 'A 6 ft draft can enter at a tide 2 ft above low water. Stay close to the last red marker, then aim for the middle of the sound.'
