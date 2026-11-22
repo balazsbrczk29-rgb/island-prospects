@@ -1,24 +1,63 @@
-import { useMemo, useState } from "react"
-import Film from "./film"
-import { Ask, EndCredits, mount, useWheelSmoothing } from "./shell"
-import { HELP, IMG, PHONE, PHONE_US, PUBLISHED, TEL, TEL_US, VENUES } from "./content"
+import { useEffect, useRef, useState } from "react"
+import { Footer, TopLine, mount, useReveal, useWheelSmoothing } from "./shell"
+import { Card, Fields, Say, WeddingProvider, useSentence, useWedding } from "./compose"
+import { IMG, PHONE, PHONE_US, PUBLISHED, TEL, TEL_US, VENUES } from "./content"
 
-function Planner() {
+function Compose() {
   return (
-    <section className="planner" id="the-planner">
-      <div className="planner__grid">
-        <h2>Dr. Bernadette Burrows, wedding planner for more than twenty-six years.</h2>
-        <div className="planner__text">
-          <p className="planner__lead">She owns and runs Bahamas Bridal Affairs herself, from Nassau. Both weddings on this page carry her name in the credits.</p>
-          <ul className="planner__facts">
-            <li>A preferred wedding planner with the One and Only Ocean Club and Atlantis, for many years.</li>
-            <li>Individual, personal attention for every couple.</li>
-            <li>Packages that flex to fit what you ask for.</li>
-            <li>Author of <cite>How to Be Fabulous</cite>.</li>
+    <section className="hero" id="compose" aria-labelledby="h1">
+      <div className="wrap hero__grid">
+        <div className="hero__copy">
+          <h1 id="h1">Check your wedding date with Dr.&nbsp;Bernadette Burrows.</h1>
+          <p className="lead"><span className="wide">Weddings in Nassau and on Paradise Island for more than 26 years, with the owner herself at your side. A preferred planner with the One&amp;Only Ocean Club and Atlantis for many years.</span><span className="narrow">Nassau and Paradise Island weddings for more than 26 years, planned by the owner herself.</span></p>
+          <p className="cap hero__write">Write your names on the card.</p>
+          <Fields />
+        </div>
+        <div className="hero__paper">
+          <figure className="hero__photo">
+            <img src={VENUES[0].img} alt={VENUES[0].alt} width={VENUES[0].w} height={VENUES[0].h} fetchPriority="high" decoding="async" />
+            <figcaption>The French Cloisters, Paradise Island, where her Weddingbells couple said their vows. Photograph: Art davis, Wikimedia Commons, CC BY-SA 4.0</figcaption>
+          </figure>
+          <Card />
+          <Say />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Venues() {
+  const w = useWedding()
+  const real = VENUES.filter(v => v.img)
+  const [on, setOn] = useState(real[0].id)
+  const [flash, setFlash] = useState("")
+  useEffect(() => { if (real.some(v => v.id === w.venue)) setOn(w.venue) }, [w.venue])
+  const pick = (id: string) => { setOn(id); w.set({ venue: id }); setFlash(id); setTimeout(() => setFlash(f => (f === id ? "" : f)), 2000) }
+  const cur = real.find(v => v.id === on)!
+  return (
+    <section className="venues" aria-labelledby="venues-h">
+      <div className="wrap venues__grid">
+        <div className="venues__copy">
+          <h2 id="venues-h">The Ocean Club, Atlantis and Lyford Cay, in her own weddings.</h2>
+          <ul className="venues__list">
+            {real.map(v => (
+              <li key={v.id}>
+                <button type="button" aria-pressed={on === v.id} onClick={() => pick(v.id)} onMouseEnter={() => setOn(v.id)} onFocus={() => setOn(v.id)}>
+                  <span className="venues__name">{v.card}<span className="venues__place">, {v.place}</span></span>
+                  <span className="venues__told">{v.told}</span>
+                  <span className="venues__set" data-on={flash === v.id} aria-live="polite">{flash === v.id ? "Set on your card" : "Choose for your card"}</span>
+                </button>
+              </li>
+            ))}
           </ul>
         </div>
-        <figure className="planner__photo">
-          <img src={IMG.flowers} alt="White roses, orchids and calla lilies with candles on a wedding table by the sea" data-source="generated" loading="lazy" decoding="async" width={1632} height={2048} />
+        <figure className="venues__photo">
+          <div className="venues__frame">
+            {real.map(v => (
+              <img key={v.id} src={v.img} alt={v.alt} width={v.w} height={v.h} loading="lazy" decoding="async" data-on={on === v.id} data-real={v.real} />
+            ))}
+          </div>
+          <figcaption>{cur.credit}</figcaption>
         </figure>
       </div>
     </section>
@@ -27,97 +66,141 @@ function Planner() {
 
 function InPrint() {
   return (
-    <section className="print" id="in-print">
-      <div className="print__head">
-        <h2>Two of her weddings, as the magazines told them.</h2>
+    <section className="print" aria-labelledby="print-h">
+      <div className="wrap">
+        <h2 id="print-h">Two of her weddings, as the magazines told them.</h2>
+        <ol className="print__list">
+          {PUBLISHED.map(p => (
+            <li className="print__row" key={p.id} data-rise>
+              <p className="print__mag"><cite>{p.mag}</cite></p>
+              <div className="print__body">
+                <p className="cap num">{p.date}</p>
+                <h3>{p.title}</h3>
+                <p>{p.teaser}</p>
+                <p className="print__links">
+                  <a href={`weddings.html#${p.id}`}>The story and every credit</a>
+                  <a href={p.url} rel="noopener">Read it in {p.mag}</a>
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
-      <ol className="print__list">
-        {PUBLISHED.map(w => (
-          <li className="print__item" key={w.id}>
-            <p className="print__mag">{w.mag}<span className="num">{w.date}</span></p>
-            <div className="print__body">
-              <h3>{w.title}</h3>
-              <p>{w.teaser}</p>
-            </div>
-            <div className="print__links">
-              <a className="quiet" href={`weddings.html#${w.id}`}>The story and every credit</a>
-              <a className="quiet" href={w.url} rel="noopener">Read it in {w.mag}</a>
-            </div>
-          </li>
-        ))}
-      </ol>
     </section>
   )
 }
 
-/** The enquiry: one sentence the couple completes, then reads to the planner or copies. */
-function DateNote() {
-  const [names, setNames] = useState("")
-  const [venue, setVenue] = useState(VENUES[0])
-  const [when, setWhen] = useState("")
-  const [guests, setGuests] = useState("80")
-  const [help, setHelp] = useState<string[]>([])
-  const [copied, setCopied] = useState(false)
-  const toggle = (h: string) => setHelp(s => (s.includes(h) ? s.filter(x => x !== h) : [...s, h]))
-  const note = useMemo(() => {
-    const list = help.length > 1 ? `${help.slice(0, -1).join(", ")} and ${help[help.length - 1]}` : help[0]
-    return `Hello Dr. Burrows. We are ${names.trim() || "(our names)"}, hoping to marry ${venue}${when.trim() ? ` around ${when.trim()}` : ""}, with about ${guests || "?"} guests.${list ? ` We would like help with ${list}.` : ""}`
-  }, [names, venue, when, guests, help])
-  const copy = async () => {
-    try { await navigator.clipboard.writeText(note) } catch { /* clipboard blocked: the note is still on screen to read */ }
-    setCopied(true); setTimeout(() => setCopied(false), 2400)
-  }
+const STEPS = [
+  ["First call", "You tell her the date, the guest count and the kind of day you picture. She tells you what is possible."],
+  ["The venue", "Choosing the ceremony and reception places, starting from the resorts she knows well."],
+  ["Your vendors", "Flowers, cake, music, hair and makeup, stationery and transport, booked and coordinated."],
+  ["The day", "She is there, running the timings, so your families can simply be guests."],
+]
+function Steps() {
   return (
-    <section className="date" id="your-date">
-      <div className="date__in">
-        <h2>Your date, in one sentence. Fill in the underlined parts.</h2>
-        <p className="note">
-          We are{" "}
-          <label><span className="vh">Your names</span><input className="names" name="names" value={names} onChange={e => setNames(e.target.value)} placeholder="your two names" autoComplete="off" /></label>,
-          hoping to marry{" "}
-          <label><span className="vh">Where</span>
-            <span className="pick"><span aria-hidden>{venue}</span>
-              <select name="venue" value={venue} onChange={e => setVenue(e.target.value)}>
-                {VENUES.map(v => <option key={v}>{v}</option>)}
-              </select>
-            </span>
-          </label>{" "}
-          around{" "}
-          <label><span className="vh">Date or month</span><input className="when" name="when" value={when} onChange={e => setWhen(e.target.value)} placeholder="a date or a month" autoComplete="off" /></label>,
-          with about{" "}
-          <label><span className="vh">Number of guests</span><input className="guests" name="guests" type="number" inputMode="numeric" min={2} max={400} value={guests} onChange={e => setGuests(e.target.value)} /></label>{" "}
-          guests. We would like help with:
-        </p>
-        <div className="help" role="group" aria-label="What you would like help with">
-          {HELP.map(h => <button key={h} type="button" aria-pressed={help.includes(h)} onClick={() => toggle(h)}>{h}</button>)}
+    <section className="steps" aria-labelledby="steps-h">
+      <div className="wrap">
+        <h2 id="steps-h">How planning with her runs.</h2>
+        <ol className="steps__row">
+          {STEPS.map(([t, d], i) => (
+            <li key={t} data-rise style={{ transitionDelay: `${i * 70}ms` }}>
+              <span className="steps__n num">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{t}</h3>
+              <p>{d}</p>
+            </li>
+          ))}
+        </ol>
+        <p className="steps__note">Described in general terms, from the credits of her published weddings. The exact steps and what each package includes are to confirm with Dr. Burrows.</p>
+      </div>
+    </section>
+  )
+}
+
+function Planner() {
+  return (
+    <section className="planner" aria-labelledby="planner-h">
+      <div className="wrap planner__grid">
+        <div>
+          <h2 id="planner-h">Dr. Bernadette Burrows plans every wedding herself.</h2>
+          <p className="lead">She owns and runs Bahamas Bridal Affairs from Nassau. Couples get her individual, personal attention, and packages that flex to fit what they ask for.</p>
+          <ul className="planner__facts">
+            <li><span className="num">26+</span> years planning weddings and events.</li>
+            <li>A preferred wedding planner with the One&amp;Only Ocean Club and Atlantis, for many years.</li>
+            <li>Credited by name in both magazine features on this page.</li>
+            <li>Author of <cite>How to Be Fabulous</cite>.</li>
+          </ul>
         </div>
-        <p className="date__say">Read your sentence out when you call, or copy it and keep it beside the phone.</p>
-        <div className="date__send">
-          <a className="cta num" href={TEL}>Call Nassau {PHONE}</a>
-          <a className="quiet num" href={TEL_US}>From the US or Canada: {PHONE_US}</a>
-          <button type="button" className="quiet" onClick={copy} aria-live="polite"><span className={copied ? "copied" : undefined}>{copied ? "Copied, ready to paste" : "Copy our sentence"}</span></button>
+        <figure className="planner__photo">
+          <img src={IMG.flowers} alt="White roses, orchids and calla lilies with candles on a wedding table by the sea" width={1632} height={2048} loading="lazy" decoding="async" />
+          <figcaption>Illustrative photography, waiting for her own.</figcaption>
+        </figure>
+      </div>
+    </section>
+  )
+}
+
+function Call() {
+  const { text, touched } = useSentence()
+  return (
+    <section className="call" id="call" aria-labelledby="call-h">
+      <div className="wrap">
+        <h2 id="call-h">Call her about your date.</h2>
+        {touched ? <blockquote className="call__quote">{text}</blockquote> : <p className="call__quote call__quote--empty"><a href="#compose">Compose your date first</a>, and your sentence will be waiting here.</p>}
+        <div className="call__grid">
+          <div>
+            <p className="cap">From Nassau</p>
+            <a className="call__num num" href={TEL}>{PHONE}</a>
+            <a className="btn btn--light num" href={TEL}>Call Nassau</a>
+          </div>
+          <div>
+            <p className="cap">From the US and Canada</p>
+            <a className="call__num num" href={TEL_US}>{PHONE_US}</a>
+            <a className="btn btn--ghost num" href={TEL_US}>Call the US number</a>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-const HIDE = [".film", "#your-date", ".credits"]
+/** Phone only: the two calls follow once the composer is off screen, and step aside for the closing call. */
+function CallBar() {
+  const [show, setShow] = useState(false)
+  const seen = useRef(new Set<Element>())
+  useEffect(() => {
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => (e.isIntersecting ? seen.current.add(e.target) : seen.current.delete(e.target)))
+      setShow(seen.current.size === 0)
+    })
+    ;["#compose .say", "#call", ".foot"].forEach(s => { const el = document.querySelector(s); if (el) io.observe(el) })
+    return () => io.disconnect()
+  }, [])
+  return (
+    <div className="callbar" data-show={show} aria-hidden={!show}>
+      <a className="btn btn--primary num" href={TEL} tabIndex={show ? 0 : -1}>Call Nassau</a>
+      <a className="btn btn--line num" href={TEL_US} tabIndex={show ? 0 : -1}>US and Canada</a>
+    </div>
+  )
+}
 
 function Home() {
   useWheelSmoothing()
+  useReveal()
   return (
-    <>
-      <a className="skip" href="#the-planner">Skip the film</a>
+    <WeddingProvider>
+      <a className="skip" href="#compose">Skip to your date</a>
+      <TopLine home />
       <main>
-        <Film />
-        <Planner />
+        <Compose />
+        <Venues />
         <InPrint />
-        <DateNote />
+        <Steps />
+        <Planner />
+        <Call />
       </main>
-      <EndCredits />
-      <Ask href="#your-date" hideOver={HIDE} />
-    </>
+      <Footer />
+      <CallBar />
+    </WeddingProvider>
   )
 }
 

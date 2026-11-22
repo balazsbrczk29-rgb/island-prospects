@@ -4,8 +4,123 @@
  "name": "Bahamas Bridal Affairs",
  "batch": "03",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
+ "pages": [
+  "index.html",
+  "weddings.html"
+ ],
+ "primary_cta": "Check your wedding date: the invitation card composer on screen 1, then Call Nassau 242-326-4029 or the US number 1-954-892-6969",
+ "brand_truth": "Dr. Bernadette Burrows has planned Nassau and Paradise Island weddings for more than 26 years, and two of them were published in detail.",
+ "buyer": "US and Canadian couples planning 9 to 18 months ahead on a phone, often with a parent paying; they fear a planner they have never met.",
+ "direction": {
+  "archetype": "A03 Cinematic chapters",
+  "lane": "P03 Conch pink",
+  "type": "T10 Old-style book (Cormorant Garamond + EB Garamond)",
+  "why": "The strongest true material is a published wedding day with a real sequence, so the page plays it as a film. Chosen over the three dealt options for fit; competitor Anna's uses A02/P02/T09 with a left index, so nothing is shared."
+ },
+ "tier_visual": "standard",
+ "tier_visual_why": "A planner sells a day, not an object: photography, type and a scroll-scrubbed film explain it. No 3D.",
+ "concept_type": "brochure: one published wedding told as a scroll film + published weddings page + date enquiry by phone",
+ "images": [
+  {
+   "src": "https://ip-assets-bahamas-bridal-affairs.lovable.app/assets/aisle.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-bahamas-bridal-affairs.lovable.app/assets/tent.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://ip-assets-bahamas-bridal-affairs.lovable.app/assets/flowers.jpg",
+   "source": "generated",
+   "credit": "Illustrative photography, replace with your own"
+  },
+  {
+   "src": "https://upload.wikimedia.org/wikipedia/commons/2/23/Atlantis_French_Cloisters.jpg",
+   "source": "commons",
+   "credit": "Art davis, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Atlantis_French_Cloisters.jpg"
+  }
+ ],
+ "critic": {
+  "photography": 4,
+  "typography": 4,
+  "composition": 4,
+  "colour": 4,
+  "fit": 4,
+  "distinct": 4,
+  "references": 4
+ },
+ "current_site_findings": [
+  "bahamasbridalaffairs.com no longer resolves; BahamasLocal, Bahamas Index, Weddingbells and Style Me Pretty still link to it.",
+  "The Ocean Club and Atlantis record is only in a directory blurb.",
+  "Two detailed magazine features are not shown anywhere she controls.",
+  "The Florida number for US couples is buried in a listing.",
+  "No way to put date, venue and guest count into words before calling."
+ ],
+ "pitch_line": "Two magazines told your weddings in detail and every link they give goes to a website that no longer exists; this concept plays one of those days as a film and gives couples one sentence to complete before they call you.",
+ "assumptions": [
+  "Phone numbers 242-326-4029 and 1-954-892-6969 are current (directory data).",
+  "'More than 26 years' is from an undated listing and may now be higher.",
+  "Help categories in the enquiry (ceremony, reception, flowers, cake, music, hair and makeup, stationery, guest transport) are inferred from the vendor credits of the two published weddings.",
+  "Venue choices in the enquiry (Ocean Club, Atlantis, Lyford Cay) come from her published record, not a stated venue list.",
+  "The One and Only Ocean Club is named as the sources name it; it has since been rebranded.",
+  "The Weddingbells credit is shared with Wildflowers Bahamas and is shown that way."
+ ],
+ "sources": [
+  "https://www.bahamaslocal.com/showlisting/16239/Bahamas_Bridal_Affairs.html",
+  "https://www.bahamasindex.com/company/10600/Bahamas_Bridal_Affairs",
+  "https://weddingbells.ca/real-weddings/a-glamorous-destination-wedding-in-the-bahamas/",
+  "https://www.stylemepretty.com/2013/06/14/nassau-bahamas-wedding-from-karen-hill-photography/",
+  "https://www.booksamillion.com/p/How-Be-Fabulous/Bernadette-L-Burrows/9781629521237",
+  "https://commons.wikimedia.org/wiki/File:Atlantis_French_Cloisters.jpg"
+ ],
+ "qa": {
+  "blockers": 0,
+  "warnings": 2
+ },
+ "notes": "Job-spec rebuild 2026-11-22 from design.md: screen 1 is the invitation composer (names typed on the card on phone; date written out like a stationer with the weekday; venue from her published record; guests; help chips) on the real French Cloisters photograph, with a paper reply card holding the read-back sentence and both tel: buttons. Screens: venues of her published weddings (shared state sets the card), the two magazine features, planning steps (general terms, marked to confirm), meet Dr. Burrows, call section repeating the couple's sentence. weddings.html kept and restyled. Type Fraunces (opsz) + Manrope + Pinyon Script for names only; ivory ground, letterpress ink-blue accent. The six-scene film of the previous version was retired: the spec puts the composer first and the film was not in Keep; jazz, pool, arrival and champagne stand-ins are no longer used. Assumptions: native sizes of the generated images assumed 2048x1152 (landscape) and 1632x2048 (flowers), Commons Cloisters 2400x1600 (height assumed); the stationery.jpg asset in the Lovable project was not used because it could not be viewed. No email or WhatsApp known, so the hand-off is the phone. | Previous: awaiting independent critic. BLIND: look.mjs, Wikimedia and lovable.app images do not load in the sandbox; photos were judged from the Lovable gallery screenshot (project 25002f7e-e105-4fce-9f7a-228067374a10, published as ip-assets-bahamas-bridal-affairs, one round, 1.5 credits) and QA screenshots use upscaled crops of that screenshot, so they look softer than the 2048 px originals. References judged from knowledge, not seen. Seven generated stand-in photographs plus one Commons photo of the French Cloisters (2400 px wide, 2012, warmed with a static CSS filter to sit with the set); no own photos exist online and press photos belong to Mango Studios and Karen Hill. No email or WhatsApp found, so the enquiry composes a sentence to read out or copy and offers two call buttons. Film: sticky stage, opacity and transform only via function transforms, scene index is the only React state. Lenis on fine pointers only. The 2 QA warnings are the shared concept tag button (under 40 px). Critic scores are self-scores. Proposed domain: bahamasbridalaffairs.com if it can be re-registered (unverified). | Final critic (mode 2) 2026-11-21: first pass 3/4/3/4/4/4/3; one fix pass (illustrative tag on the film frame, magazine names at display size, italic help toggles, footer contrast), re-score 4 on every line. Open idea for later: a sourced portrait or book cover of Dr. Burrows would beat the flowers photo.",
+ "built_at": "2026-11-22T12:07:36Z",
+ "final_critic": {
+  "mode": 2,
+  "scores": {
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "colour": 4,
+   "fit": 4,
+   "distinct": 4,
+   "references": 4
+  },
+  "at": "2026-11-21T13:22:07.799458+00:00"
+ },
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T11:53:56.293Z"
+ "jobspec_built": true,
+ "jobspec_scores": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "gate2": {
+   "wow": 5,
+   "photography": 4,
+   "typography": 4,
+   "composition": 5,
+   "conversion_clarity": 5,
+   "phone": 4
+  },
+  "first_pass": {
+   "gate1_phone": false,
+   "wow": 4,
+   "photography": 3,
+   "typography": 4,
+   "composition": 4,
+   "conversion_clarity": 4,
+   "phone": 3
+  },
+  "critic": "fresh subagent, GUIDE 3b.6 / section 4, one fix pass and one re-score (final blocking fix: phone h1 overflow, fixed and verified at 360 and 390 px)"
+ }
 }
