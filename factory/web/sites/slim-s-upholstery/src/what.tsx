@@ -70,7 +70,7 @@ function Index() {
               <Photo src={img(A.photo)} alt={A.alt} className="h-full w-full" />
             </motion.div>
           </AnimatePresence>
-          <p className="t-cap absolute bottom-[calc(96px+1rem)] right-5 rounded-full bg-cream/90 px-3 py-1.5 text-ink/80">Illustrative photograph</p>
+          <p className="t-cap absolute bottom-[calc(96px+1rem)] right-5 rounded-full bg-cream px-3 py-1.5 text-ink">Illustrative photograph</p>
         </div>
       </div>
     </section>

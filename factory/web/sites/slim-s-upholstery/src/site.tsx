@@ -52,7 +52,7 @@ function Dock({ current }: { current: string }) {
   return (
     <nav aria-label="Main" className={`dock fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-[max(12px,env(safe-area-inset-bottom))] transition-[opacity,transform] duration-500 ease-[var(--ease-soft)] md:translate-y-0 md:opacity-100 ${shown || current !== "home" ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0 md:pointer-events-auto"}`}>
       <div className="flex w-full max-w-[820px] items-center gap-1 rounded-[22px] bg-cream p-[6px] pl-5 text-ink shadow-[0_0_0_1px_rgba(43,33,24,.1),0_18px_40px_-18px_rgba(43,33,24,.45)]">
-        <a href="index.html" className="display mr-auto py-2 text-[1.15rem] tracking-[-0.01em]" aria-current={current === "home" ? "page" : undefined}>Slim Upholstery</a>
+        <a href="index.html" className="display mr-auto inline-flex min-h-[44px] items-center text-[1.15rem] tracking-[-0.01em]" aria-current={current === "home" ? "page" : undefined}>Slim Upholstery</a>
         {NAV.map((n) => (
           <a key={n.key} href={n.href} aria-current={current === n.key ? "page" : undefined} className="hidden min-h-[44px] items-center rounded-[16px] px-3.5 text-[0.9rem] text-ink/75 transition-colors hover:bg-cream-2 hover:text-ink md:inline-flex aria-[current=page]:font-bold aria-[current=page]:text-ink">{n.label}</a>
         ))}

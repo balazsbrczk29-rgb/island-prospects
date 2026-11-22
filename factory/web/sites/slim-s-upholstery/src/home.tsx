@@ -1,44 +1,131 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue, AnimatePresence } from "motion/react"
 import { ArrowUpRight, MessageCircle, Minus, Phone, Plus } from "lucide-react"
-import { C, Page, Photo, QUOTE_TEXT, chairSet, ease, img, mount, waLink } from "./site"
+import { C, Page, Photo, chairSet, ease, img, mount, waLink } from "./site"
 
-/* ---------- 1. Hero: the needle in the cloth ---------- */
-function Hero() {
-  const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
-  const y = useTransform(scrollYProgress, (v) => `${v * 12}%`)
-  const lines = ["From worn to wow,", "one stitch at a time."]
+/* ---------- 1. The quote starter: the chair rebuilds with every answer ---------- */
+const PIECES = ["Sofa", "Dining chairs", "Car seats", "Boat cushions", "Aircraft seats", "Church pews", "Something else"]
+const ONE: Record<string, string> = { "Sofa": "sofa", "Dining chairs": "dining chair", "Car seats": "car seat", "Boat cushions": "boat cushion", "Aircraft seats": "aircraft seat", "Church pews": "church pew", "Something else": "piece" }
+const MANY: Record<string, string> = { "Sofa": "sofas", "Something else": "pieces" }
+const pieceText = (p: string, n: number) => (n === 1 ? `1 ${ONE[p]}` : `${n} ${MANY[p] ?? p.toLowerCase()}`)
+
+function radioKeys(e: React.KeyboardEvent<HTMLElement>) {
+  const k = ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"].indexOf(e.key)
+  if (k < 0) return
+  const items = [...e.currentTarget.querySelectorAll<HTMLButtonElement>("[role=radio]")]
+  const i = items.indexOf(document.activeElement as HTMLButtonElement)
+  if (i < 0) return
+  e.preventDefault()
+  const n = items[(i + (k < 2 ? 1 : -1) + items.length) % items.length]
+  n.focus(); n.click()
+}
+
+function ChairStage({ step }: { step: number }) {
+  const [layers, setLayers] = useState([{ k: 0, i: 0 }])
+  const seq = useRef(0)
+  useEffect(() => {
+    setLayers((l) => (l[l.length - 1].i === step ? l : [...l.slice(-1), { k: ++seq.current, i: step }]))
+  }, [step])
   return (
-    <section ref={ref} className="relative h-[100svh] min-h-[640px] overflow-hidden bg-cream-2" aria-labelledby="hero-title">
-      <motion.div className="absolute inset-0 will-change-transform" style={{ y }}>
-        <motion.picture className="block h-full w-full" initial={{ scale: 1.07 }} animate={{ scale: 1 }} transition={{ duration: 2.2, ease }}>
-          <source media="(max-width: 767px)" srcSet={img("hero-stitch-m")} />
-          <Photo priority src={img("hero-stitch")} alt="A sewing machine needle stitching a piped seam into deep navy upholstery cloth" className="h-full w-full object-[62%_50%] md:object-[70%_40%]" />
-        </motion.picture>
-      </motion.div>
+    <figure className="chair">
+      <div className="chair__frame">
+        {layers.map((l, idx) => (
+          <div key={l.k} className={`chair__layer${idx > 0 ? " is-in" : ""}`} onAnimationEnd={(e) => { if (e.target === e.currentTarget) setLayers((ls) => ls.slice(-1)) }}>
+            <div className="chair__inner">
+              <img src={img(`chair-${LAYERS[l.i].key}-900`)} srcSet={chairSet(LAYERS[l.i].key)} sizes="(min-width: 900px) 520px, 100vw" alt={LAYERS[l.i].alt} width={900} height={1117} decoding="async" fetchPriority={l.k === 0 ? "high" : "auto"} data-source="generated" className="h-full w-full object-cover object-[50%_62%]" />
+            </div>
+            <span className="stitch chair__seam text-cream" aria-hidden />
+          </div>
+        ))}
+      </div>
+      <figcaption className="chair__rail">
+        <span className="flex gap-1.5" aria-hidden>{LAYERS.map((x, i) => <span key={x.key} className={`h-[3px] w-8 rounded-full transition-colors duration-200 ${i <= step ? "bg-navy" : "bg-line"}`} />)}</span>
+        <span className="t-small font-bold" aria-live="polite">{LAYERS[step].name}</span>
+        <span className="t-cap ml-auto text-muted">Illustrative photographs</span>
+      </figcaption>
+    </figure>
+  )
+}
 
-      <div className="relative mx-auto flex h-full max-w-[1320px] flex-col px-5 pb-8 pt-6 md:px-12 md:pb-12 md:pt-9">
-        <div className="flex items-start justify-between gap-6">
-          <p className="display pt-2 text-[1.3rem] md:pt-0 md:text-[1.45rem]">Slim Upholstery</p>
-          <a href={C.tel} className="tnum t-small inline-flex min-h-[44px] items-center font-bold underline decoration-ink/30 underline-offset-[5px] hover:decoration-ink md:min-h-0">{C.phone}</a>
+function QuoteHero() {
+  const [piece, setPiece] = useState("Dining chairs")
+  const [qty, setQty] = useState(4)
+  const [look, setLook] = useState<"same" | "new">("same")
+  const [note, setNote] = useState("")
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
+  const touch = (k: string) => setTouched((t) => (t[k] ? t : { ...t, [k]: true }))
+  const n = Object.keys(touched).length
+  const step = Math.min(4, n + (n >= 3 ? 1 : 0))
+  const msg = `Hi Slim Upholstery, I would like a free quote for ${pieceText(piece, qty)}. ${look === "same" ? "Same look, just new." : "I would like a new look."}${note.trim() ? ` ${note.trim()}` : ""} I am attaching photos.`
+  const book = `${msg} Can I book an appointment to bring it in?`
+  return (
+    <section className="bg-cream px-5 pb-20 pt-5 md:px-12 md:pb-28 md:pt-7" aria-labelledby="hero-title">
+      <div className="mx-auto grid max-w-[1320px] gap-x-12 md:grid-cols-12">
+        <div className="flex items-center justify-between md:col-span-12">
+          <p className="display text-[1.35rem]">Slim Upholstery</p>
+          <a href={C.tel} className="tnum t-small inline-flex min-h-[44px] items-center font-bold underline decoration-ink/30 underline-offset-[5px] hover:decoration-ink">{C.phone}</a>
         </div>
 
-        <div className="mt-[7svh] max-w-[34rem] md:my-auto md:max-w-[38rem] md:pb-[14svh]">
-          <h1 id="hero-title" className="display t-h1">
-            {lines.map((l, i) => (
+        <div className="mt-6 md:col-span-7 md:mt-8">
+          <h1 id="hero-title" className="display t-hero">
+            {["From worn to wow,", "one stitch at a time."].map((l, i) => (
               <span key={l} className="block overflow-hidden pb-[0.08em]">
-                <motion.span className="block" initial={{ y: "104%" }} animate={{ y: 0 }} transition={{ delay: 0.25 + i * 0.12, duration: 1.1, ease }}>{l}</motion.span>
+                <motion.span className="block" initial={{ y: "104%" }} animate={{ y: 0 }} transition={{ delay: 0.15 + i * 0.12, duration: 0.9, ease }}>{l}</motion.span>
               </span>
             ))}
           </h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75, duration: 0.9 }} className="mt-5 max-w-[27rem] text-[1.08rem] leading-relaxed text-ink/85 md:mt-6 md:text-[1.25rem]">
-            Sofas, dining seats, boat cushions, car seats and church pews, re-covered at our workshop on Claridge Road, Nassau.
-          </motion.p>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9, duration: 0.9 }} className="mt-8 flex flex-wrap items-center gap-3">
-            <a href={waLink(QUOTE_TEXT)} className="btn btn-primary"><MessageCircle className="size-[18px]" strokeWidth={1.9} aria-hidden /> WhatsApp a free quote</a>
-            <a href="#layers" className="hidden min-h-[44px] items-center px-2 font-bold underline decoration-ink/30 decoration-2 underline-offset-[6px] hover:decoration-ink md:inline-flex">See how a chair is rebuilt</a>
-          </motion.div>
+          <p className="mt-4 max-w-[36rem] text-ink/85 md:text-[1.1rem]">Home, auto, marine, aircraft and church upholstery at {C.street}, Nassau. Free quotes.</p>
+        </div>
+
+        <div className="mt-8 md:col-span-5 md:col-start-8 md:row-span-2 md:row-start-2 md:mt-8">
+          <ChairStage step={step} />
+        </div>
+
+        <div className="mt-8 md:col-span-7 md:mt-6">
+          <div className="rounded-[26px] bg-cream-2 p-2">
+            <div className="grid gap-5 rounded-[18px] p-4 md:p-5">
+              <div>
+                <p className="t-small font-bold" id="q-piece">What needs doing</p>
+                <div className="mt-2.5 flex flex-wrap gap-2" role="radiogroup" aria-labelledby="q-piece" onKeyDown={radioKeys}>
+                  {PIECES.map((p) => (
+                    <button key={p} type="button" role="radio" aria-checked={piece === p} tabIndex={piece === p ? 0 : -1} onClick={() => { setPiece(p); touch("piece") }}
+                      className={`min-h-[44px] rounded-full px-4 t-small transition-colors duration-200 ${piece === p ? "bg-ink text-cream" : "bg-cream text-ink hover:bg-straw"}`}>{p}</button>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-wrap items-end gap-x-8 gap-y-5">
+                <div>
+                  <p className="t-small font-bold" id="q-qty">How many</p>
+                  <div className="mt-2.5 inline-flex items-center rounded-full bg-cream p-1" role="group" aria-labelledby="q-qty">
+                    <button type="button" onClick={() => { setQty((q) => Math.max(1, q - 1)); touch("qty") }} className="inline-flex size-11 items-center justify-center rounded-full hover:bg-straw" aria-label="One fewer"><Minus className="size-4" strokeWidth={2} aria-hidden /></button>
+                    <output className="tnum w-10 text-center text-[1.2rem] font-bold" aria-live="polite">{qty}</output>
+                    <button type="button" onClick={() => { setQty((q) => Math.min(60, q + 1)); touch("qty") }} className="inline-flex size-11 items-center justify-center rounded-full hover:bg-straw" aria-label="One more"><Plus className="size-4" strokeWidth={2} aria-hidden /></button>
+                  </div>
+                </div>
+                <div>
+                  <p className="t-small font-bold" id="q-look">The look</p>
+                  <div className="mt-2.5 inline-flex rounded-full bg-cream p-1" role="radiogroup" aria-labelledby="q-look" onKeyDown={radioKeys}>
+                    {([["same", "Same look"], ["new", "Something new"]] as const).map(([v, l]) => (
+                      <button key={v} type="button" role="radio" aria-checked={look === v} tabIndex={look === v ? 0 : -1} onClick={() => { setLook(v); touch("look") }}
+                        className={`min-h-[44px] rounded-full px-4 t-small transition-colors duration-200 ${look === v ? "bg-ink text-cream" : "hover:bg-straw"}`}>{l}</button>
+                    ))}
+                  </div>
+                </div>
+                <label className="min-w-[14rem] flex-1">
+                  <span className="t-small font-bold">A note <span className="font-normal text-muted">(optional)</span></span>
+                  <input value={note} onChange={(e) => { setNote(e.target.value); touch("note") }} placeholder="e.g. the seat is split, navy if possible" className="mt-2.5 block min-h-[48px] w-full rounded-full border border-line bg-cream px-4 outline-none placeholder:text-muted focus:border-ink" />
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <p className="bubble mt-5" aria-live="polite">{msg}</p>
+          <p className="t-cap mt-2 text-muted">Attach 2 or 3 photos when WhatsApp opens. A tape measure in the shot helps.</p>
+          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+            <a href={waLink(msg)} target="_blank" rel="noopener" className="btn btn-primary min-h-[54px] text-[1rem]"><MessageCircle className="size-[19px]" strokeWidth={1.9} aria-hidden /> Send on WhatsApp</a>
+            <a href={C.tel} className="tnum inline-flex min-h-[44px] items-center gap-2 font-bold underline decoration-ink/30 decoration-2 underline-offset-[6px] hover:decoration-ink"><Phone className="size-[16px]" strokeWidth={1.9} aria-hidden /> Call {C.phone}</a>
+            <a href={waLink(book)} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center font-bold underline decoration-ink/30 decoration-2 underline-offset-[6px] hover:decoration-ink">Book an appointment</a>
+          </div>
         </div>
       </div>
     </section>
@@ -119,7 +206,7 @@ function Layers() {
             ))}
           </ol>
         </div>
-        <p className="t-cap absolute bottom-[calc(96px+1rem)] right-5 hidden rounded-full bg-cream/90 px-3 py-1.5 text-ink/80 md:block">Illustrative photographs of the process</p>
+        <p className="t-cap absolute bottom-[calc(96px+1rem)] right-5 hidden rounded-full bg-cream px-3 py-1.5 text-ink md:block">Illustrative photographs of the process</p>
       </div>
     </section>
   )
@@ -127,11 +214,11 @@ function Layers() {
 
 /* ---------- 3. What we upholster: the list is the selector ---------- */
 const AREAS = [
-  { key: "home", name: "Home", line: "Sofas, dining seats, cushions and the other pieces you live with.", photo: "sofa-living", alt: "A navy reupholstered sofa in a bright room with white louvred shutters" },
-  { key: "marine", name: "Marine", line: "Boat cushions and cockpit seating.", photo: "marine-cushions", alt: "New white boat cushions with navy piping in a sportfishing cockpit over turquoise water" },
-  { key: "auto", name: "Auto", line: "Car seats and interiors, re-covered and restitched.", photo: "auto-seat", alt: "A car seat re-covered in tan leather with cream double stitching" },
-  { key: "aircraft", name: "Aircraft", line: "Aircraft seating and cabin upholstery.", photo: "aircraft-seat", alt: "A cream leather club seat in a small aircraft cabin with oval windows" },
-  { key: "churches", name: "Churches", line: "Pews and church seating, done as a set.", photo: "church-pew", alt: "Church pews with new deep green seat cushions in a white church with louvred windows" },
+  { key: "home", name: "Home", line: "Sofas, dining seats, cushions and the other pieces you live with.", send: "The whole piece from the front, a close-up of the worn part, and the width.", photo: "sofa-living", alt: "A navy reupholstered sofa in a bright room with white louvred shutters" },
+  { key: "marine", name: "Marine", line: "Boat cushions and cockpit seating.", send: "Each cushion laid flat, a close-up of the cover, and how many there are.", photo: "marine-cushions", alt: "New white boat cushions with navy piping in a sportfishing cockpit over turquoise water" },
+  { key: "auto", name: "Auto", line: "Car seats and interiors, re-covered and restitched.", send: "The seats from the open door, the damage up close, and the make and year.", photo: "auto-seat", alt: "A car seat re-covered in tan leather with cream double stitching" },
+  { key: "aircraft", name: "Aircraft", line: "Aircraft seating and cabin upholstery.", send: "One seat front and side, the damage up close, and the seat count.", photo: "aircraft-seat", alt: "A cream leather club seat in a small aircraft cabin with oval windows" },
+  { key: "churches", name: "Churches", line: "Pews and church seating, done as a set.", send: "One pew front and side, its length, and how many pews.", photo: "church-pew", alt: "Church pews with new deep green seat cushions in a white church with louvred windows" },
 ]
 
 function Areas() {
@@ -153,10 +240,11 @@ function Areas() {
                   className="group flex w-full items-baseline gap-5 py-5 text-left md:py-7"
                 >
                   <span className={`display text-[2.2rem] leading-none transition-colors duration-300 md:text-[3.4rem] ${active === i ? "text-ink" : "text-ink/55 group-hover:text-ink/80"}`}>{a.name}</span>
-                  {active === i && <span className="t-small hidden max-w-[16rem] text-muted lg:block">{a.line}</span>}
+                  {active === i && <span className="t-small hidden max-w-[18rem] text-muted lg:block">{a.line}<span className="mt-1.5 block font-bold text-ink">Send: <span className="font-normal text-ink/80">{a.send}</span></span></span>}
                 </button>
                 <div className="pb-6 md:hidden">
                   <p className="t-small text-muted">{a.line}</p>
+                  <p className="t-small mt-1.5 font-bold">Send: <span className="font-normal text-ink/80">{a.send}</span></p>
                   <div className="mt-4 aspect-[3/2] overflow-hidden rounded-[14px] bg-cream-2">
                     <Photo src={img(a.photo)} alt={a.alt} className="h-full w-full" />
                   </div>
@@ -181,9 +269,10 @@ function Areas() {
 /* ---------- 4. How it works: straw field ---------- */
 function HowItWorks() {
   const steps = [
-    ["Send a photo", `WhatsApp a picture of the piece to ${C.phone}. A tape measure in the shot helps.`],
+    ["Send photos", `WhatsApp 2 or 3 pictures of the piece to ${C.phone}. A tape measure in the shot helps.`],
     ["Get a free quote", "Slim Upholstery replies with a price for the job. Quotes cost nothing."],
-    ["Book a time", "Appointments are available. Bring it in, or arrange the pick-up of larger pieces."],
+    ["Book an appointment", "Appointments are available. Bring the piece in, or arrange how larger pieces reach the workshop."],
+    ["Collect your piece", "From worn to wow: same frame, new life."],
   ]
   return (
     <section className="bg-straw" aria-labelledby="how-title">
@@ -192,8 +281,8 @@ function HowItWorks() {
           <Photo src={img("hands-staple")} alt="Hands pulling navy cloth taut over a seat edge and stapling it underneath" className="absolute inset-0 h-full w-full" />
         </div>
         <div className="flex flex-col justify-center px-5 py-20 md:px-16 md:py-24">
-          <h2 id="how-title" className="display t-h2 max-w-[30rem]">Send a photo. Get a free quote.</h2>
-          <ol className="mt-12 space-y-9">
+          <h2 id="how-title" className="display t-h2 max-w-[30rem]">Photos first, then a free quote.</h2>
+          <ol className="mt-12 space-y-8">
             {steps.map(([t, b], i) => (
               <li key={t} className="grid grid-cols-[2.6rem_1fr] gap-x-4">
                 <span className="display tnum text-[1.6rem] leading-none text-saddle">{i + 1}</span>
@@ -210,73 +299,6 @@ function HowItWorks() {
   )
 }
 
-/* ---------- 5. Quote builder: writes the WhatsApp message ---------- */
-const PIECES = ["Sofa", "Dining chairs", "Cushions", "Boat seating", "Car seats", "Church pews", "Something else"]
-const CLOTHS = [
-  { name: "Navy weave", c: "#1E3557" }, { name: "Sand linen", c: "#D8C6A2" }, { name: "Olive", c: "#5E6A3E" },
-  { name: "Cream", c: "#F1E9D6" }, { name: "Outdoor canvas", c: "#9FB3B8" }, { name: "Leather or vinyl", c: "#8C5A2B" },
-]
-
-function QuoteBuilder() {
-  const [piece, setPiece] = useState("Dining chairs")
-  const [qty, setQty] = useState(4)
-  const [cloth, setCloth] = useState<string | null>("Navy weave")
-  const [name, setName] = useState("")
-  const msg = `Hi Slim Upholstery${name.trim() ? `, this is ${name.trim()}` : ""}. I would like a free quote: ${qty} x ${piece.toLowerCase()}${cloth ? `, thinking of ${cloth.toLowerCase()}` : ", fabric still to choose"}. I can send photos now. When is a good time to come by?`
-  return (
-    <section id="quote" className="bg-cream px-5 py-24 md:px-12 md:py-36" aria-labelledby="quote-title">
-      <div className="mx-auto grid max-w-[1320px] gap-14 md:grid-cols-[1.05fr_1fr] md:gap-20">
-        <div>
-          <h2 id="quote-title" className="display t-h2 max-w-[34rem]">Tell us what needs doing.</h2>
-          <p className="t-lead mt-5 max-w-[30rem] text-ink/80">Three choices, and your WhatsApp message is written for you.</p>
-
-          <fieldset className="mt-12">
-            <legend className="font-bold">The piece</legend>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {PIECES.map((p) => (
-                <button key={p} type="button" aria-pressed={piece === p} onClick={() => setPiece(p)}
-                  className={`min-h-[44px] rounded-full px-4 t-small transition-colors duration-200 ${piece === p ? "bg-ink text-cream" : "bg-cream-2 text-ink hover:bg-straw"}`}>{p}</button>
-              ))}
-            </div>
-          </fieldset>
-
-          <fieldset className="mt-10">
-            <legend className="font-bold">How many</legend>
-            <div className="mt-4 inline-flex items-center rounded-full bg-cream-2 p-1">
-              <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} className="inline-flex size-11 items-center justify-center rounded-full hover:bg-straw" aria-label="One fewer"><Minus className="size-4" strokeWidth={2} aria-hidden /></button>
-              <output className="tnum w-12 text-center text-[1.25rem] font-bold" aria-live="polite">{qty}</output>
-              <button type="button" onClick={() => setQty((q) => Math.min(60, q + 1))} className="inline-flex size-11 items-center justify-center rounded-full hover:bg-straw" aria-label="One more"><Plus className="size-4" strokeWidth={2} aria-hidden /></button>
-            </div>
-          </fieldset>
-
-          <fieldset className="mt-10">
-            <legend className="font-bold">A cloth idea <span className="font-normal text-muted">(you will see real samples at the shop)</span></legend>
-            <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-6">
-              {CLOTHS.map((c) => (
-                <button key={c.name} type="button" aria-pressed={cloth === c.name} onClick={() => setCloth(cloth === c.name ? null : c.name)} className="group text-left">
-                  <span className={`block aspect-square rounded-[14px] transition-[box-shadow,transform] duration-200 group-active:scale-95 ${cloth === c.name ? "shadow-[0_0_0_2px_var(--color-cream),0_0_0_4px_var(--color-ink)]" : "shadow-[inset_0_0_0_1px_rgba(43,33,24,.12)]"}`} style={{ background: c.c }} />
-                  <span className="t-cap mt-2 block leading-snug">{c.name}</span>
-                </button>
-              ))}
-            </div>
-          </fieldset>
-        </div>
-
-        <div className="md:sticky md:top-[12vh] md:self-start">
-          <div className="rounded-[26px] bg-cream-2 p-6 md:p-8">
-            <label htmlFor="q-name" className="font-bold">Your name <span className="font-normal text-muted">(optional)</span></label>
-            <input id="q-name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" className="mt-3 block min-h-[48px] w-full rounded-[14px] border border-line bg-cream px-4 outline-none focus:border-ink" />
-            <p className="mt-7 font-bold">Your message</p>
-            <p className="mt-3 rounded-[18px] rounded-bl-[6px] bg-cream p-5 leading-relaxed text-ink/90" aria-live="polite">{msg}</p>
-            <a href={waLink(msg)} className="btn btn-primary mt-7 w-full min-h-[54px] text-[1rem]"><MessageCircle className="size-[19px]" strokeWidth={1.9} aria-hidden /> Send on WhatsApp</a>
-            <p className="t-small mt-4 text-center text-muted">Opens WhatsApp with this message to {C.phone}. Or call <a href={C.tel} className="tnum whitespace-nowrap underline underline-offset-4">{C.phone}</a>.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 /* ---------- 6. Visit: navy field ---------- */
 function Visit() {
   return (
@@ -284,19 +306,19 @@ function Visit() {
       <div className="mx-auto grid max-w-[1320px] gap-14 md:grid-cols-[1.3fr_1fr]">
         <div>
           <h2 id="visit-title" className="display t-h2">{C.street},<br />Nassau.</h2>
-          <p className="t-lead mt-6 max-w-[30rem] text-cream/80">The workshop is on Claridge Road. Come with photos or with the piece itself; cloth samples are there to touch.</p>
+          <p className="t-lead mt-6 max-w-[30rem] text-cream-mute">The workshop is on Claridge Road. Come with photos or with the piece itself; cloth samples are there to touch.</p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a href={C.map} className="btn text-cream shadow-[inset_0_0_0_1.5px_var(--color-cream)] hover:bg-cream hover:text-ink">Directions <ArrowUpRight className="size-[17px]" strokeWidth={1.9} aria-hidden /></a>
             <a href={C.tel} className="btn tnum text-cream shadow-[inset_0_0_0_1.5px_rgba(247,240,224,.4)] hover:shadow-[inset_0_0_0_1.5px_var(--color-cream)]"><Phone className="size-[17px]" strokeWidth={1.9} aria-hidden /> {C.phone}</a>
           </div>
         </div>
-        <dl className="tnum grid grid-cols-[auto_1fr] gap-x-8 gap-y-4 self-end text-cream/90">
-          <dt className="text-cream/60">Monday to Friday</dt><dd>9:00am to 5:30pm</dd>
-          <dt className="text-cream/60">Saturday</dt><dd>Shorter hours, call ahead</dd>
-          <dt className="text-cream/60">Sunday</dt><dd>Closed</dd>
-          <dt className="pt-6 text-cream/60">Call or WhatsApp</dt><dd className="pt-6"><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tel}>{C.phone}</a></dd>
-          <dt className="text-cream/60">Shop line</dt><dd><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tel2}>{C.phone2}</a></dd>
-          <dt className="text-cream/60">Recent work</dt><dd className="flex flex-wrap gap-x-4"><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.ig}>Instagram</a><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tt}>TikTok</a><a className="underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.fb}>Facebook</a></dd>
+        <dl className="tnum grid grid-cols-[auto_1fr] gap-x-8 gap-y-2 items-center self-end text-cream">
+          <dt className="text-cream-mute">Monday to Friday</dt><dd>9:00am to 5:30pm</dd>
+          <dt className="text-cream-mute">Saturday</dt><dd>Shorter hours, call ahead</dd>
+          <dt className="text-cream-mute">Sunday</dt><dd>Closed</dd>
+          <dt className="pt-6 text-cream-mute">Call or WhatsApp</dt><dd className="pt-6"><a className="inline-flex min-h-[44px] items-center underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tel}>{C.phone}</a></dd>
+          <dt className="text-cream-mute">Shop line</dt><dd><a className="inline-flex min-h-[44px] items-center underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tel2}>{C.phone2}</a></dd>
+          <dt className="text-cream-mute">Recent work</dt><dd className="flex flex-wrap gap-x-4"><a className="inline-flex min-h-[44px] items-center underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.ig}>Instagram</a><a className="inline-flex min-h-[44px] items-center underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.tt}>TikTok</a><a className="inline-flex min-h-[44px] items-center underline decoration-cream/30 underline-offset-4 hover:decoration-cream" href={C.fb}>Facebook</a></dd>
         </dl>
       </div>
     </section>
@@ -306,11 +328,10 @@ function Visit() {
 function Home() {
   return (
     <Page current="home">
-      <Hero />
-      <Layers />
+      <QuoteHero />
       <Areas />
+      <Layers />
       <HowItWorks />
-      <QuoteBuilder />
       <Visit />
     </Page>
   )
