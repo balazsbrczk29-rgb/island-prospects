@@ -26,7 +26,7 @@ export function Header({ solid = false, ink }: { solid?: boolean; ink?: string }
       <header className={`hdr${solid ? " solid" : ""}`} style={ink ? ({ "--hdr-ink": ink } as React.CSSProperties) : undefined}>
         <a className="name" href="index.html">Pro-Tech Security</a>
         <div className="right">
-          <a className="num" href={`tel:${TEL}`}>{PHONE}</a>
+          <a className="num" href={`tel:${TEL}`}><span className="tel-long">{PHONE}</span><span className="tel-short">Call</span></a>
           <button type="button" aria-expanded={open} aria-controls="menu" onClick={() => setOpen(true)}>Menu</button>
         </div>
       </header>
@@ -54,7 +54,7 @@ export function Dock() {
       es.forEach(e => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)))
       el.dataset.hidden = seen.size ? "true" : "false"
     }, { threshold: 0.05 })
-    document.querySelectorAll(window.innerWidth < 961 ? "#contact, .readout .acts" : "[data-hero], #contact, .readout .acts").forEach(t => io.observe(t))
+    document.querySelectorAll("[data-hero], #contact, .readout .acts").forEach(t => io.observe(t))
     return () => io.disconnect()
   }, [])
   return <div className="dock" ref={ref} data-hidden="true"><a className="btn num" href={`tel:${TEL}`}>Call {PHONE}</a></div>

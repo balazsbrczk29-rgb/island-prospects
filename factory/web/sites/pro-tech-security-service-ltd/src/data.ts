@@ -42,13 +42,13 @@ export const STOPS = [
 ]
 
 export const CHAPTERS = [
-  { n: "2.0", time: "9:00", ink: "#101a24", img: "cctv-closeup.jpg", alt: "A white CCTV camera on a bracket against a pale green wall in morning sun (illustrative)", title: "The office opens on Farrington Road.",
-    lines: ["Alarm systems and CCTV cameras, sold, installed and serviced.", "Security supplies too, from the office, Monday to Friday, 9 to 5."] },
-  { n: "3.0", time: "14:00", ink: "#101a24", img: "guard-gate.jpg", alt: "A security officer in a navy uniform at a white gate, seen from behind (illustrative)", title: "Officers on post.",
+  { n: "3.1", time: "9:00", ink: "#101a24", img: "cctv-closeup.jpg", alt: "A white CCTV camera on a bracket against a pale green wall in morning sun (illustrative)", title: "The office opens on Farrington Road.",
+    lines: ["Alarm systems and CCTV cameras, sold, installed and serviced.", "The office is open Monday to Friday, 9 to 5."] },
+  { n: "3.2", time: "14:00", ink: "#101a24", img: "guard-gate.jpg", alt: "A security officer in a navy uniform at a white gate, seen from behind (illustrative)", title: "Officers on post.",
     lines: ["Security guard services for businesses and sites in Nassau.", "Pro-Tech runs its own training programme for its officers."] },
-  { n: "4.0", time: "18:30", ink: "#fbf6ec", img: "street-dusk.jpg", alt: "The same Nassau shop at dusk, shutter down and the wall light on (illustrative)", title: "The shutter comes down. The alarm is set.",
+  { n: "3.3", time: "18:30", ink: "#fbf6ec", img: "street-dusk.jpg", alt: "The same Nassau shop at dusk, shutter down and the wall light on (illustrative)", title: "The shutter comes down. The alarm is set.",
     lines: ["From here a monitored alarm reports to Pro-Tech's central station.", "Set it as you leave, and it is watched until you open up."] },
-  { n: "5.0", time: "3:00", ink: "#e9e4d8", img: "control-room.jpg", alt: "A quiet monitoring desk at night with two screens (illustrative)", title: "At 3 am, the central station is watching.",
+  { n: "3.4", time: "3:00", ink: "#e9e4d8", img: "control-room.jpg", alt: "A quiet monitoring desk at night with two screens (illustrative)", title: "At 3 am, the central station is watching.",
     lines: ["24/7 central station monitoring, weekends and holidays included.", "The one thing a camera on its own cannot do: notice."] },
 ]
 
@@ -69,9 +69,9 @@ export const DIVISIONS = {
   guards: { n: "2.1", name: "Security guard services", line: "Officers on post at your business or site, trained in Pro-Tech's own programme." },
   cctv: { n: "2.2", name: "CCTV and alarm sales and service", line: "Alarm systems and CCTV cameras supplied, installed and serviced." },
   monitoring: { n: "2.3", name: "24/7 central station monitoring", line: "Your alarm reports to Pro-Tech's central station, day and night, weekends included." },
-  supplies: { n: "2.4", name: "Security supplies", line: "Security equipment and supplies from the Farrington Road office." },
+  supplies: { n: "2.4", name: "Security supplies", line: "Security equipment and supplies." },
   consulting: { n: "2.5", name: "Consulting and investigations", line: "Advice on what your property needs, and investigations when something has happened." },
-  collections: { n: "2.6", name: "Collections", line: "A collections service for businesses." },
+  collections: { n: "2.6", name: "Collections", line: "Collections services." },
 } as const
 export type DKey = keyof typeof DIVISIONS
 
@@ -84,8 +84,11 @@ export function covered(needs: Need[]): DKey[] {
 }
 
 export function request2(p: string, needs: Need[], area: string) {
-  const list = needs.map(n => (n === "Not sure" ? "advice on what I need" : n.toLowerCase()))
-  return `Pro-Tech request: ${p.charAt(0).toLowerCase() + p.slice(1)}${area ? ` in ${area}` : " in Nassau"}. I need ${list.length ? list.join(", ").replace(/, ([^,]*)$/, " and $1") : "advice"}.`
+  const PH: Record<Need, string> = { Alarm: "an alarm", Cameras: "CCTV cameras", Monitoring: "monitoring for my alarm", Guards: "security officers", "Not sure": "advice on what I need" }
+  const list = needs.map(n => PH[n])
+  const where = area ? ` in ${area}` : " in New Providence"
+  if (!list.length || (needs.length === 1 && needs[0] === "Not sure")) return `Pro-Tech request: ${p.charAt(0).toLowerCase() + p.slice(1)}${where}. Please advise what I need.`
+  return `Pro-Tech request: ${p.charAt(0).toLowerCase() + p.slice(1)}${where}. I need ${list.join(", ").replace(/, ([^,]*)$/, " and $1")}.`
 }
 
 export function officeShort(hour: number, weekday: number) {
