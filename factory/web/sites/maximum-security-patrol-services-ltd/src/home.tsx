@@ -223,6 +223,11 @@ function Home() {
     return () => io.disconnect()
   }, [])
 
+  useEffect(() => {
+    const narrow = matchMedia("(max-width: 900px)").matches
+    document.documentElement.style.setProperty("--concept-offset", dock && narrow ? "72px" : "0px")
+  }, [dock])
+
   const add = (id: SvcId) => {
     setSt(s => ({ ...s, svc: s.svc.includes(id) ? s.svc : [...s.svc, id] }))
     document.getElementById("builder")?.scrollIntoView({ behavior: reducedQ() ? "auto" : "smooth" })
