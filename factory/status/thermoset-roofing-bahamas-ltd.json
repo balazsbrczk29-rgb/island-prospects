@@ -4,7 +4,7 @@
  "name": "Thermoset Roofing Bahamas Ltd",
  "batch": "08",
  "tier": "A",
- "state": "built",
+ "state": "building",
  "generation": 2,
  "history": [
   {
@@ -35,115 +35,6 @@
    "note": "built on rejected rules, rerolled per HANDOFF item 5"
   }
  ],
- "rebuild_of": 2,
- "pages": [
-  "index.html"
- ],
- "primary_cta": "Request a free estimate",
- "brand_truth": "The roof over the brands you know: a Bahamian-owned family roofing contractor since 2002, factory certified on Carlisle, Elevate, Englert, Sika, Siplast and Tremco systems.",
- "buyer": "Property and facility managers, resort engineering teams, church committees, general contractors and homeowners with leaks in New Providence.",
- "direction": {
-  "archetype": "A06",
-  "lane": "P01",
-  "type": "T03",
-  "nav": "N4",
-  "motion": "M4",
-  "why": "Their product is an assembly nobody sees; the object study shows it. Limestone ground with their logo teal; conch-pink render on the building at Balazs's request."
- },
- "concept_type": "brochure: services + client proof + maintenance program + free estimate request",
- "images": [
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/30e95db4-7162-4a03-afe2-feede133298a/IMG_4711.jpeg",
-   "source": "own",
-   "credit": "Thermoset Roofing Bahamas Ltd."
-  },
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/2c132234-ef75-4633-93aa-a3ab3b043533/a827c3e8-ae10-4bb1-97b9-1a8100b023d7.jpeg",
-   "source": "own",
-   "credit": "Thermoset Roofing Bahamas Ltd."
-  },
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/3fd21fc3-d414-4ad4-8aa3-4e43ec25d640/PHOTO-2025-06-23-13-59-54.jpg",
-   "source": "own",
-   "credit": "Thermoset Roofing Bahamas Ltd."
-  },
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/73e36bd3-582d-4ed1-8a4e-47635d9aa4ad/IMG_8670.jpeg",
-   "source": "own",
-   "credit": "Thermoset Roofing Bahamas Ltd."
-  },
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/63931fc6-e57c-4101-afbf-8ab5dce20cad/IMG_4723.jpeg",
-   "source": "own",
-   "credit": "Thermoset Roofing Bahamas Ltd."
-  },
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/8f25b357-e661-4cb8-8f69-d30fd36857d1/IMG_4719.jpeg",
-   "source": "own",
-   "credit": "Thermoset Roofing Bahamas Ltd."
-  },
-  {
-   "src": "https://images.squarespace-cdn.com/content/v1/685164f5603a7f2c27ad6720/25e12ffd-84e2-4780-a822-d6b9ccf08728/IMG_7262.JPG",
-   "source": "own",
-   "credit": "Thermoset Roofing Bahamas Ltd."
-  },
-  {
-   "src": "thermoset-roofing-bahamas-ltd/poster-wide.jpg",
-   "source": "generated",
-   "credit": "Render of the procedural 3D concept model, not a Thermoset project"
-  },
-  {
-   "src": "thermoset-roofing-bahamas-ltd/poster-tall.jpg",
-   "source": "generated",
-   "credit": "Render of the procedural 3D concept model, not a Thermoset project"
-  },
-  {
-   "src": "thermoset-roofing-bahamas-ltd/still-plan.jpg",
-   "source": "generated",
-   "credit": "Render of the procedural 3D concept model, not a Thermoset project"
-  },
-  {
-   "src": "thermoset-roofing-bahamas-ltd/still-corner.jpg",
-   "source": "generated",
-   "credit": "Render of the procedural 3D concept model, not a Thermoset project"
-  }
- ],
- "critic": {
-  "photography": 4,
-  "typography": 4,
-  "composition": 4,
-  "colour": 4,
-  "fit": 4.5,
-  "distinct": 4.5,
-  "references": 4,
-  "note": "Re-scored after one fix pass on the new screenshots (first pass: typography 3.5, references 3.5)."
- },
- "current_site_findings": [
-  "Two websites are live; thermosetbahamas.com still says South Florida contractor.",
-  "Homepage opens with 'Welcome to the pinnacle' and a shopping cart icon.",
-  "Client list buried under resort photos that are not Thermoset's own.",
-  "WhatsApp promised but no number shown.",
-  "Certifications are one red line of text."
- ],
- "pitch_line": "Your clients are Baha Mar, Atlantis and the airport, so the site opens with 'The roof over the brands you know' and shows the roof itself going on, layer by layer.",
- "assumptions": [
-  "Wording for vapour retarder, insulation and cover board is plain trade description, not Thermoset's own text.",
-  "'Since 2002' (site says 07/03/02).",
-  "Every client on the portfolio page may be named publicly.",
-  "Estimate requests go to the General Manager's email.",
-  "Photo captions describe what each job photo appears to show; confirm the jobs."
- ],
- "sources": [
-  "https://www.thermosetroofing242.com/",
-  "https://www.thermosetroofing242.com/services",
-  "https://www.thermosetroofing242.com/portfolio",
-  "https://www.thermosetroofing242.com/radar-program",
-  "https://www.facebook.com/thermosetroofing242/"
- ],
- "qa": {
-  "blockers": 0,
-  "warnings": 2
- },
- "notes": "Reroll built with Balazs reviewing the first screen. Manual claim (batch.mjs printed SKIP). Single page (services.html dropped). One pinned WebGL stage: procedural building with ambient occlusion, six scroll chapters, system picker with four finishes. QA BLIND for the 7 hotlinked job photos (Squarespace CDN unreachable from the sandbox): the Work section was judged as grey boxes. look.mjs could not reach reference sites; current site seen via Firecrawl screenshot. qa.mjs 'dead space' warning is the pinned stage in a full-page capture, not real empty page. interact.mjs stalls on the software-rendered canvas and was stopped; the picker click was verified in a manual Playwright run; the estimate form and services tabs were not click-tested. Animation smoothness not seen on a real GPU or phone. Pushed to the session branch only, not main.",
- "built_at": "2026-11-20T18:58:42.331027+00:00"
+ "rebuild_of": 1,
+ "claimed_at": "2026-11-22T12:14:13.401Z"
 }
