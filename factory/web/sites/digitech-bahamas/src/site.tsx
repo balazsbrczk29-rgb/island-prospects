@@ -12,7 +12,7 @@ export function Parts() {
     <section className="sec wrap" id="systems" aria-labelledby="systems-h">
       <div className="sec-head">
         <h2 id="systems-h">Four jobs, one local team that answers the phone.</h2>
-        <p>Most Nassau businesses buy the till from one company, the Wi-Fi from another and back up nothing. Digitech does all four, so there is one number to call.</p>
+        <p>Point of sale, networks, managed IT and cloud backup from one team in Centreville, Nassau, so there is one number to call.</p>
       </div>
       <div className="parts">
         <ul className="parts__list">
