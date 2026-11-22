@@ -1,22 +1,24 @@
 import { createRoot } from 'react-dom/client'
 import './styles.css'
-import Hero from './hero'
-import { Contact, Corner, Footer } from './ui'
-import Sections from './sections'
+import { Header, Contact, Footer, Bar } from './ui'
+import { Hero, Fuel, Yard, Harbour, Store } from './sections'
 
 function Home() {
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <main id="main" className="home">
+      <Header page="home" />
+      <main id="main">
         <Hero />
-        <Sections />
+        <Fuel />
+        <Yard />
+        <Harbour />
+        <Store />
         <Contact />
       </main>
       <Footer />
-      <Corner />
+      <Bar />
     </>
   )
 }
-const el = document.getElementById('root')!
-createRoot(el).render(<Home />)
+createRoot(document.getElementById('root')!).render(<Home />)

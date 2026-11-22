@@ -4,8 +4,33 @@
  "name": "Lighthouse Marina",
  "batch": "11",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T13:07:44.257Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T13:16:30.321811+00:00",
+ "url": "https://balazsbrczk29-rgb.github.io/island-prospects/lighthouse-marina/",
+ "critic": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present_and_better": true
+  },
+  "gate2": {
+   "wow": 4,
+   "photography": 4,
+   "typography": 4,
+   "composition": 4,
+   "conversion": 4,
+   "phone": 4
+  },
+  "note": "Re-score passed; its last fix (gauges above the chips, nowrap gauge labels) applied before publish."
+ },
+ "notes": [
+  "Job-spec rebuild from design.md: navy instrument panel on screen 1 beside the dock photo: LOA, draft, hull, months; slip verdict with 60 ft / 6 ft gauges; itemised haul-out estimate from the Nov 2024 sheet + 10% VAT; separate Request a slip and Request this haul-out emails (prefilled), Call, VHF 16.",
+  "Kept: Schibsted Grotesk and hull/navy/brass palette, every Nov 2024 rate (full sheet on home and boatyard.html), slip specs, fuel facts, panorama from the lighthouse gallery (now a draggable band, credited), calling card with all three phones, VHF 16, email, hours, cottages note.",
+  "Receipt figures use proportional lining numerals: Schibsted tnum spaces punctuation; amounts are right-aligned (inspect WARNs justified).",
+  "Assumptions to confirm with owner: 305 735 8550 labelled \"US line\" (from area code); ship\u2019s store hours Monday to Saturday 8 to 4 carried from previous version; dockage rates not published (shown as on request); liquor store reopening soon.",
+  "Stale Nov 21 wip branch not resumed; built fresh from main per the approved spec."
+ ]
 }
