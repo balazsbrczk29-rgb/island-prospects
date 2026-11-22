@@ -74,7 +74,7 @@ function Hero() {
   useEffect(() => { setPhone(matchMedia('(max-width: 900px)').matches) }, [])
   return (
     <section className="hero" aria-labelledby="hero-h">
-      <InletMap zoom={16} at={phone ? [0.5, 0.55] : [0.68, 0.52]} className="hero__map" />
+      <InletMap zoom={16} at={phone ? [0.4, 0.34] : [0.68, 0.52]} className="hero__map" />
       <div className="card" id="card">
         <p className="coord num">{COORD}</p>
         <h1 id="hero-h" className="h1">Bell Channel Club &amp; Marina</h1>

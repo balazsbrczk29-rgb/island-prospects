@@ -60,7 +60,7 @@ a { color: inherit; text-underline-offset: 4px; }
 
 /* map */
 .imap { position: relative; overflow: hidden; contain: strict; background-color: #3f6a78; background-image: linear-gradient(rgb(243 238 226 / .12) 1px, transparent 1px), linear-gradient(90deg, rgb(243 238 226 / .12) 1px, transparent 1px); background-size: 128px 128px; }
-.imap__ghost { position: absolute; left: 0; top: 0; margin-left: -9ch; width: 18ch; text-align: center; color: var(--f-ink); font-size: var(--t13); letter-spacing: .12em; }
+.imap__ghost { position: absolute; left: 0; top: 0; margin-left: -12ch; width: 24ch; white-space: nowrap; text-align: center; color: var(--f-ink); font-size: var(--t13); letter-spacing: .12em; }
 .imap__tiles { animation: settle 1.4s var(--ease) both; transform-origin: 68% 52%; }
 @keyframes settle { from { transform: scale(1.04); } to { transform: none; } }
 .imap__tiles { position: absolute; inset: 0; }
@@ -153,8 +153,12 @@ a { color: inherit; text-underline-offset: 4px; }
   .hdr__tel { border: 0; padding: 0; }
   .hero { height: auto; display: flex; flex-direction: column; }
   .card { order: 1; position: static; width: auto; box-shadow: none; border: 0; border-bottom: 1px solid var(--line); padding: var(--s3) var(--margin); }
-  .hero__map { order: 0; position: relative; inset: auto; height: 200px; }
-  .imap__credit { font-size: 11px; padding: 4px 8px; }
+  .hero__map { order: 0; position: relative; inset: auto; height: 190px; }
+  .imap__credit { font-size: 10px; padding: 3px 6px; }
+  .hero .imap__scale { display: none; }
+  .hero .imap__corner { right: 8px; bottom: 8px; left: 8px; }
+  .hero .lede { font-size: 1rem; }
+  .card { gap: 10px; }
   .hdr__tel { white-space: nowrap; }
   .hdr__name { font-size: 1rem; }
   .who__seg button { font-size: 0.8125rem; padding: 0 4px; }
