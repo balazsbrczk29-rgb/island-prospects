@@ -4,8 +4,29 @@
  "name": "Cape Santa Maria Beach Resort",
  "batch": "10",
  "tier": "A",
- "state": "building",
+ "state": "built",
  "generation": 2,
  "rebuild_of": 1,
- "claimed_at": "2026-11-22T13:53:27.795Z"
+ "jobspec_built": true,
+ "built_at": "2026-11-22T14:13:27.598Z",
+ "scores": {
+  "gate1": {
+   "screen1_product_and_tool": true,
+   "job_easier": true,
+   "keep_present": true
+  },
+  "wow": 4,
+  "photography": 4,
+  "typography": 5,
+  "composition": 4,
+  "conversion_clarity": 5,
+  "phone": 4
+ },
+ "notes": [
+  "Built from approved job spec + design.md (2026-11-22). Core tool: gateway route finder drawing the real route on a Natural Earth chart of the Bahamas (baked by tools/bake-map.mjs), room chips, Check availability to bookonthenet, prefilled email plan.",
+  "Sheep Runner ferry leg not drawn on the chart: the brief gives no location for Long Island Harbour Club; carried in the sentence and timetable.",
+  "Photo heights other than the aerial (1920x1080) are assumed 3:2 of the recorded native widths; all photos sit in aspect-ratio boxes with object-fit cover.",
+  "Expired $500 air-credit offer not shown. Taxi minutes omitted because their site gives three conflicting times.",
+  "Critic (fresh subagent): first pass wow 4, photo 3, type 4, comp 3, conv 4, phone 3; fixes applied; re-score wow 4, photo 4, type 5, comp 4, conv 5, phone 3 with one must-fix (phone route sentence below fold), applied and verified (sentence now starts at y650 on 390x844); phone 4 per the critic condition."
+ ]
 }
