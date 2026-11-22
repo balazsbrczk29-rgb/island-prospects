@@ -1,12 +1,13 @@
 import { StrictMode, useEffect, useState, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import Lenis from 'lenis'
-import { BIZ } from './data'
+import { BIZ, MAP } from './data'
 import './styles.css'
 
 export const NAV = [
   { href: 'index.html#docks', label: 'The docks', note: 'slips, power, fuel' },
   { href: 'index.html#fit', label: 'Will she fit?', note: 'check your boat' },
+  { href: 'index.html#fuel', label: 'Fuel', note: 'the only pumps on the cay' },
   { href: 'index.html#day', label: 'The day', note: 'hours, live' },
   { href: 'marina.html', label: 'Services', note: 'fuel, facilities, questions' },
   { href: 'island.html', label: 'The cay', note: 'what is ashore' },
@@ -45,7 +46,7 @@ export function Masthead({ current, home }: { current?: string; home?: boolean }
       <div className="mast-name">
         <Name className="nameplate"><a href="index.html">Man‑O‑War Marina</a></Name>
         <nav className="mast-nav" aria-label="Main">
-          {NAV.filter(n => n.label !== 'Services' && n.label !== 'Request a slip').map(n => <a key={n.href} href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a>)}
+          {NAV.filter(n => !['Services', 'Request a slip', 'The day'].includes(n.label)).map(n => <a key={n.href} href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a>)}
         </nav>
         <button className="contents-btn" type="button" aria-haspopup="dialog" aria-expanded={open} aria-controls="toc" onClick={() => setOpen(true)}>Contents</button>
       </div>
@@ -77,7 +78,7 @@ export function Colophon() {
           <div><dt>Radio</dt><dd>VHF channel 16</dd></div>
           <div><dt>Hours</dt><dd className="tab">Monday to Saturday, 8 to 12 and 1 to 4</dd></div>
           <div><dt>Dock N&rsquo; Dine</dt><dd className="tab"><a className="lnk" href={`tel:${BIZ.restaurantTel}`}>{BIZ.restaurantPhone}</a></dd></div>
-          <div><dt>Where</dt><dd>Man&#8209;O&#8209;War Cay, Abaco, Bahamas</dd></div>
+          <div><dt>Where</dt><dd><a className="lnk" href={MAP} target="_blank" rel="noopener">Man&#8209;O&#8209;War Cay, Abaco, Bahamas (map)</a></dd></div>
         </dl>
       </div>
       <div className="wrap colo-foot">
