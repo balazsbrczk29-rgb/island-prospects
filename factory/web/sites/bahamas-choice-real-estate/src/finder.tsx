@@ -97,13 +97,14 @@ export function ListingCard({ l, onHover, wide = false }: { l: Listing; onHover?
       <h3 className="card-title">{l.title}</h3>
       <p className="card-facts num">{facts}</p>
       <p className="card-place">{l.area}, {short(l.island)}</p>
+      <p className="card-who">Lana answers, <span className="num">{LANA.phone}</span></p>
       <button type="button" className="card-ask" aria-expanded={open} onClick={() => setOpen(o => !o)} onKeyDown={e => e.key === 'Escape' && setOpen(false)}>
         Ask for a viewing
       </button>
       <AnimatePresence initial={false}>
         {open && (
           <motion.div className="card-sheet" initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.18, ease: [0.22, 0.61, 0.36, 1] }}>
-            <p>Lana Munnings-Basalyga, Principal Broker, answers viewings.</p>
+            <p>Lana Munnings-Basalyga, Principal Broker. Your message carries the MLS number.</p>
             <div className="sheet-links">
               <a href={links.tel} className="num">Call</a>
               <a href={links.wa} rel="noopener">WhatsApp</a>
@@ -137,7 +138,6 @@ export function Finder({ search, setSearch, onHover, onSendSearch }: {
           {(search.island !== 'any' || search.kind !== 'any' || search.band > 0 || search.mode !== 'Buy') ? <button type="button" className="clear" onClick={() => setSearch(START)}>Clear</button> : null}
         </p>
       </div>
-      <div className="inline-chart"><Chart search={search} onIsland={n => set({ island: search.island === n ? 'any' : n })} compact /></div>
       <div className="selects">
         <label><span className="sr-only">Island</span>
           <select value={search.island} onChange={e => set({ island: e.target.value })}>
@@ -175,6 +175,7 @@ export function Finder({ search, setSearch, onHover, onSendSearch }: {
           )}
         </AnimatePresence>
       </div>
+      <div className="inline-chart"><p className="chart-cap">Or tap an island.</p><Chart search={search} onIsland={n => set({ island: search.island === n ? 'any' : n })} compact /></div>
       <p className="finder-foot">Listings from the Bahamas MLS for {OFFICE.name}, checked 22 November 2026.</p>
     </div>
   );
