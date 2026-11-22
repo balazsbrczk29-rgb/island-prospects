@@ -34,11 +34,11 @@ export const UNITS: Unit[] = [
   u('apartment', 'One-bedroom apartment', 'Apartment', 1, 'room', 'Two double beds, a pull-out couch and a kitchenette.', '11/Apt2.jpg', '11/Apt5.jpg', { kitchen: true }),
   u('sand-dollar', 'Sand Dollar Cottage', 'Two bedrooms', 2, 'two', 'A screened-in porch overlooking the Atlantic.', '10/1-12-1024x683.jpg', '10/3-9-1024x683.jpg', { atlantic: true }),
   u('sea-la-vie', 'Sea La Vie Cottage', 'Two bedrooms', 2, 'two', 'Views of the Atlantic.', '10/8-10.jpg', '10/4-11.jpg', { atlantic: true }),
-  u('gecko', 'Gecko House', 'Three bedrooms', 3, 'house', 'Right on the beach, with ocean views.', '10/13-7-1024x683.jpg', '10/4b-3-1024x683.jpg', { beach: true, atlantic: true }),
+  u('gecko', 'Gecko House', 'Three bedrooms', 3, 'house', 'Right on the beach.', '10/13-7-1024x683.jpg', '10/4b-3-1024x683.jpg', { beach: true, atlantic: true }),
   u('carolyns', "Carolyn's Favourite", 'Three bedrooms', 3, 'house', 'Panoramic Atlantic Ocean views and a large open kitchen.', '10/14-6.jpg', '10/8-11-1024x683.jpg', { atlantic: true, kitchen: true }),
   u('rainbow', 'Rainbow Villa', 'Three bedrooms', 3, 'housepool', 'An infinity salt water pool, right on the Atlantic.', '10/1-14-1024x683.jpg', '10/12-10-1024x683.jpg', { pool: true, atlantic: true }),
   u('flamingo', 'Flamingo House', 'Four bedrooms', 4, 'house', 'A porch overlooking the Atlantic Ocean.', '10/3-10-1024x684.jpg', '10/1-15-1024x683.jpg', { atlantic: true }),
-  u('dolphin', 'Dolphin House', 'Four bedrooms', 4, 'housepool', 'A fresh water pool among coconut palms, with Atlantic views.', '10/1-16-1024x683.jpg', '10/4-12-1024x683.jpg', { pool: true, atlantic: true }),
+  u('dolphin', 'Dolphin House', 'Four bedrooms', 4, 'housepool', 'A fresh water pool among coconut palms.', '10/1-16-1024x683.jpg', '10/4-12-1024x683.jpg', { pool: true }),
 ]
 
 export const WINTER_START = '2026-12-19', WINTER_END = '2027-04-18'
