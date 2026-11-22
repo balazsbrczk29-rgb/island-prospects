@@ -7,6 +7,13 @@ import "./styles.css"
 
 const ease = [0.16, 1, 0.3, 1] as const
 type Mode = "boat" | "air"
+const openTool = (m: Mode) => (e: React.MouseEvent) => {
+  e.preventDefault()
+  window.dispatchEvent(new CustomEvent("romora-mode", { detail: m }))
+  document.getElementById("top")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })
+}
+
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}` }
 
 function Nav() {
   return (
@@ -29,6 +36,7 @@ function BoatTool() {
   const [abroad, setAbroad] = useState(true)
   const [arr, setArr] = useState("")
   const [dep, setDep] = useState("")
+  const [showDates, setShowDates] = useState(false)
   const fits = loa <= MAX_LOA
   const href = useMemo(() => {
     const body = [
@@ -61,22 +69,25 @@ function BoatTool() {
           {[...POWER, "Not sure"].map(p => <button key={p} type="button" className="chip" aria-pressed={power === p} onClick={() => setPower(p)}>{p}</button>)}
         </div>
       </fieldset>
-      <div className="two">
-        <fieldset className="grp">
+      <div className="row">
+        <fieldset className="grp grp--row">
           <legend className="cap">Clearing in from abroad?</legend>
           <div className="yn">
             <button type="button" className="chip" aria-pressed={abroad} onClick={() => setAbroad(true)}>Yes</button>
             <button type="button" className="chip" aria-pressed={!abroad} onClick={() => setAbroad(false)}>No</button>
           </div>
         </fieldset>
-        <div className="dates">
-          <label><span className="cap">Arrive</span><input type="date" value={arr} onChange={e => setArr(e.target.value)} /></label>
-          <label><span className="cap">Leave</span><input type="date" value={dep} min={arr || undefined} onChange={e => setDep(e.target.value)} /></label>
-        </div>
+        <button type="button" className="add-d" aria-expanded={showDates} onClick={() => setShowDates(v => !v)}>{showDates ? "Hide dates" : "Add dates (optional)"}</button>
       </div>
+      {showDates && (
+        <div className="dates">
+          <label><span className="cap">Arrive</span><input type="date" value={arr} min={today()} onChange={e => setArr(e.target.value)} /></label>
+          <label><span className="cap">Leave</span><input type="date" value={dep} min={arr || today()} onChange={e => setDep(e.target.value)} /></label>
+        </div>
+      )}
       <ul className="res" aria-live="polite">
         <li data-ok={fits}><span className="num">{loa} ft</span>{fits ? ": within the 190 ft the marina welcomes." : ": over the published 190 ft. Ask the Dockmaster."}</li>
-        <li data-ok={power !== "Not sure"}>{power === "Not sure" ? "The Dockmaster will match your shore power." : `${power} is on the marina's published power list.`}</li>
+        <li data-ok={power !== "Not sure" && !power.startsWith("408V")}>{power === "Not sure" ? "The Dockmaster will match your shore power." : power.startsWith("408V") ? "Published as 408V 3 phase: the Dockmaster will confirm the exact voltage." : `${power} is on the marina's published power list.`}</li>
         {abroad && <li data-ok>Official port of entry: customs and immigration at the dock.</li>}
       </ul>
       <div className="act">
@@ -98,7 +109,7 @@ function AirTool() {
   return (
     <div className="tool">
       <div className="two">
-        <label className="fld"><span className="cap">Arrive</span><input type="date" value={date} onChange={e => setDate(e.target.value)} /></label>
+        <label className="fld"><span className="cap">Arrive</span><input type="date" value={date} min={today()} onChange={e => setDate(e.target.value)} /></label>
         <div className="fld">
           <span className="cap" id="n-l">Nights</span>
           <div className="step" role="group" aria-labelledby="n-l">
@@ -120,11 +131,11 @@ function AirTool() {
         </div>
       </fieldset>
       <ul className="res" aria-live="polite">
-        {start ? <li data-ok={!closed}><span className="num">{nights} night{nights > 1 ? "s" : ""} from {fmtDate(start)}</span>, {r.name}.</li> : <li>Pick a date to check {r.name}.</li>}
+        {start ? <li data-ok={!closed}>Bring these to the booking page: <span className="num">{nights} night{nights > 1 ? "s" : ""} from {fmtDate(start)}</span>, {r.name}.</li> : <li>Pick a date for {r.name}.</li>}
         {closed && <li className="warn">The resort is closed for the season from 17 August to 12 November. Choose dates outside it.</li>}
       </ul>
       <div className="act">
-        <a className="btn" href={BOOK} target="_blank" rel="noopener">{closed ? "See open dates" : "Check availability"}</a>
+        <a className="btn" href={BOOK} target="_blank" rel="noopener">{closed ? "See open dates" : "Open the booking page"}</a>
         <p className="act__who">Or call reservations <a className="num" href={TEL}>{PHONE}</a></p>
       </div>
       <p className="tool__more"><span>From North Eleuthera airport: a short taxi to the dock, then about ten minutes by water taxi.</span></p>
@@ -135,6 +146,11 @@ function AirTool() {
 function Hero() {
   const [mode, setMode] = useState<Mode>("boat")
   const reduce = useReducedMotion()
+  useEffect(() => {
+    const on = (e: Event) => setMode((e as CustomEvent<Mode>).detail)
+    window.addEventListener("romora-mode", on)
+    return () => window.removeEventListener("romora-mode", on)
+  }, [])
   const key = (e: React.KeyboardEvent) => { if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) { e.preventDefault(); setMode(m => (m === "boat" ? "air" : "boat")) } }
   const photo = mode === "boat"
     ? { src: IMG.marinaAerial, alt: "The slips of Romora Bay Marina from above, Harbour Island" }
@@ -150,8 +166,8 @@ function Hero() {
       <div className="hero__panel">
         <div className="hero__head">
         <p className="cap hero__where">Harbour Island, Eleuthera, The Bahamas</p>
-        <h1 id="h1" className="t-hero">One dock for the yacht <em>and the room.</em></h1>
-        <p className="hero__lede">Seventeen rooms and a full-service marina, an official port of entry. How are you arriving?</p>
+        <h1 id="h1" className="t-hero">One dock for the yacht<br /><em>and the room.</em></h1>
+        <p className="hero__lede">Seventeen rooms and a port-of-entry marina. How are you arriving?</p>
         <div className="sw" role="radiogroup" aria-label="How are you arriving?" onKeyDown={key}>
           {(["boat", "air"] as Mode[]).map(m => (
             <button key={m} type="button" role="radio" aria-checked={mode === m} tabIndex={mode === m ? 0 : -1} className="sw__b" onClick={() => setMode(m)}>
@@ -241,7 +257,7 @@ function Day() {
           <img src={IMG.sipsip} alt="Tables on the Sip Sip deck over the harbour" width={1600} height={1067} loading="lazy" decoding="async" />
           <div>
             <h3 className="t-h3">Sip Sip</h3>
-            <p>The waterfront restaurant: fresh-caught seafood, local ingredients and sunset cocktails.</p>
+            <p>The waterfront restaurant at the marina, for lunch over the harbour.</p>
             <p className="day__h num">Lunch 11:30am to 4pm. Closed Tuesdays.</p>
           </div>
         </div>
@@ -249,17 +265,17 @@ function Day() {
           <div className="day__c">
             <img src={IMG.upstairs} alt="The patio at Upstairs at Romora, looking over the harbour" width={1200} height={800} loading="lazy" decoding="async" />
             <h3 className="t-h3">Upstairs @ Romora</h3>
-            <p>Breakfast and dinner with harbour views and a serious wine list. Catering and events on request.</p>
+            <p>Breakfast, dinner and wine with harbour views. Catering and events on request.</p>
           </div>
           <div className="day__c">
             <img src={IMG.kayak} alt="Kayaking in clear water off Harbour Island" width={1200} height={800} loading="lazy" decoding="async" />
             <h3 className="t-h3">The water and the pink sand</h3>
-            <p>Kayaking, snorkelling and fishing from the resort, and the pink sand beaches a short walk away.</p>
+            <p>Kayaking, snorkelling and fishing, and Harbour Island's pink sand beaches.</p>
           </div>
           <div className="day__c">
             <img src={IMG.pickle} alt="A pickleball game on the Romora Bay courts" width={1200} height={800} loading="lazy" decoding="async" />
             <h3 className="t-h3">The pickleball club</h3>
-            <p>Courts on site, with clinics and social play through the season.</p>
+            <p>Pickleball courts and the island's pickleball club at the resort.</p>
           </div>
         </div>
       </div>
@@ -300,7 +316,7 @@ function Contact() {
       <p className="close__c"><a href={`mailto:${MARINA_EMAIL}`}>{MARINA_EMAIL}</a><a className="num" href={MARINA_TEL}>Marina {MARINA_PHONE}</a><span>Harbour Island, Eleuthera, The Bahamas</span></p>
       <div className="close__act">
         <a className="btn" href={BOOK} target="_blank" rel="noopener">Check availability</a>
-        <a className="btn btn--line" href="#top">Request a slip</a>
+        <a className="btn btn--line" href="#top" onClick={openTool("boat")}>Request a slip</a>
       </div>
       <footer className="foot">
         <p>Romora Bay Resort & Marina, Harbour Island. Seventeen rooms and a full-service marina.</p>
@@ -325,7 +341,7 @@ function Dock() {
   }, [])
   return (
     <div className="dock" data-show={show} aria-hidden={!show}>
-      <a className="btn btn--line" href="#top" tabIndex={show ? 0 : -1}>Request a slip</a>
+      <a className="btn btn--line" href="#top" onClick={openTool("boat")} tabIndex={show ? 0 : -1}>Request a slip</a>
       <a className="btn" href={BOOK} target="_blank" rel="noopener" tabIndex={show ? 0 : -1}>Check availability</a>
     </div>
   )

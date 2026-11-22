@@ -11,7 +11,7 @@
    "path": "",
    "faq": true,
    "title": "Harbour Island Resort & Marina | Romora Bay, Eleuthera",
-   "desc": "Romora Bay, Harbour Island: 17 waterview rooms and a full-service marina for yachts to 190 ft, an official port of entry with customs on site."
+   "desc": "Romora Bay, Harbour Island: 17 rooms and a full-service marina for yachts to 190 ft, an official port of entry with customs on site."
   }
  ],
  "graph": [
@@ -122,7 +122,7 @@
    "A fit-and-power checker for captains, with a prefilled email to the marina team.",
    "Named dockmaster and manager with working contact links.",
    "Rooms, suites and The House in one selector with their own photographs.",
-   "Separate Resort and Marina markup so both rank for Harbour Island searches."
+   "Structured data that describes the resort and the marina together, so both can rank for Harbour Island searches."
   ],
   "agency": "ESTATIQ AI Solutions",
   "contact": "balazs@estatiq.co"
