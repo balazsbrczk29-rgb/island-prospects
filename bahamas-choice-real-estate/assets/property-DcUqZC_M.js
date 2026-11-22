@@ -1,4 +1,4 @@
-import{L as p,c as v,j as e,r,u as f,W as y,M as b,s as h,O as d,m as w,T as m,b as S,S as T}from"./site-DU-sRmJr.js";const u=Number(document.body.dataset.listing),s=p.find(t=>t.id===u),$=p.filter(t=>t.id!==u&&t.page);function k(){f();const[t,x]=r.useState(0),g=s.photos.map((a,n)=>({key:`p${n}`,photo:a,mode:a.h<700?"framed":"cover"})),o=a=>x(n=>(n+a+s.photos.length)%s.photos.length),[i,l]=r.useState({name:"",contact:"",when:""}),c=i.name.trim()&&i.contact.trim(),j=s.status==="To rent"?"rent":"buy",N=`Hello Bahamas Choice,
+import{L as p,c as v,j as e,r,u as f,W as y,M as b,s as h,O as d,m as w,T as m,b as S,S as T}from"./site-D1Dr7zyu.js";const u=Number(document.body.dataset.listing),s=p.find(t=>t.id===u),$=p.filter(t=>t.id!==u&&t.page);function k(){f();const[t,x]=r.useState(0),g=s.photos.map((a,n)=>({key:`p${n}`,photo:a,mode:a.h<700?"framed":"cover"})),o=a=>x(n=>(n+a+s.photos.length)%s.photos.length),[i,l]=r.useState({name:"",contact:"",when:""}),c=i.name.trim()&&i.contact.trim(),j=s.status==="To rent"?"rent":"buy",N=`Hello Bahamas Choice,
 
 I would like to view ${s.title}, ${s.area}, ${s.island} (listing #${s.id}, ${s.price}${s.priceNote?" "+s.priceNote:""}).
 
