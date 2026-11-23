@@ -1,1 +1,37 @@
-{"slug":"yvette-mccartney-law","name":"Yvette McCartney Law","state":"built","generation":2,"pages":["index.html"],"primary_cta":"Call chambers","concept_type":"brochure + enquiry","images":[{"src":"public/img/*.png","source":"own","credit":"the firm's gallery on goguild.com, supplied by Balazs, native 200x150"}],"critic":{"note":"self-checked with inspect.mjs and screenshots; independent critic not run to save usage"},"assumptions":["No sourced email, so no form: call and printable brief only","Practice-area checklists are generic, no legal advice","Portrait names unconfirmed"],"sources":["https://www.goguild.com/nassau/c-yvette-mccartney/","https://www.goguild.com/nassau/c-yvette-mccartney/contact"],"built_at":"2026-11-23"}
+{
+ "slug": "yvette-mccartney-law",
+ "name": "Yvette McCartney Law",
+ "state": "built",
+ "generation": 2,
+ "pages": [
+  "index.html"
+ ],
+ "primary_cta": "Call chambers",
+ "concept_type": "brochure + enquiry",
+ "images": [
+  {
+   "src": "public/img/*.png",
+   "source": "own",
+   "credit": "the firm's gallery on goguild.com, supplied by Balazs, native 200x150"
+  },
+  {
+   "src": "https://ip-assets-yvette-mccartney-law.lovable.app/assets/chambers-light.jpg",
+   "source": "generated",
+   "credit": "Illustrative photograph from the Lovable asset studio (ip-assets-yvette-mccartney-law), to be replaced with the firm's own"
+  }
+ ],
+ "critic": {
+  "note": "self-checked with inspect.mjs and screenshots; independent critic not run to save usage"
+ },
+ "assumptions": [
+  "No sourced email, so no form: call and printable brief only",
+  "Practice-area checklists are generic, no legal advice",
+  "Portrait names unconfirmed",
+  "Hero photograph is illustrative, not the firm's chambers"
+ ],
+ "sources": [
+  "https://www.goguild.com/nassau/c-yvette-mccartney/",
+  "https://www.goguild.com/nassau/c-yvette-mccartney/contact"
+ ],
+ "built_at": "2026-11-23 (v2 redesign)"
+}
