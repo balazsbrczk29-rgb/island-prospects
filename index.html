@@ -18,7 +18,7 @@ main{max-width:1200px;margin:auto;padding:0 16px 48px;display:grid;gap:10px;grid
 .c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:6px}
 .c h2{font-size:15px;margin:0}.m{color:var(--muted);font-size:12.5px}.p{font-size:13.5px}
 .tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-right:4px}
-.tag.built{border-color:var(--accent);color:var(--accent)}.tag.skipped{color:#a3612a;border-color:#a3612a}
+.tag.built,.tag.upgraded{border-color:var(--accent);color:var(--accent)}.tag.skipped{color:#a3612a;border-color:#a3612a}
 .links{display:flex;gap:12px;margin-top:auto;padding-top:6px;font-size:13.5px}a{color:var(--accent)}
 </style>
 </head>
@@ -26,7 +26,7 @@ main{max-width:1200px;margin:auto;padding:0 16px 48px;display:grid;gap:10px;grid
 <header><h1>Concept previews</h1><p class="sub">Internal sales dashboard. Each card links to a concept site and its "what we would change" notes.</p></header>
 <div class="bar">
   <input id="q" placeholder="Search name, island, sector" aria-label="Search">
-  <select id="st" aria-label="State"><option value="">All states</option><option>built</option><option>pending</option><option>skipped</option></select>
+  <select id="st" aria-label="State"><option value="">All states</option><option>upgraded</option><option>building</option><option>older</option><option>pending</option><option>skipped</option></select>
   <select id="ni" aria-label="Niche"><option value="">All niches</option></select>
 </div>
 <div class="stats" id="stats">Loading…</div>
@@ -39,17 +39,18 @@ main{max-width:1200px;margin:auto;padding:0 16px 48px;display:grid;gap:10px;grid
   const ni=document.getElementById('ni');[...new Set(P.map(p=>p.niche))].sort().forEach(n=>ni.add(new Option(n,n)));
   function render(){
     const q=document.getElementById('q').value.toLowerCase(),st=document.getElementById('st').value,n=ni.value;
-    const rows=P.filter(p=>{const s=p.s?p.s.state:'pending';return(!st||s===st)&&(!n||p.niche===n)&&(!q||(p.name+' '+p.location+' '+p.sector).toLowerCase().includes(q))})
-      .sort((a,b)=>(a.s?0:1)-(b.s?0:1)||a.batch.localeCompare(b.batch));
-    const built=P.filter(p=>p.s&&p.s.state==='built').length;
-    document.getElementById('stats').textContent=built+' of '+P.length+' built · '+rows.length+' shown';
-    document.getElementById('grid').innerHTML=rows.map(p=>{const s=p.s,state=s?s.state:'pending';
+    const lab=s=>!s?'pending':s.state==='skipped'?'skipped':s.jobspec_built?'upgraded':s.state==='building'?'building':'older';
+    const rows=P.filter(p=>{const s=lab(p.s);return(!st||s===st)&&(!n||p.niche===n)&&(!q||(p.name+' '+p.location+' '+p.sector).toLowerCase().includes(q))})
+      .sort((a,b)=>({upgraded:0,building:1,older:2,pending:3,skipped:4}[lab(a.s)]-{upgraded:0,building:1,older:2,pending:3,skipped:4}[lab(b.s)])||a.name.localeCompare(b.name));
+    const up=P.filter(p=>lab(p.s)==='upgraded').length,old=P.filter(p=>lab(p.s)==='older').length;
+    document.getElementById('stats').textContent=up+' of '+P.length+' upgraded to the latest standard · '+old+' older versions · '+rows.length+' shown';
+    document.getElementById('grid').innerHTML=rows.map(p=>{const s=p.s,state=lab(s);
       return '<article class="c"><h2>'+esc(p.name)+'</h2><div class="m">'+esc(p.sector)+' · '+esc(p.location)+'</div>'+
       '<div><span class="tag '+state+'">'+state+'</span><span class="tag">tier '+p.tier+'</span><span class="tag">batch '+p.batch+'</span></div>'+
       (s&&s.pitch_line?'<div class="p">'+esc(s.pitch_line)+'</div>':'<div class="m">'+esc(p.site_check_2026_11_04||'')+'</div>')+
       (s&&s.state==='skipped'?'<div class="m">'+esc(s.notes)+'</div>':'')+
-      '<div class="links">'+(state==='built'?'<a href="'+p.slug+'/">Open site</a><a href="'+p.slug+'/?notes=1">Open with notes</a>':'')+
-      (p.current_site?'<a href="https://'+esc(p.current_site)+'" rel="noopener" target="_blank">Current site</a>':'')+'</div></article>'}).join('');
+      '<div class="links">'+((state==='upgraded'||state==='older')?'<a href="'+p.slug+'/">Open new site</a><a href="'+p.slug+'/?notes=1">Open with notes</a>':'')+
+      (p.current_site?'<a href="https://'+esc(p.current_site)+'" rel="noopener" target="_blank">Their current site</a>':'')+'</div></article>'}).join('');
   }
   ['q','st','ni'].forEach(id=>document.getElementById(id).addEventListener('input',render));render();
 })();
